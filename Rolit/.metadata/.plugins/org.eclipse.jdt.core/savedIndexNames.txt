@@ -1,2 +1,0 @@
-INDEX VERSION 1.131+C:\Users\jdbar\OneDrive\DG_MatInfo_2\IS2\Rolit\.metadata\.plugins\org.eclipse.jdt.core
-1067094681.index
