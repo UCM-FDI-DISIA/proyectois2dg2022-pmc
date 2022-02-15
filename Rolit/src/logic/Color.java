@@ -9,6 +9,15 @@ public enum Color {
 		this.shortcut = shortcut;
 	}
 	
+	public static Color valueOfIgnoreCase(char inputString) {
+		for (Color color : Color.values()) {
+			if (color.shortcut == Character.toUpperCase(inputString)) {
+				return color;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public String toString() {
 		return String.valueOf(shortcut);
