@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-	private GameMode gamemode;
 	private boolean finished;
 	private List<Player> players;
 	private List<Cube> cubes;
