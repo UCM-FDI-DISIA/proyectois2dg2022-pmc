@@ -32,4 +32,8 @@ public class Cube {
 		return color.toString();
 	}
 
+	public String serialize() {
+		return (color.toString() + " " + x + " " + y);
+	}
+	
 }
