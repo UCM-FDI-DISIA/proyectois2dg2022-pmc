@@ -42,7 +42,7 @@ public class Game {
 		
 	}
 	
-	public int getSize() {
+	public int getBoardSize() {
 		
 	}
 	
