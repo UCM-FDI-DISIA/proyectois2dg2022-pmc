@@ -12,15 +12,18 @@ public class Player {
 	}
 	
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 	
 	public int getScore() {
-		return score;
+		return this.score;
 	}
 	
 	public void addScore(int score) {
 		this.score += score;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
 }

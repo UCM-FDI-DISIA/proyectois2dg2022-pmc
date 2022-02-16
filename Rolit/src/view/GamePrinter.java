@@ -1,5 +1,6 @@
 package view;
 
+import logic.Game;
 import utils.StringUtils;
 
 public class GamePrinter {
