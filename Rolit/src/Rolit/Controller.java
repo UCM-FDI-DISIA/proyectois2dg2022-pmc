@@ -2,11 +2,13 @@ package Rolit;
 
 import java.util.Scanner;
 
+import logic.Game;
+
 public class Controller {
 	private Scanner input;
 	private Game game;
 	
-	public Controller(Game game, ) {
+	public Controller(Game game) {
 		
 	}
 	
