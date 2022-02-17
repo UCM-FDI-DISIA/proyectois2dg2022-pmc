@@ -27,19 +27,19 @@ public class GamePrinter {
 		StringBuilder str = new StringBuilder();
 		str.append(StringUtils.LINE_SEPARATOR);
 		// Paint game
+		str.append(StringUtils.repeat('-', 16)).append(StringUtils.LINE_SEPARATOR);
 		for (int x = 0; x < game.getBoardSize(); x++) {
-			str.append(MARGIN_SIZE);
 			for (int y = 0; y < game.getBoardSize(); y++) {
-				str.append(StringUtils.centre(game.positionToString(x, y), GAP_SIZE)).append(SPACE);
+				str.append(game.positionToString(x, y)).append(SPACE);
 			}
 			str.append(StringUtils.LINE_SEPARATOR);
 			
 		}
-		
+		str.append(StringUtils.repeat('-', 16)).append(StringUtils.LINE_SEPARATOR);
 		return str.toString();
 	}
 	
-	public static String showRanking() {
+	public String showRanking() {
 		List<Player> players = game.getPlayers();
 		Collections.sort(players);
 		StringBuilder str = new StringBuilder(RANKING);

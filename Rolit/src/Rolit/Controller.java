@@ -15,7 +15,7 @@ public class Controller {
 	private Game game;
 	private GamePrinter printer;
 	private SaveLoadManager saveLoadManager;
-	private static final String DEFAULT_FILENAME = "SAVED_GAMES";
+	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
 	
 	private final String NUEVA_PARTIDA = "Nueva partida";
 	private final String CARGAR_PARTIDA = "Cargar partida";
@@ -28,15 +28,13 @@ public class Controller {
 	
 	public Controller(Game game) {
 		this.game = game;
-		this.saveLoadManager = new SaveLoadManager(game, SAVED_GAMES);
+		this.printer = new GamePrinter(game);
+		input = new Scanner(System.in);
+		//this.saveLoadManager = new SaveLoadManager(game, DEFAULT_FILENAME);
 	} 
 	
 	private void printGame() {
 		System.out.println(this.printer);
-	}
-	
-	private void split(String data) {
-		
 	}
 	
 	public void run() {
@@ -46,8 +44,10 @@ public class Controller {
 		for (int i = 0; i < arrayOpciones.length; ++i)
 			System.out.println((i+1) + ". " + arrayOpciones[i]);
 		
-		int respuesta;
+		int respuesta = 1;
 		boolean repeat = true;
+		
+		
 		while (repeat) {
 			respuesta = input.nextInt();
 			if (respuesta-1 >= 0 && respuesta-1 < arrayOpciones.length)
@@ -56,7 +56,7 @@ public class Controller {
 				System.out.println(OPCION_INCORRECTA);
 		}
 		
-		if (arrayOpciones[respuesta-1] == "CARGAR_PARTIDA") {
+		if ("CARGAR_PARTIDA".equals(arrayOpciones[respuesta-1])) {
 			saveLoadManager.loadGame();
 		}
 		
@@ -66,7 +66,10 @@ public class Controller {
 			int posx, posy;
 			boolean valido = false;
 			
+			printGame();
+			
 			while (!valido) {
+				System.out.println("Introduce un comando:");
 				command = input.next();
 				if ("c".equals(command)) {
 					System.out.println("Introduce la posicion x: ");
@@ -83,6 +86,6 @@ public class Controller {
 			
 		}
 		
-		System.out.println(this.game.showRanking());
+		System.out.println(this.printer.showRanking());
 	}
 }

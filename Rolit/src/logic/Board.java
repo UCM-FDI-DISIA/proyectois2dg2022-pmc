@@ -9,12 +9,21 @@ public class Board {
 	
 	private List<List<Cube>> matrix;
 	private int size;
+	private int numCubes;
 	
 	public Board(int size) {
 		this.size = size;
+		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
 		for(int i = 0; i < size; i++) {
-			this.matrix.add(new ArrayList<Cube> (size));
+			this.matrix.add(new ArrayList<Cube>(size));
+		}
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				List<Cube> column = matrix.get(i);
+				column.add(null);
+				}
 		}
 	}
 	
@@ -32,6 +41,11 @@ public class Board {
 		
 		List<Cube> column = matrix.get(c.getX());
 		column.add(c.getY(), c);
+		this.numCubes++;
+	}
+	
+	public int getNumCubes() {
+		return numCubes;
 	}
 	
 }

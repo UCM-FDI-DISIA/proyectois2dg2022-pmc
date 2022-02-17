@@ -29,6 +29,7 @@ public class Rolit {
 		
 		List<Player> players = namePlayers(scanner);
 		
+		
 		Game game = new Game(players, new Board(boardSize));
 		
 		Controller controller = new Controller(game);
