@@ -23,7 +23,18 @@ public class Game {
 	}
 	
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
-		
+		for(Cube c : cubes) {
+			board.addCubeInPos(c);
+		}
+		this.players = players;
+		int index = 0;
+		boolean found = false;
+		while(!found && index < players.size()) {
+			if(players.get(index).getColor().equals(currentPlayerColor)) {
+				found = true;
+				currentPlayer = index;
+			}
+		}
 	}
 	
 	public boolean play(int x, int y) {
