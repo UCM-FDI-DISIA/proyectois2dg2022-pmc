@@ -12,11 +12,11 @@ public class Player implements Comparable<Player> {
 	}
 
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 
 	public int getScore() {
-		return score;
+		return this.score;
 	}
 
 	public void addScore(int score) {
@@ -25,7 +25,7 @@ public class Player implements Comparable<Player> {
 
 	@Override
 	public int compareTo(Player p) {
-		// FIXME SI FALLA EL ORDEN ES AQUÍ
+		// FIXME SI FALLA EL ORDEN ES AQUï¿½
 		if (score < p.getScore()) {
 			return -1;
 		} else if (score == p.getScore()) {
@@ -35,4 +35,8 @@ public class Player implements Comparable<Player> {
 
 	}
 
+	
+	public String getName() {
+		return this.name;
+	}
 }
