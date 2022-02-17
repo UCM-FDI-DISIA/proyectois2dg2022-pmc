@@ -47,7 +47,7 @@ public class GamePrinter {
 		str.append(StringUtils.LINE_SEPARATOR).append(MSG_REY).append(StringUtils.LINE_SEPARATOR);
 		
 		for (int i = 0; i < players.size(); ++i) {
-			str.append(MSG_POS).append(i).append(SEPARATOR).append(players.get(i).getName()).append(StringUtils.LINE_SEPARATOR);
+			str.append(MSG_POS).append(i + 1).append(SEPARATOR).append(players.get(i).getName()).append(StringUtils.LINE_SEPARATOR);
 		}
 		
 		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
