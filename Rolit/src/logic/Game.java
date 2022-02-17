@@ -27,10 +27,12 @@ public class Game {
 	}
 	
 	public boolean play(int x, int y) {
+		//Primero tenemos que comprobar que se pueda poner un cubo en la posicion indicada
 		if(!tryToAddCube(x, y)) {
 			System.out.println("La posición no es válida");
 			return false;
 		}
+		//En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
 		Cube newCube = new Cube(x, y, players.get(currentPlayer).getColor());
 		board.addCubeInPos(newCube);
 		this.update(newCube);
@@ -45,21 +47,26 @@ public class Game {
 		Cube currentCube;
 		
 		//Hacemos dos bucles para indicar la direccion en la que vamos a buscar un cubo del color del jugador actual
+		//Estos dos bucles representan siempre 8 iteraciones, por lo que no implican que el coste del algoritmo sea cubico (es lineal)
 		for(int dirX = -1; dirX <= 1; dirX++) {
 			for(int dirY = -1; dirY <= 1; dirY++) {
 				//Partiendo de la posicion actual (posX, posY), nos movemos en la direccion actual
+				//sumando a la posicion actual (dirX, dirY)
 				if(!(dirX == 0 && dirY == 0)) {
 					newX = posX + dirX;
 					newY = posY + dirY;
 					found = false;
+					//Comprobamos la nueva casilla y el posible cubo que haya en ella
 					while(isPositionInRange(newX, newY) && !found) {
 						currentCube = getCubeInPos(newX, newY);
 						if(currentCube != null) {
+							//Si el cubo es del color del jugador actual dejamos de buscar, es hasta este hasta el que tenemos que llegar
 							if(currentCube.getColor().equals(players.get(currentPlayer).getColor())) {
 								found = true;
 								foundX = newX;
 								foundY = newY;
 							}
+							//Si el cubo es de otro color seguimos buscando
 							else {
 								newX += dirX;
 								newY += dirY;
@@ -70,6 +77,8 @@ public class Game {
 							newY += dirY;
 						}
 					}
+					//Si en la direccion dada por (dirX, dirY) hemos encontrado otro cubo del color del jugador actual
+					//ponemos cubos del color en cuestion en todas las casillas entre medias
 					if(found) {
 						newX = posX + dirX;
 						newY = posY + dirY;
@@ -88,6 +97,7 @@ public class Game {
 							else {
 								Cube addCube = new Cube(newX, newY, players.get(currentPlayer).getColor());
 								board.addCubeInPos(addCube);
+								players.get(currentPlayer).addScore(1);
 							}
 							
 							newX += dirX;
@@ -97,7 +107,7 @@ public class Game {
 				}
 			}
 		}
-		//Cambiamos el turno
+		//Cambiamos el turno al siguiente jugador en la lista
 		currentPlayer = (currentPlayer + 1) % players.size();
 	}
 	
