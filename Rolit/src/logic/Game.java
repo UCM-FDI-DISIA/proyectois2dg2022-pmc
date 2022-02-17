@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ public class Game {
 	private boolean finished;
 	private List<Player> players;
 	private Board board;
-	private int currentPlayer;
+	private int currentPlayerIndex;
 	private Map<Color, Player> colorPlayerMap;
 	
 	public Game(List<Player> players, Board board) {
@@ -32,9 +33,19 @@ public class Game {
 		while(!found && index < players.size()) {
 			if(players.get(index).getColor().equals(currentPlayerColor)) {
 				found = true;
-				currentPlayer = index;
+				currentPlayerIndex = index;
 			}
 		}
+	}
+	
+	public List<Cube> saveBoard() {
+		List<Cube> cubeList = new ArrayList<Cube>() ;
+		for(int i = 0; i < board.getSize(); i++) {
+			for(int j = 0; j < board.getSize(); j++) {
+				cubeList.add(board.getCubeInPos(i, j));
+			}
+		}
+		return Collections.unmodifiableList(cubeList);	
 	}
 	
 	public boolean play(int x, int y) {
@@ -44,7 +55,7 @@ public class Game {
 			return false;
 		}
 		//En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-		Cube newCube = new Cube(x, y, players.get(currentPlayer).getColor());
+		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex).getColor());
 		board.addCubeInPos(newCube);
 		this.update(newCube);
 		return true;
@@ -72,7 +83,7 @@ public class Game {
 						currentCube = getCubeInPos(newX, newY);
 						if(currentCube != null) {
 							//Si el cubo es del color del jugador actual dejamos de buscar, es hasta este hasta el que tenemos que llegar
-							if(currentCube.getColor().equals(players.get(currentPlayer).getColor())) {
+							if(currentCube.getColor().equals(players.get(currentPlayerIndex).getColor())) {
 								found = true;
 								foundX = newX;
 								foundY = newY;
@@ -100,17 +111,16 @@ public class Game {
 								colorPlayerMap.get(currentCube.getColor()).addScore(-1);
 								
 								//Cambiamos de color el cubo en cuestion al color del jugador actual
-								currentCube.setColor(players.get(currentPlayer).getColor());
+								currentCube.setColor(players.get(currentPlayerIndex).getColor());
 								
 								//Incrementamos en uno la puntuacion del jugador actual
-								players.get(currentPlayer).addScore(1);
+								players.get(currentPlayerIndex).addScore(1);
 							}
 							else {
-								Cube addCube = new Cube(newX, newY, players.get(currentPlayer).getColor());
+								Cube addCube = new Cube(newX, newY, players.get(currentPlayerIndex).getColor());
 								board.addCubeInPos(addCube);
-								players.get(currentPlayer).addScore(1);
+								players.get(currentPlayerIndex).addScore(1);
 							}
-							
 							newX += dirX;
 							newY += dirY;
 						}
@@ -119,7 +129,7 @@ public class Game {
 			}
 		}
 		//Cambiamos el turno al siguiente jugador en la lista
-		currentPlayer = (currentPlayer + 1) % players.size();
+		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 	
 	public String positionToString(int x, int y) {
@@ -166,6 +176,6 @@ public class Game {
 	}
 	
 	public List<Player> getPlayers() {
-		return this.players;
+		return Collections.unmodifiableList(this.players);
 	}
 }
