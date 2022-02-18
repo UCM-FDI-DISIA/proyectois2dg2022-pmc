@@ -22,10 +22,6 @@ public class Game {
 			this.colorPlayerMap.put(player.getColor(), player);
 		}
 	}
-	
-	public Color getTurn() {
-		return this.players.get(currentPlayerIndex).getColor();
-	}
 
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
 		for (Cube c : cubes) {
@@ -39,6 +35,7 @@ public class Game {
 				found = true;
 				currentPlayerIndex = index;
 			}
+			index++;
 		}
 	}
 
@@ -46,7 +43,8 @@ public class Game {
 		List<Cube> cubeList = new ArrayList<Cube>();
 		for (int i = 0; i < board.getSize(); i++) {
 			for (int j = 0; j < board.getSize(); j++) {
-				cubeList.add(board.getCubeInPos(i, j));
+				if(board.getCubeInPos(i, j) != null)
+					cubeList.add(board.getCubeInPos(i, j));
 			}
 		}
 		return Collections.unmodifiableList(cubeList);
@@ -190,5 +188,13 @@ public class Game {
 
 	public List<Player> getPlayers() {
 		return Collections.unmodifiableList(this.players);
+	}
+	
+	public Player getCurrentPlayer() {
+		return this.players.get(currentPlayerIndex);
+	}
+	
+	public Color getCurrentColor() {
+		return this.players.get(currentPlayerIndex).getColor();
 	}
 }

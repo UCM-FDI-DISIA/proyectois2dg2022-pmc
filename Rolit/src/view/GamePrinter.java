@@ -14,9 +14,9 @@ public class GamePrinter {
 	private static final int GAP_SIZE = 3;
 	private static final String RANKING = "RANKING DEL ROLIT";
 	private static final String MSG_POS = "En la posicion numero ";
-	private static final String SEPARATOR = " :";
+	private static final String SEPARATOR = ": ";
 	private static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
-	private static final String MSG_GOOD_LUCK = "suerte para la siguiente :)";
+	private static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
 	private Game game;
 	
 	public GamePrinter(Game game) {
@@ -40,7 +40,7 @@ public class GamePrinter {
 	}
 	
 	public String showRanking() {
-		List<Player> players = game.getPlayers();
+		List<Player> players = new ArrayList<Player>(game.getPlayers());
 		Collections.sort(players);
 		StringBuilder str = new StringBuilder(RANKING);
 		
@@ -53,5 +53,9 @@ public class GamePrinter {
 		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
 		
 		return str.toString(); 
+	}
+	
+	public String showTurn() {
+		return String.format("Turno de %s (%s)", game.getCurrentPlayer().getName(), game.getCurrentColor().toString());
 	}
 }

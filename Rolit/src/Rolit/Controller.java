@@ -39,7 +39,8 @@ public class Controller {
 	
 	public void run() {
 
-		System.out.println("ï¿½Que desea?");
+		System.out.println();
+		System.out.println("¿Que desea?");
 		System.out.println();
 		for (int i = 0; i < arrayOpciones.length; ++i)
 			System.out.println((i+1) + ". " + arrayOpciones[i]);
@@ -56,7 +57,7 @@ public class Controller {
 				System.out.println(OPCION_INCORRECTA);
 		}
 		
-		if ("CARGAR_PARTIDA".equals(arrayOpciones[respuesta-1])) {
+		if (CARGAR_PARTIDA.equals(arrayOpciones[respuesta-1])) {
 			saveLoadManager.loadGame();
 		}
 		
@@ -69,7 +70,10 @@ public class Controller {
 			printGame();
 			
 			while (!valido) {
+				System.out.println(printer.showTurn());
 				System.out.println("Introduce un comando:");
+				System.out.println("c : Poner un cubo");
+				System.out.println("s : Guardar partida");
 				command = input.next();
 				if ("c".equals(command)) {
 					System.out.println("Introduce la posicion x: ");
@@ -85,6 +89,8 @@ public class Controller {
 			}
 			
 		}
+		
+		printGame();
 		
 		System.out.println(this.printer.showRanking());
 	}

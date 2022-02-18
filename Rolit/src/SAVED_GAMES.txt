@@ -1,0 +1,17 @@
+Y 2 3
+R 2 4
+G 2 5
+Y 3 4
+G 3 5
+Y 4 5
+G 5 5
+Y 5 6
+B 6 5
+G 6 7
+R 7 6
+B 7 7
+Player Y
+Leo Y
+Mar R
+Dani G
+Juandi B

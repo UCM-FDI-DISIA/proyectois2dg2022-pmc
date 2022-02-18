@@ -32,10 +32,11 @@ public class SaveLoadManager {
 			for (Cube i : list_cubes) {
 				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
 			}
-			save_file.write("Player " + this.game.getTurn() + String.format("%n"));
+			save_file.write("Player " + this.game.getCurrentColor() + String.format("%n"));
 			for (Player i : list_players) {
 				save_file.write(i.getName() + " " + i.getColor().toString() + String.format("%n"));
 			}
+			System.out.println("Partida guardada exitosamente");
 		}
 		catch(IOException error_file) {
 			System.out.println("ERROR AL GUARDAR ARCHIVO");
@@ -49,7 +50,7 @@ public class SaveLoadManager {
 			List<Player> list_players = new ArrayList<Player>();
 			
 			while(!"Player".equals(words[0])) {
-				list_cubes.add(new Cube(Integer.decode(words[1]).intValue(), Integer.decode(words[2]).intValue(), Color.valueOfIgnoreCase(words[3].charAt(0))));
+				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Color.valueOfIgnoreCase(words[0].charAt(0))));
 				words = save_file.readLine().split(" ");
 			}
 			Color turn = Color.valueOfIgnoreCase(words[1].charAt(0));
