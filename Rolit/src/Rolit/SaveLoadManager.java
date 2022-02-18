@@ -32,7 +32,7 @@ public class SaveLoadManager {
 			for (Cube i : list_cubes) {
 				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
 			}
-			save_file.write("Player " + this.game.turn() + String.format("%n"));
+			save_file.write("Player " + this.game.getTurn() + String.format("%n"));
 			for (Player i : list_players) {
 				save_file.write(i.getName() + " " + i.getColor().toString() + String.format("%n"));
 			}
