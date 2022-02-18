@@ -22,6 +22,10 @@ public class Game {
 			this.colorPlayerMap.put(player.getColor(), player);
 		}
 	}
+	
+	public Color getTurn() {
+		return this.players.get(currentPlayerIndex).getColor();
+	}
 
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
 		for (Cube c : cubes) {
