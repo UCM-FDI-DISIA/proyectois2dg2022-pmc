@@ -40,12 +40,17 @@ public class Board {
 			throw new IllegalArgumentException(POS_ERROR);
 		
 		List<Cube> column = matrix.get(c.getX());
+		column.remove(c.getY());
 		column.add(c.getY(), c);
 		this.numCubes++;
 	}
 	
 	public int getNumCubes() {
 		return numCubes;
+	}
+	
+	public boolean isBoardFull() {
+		return numCubes == size * size;
 	}
 	
 }

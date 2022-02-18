@@ -82,8 +82,9 @@ public class Game {
 					newX = posX + dirX;
 					newY = posY + dirY;
 					found = false;
+					boolean conected = true;
 					// Comprobamos la nueva casilla y el posible cubo que haya en ella
-					while (isPositionInRange(newX, newY) && !found) {
+					while (isPositionInRange(newX, newY) && !found && conected) {
 						currentCube = getCubeInPos(newX, newY);
 						if (currentCube != null) {
 							// Si el cubo es del color del jugador actual dejamos de buscar, es hasta este
@@ -99,8 +100,7 @@ public class Game {
 								newY += dirY;
 							}
 						} else {
-							newX += dirX;
-							newY += dirY;
+							conected = false; //Si hay alguna casilla vacia en esta direccion dejamos de buscar
 						}
 					}
 					// Si en la direccion dada por (dirX, dirY) hemos encontrado otro cubo del color
@@ -132,8 +132,11 @@ public class Game {
 				}
 			}
 		}
-		// Cambiamos el turno al siguiente jugador en la lista
-		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		//Comprobamos si la partida termina con este turno
+		finished = board.isBoardFull();
+		
+		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+		if(!finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 
 	public String positionToString(int x, int y) {
