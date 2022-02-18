@@ -39,7 +39,7 @@ public class Controller {
 	
 	public void run() {
 
-		System.out.println("¿Que desea?");
+		System.out.println("ï¿½Que desea?");
 		System.out.println();
 		for (int i = 0; i < arrayOpciones.length; ++i)
 			System.out.println((i+1) + ". " + arrayOpciones[i]);
