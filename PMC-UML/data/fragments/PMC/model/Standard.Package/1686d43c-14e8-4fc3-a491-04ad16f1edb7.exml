@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Model" version="4">
+  <OBJECT>
+    <ID name="Model" mc="Standard.Package" uid="1686d43c-14e8-4fc3-a491-04ad16f1edb7"/>
+    <PID name="PMC" mc="Standard.Project" uid="545774f3-3b7a-47a4-bc49-91bc32812f54"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Model]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Product">
+        <COMPID name="Model (PackageContentStructureDiagramTemplate)" mc="Standard.ClassDiagram" uid="4d1de5ea-f241-420b-b434-4c2ebe895d76"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
