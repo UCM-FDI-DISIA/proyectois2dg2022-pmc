@@ -1,0 +1,97 @@
+\documentclass{article}
+\title{REFACTORIZACIÓN DEL SPRINT 1}
+\date{\today}
+\author{Grupo PMC}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{listings}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\begin{document}
+\maketitle
+
+\subsubsection*{SaveLoadManager}
+Esta clase pasa a ser exclusivamente un intermediario entre la clase \textit{Game} y los ficheros de carga y guardado y debe ser estática para que pueda usarse más adelante solo como componente aislado y no sea necesario instanciarse, debe tener todo lo necesario para encapsular dicha funcionalidad, entre las características de la clase:
+\begin{itemize}
+\item Debe tener funciones de carga y descarga que llamamos:
+\begin{lstlisting}[language=Java]
+public void loadGame();
+public void saveGame();
+\end{lstlisting}
+\item Recibe una lista de Players, el turno actual y el tablero.
+\item Posee los ficheros de carga y guardado.
+\end{itemize}
+
+\subsubsection*{Cube}
+Esta clase queda prácticamente igual a la de la versión anterior, a excepción de que en vez de tener una instancia de la las \textit{Color}, ahora pasa a tener una instancia del \textit{Player} al que pertenece.
+Gracias a esta modificación reúne las siguientes funcionalidades:
+\begin{itemize}
+\item Modifica puntuaciones del jugador que tiene como instancia (al cambiarse de color cuando juegas, él gestiona el cambio de puntuaciones individualmente). Para ello debe tener una función que dado un color, se autoasigne el jugador de dicho color:
+\begin{lstlisting}[language=Java]
+public void changeOwner(Color color){
+	this.owner = ??? // Funcion que busque un jugador en base a un player
+}
+
+\end{lstlisting}
+\item Tiene acceso al color del player, ya que el tablero solo trabaja con player y debe preguntarle a los cubos su color.
+\end{itemize}
+
+\subsubsection*{Board}
+El tablero ahora reúne toda la funcionalidad que es la parte física del juego. Representa íntegramente el tablero y las bolas tal y como sería en el juego físico, por tanto, reúne toda la funcionalidad de poner bolas, cambiarlas de color y gestionar lo relativo a lo que cambia en el tablero físico.
+
+En consecuencia, reúne las siguientes funcionalidades:
+\begin{itemize}
+\item Añade y quita cubos
+\item Tiene tamaño y forma propios
+\item Para cualquier modificación que se haga sobre un cubo se debe pasar por board
+\item NO trabaja con \textit{Players}, trabaja con \textit{COLORES}.
+\item Para cambiar un cubo de color, se delega la responsabilidad en el cubo que sabrá dado un color a que jugador cambiarse y devolverá el color correspondiente a dicho jugador.
+\item Posee una función que dada un cubo, lo coloca y cambia el tablero completamente:
+\begin{lstlisting}[language=Java]
+public void update(){
+// Actualizamos los cubos y el tablero
+}
+\end{lstlisting}
+\end{itemize}
+
+\subsubsection*{Player}
+El player de ahora pasa a tener más peso al suprimir la visión de colores al resto de clases que manejan el juego y que no son \textit{Board}. Ahora, para que los cubos puedan cambiarse de poseedor, tienen todos un atributo estático en el que son capaces de consultar, dado un color, el jugador que corresponde y así poder devolver a los cubos lo que necesita:
+\begin{lstlisting}[language=Java]
+public class Player(){
+	private Player[] players = new Player[4];
+	private Color color;
+	private int score;
+	private String name;
+
+	...
+
+	public Player getPlayer(Color color){
+	return this.players.find(color);
+	}
+}
+\end{lstlisting}
+
+\subsubsection*{Game}
+La clase Game a perdido peso en cuanto a lo que la lógica de poner una bola respecta, puesto que se apoya más en la clase Board que gestiona toda la modificación de cubos. Sin embargo, no queda como una clase inútil, sino que se encarga de gestionar la parte externa del desarrollo de una partida. Del mismo modo que el tablero era la parte física del juego, esta clase puede considerarse como el ``árbitro'' que va dando orden a los jugadores, prepara para guardar y cargar el juego y coordina al resto de elementos del juego para colaborar entre sí. Reune las siguientes funcionalidades:
+\begin{itemize}
+\item Tiene que poder preparar un formato adecuado del estado del juego para que la clase \textit{SaveLoadManager} guarde el juego correctamente.
+\item Tiene que tener una función que juegue un turno completo y que cambie de jugador al siguiente al final.
+\item El método update que tenía ahora pasa al tablero y él solo lo llama con la información adecuada durante el turno correspondiente.
+\item Debe tener una referencia a la misma lista que los players tienen como atributo de players.
+\item \textbf{Generamos los players en su constructor}, solo debe recibir una lista de string (los nombres) y el numPlayers.
+\item Es creado en \textit{Controller}
+\end{itemize}
+
+\subsubsection*{Controller}
+La clase Controller está todavía un poco a expensas de que se desarrollen otras clases que están en proceso como los commandos. Sin embargo, por lo pronto sabemos que tiene que haber:
+\begin{itemize}
+\item Un menú que permita elegir entre los diferentes commandos
+\item Un método para pedir los nombres y el número de jugadores en caso de querer jugar y no cargar ni guardar partida.
+\item Tiene que haber un método que se dedique a hacer correr la aplicación:
+\begin{lstlisting}[language=Java]
+public void run();
+\end{lstlisting}
+\end{itemize}
+
+\end{document}
