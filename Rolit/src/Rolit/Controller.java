@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import commands.Command;
 import logic.Game;
 import view.GamePrinter;
 
@@ -16,6 +17,7 @@ public class Controller {
 	private GamePrinter printer;
 	private SaveLoadManager saveLoadManager;
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
+	private static final String PROMPT = "Command > ";
 	
 	private final String NUEVA_PARTIDA = "Nueva partida";
 	private final String CARGAR_PARTIDA = "Cargar partida";
@@ -61,15 +63,23 @@ public class Controller {
 			saveLoadManager.loadGame();
 		}
 		
-
+		boolean refreshDisplay = true;
 		while(!game.isFinished()) {
-			String command;
+			if(refreshDisplay) printGame();
 			int posx, posy;
 			boolean valido = false;
-			
-			printGame();
-			
-			while (!valido) {
+			System.out.println(PROMPT);
+			String s = input.nextLine();
+			String[] parameters = s.toLowerCase().trim().split(" ");
+			Command command = null;
+			try {
+				command = Command.getCommand(parameters);
+				refreshDisplay = command.execute(game);
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			/*while (!valido) {
 				System.out.println(printer.showTurn());
 				System.out.println("Introduce un comando:");
 				System.out.println("c : Poner un cubo");
@@ -86,11 +96,10 @@ public class Controller {
 					saveLoadManager.saveGame();
 				else
 					System.out.println("Invalid Command");										
-			}
+			}*/
 			
 		}
-		
-		printGame();
+		if(refreshDisplay) printGame();
 		
 		System.out.println(this.printer.showRanking());
 	}
