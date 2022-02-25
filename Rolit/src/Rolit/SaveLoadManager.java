@@ -12,12 +12,13 @@ import logic.Color;
 import logic.Cube;
 import logic.Game;
 import logic.Player;
+import logic.Saveable;
 
 public class SaveLoadManager {
-	private Game game;
+	private Saveable game;
 	private String saving_file;
 	
-	public SaveLoadManager(Game game, String file) {
+	public SaveLoadManager(Saveable game, String file) {
 		this.game = game;
 		this.saving_file = file;
 	}

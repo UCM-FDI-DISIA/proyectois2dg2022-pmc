@@ -15,9 +15,7 @@ public class Rolit {
 	private static final String NAME_PLAYERS = "Name the players: ";
 	
 	private static final int numberOfPlayers = 4;
-	private static final int boardSize = 8;
-
-	
+	private static final int boardSize = 8;	
 	
 	public static void main(String[] args) {
 		

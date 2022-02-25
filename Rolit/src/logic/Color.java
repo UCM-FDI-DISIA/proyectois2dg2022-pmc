@@ -22,4 +22,8 @@ public enum Color {
 	public String toString() {
 		return String.valueOf(shortcut);
 	}
+	
+	public static int size() {
+		return Color.values().length;
+	}
 }

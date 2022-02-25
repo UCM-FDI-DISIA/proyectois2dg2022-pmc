@@ -3,12 +3,12 @@ package logic;
 public class Cube {
 	private int x;
 	private int y;
-	private Color color;
+	private Player player;
 	
-	public Cube(int x, int y, Color color) {
+	public Cube(int x, int y, Player player) {
 		this.x = x;
 		this.y = y;
-		this.color = color;
+		this.player = player;
 	}
 	
 	public int getX() {
@@ -20,20 +20,24 @@ public class Cube {
 	}
 
 	public Color getColor() {
-		return color;
+		return player.getColor();
 	}
 	
 	public void setColor(Color color) {
-		this.color = color;
+		this.player = player.getPlayer(color);
 	}
+	
 	
 	@Override
 	public String toString() {
-		return color.toString();
+		return this.getColor().toString();
 	}
 
 	public String serialize() {
-		return (color.toString() + " " + x + " " + y);
+		return (this.toString() + " " + x + " " + y);
 	}
 	
+	public void addScore(int score) {
+		player.addScore(score);
+	}
 }

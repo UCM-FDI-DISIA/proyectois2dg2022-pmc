@@ -1,6 +1,7 @@
 package logic;
 
 public class Player implements Comparable<Player> {
+	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
 	private String name;
@@ -9,6 +10,7 @@ public class Player implements Comparable<Player> {
 		this.color = c;
 		this.score = 0;
 		this.name = name;
+		playerList[color.ordinal()] = this;
 	}
 
 	public Color getColor() {
@@ -25,18 +27,14 @@ public class Player implements Comparable<Player> {
 
 	@Override
 	public int compareTo(Player p) {
-		// FIXME SI FALLA EL ORDEN ES AQU�
-		if (score < p.getScore()) {
-			return -1;
-		} else if (score == p.getScore()) {
-			return 0;
-		}
-		return 1;
-
+		return (score - p.getScore());
 	}
 
-	
 	public String getName() {
 		return this.name;
+	}
+	
+	public Player getPlayer(Color c) {
+		return Player.playerList[c.ordinal()];
 	}
 }

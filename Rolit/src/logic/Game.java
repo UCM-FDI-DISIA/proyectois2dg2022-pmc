@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Game {
+public class Game implements Saveable{
 	private boolean finished;
 	private List<Player> players;
 	private Board board;
@@ -65,75 +65,7 @@ public class Game {
 	}
 
 	public void update(Cube newCube) {
-		int posX = newCube.getX(), posY = newCube.getY();
-		int newX, newY;
-		int foundX = posX, foundY = posY; // Las inicializo porque si no Eclipse se queja
-		boolean found;
-		Cube currentCube;
-
-		// Hacemos dos bucles para indicar la direccion en la que vamos a buscar un cubo
-		// del color del jugador actual
-		// Estos dos bucles representan siempre 8 iteraciones, por lo que no implican
-		// que el coste del algoritmo sea cubico (es lineal)
-		for (int dirX = -1; dirX <= 1; dirX++) {
-			for (int dirY = -1; dirY <= 1; dirY++) {
-				// Partiendo de la posicion actual (posX, posY), nos movemos en la direccion
-				// actual
-				// sumando a la posicion actual (dirX, dirY)
-				if (!(dirX == 0 && dirY == 0)) {
-					newX = posX + dirX;
-					newY = posY + dirY;
-					found = false;
-					boolean conected = true;
-					// Comprobamos la nueva casilla y el posible cubo que haya en ella
-					while (isPositionInRange(newX, newY) && !found && conected) {
-						currentCube = getCubeInPos(newX, newY);
-						if (currentCube != null) {
-							// Si el cubo es del color del jugador actual dejamos de buscar, es hasta este
-							// hasta el que tenemos que llegar
-							if (currentCube.getColor().equals(players.get(currentPlayerIndex).getColor())) {
-								found = true;
-								foundX = newX;
-								foundY = newY;
-							}
-							// Si el cubo es de otro color seguimos buscando
-							else {
-								newX += dirX;
-								newY += dirY;
-							}
-						} else {
-							conected = false; //Si hay alguna casilla vacia en esta direccion dejamos de buscar
-						}
-					}
-					// Si en la direccion dada por (dirX, dirY) hemos encontrado otro cubo del color
-					// del jugador actual
-					// ponemos cubos del color en cuestion en todas las casillas entre medias
-					if (found) {
-						newX = posX + dirX;
-						newY = posY + dirY;
-						while (!(newX == foundX && newY == foundY)) {
-							currentCube = getCubeInPos(newX, newY);
-							if (currentCube != null) {
-								// Quitamos un punto al jugador al cual quitamos un cubo de su color
-								colorPlayerMap.get(currentCube.getColor()).addScore(-1);
-
-								// Cambiamos de color el cubo en cuestion al color del jugador actual
-								currentCube.setColor(players.get(currentPlayerIndex).getColor());
-
-								// Incrementamos en uno la puntuacion del jugador actual
-								players.get(currentPlayerIndex).addScore(1);
-							} else {
-								Cube addCube = new Cube(newX, newY, players.get(currentPlayerIndex).getColor());
-								board.addCubeInPos(addCube);
-								players.get(currentPlayerIndex).addScore(1);
-							}
-							newX += dirX;
-							newY += dirY;
-						}
-					}
-				}
-			}
-		}
+		board.update(newCube);
 		//Comprobamos si la partida termina con este turno
 		finished = board.isBoardFull();
 		
@@ -164,10 +96,6 @@ public class Game {
 			return nearbyCube;
 		} else
 			return isPositionInRange(x, y);
-	}
-
-	public boolean isPositionInRange(int x, int y) {
-		return x >= 0 && x < board.getSize() && y >= 0 && y < board.getSize();
 	}
 
 	public void flipTrapped() {
