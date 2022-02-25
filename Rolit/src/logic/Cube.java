@@ -4,6 +4,7 @@ public class Cube {
 	private int x;
 	private int y;
 	private Player player;
+	private int value = 1;
 	
 	public Cube(int x, int y, Player player) {
 		this.x = x;
@@ -37,7 +38,7 @@ public class Cube {
 		return (this.toString() + " " + x + " " + y);
 	}
 	
-	public void addScore(int score) {
-		player.addScore(score);
+	public void addScore() {//FIXME ARREGLAR CUANDO SE RESTAN LOS PUNTOS, HACERLO TODO INTERNAMENTE CUANDO SE CAMBIA DE COLOR
+		player.addScore(value);
 	}
 }
