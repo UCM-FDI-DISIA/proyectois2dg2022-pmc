@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Action" version="4">
   <OBJECT>
-    <ID name="Action" mc="Standard.Interface" uid="146f765c-6c7a-482d-8904-602ecb0a933a"/>
-    <PID name="actions" mc="Standard.Package" uid="3d228749-03e7-4812-8da5-02d46141363d"/>
+    <ID name="Action" mc="Standard.Interface" uid="dffa22e9-7ed9-4be2-b3da-2543a7374167"/>
+    <PID name="actions" mc="Standard.Package" uid="22bfa8f8-caf5-4ba2-adda-acaf3d416398"/>
     <ATTRIBUTES>
       <ATT name="IsElementary">false</ATT>
       <ATT name="IsAbstract">true</ATT>
@@ -15,7 +15,7 @@
     <DEPENDENCIES>
       <COMP relation="OwnedOperation">
         <OBJECT>
-          <ID name="execute" mc="Standard.Operation" uid="c0da8e72-8a4a-4805-ba8c-10c01eca9992"/>
+          <ID name="execute" mc="Standard.Operation" uid="a01d61f4-5bb1-4a2f-8406-6c7b10667648"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>

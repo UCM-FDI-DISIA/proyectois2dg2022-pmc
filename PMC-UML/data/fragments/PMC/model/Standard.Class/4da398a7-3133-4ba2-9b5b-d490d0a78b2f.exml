@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Scanner" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="BufferedWriter" version="4">
   <OBJECT>
-    <ID name="Scanner" mc="Standard.Class" uid="2c579369-8d52-4703-89c9-892239154ee6"/>
-    <PID name="Rolit" mc="Standard.Package" uid="37d9cfc9-aace-4f8e-89bf-040f9a9303a3"/>
+    <ID name="BufferedWriter" mc="Standard.Class" uid="4da398a7-3133-4ba2-9b5b-d490d0a78b2f"/>
+    <PID name="io" mc="Standard.Package" uid="709ff840-773a-4b4d-bc9a-ec65468a034d"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -11,7 +11,7 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Scanner]]></ATT>
+      <ATT name="Name"><![CDATA[BufferedWriter]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
@@ -20,7 +20,7 @@
       </LINK>
       <COMP relation="Tag">
         <OBJECT>
-          <ID name="" mc="Infrastructure.TaggedValue" uid="d80750e0-9770-4416-acd8-e07b48362a94"/>
+          <ID name="" mc="Infrastructure.TaggedValue" uid="ab46bd3b-8242-49e1-895a-943461285f1c"/>
           <ATTRIBUTES>
             <ATT name="Name"></ATT>
             <ATT name="status">1970354901745664</ATT>

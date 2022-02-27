@@ -16,9 +16,7 @@
       <COMP relation="OwnedElement">
         <COMPID name="Collections" mc="Standard.Class" uid="12192c7a-42f3-4454-8ec0-747981dc2c8e"/>
         <COMPID name="ArrayList" mc="Standard.Class" uid="1fdc4394-449e-4a97-a406-1c010920c3be"/>
-        <COMPID name="List" mc="Standard.Interface" uid="e21114e5-8e05-4dad-9a7a-3d7799e3b63d"/>
         <COMPID name="HashMap" mc="Standard.Class" uid="c55a4b69-5889-4725-9caa-f0d7c6e60dee"/>
-        <COMPID name="Scanner" mc="Standard.Class" uid="2c579369-8d52-4703-89c9-892239154ee6"/>
         <COMPID name="Map" mc="Standard.Interface" uid="b177d3de-d176-4b50-b5b2-b017cc858607"/>
       </COMP>
       <LINK relation="Extension">

@@ -17,9 +17,9 @@
         <COMPID name="java" mc="Standard.Package" uid="10a0696f-594a-4a25-809e-3afbba94bd82"/>
         <COMPID name="utils" mc="Standard.Package" uid="18272fbb-47a9-4944-9c8d-5d95b602e0d8"/>
         <COMPID name="logic" mc="Standard.Package" uid="a8a2afbe-976f-4dba-8e82-79320a5f30cc"/>
-        <COMPID name="actions" mc="Standard.Package" uid="3d228749-03e7-4812-8da5-02d46141363d"/>
         <COMPID name="view" mc="Standard.Package" uid="861a8e79-0cea-4ad4-9c8d-f15259e6d013"/>
         <COMPID name="Rolit" mc="Standard.Package" uid="37d9cfc9-aace-4f8e-89bf-040f9a9303a3"/>
+        <COMPID name="actions" mc="Standard.Package" uid="22bfa8f8-caf5-4ba2-adda-acaf3d416398"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

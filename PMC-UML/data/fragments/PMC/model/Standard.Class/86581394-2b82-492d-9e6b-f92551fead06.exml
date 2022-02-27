@@ -474,7 +474,7 @@ System.out.println(this.printer.showRanking());
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="20d8f0c4-ccf7-4f9d-b281-ab9e29ab6bfe"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="062e9370-cf7b-4ee7-b4a7-6110108f0f8a"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -549,7 +549,7 @@ System.out.println(this.printer.showRanking());
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="e20afcf5-2a30-4b7a-b5a7-b545e4a2796d"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="99aafc53-7cbc-49a3-a93b-5c812dafd127"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -624,7 +624,7 @@ System.out.println(this.printer.showRanking());
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="5b468b48-82ea-490c-9ac6-bd8264f9ddd0"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="36db89c3-2ec7-4aaf-ada3-8a64e0ea89c2"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -699,7 +699,7 @@ System.out.println(this.printer.showRanking());
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="0d3dc27f-bc89-4629-89a6-0f86d5b27d77"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="f701e13c-958d-4cca-bea9-bbd3dcfd0ced"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -711,6 +711,73 @@ System.out.println(this.printer.showRanking());
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="OwnedImport">
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="b791496b-b9b1-4ed5-ad06-890fa5f47862"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="BufferedReader" mc="Standard.Class" uid="06e1e84f-af3f-4cc5-abcc-56d2bf969539"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="19d2d4ab-745a-40ac-8666-ca5435250719"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="BufferedWriter" mc="Standard.Class" uid="4da398a7-3133-4ba2-9b5b-d490d0a78b2f"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="badb3075-779e-4bfc-8af0-a7e0097f4d0d"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="FileReader" mc="Standard.Class" uid="91bd9664-0ace-4b68-aae5-69f7db02bc6e"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="c784eddf-eb00-4269-9895-9bd5f346e866"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="FileWriter" mc="Standard.Class" uid="568f25df-c91f-4bba-986e-86dbacc50572"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="0f7cf985-d382-4ce9-8489-6f01af3ecf9c"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="IOException" mc="Standard.Class" uid="7ae8b62a-fa2f-450c-8876-222d4c17ec94"/>
+            </LINK>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>

@@ -15,9 +15,10 @@
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
         <COMPID name="Controller" mc="Standard.Class" uid="86581394-2b82-492d-9e6b-f92551fead06"/>
-        <COMPID name="Info" mc="Standard.Class" uid="ce675a47-9f3b-41c5-8f37-7a290ed1c6b9"/>
         <COMPID name="Rolit" mc="Standard.Class" uid="7ba2b671-565e-4c26-a624-cabb73eb4bbf"/>
         <COMPID name="SaveLoadManager" mc="Standard.Class" uid="7366a80c-51ce-44cc-89e8-66a54a7b1237"/>
+        <COMPID name="Info" mc="Standard.Class" uid="253764b6-9f5f-4798-bbb0-67940df4eacd"/>
+        <COMPID name="Scanner" mc="Standard.Class" uid="2c579369-8d52-4703-89c9-892239154ee6"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>

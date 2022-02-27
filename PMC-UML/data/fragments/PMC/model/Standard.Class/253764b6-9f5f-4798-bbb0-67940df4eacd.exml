@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Info" version="4">
   <OBJECT>
-    <ID name="Info" mc="Standard.Class" uid="ce675a47-9f3b-41c5-8f37-7a290ed1c6b9"/>
+    <ID name="Info" mc="Standard.Class" uid="253764b6-9f5f-4798-bbb0-67940df4eacd"/>
     <PID name="Rolit" mc="Standard.Package" uid="37d9cfc9-aace-4f8e-89bf-040f9a9303a3"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>

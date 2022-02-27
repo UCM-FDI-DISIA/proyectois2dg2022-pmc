@@ -48,7 +48,7 @@
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <LINK relation="Type">
-                    <ID name="Game" mc="Standard.Class" uid="f8c9f1f0-8a8a-4e0c-ac60-dbc25fc703e7"/>
+                    <ID name="Saveable" mc="Standard.Interface" uid="ec75aa13-aea8-49c9-a0d4-63b6368ea995"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -235,7 +235,7 @@ catch(IOException error_file) {
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="1614e0d3-9e9a-4c04-af83-4857f1661610"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="b56abe60-e1d7-46f8-904d-25daaa3c31a3"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -270,7 +270,7 @@ catch(IOException error_file) {
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Target">
-              <ID name="Game" mc="Standard.Class" uid="f8c9f1f0-8a8a-4e0c-ac60-dbc25fc703e7"/>
+              <ID name="Saveable" mc="Standard.Interface" uid="ec75aa13-aea8-49c9-a0d4-63b6368ea995"/>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
@@ -312,7 +312,7 @@ catch(IOException error_file) {
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="b1e0cbbf-5934-4db1-bae1-3c1e26c75829"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="1bc597a9-6a0c-4789-95d7-cc43fe8e28bd"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -392,6 +392,84 @@ catch(IOException error_file) {
           <DEPENDENCIES>
             <LINK relation="ImportedElement">
               <ID name="Player" mc="Standard.Class" uid="da2433c4-be9f-4a24-9f42-6eb5364dd679"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="3066070a-428c-40d0-ad5e-e5ded0025f9c"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="BufferedReader" mc="Standard.Class" uid="06e1e84f-af3f-4cc5-abcc-56d2bf969539"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="1968f03e-cb2e-4b36-809f-054340c63ecc"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="BufferedWriter" mc="Standard.Class" uid="4da398a7-3133-4ba2-9b5b-d490d0a78b2f"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="ee5746c7-440c-4178-bbf0-ab5e305e6b54"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="FileReader" mc="Standard.Class" uid="91bd9664-0ace-4b68-aae5-69f7db02bc6e"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="2e7a38bd-7f91-4a53-87a0-1d70cfc05227"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="FileWriter" mc="Standard.Class" uid="568f25df-c91f-4bba-986e-86dbacc50572"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="03f436e4-aeec-4c61-a662-da1160922e53"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="IOException" mc="Standard.Class" uid="7ae8b62a-fa2f-450c-8876-222d4c17ec94"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.ElementImport" uid="711252fd-e927-4d37-bfcb-29b81c2c9158"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="Game" mc="Standard.Class" uid="f8c9f1f0-8a8a-4e0c-ac60-dbc25fc703e7"/>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>

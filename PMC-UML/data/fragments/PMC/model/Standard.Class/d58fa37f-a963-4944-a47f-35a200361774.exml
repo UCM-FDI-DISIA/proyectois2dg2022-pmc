@@ -659,7 +659,7 @@ str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="31c2d5d3-7b0b-4f44-8726-81f18105a2f1"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="fca98b62-82e7-45a9-adf0-6b319adc70a7"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

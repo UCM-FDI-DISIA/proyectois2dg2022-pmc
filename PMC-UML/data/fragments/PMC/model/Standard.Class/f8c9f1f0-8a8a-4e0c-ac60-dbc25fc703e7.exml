@@ -555,75 +555,7 @@ this.update(newCube);
               <OBJECT>
                 <ID name="" mc="Infrastructure.Note" uid="3f1e31f9-98b7-419b-a0ae-b4feb0be77b0"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[int posX = newCube.getX(), posY = newCube.getY();
-int newX, newY;
-int foundX = posX, foundY = posY; // Las inicializo porque si no Eclipse se queja
-boolean found;
-Cube currentCube;
-
-// Hacemos dos bucles para indicar la direccion en la que vamos a buscar un cubo
-// del color del jugador actual
-// Estos dos bucles representan siempre 8 iteraciones, por lo que no implican
-// que el coste del algoritmo sea cubico (es lineal)
-for (int dirX = -1; dirX <= 1; dirX++) {
-    for (int dirY = -1; dirY <= 1; dirY++) {
-        // Partiendo de la posicion actual (posX, posY), nos movemos en la direccion
-        // actual
-        // sumando a la posicion actual (dirX, dirY)
-        if (!(dirX == 0 && dirY == 0)) {
-            newX = posX + dirX;
-            newY = posY + dirY;
-            found = false;
-            boolean conected = true;
-            // Comprobamos la nueva casilla y el posible cubo que haya en ella
-            while (isPositionInRange(newX, newY) && !found && conected) {
-                currentCube = getCubeInPos(newX, newY);
-                if (currentCube != null) {
-                    // Si el cubo es del color del jugador actual dejamos de buscar, es hasta este
-                    // hasta el que tenemos que llegar
-                    if (currentCube.getColor().equals(players.get(currentPlayerIndex).getColor())) {
-                        found = true;
-                        foundX = newX;
-                        foundY = newY;
-                    }
-                    // Si el cubo es de otro color seguimos buscando
-                    else {
-                        newX += dirX;
-                        newY += dirY;
-                    }
-                } else {
-                    conected = false; //Si hay alguna casilla vacia en esta direccion dejamos de buscar
-                }
-            }
-            // Si en la direccion dada por (dirX, dirY) hemos encontrado otro cubo del color
-            // del jugador actual
-            // ponemos cubos del color en cuestion en todas las casillas entre medias
-            if (found) {
-                newX = posX + dirX;
-                newY = posY + dirY;
-                while (!(newX == foundX && newY == foundY)) {
-                    currentCube = getCubeInPos(newX, newY);
-                    if (currentCube != null) {
-                        // Quitamos un punto al jugador al cual quitamos un cubo de su color
-                        colorPlayerMap.get(currentCube.getColor()).addScore(-1);
-
-                        // Cambiamos de color el cubo en cuestion al color del jugador actual
-                        currentCube.setColor(players.get(currentPlayerIndex).getColor());
-
-                        // Incrementamos en uno la puntuacion del jugador actual
-                        players.get(currentPlayerIndex).addScore(1);
-                    } else {
-                        Cube addCube = new Cube(newX, newY, players.get(currentPlayerIndex).getColor());
-                        board.addCubeInPos(addCube);
-                        players.get(currentPlayerIndex).addScore(1);
-                    }
-                    newX += dirX;
-                    newY += dirY;
-                }
-            }
-        }
-    }
-}
+                  <ATT name="Content"><![CDATA[board.update(newCube);
 //Comprobamos si la partida termina con este turno
 finished = board.isBoardFull();
 
@@ -858,107 +790,6 @@ else
                 <DEPENDENCIES>
                   <LINK relation="Model">
                     <FOREIGNID name="JavaCode" mc="Infrastructure.NoteType" uid="003800a8-0000-018e-0000-000000000000"/>
-                  </LINK>
-                </DEPENDENCIES>
-              </OBJECT>
-            </COMP>
-          </DEPENDENCIES>
-        </OBJECT>
-        <OBJECT>
-          <ID name="isPositionInRange" mc="Standard.Operation" uid="adca4f2c-b0a7-4a4b-9d92-bf34e77633bd"/>
-          <ATTRIBUTES>
-            <ATT name="Concurrency">false</ATT>
-            <ATT name="Final">false</ATT>
-            <ATT name="Passing">MethodOut</ATT>
-            <ATT name="Visibility">Public</ATT>
-            <ATT name="IsClass">false</ATT>
-            <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[isPositionInRange]]></ATT>
-            <ATT name="status">1970354901745664</ATT>
-          </ATTRIBUTES>
-          <DEPENDENCIES>
-            <COMP relation="IO">
-              <OBJECT>
-                <ID name="x" mc="Standard.Parameter" uid="ae61e121-6ed6-4e05-b65c-3c4043b329ca"/>
-                <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
-                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
-                  <ATT name="TypeConstraint"></ATT>
-                  <ATT name="DefaultValue"></ATT>
-                  <ATT name="IsOrdered">false</ATT>
-                  <ATT name="IsUnique">false</ATT>
-                  <ATT name="IsException">false</ATT>
-                  <ATT name="IsStream">false</ATT>
-                  <ATT name="Effect">ReadEffect</ATT>
-                  <ATT name="Name"><![CDATA[x]]></ATT>
-                  <ATT name="status">1970354901745664</ATT>
-                </ATTRIBUTES>
-                <DEPENDENCIES>
-                  <LINK relation="Type">
-                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
-                  </LINK>
-                </DEPENDENCIES>
-              </OBJECT>
-              <OBJECT>
-                <ID name="y" mc="Standard.Parameter" uid="7617dc60-9027-440f-82d9-e21f5f844f91"/>
-                <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
-                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
-                  <ATT name="TypeConstraint"></ATT>
-                  <ATT name="DefaultValue"></ATT>
-                  <ATT name="IsOrdered">false</ATT>
-                  <ATT name="IsUnique">false</ATT>
-                  <ATT name="IsException">false</ATT>
-                  <ATT name="IsStream">false</ATT>
-                  <ATT name="Effect">ReadEffect</ATT>
-                  <ATT name="Name"><![CDATA[y]]></ATT>
-                  <ATT name="status">1970354901745664</ATT>
-                </ATTRIBUTES>
-                <DEPENDENCIES>
-                  <LINK relation="Type">
-                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
-                  </LINK>
-                </DEPENDENCIES>
-              </OBJECT>
-            </COMP>
-            <COMP relation="Return">
-              <OBJECT>
-                <ID name="" mc="Standard.Parameter" uid="f74fd3c4-9154-4244-a269-bbf69b7f0f7e"/>
-                <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
-                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
-                  <ATT name="TypeConstraint"></ATT>
-                  <ATT name="DefaultValue"></ATT>
-                  <ATT name="IsOrdered">false</ATT>
-                  <ATT name="IsUnique">false</ATT>
-                  <ATT name="IsException">false</ATT>
-                  <ATT name="IsStream">false</ATT>
-                  <ATT name="Effect">ReadEffect</ATT>
-                  <ATT name="Name"></ATT>
-                  <ATT name="status">1970354901745664</ATT>
-                </ATTRIBUTES>
-                <DEPENDENCIES>
-                  <LINK relation="Type">
-                    <FOREIGNID name="boolean" mc="Standard.DataType" uid="00000004-0000-0005-0000-000000000000"/>
-                  </LINK>
-                </DEPENDENCIES>
-              </OBJECT>
-            </COMP>
-            <COMP relation="Descriptor">
-              <OBJECT>
-                <ID name="" mc="Infrastructure.Note" uid="53d7a0e1-9a91-404a-86cf-b6587361c4ac"/>
-                <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[return x >= 0 && x < board.getSize() && y >= 0 && y < board.getSize();]]></ATT>
-                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
-                  <ATT name="Name"></ATT>
-                  <ATT name="status">1970354901745664</ATT>
-                </ATTRIBUTES>
-                <DEPENDENCIES>
-                  <LINK relation="Model">
-                    <FOREIGNID name="JavaReturned" mc="Infrastructure.NoteType" uid="003800a8-0000-0190-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -1407,7 +1238,7 @@ else
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="054db242-0c29-4c22-9a55-d914ec092d86"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="ca89dc2e-74b0-428a-877c-dac5697fcf67"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1445,7 +1276,7 @@ else
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="5c446e77-efef-40d3-b4b4-55d2978a1dad"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="b8849511-a984-4755-a495-f425e14a55a6"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1544,7 +1375,7 @@ else
                 </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="d65d3bda-1f19-4b98-98cd-d74d4d0fdaf7"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="894cd9cc-fc28-4e8d-803b-495766a9bb59"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1619,7 +1450,7 @@ else
             </COMP>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="5d684b32-705d-420b-8f83-0b82f7fb9b60"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="312d85d9-4ac7-4b06-94e9-47bade372ec5"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1681,7 +1512,7 @@ else
                   </LINK>
                   <COMP relation="Tag">
                     <OBJECT>
-                      <ID name="" mc="Infrastructure.TaggedValue" uid="19523a5f-27a6-462b-a0d3-8d9a5a57d6d6"/>
+                      <ID name="" mc="Infrastructure.TaggedValue" uid="76912cee-386c-42fc-b1c3-31889210614b"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -1758,7 +1589,7 @@ else
                 </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="" mc="Infrastructure.TaggedValue" uid="8e8324ff-471a-4cf2-8be4-948e22831f67"/>
+                <ID name="" mc="Infrastructure.TaggedValue" uid="6d004306-7590-432e-bdda-450db3fb7a9f"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1770,6 +1601,20 @@ else
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="Realized">
+        <OBJECT>
+          <ID name="" mc="Standard.InterfaceRealization" uid="942d3781-298b-43fa-98e8-b1f047aaaa27"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Implemented">
+              <ID name="Saveable" mc="Standard.Interface" uid="ec75aa13-aea8-49c9-a0d4-63b6368ea995"/>
+            </LINK>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>

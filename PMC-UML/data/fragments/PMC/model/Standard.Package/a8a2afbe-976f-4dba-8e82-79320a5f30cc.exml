@@ -389,6 +389,61 @@
                   </COMP>
                 </DEPENDENCIES>
               </OBJECT>
+              <OBJECT>
+                <ID name="size" mc="Standard.Operation" uid="ade19445-0176-4ab5-b39a-bd508aadaad5"/>
+                <ATTRIBUTES>
+                  <ATT name="Concurrency">false</ATT>
+                  <ATT name="Final">false</ATT>
+                  <ATT name="Passing">MethodOut</ATT>
+                  <ATT name="Visibility">Public</ATT>
+                  <ATT name="IsClass">true</ATT>
+                  <ATT name="IsAbstract">false</ATT>
+                  <ATT name="Name"><![CDATA[size]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Return">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Parameter" uid="83c46cb5-747d-4680-a6b4-e6174cd32769"/>
+                      <ATTRIBUTES>
+                        <ATT name="ParameterPassing">In</ATT>
+                        <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                        <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                        <ATT name="TypeConstraint"></ATT>
+                        <ATT name="DefaultValue"></ATT>
+                        <ATT name="IsOrdered">false</ATT>
+                        <ATT name="IsUnique">false</ATT>
+                        <ATT name="IsException">false</ATT>
+                        <ATT name="IsStream">false</ATT>
+                        <ATT name="Effect">ReadEffect</ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Type">
+                          <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Infrastructure.Note" uid="f1aa326f-10bd-4d4f-bfe9-107a97101195"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[return Color.values().length;]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="JavaReturned" mc="Infrastructure.NoteType" uid="003800a8-0000-0190-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="OwnedAttribute">
               <OBJECT>
@@ -415,7 +470,7 @@
                   </LINK>
                   <COMP relation="Tag">
                     <OBJECT>
-                      <ID name="" mc="Infrastructure.TaggedValue" uid="5d39fd3c-3c26-438c-9d54-075cd0d280fb"/>
+                      <ID name="" mc="Infrastructure.TaggedValue" uid="f12faf1a-7889-4e54-88fc-4c1e6a31211e"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -438,6 +493,8 @@
         <COMPID name="Cube" mc="Standard.Class" uid="f89040b2-ad72-4aea-a545-d7366c53ec96"/>
         <COMPID name="Game" mc="Standard.Class" uid="f8c9f1f0-8a8a-4e0c-ac60-dbc25fc703e7"/>
         <COMPID name="Player" mc="Standard.Class" uid="da2433c4-be9f-4a24-9f42-6eb5364dd679"/>
+        <COMPID name="Saveable" mc="Standard.Interface" uid="ec75aa13-aea8-49c9-a0d4-63b6368ea995"/>
+        <COMPID name="List" mc="Standard.Interface" uid="e21114e5-8e05-4dad-9a7a-3d7799e3b63d"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
