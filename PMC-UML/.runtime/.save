@@ -1,7 +1,7 @@
-#Sun Feb 27 18:23:27 CET 2022
+#Sun Feb 27 21:39:36 CET 2022
 org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/sergi/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.full.perspective.parentId=app.ui.ext_com.partstack.bottom
-org.modelio.app.diagram.editor.OpenedDiagrams1='Model Class diagram' {607da468-9b96-4ff6-b470-30153b874419} Standard.ClassDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams1='Interaction Sequence diagram' {3afdf821-d2dd-47a1-b67a-87b4e380bc34} Standard.SequenceDiagram
 org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/sergi/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.development.perspective.parentId=app.ui.ext_com.partstack.bottom
-org.modelio.app.diagram.editor.OpenedDiagrams0='Interaction Sequence diagram' {3afdf821-d2dd-47a1-b67a-87b4e380bc34} Standard.SequenceDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams0='Model Class diagram' {607da468-9b96-4ff6-b470-30153b874419} Standard.ClassDiagram
 org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/sergi/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.diagram.perspective.parentId=app.ui.ext_com.partstack.right
 org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/sergi/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.app.ui.model.perspective.parentId=org.modelio.app.bottom.parts
