@@ -13,13 +13,20 @@ public class Game implements Saveable{
 	private int currentPlayerIndex;
 	private Map<Color, Player> colorPlayerMap;
 
-	public Game(List<Player> players, Board board) {
+	public Game(List<String> names, Board board) {
 		this.finished = false;
-		this.players = players;
+		this.createPlayers(names);
 		this.board = board;
 		this.colorPlayerMap = new HashMap<Color, Player>();
 		for (Player player : players) {
 			this.colorPlayerMap.put(player.getColor(), player);
+		}
+	}
+	
+	private void createPlayers(List<String> names) {
+		players = new ArrayList<>();
+		for (int i = 0; i < names.size(); i++) {
+			this.players.add(new Player(Color.values()[i], names.get(i)));
 		}
 	}
 
@@ -53,24 +60,21 @@ public class Game implements Saveable{
 	public boolean play(int x, int y) {
 		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
 		// indicada
-		if (!tryToAddCube(x, y)) {
+		if (!board.tryToAddCube(x, y)) {
 			System.out.println("La posicion no es valida");
 			return false;
 		}
 		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex).getColor());
+		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
 		board.addCubeInPos(newCube);
-		this.update(newCube);
-		return true;
-	}
-
-	public void update(Cube newCube) {
+		
 		board.update(newCube);
+		
 		//Comprobamos si la partida termina con este turno
 		finished = board.isBoardFull();
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		if(!finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();		return true;
 	}
 
 	public String positionToString(int x, int y) {
@@ -79,23 +83,6 @@ public class Game implements Saveable{
 			return " ";
 		else
 			return cube.getColor().toString();
-	}
-
-	public boolean tryToAddCube(int x, int y) {
-		if (this.board.getNumCubes() > 0) {
-			boolean nearbyCube = false;
-			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
-				return false;
-			for (int i = -1; i <= 1; i++) {
-				for (int j = -1; j <= 1; j++) {
-					if (isPositionInRange(x + i, y + j) && getCubeInPos(x + i, y + j) != null) {
-						nearbyCube = true;
-					}
-				}
-			}
-			return nearbyCube;
-		} else
-			return isPositionInRange(x, y);
 	}
 
 	public void flipTrapped() {

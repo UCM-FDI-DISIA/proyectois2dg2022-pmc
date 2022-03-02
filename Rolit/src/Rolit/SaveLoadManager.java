@@ -51,7 +51,7 @@ public class SaveLoadManager {
 			List<Player> list_players = new ArrayList<Player>();
 			
 			while(!"Player".equals(words[0])) {
-				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Color.valueOfIgnoreCase(words[0].charAt(0))));
+				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Player.getPlayer(Color.valueOfIgnoreCase(words[0].charAt(0)))));
 				words = save_file.readLine().split(" ");
 			}
 			Color turn = Color.valueOfIgnoreCase(words[1].charAt(0));

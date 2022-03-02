@@ -25,7 +25,7 @@ public class Rolit {
 		System.out.println();
 		
 		
-		List<Player> players = namePlayers(scanner);
+		List<String> players = namePlayers(scanner);
 		
 		
 		Game game = new Game(players, new Board(boardSize));
@@ -41,10 +41,10 @@ public class Rolit {
 		System.out.println(VERSION);
 	}
 	
-	private static List<Player> namePlayers(Scanner scanner) {
+	private static List<String> namePlayers(Scanner scanner) {
 		System.out.println(NAME_PLAYERS);
 		System.out.println();
-		List<Player> players = new ArrayList<Player>();
+		List<String> players = new ArrayList<String>();
 		
 		for (int i = 0; i < numberOfPlayers; ++i) {
 			
@@ -53,8 +53,7 @@ public class Rolit {
 			System.out.print("Player "+(i+1)+"("+currentColor.toString()+"): ");
 			String name = scanner.nextLine();
 			
-			Player currentPlayer = new Player(currentColor, name);
-			players.add(currentPlayer);
+			players.add(name);
 	
 		}
 		

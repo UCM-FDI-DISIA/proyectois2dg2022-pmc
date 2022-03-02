@@ -34,7 +34,7 @@ public class Player implements Comparable<Player> {
 		return this.name;
 	}
 	
-	public Player getPlayer(Color c) {
+	public static Player getPlayer(Color c) {
 		return Player.playerList[c.ordinal()];
 	}
 }

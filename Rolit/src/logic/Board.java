@@ -103,15 +103,9 @@ public class Board {
 						while (!(newX == foundX && newY == foundY)) {
 							currentCube = getCubeInPos(newX, newY);
 
-							// Quitamos un punto al jugador al cual quitamos un cubo de su color
-							currentCube.addScore(-1);
-
-							// Cambiamos de color el cubo en cuestion al color del jugador actual
-							currentCube.setColor(newCube.getColor());
-
-							// Incrementamos en uno la puntuacion del jugador actual
-							newCube.addScore(1);
-
+							// Cambiamos de color el cubo en cuestion al color del jugador actual y actualizamos los puntos
+							currentCube.changeOwner(newCube.getColor());
+							
 							newX += dirX;
 							newY += dirY;
 						}
@@ -124,6 +118,23 @@ public class Board {
 
 	private boolean isPositionInRange(int x, int y) {
 		return x >= 0 && x < size && y >= 0 && y < size;
+	}
+	
+	public boolean tryToAddCube(int x, int y) {
+		if (numCubes > 0) {
+			boolean nearbyCube = false;
+			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
+				return false;
+			for (int i = -1; i <= 1; i++) {
+				for (int j = -1; j <= 1; j++) {
+					if (isPositionInRange(x + i, y + j) && getCubeInPos(x + i, y + j) != null) {
+						nearbyCube = true;
+					}
+				}
+			}
+			return nearbyCube;
+		} else
+			return isPositionInRange(x, y);
 	}
 
 }
