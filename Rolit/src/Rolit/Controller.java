@@ -15,8 +15,6 @@ public class Controller {
 	private Scanner input;
 	private Game game;
 	private GamePrinter printer;
-	private SaveLoadManager saveLoadManager;
-	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
 	private static final String PROMPT = "Command > ";
 	
 	private final String NUEVA_PARTIDA = "Nueva partida";
@@ -32,7 +30,6 @@ public class Controller {
 		this.game = game;
 		this.printer = new GamePrinter(game);
 		input = new Scanner(System.in);
-		this.saveLoadManager = new SaveLoadManager(game, DEFAULT_FILENAME);
 	} 
 	
 	private void printGame() {
@@ -60,14 +57,12 @@ public class Controller {
 		}
 		
 		if (CARGAR_PARTIDA.equals(arrayOpciones[respuesta-1])) {
-			saveLoadManager.loadGame();
+			SaveLoadManager.loadGame(game);
 		}
 		
 		boolean refreshDisplay = true;
 		while(!game.isFinished()) {
 			if(refreshDisplay) printGame();
-			int posx, posy;
-			boolean valido = false;
 			System.out.println(PROMPT);
 			String s = input.nextLine();
 			String[] parameters = s.toLowerCase().trim().split(" ");
@@ -79,28 +74,10 @@ public class Controller {
 			catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			/*while (!valido) {
-				System.out.println(printer.showTurn());
-				System.out.println("Introduce un comando:");
-				System.out.println("c : Poner un cubo");
-				System.out.println("s : Guardar partida");
-				command = input.next();
-				if ("c".equals(command)) {
-					System.out.println("Introduce la posicion x: ");
-					posx = input.nextInt();
-					System.out.println("Introduce la posicion y: ");
-					posy = input.nextInt();
-					valido = game.play(posx, posy);
-				}					
-				else if("s".equals(command))
-					saveLoadManager.saveGame();
-				else
-					System.out.println("Invalid Command");										
-			}*/
-			
 		}
+		
 		if(refreshDisplay) printGame();
 		
-		System.out.println(this.printer.showRanking());
+		if(!game.exited()) System.out.println(this.printer.showRanking());
 	}
 }

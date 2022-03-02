@@ -19,7 +19,7 @@ public class SaveCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		SaveLoadManager.saveGame();
+		SaveLoadManager.saveGame(game);
 		return false;
 	}
 }

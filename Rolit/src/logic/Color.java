@@ -1,7 +1,8 @@
 package logic;
 
 public enum Color {
-	YELLOW('Y'), RED('R'), GREEN('G'), BLUE('L'), ORANGE('O'), PINK('K'), PURPLE('P'), BLACK('B'), BROWN('W'), BEIGE('E');
+	YELLOW('Y'), RED('R'), GREEN('G'), BLUE('L'), ORANGE('O'), 
+	PINK('K'), PURPLE('P'), BLACK('B'), BROWN('W'), BEIGE('E');
 	
 	private char shortcut;
 	

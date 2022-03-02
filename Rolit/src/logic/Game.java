@@ -12,6 +12,7 @@ public class Game {
 	private Board board;
 	private int currentPlayerIndex;
 	private Map<Color, Player> colorPlayerMap;
+	private boolean exit;
 
 	public Game(List<Player> players, Board board) {
 		this.finished = false;
@@ -21,6 +22,7 @@ public class Game {
 		for (Player player : players) {
 			this.colorPlayerMap.put(player.getColor(), player);
 		}
+		this.exit = false;
 	}
 
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
@@ -170,8 +172,8 @@ public class Game {
 		return x >= 0 && x < board.getSize() && y >= 0 && y < board.getSize();
 	}
 
-	public void flipTrapped() {
-
+	public void setExit() {
+		this.exit = true;
 	}
 
 	public Cube getCubeInPos(int x, int y) {
@@ -182,8 +184,12 @@ public class Game {
 		return board.getSize();
 	}
 
+	public boolean exited() {
+		return this.exit;
+	}
+	
 	public boolean isFinished() {
-		return this.finished;
+		return this.finished || this.exit;
 	}
 
 	public List<Player> getPlayers() {

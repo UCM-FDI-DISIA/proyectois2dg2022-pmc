@@ -35,6 +35,9 @@ public class Player implements Comparable<Player> {
 
 	}
 
+	public boolean isColorAvailable(Color color) {
+		return true;
+	}
 	
 	public String getName() {
 		return this.name;
