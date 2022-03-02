@@ -12,9 +12,8 @@ import logic.Player;
 public class Rolit {
 	private static final String TITLE = "		ROLIT";
 	private static final String VERSION = "Sprint Week 1";
-	private static final String NAME_PLAYERS = "Name the players: ";
 	
-	private static final int numberOfPlayers = 4;
+
 	private static final int boardSize = 8;	
 	
 	public static void main(String[] args) {
@@ -41,24 +40,6 @@ public class Rolit {
 		System.out.println(VERSION);
 	}
 	
-	private static List<String> namePlayers(Scanner scanner) {
-		System.out.println(NAME_PLAYERS);
-		System.out.println();
-		List<String> players = new ArrayList<String>();
-		
-		for (int i = 0; i < numberOfPlayers; ++i) {
-			
-			Color currentColor = Color.values()[i];
-			
-			System.out.print("Player "+(i+1)+"("+currentColor.toString()+"): ");
-			String name = scanner.nextLine();
-			
-			players.add(name);
 	
-		}
-		
-		return players;
-		
-	}
 
 }
