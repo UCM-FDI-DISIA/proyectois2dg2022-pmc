@@ -30,6 +30,10 @@ public class Player implements Comparable<Player> {
 		return (score - p.getScore());
 	}
 
+	public boolean isColorAvailable(Color color) {
+		return true;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

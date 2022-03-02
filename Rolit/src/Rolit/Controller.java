@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import commands.Command;
 import logic.Game;
 import view.GamePrinter;
 
@@ -14,8 +15,7 @@ public class Controller {
 	private Scanner input;
 	private Game game;
 	private GamePrinter printer;
-	private SaveLoadManager saveLoadManager;
-	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
+	private static final String PROMPT = "Command > ";
 	
 	private final String NUEVA_PARTIDA = "Nueva partida";
 	private final String CARGAR_PARTIDA = "Cargar partida";
@@ -30,7 +30,6 @@ public class Controller {
 		this.game = game;
 		this.printer = new GamePrinter(game);
 		input = new Scanner(System.in);
-		this.saveLoadManager = new SaveLoadManager(game, DEFAULT_FILENAME);
 	} 
 	
 	private void printGame() {
@@ -58,40 +57,27 @@ public class Controller {
 		}
 		
 		if (CARGAR_PARTIDA.equals(arrayOpciones[respuesta-1])) {
-			saveLoadManager.loadGame();
+			SaveLoadManager.loadGame(game);
 		}
 		
-
+		boolean refreshDisplay = true;
 		while(!game.isFinished()) {
-			String command;
-			int posx, posy;
-			boolean valido = false;
-			
-			printGame();
-			
-			while (!valido) {
-				System.out.println(printer.showTurn());
-				System.out.println("Introduce un comando:");
-				System.out.println("c : Poner un cubo");
-				System.out.println("s : Guardar partida");
-				command = input.next();
-				if ("c".equals(command)) {
-					System.out.println("Introduce la posicion x: ");
-					posx = input.nextInt();
-					System.out.println("Introduce la posicion y: ");
-					posy = input.nextInt();
-					valido = game.play(posx, posy);
-				}					
-				else if("s".equals(command))
-					saveLoadManager.saveGame();
-				else
-					System.out.println("Invalid Command");										
+			if(refreshDisplay) printGame();
+			System.out.println(PROMPT);
+			String s = input.nextLine();
+			String[] parameters = s.toLowerCase().trim().split(" ");
+			Command command = null;
+			try {
+				command = Command.getCommand(parameters);
+				refreshDisplay = command.execute(game);
 			}
-			
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		
-		printGame();
+		if(refreshDisplay) printGame();
 		
-		System.out.println(this.printer.showRanking());
+		if(!game.exited()) System.out.println(this.printer.showRanking());
 	}
 }

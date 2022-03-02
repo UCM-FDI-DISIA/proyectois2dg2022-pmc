@@ -12,6 +12,7 @@ public class Game implements Saveable{
 	private Board board;
 	private int currentPlayerIndex;
 	private Map<Color, Player> colorPlayerMap;
+	private boolean exit;
 
 	public Game(List<String> names, Board board) {
 		this.finished = false;
@@ -21,6 +22,7 @@ public class Game implements Saveable{
 		for (Player player : players) {
 			this.colorPlayerMap.put(player.getColor(), player);
 		}
+		this.exit = false;
 	}
 	
 	private void createPlayers(List<String> names) {
@@ -85,8 +87,8 @@ public class Game implements Saveable{
 			return cube.getColor().toString();
 	}
 
-	public void flipTrapped() {
-
+	public void setExit() {
+		this.exit = true;
 	}
 
 	public Cube getCubeInPos(int x, int y) {
@@ -97,8 +99,12 @@ public class Game implements Saveable{
 		return board.getSize();
 	}
 
+	public boolean exited() {
+		return this.exit;
+	}
+	
 	public boolean isFinished() {
-		return this.finished;
+		return this.finished || this.exit;
 	}
 
 	public List<Player> getPlayers() {
