@@ -102,7 +102,7 @@ public class Controller {
 				try {
 					System.out.println(game.availableColors());
 					System.out.print(CHOOSE_COLOR);
-					String c = this.input.next(); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
+					char c = this.input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
 					game.tryToAddPlayer(name, c);
 					added = true;
 				} catch (IllegalArgumentException e) {

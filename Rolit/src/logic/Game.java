@@ -48,8 +48,8 @@ public class Game implements Saveable{
 		return Collections.unmodifiableList(cubeList);
 	}
 
-	public void tryToAddPlayer(String name, char colorShortcut) {
-		Color color = Color.valueOfIgnoreCase(colorShortcut);
+	public void tryToAddPlayer(String name, char c) {
+		Color color = Color.valueOfIgnoreCase(c);
 		if(color == null) 
 			throw new IllegalArgumentException("El shortcut no se corresponde con ningun color");
 		Player player = Player.getPlayer(color);
