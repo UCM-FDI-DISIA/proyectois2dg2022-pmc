@@ -12,7 +12,7 @@ public class Player implements Comparable<Player> {
 		this.name = name;
 		playerList[color.ordinal()] = this;
 	}
-
+	
 	public Color getColor() {
 		return this.color;
 	}
@@ -28,10 +28,6 @@ public class Player implements Comparable<Player> {
 	@Override
 	public int compareTo(Player p) {
 		return (score - p.getScore());
-	}
-
-	public boolean isColorAvailable(Color color) {
-		return true;
 	}
 	
 	public String getName() {

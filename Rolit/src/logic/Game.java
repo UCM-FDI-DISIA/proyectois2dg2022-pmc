@@ -11,25 +11,14 @@ public class Game implements Saveable{
 	private List<Player> players;
 	private Board board;
 	private int currentPlayerIndex;
-	private Map<Color, Player> colorPlayerMap;
 	private boolean exit;
+	private static final String AVAILABLE_COLORS_MSG = "Available colors:";
 
-	public Game(List<String> names, Board board) {
+	public Game(Board board) {
 		this.finished = false;
-		this.createPlayers(names);
 		this.board = board;
-		this.colorPlayerMap = new HashMap<Color, Player>();
-		for (Player player : players) {
-			this.colorPlayerMap.put(player.getColor(), player);
-		}
+		this.players = new ArrayList<Player>();
 		this.exit = false;
-	}
-	
-	private void createPlayers(List<String> names) {
-		players = new ArrayList<>();
-		for (int i = 0; i < names.size(); i++) {
-			this.players.add(new Player(Color.values()[i], names.get(i)));
-		}
 	}
 
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
@@ -59,6 +48,29 @@ public class Game implements Saveable{
 		return Collections.unmodifiableList(cubeList);
 	}
 
+	public void tryToAddPlayer(String name, char colorShortcut) {
+		Color color = Color.valueOfIgnoreCase(colorShortcut);
+		if(color == null) 
+			throw new IllegalArgumentException("El shortcut no se corresponde con ningun color");
+		Player player = Player.getPlayer(color);
+		if(player == null) {
+			players.add(new Player(color, name));
+		}
+		else {
+			throw new IllegalArgumentException("El color seleccionado no esta disponible");
+		}
+	}
+	
+	public String availableColors() {
+		StringBuilder str = new StringBuilder();
+		str.append(String.format("%s%n", AVAILABLE_COLORS_MSG));
+		for(Color c : Color.values()) {
+			if(Player.getPlayer(c) == null)
+				str.append(String.format("%c: %s%n", c, c.name()));
+		}
+		return str.toString();
+	}
+	
 	public boolean play(int x, int y) {
 		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
 		// indicada
