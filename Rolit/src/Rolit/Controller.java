@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.Command;
+import logic.Board;
 import logic.Color;
 import logic.Game;
 import view.GamePrinter;
@@ -19,19 +20,21 @@ public class Controller {
 	private Game game;
 	private GamePrinter printer;
 	private static final String PROMPT = "Command > ";
-	private static final int numberOfPlayers = 4;
 	private static final String NAME_PLAYERS = "Name the players: ";
 	private static final String INITIAL_MESSAGE = "Choose an option:";
 	private static final String CHOOSE_COLOR = "Choose a color shortcut:";
-
+	private static final String NUMBER_PLAYERS_MSG = "How many players do you want?";
+	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2-10";
+	private static final String BOARD_MSG = "Choose your board size (the lenght of the side), it must be more than 8";
+	private static final String BOARD_ERROR = "Board size must be a number between 8-15";
+	
 	private final String NEW_GAME = "New game";
 	private final String LOAD_GAME = "Load game";
 	private final String INVALID_OPTION = "Invalid option. Try again.";
 
 	private final String[] optionsArray = { NEW_GAME, LOAD_GAME };
 
-	public Controller(Game game) {
-		this.game = game;
+	public Controller() {
 		this.printer = new GamePrinter(game);
 		input = new Scanner(System.in);
 	}
@@ -39,8 +42,29 @@ public class Controller {
 	private void printGame() {
 		System.out.println(this.printer);
 	}
+	
+	private int menu() {
+		System.out.println();
+		System.out.println(INITIAL_MESSAGE);
+		System.out.println();
 
-	public void run() {
+		for (int i = 0; i < optionsArray.length; ++i)
+			System.out.println((i + 1) + ". " + optionsArray[i]);
+
+		int respuesta = 1;
+		boolean repeat = true;
+
+		while (repeat) {
+			respuesta = this.input.nextInt();
+			if (respuesta - 1 >= 0 && respuesta - 1 < optionsArray.length)
+				repeat = false;
+			else
+				System.out.println(INVALID_OPTION);
+		}
+		return respuesta;
+	}
+
+	private void play() {
 		boolean refreshDisplay = true;
 		while (!game.isFinished()) {
 			if (refreshDisplay)
@@ -64,22 +88,21 @@ public class Controller {
 			System.out.println(this.printer.showRanking());
 	}
 
-	private static List<String> chooseColor(Scanner scanner) {
+	private void chooseColor(int numPlayers) {
 		System.out.println(NAME_PLAYERS);
 		System.out.println();
-		List<String> players = new ArrayList<String>();
 
-		for (int i = 0; i < numberOfPlayers; ++i) {
+		for (int i = 0; i < numPlayers; ++i) {
 			boolean added = false;
 
 			System.out.print("Player " + (i + 1) + ": ");
-			String name = scanner.nextLine();
+			String name = this.input.nextLine();
 
 			 while (!added) {
 				try {
 					System.out.println(game.availableColors());
 					System.out.print(CHOOSE_COLOR);
-					String c = scanner.next(); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
+					String c = this.input.next(); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
 					game.tryToAddPlayer(name, c);
 					added = true;
 				} catch (IllegalArgumentException e) {
@@ -87,42 +110,41 @@ public class Controller {
 					added = false;
 				}
 			}
-
-			players.add(name);
-
 		}
-
-		return players;
-
 	}
 
-	private int menu() {
-		System.out.println();
-		System.out.println(INITIAL_MESSAGE);
-		System.out.println();
-
-		for (int i = 0; i < optionsArray.length; ++i)
-			System.out.println((i + 1) + ". " + optionsArray[i]);
-
-		int respuesta = 1;
-		boolean repeat = true;
-
-		while (repeat) {
-			respuesta = input.nextInt();
-			if (respuesta - 1 >= 0 && respuesta - 1 < optionsArray.length)
-				repeat = false;
-			else
-				System.out.println(INVALID_OPTION);
+	private int numPlayers() {
+		System.out.println(NUMBER_PLAYERS_MSG);
+		int nPlayers = this.input.nextInt();
+		while (nPlayers < 2 || nPlayers > Color.size()) {
+			System.out.println(ERROR_PLAYERS_MSG);
+			nPlayers = this.input.nextInt();
 		}
-
-		if (LOAD_GAME.equals(optionsArray[respuesta - 1])) {
+		return nPlayers;
+	}
+	
+	private Board chooseBoard() {
+		System.out.println(BOARD_MSG);
+		int board_size = this.input.nextInt();
+		while (board_size < 8 || board_size > Board.MAX_SIZE) {
+			System.out.println(BOARD_ERROR);
+			board_size = this.input.nextInt();
+		}
+		return new Board(board_size);
+	}
+	
+	private void createGame() {
+		this.game = new Game(this.chooseBoard());
+		this.chooseColor(this.numPlayers());
+	}
+	
+	public void run() {
+		int option = this.menu();
+		if (LOAD_GAME.equals(optionsArray[option - 1]))
 			SaveLoadManager.loadGame(game);
-		} else {
-			chooseColor(input);
-		}
-
-		run();
-
-		return 0;
+		else 
+			this.createGame();
+		this.play();
 	}
+	
 }

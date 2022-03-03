@@ -6,6 +6,7 @@ import java.util.List;
 public class Board {
 
 	private final static String POS_ERROR = "Failed to add cube, its position is out of the board";
+	public final static int MAX_SIZE = 15;
 
 	private List<List<Cube>> matrix;
 	private int size;
