@@ -27,7 +27,7 @@ public class GamePrinter {
 		StringBuilder str = new StringBuilder();
 		str.append(StringUtils.LINE_SEPARATOR);
 		// Paint game
-		str.append(StringUtils.repeat('-', 16)).append(StringUtils.LINE_SEPARATOR);	//TODO El margen tiene que depender del tamaño
+		str.append(StringUtils.repeat('-', 16)).append(StringUtils.LINE_SEPARATOR);
 		for (int x = 0; x < game.getBoardSize(); x++) {
 			for (int y = 0; y < game.getBoardSize(); y++) {
 				str.append(game.positionToString(x, y)).append(SPACE);
