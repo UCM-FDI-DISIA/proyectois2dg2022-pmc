@@ -11,14 +11,25 @@ public class Game implements Saveable{
 	private List<Player> players;
 	private Board board;
 	private int currentPlayerIndex;
+	private Map<Color, Player> colorPlayerMap;
 	private boolean exit;
-	private static final String AVAILABLE_COLORS_MSG = "Available colors:";
 
-	public Game(Board board) {
+	public Game(List<String> names, Board board) {
 		this.finished = false;
+		this.createPlayers(names);
 		this.board = board;
-		this.players = new ArrayList<Player>();
+		this.colorPlayerMap = new HashMap<Color, Player>();
+		for (Player player : players) {
+			this.colorPlayerMap.put(player.getColor(), player);
+		}
 		this.exit = false;
+	}
+	
+	private void createPlayers(List<String> names) {
+		players = new ArrayList<>();
+		for (int i = 0; i < names.size(); i++) {
+			this.players.add(new Player(Color.values()[i], names.get(i)));
+		}
 	}
 
 	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
@@ -48,29 +59,6 @@ public class Game implements Saveable{
 		return Collections.unmodifiableList(cubeList);
 	}
 
-	public void tryToAddPlayer(String name, char c) {
-		Color color = Color.valueOfIgnoreCase(c);
-		if(color == null) 
-			throw new IllegalArgumentException("El shortcut no se corresponde con ningun color");
-		Player player = Player.getPlayer(color);
-		if(player == null) {
-			players.add(new Player(color, name));
-		}
-		else {
-			throw new IllegalArgumentException("El color seleccionado no esta disponible");
-		}
-	}
-	
-	public String availableColors() {
-		StringBuilder str = new StringBuilder();
-		str.append(String.format("%s%n", AVAILABLE_COLORS_MSG));
-		for(Color c : Color.values()) {
-			if(Player.getPlayer(c) == null)
-				str.append(String.format("%c: %s%n", c, c.name()));
-		}
-		return str.toString();
-	}
-	
 	public boolean play(int x, int y) {
 		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
 		// indicada
@@ -99,8 +87,34 @@ public class Game implements Saveable{
 			return cube.getColor().toString();
 	}
 
+<<<<<<< HEAD
+	public void flipTrapped() {
+
+=======
+	public boolean tryToAddCube(int x, int y) {
+		if (this.board.getNumCubes() > 0) {
+			boolean nearbyCube = false;
+			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
+				return false;
+			for (int i = -1; i <= 1; i++) {
+				for (int j = -1; j <= 1; j++) {
+					if (isPositionInRange(x + i, y + j) && getCubeInPos(x + i, y + j) != null) {
+						nearbyCube = true;
+					}
+				}
+			}
+			return nearbyCube;
+		} else
+			return isPositionInRange(x, y);
+	}
+
+	public boolean isPositionInRange(int x, int y) {
+		return x >= 0 && x < board.getSize() && y >= 0 && y < board.getSize();
+	}
+
 	public void setExit() {
 		this.exit = true;
+>>>>>>> Dev
 	}
 
 	public Cube getCubeInPos(int x, int y) {

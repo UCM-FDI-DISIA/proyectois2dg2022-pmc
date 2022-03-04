@@ -24,8 +24,10 @@ public class Cube {
 		return player.getColor();
 	}
 	
-	public void setColor(Color color) {
-		this.player = player.getPlayer(color);
+	public void changeOwner(Color color) {
+		player.addScore(-value);
+		this.player = Player.getPlayer(color);
+		player.addScore(value);
 	}
 	
 	
@@ -38,7 +40,4 @@ public class Cube {
 		return (this.toString() + " " + x + " " + y);
 	}
 	
-	public void addScore() {//FIXME ARREGLAR CUANDO SE RESTAN LOS PUNTOS, HACERLO TODO INTERNAMENTE CUANDO SE CAMBIA DE COLOR
-		player.addScore(value);
-	}
 }

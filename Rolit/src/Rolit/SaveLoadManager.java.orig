@@ -15,7 +15,17 @@ import logic.Player;
 import logic.Saveable;
 
 public class SaveLoadManager {
+<<<<<<< HEAD
+	private Saveable game;
+	private String saving_file;
+	
+	public SaveLoadManager(Saveable game, String file) {
+		this.game = game;
+		this.saving_file = file;
+	}
+=======
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
+>>>>>>> Dev
 	
 	// Formato para el guardado, todos cubos se guardan como "color posx posy \n" y 
 	// al final tenemos "Player  color" para el jugador que tenia el turno.
