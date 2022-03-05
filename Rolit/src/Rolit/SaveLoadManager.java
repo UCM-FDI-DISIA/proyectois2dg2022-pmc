@@ -17,7 +17,11 @@ import logic.Saveable;
 
 public class SaveLoadManager {
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
-	
+	private static final String ERROR_LOAD = "Failed to load the file";
+	private static final String ERROR_SAVE = "Failed to save the file";
+	private static final String SUCCESS_MSG = "Game saved successfully";
+	private static final String CENTINEL = "END";
+
 	/*
 	 * Formato de guardado:
 	 * 
@@ -52,11 +56,11 @@ public class SaveLoadManager {
 				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
 			}
 			
-			save_file.write("END");	//(centinela)
-			System.out.println("Partida guardada exitosamente");
+			save_file.write(CENTINEL);
+			System.out.println(SUCCESS_MSG);
 		}
 		catch(IOException error_file) {
-			System.out.println("ERROR AL GUARDAR ARCHIVO");
+			System.out.println(ERROR_SAVE);
 		}
 	}
 	
@@ -85,7 +89,7 @@ public class SaveLoadManager {
 			Board board = new Board(boardSize);
 			
 			words = save_file.readLine().split(" ");
-			while(!"END".equals(words[0])) {
+			while(!CENTINEL.equals(words[0])) {
 				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Player.getPlayer(Color.valueOfIgnoreCase(words[0].charAt(0)))));
 				words = save_file.readLine().split(" ");
 			}
@@ -93,7 +97,7 @@ public class SaveLoadManager {
 			return new Game(board, list_cubes, list_players, turn, boardSize);
 		}
 		catch(IOException error_file) {
-			System.out.println("ERROR AL CARGAR ARCHIVO");
+			System.out.println(ERROR_LOAD);
 		}
 		return null;
 	}

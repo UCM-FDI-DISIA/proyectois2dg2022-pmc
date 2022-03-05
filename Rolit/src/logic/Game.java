@@ -54,13 +54,13 @@ public class Game implements Saveable{
 	public void tryToAddPlayer(String name, char c) {
 		Color color = Color.valueOfIgnoreCase(c);
 		if(color == null) 
-			throw new IllegalArgumentException("El shortcut no se corresponde con ningun color");
+			throw new IllegalArgumentException("The shortcut does not match any color");
 		Player player = Player.getPlayer(color);
 		if(player == null) {
 			players.add(new Player(color, name));
 		}
 		else {
-			throw new IllegalArgumentException("El color seleccionado no esta disponible");
+			throw new IllegalArgumentException("The selected color is not available");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class Game implements Saveable{
 		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
 		// indicada
 		if (!board.tryToAddCube(x, y)) {
-			System.out.println("La posicion no es valida");
+			System.out.println("Not a valid position");
 			return false;
 		}
 		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero

@@ -3,17 +3,17 @@ package commands;
 import logic.Game;
 
 public class PlaceCubeCommand extends Command {
-	private static final String NAME = "place cube";
+	private static final String NAME = "place_cube";
 
-	private static final String DETAILS = "[p]lace cube";
+	private static final String DETAILS = "[p]lace_cube <x> <y>";
 
 	private static final String SHORTCUT = "p";
 
-	private static final String HELP = "place a cube";
+	private static final String HELP = "place a cube in position x, y";
 	
 	private static final String COOR_IS_NUMBER_MSNG = "the coordenates must be integers";
 	
-	private static final String INVALID_COOR_MSG = "Las coordenadas introducidas no son válidas";
+	private static final String INVALID_COOR_MSG = "Invalid position";
 
 	private int x;
 	private int y;

@@ -1,6 +1,5 @@
 package Rolit;
 
-
 public class Rolit {
 	private static final String TITLE = "		ROLIT";
 	private static final String VERSION = "Sprint Week 2";

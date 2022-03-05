@@ -4,7 +4,7 @@ import logic.Game;
 
 public abstract class Command {
 	
-	private static final String UNKNOWN_COMMAND_MSG = "Unknown command";
+	private static final String UNKNOWN_COMMAND_MSG = "Unknown command. Type \"help\" to see the available commands.";
 
 	protected static final String INCORRECT_NUMBER_OF_ARGS_MSG = "Incorrect number of arguments";
 	

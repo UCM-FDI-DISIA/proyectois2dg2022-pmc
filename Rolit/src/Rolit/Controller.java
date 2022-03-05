@@ -16,10 +16,10 @@ public class Controller {
 	private static final String NAME_PLAYERS = "Name the players: ";
 	private static final String INITIAL_MESSAGE = "Choose an option:";
 	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
-	private static final String NUMBER_PLAYERS_MSG = "How many players do you want?";
-	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2-10";
-	private static final String BOARD_MSG = "Choose your board size (the lenght of the side), it must be more than 8";
-	private static final String BOARD_ERROR = "Board size must be a number between 8-15";
+	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
+	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
+	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
+	private static final String BOARD_ERROR = "Board size must be a number between 8 and 15 (inclusive)";
 	
 	private final String NEW_GAME = "New game";
 	private final String LOAD_GAME = "Load game";
@@ -33,6 +33,10 @@ public class Controller {
 
 	private void printGame() {
 		System.out.println(this.printer);
+	}
+	
+	private void printTurn() {
+		System.out.println("Turn: " + game.getCurrentPlayer().getName() + " (" + game.getCurrentColor() + ")");
 	}
 	
 	private int menu() {
@@ -60,9 +64,11 @@ public class Controller {
 		boolean refreshDisplay = true;
 		input.nextLine();
 		while (!game.isFinished()) {
-			if (refreshDisplay)
+			if (refreshDisplay) {
+				printTurn();
 				printGame();
-			System.out.println(PROMPT);
+			}
+			System.out.print(PROMPT);
 			String s = input.nextLine();
 			String[] parameters = s.toLowerCase().trim().split(" ");
 			Command command = null;
@@ -71,6 +77,7 @@ public class Controller {
 				refreshDisplay = command.execute(game);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				System.out.println();
 			}
 		}
 
@@ -90,7 +97,6 @@ public class Controller {
 			System.out.print("Player " + (i + 1) + ": ");
 			input.nextLine();
 			String name = input.nextLine();
-			//while(!(name = input.nextLine()).isEmpty())	name = this.input.nextLine();
 			 while (!added) {
 				try {
 					System.out.println(game.availableColors());
