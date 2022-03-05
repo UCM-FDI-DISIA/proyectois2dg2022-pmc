@@ -12,14 +12,14 @@
 \maketitle
 
 \subsubsection*{SaveLoadManager}
-Esta clase pasa a ser exclusivamente un intermediario entre la clase \textit{Game} y los ficheros de carga y guardado y debe ser estática para que pueda usarse más adelante solo como componente aislado y no sea necesario instanciarse, debe tener todo lo necesario para encapsular dicha funcionalidad, entre las características de la clase:
+Esta clase pasa a ser exclusivamente un intermediario entre la clase \textit{Game} y los ficheros de carga y guardado y sus métodos deben ser estáticos para que puedan usarse más adelante como componente aislado y no sea necesario instanciarse. Debe tener todo lo necesario para encapsular dicha funcionalidad, entre las características de la clase:
 \begin{itemize}
 \item Debe tener funciones de carga y descarga que llamamos:
 \begin{lstlisting}[language=Java]
-public void loadGame();
-public void saveGame();
+public static void loadGame();
+public static void saveGame();
 \end{lstlisting}
-\item Recibe una lista de Players, el turno actual y el tablero.
+\item Recibe una lista de Players, el turno actual y el tablero a través de una interfaz \textit{Saveable}.
 \item Posee los ficheros de carga y guardado.
 \end{itemize}
 
@@ -30,7 +30,7 @@ Gracias a esta modificación reúne las siguientes funcionalidades:
 \item Modifica puntuaciones del jugador que tiene como instancia (al cambiarse de color cuando juegas, él gestiona el cambio de puntuaciones individualmente). Para ello debe tener una función que dado un color, se autoasigne el jugador de dicho color:
 \begin{lstlisting}[language=Java]
 public void changeOwner(Color color){
-	this.owner = ??? // Funcion que busque un jugador en base a un player
+	this.player = ??? // Funcion que busque un jugador en base a un player
 }
 
 \end{lstlisting}
@@ -43,8 +43,8 @@ El tablero ahora reúne toda la funcionalidad que es la parte física del juego.
 En consecuencia, reúne las siguientes funcionalidades:
 \begin{itemize}
 \item Añade y quita cubos
-\item Tiene tamaño y forma propios
-\item Para cualquier modificación que se haga sobre un cubo se debe pasar por board
+\item Tiene tamaño propio
+\item Cualquier modificación que se haga sobre un cubo se debe pasar por board
 \item NO trabaja con \textit{Players}, trabaja con \textit{COLORES}.
 \item Para cambiar un cubo de color, se delega la responsabilidad en el cubo que sabrá dado un color a que jugador cambiarse y devolverá el color correspondiente a dicho jugador.
 \item Posee una función que dada un cubo, lo coloca y cambia el tablero completamente:
@@ -59,7 +59,7 @@ public void update(){
 El player de ahora pasa a tener más peso al suprimir la visión de colores al resto de clases que manejan el juego y que no son \textit{Board}. Ahora, para que los cubos puedan cambiarse de poseedor, tienen todos un atributo estático en el que son capaces de consultar, dado un color, el jugador que corresponde y así poder devolver a los cubos lo que necesita:
 \begin{lstlisting}[language=Java]
 public class Player(){
-	private Player[] players = new Player[4];
+	private static Player[] players = new Player[Color.size()];
 	private Color color;
 	private int score;
 	private String name;
@@ -67,7 +67,7 @@ public class Player(){
 	...
 
 	public Player getPlayer(Color color){
-	return this.players.find(color);
+	return this.players[color.ordinal()];
 	}
 }
 \end{lstlisting}
@@ -78,9 +78,8 @@ La clase Game a perdido peso en cuanto a lo que la lógica de poner una bola res
 \item Tiene que poder preparar un formato adecuado del estado del juego para que la clase \textit{SaveLoadManager} guarde el juego correctamente.
 \item Tiene que tener una función que juegue un turno completo y que cambie de jugador al siguiente al final.
 \item El método update que tenía ahora pasa al tablero y él solo lo llama con la información adecuada durante el turno correspondiente.
-\item Debe tener una referencia a la misma lista que los players tienen como atributo de players.
-\item \textbf{Generamos los players en su constructor}, solo debe recibir una lista de string (los nombres) y el numPlayers.
-\item Es creado en \textit{Controller}
+\item En su constructor solo recibe un \textit{Board}.
+\item Es creado en \textit{Controller}, aunque pretendemos mejorar esto en futuros sprint.
 \end{itemize}
 
 \subsubsection*{Controller}
