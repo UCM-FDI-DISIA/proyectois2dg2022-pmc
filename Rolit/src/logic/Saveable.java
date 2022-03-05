@@ -9,5 +9,5 @@ public interface Saveable {
 	
 	public List<Cube> saveBoard();
 	
-	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor);
+	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor, int boardSize);
 }

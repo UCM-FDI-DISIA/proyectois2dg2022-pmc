@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.Board;
 import logic.Color;
 import logic.Cube;
 import logic.Game;
@@ -20,10 +21,11 @@ public class SaveLoadManager {
 	// Formato para el guardado, todos cubos se guardan como "color posx posy \n" y 
 	// al final tenemos "Player  color" para el jugador que tenia el turno.
 	
-	public static void saveGame(Saveable game, String filemane) {	
+	public static void saveGame(Saveable game, String filemane, int boardSize) {	
 		try(BufferedWriter save_file = new BufferedWriter(new FileWriter(filemane))) {
 			List<Cube> list_cubes = game.saveBoard();
 			List<Player> list_players = game.getPlayers();
+			save_file.write(String.format("%d%n", boardSize));
 			for (Cube i : list_cubes) {
 				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
 			}
@@ -38,15 +40,19 @@ public class SaveLoadManager {
 		}
 	}
 	
-	public static void saveGame(Saveable game) {
-		saveGame(game, DEFAULT_FILENAME);
+	public static void saveGame(Saveable game, int boardSize) {
+		saveGame(game, DEFAULT_FILENAME, boardSize);
 	}
 	
-	public static void loadGame(Saveable game, String filename) {
+	public static Game loadGame(String filename) {
 		try(BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			String[] words = save_file.readLine().split(" ");
+			int boardSize;
 			List<Cube> list_cubes = new ArrayList<Cube>();
 			List<Player> list_players = new ArrayList<Player>();
+			
+			boardSize = save_file.read();
+			Board board = new Board(boardSize);
 			
 			while(!"Player".equals(words[0])) {
 				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Player.getPlayer(Color.valueOfIgnoreCase(words[0].charAt(0)))));
@@ -57,14 +63,15 @@ public class SaveLoadManager {
 				words = save_file.readLine().split(" ");
 				list_players.add(new Player(Color.valueOfIgnoreCase(words[1].charAt(0)), words[0]));
 			}						
-			game.loadGame(list_cubes, list_players, turn);
+			return new Game(board, list_cubes, list_players, turn, boardSize);
 		}
 		catch(IOException error_file) {
 			System.out.println("ERROR AL CARGAR ARCHIVO");
 		}
+		return null;
 	}
 	
-	public static void loadGame(Saveable game) {
-		loadGame(game, DEFAULT_FILENAME);
+	public static Game loadGame() {
+		return loadGame(DEFAULT_FILENAME);
 	}
 }

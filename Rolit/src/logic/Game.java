@@ -2,9 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Game implements Saveable{
 	private boolean finished;
@@ -20,8 +18,13 @@ public class Game implements Saveable{
 		this.players = new ArrayList<Player>();
 		this.exit = false;
 	}
+	
+	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor, int boardSize) {
+		this(board);
+		this.loadGame(list_cubes, list_players, currentPlayerColor, boardSize);
+	}
 
-	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
+	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor, int boardSize) {
 		for (Cube c : cubes) {
 			board.addCubeInPos(c);
 		}
@@ -66,7 +69,7 @@ public class Game implements Saveable{
 		str.append(String.format("%s%n", AVAILABLE_COLORS_MSG));
 		for(Color c : Color.values()) {
 			if(Player.getPlayer(c) == null)
-				str.append(String.format("%c: %s%n", c, c.name()));
+				str.append(String.format("%s: %s%n", c, c.name()));
 		}
 		return str.toString();
 	}

@@ -22,7 +22,7 @@ public class Controller {
 	private static final String PROMPT = "Command > ";
 	private static final String NAME_PLAYERS = "Name the players: ";
 	private static final String INITIAL_MESSAGE = "Choose an option:";
-	private static final String CHOOSE_COLOR = "Choose a color shortcut:";
+	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 	private static final String NUMBER_PLAYERS_MSG = "How many players do you want?";
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2-10";
 	private static final String BOARD_MSG = "Choose your board size (the lenght of the side), it must be more than 8";
@@ -35,7 +35,6 @@ public class Controller {
 	private final String[] optionsArray = { NEW_GAME, LOAD_GAME };
 
 	public Controller() {
-		this.printer = new GamePrinter(game);
 		input = new Scanner(System.in);
 	}
 
@@ -91,13 +90,13 @@ public class Controller {
 	private void chooseColor(int numPlayers) {
 		System.out.println(NAME_PLAYERS);
 		System.out.println();
-
 		for (int i = 0; i < numPlayers; ++i) {
 			boolean added = false;
 
 			System.out.print("Player " + (i + 1) + ": ");
-			String name = this.input.nextLine();
-
+			input.nextLine();
+			String name = input.nextLine();
+			//while(!(name = input.nextLine()).isEmpty())	name = this.input.nextLine();
 			 while (!added) {
 				try {
 					System.out.println(game.availableColors());
@@ -111,6 +110,7 @@ public class Controller {
 				}
 			}
 		}
+		input.next();
 	}
 
 	private int numPlayers() {
@@ -136,12 +136,13 @@ public class Controller {
 	private void createGame() {
 		this.game = new Game(this.chooseBoard());
 		this.chooseColor(this.numPlayers());
+		this.printer = new GamePrinter(game);
 	}
 	
 	public void run() {
 		int option = this.menu();
 		if (LOAD_GAME.equals(optionsArray[option - 1]))
-			SaveLoadManager.loadGame(game);
+			game = SaveLoadManager.loadGame();
 		else 
 			this.createGame();
 		this.play();
