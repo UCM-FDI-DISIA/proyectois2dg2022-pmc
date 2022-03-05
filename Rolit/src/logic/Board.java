@@ -43,6 +43,7 @@ public class Board {
 		List<Cube> column = matrix.get(c.getX());
 		column.remove(c.getY());
 		column.add(c.getY(), c);
+		c.addPlayerScore();
 		this.numCubes++;
 	}
 

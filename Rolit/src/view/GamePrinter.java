@@ -10,8 +10,6 @@ import utils.StringUtils;
 public class GamePrinter {
 	
 	private static final String SPACE = " ";
-	private static final int MARGIN_SIZE = 2; 
-	private static final int GAP_SIZE = 3;
 	private static final String RANKING = "RANKING DEL ROLIT";
 	private static final String MSG_POS = "En la posicion numero ";
 	private static final String SEPARATOR = ": ";

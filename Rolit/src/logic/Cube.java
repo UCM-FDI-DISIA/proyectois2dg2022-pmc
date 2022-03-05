@@ -30,6 +30,9 @@ public class Cube {
 		player.addScore(value);
 	}
 	
+	public void addPlayerScore() {
+		player.addScore(value);
+	}
 	
 	@Override
 	public String toString() {

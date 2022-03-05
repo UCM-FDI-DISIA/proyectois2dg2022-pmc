@@ -1,17 +1,20 @@
-Y 2 3
-R 2 4
-G 2 5
-Y 3 4
-G 3 5
-Y 4 5
-G 5 5
-Y 5 6
-B 6 5
-G 6 7
-R 7 6
-B 7 7
-Player Y
-Leo Y
-Mar R
-Dani G
-Juandi B
+3
+Player W
+Dani R
+Leo W
+Mar E
+10
+R 0 0
+W 0 1
+R 1 1
+R 2 1
+R 2 2
+R 3 2
+R 3 3
+R 4 3
+R 4 4
+R 5 4
+R 5 5
+E 6 5
+R 6 6
+END

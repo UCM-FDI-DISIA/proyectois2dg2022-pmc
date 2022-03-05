@@ -27,7 +27,7 @@ public class Player implements Comparable<Player> {
 
 	@Override
 	public int compareTo(Player p) {
-		return (score - p.getScore());
+		return -(score - p.getScore());	//Lleva un - delante para que no sea orden natural, sino mayor a menor
 	}
 	
 	public String getName() {

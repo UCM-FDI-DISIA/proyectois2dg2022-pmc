@@ -1,12 +1,5 @@
 package Rolit;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import commands.Command;
@@ -65,6 +58,7 @@ public class Controller {
 
 	private void play() {
 		boolean refreshDisplay = true;
+		input.nextLine();
 		while (!game.isFinished()) {
 			if (refreshDisplay)
 				printGame();
@@ -110,7 +104,6 @@ public class Controller {
 				}
 			}
 		}
-		input.next();
 	}
 
 	private int numPlayers() {
@@ -136,6 +129,9 @@ public class Controller {
 	private void createGame() {
 		this.game = new Game(this.chooseBoard());
 		this.chooseColor(this.numPlayers());
+	}
+	
+	private void createPrinter() {
 		this.printer = new GamePrinter(game);
 	}
 	
@@ -145,6 +141,7 @@ public class Controller {
 			game = SaveLoadManager.loadGame();
 		else 
 			this.createGame();
+		this.createPrinter();
 		this.play();
 	}
 	

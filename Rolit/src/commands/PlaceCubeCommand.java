@@ -19,7 +19,7 @@ public class PlaceCubeCommand extends Command {
 	private int y;
 	
 	public PlaceCubeCommand() {
-		super(NAME, SHORTCUT, DETAILS, HELP);
+		super(NAME, DETAILS, SHORTCUT, HELP);
 	}
 
 	@Override

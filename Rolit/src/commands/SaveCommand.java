@@ -36,6 +36,7 @@ public class SaveCommand extends Command {
 			}
 			else
 				throw new IllegalArgumentException("SaveCommand format can be either \"s\" or \"s\" \"filename\"");
+			return this;
 		}
 		return null;
 	}

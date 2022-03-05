@@ -18,15 +18,18 @@ public abstract class Command {
 
 	private final String help;
 
-	public Command(String name, String shortcut, String details, String help) {
+	public Command(String name, String details, String shortcut, String help) {
 		this.name = name;
-		this.shortcut = shortcut;
 		this.details = details;
+		this.shortcut = shortcut;
 		this.help = help;
 	}
 	
 	protected static final Command[] AVAILABLE_COMMANDS = {
-			
+			new ExitCommand(),
+			new HelpCommand(),
+			new PlaceCubeCommand(),
+			new SaveCommand()
 	};
 	
 	public static Command getCommand(String[] commandWords) { //Habria que hacer un bucle para ver con qu� comando coincide
