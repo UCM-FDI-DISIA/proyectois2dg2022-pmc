@@ -6,6 +6,7 @@ import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import utils.StringUtils;
 import view.GamePrinter;
 
 public class Controller {
@@ -20,7 +21,8 @@ public class Controller {
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
 	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
 	private static final String BOARD_ERROR = "Board size must be a number between 8 and 15 (inclusive)";
-	
+	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
+
 	private final String NEW_GAME = "New game";
 	private final String LOAD_GAME = "Load game";
 	private final String INVALID_OPTION = "Invalid option. Try again.";
@@ -143,8 +145,14 @@ public class Controller {
 	
 	public void run() {
 		int option = this.menu();
-		if (LOAD_GAME.equals(optionsArray[option - 1]))
-			game = SaveLoadManager.loadGame();
+		if (LOAD_GAME.equals(optionsArray[option - 1])) {
+			System.out.print(LOAD_MSG);
+			String fileName = input.next();
+			if(".".equals(fileName))
+				game = SaveLoadManager.loadGame();
+			else
+				game = SaveLoadManager.loadGame(fileName);
+		}
 		else 
 			this.createGame();
 		this.createPrinter();
