@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  6 MAR 2022 18:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  6 MAR 2022 17:46
 entering extended mode
-**./HistoriasDeUsuario.tex
-(HistoriasDeUsuario.tex
+**./DocumentaciónSprint1.tex
+(DocumentaciónSprint1.tex
 LaTeX2e <2020-10-01> patch level 4
 L3 programming layer <2021-01-09> xparse <2020-03-03>
 (C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -85,11 +85,11 @@ tex.def
 File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count191
 \l__pdf_internal_box=\box47
-) (HistoriasDeUsuario.aux
+) (DocumentaciónSprint1.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
-\openout1 = `HistoriasDeUsuario.aux'.
+\openout1 = `DocumentaciónSprint1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -150,29 +150,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 11.
 [1
 
-{C:/Users/leona/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
-(HistoriasDeUsuario.aux
+{C:/Users/leona/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
+(DocumentaciónSprint1.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 2122 strings out of 479618
- 32076 string characters out of 2865026
- 336176 words of memory out of 3000000
+ 2121 strings out of 479618
+ 32136 string characters out of 2865026
+ 336173 words of memory out of 3000000
  19330 multiletter control sequences out of 15000+200000
- 407713 words of font info for 41 fonts, out of 3000000 for 9000
+ 407723 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,6n,74p,222b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\leona\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
-m1000.pk><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/leona/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on HistoriasDeUsuario.pdf (3 pages, 72459 bytes).
+ 68i,6n,74p,525b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/leona/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on DocumentaciónSprint1.pdf (2 pages, 75534 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
+ 29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
