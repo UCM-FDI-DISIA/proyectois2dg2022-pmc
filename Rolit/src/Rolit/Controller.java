@@ -3,10 +3,7 @@ package Rolit;
 import java.util.Scanner;
 
 import commands.Command;
-import logic.Board;
-import logic.Color;
 import logic.Game;
-import utils.StringUtils;
 import view.GamePrinter;
 
 public class Controller {
@@ -14,13 +11,7 @@ public class Controller {
 	private Game game;
 	private GamePrinter printer;
 	private static final String PROMPT = "Command > ";
-	private static final String NAME_PLAYERS = "Name the players: ";
 	private static final String INITIAL_MESSAGE = "Choose an option:";
-	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
-	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
-	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
-	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
-	private static final String BOARD_ERROR = "Board size must be a number between 8 and 15 (inclusive)";
 	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
 
 	private final String NEW_GAME = "New game";
@@ -90,55 +81,6 @@ public class Controller {
 			System.out.println(this.printer.showRanking());
 	}
 
-	private void chooseColor(int numPlayers) {
-		System.out.println(NAME_PLAYERS);
-		System.out.println();
-		for (int i = 0; i < numPlayers; ++i) {
-			boolean added = false;
-
-			System.out.print("Player " + (i + 1) + ": ");
-			input.nextLine();
-			String name = input.nextLine();
-			 while (!added) {
-				try {
-					System.out.println(game.availableColors());
-					System.out.print(CHOOSE_COLOR);
-					char c = this.input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
-					game.tryToAddPlayer(name, c);
-					added = true;
-				} catch (IllegalArgumentException e) {
-					System.out.println(e.getMessage());
-					added = false;
-				}
-			}
-		}
-	}
-
-	private int numPlayers() {
-		System.out.println(NUMBER_PLAYERS_MSG);
-		int nPlayers = this.input.nextInt();
-		while (nPlayers < 2 || nPlayers > Color.size()) {
-			System.out.println(ERROR_PLAYERS_MSG);
-			nPlayers = this.input.nextInt();
-		}
-		return nPlayers;
-	}
-	
-	private Board chooseBoard() {
-		System.out.println(BOARD_MSG);
-		int board_size = this.input.nextInt();
-		while (board_size < 8 || board_size > Board.MAX_SIZE) {
-			System.out.println(BOARD_ERROR);
-			board_size = this.input.nextInt();
-		}
-		return new Board(board_size);
-	}
-	
-	private void createGame() {
-		this.game = new Game(this.chooseBoard());
-		this.chooseColor(this.numPlayers());
-	}
-	
 	private void createPrinter() {
 		this.printer = new GamePrinter(game);
 	}
@@ -154,7 +96,7 @@ public class Controller {
 				game = SaveLoadManager.loadGame(fileName);
 		}
 		else 
-			this.createGame();
+			game = GameGenerator.createGame();
 		this.createPrinter();
 		this.play();
 	}
