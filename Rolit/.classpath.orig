@@ -6,7 +6,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="lib/commons-cli-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/json.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/leona/OneDrive/Escritorio/rollit/proyectois2dg2022-pmc/Rolit/lib/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leona/OneDrive/Escritorio/rollit/proyectois2dg2022-pmc/Rolit/lib/json.jar"/>
+>>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
 	<classpathentry kind="output" path="bin"/>
 </classpath>

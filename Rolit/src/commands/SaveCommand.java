@@ -1,6 +1,6 @@
 package commands;
 
-import Rolit.SaveLoadManager;
+import control.SaveLoadManager;
 import logic.Game;
 
 public class SaveCommand extends Command {

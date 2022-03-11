@@ -1,6 +1,12 @@
 package logic;
 
-public class Player implements Comparable<Player> {
+<<<<<<< HEAD
+import org.json.JSONObject;
+
+public class Player implements Comparable<Player>, Reportable {
+=======
+public class Player implements Comparable<Player>, Replayable {
+>>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
@@ -12,7 +18,7 @@ public class Player implements Comparable<Player> {
 		this.name = name;
 		playerList[color.ordinal()] = this;
 	}
-
+	
 	public Color getColor() {
 		return this.color;
 	}
@@ -27,21 +33,36 @@ public class Player implements Comparable<Player> {
 
 	@Override
 	public int compareTo(Player p) {
-		return (score - p.getScore());
-	}
-
-<<<<<<< HEAD
-=======
-	public boolean isColorAvailable(Color color) {
-		return true;
+		return -(score - p.getScore());	//Lleva un - delante para que no sea orden natural, sino mayor a menor
 	}
 	
->>>>>>> Dev
 	public String getName() {
 		return this.name;
 	}
 	
 	public static Player getPlayer(Color c) {
 		return Player.playerList[c.ordinal()];
+	}
+<<<<<<< HEAD
+
+	@Override
+	public JSONObject report() {
+		JSONObject jo1 = new JSONObject();
+		jo1.put("name", name);
+		jo1.put("color", color.toString());
+		
+		// TODO Auto-generated method stub
+		return null;
+=======
+	
+	@Override
+	public String toString() {
+		return name + " (" + color.toString() + ")";
+	}
+
+	@Override
+	public String toState() {
+		return toString();
+>>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
 	}
 }

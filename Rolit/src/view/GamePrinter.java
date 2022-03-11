@@ -52,8 +52,5 @@ public class GamePrinter {
 		
 		return str.toString(); 
 	}
-	
-	public String showTurn() {
-		return String.format("Turno de %s (%s)", game.getCurrentPlayer().getName(), game.getCurrentColor().toString());
-	}
+
 }

@@ -1,4 +1,4 @@
-package Rolit;
+package control;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -249,9 +249,15 @@ public class SaveLoadManager {
 	
 	public static void saveGame(Reportable game) {
 		saveGame(game, DEFAULT_FILENAME);
+	}	
+
+	public static void loadReplay(String filename) {
+		// TODO Auto-generated method stub
+		
 	}
 	
-	
-	
-	
+	public static void saveReplay() {
+		// TODO Auto-generated method stub
+		
+	}
 }

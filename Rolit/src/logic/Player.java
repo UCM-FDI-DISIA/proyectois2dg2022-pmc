@@ -2,7 +2,7 @@ package logic;
 
 import org.json.JSONObject;
 
-public class Player implements Comparable<Player>, Reportable {
+public class Player implements Comparable<Player>, Replayable {
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
@@ -47,6 +47,11 @@ public class Player implements Comparable<Player>, Reportable {
 		jo1.put("color", color.toString());
 		
 		// TODO Auto-generated method stub
-		return null;
+		return jo1;
+	}
+
+	@Override
+	public String toString() {
+		return name + " (" + color.toString() + ")";
 	}
 }

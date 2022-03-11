@@ -1,18 +1,22 @@
-package Rolit;
+package control;
 
 import java.util.Scanner;
 
+import Rolit.GameGenerator;
 import commands.Command;
 import logic.Game;
+import replay.Replay;
 import view.GamePrinter;
 
 public class Controller {
 	private Scanner input;
 	private Game game;
 	private GamePrinter printer;
+	private Replay replay;
 	private static final String PROMPT = "Command > ";
 	private static final String INITIAL_MESSAGE = "Choose an option:";
 	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
+<<<<<<< HEAD:Rolit/src/Rolit/Controller.java
 	private final int GO_BACK_INT = -1;
 	private final String HOW_TO_EXIT_MSG = " (" + GO_BACK_INT + " to go back)";
 	private final String NEW_GAME = "New game";
@@ -23,9 +27,21 @@ public class Controller {
 	private final String INVALID_OPTION = "Invalid option. Try again.";
 
 	private final String[] optionsArray = { NEW_GAME, LOAD_GAME, DELETE_GAME };
+=======
+	private static final String REPLAY_FILE_NAME = "replay.txt";
+
+	
+	private final String NEW_GAME = "New game";
+	private final String LOAD_GAME = "Load game";
+	private final String REPLAY_GAME = "Replay game";
+	private final String INVALID_OPTION = "Invalid option. Try again.";
+
+	private final String[] optionsArray = { NEW_GAME, LOAD_GAME, REPLAY_GAME};
+>>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay):Rolit/src/control/Controller.java
 
 	public Controller() {
 		input = new Scanner(System.in);
+		replay = new Replay();
 	}
 
 	private void printGame() {
@@ -33,7 +49,7 @@ public class Controller {
 	}
 	
 	private void printTurn() {
-		System.out.println("Turn: " + game.getCurrentPlayer().getName() + " (" + game.getCurrentColor() + ")");
+		System.out.println("Turn: " + game.getCurrentPlayer());
 	}
 	
 	private int menu() {
@@ -72,6 +88,7 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
+				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();
@@ -90,6 +107,7 @@ public class Controller {
 	}
 	
 	public void run() {
+<<<<<<< HEAD:Rolit/src/Rolit/Controller.java
 		
 		boolean repeatMenu;
 		
@@ -185,6 +203,23 @@ public class Controller {
 			
 		} while (repeatMenu);
 		
+=======
+		int option = this.menu();
+		if (LOAD_GAME.equals(optionsArray[option - 1])) {
+			System.out.print(LOAD_MSG);
+			String fileName = input.next();
+			if(".".equals(fileName))
+				game = SaveLoadManager.loadGame();
+			else
+				game = SaveLoadManager.loadGame(fileName);
+		}
+		else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
+			System.out.print("Escribe el nombre del replay a cargar .txt (temporal)"); //FIXME cambiar
+			replay = SaveLoadManager.loadReplay();
+		}
+		else 
+			game = GameGenerator.createGame();
+>>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay):Rolit/src/control/Controller.java
 		this.createPrinter();
 		this.play();
 	}

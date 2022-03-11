@@ -1,8 +1,11 @@
 package commands;
 
-import logic.Game;
+import org.json.JSONObject;
 
-public abstract class Command {
+import logic.Game;
+import logic.Replayable;
+
+public abstract class Command implements Replayable {
 	
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command. Type \"help\" to see the available commands.";
 
@@ -73,4 +76,15 @@ public abstract class Command {
 	public String infoForHelp() {
 		return details + ": " + help;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	@Override
+	public JSONObject report() {
+		return null;
+	}
+	
 }
