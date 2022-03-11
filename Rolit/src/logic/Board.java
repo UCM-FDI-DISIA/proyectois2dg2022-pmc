@@ -14,10 +14,9 @@ public class Board {
 	private int numCubes;
 
 	public Board(int size, Forma forma) {
-		this.size = size;
 		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
-		this.forma = new ArrayList<List<Boolean>>();
+		this.forma = SaveLoadManager.loadForma();
 		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));

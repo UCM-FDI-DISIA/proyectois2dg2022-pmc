@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import logic.Board;
 import logic.Color;
+import logic.Forma;
 import logic.Game;
 
 public class GameGenerator {
@@ -12,7 +13,7 @@ public class GameGenerator {
 	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
-	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
+	private static final String BOARD_MSG = "Choose your board shape";
 	private static final String BOARD_ERROR = "Board size must be a number between 8 and 15 (inclusive)";
 	
 	private static Scanner input = new Scanner(System.in);
@@ -33,14 +34,16 @@ public class GameGenerator {
 		return nPlayers;
 	}
 	
-	private static Board chooseBoard() {
-		System.out.println(BOARD_MSG);
-		int board_size = input.nextInt();
-		while (board_size < 8 || board_size > Board.MAX_SIZE) {
+	private static Board chooseBoard(Game game) {
+		System.out.println(BOARD_MSG); //TODO cuando guardemos una partida hay que guardar su forma, ademas de su tamaño
+		int size = input.nextInt();
+		String board_shape = input.next();
+		while (Forma.valueOfIgnoreCase(board_shape) != null) {
 			System.out.println(BOARD_ERROR);
-			board_size = input.nextInt();
+			game.availableShapes();
+			board_shape = input.next();
 		}
-		return new Board(board_size);
+		return new Board(size, Forma.valueOfIgnoreCase(board_shape));
 	}
 
 	private static void chooseColor(int numPlayers, Game game) {

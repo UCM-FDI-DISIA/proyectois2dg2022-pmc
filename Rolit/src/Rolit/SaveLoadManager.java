@@ -71,7 +71,7 @@ public class SaveLoadManager {
 	public static Game loadGame(String filename) {
 		try(BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			
-			int boardSize;
+			String boardShape;
 			List<Cube> list_cubes = new ArrayList<Cube>();
 			List<Player> list_players = new ArrayList<Player>();
 			
@@ -85,8 +85,8 @@ public class SaveLoadManager {
 				list_players.add(new Player(Color.valueOfIgnoreCase(words[1].charAt(0)), words[0]));
 			}	
 			
-			boardSize = Integer.parseInt(save_file.readLine());
-			Board board = new Board(boardSize);
+			boardShape = save_file.readLine(); //ahoar leemos un string en vez de un int
+			Board board = new Board(boardShape);
 			
 			words = save_file.readLine().split(" ");
 			while(!CENTINEL.equals(words[0])) {

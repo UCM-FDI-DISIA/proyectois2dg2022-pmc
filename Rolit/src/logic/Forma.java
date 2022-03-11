@@ -1,5 +1,7 @@
 package logic;
 
+import utils.StringUtils;
+
 public enum Forma {
 	SS("square_small.txt", "cuadrado 9x9"), SM("square_medium.txt", "cuadrado 13x13"), 
 	SL("square_large.txt", "cuadrado 17x17"), CS("circle_small.txt", "circulo 9x9"), 
@@ -23,8 +25,8 @@ public enum Forma {
 		}
 		return null;
 	}
-	
-	public static int size() {
-		return Forma.values().length;
+
+	public String getInfo() {
+		return info;
 	}
 }
