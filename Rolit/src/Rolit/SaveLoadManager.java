@@ -26,6 +26,7 @@ public class SaveLoadManager {
 	private static final String ERROR_LOAD = "Failed to load the file";
 	private static final String ERROR_LOAD_DEFAULT = "Failed to load the saved games index.";
 	private static final String ERROR_SAVE = "Failed to save the file";
+	private static final String ERROR_SAVE_DEFAULT = "Failed to update the saved games index";
 	private static final String SUCCESS_MSG = "Game saved successfully";
 	private static final String CENTINEL = "END";
 	private static List<String> names;
@@ -50,8 +51,29 @@ public class SaveLoadManager {
 	 * END (centinela)
 	 * */
 	
-	public static void saveGame(Saveable game, String filemane, int boardSize) {	
-		try(BufferedWriter save_file = new BufferedWriter(new FileWriter(filemane))) {
+	private static void addToListOfSavedGames(String filename) {
+		
+		try {
+			
+			names = getListOfSavedGames();
+			
+			try(BufferedWriter pointer = new BufferedWriter(new FileWriter(INDEX_FILENAME))) {
+				if (!names.contains(filename))
+					names.add(filename);
+				
+				for (int i = 0; i < names.size(); ++i) {
+					pointer.write(names.get(i));
+					if (i != names.size() - 1)
+						pointer.write(String.format("%n"));
+				}
+			}
+		} catch (IOException error_file) {
+			System.out.println(ERROR_SAVE_DEFAULT);
+		}
+		
+	}
+	public static void saveGame(Saveable game, String filename, int boardSize) {	
+		try(BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			List<Cube> list_cubes = game.saveBoard();
 			List<Player> list_players = game.getPlayers();
 			save_file.write(String.format("%d%n", game.getPlayers().size()));	//Número de jugadores (n (int))
@@ -66,6 +88,9 @@ public class SaveLoadManager {
 			
 			save_file.write(CENTINEL);
 			System.out.println(SUCCESS_MSG);
+			
+			addToListOfSavedGames(filename);
+			
 		}
 		catch(IOException error_file) {
 			System.out.println(ERROR_SAVE);
@@ -124,11 +149,15 @@ public class SaveLoadManager {
 		
 	}
 	
+	private static List<String> getListOfSavedGames() throws IOException {
+		return Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+		
+	}
 	public static boolean showSavedGames() {
 		
 		try(BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
 			
-			names = Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+			names = getListOfSavedGames();
 			
 			if (names.size() > 0) {
 				for (int i = 0; i < names.size(); ++i)

@@ -16,6 +16,8 @@ public class Controller {
 
 	private final String NEW_GAME = "New game";
 	private final String LOAD_GAME = "Load game";
+	private final String LIST_MSG = "List of saved games: ";
+	private final String CHOOSE_NUMBER_MSG = "Choose a number: ";
 	private final String INVALID_OPTION = "Invalid option. Try again.";
 
 	private final String[] optionsArray = { NEW_GAME, LOAD_GAME };
@@ -88,7 +90,7 @@ public class Controller {
 	public void run() {
 		int option = this.menu();
 		if (LOAD_GAME.equals(optionsArray[option - 1])) {
-				System.out.println("List of saved games: ");
+				System.out.println(LIST_MSG);
 				boolean opened = SaveLoadManager.showSavedGames();
 				
 				if (!opened) {
@@ -108,21 +110,16 @@ public class Controller {
 					do {
 						
 						repeat = false;
-						System.out.print("Pick a number: ");
+						System.out.print(CHOOSE_NUMBER_MSG);
 						
 						try {
 							
 							int numberOfSavedGameInt = Integer.valueOf(input.next());
 							game = SaveLoadManager.loadGame(numberOfSavedGameInt);
 							
-						} catch (NumberFormatException e){
-							
-							System.out.println("That was not a number.");
-							repeat = true;
-							
 						} catch (Exception e) {
 							
-							System.out.println("That was not a correct option.");
+							System.out.println(INVALID_OPTION);
 							repeat = true;
 							
 						}
