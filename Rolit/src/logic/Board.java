@@ -9,13 +9,16 @@ public class Board {
 	public final static int MAX_SIZE = 15;
 
 	private List<List<Cube>> matrix;
+	private List<List<Boolean>> forma;
 	private int size;
 	private int numCubes;
 
-	public Board(int size) {
+	public Board(int size, Forma forma) {
 		this.size = size;
 		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
+		this.forma = new ArrayList<List<Boolean>>();
+		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
 		}
@@ -119,7 +122,7 @@ public class Board {
 	}
 
 	private boolean isPositionInRange(int x, int y) {
-		return x >= 0 && x < size && y >= 0 && y < size;
+		return x >= 0 && x < size && y >= 0 && y < size && forma[x][y];
 	}
 	
 	public boolean tryToAddCube(int x, int y) {
