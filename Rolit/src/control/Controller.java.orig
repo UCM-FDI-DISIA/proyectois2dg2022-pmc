@@ -189,7 +189,8 @@ public class Controller {
 			}
 			else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
 				System.out.print("Escribe el nombre del replay a cargar .txt (temporal)");
-				replay = SaveLoadManager.loadReplay();
+				String loadFile = input.nextLine();
+				replay = SaveLoadManager.loadReplay(loadFile);
 			}			
 		} while (repeatMenu);
 =======
@@ -206,10 +207,11 @@ public class Controller {
 			System.out.print("Escribe el nombre del replay a cargar .txt (temporal)"); //FIXME cambiar
 			String loadFile = input.nextLine();
 			replay = SaveLoadManager.loadReplay(loadFile);
+			replay.startReplay();
 		}
 		else 
 			game = GameGenerator.createGame();
->>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
+>>>>>>> e680723 (Corregido controller para que funcione con replay)
 		this.createPrinter();
 		this.play();
 	}

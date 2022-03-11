@@ -190,6 +190,7 @@ public class Controller {
 				System.out.print("Escribe el nombre del replay a cargar .txt (temporal)");
 				String loadFile = input.nextLine();
 				replay = SaveLoadManager.loadReplay(loadFile);
+				replay.startReplay();
 			}			
 		} while (repeatMenu);
 		this.createPrinter();
