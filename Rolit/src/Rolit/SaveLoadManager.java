@@ -2,6 +2,7 @@ package Rolit;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +28,9 @@ public class SaveLoadManager {
 	private static final String ERROR_LOAD_DEFAULT = "Failed to load the saved games index.";
 	private static final String ERROR_SAVE = "Failed to save the file";
 	private static final String ERROR_SAVE_DEFAULT = "Failed to update the saved games index";
-	private static final String SUCCESS_MSG = "Game saved successfully";
+	private static final String SUCCESS_SAVE_MSG = "Game saved successfully";
+	private static final String SUCCESS_DELETE_MSG = "Game deleted successfully";
+	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static final String CENTINEL = "END";
 	private static List<String> names;
 
@@ -51,54 +54,84 @@ public class SaveLoadManager {
 	 * END (centinela)
 	 * */
 	
+	private static List<String> getListOfSavedGames() throws IOException {
+		return Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+		
+	}
+	public static boolean showSavedGames() {
+		
+		try(BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
+			
+			names = getListOfSavedGames();
+			
+			if (names.size() > 0) {
+				for (int i = 0; i < names.size(); ++i)
+					System.out.println(i+1 + ". " + names.get(i));
+			}
+			
+		} catch(IOException error_file) {
+			System.out.println(ERROR_LOAD_DEFAULT);
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	public static void removeGame(int option) throws Exception {
+		
+		names = getListOfSavedGames();
+		
+		option--;
+		if (option < 0 || option >= names.size())
+			throw new Exception();
+		
+		String filename = names.get(option);
+		
+		File fileToDelete = new File(filename);
+		if (fileToDelete.delete()) {
+			
+			System.out.println(SUCCESS_DELETE_MSG);
+
+			names.remove(filename);
+			
+			updateListOfSavedGames();
+		}
+		else
+			System.out.println(ERROR_DELETE);
+	
+				
+	}
+	
+	private static void updateListOfSavedGames() {
+		try(BufferedWriter pointer = new BufferedWriter(new FileWriter(INDEX_FILENAME))) {
+			
+			for (int i = 0; i < names.size(); ++i) {
+				pointer.write(names.get(i));
+				if (i != names.size() - 1)
+					pointer.write(String.format("%n"));
+			}
+		} catch (IOException error_file) {
+		System.out.println(ERROR_SAVE_DEFAULT);
+		}
+		
+		
+	}
 	private static void addToListOfSavedGames(String filename) {
 		
 		try {
 			
 			names = getListOfSavedGames();
 			
-			try(BufferedWriter pointer = new BufferedWriter(new FileWriter(INDEX_FILENAME))) {
-				if (!names.contains(filename))
-					names.add(filename);
-				
-				for (int i = 0; i < names.size(); ++i) {
-					pointer.write(names.get(i));
-					if (i != names.size() - 1)
-						pointer.write(String.format("%n"));
-				}
-			}
+			if (!names.contains(filename))
+				names.add(filename);
+			
+			updateListOfSavedGames();
+			
 		} catch (IOException error_file) {
 			System.out.println(ERROR_SAVE_DEFAULT);
 		}
 		
-	}
-	public static void saveGame(Saveable game, String filename, int boardSize) {	
-		try(BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
-			List<Cube> list_cubes = game.saveBoard();
-			List<Player> list_players = game.getPlayers();
-			save_file.write(String.format("%d%n", game.getPlayers().size()));	//Número de jugadores (n (int))
-			save_file.write("Player " + game.getCurrentColor() + String.format("%n"));	//Jugador que tiene el turno ("Player" color(char))
-			for (Player i : list_players) {	//Jugadores (nombre(String) color(char))
-				save_file.write(i.getName() + " " + i.getColor().toString() + String.format("%n"));
-			}
-			save_file.write(String.format("%d%n", boardSize));	//Tamaño del tablero (int)
-			for (Cube i : list_cubes) {	//Cubos(color(char) posx(int) posy(int))
-				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
-			}
-			
-			save_file.write(CENTINEL);
-			System.out.println(SUCCESS_MSG);
-			
-			addToListOfSavedGames(filename);
-			
-		}
-		catch(IOException error_file) {
-			System.out.println(ERROR_SAVE);
-		}
-	}
-	
-	public static void saveGame(Saveable game, int boardSize) {
-		saveGame(game, DEFAULT_FILENAME, boardSize);
 	}
 	
 	public static Game loadGame(String filename) {
@@ -149,27 +182,36 @@ public class SaveLoadManager {
 		
 	}
 	
-	private static List<String> getListOfSavedGames() throws IOException {
-		return Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
-		
-	}
-	public static boolean showSavedGames() {
-		
-		try(BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
-			
-			names = getListOfSavedGames();
-			
-			if (names.size() > 0) {
-				for (int i = 0; i < names.size(); ++i)
-					System.out.println(i+1 + ". " + names.get(i));
+	public static void saveGame(Saveable game, String filename, int boardSize) {	
+		try(BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
+			List<Cube> list_cubes = game.saveBoard();
+			List<Player> list_players = game.getPlayers();
+			save_file.write(String.format("%d%n", game.getPlayers().size()));	//Número de jugadores (n (int))
+			save_file.write("Player " + game.getCurrentColor() + String.format("%n"));	//Jugador que tiene el turno ("Player" color(char))
+			for (Player i : list_players) {	//Jugadores (nombre(String) color(char))
+				save_file.write(i.getName() + " " + i.getColor().toString() + String.format("%n"));
+			}
+			save_file.write(String.format("%d%n", boardSize));	//Tamaño del tablero (int)
+			for (Cube i : list_cubes) {	//Cubos(color(char) posx(int) posy(int))
+				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
 			}
 			
-		} catch(IOException error_file) {
-			System.out.println(ERROR_LOAD_DEFAULT);
-			return false;
+			save_file.write(CENTINEL);
+			System.out.println(SUCCESS_SAVE_MSG);
+			
+			addToListOfSavedGames(filename);
+			
 		}
-		
-		return true;
-		
+		catch(IOException error_file) {
+			System.out.println(ERROR_SAVE);
+		}
 	}
+	
+	public static void saveGame(Saveable game, int boardSize) {
+		saveGame(game, DEFAULT_FILENAME, boardSize);
+	}
+	
+	
+	
+	
 }
