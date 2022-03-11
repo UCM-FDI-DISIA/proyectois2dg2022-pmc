@@ -2,7 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import Rolit.Controller;
 import Rolit.SaveLoadManager;
 import utils.StringUtils;

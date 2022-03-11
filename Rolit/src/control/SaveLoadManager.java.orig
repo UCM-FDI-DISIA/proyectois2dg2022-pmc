@@ -16,14 +16,24 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
 import logic.Game;
 import logic.Player;
 import logic.Saveable;
+<<<<<<< HEAD
 import logic.Shape;
 import logic.Reportable;
+=======
+import replay.Replay;
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
 
 public class SaveLoadManager {
 
@@ -41,6 +51,7 @@ public class SaveLoadManager {
 	/*
 	 * Formato de guardado:
 	 * 
+<<<<<<< HEAD
 	 * Nï¿½mero de jugadores (n (int))
 	 * Jugador que tiene el turno ("Player" color(char))
 	 * Jugador 1 (nombre(String) color(char))
@@ -100,12 +111,42 @@ public class SaveLoadManager {
 			names.remove(filename);
 			
 			updateListOfSavedGames();
+=======
+	 * Número de jugadores (n (int)) Jugador que tiene el turno ("Player"
+	 * color(char)) Jugador 1 (nombre(String) color(char)) Jugador 2 (nombre(String)
+	 * color(char)) ... ... Jugador n (nombre(String) color(char)) Tamaño del
+	 * tablero (int) Cubo(color(char) posx(int) posy(int)) Cubo(color(char)
+	 * posx(int) posy(int)) Cubo(color(char) posx(int) posy(int)) ... ...
+	 * Cubo(color(char) posx(int) posy(int)) END (centinela)
+	 */
+
+	public static void saveGame(Saveable game, String filemane, int boardSize) {
+		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filemane))) {
+			List<Cube> list_cubes = game.saveBoard();
+			List<Player> list_players = game.getPlayers();
+			save_file.write(String.format("%d%n", game.getPlayers().size())); // Número de jugadores (n (int))
+			save_file.write("Player " + game.getCurrentColor() + String.format("%n")); // Jugador que tiene el turno
+																						// ("Player" color(char))
+			for (Player i : list_players) { // Jugadores (nombre(String) color(char))
+				save_file.write(i.getName() + " " + i.getColor().toString() + String.format("%n"));
+			}
+			save_file.write(String.format("%d%n", boardSize)); // Tamaño del tablero (int)
+			for (Cube i : list_cubes) { // Cubos(color(char) posx(int) posy(int))
+				save_file.write(i.getColor().toString() + " " + i.getX() + " " + i.getY() + String.format("%n"));
+			}
+
+			save_file.write(CENTINEL);
+			System.out.println(SUCCESS_MSG);
+		} catch (IOException error_file) {
+			System.out.println(ERROR_SAVE);
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
 		}
 		else
 			System.out.println(ERROR_DELETE);
 	
 				
 	}
+<<<<<<< HEAD
 	
 	private static void updateListOfSavedGames() {
 		try(BufferedWriter pointer = new BufferedWriter(new FileWriter(INDEX_FILENAME))) {
@@ -136,9 +177,15 @@ public class SaveLoadManager {
 			System.out.println(ERROR_SAVE_DEFAULT);
 		}
 		
+=======
+
+	public static void saveGame(Saveable game, int boardSize) {
+		saveGame(game, DEFAULT_FILENAME, boardSize);
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
 	}
-	
+
 	public static Game loadGame(String filename) {
+<<<<<<< HEAD
 		
 		try(BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			
@@ -183,15 +230,41 @@ public class SaveLoadManager {
 				list_cubes.add(new Cube(posList.get(0), posList.get(1), Player.getPlayer(Color.valueOfIgnoreCase(auxCubeColor.charAt(0)))));
 				
 				
+=======
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+
+			int boardSize;
+			List<Cube> list_cubes = new ArrayList<Cube>();
+			List<Player> list_players = new ArrayList<Player>();
+
+			int numPlayers = Integer.parseInt(save_file.readLine());
+
+			String[] words = save_file.readLine().split(" ");
+			Color turn = Color.valueOfIgnoreCase(words[1].charAt(0));
+
+			for (int i = 0; i < numPlayers; i++) {
+				words = save_file.readLine().split(" ");
+				list_players.add(new Player(Color.valueOfIgnoreCase(words[1].charAt(0)), words[0]));
 			}
-								
+
+			boardSize = Integer.parseInt(save_file.readLine());
+			Board board = new Board(boardSize);
+
+			words = save_file.readLine().split(" ");
+			while (!CENTINEL.equals(words[0])) {
+				list_cubes.add(new Cube(Integer.parseInt(words[1]), Integer.parseInt(words[2]),
+						Player.getPlayer(Color.valueOfIgnoreCase(words[0].charAt(0)))));
+				words = save_file.readLine().split(" ");
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
+			}
+
 			return new Game(board, list_cubes, list_players, turn, boardSize);
-		}
-		catch(IOException error_file) {
+		} catch (IOException error_file) {
 			System.out.println(ERROR_LOAD);
 		}
 		return null;
 	}
+<<<<<<< HEAD
 	
 	public static int[][] loadShape(String filename) {
 		try(BufferedReader shape_file = new BufferedReader(new FileReader(filename))) {
@@ -216,10 +289,12 @@ public class SaveLoadManager {
 		return null;
 	}
 	
+=======
+
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
 	public static Game loadGame() {
 		return loadGame(DEFAULT_FILENAME);
 	}
-<<<<<<< HEAD:Rolit/src/Rolit/SaveLoadManager.java
 	
 	public static Game loadGame(int option) throws Exception {
 		option--;
@@ -250,21 +325,59 @@ public class SaveLoadManager {
 	
 	public static void saveGame(Reportable game) {
 		saveGame(game, DEFAULT_FILENAME);
-	}
-	
-	
-	
-	
-=======
+	}	
 
-	public static void loadReplay(String filename) {
-		// TODO Auto-generated method stub
-		
+	public static Replay loadReplay(String filename) {
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+			Replay replay = new Replay();
+			//Guardamos el .txt en un JSONObject
+			JSONObject jo = new JSONObject(new JSONTokener(save_file));
+			//Cogemos el array de estados
+			JSONArray states = jo.getJSONArray("states");
+			for (int i = 0; i < states.length(); i++) {
+				//Guardamos el estado i-esimo
+				JSONObject state = states.getJSONObject(i);
+				//Obtenemos el turno
+				JSONObject turn = state.getJSONObject("turn");
+				//Obtenemos el JSON del tablero
+				JSONObject boardjson = state.getJSONObject("board");
+				//Obtenemos la forma del tablero
+				Shape shape = boardjson.getString("shape");
+				//Creamos el tablero
+				Board board = new Board(shape);
+				//Obtenemos el array de cubos
+				JSONArray cubes = boardjson.getJSONArray("cubes");
+				for (int j = 0; j < cubes.length(); j++) {
+					//Seleccionamos el cubo j-esimo
+					JSONObject cube = cubes.getJSONObject(i);
+					//Obtenemos el color del cubo
+					Color color = Color.valueOfIgnoreCase(cube.getString("color").charAt(0));
+					//Obtenemos el player del cubo
+					Player p = Player.getPlayer(color);
+					//Obtenemos la posicion del cubo
+					JSONArray pos = cube.getJSONArray("pos");
+					//Creamos el cubo
+					Cube c = new Cube(pos.getInt(0), pos.getInt(1), p);
+					//Agregamos el cubo al tablero
+					board.addCubeInPos(c);
+				}
+				replay.addState(turn.getString("name"), turn.getString("color"), state.getString("command"), board);
+			}
+			
+		} catch (IOException | JSONException error_file) {
+			System.out.println(ERROR_LOAD);
+		}
+		return null;
 	}
-	
-	public static void saveReplay() {
-		// TODO Auto-generated method stub
-		
+
+	public static void saveReplay(String filename, Replay replay) {
+		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
+			JSONObject jo = new JSONObject();
+			JSONArray ja = replay.report();
+			jo.put("states", ja);
+			save_file.write(jo.toString());
+		} catch (IOException error_file) {
+			System.out.println(ERROR_SAVE);
+		}
 	}
->>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay):Rolit/src/control/SaveLoadManager.java
 }

@@ -188,7 +188,8 @@ public class Controller {
 			}
 			else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
 				System.out.print("Escribe el nombre del replay a cargar .txt (temporal)");
-				replay = SaveLoadManager.loadReplay();
+				String loadFile = input.nextLine();
+				replay = SaveLoadManager.loadReplay(loadFile);
 			}			
 		} while (repeatMenu);
 		this.createPrinter();

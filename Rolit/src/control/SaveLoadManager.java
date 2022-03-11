@@ -16,6 +16,12 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
@@ -24,6 +30,7 @@ import logic.Player;
 import logic.Saveable;
 import logic.Shape;
 import logic.Reportable;
+import replay.Replay;
 
 public class SaveLoadManager {
 
@@ -137,7 +144,7 @@ public class SaveLoadManager {
 		}
 		
 	}
-	
+
 	public static Game loadGame(String filename) {
 		
 		try(BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
@@ -181,13 +188,10 @@ public class SaveLoadManager {
 				}
 				
 				list_cubes.add(new Cube(posList.get(0), posList.get(1), Player.getPlayer(Color.valueOfIgnoreCase(auxCubeColor.charAt(0)))));
-				
-				
 			}
-								
+
 			return new Game(board, list_cubes, list_players, turn, boardSize);
-		}
-		catch(IOException error_file) {
+		} catch (IOException error_file) {
 			System.out.println(ERROR_LOAD);
 		}
 		return null;
@@ -251,13 +255,57 @@ public class SaveLoadManager {
 		saveGame(game, DEFAULT_FILENAME);
 	}	
 
-	public static void loadReplay(String filename) {
-		// TODO Auto-generated method stub
-		
+	public static Replay loadReplay(String filename) {
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+			Replay replay = new Replay();
+			//Guardamos el .txt en un JSONObject
+			JSONObject jo = new JSONObject(new JSONTokener(save_file));
+			//Cogemos el array de estados
+			JSONArray states = jo.getJSONArray("states");
+			for (int i = 0; i < states.length(); i++) {
+				//Guardamos el estado i-esimo
+				JSONObject state = states.getJSONObject(i);
+				//Obtenemos el turno
+				JSONObject turn = state.getJSONObject("turn");
+				//Obtenemos el JSON del tablero
+				JSONObject boardjson = state.getJSONObject("board");
+				//Obtenemos la forma del tablero
+				Shape shape = boardjson.getString("shape");
+				//Creamos el tablero
+				Board board = new Board(shape);
+				//Obtenemos el array de cubos
+				JSONArray cubes = boardjson.getJSONArray("cubes");
+				for (int j = 0; j < cubes.length(); j++) {
+					//Seleccionamos el cubo j-esimo
+					JSONObject cube = cubes.getJSONObject(i);
+					//Obtenemos el color del cubo
+					Color color = Color.valueOfIgnoreCase(cube.getString("color").charAt(0));
+					//Obtenemos el player del cubo
+					Player p = Player.getPlayer(color);
+					//Obtenemos la posicion del cubo
+					JSONArray pos = cube.getJSONArray("pos");
+					//Creamos el cubo
+					Cube c = new Cube(pos.getInt(0), pos.getInt(1), p);
+					//Agregamos el cubo al tablero
+					board.addCubeInPos(c);
+				}
+				replay.addState(turn.getString("name"), turn.getString("color"), state.getString("command"), board);
+			}
+			
+		} catch (IOException | JSONException error_file) {
+			System.out.println(ERROR_LOAD);
+		}
+		return null;
 	}
-	
-	public static void saveReplay() {
-		// TODO Auto-generated method stub
-		
+
+	public static void saveReplay(String filename, Replay replay) {
+		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
+			JSONObject jo = new JSONObject();
+			JSONArray ja = replay.report();
+			jo.put("states", ja);
+			save_file.write(jo.toString());
+		} catch (IOException error_file) {
+			System.out.println(ERROR_SAVE);
+		}
 	}
 }

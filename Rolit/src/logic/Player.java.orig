@@ -1,12 +1,8 @@
 package logic;
 
-<<<<<<< HEAD
 import org.json.JSONObject;
 
-public class Player implements Comparable<Player>, Reportable {
-=======
 public class Player implements Comparable<Player>, Replayable {
->>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
@@ -43,7 +39,6 @@ public class Player implements Comparable<Player>, Replayable {
 	public static Player getPlayer(Color c) {
 		return Player.playerList[c.ordinal()];
 	}
-<<<<<<< HEAD
 
 	@Override
 	public JSONObject report() {
@@ -52,17 +47,17 @@ public class Player implements Comparable<Player>, Replayable {
 		jo1.put("color", color.toString());
 		
 		// TODO Auto-generated method stub
-		return null;
-=======
-	
-	@Override
-	public String toString() {
-		return name + " (" + color.toString() + ")";
+		return jo1;
 	}
 
 	@Override
-	public String toState() {
-		return toString();
->>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
+<<<<<<< HEAD
+	public String toString() {
+		return name + " (" + color.toString() + ")";
+=======
+	public JSONObject report() {
+		return null;
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
 	}
+
 }

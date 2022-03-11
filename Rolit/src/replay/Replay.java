@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Replay {
 
 	private static final String PROMPT = "> ";
@@ -31,8 +34,8 @@ public class Replay {
 		currentState = 0;
 	}
 	
-	public void addState(Replayable turn, Replayable command, Replayable board) {
-		states.add(new State(turn, command, board));
+	public void addState(String playerName, String colorShortcut, String commandName, Replayable board) {
+		states.add(new State(playerName, colorShortcut, commandName, board));
 	}
 	
 	public void startReplay() {
@@ -70,6 +73,16 @@ public class Replay {
 			System.out.println(ERROR_MSG);
 		}
 		return replaying;
+	}
+
+	public JSONArray report() {
+		JSONArray ja = new JSONArray();
+		
+		for (State s : states) {
+			ja.put(s.report());
+		}
+		
+		return null;
 	}
 	
 }

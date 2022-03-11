@@ -9,10 +9,11 @@ import Rolit.SaveLoadManager;
 import utils.StringUtils;
 import org.json.JSONObject;
 =======
-public class Board implements Replayable{
->>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
+import org.json.JSONObject;
 
-public class Board implements Reportable {
+>>>>>>> a4e6a35 (Creados metodos save/loadReplay en el SaveLoadManager)
+public class Board implements Replayable{
+	
 	public final static int MAX_SIZE = 15;
 
 	private List<List<Cube>> matrix;
@@ -174,7 +175,6 @@ public class Board implements Reportable {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
 		
@@ -185,16 +185,8 @@ public class Board implements Reportable {
 		
 		jo.put("size", (Integer)size);
 		jo.put("cubes", jo1);
-=======
-	public String toState() {
-		return toString();
-	}
-
-	@Override
-	public JSONObject report() {
->>>>>>> 5f7d746 (Creacion paquete replay(Replay y State), creacion interfaz Replayable, cambios en controller para poder elegir la opcion de hacer replay)
 		// TODO Auto-generated method stub
-		return null;
+		return jo;
 	}
 
 }

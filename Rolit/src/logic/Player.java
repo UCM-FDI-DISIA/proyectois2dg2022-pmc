@@ -54,4 +54,5 @@ public class Player implements Comparable<Player>, Replayable {
 	public String toString() {
 		return name + " (" + color.toString() + ")";
 	}
+
 }
