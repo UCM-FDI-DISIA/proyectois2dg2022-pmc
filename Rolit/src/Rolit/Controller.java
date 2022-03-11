@@ -88,13 +88,50 @@ public class Controller {
 	public void run() {
 		int option = this.menu();
 		if (LOAD_GAME.equals(optionsArray[option - 1])) {
-			System.out.print(LOAD_MSG);
-			String fileName = input.next();
-			if(".".equals(fileName))
-				game = SaveLoadManager.loadGame();
-			else
-				game = SaveLoadManager.loadGame(fileName);
-		}
+				System.out.println("List of saved games: ");
+				boolean opened = SaveLoadManager.showSavedGames();
+				
+				if (!opened) {
+					System.out.println(LOAD_MSG);
+					String fileName = input.next();
+					
+					if(".".equals(fileName)) {
+						game = SaveLoadManager.loadGame();
+					}
+					else
+						game = SaveLoadManager.loadGame(fileName);
+					
+				}
+				else {
+					boolean repeat;
+					
+					do {
+						
+						repeat = false;
+						System.out.print("Pick a number: ");
+						
+						try {
+							
+							int numberOfSavedGameInt = Integer.valueOf(input.next());
+							game = SaveLoadManager.loadGame(numberOfSavedGameInt);
+							
+						} catch (NumberFormatException e){
+							
+							System.out.println("That was not a number.");
+							repeat = true;
+							
+						} catch (Exception e) {
+							
+							System.out.println("That was not a correct option.");
+							repeat = true;
+							
+						}
+						
+					} while (repeat);
+					
+				}
+					
+			}
 		else 
 			game = GameGenerator.createGame();
 		this.createPrinter();

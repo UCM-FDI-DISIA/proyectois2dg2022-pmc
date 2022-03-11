@@ -5,8 +5,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import logic.Board;
 import logic.Color;
@@ -16,11 +20,15 @@ import logic.Player;
 import logic.Saveable;
 
 public class SaveLoadManager {
+
+	private static final String INDEX_FILENAME = "names.txt";
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
 	private static final String ERROR_LOAD = "Failed to load the file";
+	private static final String ERROR_LOAD_DEFAULT = "Failed to load the saved games index.";
 	private static final String ERROR_SAVE = "Failed to save the file";
 	private static final String SUCCESS_MSG = "Game saved successfully";
 	private static final String CENTINEL = "END";
+	private static List<String> names;
 
 	/*
 	 * Formato de guardado:
@@ -104,5 +112,35 @@ public class SaveLoadManager {
 	
 	public static Game loadGame() {
 		return loadGame(DEFAULT_FILENAME);
+	}
+	
+	public static Game loadGame(int option) throws Exception {
+		option--;
+		if (option < 0 || option >= names.size())
+			throw new Exception();
+		else {
+			return loadGame(names.get(option));
+		}
+		
+	}
+	
+	public static boolean showSavedGames() {
+		
+		try(BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
+			
+			names = Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+			
+			if (names.size() > 0) {
+				for (int i = 0; i < names.size(); ++i)
+					System.out.println(i+1 + ". " + names.get(i));
+			}
+			
+		} catch(IOException error_file) {
+			System.out.println(ERROR_LOAD_DEFAULT);
+			return false;
+		}
+		
+		return true;
+		
 	}
 }
