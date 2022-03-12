@@ -74,14 +74,6 @@ public class Game implements Saveable{
 		return str.toString();
 	}
 	
-	public String availableShapes() {
-		StringBuilder buffer = new StringBuilder("Elija entre uno de los siguinetes: ");
-		for (Forma forma : Forma.values()) {
-			buffer.append(forma.name()).append(": ").append(forma.getInfo()); //ver como hacer esto
-		}
-		return buffer.toString();
-	}
-	
 	public boolean play(int x, int y) {
 		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
 		// indicada

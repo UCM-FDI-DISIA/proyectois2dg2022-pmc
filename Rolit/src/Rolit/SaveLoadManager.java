@@ -14,6 +14,7 @@ import logic.Cube;
 import logic.Game;
 import logic.Player;
 import logic.Saveable;
+import logic.Shape;
 
 public class SaveLoadManager {
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES.txt";
@@ -70,7 +71,6 @@ public class SaveLoadManager {
 	
 	public static Game loadGame(String filename) {
 		try(BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
-			
 			String boardShape;
 			List<Cube> list_cubes = new ArrayList<Cube>();
 			List<Player> list_players = new ArrayList<Player>();
@@ -84,9 +84,9 @@ public class SaveLoadManager {
 				words = save_file.readLine().split(" ");
 				list_players.add(new Player(Color.valueOfIgnoreCase(words[1].charAt(0)), words[0]));
 			}	
-			
-			boardShape = save_file.readLine(); //ahoar leemos un string en vez de un int
-			Board board = new Board(boardShape);
+			int size = Integer.parseInt(save_file.readLine());
+			boardShape = save_file.readLine();
+			Board board = new Board(size, Shape.valueOf(boardShape));
 			
 			words = save_file.readLine().split(" ");
 			while(!CENTINEL.equals(words[0])) {
@@ -94,7 +94,30 @@ public class SaveLoadManager {
 				words = save_file.readLine().split(" ");
 			}
 								
-			return new Game(board, list_cubes, list_players, turn, boardSize);
+			return new Game(board, list_cubes, list_players, turn, size);
+		}
+		catch(IOException error_file) {
+			System.out.println(ERROR_LOAD);
+		}
+		return null;
+	}
+	
+	public static int[][] loadShape(String filename) {
+		try(BufferedReader shape_file = new BufferedReader(new FileReader(filename))) {
+			
+			int size = Integer.parseInt(shape_file.readLine());
+			int array_int[][] = new int[size][size];
+			
+			for (int i = 0; i < size + 2; i++) {
+				for (int j = 0; j < size + 2; j++) {
+					if (shape_file.read() == 'X') array_int[i][j] = 0;
+					else if (shape_file.read() == 'D') array_int[i][j] = 1;
+					else array_int[i][j] = 2;
+					shape_file.read(); //lee el espacio
+				}
+			}
+								
+			return array_int;
 		}
 		catch(IOException error_file) {
 			System.out.println(ERROR_LOAD);

@@ -3,20 +3,24 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+import Rolit.Controller;
+import Rolit.SaveLoadManager;
+import utils.StringUtils;
 
-	private final static String POS_ERROR = "Failed to add cube, its position is out of the board";
+public class Board {
 	public final static int MAX_SIZE = 15;
 
 	private List<List<Cube>> matrix;
-	private List<List<Boolean>> forma;
+	private int[][] shape;
 	private int size;
 	private int numCubes;
 
-	public Board(int size, Forma forma) {
+	private static final String SPACE = " ";
+	
+	public Board(int size, Shape shape) {
 		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
-		this.forma = SaveLoadManager.loadForma();
+		this.shape = SaveLoadManager.loadShape(shape.getFilename());
 		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
@@ -39,9 +43,6 @@ public class Board {
 	}
 
 	public void addCubeInPos(Cube c) {
-		if (c.getX() < 0 || c.getX() >= size || c.getY() < 0 || c.getY() >= size)
-			throw new IllegalArgumentException(POS_ERROR);
-
 		List<Cube> column = matrix.get(c.getX());
 		column.remove(c.getY());
 		column.add(c.getY(), c);
@@ -119,9 +120,35 @@ public class Board {
 		}
 		
 	}
+	
+	public String positionToString(int x, int y) {
+		Cube cube = getCubeInPos(x, y);
+		if (cube == null)
+			return " ";
+		else
+			return cube.getColor().toString();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(StringUtils.LINE_SEPARATOR);
+		// Paint game
+		for (int x = 0; x < size + 2; x++) {
+			for (int y = 0; y < size + 2; y++) {
+				if (shape[x][y] == 1) str.append("X").append(SPACE);
+				else if (shape[x][y] == 2) str.append(positionToString(x, y)).append(SPACE);
+			}
+			str.append(StringUtils.LINE_SEPARATOR);
+			
+		}
+		str.append(StringUtils.LINE_SEPARATOR);
+		
+		return str.toString();
+	}
 
 	private boolean isPositionInRange(int x, int y) {
-		return x >= 0 && x < size && y >= 0 && y < size && forma[x][y];
+		return x >= 0 && x < size && y >= 0 && y < size && shape[x + 1][y + 1] == 2;
 	}
 	
 	public boolean tryToAddCube(int x, int y) {

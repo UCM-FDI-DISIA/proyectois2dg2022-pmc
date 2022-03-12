@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import logic.Board;
 import logic.Color;
-import logic.Forma;
+import logic.Shape;
 import logic.Game;
 
 public class GameGenerator {
@@ -14,7 +14,7 @@ public class GameGenerator {
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
 	private static final String BOARD_MSG = "Choose your board shape";
-	private static final String BOARD_ERROR = "Board size must be a number between 8 and 15 (inclusive)";
+	private static final String BOARD_ERROR = "Board shape must be one of these: ";
 	
 	private static Scanner input = new Scanner(System.in);
 	
@@ -34,16 +34,17 @@ public class GameGenerator {
 		return nPlayers;
 	}
 	
-	private static Board chooseBoard(Game game) {
+	private static Board chooseBoard() {
 		System.out.println(BOARD_MSG); //TODO cuando guardemos una partida hay que guardar su forma, ademas de su tamaño
+		Shape.availableShapes();
 		int size = input.nextInt();
 		String board_shape = input.next();
-		while (Forma.valueOfIgnoreCase(board_shape) != null) {
+		while (Shape.valueOfIgnoreCase(board_shape) != null) {
 			System.out.println(BOARD_ERROR);
-			game.availableShapes();
+			Shape.availableShapes();
 			board_shape = input.next();
 		}
-		return new Board(size, Forma.valueOfIgnoreCase(board_shape));
+		return new Board(size, Shape.valueOfIgnoreCase(board_shape));
 	}
 
 	private static void chooseColor(int numPlayers, Game game) {
