@@ -3,7 +3,9 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+import org.json.JSONObject;
+
+public class Board implements Reportable {
 
 	private final static String POS_ERROR = "Failed to add cube, its position is out of the board";
 	public final static int MAX_SIZE = 15;
@@ -137,6 +139,12 @@ public class Board {
 			return nearbyCube;
 		} else
 			return isPositionInRange(x, y);
+	}
+
+	@Override
+	public JSONObject report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

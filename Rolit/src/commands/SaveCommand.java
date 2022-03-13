@@ -22,8 +22,8 @@ public class SaveCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		if(filename == null) SaveLoadManager.saveGame(game, game.getBoardSize());
-		else SaveLoadManager.saveGame(game, filename, game.getBoardSize());
+		if(filename == null) SaveLoadManager.saveGame(game);
+		else SaveLoadManager.saveGame(game, filename);
 		return false;
 	}
 	

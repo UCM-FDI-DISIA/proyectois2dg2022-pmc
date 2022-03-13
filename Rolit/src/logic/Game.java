@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Game implements Saveable{
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class Game implements Reportable {
 	private boolean finished;
 	private List<Player> players;
 	private Board board;
@@ -132,5 +135,23 @@ public class Game implements Saveable{
 	
 	public Color getCurrentColor() {
 		return this.players.get(currentPlayerIndex).getColor();
+	}
+
+	@Override
+	public JSONObject report() {
+		JSONObject gameJSONObject = new JSONObject();
+		
+		//FIXME saveBoard no devuelve Board sino una lista de cubos
+		gameJSONObject.put("board", board.report());
+		
+		JSONArray playerJSONArray = new JSONArray();		 
+		for (int i = 0; i < players.size(); ++i)
+			playerJSONArray.put(players.get(i).report());
+					
+		gameJSONObject.put("players", playerJSONArray);
+		
+		gameJSONObject.put("turn", this.getCurrentColor());
+		
+		return gameJSONObject;
 	}
 }
