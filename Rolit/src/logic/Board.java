@@ -143,6 +143,15 @@ public class Board implements Reportable {
 
 	@Override
 	public JSONObject report() {
+		JSONObject jo = new JSONObject();
+		
+		JSONArray jo1 = new JSONArray();
+		for (int i =0; i<matrix.size() ;i++)
+			for (int j=0; j< matrix.get(i).size(); j++)
+				jo1.put(getCubeInPos(i,j).report());
+		
+		jo.put("size", (Integer)size);
+		jo.put("cubes", jo1);
 		// TODO Auto-generated method stub
 		return null;
 	}

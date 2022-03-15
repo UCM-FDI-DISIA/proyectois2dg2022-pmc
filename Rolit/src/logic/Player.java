@@ -42,6 +42,10 @@ public class Player implements Comparable<Player>, Reportable {
 
 	@Override
 	public JSONObject report() {
+		JSONObject jo1 = new JSONObject();
+		jo1.put("name", name);
+		jo1.put("color", color.toString());
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
