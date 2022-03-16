@@ -1,0 +1,32 @@
+\documentclass{article}
+\title{REFACTORIZACIÓN DEL SPRINT 2}
+\date{\today}
+\author{Grupo PMC}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{listings}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\begin{document}
+\maketitle
+
+\subsubsection*{Controller}
+La clase \textit{Controller} conocía demasiados detalles de implementación del \textit{Game}. Para evitar que se quedase desactualizado y que no fuese operativo ante cambios hemos decidido delegar la funcionalidad de creación del juego y de sus objetos internos a otra clase nueva, la clase \textit{GameGenerator}.
+
+En \textit{Controller} solo subsisten los métodos para mostrar un menú desde el que se elija jugar, cargar u otras funcionalidades extras que se puedan ir añadiendo, los métodos de jugar un turno y el método \textit{run()} que se encarga de hacer funcionar la aplicación.
+
+\subsubsection*{GameGenerator}
+Esta clase hace de factoría del \textit{Game} y se encarga de conocer los detalles de su implementación concreta y de pedir al usuario los datos requeridos para crear el juego.
+
+Por el momento, se debe encargar de:
+\begin{itemize}
+\item Crear los jugadores y pedir el número de los mismos.
+\item Crear el Board con las características concretas del juego.
+\item Generar el Game que se desarrollará durante la partida.
+\end{itemize}
+
+Asímismo, debería tener al menos un método público (probablemente estático) que devolviese un \textit{Game} completamente creado. De este modo, en la clase \textit{Controller} bastaría con llamar a dicho método para asignar el juego creado a su propio atributo juego. Esto nos da una gran ventaja a la hora de introducir distintos modos de juego como ya se va a hacer en ese sprint.
+
+
+\end{document}
