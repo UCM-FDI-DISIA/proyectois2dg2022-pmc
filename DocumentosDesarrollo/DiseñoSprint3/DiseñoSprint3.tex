@@ -1,0 +1,37 @@
+\documentclass{article}
+\title{DISEÑO DEL SPRINT 3}
+\date{\today}
+\author{Grupo PMC}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{listings}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\begin{document}
+\maketitle
+
+\subsubsection*{Board}
+Vamos a dejar más determinada la capacidad del usuario de elegir las características del juego. Ahora va a haber sólo 3 tamaños de tablero: pequeño, mediano o grande y van a ser específicos de cada forma. También habrá un conjunto determinado de formas entre las que elegir e internamente crearemos el tablero con la forma y el tamaño determinados.
+
+Del mismo modo, la selección del tablero y del tamaño determinará el número máximo de jugadores posibles, para que el juego sea plausible en el tablero seleccionado.
+
+Una buena forma de tener determinadas y marcadas todas estas cosas es tener los tableros ya dibujados y determinados en unos ficheros ``.txt'' desde los que se puede cargar toda la información relativa al mismo.
+
+\subsubsection*{SaveLoadManager}
+Los ficheros de guardado ahora tienen nombre propio. Cuando guardamos una partida, creamos un fichero con ese nombre y guardamos el nombre en un fichero de nombres, para que luego al buscar para cargar partida el juego sepa decirte todas las partidas guardadas que hay.
+
+Para poder repetir las partidas, va a haber que guardar durante la partida el estado del juego en cada turno en un fichero que llamaremos \textit{currentGame.txt}. Al final, se dedice si se quiere guardar la replay de la partida actual para verla más tarde.
+
+Las replays tienen que poder dar un paso hacia delante, hacia atrás y mantenerse en pausa viendo un paso concreto de la partida y deben mostrar la salida por pantalla que se ve durante la partida tal y como estaba en ese momento.
+
+La funcionalidad de guardar una replay e irla construyendo a partir del \textit{Game} debería ser de SaveLoadManager, que guardaría como definitivo el fichero a través de un método llamado \textit{saveReplay()}. Además, en cada turno es necesario que se vaya construyendo la replay a partir del estado del juego en ese momento.
+
+\subsubsection*{Game}
+Para implementar las funcionalidades de distintos juegos, la clase \textit{Game} va a pasar a ser una clase abstracta. Las clases de cada modo de juego será una extensión de dicha clase que encapsulará de forma local lo que se espera de ese modo.
+
+Por el momento, para hacer la clase de juego por equipos lo único que cambia es la forma de imprimir el ranking y a lo sumo dos nuevos atributos que sumen las puntuaciones de los jugadores de cada equipo y que sean la puntuación total de los diferentes equipos. Puedes comerte los cubos de tus compañeros aunque las puntuaciones no cambian.
+
+
+
+\end{document}
