@@ -1,6 +1,8 @@
 package logic;
 
-public class Cube {
+import org.json.JSONObject;
+
+public class Cube implements Reportable {
 	private int x;
 	private int y;
 	private Player player;
@@ -41,6 +43,23 @@ public class Cube {
 
 	public String serialize() {
 		return (this.toString() + " " + x + " " + y);
+	}
+
+	@Override
+	public JSONObject report() {
+		
+		JSONObject jo = new JSONObject();
+		
+		jo.put("color", player.getColor().toString());
+		
+		JSONArray jo1 = new JSONArray();
+		jo1.put((Integer)x);
+		jo1.put((Integer)y);
+		
+		jo.put("coor", jo1);
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

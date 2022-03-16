@@ -1,6 +1,8 @@
 package logic;
 
-public class Player implements Comparable<Player> {
+import org.json.JSONObject;
+
+public class Player implements Comparable<Player>, Reportable {
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
@@ -36,5 +38,15 @@ public class Player implements Comparable<Player> {
 	
 	public static Player getPlayer(Color c) {
 		return Player.playerList[c.ordinal()];
+	}
+
+	@Override
+	public JSONObject report() {
+		JSONObject jo1 = new JSONObject();
+		jo1.put("name", name);
+		jo1.put("color", color.toString());
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

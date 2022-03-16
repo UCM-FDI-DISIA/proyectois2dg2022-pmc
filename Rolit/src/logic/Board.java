@@ -6,8 +6,9 @@ import java.util.List;
 import Rolit.Controller;
 import Rolit.SaveLoadManager;
 import utils.StringUtils;
+import org.json.JSONObject;
 
-public class Board {
+public class Board implements Reportable {
 	public final static int MAX_SIZE = 15;
 
 	private List<List<Cube>> matrix;
@@ -166,6 +167,21 @@ public class Board {
 			return nearbyCube;
 		} else
 			return isPositionInRange(x, y);
+	}
+
+	@Override
+	public JSONObject report() {
+		JSONObject jo = new JSONObject();
+		
+		JSONArray jo1 = new JSONArray();
+		for (int i =0; i<matrix.size() ;i++)
+			for (int j=0; j< matrix.get(i).size(); j++)
+				jo1.put(getCubeInPos(i,j).report());
+		
+		jo.put("size", (Integer)size);
+		jo.put("cubes", jo1);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
