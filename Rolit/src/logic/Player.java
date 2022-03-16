@@ -2,7 +2,7 @@ package logic;
 
 import org.json.JSONObject;
 
-public class Player implements Comparable<Player>, Replayable {
+public class Player implements Comparable<Player>, Reportable {
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;

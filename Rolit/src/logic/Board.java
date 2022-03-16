@@ -2,25 +2,29 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import Rolit.Controller;
-import Rolit.SaveLoadManager;
+import control.SaveLoadManager;
 import utils.StringUtils;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
-public class Board implements Replayable{
+public class Board implements Reportable{
 	
 	public final static int MAX_SIZE = 15;
-
+	
 	private List<List<Cube>> matrix;
-	private int[][] shape;
+	private boolean[][] shapeMatrix;
+	private String shapeName;
 	private int size;
 	private int numCubes;
 
-	private static final String SPACE = " ";
+	private static final char SPACE = ' ';
 	
-	public Board(int size, Shape shape) {
+	public Board(Shape shape) {
 		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
-		this.shape = SaveLoadManager.loadShape(shape.getFilename());
+		this.shapeName = shape.name();
+		this.shapeMatrix = SaveLoadManager.loadShape(shape.getFilename());
+		this.size = SaveLoadManager.getShapeSize(shape.getFilename());
 		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
@@ -32,6 +36,21 @@ public class Board implements Replayable{
 				column.add(null);
 			}
 		}
+	}
+	
+	public Board(Board board) {
+		
+		 List<List<Cube>> m = new ArrayList<List<Cube>>();
+		for (int i = 0; i < board.matrix.size(); i++) {
+			List<Cube> lc = new ArrayList<Cube> (board.matrix.get(i));
+			m.add(lc);
+		}
+		
+		this.matrix = m;
+		this.shapeMatrix = board.shapeMatrix;
+		this.shapeName = board.shapeName;
+		this.size = board.size;
+		this.numCubes = board.numCubes;
 	}
 
 	public int getSize() {
@@ -134,21 +153,20 @@ public class Board implements Replayable{
 		StringBuilder str = new StringBuilder();
 		str.append(StringUtils.LINE_SEPARATOR);
 		// Paint game
-		for (int x = 0; x < size + 2; x++) {
-			for (int y = 0; y < size + 2; y++) {
-				if (shape[x][y] == 1) str.append("X").append(SPACE);
-				else if (shape[x][y] == 2) str.append(positionToString(x, y)).append(SPACE);
-			}
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				if (!shapeMatrix[x][y]) str.append("■").append(SPACE);
+				else if (shapeMatrix[x][y])str.append(positionToString(x, y)).append(SPACE);
+				}
 			str.append(StringUtils.LINE_SEPARATOR);
 			
 		}
-		str.append(StringUtils.LINE_SEPARATOR);
 		
 		return str.toString();
 	}
 
 	private boolean isPositionInRange(int x, int y) {
-		return x >= 0 && x < size && y >= 0 && y < size && shape[x + 1][y + 1] == 2;
+		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
 	public boolean tryToAddCube(int x, int y) {
@@ -173,11 +191,15 @@ public class Board implements Replayable{
 		JSONObject jo = new JSONObject();
 		
 		JSONArray jo1 = new JSONArray();
-		for (int i =0; i<matrix.size() ;i++)
-			for (int j=0; j< matrix.get(i).size(); j++)
-				jo1.put(getCubeInPos(i,j).report());
+		for (int i = 0; i< matrix.size(); i++)
+			for (int j = 0; j< matrix.get(i).size(); j++) {
+				Cube c = getCubeInPos(i,j);
+				if(c != null)
+					jo1.put(getCubeInPos(i,j).report());	
+			}
+
 		
-		jo.put("size", (Integer)size);
+		jo.put("shape", shapeName);
 		jo.put("cubes", jo1);
 		// TODO Auto-generated method stub
 		return jo;

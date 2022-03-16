@@ -22,12 +22,13 @@ public class Controller {
 	private final String LOAD_GAME = "Load game";
 	private final String DELETE_GAME = "Delete a game";
 	private final String LIST_MSG = "List of saved games: ";
-	private final String CHOOSE_NUMBER_MSG = "Choose a number: ";
+	private final String CHOOSE_NUMBER_MSG = "Choose a number";
 	private final String INVALID_OPTION = "Invalid option. Try again.";
-	private static final String REPLAY_FILE_NAME = "replay.txt";
 	private final String REPLAY_GAME = "Replay game";
+	private final String REPLAY_MSG = "Do you want to save the replay of the game? (y/n)";
 	private final String[] optionsArray = { NEW_GAME, LOAD_GAME, DELETE_GAME, REPLAY_GAME};
-
+	private boolean playMode = true;
+	
 	public Controller() {
 		input = new Scanner(System.in);
 		replay = new Replay();
@@ -67,7 +68,6 @@ public class Controller {
 		input.nextLine();
 		while (!game.isFinished()) {
 			if (refreshDisplay) {
-				printTurn();
 				printGame();
 			}
 			System.out.print(PROMPT);
@@ -77,7 +77,7 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				
+				replay.addState(s, new Game(game));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();
@@ -89,6 +89,10 @@ public class Controller {
 
 		if (!game.exited())
 			System.out.println(this.printer.showRanking());
+		
+		if(askSaveReplay())
+			SaveLoadManager.saveReplay(replay);
+		
 	}
 
 	private void createPrinter() {
@@ -130,7 +134,7 @@ public class Controller {
 						do {
 							
 							repeatChooseNumber = false;
-							System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG);
+							System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG + " :");
 							
 							try {
 								
@@ -157,6 +161,8 @@ public class Controller {
 			else if (DELETE_GAME.equals(optionsArray[option - 1])) {
 				
 				repeatMenu = true;
+				
+				playMode = false;
 				
 				boolean opened = SaveLoadManager.showSavedGames();
 				
@@ -187,14 +193,25 @@ public class Controller {
 				
 			}
 			else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
-				System.out.print("Escribe el nombre del replay a cargar .txt (temporal)");
-				String loadFile = input.nextLine();
-				replay = SaveLoadManager.loadReplay(loadFile);
+				playMode = false;
+				//System.out.print("Escribe el nombre del replay a cargar .txt (temporal):");
+				//input.nextLine();
+				//String loadFile = input.nextLine();
+				replay = SaveLoadManager.loadReplay();
 				replay.startReplay();
 			}			
 		} while (repeatMenu);
-		this.createPrinter();
-		this.play();
+		if(playMode) {
+			this.createPrinter();
+			this.play();
+		}
 	}
+	
+	private boolean askSaveReplay() {
+		System.out.println(REPLAY_MSG);
+		String ans = input.nextLine();
+		return "y".equals(ans.toLowerCase());
+	}
+
 	
 }

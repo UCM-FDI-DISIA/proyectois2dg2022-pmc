@@ -25,7 +25,7 @@ Para poder repetir las partidas, va a haber que guardar durante la partida el es
 
 Las replays tienen que poder dar un paso hacia delante, hacia atrás y mantenerse en pausa viendo un paso concreto de la partida y deben mostrar la salida por pantalla que se ve durante la partida tal y como estaba en ese momento.
 
-La funcionalidad de guardar una replay e irla construyendo a partir del \textit{Game} debería ser de SaveLoadManager, que guardaría como definitivo el fichero a través de un método llamado \textit{saveReplay()}. Además, en cada turno es necesario que se vaya construyendo la replay a partir del estado del juego en ese momento.
+Para gestionar esta nueva funcionalidad se creará una nueva clase Replay que irá construyendo cada estado a partir del \textit{Game}. Debería ser el SaveLoadManager quien se encargue de guardar y cargar los replays completos en un fichero a través de los métodos \textit{saveReplay()} y \textit{loadReplay()}.
 
 \subsubsection*{Game}
 Para implementar las funcionalidades de distintos juegos, la clase \textit{Game} va a pasar a ser una clase abstracta. Las clases de cada modo de juego será una extensión de dicha clase que encapsulará de forma local lo que se espera de ese modo.

@@ -1,9 +1,5 @@
 package logic;
 
-import org.json.JSONObject;
-
-public interface Replayable {
+public interface Replayable extends Reportable {
 	public String toString();
-	
-	public JSONObject report();
-}
+	}

@@ -1,5 +1,6 @@
 package logic;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Cube implements Reportable {
@@ -44,7 +45,7 @@ public class Cube implements Reportable {
 	public String serialize() {
 		return (this.toString() + " " + x + " " + y);
 	}
-
+	
 	@Override
 	public JSONObject report() {
 		
@@ -53,13 +54,12 @@ public class Cube implements Reportable {
 		jo.put("color", player.getColor().toString());
 		
 		JSONArray jo1 = new JSONArray();
-		jo1.put((Integer)x);
-		jo1.put((Integer)y);
+		jo1.put(x);
+		jo1.put(y);
 		
-		jo.put("coor", jo1);
+		jo.put("pos", jo1);
 		
-		// TODO Auto-generated method stub
-		return null;
+		return jo;
 	}
 	
 }

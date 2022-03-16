@@ -7,7 +7,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Game implements Reportable {
+import utils.StringUtils;
+
+public class Game implements Replayable{
 	private boolean finished;
 	private List<Player> players;
 	private Board board;
@@ -22,12 +24,20 @@ public class Game implements Reportable {
 		this.exit = false;
 	}
 	
-	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor, int boardSize) {
+	public Game(Game game) {
+		this.finished = game.finished;
+		this.players = game.players;
+		this.board = new Board(game.board);
+		this.currentPlayerIndex = game.currentPlayerIndex;
+		this.exit = game.exit;
+	}
+	
+	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
 		this(board);
-		this.loadGame(list_cubes, list_players, currentPlayerColor, boardSize);
+		this.loadGame(list_cubes, list_players, currentPlayerColor);
 	}
 
-	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor, int boardSize) {
+	public void loadGame(List<Cube> cubes, List<Player> players, Color currentPlayerColor) {
 		for (Cube c : cubes) {
 			board.addCubeInPos(c);
 		}
@@ -138,10 +148,19 @@ public class Game implements Reportable {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder bf = new StringBuilder();
+		bf.append("Turno: ");
+		bf.append(getCurrentPlayer().toString());
+		bf.append(StringUtils.LINE_SEPARATOR);
+		bf.append(board.toString());
+		return bf.toString();
+	}
+	
+	@Override
 	public JSONObject report() {
 		JSONObject gameJSONObject = new JSONObject();
 		
-		//FIXME saveBoard no devuelve Board sino una lista de cubos
 		gameJSONObject.put("board", board.report());
 		
 		JSONArray playerJSONArray = new JSONArray();		 
@@ -155,3 +174,4 @@ public class Game implements Reportable {
 		return gameJSONObject;
 	}
 }
+

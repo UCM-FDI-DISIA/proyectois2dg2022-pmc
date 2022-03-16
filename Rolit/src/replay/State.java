@@ -1,46 +1,34 @@
 package replay;
 
-import java.util.List;
 
 import org.json.JSONObject;
-
-import commands.Command;
-import logic.Board;
-import logic.Cube;
-import logic.Player;
 import logic.Replayable;
+import logic.Reportable;
 import utils.StringUtils;
 
-public class State {
-	String playerName;
-	String colorShortcut;
+public class State implements Reportable{
 	String command;
-	Replayable board;
+	Replayable game;
 	
-	State(String playerName, String colorShortcut, String commandName, Replayable board){
-		this.playerName = playerName;
-		this.colorShortcut = colorShortcut;
+	State(String commandName, Replayable game){
 		this.command = commandName;
-		this.board = board;
+		this.game = game;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Turn: ").append(playerName + " (" + colorShortcut + ")").append(StringUtils.LINE_SEPARATOR);
 		str.append("Command > ").append(command).append(StringUtils.LINE_SEPARATOR);
-		str.append(board);
+		str.append(game);
 		return str.toString();
 	}
 	
+	@Override
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
-		JSONObject turn = new JSONObject();
-		turn.put("name", playerName);
-		turn.put("color", colorShortcut);
-		
-		jo.put("turn", turn);
+	
 		jo.put("command", command);
-		jo.put("board", board.report());
+		jo.put("game", game.report());
 		
 		return jo;
 		

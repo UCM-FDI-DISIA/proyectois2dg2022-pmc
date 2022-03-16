@@ -22,19 +22,7 @@ public class GamePrinter {
 	}
 	
 	public String toString() {
-		StringBuilder str = new StringBuilder();
-		str.append(StringUtils.LINE_SEPARATOR);
-		// Paint game
-		str.append(StringUtils.repeat('-', game.getBoardSize() * 2)).append(StringUtils.LINE_SEPARATOR);	//TODO El margen tiene que depender del tamaño
-		for (int x = 0; x < game.getBoardSize(); x++) {
-			for (int y = 0; y < game.getBoardSize(); y++) {
-				str.append(game.positionToString(x, y)).append(SPACE);
-			}
-			str.append(StringUtils.LINE_SEPARATOR);
-			
-		}
-		str.append(StringUtils.repeat('-', game.getBoardSize() * 2)).append(StringUtils.LINE_SEPARATOR);
-		return str.toString();
+		return game.toString();
 	}
 	
 	public String showRanking() {
