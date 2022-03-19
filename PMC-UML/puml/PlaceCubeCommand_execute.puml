@@ -1,0 +1,38 @@
+# PlaceCubeCommand
+
+@startuml
+participant Actor
+Actor -> PlaceCubeCommand : execute
+activate PlaceCubeCommand
+PlaceCubeCommand -> Game : play
+activate Game
+Game -> Board : tryToAddCube
+activate Board
+Board --> Game : validPosition
+deactivate Board
+alt validPosition
+Game -> Cube : new
+activate Cube
+Cube --> Game
+deactivate Cube
+Game -> Board : addCubeInPos
+activate Board
+Board -> Cube : addPlayerScore
+activate Cube
+Cube -> Player : addScore
+activate Player
+Player --> Cube
+deactivate Player
+Cube --> Board
+deactivate Cube
+Board --> Game
+deactivate Board
+Game -> Board : update
+activate Board
+Board --> Game : finished
+deactivate Board
+end
+Game --> PlaceCubeCommand
+deactivate Game
+return
+@enduml
