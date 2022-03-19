@@ -1,0 +1,12 @@
+# ExitCommand
+
+@startuml
+participant Actor
+Actor -> ExitCommand : execute
+activate ExitCommand
+ExitCommand -> Game : setExit
+activate Game
+Game --> ExitCommand
+deactivate Game
+return
+@enduml
