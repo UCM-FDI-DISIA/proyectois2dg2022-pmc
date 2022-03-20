@@ -17,6 +17,9 @@ deactivate Controller
 Rolit -> Controller : run
 
 activate Controller
+
+loop Not created nor loaded a game
+
 Controller -> Controller : menu
 activate Controller
 Controller --> Controller : opcion
@@ -80,6 +83,10 @@ deactivate Replay
 
 end
 
+end
+
+alt Play Mode
+
 Controller -> Controller : createPrinter
 activate Controller
 Controller -> GamePrinter : new
@@ -92,6 +99,9 @@ Controller -> Controller : play
 activate Controller
 Controller --> Controller
 deactivate Controller
+
+end
+
 Controller --> Rolit
 deactivate Controller
 return
