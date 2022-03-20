@@ -1,0 +1,23 @@
+@startuml
+participant Actor
+Actor -> GameGenerator : createGame
+
+activate GameGenerator
+
+GameGenerator -> GameGenerator : chooseBoard
+activate GameGenerator
+GameGenerator --> GameGenerator : Board
+deactivate GameGenerator
+
+GameGenerator -> GameGenerator : chooseColor
+activate GameGenerator
+GameGenerator --> GameGenerator
+deactivate GameGenerator
+
+GameGenerator -> Game : new
+activate Game
+Game --> GameGenerator : Game
+deactivate Game
+
+return Game
+@enduml
