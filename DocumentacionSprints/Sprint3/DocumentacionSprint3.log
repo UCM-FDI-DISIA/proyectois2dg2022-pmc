@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  20 MAR 2022 23:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  20 MAR 2022 23:43
 entering extended mode
-**./DocumentaciónSprint1.tex
-(DocumentaciónSprint1.tex
+**./DocumentacionSprint3.tex
+(DocumentacionSprint3.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18>
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -85,11 +85,9 @@ mode.def
 File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count181
 \l__pdf_internal_box=\box45
-) (DocumentaciónSprint1.aux
-LaTeX Info: Redefining \. on input line 8.
-LaTeX Info: Redefining \% on input line 8.
 )
-\openout1 = `DocumentaciónSprint1.aux'.
+No file DocumentacionSprint3.aux.
+\openout1 = `DocumentacionSprint3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -107,7 +105,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -151,25 +148,25 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
-(DocumentaciónSprint1.aux
+(DocumentacionSprint3.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 2040 strings out of 480790
- 30372 string characters out of 2897301
- 290723 words of memory out of 3000000
- 18088 multiletter control sequences out of 15000+200000
+ 2046 strings out of 480790
+ 30359 string characters out of 2897301
+ 289717 words of memory out of 3000000
+ 18096 multiletter control sequences out of 15000+200000
  536631 words of font info for 38 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,35p,525b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,6n,35p,687b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on DocumentaciónSprint1.pdf (2 pages, 75341 bytes).
+Output written on DocumentacionSprint3.pdf (2 pages, 74772 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
