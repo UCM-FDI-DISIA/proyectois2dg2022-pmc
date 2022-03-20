@@ -1,0 +1,98 @@
+@startuml
+actor Usuario
+Usuario -> Rolit : main
+activate Rolit
+Rolit -> Rolit : version
+activate Rolit
+Rolit --> Rolit
+deactivate Rolit
+Rolit -> Controller : new
+activate Controller
+Controller -> Replay : new
+activate Replay
+Replay --> Controller
+deactivate Replay
+Controller --> Rolit
+deactivate Controller
+Rolit -> Controller : run
+
+activate Controller
+Controller -> Controller : menu
+activate Controller
+Controller --> Controller : opcion
+deactivate Controller
+
+alt New Game
+
+Controller -> GameGenerator : createGame
+activate GameGenerator
+GameGenerator --> Controller : Game
+deactivate GameGenerator
+
+else Load Game
+
+Controller -> SaveLoadManager : showSavedGames
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : getListOfSavedGames
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> Controller
+deactivate SaveLoadManager
+Controller -> SaveLoadManager : loadGame
+activate SaveLoadManager
+SaveLoadManager --> Controller : return Game
+deactivate SaveLoadManager
+
+else Delete Game
+
+Controller -> SaveLoadManager : removeGame
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : getListOfSavedGames
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : updateListOfSavedGames
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> Controller
+deactivate SaveLoadManager
+
+else Replay Game
+
+Controller -> SaveLoadManager : loadReplay
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : loadReplay
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> Controller : Replay
+deactivate SaveLoadManager
+Controller -> Replay : startReplay
+activate Replay
+Replay -> Replay : execute
+activate Replay
+Replay --> Replay
+deactivate Replay
+Replay --> Controller
+deactivate Replay
+
+end
+
+Controller -> Controller : createPrinter
+activate Controller
+Controller -> GamePrinter : new
+activate GamePrinter
+GamePrinter --> Controller : GamePrinter
+deactivate GamePrinter
+Controller --> Controller
+deactivate Controller
+Controller -> Controller : play
+activate Controller
+Controller --> Controller
+deactivate Controller
+Controller --> Rolit
+deactivate Controller
+return
+@enduml
