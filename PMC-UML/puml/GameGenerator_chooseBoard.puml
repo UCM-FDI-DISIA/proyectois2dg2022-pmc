@@ -1,0 +1,28 @@
+@startuml
+participant Actor
+Actor -> GameGenerator : 1:chooseBoard
+activate GameGenerator
+loop "<do while (input!=NULL>)"
+
+GameGenerator -> Shape : 1.1:availableShapes
+activate Shape
+Shape --> GameGenerator : StringBuilder buffer
+deactivate Shape
+GameGenerator -> Shape : 1.2:valueOfIgnoreCase (input) (NULL)
+activate Shape
+Shape --> GameGenerator: BOARD_ERROR
+deactivate Shape
+
+end
+
+GameGenerator -> Shape : 1.3:valueOfIgnoreCase (input)
+activate Shape
+Shape --> GameGenerator 
+deactivate Shape
+GameGenerator -> Board : 1.4:new
+activate Board
+
+Board --> GameGenerator
+deactivate Board
+return
+@enduml

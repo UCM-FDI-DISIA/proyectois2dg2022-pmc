@@ -1,0 +1,29 @@
+participant Actor
+Actor -> GameGenerator : 1:chooseColor
+loop for
+activate GameGenerator
+GameGenerator -> Game : 1.1:availableColors
+activate Game
+Game -> Player : 1.1.1:getPlayer
+activate Player
+Player --> Game
+deactivate Player
+Game --> GameGenerator
+deactivate Game
+GameGenerator -> Game : 1.2:tryToAddPlayer
+activate Game
+Game -> Player : 1.2.1:getPlayer
+activate Player
+Player --> Game
+deactivate Player
+group if [player==null]
+Game -> Player : 1.2.2:new
+activate Player
+Player --> Game
+deactivate Player
+end
+Game --> GameGenerator
+deactivate Game
+end
+return
+@enduml
