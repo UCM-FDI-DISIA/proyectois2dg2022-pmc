@@ -9,13 +9,27 @@
 \title{Interfaz gráfica}
 \maketitle
 
+
+\section*{Pantalla principal}
+La interfaz comenzará con un panel principal en el que se muestra un mensaje del tipo ''Rolit'' y diferentes botones para elegir que hacer en un principio. Por el momento los botones principales serán: Jugar, Tutorial y Cargar repetición.
+
+\subsection*{Pantalla ''Jugar''}
+Lo primero que se hará será mostrar las diferentes posibilidades para jugar una partida, que son las siguientes: Nueva partida y cargar partida.
+
+\subsubsection*{Pantalla ''Nueva partida''}
+Se mostrarán las partidas necesarias para cargar los parámetros requeridos para la creación de la partida (modo de juego, forma del tablero, número de jugadores, colores, ...).
+
+\subsubsection*{Pantalla ''Cargar partida''}
+Se mostrará un JFileChooser para seleccionar un fichero de partida válido (uno guardado previamente). Una vez seleccionado uno se cargará la partida y se pasará al juego.
+
+\section*{Pantalla de juego}
 La interfaz va a tener una barra superior, un panel en medio y una barra inferior.
-La barra superior tendrá los siguientes botones: new game, cargar partida, guardar partida, cargar replay, help, exit, avanzar y volver atrás. Algunos de estos botones estarán desactivados durante la partida (por lo pronto el de cargar partida y cargar replay).
+La barra superior tendrá una serie de botones para permitir al usuario ciertas funcionalidades, como son las siguientes: guardar partida, salir, pedir ayuda (comando Help). Algunos de estos botones estarán desactivados durante la partida (por lo pronto el de cargar partida y cargar replay).
 En el panel del centro estará el tablero. Arriba de este se mostrará el turno del jugador actual.
 En la barra inferior se mostrarán mensajes durante la partida. Por ejemplo, si se intenta poner un cubo en una posición ocupada se mostrará un mensaje en esta barra diciendo que no se puede poner el cubo ahí.
 Estaría bien que se pueda mostrar las puntuaciones de cada jugador en cada momento de la partida (algo así como el ranking en todo momento).
 
-Para el modo replay se mostrará el tablero en el centro de la misma manera y se podrán usar los botones de avanzar y volver atrás.
+\subsection*{Pantalla ''Cargar replay''}
+Para el modo replay se mostrará el tablero en el centro de la misma manera (y el turno de jugador y ranking, de forma similar o incluso idéntica a como se muestra al jugar) y se podrán usar los botones de avanzar y volver atrás.
 
-Al seleccionar new game se mostrará un JDialog en el que se harán todas las preguntas necesarias para la creación del juego (modo de juego, número de jugadores, colores, ...).
 \end{document}
