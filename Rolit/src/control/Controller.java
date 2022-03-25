@@ -132,8 +132,6 @@ public class Controller {
 	
 	// FIXME tiene que haber una forma mejor de hacerlo todo
 	public void run() {
-			
-		
 		int selectedMode = mode();
 		
 		if (GUI_MODE.equals(modes[selectedMode-1])) {
@@ -147,101 +145,66 @@ public class Controller {
 				}
 			});
 		}
-		
 		else if (CONSOLE_MODE.equals(modes[selectedMode-1])){
 			
 			if (NEW_GAME.equals(optionsArray[option - 1]))
 				game = GameBuilder.createGame();
 			boolean repeatMenu;
-			
 			do {
-				
 				repeatMenu = false;
-				
 				int option = this.menu();
-				
 				if (NEW_GAME.equals(optionsArray[option - 1]))
 					game = GameGenerator.createGame();
-				
 				else if (LOAD_GAME.equals(optionsArray[option - 1]))
 				{
 						System.out.println(LIST_MSG);
 						boolean opened = SaveLoadManager.showSavedGames();
-						
 						if (!opened) {
 							System.out.println(LOAD_MSG);
 							String fileName = input.next();
-							
 							if(".".equals(fileName)) {
 								game = SaveLoadManager.loadGame();
 							}
 							else
 								game = SaveLoadManager.loadGame(fileName);
-							
 						}
 						else {
 							boolean repeatChooseNumber;
-							
 							do {
-								
 								repeatChooseNumber = false;
 								System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG + " :");
-								
 								try {
-									
 									int numberOfSavedGameInt = Integer.valueOf(input.next());
-									
 									if (numberOfSavedGameInt != GO_BACK_INT)
 										game = SaveLoadManager.loadGame(numberOfSavedGameInt);
 									else
 										repeatMenu = true;
-									
 								} catch (Exception e) {
-									
 									System.out.println(INVALID_OPTION);
 									repeatChooseNumber = true;
-									
 								}
-								
 							} while (repeatChooseNumber);
-							
 						}
-							
 				}
-				
 				else if (DELETE_GAME.equals(optionsArray[option - 1])) {
-					
 					repeatMenu = true;
-					
 					playMode = false;
-					
 					boolean opened = SaveLoadManager.showSavedGames();
-					
 					if (opened) {
-						
 						boolean repeatChooseNumber;
-						
 						do {
-							
 							repeatChooseNumber = false;
 							System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG);
-							
 							try {
 								int numberOfSavedGameInt = Integer.valueOf(input.next());
 								if (numberOfSavedGameInt != GO_BACK_INT)
 									SaveLoadManager.removeGame(numberOfSavedGameInt);
-								
 							} catch (Exception e) {
-								
 								System.out.println(INVALID_OPTION);
 								repeatChooseNumber = true;
-								
 							}
-							
 						} while (repeatChooseNumber);
-						
 					}
-					
 				}
 				else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
 					playMode = false;
@@ -257,10 +220,7 @@ public class Controller {
 				this.play();
 			}
 		}
-		
-		
 	}
-		
 	
 	private boolean askSaveReplay() {
 		System.out.println(REPLAY_MSG);
