@@ -10,10 +10,10 @@ import logic.Game;
 
 public class StatusBar extends JPanel implements RolitObserver {
 
-	private Controller ctrl;
+	private Game game;
 	
-	public StatusBar(Controller _ctrl) {
-		_ctrl = ctrl;
+	public StatusBar(Game game) {
+		this.game = game;
 		JLabel statusLabel = new JLabel("Status: ");
 		this.add(statusLabel);
 	}

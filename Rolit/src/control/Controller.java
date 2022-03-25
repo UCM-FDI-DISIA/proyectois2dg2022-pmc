@@ -135,13 +135,10 @@ public class Controller {
 		int selectedMode = mode();
 		
 		if (GUI_MODE.equals(modes[selectedMode-1])) {
-			
-			Controller ctrl = this; //FIXME chapuza del quince
-			
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					MainWindow mainWindow = new MainWindow(ctrl);
+					MainWindow mainWindow = new MainWindow(game);
 				}
 			});
 		}

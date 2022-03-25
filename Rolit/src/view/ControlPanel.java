@@ -16,11 +16,11 @@ import logic.Game;
 
 public class ControlPanel extends JPanel implements ActionListener, RolitObserver {
 
-	private Controller ctrl;
+	private Game game;
 	JFileChooser fc;
 	
-	public ControlPanel(Controller _ctrl) {
-		ctrl = _ctrl;
+	public ControlPanel(Game game) {
+		this.game = game;
 		
 		JButton btnOpenFile = new JButton();
 		btnOpenFile.setActionCommand("abrir");
@@ -43,7 +43,7 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("abrir")) {
 			int ret = fc.showOpenDialog(this);
-			//según salga yo de esta ventana, "ret" tomará un valor u otro
+			//segï¿½n salga yo de esta ventana, "ret" tomarï¿½ un valor u otro
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				//...
 			} else {

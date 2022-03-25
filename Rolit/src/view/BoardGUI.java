@@ -15,19 +15,20 @@ public class BoardGUI implements RolitObserver {
 	private int nFilas;
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
-	private Controller ctrl;
+	private Game game;
 	
-	public BoardGUI(int nFilas, int nColumnas, Controller ctrl) {
+	public BoardGUI(int nFilas, int nColumnas, Game game) {
 		this.nFilas = nFilas;
 		this.nColumnas = nColumnas;
+		this.game = game;
 
 		this.celdas = new CeldaGUI[nColumnas][nFilas];
 		// Crear las celdas que componen el tablero
 		for (int i = 0; i < nFilas; i++)
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, true);
+				this.celdas[i][j] = new CeldaGUI(i, j, true, game);
 			}
-		this.ctrl = ctrl;
+		this.game.addObserver(this);
 	}
 	
 	public void crearTablero(JPanel panel) {
@@ -35,12 +36,19 @@ public class BoardGUI implements RolitObserver {
 		panel.setLayout(new GridLayout(nFilas, nColumnas));
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				panel.add(celdas[i][j].getBoton());
+				panel.add(celdas[i][j].getButton());
 			}
 		}
 		panel.revalidate();
 	}
 
+	public void update(Game game, Board board, Command command) {
+		for(int i = 0; i < nFilas; i++) {
+			for(int j = 0; j < nColumnas; j++) {
+				celdas[i][j].update(game, board, command);
+			}
+		}
+	}
 
 	@Override
 	public void onError(String err) {
@@ -51,15 +59,14 @@ public class BoardGUI implements RolitObserver {
 	@Override
 	public void onGameCreated(Game game, Board board, Command command) {
 		
-		this.celdas = new CeldaGUI[nColumnas][nFilas];
+		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
 		List<List<Boolean>> shapeMatrixList = board.getShapeMatrix();
-		// TODO Auto-generated method stub
-		for (int i = 0; i < nFilas; i++)
+		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrixList.get(i).get(j));
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrixList.get(i).get(j), game);
 			}
-		
+		}
 	}
 
 	@Override

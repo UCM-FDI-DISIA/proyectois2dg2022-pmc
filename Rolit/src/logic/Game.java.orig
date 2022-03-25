@@ -7,12 +7,36 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+<<<<<<< HEAD
 public abstract class Game implements Replayable {	
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
+=======
+import commands.Command;
+import utils.StringUtils;
+import view.Observable;
+import view.RolitObserver;
+
+public class Game implements Replayable, Observable<RolitObserver> {
+	private boolean finished;
+	private List<Player> players;
+	private Board board;
+	private int currentPlayerIndex;
+	private boolean exit;
+	private static final String AVAILABLE_COLORS_MSG = "Available colors:";
+	private List<RolitObserver> observers;
+
+	public Game(Board board) {
+		this.finished = false;
+		this.board = board;
+		this.players = new ArrayList<Player>();
+		this.exit = false;
+		this.observers = new ArrayList<>();
+	}
+>>>>>>> be39bee (Avances en las componentes visuales)
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -24,7 +48,7 @@ public abstract class Game implements Replayable {
 		this.observers = new ArrayList<>();
 	}
 	
-	// Constructor de creaciï¿½n a partir de carga
+	// Constructor de creación a partir de carga
 	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
 		this.finished = false;
 		this.board = board;
@@ -85,6 +109,8 @@ public abstract class Game implements Replayable {
 		
 		return gameJSONObject;
 	}
+<<<<<<< HEAD
+=======
 
 	public void addObserver(RolitObserver o) {
 		this.observers.add(o);
@@ -135,5 +161,6 @@ public abstract class Game implements Replayable {
 		
 	}
 }
+>>>>>>> be39bee (Avances en las componentes visuales)
 
 }

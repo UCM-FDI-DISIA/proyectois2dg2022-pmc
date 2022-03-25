@@ -21,27 +21,26 @@ import logic.Game;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 
-	private Controller _ctrl;
+	private Game game;
 	private JButton createGameButton;
 	private JPanel welcomePanel;
 	JPanel mainPanel;
 	JPanel boardPanel;
 	
-	public MainWindow(Controller ctrl) {
+	public MainWindow(Game game) {
 		super("Rolit");
-		_ctrl = ctrl;
+		this.game = game;
 		initGUI();
-		// TODO Auto-generated constructor stub
 	}
 	
 	private void initGUI() {
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel);
-		mainPanel.add(new ControlPanel(_ctrl), BorderLayout.PAGE_START);
-		mainPanel.add(new StatusBar(_ctrl),BorderLayout.PAGE_END);
+		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
+		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
 		
 		welcomePanel = new JPanel(new BorderLayout());
-		welcomePanel.add(new JLabel("¿Qué desea hacer?: "));
+		welcomePanel.add(new JLabel("¿Qué desea hacer?"));
 		createGameButton = new JButton("Crear nueva partida");
 		createGameButton.setActionCommand("crearNuevaPartida");
 		createGameButton.addActionListener(this);
@@ -49,14 +48,14 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(welcomePanel, BorderLayout.CENTER);
 		
 		boardPanel = new JPanel(new BorderLayout());
-		BoardGUI tablero = new BoardGUI(8, 8);
+		BoardGUI tablero = new BoardGUI(8, 8, game);
 		tablero.crearTablero(boardPanel);
 		mainPanel.add(boardPanel, BorderLayout.CENTER);
 		
 		
-		//boardPanel.add(new JLabel("Estadísticas: "), BorderLayout.SOUTH);
+		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
 		
-		
+		this.setPreferredSize(new Dimension(500, 500));
 		this.pack();
 		this.setVisible(true);
 	}
@@ -65,6 +64,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("crearNuevaPartida")) {
+			CreateGameDialog dialog = new CreateGameDialog(this);
+			dialog.open();
+			
 			mainPanel.remove(welcomePanel);
 			mainPanel.add(boardPanel);
 			
