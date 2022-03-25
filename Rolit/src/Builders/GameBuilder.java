@@ -16,7 +16,7 @@ public abstract class GameBuilder {
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
 	private static final String BOARD_MSG = "Choose a board shape. ";
 	private static final String BOARD_ERROR = "ERROR: Not found such shape. ";
-	private static Scanner input = new Scanner(System.in);
+	protected final static Scanner input = new Scanner(System.in);
 	
 	private static GameBuilder[] builders = {
 		new GameClassicBuilder(),
@@ -53,7 +53,7 @@ public abstract class GameBuilder {
 		} while (Shape.valueOfIgnoreCase(board_shape) == null);		
 		o.put("Board", new Board(Shape.valueOfIgnoreCase(board_shape)).report());
 		// TODO faltan preguntar a los método específicos de cada factoría
-		parse(type).whatINeed(nPlayers);
+		parse(type).whatINeed(nPlayers, o);
 		
 		return o;
 	}
