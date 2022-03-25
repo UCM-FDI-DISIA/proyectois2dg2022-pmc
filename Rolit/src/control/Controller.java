@@ -2,15 +2,15 @@ package control;
 
 import java.util.Scanner;
 
-import Rolit.GameGenerator;
+import Builders.GameBuilder;
 import commands.Command;
-import logic.Game;
+import logic.GameClassic;
 import replay.Replay;
 import view.GamePrinter;
 
 public class Controller {
 	private Scanner input;
-	private Game game;
+	private GameClassic game;
 	private GamePrinter printer;
 	private Replay replay;
 	private static final String PROMPT = "Command > ";
@@ -77,7 +77,7 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				replay.addState(s, new Game(game));
+				replay.addState(s, new GameClassic(game));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();
@@ -110,7 +110,7 @@ public class Controller {
 			int option = this.menu();
 			
 			if (NEW_GAME.equals(optionsArray[option - 1]))
-				game = GameGenerator.createGame();
+				game = GameBuilder.createGame();
 			
 			else if (LOAD_GAME.equals(optionsArray[option - 1]))
 			{

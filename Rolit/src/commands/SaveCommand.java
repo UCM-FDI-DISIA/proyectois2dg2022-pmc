@@ -1,7 +1,7 @@
 package commands;
 
 import control.SaveLoadManager;
-import logic.Game;
+import logic.GameClassic;
 
 public class SaveCommand extends Command {
 	
@@ -21,7 +21,7 @@ public class SaveCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(GameClassic game) {
 		if(filename == null) SaveLoadManager.saveGame(game);
 		else SaveLoadManager.saveGame(game, filename);
 		return false;

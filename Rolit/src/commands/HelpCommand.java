@@ -1,6 +1,6 @@
 package commands;
 
-import logic.Game;
+import logic.GameClassic;
 
 public class HelpCommand extends Command {
 	
@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(GameClassic game) {
 		StringBuilder buffer = new StringBuilder("Available commands:");
 		for(Command c : AVAILABLE_COMMANDS) {
 			buffer.append(String.format("%n%s", c.infoForHelp()));

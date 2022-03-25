@@ -1,6 +1,6 @@
 package commands;
 
-import logic.Game;
+import logic.GameClassic;
 
 public class PlaceCubeCommand extends Command {
 	private static final String NAME = "place_cube";
@@ -23,7 +23,7 @@ public class PlaceCubeCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(GameClassic game) {
 		if(!game.play(x, y)) {
 			System.out.println(INVALID_COOR_MSG);
 		}

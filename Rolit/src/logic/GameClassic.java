@@ -9,22 +9,16 @@ import org.json.JSONObject;
 
 import utils.StringUtils;
 
-public class Game implements Replayable{
+// FIXME MIRAR SI ES VIABLE EL GAME ABSTRACTO
+public class GameClassic implements Replayable{
 	private boolean finished;
 	private List<Player> players;
 	private Board board;
 	private int currentPlayerIndex;
 	private boolean exit;
 	private static final String AVAILABLE_COLORS_MSG = "Available colors:";
-
-	public Game(Board board) {
-		this.finished = false;
-		this.board = board;
-		this.players = new ArrayList<Player>();
-		this.exit = false;
-	}
 	
-	public Game(Game game) {
+	public GameClassic(GameClassic game) {
 		this.finished = game.finished;
 		this.players = game.players;
 		this.board = new Board(game.board);
@@ -32,8 +26,11 @@ public class Game implements Replayable{
 		this.exit = game.exit;
 	}
 	
-	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
-		this(board);
+	public GameClassic(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
+		this.finished = false;
+		this.board = board;
+		this.players = new ArrayList<Player>();
+		this.exit = false;
 		this.loadGame(list_cubes, list_players, currentPlayerColor);
 	}
 

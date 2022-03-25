@@ -3,7 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import logic.Game;
+import logic.GameClassic;
 import logic.Player;
 import utils.StringUtils;
 
@@ -15,9 +15,9 @@ public class GamePrinter {
 	private static final String SEPARATOR = ": ";
 	private static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
 	private static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
-	private Game game;
+	private GameClassic game;
 	
-	public GamePrinter(Game game) {
+	public GamePrinter(GameClassic game) {
 		this.game = game;
 	}
 	

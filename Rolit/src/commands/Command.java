@@ -2,7 +2,7 @@ package commands;
 
 import org.json.JSONObject;
 
-import logic.Game;
+import logic.GameClassic;
 import logic.Replayable;
 
 public abstract class Command implements Replayable {
@@ -50,7 +50,7 @@ public abstract class Command implements Replayable {
 		return command;
 	}
 	
-	public abstract boolean execute(Game game);
+	public abstract boolean execute(GameClassic game);
 
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) || this.name.equalsIgnoreCase(name);

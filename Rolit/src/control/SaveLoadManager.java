@@ -15,10 +15,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONTokener;
+
+import Builders.GameBuilder;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
-import logic.Game;
+import logic.GameClassic;
 import logic.Player;
 import logic.Shape;
 import logic.Reportable;
@@ -117,65 +119,22 @@ public class SaveLoadManager {
 
 	}
 
-	public static Game loadGame(String filename) {
-
+	public static GameClassic loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
-			return loadGame(gameJSONObject);
+			return GameBuilder.createGame(gameJSONObject);
 		} catch (IOException error_file) {
 			System.out.println(ERROR_LOAD);
 		}
 		return null;
 	}
 
-	private static Game loadGame(JSONObject gameJSONObject) {
-
-		List<Cube> list_cubes = new ArrayList<Cube>();
-		List<Player> list_players = new ArrayList<Player>();
-
-		Color turn = Color.valueOf(gameJSONObject.getString("turn"));
-
-		JSONArray playersJSONArray = gameJSONObject.getJSONArray("players");
-
-		for (int i = 0; i < playersJSONArray.length(); ++i) {
-
-			String auxPlayerName = playersJSONArray.getJSONObject(i).getString("name");
-			String auxPlayerColor = playersJSONArray.getJSONObject(i).getString("color");
-
-			list_players.add(new Player(Color.valueOfIgnoreCase(auxPlayerColor.charAt(0)), auxPlayerName));
-		}
-
-		JSONObject boardJSONObject = gameJSONObject.getJSONObject("board");
-		String boardShape = boardJSONObject.getString("shape");
-		Board board = new Board(Shape.valueOfIgnoreCase(boardShape)); // FIXME asumo que el constructor de Board se ve
-																		// as�
-
-		JSONArray cubesJSONArray = boardJSONObject.getJSONArray("cubes");
-
-		for (int i = 0; i < cubesJSONArray.length(); ++i) {
-
-			String auxCubeColor = cubesJSONArray.getJSONObject(i).getString("color");
-
-			// TODO Comprobar si as� se pueden parsear los arrays de enteros
-			List<Integer> posList = new ArrayList<>();
-			JSONArray auxCubePos = cubesJSONArray.getJSONObject(i).getJSONArray("pos");
-			for (Object s : auxCubePos) {
-				posList.add((Integer) s);
-			}
-
-			list_cubes.add(new Cube(posList.get(0), posList.get(1),
-					Player.getPlayer(Color.valueOfIgnoreCase(auxCubeColor.charAt(0)))));
-		}
-
-		return new Game(board, list_cubes, list_players, turn);
-
-	}
-
-	public static Game loadGame() {
+	public static GameClassic loadGame() {
 		return loadGame(DEFAULT_FILENAME);
 	}
 
-	public static Game loadGame(int option) throws Exception {
+	// FIXME esto es chapuza
+	public static GameClassic loadGame(int option) throws Exception {
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -216,10 +175,9 @@ public class SaveLoadManager {
 			for (int i = 0; i < states.length(); i++) {
 				JSONObject state = states.getJSONObject(i);
 				String commandName = state.getString("command");
-				Game game = loadGame(state.getJSONObject("game"));
+				GameClassic game = GameBuilder.createGame(state.getJSONObject("game"));
 				replay.addState(commandName, game);
 			}
-
 		} catch (IOException | JSONException error_file) {
 			System.out.println(ERROR_LOAD + ": " + error_file);
 		}

@@ -1,6 +1,6 @@
 package commands;
 
-import logic.Game;
+import logic.GameClassic;
 
 public class ExitCommand extends Command {
 	private static final String NAME = "exit";
@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(GameClassic game) {
 		game.setExit();
 		 System.out.println("See ya!");
 		return false;
