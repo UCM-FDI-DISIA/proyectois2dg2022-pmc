@@ -9,9 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
+import commands.Command;
 import control.Controller;
+import logic.Board;
+import logic.Game;
 
-public class ControlPanel extends JPanel implements ActionListener {
+public class ControlPanel extends JPanel implements ActionListener, RolitObserver {
 
 	private Controller ctrl;
 	JFileChooser fc;
@@ -54,6 +57,48 @@ public class ControlPanel extends JPanel implements ActionListener {
 				//...
 			}
 		}
+		
+	}
+
+	@Override
+	public void onGameCreated(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCommandIntroduced(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayLeftButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegister(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String err) {
+		// TODO Auto-generated method stub
 		
 	}
 

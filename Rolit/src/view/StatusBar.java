@@ -3,9 +3,12 @@ package view;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import commands.Command;
 import control.Controller;
+import logic.Board;
+import logic.Game;
 
-public class StatusBar extends JPanel {
+public class StatusBar extends JPanel implements RolitObserver {
 
 	private Controller ctrl;
 	
@@ -14,5 +17,48 @@ public class StatusBar extends JPanel {
 		JLabel statusLabel = new JLabel("Status: ");
 		this.add(statusLabel);
 	}
+
+	@Override
+	public void onGameCreated(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCommandIntroduced(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayLeftButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegister(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

@@ -6,11 +6,17 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+<<<<<<< HEAD
+import control.Controller;
+
+public class BoardGUI {
+=======
 import commands.Command;
 import logic.Board;
 import logic.Game;
 
 public class BoardGUI implements RolitObserver {
+>>>>>>> 308413a (Avances MainPanel)
 
 	private int nFilas;
 	private int nColumnas;

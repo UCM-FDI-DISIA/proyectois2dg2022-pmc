@@ -13,9 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 
+import commands.Command;
+import logic.Board;
+import logic.Game;
+
 //Clase joseada de https://www.javacodex.com/More-Examples/2/14
 
-class RoundButton extends JButton {
+class RoundButton extends JButton implements RolitObserver {
 
 	
 	public RoundButton(String label) {
@@ -83,4 +87,47 @@ class RoundButton extends JButton {
 	  }
 	  
 	  public RoundButton() {this("");}
+
+	@Override
+	public void onGameCreated(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCommandIntroduced(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayLeftButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegister(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
