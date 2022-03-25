@@ -15,6 +15,7 @@ public class Rolit {
 		
 		controller.run();
 		
+		
 	}
 
 	private static void version() {

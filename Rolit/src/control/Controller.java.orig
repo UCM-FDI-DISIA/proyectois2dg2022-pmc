@@ -2,10 +2,13 @@ package control;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import Builders.GameBuilder;
+=======
 import javax.swing.SwingUtilities;
 
 import Rolit.GameGenerator;
+>>>>>>> 2a8dd3e (Interfaz gráfica primitiva)
 import commands.Command;
 import logic.Game;
 import replay.Replay;
@@ -150,9 +153,12 @@ public class Controller {
 		
 		else if (CONSOLE_MODE.equals(modes[selectedMode-1])){
 			
+<<<<<<< HEAD
 			if (NEW_GAME.equals(optionsArray[option - 1]))
 				game = GameBuilder.createGame();
+=======
 			boolean repeatMenu;
+>>>>>>> 2a8dd3e (Interfaz gráfica primitiva)
 			
 			do {
 				
