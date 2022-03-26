@@ -14,10 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import Rolit.GameGenerator;
 import commands.Command;
 import control.Controller;
 import logic.Board;
 import logic.Game;
+import logic.Shape;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 
@@ -66,7 +68,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("crearNuevaPartida")) {
 			CreateGameDialog dialog = new CreateGameDialog(game, (JFrame) this.getParent());
-			dialog.open();
+			int status = dialog.open();
+			
+			if (status == 1) { //e.d. se ha presionado OK
+
+				
+			}
 			
 		}
 		

@@ -20,6 +20,11 @@ public class CreateGameDialog extends JDialog {
 	
 	private Game game;
 	private Frame parent;
+	private int status;
+	
+	JComboBox<Shape> shapesCombo;
+	JComboBox<String> gameModeCombo;
+	JSpinner playersSpinner;
 	
 	public CreateGameDialog(Game game, Frame parent) {
 		super(parent, true);
@@ -40,12 +45,12 @@ public class CreateGameDialog extends JDialog {
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		String[] gameModes = {"Classic"};
-		JComboBox gameModeCombo = new JComboBox(gameModes);
+		gameModeCombo = new JComboBox<String>(gameModes);
 		
 		Shape[] shapes = Shape.values();
-		JComboBox shapesCombo = new JComboBox(shapes);
+		shapesCombo = new JComboBox<Shape>(shapes);
 		
-		JSpinner playersSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+		playersSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
 		
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -56,6 +61,7 @@ public class CreateGameDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				status = 0;
 				CreateGameDialog.this.setVisible(false);
 			}
 			
@@ -67,6 +73,8 @@ public class CreateGameDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				status = 1;
+				CreateGameDialog.this.setVisible(false);
 				
 			}
 			
@@ -89,10 +97,23 @@ public class CreateGameDialog extends JDialog {
 		//Hay que pedir los nombres y colores para crearlos
 	}
 	
-	public void open() {
+	public int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
+		return status;
+	}
+	
+	public String getGameMode() {
+		return (String) gameModeCombo.getSelectedItem();
+		
+	}
+	
+	public Shape getBoardShape() {
+		return (Shape) shapesCombo.getSelectedItem();
 	}
 
+	public int getNumPlayers() {
+		return (int) playersSpinner.getValue();
+	}
 	
 }

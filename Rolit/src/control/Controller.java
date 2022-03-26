@@ -140,8 +140,8 @@ public class Controller {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					GameGenerator.createDefaultGame();
-					MainWindow mainWindow = new MainWindow(new Game(new Board(Shape.SS)));
+					//;
+					MainWindow mainWindow = new MainWindow(GameGenerator.createDefaultGame());
 				}
 			});
 		}
