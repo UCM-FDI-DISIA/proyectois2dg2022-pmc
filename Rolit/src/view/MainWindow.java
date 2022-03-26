@@ -26,7 +26,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel welcomePanel;
 	JPanel mainPanel;
 	JPanel boardPanel;
-	
+
 	public MainWindow(Game game) {
 		super("Rolit");
 		this.game = game;
@@ -39,23 +39,24 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
 		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
 		
-		welcomePanel = new JPanel(new BorderLayout());
+		welcomePanel = new JPanel();
 		welcomePanel.add(new JLabel("¿Qué desea hacer?"));
 		createGameButton = new JButton("Crear nueva partida");
 		createGameButton.setActionCommand("crearNuevaPartida");
 		createGameButton.addActionListener(this);
 		welcomePanel.add(createGameButton);
-		mainPanel.add(welcomePanel, BorderLayout.CENTER);
 		
+		mainPanel.add(welcomePanel, BorderLayout.CENTER);
+		/*
 		boardPanel = new JPanel(new BorderLayout());
 		BoardGUI tablero = new BoardGUI(8, 8, game);
 		tablero.crearTablero(boardPanel);
 		mainPanel.add(boardPanel, BorderLayout.CENTER);
-		
+		*/
 		
 		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
 		
-		this.setPreferredSize(new Dimension(500, 500));
+		
 		this.pack();
 		this.setVisible(true);
 	}
@@ -64,11 +65,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("crearNuevaPartida")) {
-			CreateGameDialog dialog = new CreateGameDialog(this);
+			CreateGameDialog dialog = new CreateGameDialog(game, (JFrame) this.getParent());
 			dialog.open();
-			
-			mainPanel.remove(welcomePanel);
-			mainPanel.add(boardPanel);
 			
 		}
 		

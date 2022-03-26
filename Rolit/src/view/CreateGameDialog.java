@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -17,13 +19,20 @@ import logic.Shape;
 public class CreateGameDialog extends JDialog {
 	
 	private Game game;
+	private Frame parent;
 	
-	public CreateGameDialog(Frame parent) {
+	public CreateGameDialog(Game game, Frame parent) {
 		super(parent, true);
+		this.parent = parent;
+		this.game = game;
 		initGUI();
 	}
 	
 	public void initGUI () {
+		
+		this.setLocation(50, 50);
+		this.setSize(700, 200);
+		
 		setTitle("Create Game");
 		setVisible(false);
 		
@@ -36,7 +45,7 @@ public class CreateGameDialog extends JDialog {
 		Shape[] shapes = Shape.values();
 		JComboBox shapesCombo = new JComboBox(shapes);
 		
-		JSpinner playersSpinner = new JSpinner(new SpinnerNumberModel(0, 1, 10, 1));
+		JSpinner playersSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
 		
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -51,7 +60,7 @@ public class CreateGameDialog extends JDialog {
 			}
 			
 		});
-		buttonsPanel.add(cancelButton);
+		
 		
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
@@ -62,7 +71,19 @@ public class CreateGameDialog extends JDialog {
 			}
 			
 		});
+		
+		buttonsPanel.add(gameModeCombo);
+		buttonsPanel.add(shapesCombo);
+		buttonsPanel.add(playersSpinner);
 		buttonsPanel.add(okButton);
+		buttonsPanel.add(cancelButton);
+		
+		mainPanel.add(buttonsPanel);
+		
+		setContentPane(mainPanel);
+		setMinimumSize(new Dimension(100, 100));
+		
+		this.pack();
 		
 		//TODO Antes de pasar a crear el Game hay que crear los players
 		//Hay que pedir los nombres y colores para crearlos

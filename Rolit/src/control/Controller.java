@@ -7,7 +7,9 @@ import javax.swing.SwingUtilities;
 
 import Rolit.GameGenerator;
 import commands.Command;
+import logic.Board;
 import logic.Game;
+import logic.Shape;
 import replay.Replay;
 import view.GamePrinter;
 import view.MainWindow;
@@ -138,7 +140,8 @@ public class Controller {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					MainWindow mainWindow = new MainWindow(game);
+					GameGenerator.createDefaultGame();
+					MainWindow mainWindow = new MainWindow(new Game(new Board(Shape.SS)));
 				}
 			});
 		}
