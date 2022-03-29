@@ -3,21 +3,20 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import logic.GameClassic;
+
+import logic.Game;
 import logic.Player;
 import utils.StringUtils;
 
 public class GamePrinter {
-	
-	private static final String SPACE = " ";
 	private static final String RANKING = "RANKING DEL ROLIT";
 	private static final String MSG_POS = "En la posicion numero ";
 	private static final String SEPARATOR = ": ";
 	private static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
 	private static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
-	private GameClassic game;
+	private Game game;
 	
-	public GamePrinter(GameClassic game) {
+	public GamePrinter(Game game) {
 		this.game = game;
 	}
 	

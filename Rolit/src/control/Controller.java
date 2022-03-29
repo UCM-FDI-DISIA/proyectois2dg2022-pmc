@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import Builders.GameBuilder;
 import commands.Command;
-import logic.GameClassic;
+import logic.Game;
 import replay.Replay;
 import view.GamePrinter;
 
 public class Controller {
 	private Scanner input;
-	private GameClassic game;
+	private Game game;
 	private GamePrinter printer;
 	private Replay replay;
 	private static final String PROMPT = "Command > ";
@@ -36,10 +36,6 @@ public class Controller {
 
 	private void printGame() {
 		System.out.println(this.printer);
-	}
-	
-	private void printTurn() {
-		System.out.println("Turn: " + game.getCurrentPlayer());
 	}
 	
 	private int menu() {
@@ -77,7 +73,8 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				replay.addState(s, new GameClassic(game));
+				// TODO no podemos instanciar la clase abstracta, habrá que hacer un método estático que devuelva una copia
+				replay.addState(s, game.copyMe());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();

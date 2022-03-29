@@ -7,16 +7,13 @@ import utils.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-public class Board implements Reportable{
-	
-	public final static int MAX_SIZE = 15;
-	
+public class Board implements Reportable{	
+	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
 	private int numCubes;
-
 	private static final char SPACE = ' ';
 	
 	public Board(Shape shape) {
@@ -29,7 +26,6 @@ public class Board implements Reportable{
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
 		}
-
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				List<Cube> column = matrix.get(i);
@@ -38,9 +34,8 @@ public class Board implements Reportable{
 		}
 	}
 	
-	public Board(Board board) {
-		
-		 List<List<Cube>> m = new ArrayList<List<Cube>>();
+	public Board(Board board) {		
+		List<List<Cube>> m = new ArrayList<List<Cube>>();
 		for (int i = 0; i < board.matrix.size(); i++) {
 			List<Cube> lc = new ArrayList<Cube> (board.matrix.get(i));
 			m.add(lc);
@@ -53,11 +48,7 @@ public class Board implements Reportable{
 		this.numCubes = board.numCubes;
 	}
 
-	public int getSize() {
-		return size;
-	}
-
-	public Cube getCubeInPos(int x, int y) {
+	private Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
 
@@ -67,10 +58,6 @@ public class Board implements Reportable{
 		column.add(c.getY(), c);
 		c.addPlayerScore();
 		this.numCubes++;
-	}
-
-	public int getNumCubes() {
-		return numCubes;
 	}
 
 	public boolean isBoardFull() {
@@ -140,7 +127,7 @@ public class Board implements Reportable{
 		
 	}
 	
-	public String positionToString(int x, int y) {
+	private String positionToString(int x, int y) {
 		Cube cube = getCubeInPos(x, y);
 		if (cube == null)
 			return " ";
@@ -201,7 +188,6 @@ public class Board implements Reportable{
 		
 		jo.put("shape", shapeName);
 		jo.put("cubes", jo1);
-		// TODO Auto-generated method stub
 		return jo;
 	}
 

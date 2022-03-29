@@ -2,38 +2,30 @@ package commands;
 
 import org.json.JSONObject;
 
-import logic.GameClassic;
+import logic.Game;
 import logic.Replayable;
 
-public abstract class Command implements Replayable {
-	
+public abstract class Command implements Replayable {	
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command. Type \"help\" to see the available commands.";
-
-	protected static final String INCORRECT_NUMBER_OF_ARGS_MSG = "Incorrect number of arguments";
-	
-	protected static final String PARSE_LONG_MSG = "the seed is not a proper long number";
-	
+	protected static final String INCORRECT_NUMBER_OF_ARGS_MSG = "Incorrect number of arguments";	
+	protected static final String PARSE_LONG_MSG = "the seed is not a proper long number";	
 	private final String name;
-
 	private final String shortcut;
-
 	private final String details;
-
 	private final String help;
-
-	public Command(String name, String details, String shortcut, String help) {
-		this.name = name;
-		this.details = details;
-		this.shortcut = shortcut;
-		this.help = help;
-	}
-	
 	protected static final Command[] AVAILABLE_COMMANDS = {
 			new ExitCommand(),
 			new HelpCommand(),
 			new PlaceCubeCommand(),
 			new SaveCommand()
 	};
+
+	public Command(String name, String details, String shortcut, String help) {
+		this.name = name;
+		this.details = details;
+		this.shortcut = shortcut;
+		this.help = help;
+	}	
 	
 	public static Command getCommand(String[] commandWords) { //Habria que hacer un bucle para ver con qu� comando coincide
 		Command command = null;
@@ -50,7 +42,7 @@ public abstract class Command implements Replayable {
 		return command;
 	}
 	
-	public abstract boolean execute(GameClassic game);
+	public abstract boolean execute(Game game);
 
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) || this.name.equalsIgnoreCase(name);

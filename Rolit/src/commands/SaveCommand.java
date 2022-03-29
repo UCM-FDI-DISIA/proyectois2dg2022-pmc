@@ -1,18 +1,13 @@
 package commands;
 
 import control.SaveLoadManager;
-import logic.GameClassic;
+import logic.Game;
 
-public class SaveCommand extends Command {
-	
+public class SaveCommand extends Command {	
 	private static final String NAME = "save";
-
 	private static final String DETAILS = "[s]ave";
-
 	private static final String SHORTCUT = "s";
-
-	private static final String HELP = "save the game";
-	
+	private static final String HELP = "save the game";	
 	private String filename;
 	
 	public SaveCommand() {
@@ -21,7 +16,7 @@ public class SaveCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(GameClassic game) {
+	public boolean execute(Game game) {
 		if(filename == null) SaveLoadManager.saveGame(game);
 		else SaveLoadManager.saveGame(game, filename);
 		return false;

@@ -8,17 +8,18 @@ public class Player implements Comparable<Player>, Reportable {
 	private int score;
 	private String name;
 
+	// constructor habitual de un player por defecto
 	public Player(Color c, String name) {
 		this.color = c;
 		this.score = 0;
 		this.name = name;
-		playerList[color.ordinal()] = this;
-	}
+		Player.playerList[color.ordinal()] = this;
+	}	
 	
 	public Color getColor() {
 		return this.color;
 	}
-
+	
 	public int getScore() {
 		return this.score;
 	}
@@ -29,7 +30,7 @@ public class Player implements Comparable<Player>, Reportable {
 
 	@Override
 	public int compareTo(Player p) {
-		return -(score - p.getScore());	//Lleva un - delante para que no sea orden natural, sino mayor a menor
+		return -(this.score - p.score);	//Lleva un - delante para que no sea orden natural, sino mayor a menor
 	}
 	
 	public String getName() {
@@ -46,7 +47,6 @@ public class Player implements Comparable<Player>, Reportable {
 		jo1.put("name", name);
 		jo1.put("color", color.toString());
 		
-		// TODO Auto-generated method stub
 		return jo1;
 	}
 

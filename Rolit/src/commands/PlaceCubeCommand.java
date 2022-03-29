@@ -1,20 +1,14 @@
 package commands;
 
-import logic.GameClassic;
+import logic.Game;
 
 public class PlaceCubeCommand extends Command {
 	private static final String NAME = "place_cube";
-
 	private static final String DETAILS = "[p]lace_cube <x> <y>";
-
 	private static final String SHORTCUT = "p";
-
-	private static final String HELP = "place a cube in position x, y";
-	
-	private static final String COOR_IS_NUMBER_MSNG = "the coordenates must be integers";
-	
+	private static final String HELP = "place a cube in position x, y";	
+	private static final String COOR_IS_NUMBER_MSNG = "the coordenates must be integers";	
 	private static final String INVALID_COOR_MSG = "Invalid position";
-
 	private int x;
 	private int y;
 	
@@ -23,7 +17,7 @@ public class PlaceCubeCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(GameClassic game) {
+	public boolean execute(Game game) {
 		if(!game.play(x, y)) {
 			System.out.println(INVALID_COOR_MSG);
 		}
