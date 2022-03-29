@@ -24,8 +24,10 @@ import logic.Shape;
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 
 	private Game game;
-	private JButton createGameButton;
 	private JPanel welcomePanel;
+	private JButton createGameButton;
+	private JButton loadGameButton;
+	private JButton loadReplayButton;
 	JPanel mainPanel;
 	JPanel boardPanel;
 
@@ -36,18 +38,36 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 	
 	private void initGUI() {
-		mainPanel = new JPanel(new BorderLayout());
-		this.setContentPane(mainPanel);
-		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
-		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
 		
+		//Panel de bienvenida
 		welcomePanel = new JPanel();
-		welcomePanel.add(new JLabel("¿Qué desea hacer?"));
-		createGameButton = new JButton("Crear nueva partida");
-		createGameButton.setActionCommand("crearNuevaPartida");
+		this.setContentPane(welcomePanel);
+		//Botones
+		createGameButton = new JButton("Create new game");
+		createGameButton.setActionCommand("Create new game");
 		createGameButton.addActionListener(this);
+		loadGameButton = new JButton("Load game");
+		loadGameButton.setActionCommand("Load game");
+		loadGameButton.addActionListener(this);
+		loadReplayButton = new JButton("Load replay");
+		loadReplayButton.setActionCommand("Load replay");
+		loadReplayButton.addActionListener(this);
+
+		welcomePanel.add(new JLabel("Choose an option"));
 		welcomePanel.add(createGameButton);
+		welcomePanel.add(loadGameButton);
+		welcomePanel.add(loadReplayButton);
 		
+		
+		
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.pack();
+		this.setVisible(true);
+	}
+
+	public void initGame() {
+		this.removeAll();
+		this.setContentPane(mainPanel); //FIXME No sé yo si así es como se hacen las cosas
 		mainPanel.add(welcomePanel, BorderLayout.CENTER);
 		/*
 		boardPanel = new JPanel(new BorderLayout());
@@ -57,24 +77,26 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		*/
 		
 		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
+		mainPanel = new JPanel(new BorderLayout());
+		this.setContentPane(mainPanel);
+		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
+		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
 		
-		
-		this.pack();
-		this.setVisible(true);
 	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("crearNuevaPartida")) {
-			CreateGameDialog dialog = new CreateGameDialog(game, (JFrame) this.getParent());
+		if (e.getActionCommand().equals("Create new game")) {
+			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this);
 			int status = dialog.open();
 			
 			if (status == 1) { //e.d. se ha presionado OK
-
-				
+				game = dialog.getNewGame();
+				initGame();
 			}
-			
+			else {
+				//TODO Mostrar algún tipo de error
+			}
 		}
 		
 	}

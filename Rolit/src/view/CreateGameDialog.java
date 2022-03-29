@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,7 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import logic.Board;
+import logic.Color;
+import logic.Cube;
 import logic.Game;
+import logic.Player;
 import logic.Shape;
 
 public class CreateGameDialog extends JDialog {
@@ -26,10 +32,9 @@ public class CreateGameDialog extends JDialog {
 	JComboBox<String> gameModeCombo;
 	JSpinner playersSpinner;
 	
-	public CreateGameDialog(Game game, Frame parent) {
+	public CreateGameDialog(Frame parent) {
 		super(parent, true);
 		this.parent = parent;
-		this.game = game;
 		initGUI();
 	}
 	
@@ -73,9 +78,21 @@ public class CreateGameDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				status = 1;
-				CreateGameDialog.this.setVisible(false);
-				
+				ChoosePlayersDialog dialog = new ChoosePlayersDialog(parent, (int)playersSpinner.getValue());
+				int status = dialog.open();
+				if(status == 1) {
+					List<Player> players = dialog.getPlayersList();
+					Shape shape = (Shape) shapesCombo.getSelectedItem();
+					Board board = new Board(shape);
+					List<Cube> cubes = new ArrayList<>();	//Vacía, para pasársela al constructor de game
+					Color currentColor = players.get(0).getColor();
+					game = new Game(board, cubes, players, currentColor);
+					status = 1;
+					CreateGameDialog.this.setVisible(false);
+				}
+				else {
+					//TODO Mostrar algún mensaje de error
+				}
 			}
 			
 		});
@@ -116,4 +133,7 @@ public class CreateGameDialog extends JDialog {
 		return (int) playersSpinner.getValue();
 	}
 	
+	public Game getNewGame() {
+		return this.game;
+	}
 }
