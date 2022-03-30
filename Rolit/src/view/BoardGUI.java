@@ -17,7 +17,7 @@ public class BoardGUI implements RolitObserver {
 	private CeldaGUI[][] celdas;
 	private Game game;
 	
-	public BoardGUI(Game game) {;
+	public BoardGUI(Game game) {
 		this.game = game;
 		
 		List<List<Boolean>> shapeMatrixList = this.game.getBoard().getShapeMatrix();

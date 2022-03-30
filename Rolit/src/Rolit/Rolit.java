@@ -4,7 +4,7 @@ import control.Controller;
 
 public class Rolit {
 	private static final String TITLE = "		ROLIT";
-	private static final String VERSION = "Sprint Week 3";
+	private static final String VERSION = "Sprint Week 4";
 	
 	public static void main(String[] args) {
 		
