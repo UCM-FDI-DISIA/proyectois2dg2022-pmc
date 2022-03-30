@@ -30,6 +30,7 @@ public class GameClassic extends Game {
 		// indicada
 		if (!this.board.tryToAddCube(x, y)) {
 			System.out.println("Not a valid position");
+			this.onTurnPlayed();
 			return false;
 		}
 		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
@@ -43,7 +44,10 @@ public class GameClassic extends Game {
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-			return true;
+		
+		this.onTurnPlayed();
+		
+		return true;
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class BoardGUI implements RolitObserver {
 	public void update(Game game, Board board) {
 		for(int i = 0; i < nFilas; i++) {
 			for(int j = 0; j < nColumnas; j++) {
-				celdas[i][j].update(game, board);
+				celdas[i][j].update();
 			}
 		}
 	}
@@ -67,7 +67,7 @@ public class BoardGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(Game game, Board board) {
+	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
 	}

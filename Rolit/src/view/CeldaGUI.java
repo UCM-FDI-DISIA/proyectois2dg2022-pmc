@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +23,7 @@ public class CeldaGUI implements RolitObserver {
 	private JButton button;
 	private Game game;
 	private String iconPath;
+	private final int sideLength = 48;
 
 	public CeldaGUI(int y, int x, boolean validButton, Game g) {
 		this.x = x;
@@ -44,7 +46,9 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setEnabled(validButton);
 		this.iconPath = "resources/icons/emptyCell.png";
 		this.button.setIcon(new ImageIcon(this.iconPath));
-		this.button.setMaximumSize(new Dimension(24, 24));
+		this.button.setMinimumSize(new Dimension(sideLength, sideLength));
+		this.button.setMaximumSize(new Dimension(sideLength, sideLength));
+		this.button.setPreferredSize(new Dimension(sideLength, sideLength));
 		this.button.setVisible(true);
 		this.game.addObserver(this);
 	}
@@ -61,26 +65,33 @@ public class CeldaGUI implements RolitObserver {
 		return button;
 	}
 
-	public void update(Game game, Board board) {
-		Cube cube = board.getCubeInPos(this.x, this.y);
+	public void update() {
+		Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
 		if(cube != null) {
 			logic.Color newColor = cube.getColor();
 			this.iconPath = newColor.getPath();
-			this.button.setIcon(new ImageIcon(this.iconPath));
 			this.filled = true;
-			this.button.setEnabled(false);
+			
+			ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
+			Image originalImg = originalImgIcon.getImage();
+			Image resizedImg = originalImg.getScaledInstance(sideLength, sideLength,  java.awt.Image.SCALE_SMOOTH);
+			ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+			
+			this.button.setIcon(resizedImgIcon);
 		}
 		else this.filled = false; //Por si pudiera desocuparse una casilla en una replay, pero no estoy seguro de esto, porque en las replays no se debe poder interactuar con el tablero
+		
+		this.button.repaint();
 	}
 
 	@Override
 	public void onGameCreated(Game game, Board board) {
-		update(game, board);
+		update();
 	}
 
 	@Override
-	public void onTurnPlayed(Game game, Board board) {
-		update(game, board);
+	public void onTurnPlayed() {
+		update();
 	}
 
 	@Override
@@ -91,12 +102,12 @@ public class CeldaGUI implements RolitObserver {
 
 	@Override
 	public void onReplayLeftButton(Game game, Board board) {
-		update(game, board);
+		update();
 	}
 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
-		update(game, board);
+		update();
 	}
 
 	@Override

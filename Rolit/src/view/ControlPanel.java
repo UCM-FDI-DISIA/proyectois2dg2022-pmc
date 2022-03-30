@@ -87,7 +87,7 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 	}
 
 	@Override
-	public void onTurnPlayed(Game game, Board board) {
+	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
 	}

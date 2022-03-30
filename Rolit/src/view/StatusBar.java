@@ -37,7 +37,7 @@ public class StatusBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(Game game, Board board) {
+	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
 	}

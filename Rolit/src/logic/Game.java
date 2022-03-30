@@ -117,7 +117,7 @@ public abstract class Game implements Replayable {
 
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
-			o.onTurnPlayed(this, this.board);
+			o.onTurnPlayed();
 		}
 	}
 
