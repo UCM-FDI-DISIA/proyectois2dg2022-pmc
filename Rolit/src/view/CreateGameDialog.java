@@ -28,9 +28,9 @@ public class CreateGameDialog extends JDialog {
 	private Frame parent;
 	private int status;
 	
-	JComboBox<Shape> shapesCombo;
-	JComboBox<String> gameModeCombo;
-	JSpinner playersSpinner;
+	private JComboBox<Shape> shapesCombo;
+	private JComboBox<String> gameModeCombo;
+	private JSpinner playersSpinner;
 	
 	public CreateGameDialog(Frame parent) {
 		super(parent, true);
@@ -71,8 +71,6 @@ public class CreateGameDialog extends JDialog {
 			}
 			
 		});
-		
-		
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
 
@@ -81,6 +79,7 @@ public class CreateGameDialog extends JDialog {
 				ChoosePlayersDialog dialog = new ChoosePlayersDialog(parent, (int)playersSpinner.getValue());
 				int status = dialog.open();
 				if(status == 1) {
+					//TODO Aquí va a haber que diferenciar el modo de juego
 					List<Player> players = dialog.getPlayersList();
 					Shape shape = (Shape) shapesCombo.getSelectedItem();
 					Board board = new Board(shape);
@@ -120,9 +119,10 @@ public class CreateGameDialog extends JDialog {
 		return status;
 	}
 	
+	//TODO Revisar cuáles de los métodos siguientes se usan
+	
 	public String getGameMode() {
 		return (String) gameModeCombo.getSelectedItem();
-		
 	}
 	
 	public Shape getBoardShape() {
