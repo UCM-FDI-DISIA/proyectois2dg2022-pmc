@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import Rolit.GameGenerator;
 import commands.Command;
 import control.Controller;
 import logic.Board;
@@ -59,7 +58,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		
 		
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
 	}
@@ -99,32 +98,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 		
 	}
-	@Override
-	public void onGameCreated(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTurnPlayed(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayLeftButton(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayRightButton(Game game, Board board, Command command) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -137,6 +113,30 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	@Override
 	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameCreated(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayLeftButton(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
 	}

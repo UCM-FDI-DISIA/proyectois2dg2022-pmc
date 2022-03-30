@@ -35,7 +35,7 @@ public class GameTeamsBuilder extends GameBuilder {
 
 	@Override
 	protected Game GenerateGame(JSONObject o) {		
-		Color turn = Color.valueOf(o.getString("turn"));
+		Color turn = Color.valueOfIgnoreCase(o.getString("turn").charAt(0));
 		
 		List<Player> list_players = new ArrayList<Player>();
 		JSONArray playersJSONArray = o.getJSONArray("players");

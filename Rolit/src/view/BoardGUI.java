@@ -42,10 +42,10 @@ public class BoardGUI implements RolitObserver {
 		panel.revalidate();
 	}
 
-	public void update(Game game, Board board, Command command) {
+	public void update(Game game, Board board) {
 		for(int i = 0; i < nFilas; i++) {
 			for(int j = 0; j < nColumnas; j++) {
-				celdas[i][j].update(game, board, command);
+				celdas[i][j].update(game, board);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class BoardGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board, Command command) {
+	public void onGameCreated(Game game, Board board) {
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
@@ -70,7 +70,7 @@ public class BoardGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(Game game, Board board, Command command) {
+	public void onTurnPlayed(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -82,13 +82,13 @@ public class BoardGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board, Command command) {
+	public void onReplayLeftButton(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onReplayRightButton(Game game, Board board, Command command) {
+	public void onReplayRightButton(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -98,4 +98,6 @@ public class BoardGUI implements RolitObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

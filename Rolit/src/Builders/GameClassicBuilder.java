@@ -16,7 +16,7 @@ import logic.Player;
 import logic.Shape;
 
 public class GameClassicBuilder extends GameBuilder {
-	protected static final String TYPE = "GameClassic";
+	public static final String TYPE = "GameClassic";
 	private static final String NAME_PLAYERS = "Name the players: ";
 	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 
@@ -35,7 +35,7 @@ public class GameClassicBuilder extends GameBuilder {
 	
 	@Override
 	protected Game GenerateGame(JSONObject o) {
-		Color turn = Color.valueOf(o.getString("turn"));
+		Color turn = Color.valueOfIgnoreCase(o.getString("turn").charAt(0));
 		
 		List<Player> list_players = new ArrayList<Player>();
 		JSONArray playersJSONArray = o.getJSONArray("players");

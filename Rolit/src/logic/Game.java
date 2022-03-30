@@ -99,13 +99,13 @@ public abstract class Game implements Replayable {
 
 	public void onGameCreated() {
 		for(RolitObserver o : observers) {
-			o.onGameCreated(this, this.board, null);
+			o.onGameCreated(this, this.board);
 		}
 	}
 
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
-			o.onTurnPlayed(this, this.board, null);
+			o.onTurnPlayed(this, this.board);
 		}
 	}
 
@@ -117,13 +117,13 @@ public abstract class Game implements Replayable {
 
 	public void onReplayLeftButton() {
 		for(RolitObserver o : observers) {
-			o.onReplayLeftButton(this, this.board, null);
+			o.onReplayLeftButton(this, this.board);
 		}
 	}
 
 	public void onReplayRightButton() {
 		for(RolitObserver o : observers) {
-			o.onReplayRightButton(this, this.board, null);
+			o.onReplayRightButton(this, this.board);
 		}
 	}
 
@@ -137,6 +137,4 @@ public abstract class Game implements Replayable {
 		// TODO Auto-generated method stub
 		
 	}
-}
-
 }

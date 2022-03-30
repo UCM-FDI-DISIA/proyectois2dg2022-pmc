@@ -60,17 +60,6 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 		
 	}
 
-	@Override
-	public void onGameCreated(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTurnPlayed(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
@@ -78,17 +67,6 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 		
 	}
 
-	@Override
-	public void onReplayLeftButton(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayRightButton(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
@@ -98,6 +76,30 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 
 	@Override
 	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameCreated(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayLeftButton(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
 	}

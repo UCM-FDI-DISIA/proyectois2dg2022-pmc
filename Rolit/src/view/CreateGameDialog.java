@@ -15,6 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Builders.GameBuilder;
+import Builders.GameClassicBuilder;
+import Builders.GameTeamsBuilder;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
@@ -31,6 +37,8 @@ public class CreateGameDialog extends JDialog {
 	private JComboBox<Shape> shapesCombo;
 	private JComboBox<String> gameModeCombo;
 	private JSpinner playersSpinner;
+	
+	private ChoosePlayersDialog choosePlayersDialog;
 	
 	public CreateGameDialog(Frame parent) {
 		super(parent, true);
@@ -49,7 +57,7 @@ public class CreateGameDialog extends JDialog {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		String[] gameModes = {"Classic"};
+		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
 		gameModeCombo = new JComboBox<String>(gameModes);
 		
 		Shape[] shapes = Shape.values();
@@ -76,16 +84,17 @@ public class CreateGameDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChoosePlayersDialog dialog = new ChoosePlayersDialog(parent, (int)playersSpinner.getValue());
-				int status = dialog.open();
+				choosePlayersDialog = new ChoosePlayersDialog(parent, (int)playersSpinner.getValue());
+				int status = choosePlayersDialog.open();
 				if(status == 1) {
 					//TODO Aquí va a haber que diferenciar el modo de juego
-					List<Player> players = dialog.getPlayersList();
+					List<Player> players = choosePlayersDialog.getPlayersList();
 					Shape shape = (Shape) shapesCombo.getSelectedItem();
 					Board board = new Board(shape);
 					List<Cube> cubes = new ArrayList<>();	//Vacía, para pasársela al constructor de game
 					Color currentColor = players.get(0).getColor();
-					game = new Game(board, cubes, players, currentColor);
+					
+					game = GameBuilder.createGame(createJSONObjectGame());
 					status = 1;
 					CreateGameDialog.this.setVisible(false);
 				}
@@ -135,5 +144,42 @@ public class CreateGameDialog extends JDialog {
 	
 	public Game getNewGame() {
 		return this.game;
+	}
+	
+	protected JSONObject createJSONObjectGame() {
+		JSONObject o = new JSONObject();
+		o.put("type", this.getGameMode());
+		
+		JSONObject boardJSONObject = new JSONObject();
+		boardJSONObject.put("shape", this.getBoardShape().toString());
+		boardJSONObject.put("cubes", new JSONArray());
+		
+		o.put("board", boardJSONObject);
+		
+		List<Player> players = choosePlayersDialog.getPlayersList();
+		
+		o.put("turn", players.get(0).getColor().toString());
+		
+		if (this.getGameMode().equals(GameClassicBuilder.TYPE)) {
+			
+			JSONArray playerJSONArray = new JSONArray();		 
+			for (int i = 0; i < players.size(); ++i)
+				playerJSONArray.put(players.get(i).report());
+						
+			o.put("players", playerJSONArray);
+			
+		}
+		else if (this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
+			
+			JSONArray teamsJSONArray = new JSONArray();
+			
+			//...
+			
+			o.put("teams", teamsJSONArray);
+			
+		}
+		
+			
+		return o;
 	}
 }
