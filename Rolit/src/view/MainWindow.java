@@ -31,9 +31,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	JPanel mainPanel;
 	JPanel boardPanel;
 
-	public MainWindow(Game game) {
+	public MainWindow() {
 		super("Rolit");
-		this.game = game;
 		initGUI();
 	}
 	

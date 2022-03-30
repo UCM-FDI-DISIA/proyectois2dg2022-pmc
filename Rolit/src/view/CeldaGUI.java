@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 import commands.Command;
 import logic.Board;
+import logic.Cube;
 import logic.Game;
 
 public class CeldaGUI implements RolitObserver {
@@ -59,11 +60,12 @@ public class CeldaGUI implements RolitObserver {
 		return button;
 	}
 
-	public void update(Game game, Board board, Command command) {
+	public void update(Game game, Board board) {
 		Cube cube = board.getCubeInPos(this.x, this.y);
 		if(cube != null) {
 			logic.Color newColor = cube.getColor();
 			this.iconPath = newColor.getPath();
+			this.button.setIcon(new ImageIcon(this.iconPath));
 			this.filled = true;
 			this.button.setEnabled(false);
 		}
@@ -71,37 +73,42 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onGameCreated(Game game, Board board) {
+		update(game, board);
 	}
-	
+
 	@Override
-	public void onTurnPlayed(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onTurnPlayed(Game game, Board board) {
+		update(game, board);
 	}
 
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
-		update(game, board, command);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onReplayLeftButton(Game game, Board board) {
+		update(game, board);
 	}
 
 	@Override
-	public void onReplayRightButton(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onReplayRightButton(Game game, Board board) {
+		update(game, board);
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {}
+	public void onRegister(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void onError(String err) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

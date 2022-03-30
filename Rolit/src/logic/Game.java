@@ -7,12 +7,15 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import view.RolitObserver;
+
 public abstract class Game implements Replayable {	
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
+	private List<RolitObserver> observers;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {

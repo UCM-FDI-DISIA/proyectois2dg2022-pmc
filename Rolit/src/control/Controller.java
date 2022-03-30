@@ -5,7 +5,6 @@ import java.util.Scanner;
 import Builders.GameBuilder;
 import javax.swing.SwingUtilities;
 
-import Rolit.GameGenerator;
 import commands.Command;
 import logic.Board;
 import logic.Game;
@@ -141,20 +140,18 @@ public class Controller {
 				@Override
 				public void run() {
 					//;
-					MainWindow mainWindow = new MainWindow(GameGenerator.createDefaultGame());
+					MainWindow mainWindow = new MainWindow();
 				}
 			});
 		}
 		else if (CONSOLE_MODE.equals(modes[selectedMode-1])){
 			
-			if (NEW_GAME.equals(optionsArray[option - 1]))
-				game = GameBuilder.createGame();
 			boolean repeatMenu;
 			do {
 				repeatMenu = false;
 				int option = this.menu();
 				if (NEW_GAME.equals(optionsArray[option - 1]))
-					game = GameGenerator.createGame();
+					game = GameBuilder.createGame();
 				else if (LOAD_GAME.equals(optionsArray[option - 1]))
 				{
 						System.out.println(LIST_MSG);

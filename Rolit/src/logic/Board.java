@@ -49,7 +49,7 @@ public class Board implements Reportable{
 		this.numCubes = board.numCubes;
 	}
 
-	private Cube getCubeInPos(int x, int y) {
+	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
 
