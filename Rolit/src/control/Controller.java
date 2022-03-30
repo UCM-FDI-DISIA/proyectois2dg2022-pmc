@@ -73,7 +73,6 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				// TODO no podemos instanciar la clase abstracta, habrá que hacer un método estático que devuelva una copia
 				replay.addState(s, game.copyMe());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

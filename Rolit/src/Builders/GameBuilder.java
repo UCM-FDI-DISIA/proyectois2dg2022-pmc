@@ -49,9 +49,11 @@ public abstract class GameBuilder {
 		// Elegimos el numero de jugadores
 		System.out.println(NUMBER_PLAYERS_MSG);
 		int nPlayers = input.nextInt();
+		input.nextLine();
 		while (nPlayers < 2 || nPlayers > Color.size()) {
 			System.out.println(ERROR_PLAYERS_MSG);
 			nPlayers = input.nextInt();
+			input.nextLine();
 		}
 		// Elegimos el tablero concreto
 		System.out.print(BOARD_MSG);
@@ -65,7 +67,6 @@ public abstract class GameBuilder {
 			}
 		} while (Shape.valueOfIgnoreCase(board_shape) == null);		
 		o.put("Board", new Board(Shape.valueOfIgnoreCase(board_shape)).report());
-		// TODO faltan preguntar a los método específicos de cada factoría
 		parse(type).whatINeed(nPlayers, o);
 		
 		return o;
@@ -86,11 +87,12 @@ public abstract class GameBuilder {
 	
 	protected final String availableColors(JSONArray players) {
 		StringBuilder str = new StringBuilder();
+		boolean valid = true;
 		for (Color c : Color.values()) {
-			for (int j = 0; j < players.length(); j++) {
-				 if (!players.getJSONObject(j).get("color").equals(c.toString()))
-					 str.append(String.format("%s: %s%n", c, c.name()));
-			 }
+			for (int j = 0; j < players.length() && valid; j++)
+				 valid = !players.getJSONObject(j).get("color").equals(c.toString());
+			if (valid)
+				str.append(String.format("%s: %s%n", c, c.name()));
 		}
 		return str.toString();		
 	}

@@ -87,7 +87,6 @@ public class SaveLoadManager {
 			for (int i = 0; i < states.length(); i++) {
 				JSONObject state = states.getJSONObject(i);
 				String commandName = state.getString("command");
-				// TODO ¿Por qué me deja instanciar la clase abstracta?
 				Game game = GameBuilder.createGame(state.getJSONObject("game"));
 				replay.addState(commandName, game);
 			}

@@ -79,8 +79,11 @@ public class GameTeamsBuilder extends GameBuilder {
 		JSONArray jTeams = new JSONArray();
 		JSONObject jTeam[] = new JSONObject[MAX_TEAMS];
 
-		for (int i = 0; i < MAX_TEAMS; i++)
+		for (int i = 0; i < MAX_TEAMS; i++) {
+			jTeam[i] = new JSONObject();
+			jPlayersTeam[i] = new JSONArray();
 			jTeam[i].put("name", String.format("Team %d", i+1));
+		}			
 		
 		System.out.println(NAME_PLAYERS);
 		System.out.println();
@@ -93,9 +96,11 @@ public class GameTeamsBuilder extends GameBuilder {
 				 System.out.println(this.availableColors(jPlayers));
 				 System.out.print(CHOOSE_COLOR);
 				 char c = input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
+				 input.nextLine();
 				 Color color = Color.valueOfIgnoreCase(c);
 				 System.out.print(CHOOSE_TEAM);
 				 int selectedTeam = input.nextInt();
+				 input.nextLine();
 				 try {
 					 // validamos los datos del jugador
 					 jPlayer = this.validatePlayer(jPlayers, name, color);

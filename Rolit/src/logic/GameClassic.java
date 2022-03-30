@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import utils.StringUtils;
 
-// FIXME MIRAR SI ES VIABLE EL GAME ABSTRACTO
 public class GameClassic extends Game {
 	
 	// Constructor de copia para generar los estados de las replays
