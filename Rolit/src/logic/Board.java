@@ -2,6 +2,8 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import control.Controller;
 import control.SaveLoadManager;
 import utils.StringUtils;
 
@@ -48,7 +50,7 @@ public class Board implements Reportable{
 		this.numCubes = board.numCubes;
 	}
 
-	private Cube getCubeInPos(int x, int y) {
+	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
 
@@ -190,5 +192,4 @@ public class Board implements Reportable{
 		jo.put("cubes", jo1);
 		return jo;
 	}
-
 }
