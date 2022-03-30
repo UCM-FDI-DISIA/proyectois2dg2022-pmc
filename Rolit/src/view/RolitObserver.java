@@ -5,6 +5,7 @@ import logic.Board;
 import logic.Game;
 
 public interface RolitObserver {
+	void onBoardCreated(Board board);
 	void onGameCreated(Game game, Board board);
 	void onTurnPlayed(Game game, Board board);
 	void onCommandIntroduced(Game game, Board board, Command command);

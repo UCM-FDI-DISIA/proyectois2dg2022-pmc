@@ -21,10 +21,14 @@ public abstract class Game implements Replayable {
 	public Game(Game game) {
 		this.finished = game.finished;
 		this.players = game.players;
+		
 		this.board = new Board(game.board);
+		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
-		this.observers = new ArrayList<>();
+		this.observers = new ArrayList<RolitObserver>();
+		
+		this.onGameCreated();
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -45,7 +49,9 @@ public abstract class Game implements Replayable {
 				this.currentPlayerIndex = index;
 			}
 			index++;
-		}		
+		}
+		
+		this.observers = new ArrayList<RolitObserver>();
 	}
 	
 	public abstract boolean play(int x, int y);
@@ -96,6 +102,12 @@ public abstract class Game implements Replayable {
 	public void removeObserver(RolitObserver o) {
 		this.observers.remove(o);
 	}
+	
+	public void onBoardAdded() {
+		for(RolitObserver o : observers) {
+			o.onBoardCreated(board);
+		}
+	}
 
 	public void onGameCreated() {
 		for(RolitObserver o : observers) {
@@ -135,6 +147,12 @@ public abstract class Game implements Replayable {
 
 	public void onError() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public Board getBoard() {
+		
+		return this.board;
 		
 	}
 }

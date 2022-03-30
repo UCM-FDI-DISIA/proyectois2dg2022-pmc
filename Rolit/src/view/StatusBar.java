@@ -60,5 +60,11 @@ public class StatusBar extends JPanel implements RolitObserver {
 		
 	}
 
+	@Override
+	public void onBoardCreated(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

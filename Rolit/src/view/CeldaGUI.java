@@ -44,6 +44,7 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setEnabled(validButton);
 		this.iconPath = "resources/icons/emptyCell.png";
 		this.button.setIcon(new ImageIcon(this.iconPath));
+		this.button.setMaximumSize(new Dimension(24, 24));
 		this.button.setVisible(true);
 		this.game.addObserver(this);
 	}
@@ -106,6 +107,12 @@ public class CeldaGUI implements RolitObserver {
 
 	@Override
 	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBoardCreated(Board board) {
 		// TODO Auto-generated method stub
 		
 	}

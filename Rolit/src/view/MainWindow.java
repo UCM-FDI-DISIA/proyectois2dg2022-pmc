@@ -64,21 +64,28 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	public void initGame() {
-		this.removeAll();
-		this.setContentPane(mainPanel); //FIXME No sé yo si así es como se hacen las cosas
-		mainPanel.add(welcomePanel, BorderLayout.CENTER);
-		/*
-		boardPanel = new JPanel(new BorderLayout());
-		BoardGUI tablero = new BoardGUI(8, 8, game);
-		tablero.crearTablero(boardPanel);
-		mainPanel.add(boardPanel, BorderLayout.CENTER);
-		*/
 		
-		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
+
+		this.remove(welcomePanel);
+		
+		this.repaint();
+		
 		mainPanel = new JPanel(new BorderLayout());
+		this.setContentPane(mainPanel); //FIXME No sé yo si así es como se hacen las cosas
+		
+		
+		boardPanel = new JPanel(new BorderLayout());
+		
+		BoardGUI tablero = new BoardGUI(game);
+		tablero.crearTablero(boardPanel);
+		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
+		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
+		mainPanel.add(boardPanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
+		
+		this.pack();
 		
 	}
 	
@@ -119,7 +126,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	@Override
 	public void onGameCreated(Game game, Board board) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -138,6 +145,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBoardCreated(Board board) {
+		
+		
 		
 	}
 

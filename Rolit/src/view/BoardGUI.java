@@ -17,17 +17,22 @@ public class BoardGUI implements RolitObserver {
 	private CeldaGUI[][] celdas;
 	private Game game;
 	
-	public BoardGUI(int nFilas, int nColumnas, Game game) {
-		this.nFilas = nFilas;
-		this.nColumnas = nColumnas;
+	public BoardGUI(Game game) {;
 		this.game = game;
-
-		this.celdas = new CeldaGUI[nColumnas][nFilas];
-		// Crear las celdas que componen el tablero
-		for (int i = 0; i < nFilas; i++)
+		
+		List<List<Boolean>> shapeMatrixList = this.game.getBoard().getShapeMatrix();
+		
+		this.nFilas = shapeMatrixList.size();
+		this.nColumnas = shapeMatrixList.get(0).size();
+		
+		this.celdas = new CeldaGUI[nFilas][nColumnas];
+		
+		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, true, game);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrixList.get(i).get(j), game);
 			}
+		}
+
 		this.game.addObserver(this);
 	}
 	
@@ -59,14 +64,6 @@ public class BoardGUI implements RolitObserver {
 	@Override
 	public void onGameCreated(Game game, Board board) {
 		
-		this.celdas = new CeldaGUI[nFilas][nColumnas];
-		
-		List<List<Boolean>> shapeMatrixList = board.getShapeMatrix();
-		for (int i = 0; i < nFilas; i++) {
-			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrixList.get(i).get(j), game);
-			}
-		}
 	}
 
 	@Override
@@ -95,6 +92,12 @@ public class BoardGUI implements RolitObserver {
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBoardCreated(Board board) {
 		// TODO Auto-generated method stub
 		
 	}

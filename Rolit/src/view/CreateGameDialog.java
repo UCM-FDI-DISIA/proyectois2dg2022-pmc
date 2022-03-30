@@ -85,7 +85,7 @@ public class CreateGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				choosePlayersDialog = new ChoosePlayersDialog(parent, (int)playersSpinner.getValue());
-				int status = choosePlayersDialog.open();
+				status = choosePlayersDialog.open();
 				if(status == 1) {
 					//TODO Aquí va a haber que diferenciar el modo de juego
 					List<Player> players = choosePlayersDialog.getPlayersList();
