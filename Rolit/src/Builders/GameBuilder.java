@@ -30,7 +30,7 @@ public abstract class GameBuilder {
 	private static String availableModes() {
 		StringBuilder str = new StringBuilder();
 		for (GameBuilder g : builders) {
-			str.append(" " + g.getType());
+			str.append(" " + g.getName());
 		}
 		str.append(": ");
 		return str.toString();
@@ -66,8 +66,9 @@ public abstract class GameBuilder {
 				System.out.print(BOARD_ERROR);
 			}
 		} while (Shape.valueOfIgnoreCase(board_shape) == null);		
-		o.put("Board", new Board(Shape.valueOfIgnoreCase(board_shape)).report());
+		o.put("board", new Board(Shape.valueOfIgnoreCase(board_shape)).report());
 		parse(type).whatINeed(nPlayers, o);
+		o.put("turn", o.getJSONArray("players").getJSONObject(0).get("color"));
 		
 		return o;
 	}
@@ -87,12 +88,13 @@ public abstract class GameBuilder {
 	
 	protected final String availableColors(JSONArray players) {
 		StringBuilder str = new StringBuilder();
-		boolean valid = true;
+		boolean valid;
 		for (Color c : Color.values()) {
+			valid = true;
 			for (int j = 0; j < players.length() && valid; j++)
 				 valid = !players.getJSONObject(j).get("color").equals(c.toString());
 			if (valid)
-				str.append(String.format("%s: %s%n", c, c.name()));
+				str.append(String.format("%s: %s%n", c, c.name()));			
 		}
 		return str.toString();		
 	}
@@ -124,6 +126,6 @@ public abstract class GameBuilder {
 	protected abstract boolean match(String type);
 	protected abstract Game GenerateGame(JSONObject o);
 	// FIXME no me convence demasiado
-	abstract String getType();
+	abstract String getName();
 	
 }

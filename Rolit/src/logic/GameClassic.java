@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -14,7 +16,7 @@ public class GameClassic extends Game {
 		super(game);
 	}
 	
-	// Constructor de creación a partir de carga
+	// Constructor de creaciï¿½n a partir de carga
 	public GameClassic(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
 		super(board, list_cubes, list_players, currentPlayerColor);
 	}
@@ -44,6 +46,24 @@ public class GameClassic extends Game {
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 			return true;
+	}
+	
+	@Override
+	public String showRanking() {
+		// FIXME no tengo claro si se hace una copia o no ni tampoco de si importa esto
+		List<Player> players = new ArrayList<Player>(this.players);
+		Collections.sort(players);
+		StringBuilder str = new StringBuilder(RANKING);
+		
+		str.append(StringUtils.LINE_SEPARATOR).append(MSG_REY).append(StringUtils.LINE_SEPARATOR);
+		
+		for (int i = 0; i < players.size(); ++i) {
+			str.append(MSG_POS).append(i + 1).append(":").append(players.get(i).getName()).append(" " + players.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
+		}
+		
+		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
+		
+		return str.toString(); 
 	}
 
 	@Override

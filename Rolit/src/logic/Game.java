@@ -7,7 +7,13 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public abstract class Game implements Replayable {	
+public abstract class Game implements Replayable {
+	// TODO deberíamos hacer una clase de constantes gráficas que almacene todas estas cosas
+	protected static final String RANKING = "RANKING DEL ROLIT";
+	protected static final String MSG_POS = "En la posicion numero ";
+	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
+	protected static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
+	
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
@@ -23,11 +29,10 @@ public abstract class Game implements Replayable {
 		this.exit = game.exit;
 	}
 	
-	// Constructor de creaci�n a partir de carga
+	// Constructor de creaci�n a partir de carga
 	public Game(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
 		this.finished = false;
 		this.board = board;
-		this.players = new ArrayList<Player>();
 		this.exit = false;
 		for (Cube c : list_cubes) {
 			board.addCubeInPos(c);
@@ -47,6 +52,7 @@ public abstract class Game implements Replayable {
 	public abstract boolean play(int x, int y);
 	public abstract String toString();
 	public abstract Game copyMe();
+	public abstract String showRanking();
 	
 	public void setExit() {
 		this.exit = true;
@@ -59,11 +65,7 @@ public abstract class Game implements Replayable {
 	public boolean isFinished() {
 		return this.finished || this.exit;
 	}
-
-	public List<Player> getPlayers() {
-		return Collections.unmodifiableList(this.players);
-	}
-	
+		
 	public Player getCurrentPlayer() {
 		return this.players.get(currentPlayerIndex);
 	}
