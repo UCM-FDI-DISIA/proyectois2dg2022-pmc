@@ -159,6 +159,7 @@ public class Board implements Reportable {
 	}
 	
 	public boolean tryToAddCube(int x, int y) {
+		// FIXME creo que esta función está mal
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)

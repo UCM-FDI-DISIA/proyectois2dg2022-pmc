@@ -24,7 +24,7 @@ public class GameClassicBuilder extends GameBuilder {
 		
 	};
 	
-	String getType(){
+	String getName(){
 		return TYPE;
 	}
 	

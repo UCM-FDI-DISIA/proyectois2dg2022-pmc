@@ -49,9 +49,9 @@ public class Controller {
 		input = new Scanner(System.in);
 		replay = new Replay();
 	}
-
+	
 	private void printGame() {
-		System.out.println(this.printer);
+		System.out.println(this.game.toString());
 	}
 	
 	private int menu() {
@@ -99,9 +99,8 @@ public class Controller {
 		boolean refreshDisplay = true;
 		input.nextLine();
 		while (!game.isFinished()) {
-			if (refreshDisplay) {
-				printGame();
-			}
+			if (refreshDisplay) 
+				this.printGame();
 			System.out.print(PROMPT);
 			String s = input.nextLine();
 			String[] parameters = s.toLowerCase().trim().split(" ");
@@ -117,18 +116,14 @@ public class Controller {
 		}
 
 		if (refreshDisplay)
-			printGame();
+			this.printGame();
 
-		if (!game.exited())
-			System.out.println(this.printer.showRanking());
+		if (!this.game.exited())
+			System.out.println(this.game.showRanking());
 		
 		if(askSaveReplay())
 			SaveLoadManager.saveReplay(replay);
 		
-	}
-
-	private void createPrinter() {
-		this.printer = new GamePrinter(game);
 	}
 	
 	// FIXME tiene que haber una forma mejor de hacerlo todo
@@ -213,7 +208,6 @@ public class Controller {
 				}			
 			} while (repeatMenu);
 			if(playMode) {
-				this.createPrinter();
 				this.play();
 			}
 		}

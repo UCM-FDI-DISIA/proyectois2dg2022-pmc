@@ -24,7 +24,7 @@ import replay.Replay;
 public class SaveLoadManager {
 	private static final String INDEX_FILENAME = "names.txt";
 	private static final String DEFAULT_FILENAME = "SAVED_GAMES";
-	private static final String REPLAY_FILE_NAME = "replay.txt";
+	private static final String REPLAY_FILE_NAME = "replay.json";
 	private static final String ERROR_LOAD = "Failed to load the file";
 	private static final String ERROR_LOAD_DEFAULT = "Failed to load the saved games index.";
 	private static final String ERROR_SAVE = "Failed to save the file";
