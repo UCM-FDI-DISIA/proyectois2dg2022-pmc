@@ -14,7 +14,7 @@ public class BoardTest {
 		b.addCubeInPos(c2);
 		Cube c = new Cube(5, 5, p1);
 		assertTrue(b.tryToAddCube(5, 5));
-		assertFalse(b.tryToAddCube(15, 15));
+		assertFalse(b.tryToAddCube(30, 15));
 		b.addCubeInPos(c);
 		assertEquals(c, b.getCubeInPos(5, 5));
 	}

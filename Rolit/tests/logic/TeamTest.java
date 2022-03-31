@@ -24,5 +24,12 @@ public class TeamTest {
 	
 	@Test
 	void test_report() {
+		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
+		Player p2 = new Player(Color.YELLOW, "Leonardo Macias Pasteles");
+		List<Player> l = new ArrayList<Player>();
+		l.add(p1); l.add(p2);
+		Team equipo1 = new Team("Basados", Color.YELLOW, l);
+		String s = "{\"color\":\"Y\",\"players\":[{\"color\":\"Y\",\"name\":\"Chacon Chacon\"},{\"color\":\"Y\",\"name\":\"Leonardo Macias Pasteles\"}],\"name\":\"Basados\"}";
+		assertTrue (new JSONObject(s).similar(equipo1.report()));
 	}
 }
