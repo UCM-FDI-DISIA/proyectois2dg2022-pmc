@@ -55,23 +55,14 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onRegister(Game game, Board board, Command command) {}
 
 	@Override
 	public void onError(String err) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onGameCreated(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
@@ -86,12 +77,6 @@ public class ControlPanel extends JPanel implements ActionListener, RolitObserve
 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onBoardCreated(Board board) {
 		// TODO Auto-generated method stub
 		
 	}

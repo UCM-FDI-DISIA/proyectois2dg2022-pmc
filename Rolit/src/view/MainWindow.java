@@ -5,12 +5,16 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -23,10 +27,12 @@ import logic.Shape;
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 
 	private Game game;
+	private Shape boardShape;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
 	private JButton loadReplayButton;
+	private JFileChooser fileChooser;
 	JPanel mainPanel;
 	JPanel boardPanel;
 
@@ -76,7 +82,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		boardPanel = new JPanel(new BorderLayout());
 		
-		BoardGUI tablero = new BoardGUI(game);
+		BoardGUI tablero = new BoardGUI(game, boardShape);
 		tablero.crearTablero(boardPanel);
 		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
 		
@@ -97,13 +103,22 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			
 			if (status == 1) { //e.d. se ha presionado OK
 				game = dialog.getNewGame();
+				boardShape = dialog.getNewShape();
 				initGame();
 			}
 			else {
 				//TODO Mostrar algún tipo de error
 			}
 		}
-		
+		else if(e.getActionCommand().equals("Load game")) {
+			fileChooser = new JFileChooser();
+			int ret = fileChooser.showOpenDialog(loadGameButton);
+			if (ret == JFileChooser.APPROVE_OPTION) {
+				File fichero = fileChooser.getSelectedFile();
+				
+				
+			} 
+		}
 	}
 
 	@Override
@@ -125,12 +140,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board) {
-		
-		
-	}
-
-	@Override
 	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
@@ -147,14 +156,5 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onBoardCreated(Board board) {
-		
-		
-		
-	}
-
-
 
 }

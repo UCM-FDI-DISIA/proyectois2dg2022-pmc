@@ -85,11 +85,6 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board) {
-		update();
-	}
-
-	@Override
 	public void onTurnPlayed() {
 		update();
 	}
@@ -112,18 +107,11 @@ public class CeldaGUI implements RolitObserver {
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
+		update();
 	}
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onBoardCreated(Board board) {
 		// TODO Auto-generated method stub
 		
 	}

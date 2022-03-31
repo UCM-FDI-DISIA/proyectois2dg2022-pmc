@@ -7,8 +7,10 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import commands.Command;
+import control.SaveLoadManager;
 import logic.Board;
 import logic.Game;
+import logic.Shape;
 
 public class BoardGUI implements RolitObserver {
 
@@ -17,19 +19,19 @@ public class BoardGUI implements RolitObserver {
 	private CeldaGUI[][] celdas;
 	private Game game;
 	
-	public BoardGUI(Game game) {
+	public BoardGUI(Game game, Shape shape) {
 		this.game = game;
 		
-		List<List<Boolean>> shapeMatrixList = this.game.getBoard().getShapeMatrix();
+		boolean[][] shapeMatrix = SaveLoadManager.loadShape(shape);
 		
-		this.nFilas = shapeMatrixList.size();
-		this.nColumnas = shapeMatrixList.get(0).size();
+		this.nFilas = shapeMatrix.length;
+		this.nColumnas = shapeMatrix[0].length;
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrixList.get(i).get(j), game);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game);
 			}
 		}
 
@@ -62,11 +64,6 @@ public class BoardGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board) {
-		
-	}
-
-	@Override
 	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
@@ -92,14 +89,7 @@ public class BoardGUI implements RolitObserver {
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onBoardCreated(Board board) {
-		// TODO Auto-generated method stub
-		
+		update(game, board);
 	}
 
 	

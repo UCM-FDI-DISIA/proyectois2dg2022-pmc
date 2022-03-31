@@ -27,8 +27,6 @@ public abstract class Game implements Replayable {
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
 		this.observers = new ArrayList<RolitObserver>();
-		
-		this.onGameCreated();
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -101,18 +99,6 @@ public abstract class Game implements Replayable {
 
 	public void removeObserver(RolitObserver o) {
 		this.observers.remove(o);
-	}
-	
-	public void onBoardAdded() {
-		for(RolitObserver o : observers) {
-			o.onBoardCreated(board);
-		}
-	}
-
-	public void onGameCreated() {
-		for(RolitObserver o : observers) {
-			o.onGameCreated(this, this.board);
-		}
 	}
 
 	public void onTurnPlayed() {

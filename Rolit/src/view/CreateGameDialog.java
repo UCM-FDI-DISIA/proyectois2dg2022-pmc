@@ -58,7 +58,6 @@ public class CreateGameDialog extends JDialog {
 	private List<JTextArea> listPlayerTextAreas;
 	
 	private List<JComboBox<Color>> listPlayerComboColors;
-	private List<JComboBox<Color>> listTeamComboColors;
 	
 	private List<JComboBox<Integer>> listComboNumberTeams;
 	private List<JComboBox<String>> listComboNamesTeams;
@@ -73,8 +72,6 @@ public class CreateGameDialog extends JDialog {
 	}
 	
 	public void initGUI () {
-		
-		
 		
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
@@ -226,6 +223,10 @@ public class CreateGameDialog extends JDialog {
 		return this.game;
 	}
 	
+	public Shape getNewShape() {
+		return this.getBoardShape();
+	}
+	
 	protected JSONObject createJSONObjectGame() {
 		JSONObject o = new JSONObject();
 		o.put("type", this.getGameMode());
@@ -256,7 +257,6 @@ public class CreateGameDialog extends JDialog {
 			for (int i = 0; i < listTextAreasTeamsPanels.size(); ++i) {
 				JSONObject aux = new JSONObject();
 				aux.put("name", listTextAreasTeamsPanels.get(i).getText());
-				aux.put("color", listTeamComboColors.get(i).getSelectedItem().toString());
 				aux.put("players", new JSONArray());
 				teamsJSONArray.put(aux);
 			}
@@ -325,7 +325,6 @@ public class CreateGameDialog extends JDialog {
 		listPlayerPanels = new ArrayList<>();
 		listPlayerTextAreas = new ArrayList<>();
 		listPlayerComboColors = new ArrayList<>();
-		listTeamComboColors = new ArrayList<>();
 		
 		listComboNumberTeams = new ArrayList<>();
 		
@@ -347,13 +346,6 @@ public class CreateGameDialog extends JDialog {
 			listNameTeamsPanel.get(i).add(new JLabel(String.format("Team %d: ", i + 1)));
 			listNameTeamsPanel.get(i).add(new JLabel("Name: "));
 			listNameTeamsPanel.get(i).add(listTextAreasTeamsPanels.get(i));
-			
-			listTeamComboColors.add(new JComboBox<Color>());
-			listNameTeamsPanel.get(i).add(new JLabel("Color: "));
-			for(Color color : Color.values()) {
-				listTeamComboColors.get(i).addItem(color);
-			}
-			listNameTeamsPanel.get(i).add(listTeamComboColors.get(i));
 			
 		}
 		

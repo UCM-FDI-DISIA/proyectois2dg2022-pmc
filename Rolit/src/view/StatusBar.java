@@ -31,12 +31,6 @@ public class StatusBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onGameCreated(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onTurnPlayed() {
 		// TODO Auto-generated method stub
 		
@@ -59,12 +53,5 @@ public class StatusBar extends JPanel implements RolitObserver {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onBoardCreated(Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

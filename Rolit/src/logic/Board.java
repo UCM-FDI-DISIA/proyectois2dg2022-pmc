@@ -8,7 +8,8 @@ import utils.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-public class Board implements Reportable{	
+public class Board implements Reportable {	
+	
 	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
 	private boolean[][] shapeMatrix;

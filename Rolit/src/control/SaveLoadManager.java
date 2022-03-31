@@ -18,6 +18,7 @@ import org.json.JSONTokener;
 import Builders.GameBuilder;
 import logic.Game;
 import logic.Reportable;
+import logic.Shape;
 import replay.Replay;
 
 public class SaveLoadManager {
@@ -152,6 +153,10 @@ public class SaveLoadManager {
 		return 0;
 	}
 
+	public static boolean[][] loadShape(Shape shape) {
+		return loadShape(shape.getFilename());
+	}
+	
 	public static boolean[][] loadShape(String filename) {
 		try (BufferedReader shape_file = new BufferedReader(new FileReader(filename))) {
 			int size = Integer.parseInt(shape_file.readLine());
