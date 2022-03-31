@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import utils.StringUtils;
+import view.RolitObserver;
 
 public class GameTeams extends Game {
 	private List<Team> teams;
@@ -52,6 +53,8 @@ public class GameTeams extends Game {
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished)
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		
+		this.onTurnPlayed();
 		return true;
 	}
 	
@@ -96,5 +99,12 @@ public class GameTeams extends Game {
 		gameJSONObject.put("teams", teamsJSONArray);
 		gameJSONObject.put("type", "GameTeams");
 		return gameJSONObject;		
+	}
+	
+	@Override
+	public void onTurnPlayed() {
+		for(RolitObserver o : observers) {
+			o.onTurnPlayed(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
+		}
 	}
 }

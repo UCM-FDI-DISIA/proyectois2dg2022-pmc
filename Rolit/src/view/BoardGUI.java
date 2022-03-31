@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 import commands.Command;
 import control.SaveLoadManager;
 import logic.Board;
+import logic.Color;
 import logic.Game;
 import logic.Shape;
+import replay.Replay;
 
 public class BoardGUI implements RolitObserver {
 
@@ -18,11 +20,12 @@ public class BoardGUI implements RolitObserver {
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
 	private Game game;
+	private Replay replay;
 	
-	public BoardGUI(Game game, Shape shape) {
+	public BoardGUI(Game game) {
 		this.game = game;
 		
-		boolean[][] shapeMatrix = SaveLoadManager.loadShape(shape);
+		boolean[][] shapeMatrix = game.getShapeMatrix();
 		
 		this.nFilas = shapeMatrix.length;
 		this.nColumnas = shapeMatrix[0].length;
@@ -36,6 +39,10 @@ public class BoardGUI implements RolitObserver {
 		}
 
 		this.game.addObserver(this);
+	}
+	
+	public BoardGUI(Replay replay) {
+		this.replay = replay;
 	}
 	
 	public void crearTablero(JPanel panel) {
@@ -63,11 +70,6 @@ public class BoardGUI implements RolitObserver {
 		
 	}
 
-	@Override
-	public void onTurnPlayed() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
@@ -90,6 +92,15 @@ public class BoardGUI implements RolitObserver {
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
 		update(game, board);
+	}
+
+	@Override
+	public void onGameFinished() {}
+
+	@Override
+	public void onTurnPlayed(String name, Color color) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

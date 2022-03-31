@@ -194,16 +194,8 @@ public class Board implements Reportable {
 		return jo;
 	}
 
-	public List<List<Boolean>> getShapeMatrix() {
-		List<List<Boolean>> shapeMatrixList = new ArrayList<List<Boolean>>();
-		for (int i = 0; i < shapeMatrix.length; ++i) {
-			shapeMatrixList.add(new ArrayList<Boolean>());
-			for (int j = 0; j < shapeMatrix[0].length; ++j) {
-				shapeMatrixList.get(i).add(j, (Boolean)shapeMatrix[i][j]);
-			}
-			
-		}
-		return Collections.unmodifiableList(shapeMatrixList);
+	public boolean[][] getShapeMatrix() {
+		return this.shapeMatrix;
 	}
 
 }

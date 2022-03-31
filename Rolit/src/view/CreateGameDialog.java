@@ -88,11 +88,10 @@ public class CreateGameDialog extends JDialog {
 		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
 		gameModeCombo = new JComboBox<String>(gameModes);
 		
-		
 		Shape[] shapes = Shape.values();
 		shapesCombo = new JComboBox<Shape>(shapes);
 		
-		playersSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+		playersSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 1));
 		playersSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -205,7 +204,7 @@ public class CreateGameDialog extends JDialog {
 		return status;
 	}
 	
-	//TODO Revisar cuáles de los métodos siguientes se usan
+	//TODO Revisar cuï¿½les de los mï¿½todos siguientes se usan
 	
 	public String getGameMode() {
 		return (String) gameModeCombo.getSelectedItem();

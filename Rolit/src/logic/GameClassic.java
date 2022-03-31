@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import utils.StringUtils;
+import view.RolitObserver;
 
 public class GameClassic extends Game {
 	
@@ -85,6 +86,13 @@ public class GameClassic extends Game {
 		JSONObject gameJSONObject = super.report();
 		gameJSONObject.put("type", "GameClassic");
 		return gameJSONObject;
+	}
+
+	@Override
+	public void onTurnPlayed() {
+		for(RolitObserver o : observers) {
+			o.onTurnPlayed(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
+		}
 	}
 }
 

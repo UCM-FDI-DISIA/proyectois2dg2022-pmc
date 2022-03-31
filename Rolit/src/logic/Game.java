@@ -21,7 +21,7 @@ public abstract class Game implements Replayable {
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
-	private List<RolitObserver> observers;
+	protected List<RolitObserver> observers;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -97,17 +97,14 @@ public abstract class Game implements Replayable {
 
 	public void addObserver(RolitObserver o) {
 		this.observers.add(o);
+		this.onRegister();
 	}
 
 	public void removeObserver(RolitObserver o) {
 		this.observers.remove(o);
 	}
 
-	public void onTurnPlayed() {
-		for(RolitObserver o : observers) {
-			o.onTurnPlayed();
-		}
-	}
+	public abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
 
 	public void onCommandIntroduced() {
 		for(RolitObserver o : observers) {
@@ -138,9 +135,17 @@ public abstract class Game implements Replayable {
 		
 	}
 	
+	public void onGameFinished() {
+		for(RolitObserver o : observers) {
+			o.onGameFinished();
+		}
+	}
+	
 	public Board getBoard() {
-		
 		return this.board;
-		
+	}
+	
+	public boolean[][] getShapeMatrix() {
+		return this.board.getShapeMatrix();
 	}
 }

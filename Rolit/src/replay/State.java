@@ -6,7 +6,7 @@ import logic.Replayable;
 import logic.Reportable;
 import utils.StringUtils;
 
-public class State implements Reportable{
+public class State implements Reportable {
 	String command;
 	Replayable game;
 	

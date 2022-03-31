@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import commands.Command;
 import control.Controller;
 import logic.Board;
+import logic.Color;
 import logic.Game;
 
 public class StatusBar extends JPanel implements RolitObserver {
@@ -31,7 +32,7 @@ public class StatusBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed() {
+	public void onTurnPlayed(String name, Color color) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -50,6 +51,12 @@ public class StatusBar extends JPanel implements RolitObserver {
 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameFinished() {
 		// TODO Auto-generated method stub
 		
 	}

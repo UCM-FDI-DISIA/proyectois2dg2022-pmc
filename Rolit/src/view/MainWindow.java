@@ -20,7 +20,9 @@ import javax.swing.JTable;
 
 import commands.Command;
 import control.Controller;
+import control.SaveLoadManager;
 import logic.Board;
+import logic.Color;
 import logic.Game;
 import logic.Shape;
 
@@ -33,8 +35,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton loadGameButton;
 	private JButton loadReplayButton;
 	private JFileChooser fileChooser;
-	JPanel mainPanel;
-	JPanel boardPanel;
+	private JPanel mainPanel;
+	private JPanel centerPanel;
+	private JPanel boardPanel;
+	private JPanel gamePanel;
+	private JPanel rankingPanel;
 
 	public MainWindow() {
 		super("Rolit");
@@ -70,26 +75,36 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	public void initGame() {
-		
 
 		this.remove(welcomePanel);
 		
 		this.repaint();
 		
 		mainPanel = new JPanel(new BorderLayout());
-		this.setContentPane(mainPanel); //FIXME No sé yo si así es como se hacen las cosas
+		this.setContentPane(mainPanel); //FIXME No sï¿½ yo si asï¿½ es como se hacen las cosas
 		
+		centerPanel = new JPanel(new GridLayout(1, 2));
+		boardPanel = new JPanel();
+		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
+		//rankingPanel = new JPanel(new GridLayout());
 		
-		boardPanel = new JPanel(new BorderLayout());
+		centerPanel.add(gamePanel);
+		//centerPanel.add(rankingPanel);
 		
-		BoardGUI tablero = new BoardGUI(game, boardShape);
+		BoardGUI tablero = new BoardGUI(game);
 		tablero.crearTablero(boardPanel);
-		//boardPanel.add(new JLabel("Estadï¿½sticas: "), BorderLayout.SOUTH);
+		
+		TurnBar turnBar = new TurnBar(game);
+		
+		gamePanel.add(turnBar, BorderLayout.PAGE_START);
+		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
-		mainPanel.add(boardPanel, BorderLayout.CENTER);
+		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
+		
+		
 		
 		this.pack();
 		
@@ -103,21 +118,26 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			
 			if (status == 1) { //e.d. se ha presionado OK
 				game = dialog.getNewGame();
-				boardShape = dialog.getNewShape();
 				initGame();
 			}
 			else {
-				//TODO Mostrar algún tipo de error
+				//TODO Mostrar algï¿½n tipo de error
 			}
 		}
 		else if(e.getActionCommand().equals("Load game")) {
 			fileChooser = new JFileChooser();
 			int ret = fileChooser.showOpenDialog(loadGameButton);
 			if (ret == JFileChooser.APPROVE_OPTION) {
-				File fichero = fileChooser.getSelectedFile();
-				
-				
+				File file = fileChooser.getSelectedFile();
+				game = SaveLoadManager.loadGame(file.getPath());
+				initGame();
 			} 
+			else {
+				//TODO Mostrar algÃºn mensaje
+			}
+		}
+		else if(e.getActionCommand().contentEquals("Load replay")) {
+			
 		}
 	}
 
@@ -140,12 +160,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onTurnPlayed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onReplayLeftButton(Game game, Board board) {
 		// TODO Auto-generated method stub
 		
@@ -153,6 +167,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameFinished() {
+		// TODO Completar
+		
+	}
+
+	@Override
+	public void onTurnPlayed(String name, Color color) {
 		// TODO Auto-generated method stub
 		
 	}
