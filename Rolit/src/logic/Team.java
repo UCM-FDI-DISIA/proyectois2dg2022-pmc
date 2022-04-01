@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,16 +55,6 @@ public class Team implements Reportable, Comparable<Team> {
 			playersJSONObject.put(p.report());
 		teamJSONObject.put("players", playersJSONObject);
 		return teamJSONObject;
-	}
-	
-	public static void main(String[] args) {
-		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
-		Player p2 = new Player(Color.YELLOW, "Leonardo Macias Pasteles");
-		List<Player> l = new ArrayList<Player>();
-		l.add(p1); l.add(p2);
-		Team equipo1 = new Team("Basados", Color.YELLOW, l);
-		
-		System.out.print(equipo1.report());
 	}
 
 }

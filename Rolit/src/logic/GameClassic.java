@@ -84,10 +84,10 @@ public class GameClassic extends Game {
 	}
 	
 	public static void main(String[] args) {
-		Board b = new Board(Shape.DS);
-		Player p1 = new Player(Color.BEIGE, "Juandi");
-		Player p2 = new Player(Color.BLACK, "Leo");
-		Player p3 = new Player(Color.YELLOW, "dani");
+		Board b = new Board(Shape.SM);
+		Player p1 = new Player(Color.YELLOW, "Juandi");
+		Player p2 = new Player(Color.BROWN, "Leo");
+		Player p3 = new Player(Color.RED, "dani");
 		List<Player> lp = new ArrayList<Player>();
 		lp.add(p1);
 		lp.add(p2);
@@ -97,8 +97,8 @@ public class GameClassic extends Game {
 		Cube c2 = new Cube(3, 5, p1);
 		lc.add(c);
 		lc.add(c2);
-		Game game = new GameClassic(b, lc, lp, Color.BEIGE);
-		game.play(3,6);
+		Game game = new GameClassic(b, lc, lp, Color.YELLOW);
+		game.play(3, 6);
 		
 		System.out.print(game.report());
 	}

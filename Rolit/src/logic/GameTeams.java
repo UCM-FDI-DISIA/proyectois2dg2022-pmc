@@ -98,23 +98,32 @@ public class GameTeams extends Game {
 		return gameJSONObject;		
 	}
 	
-	/*public static void main(String[] args) {
-		Board b = new Board(Shape.DS);
-		Player p1 = new Player(Color.BEIGE, "Juandi");
-		Player p2 = new Player(Color.BLACK, "Leo");
-		Player p3 = new Player(Color.YELLOW, "dani");
+	public static void main(String[] args) {
+		Board b = new Board(Shape.SM);
+		Player p1 = new Player(Color.YELLOW, "Juandi");
+		Player p2 = new Player(Color.BROWN, "Leo");
+		Player p3 = new Player(Color.RED, "dani");
 		List<Player> lp = new ArrayList<Player>();
+		List<Player> equipo1 = new ArrayList<Player>();
+		List<Player> equipo2 = new ArrayList<Player>();
+		equipo1.add(p1);
+		equipo1.add(p2);
+		equipo2.add(p3);
+		Team e1 = new Team("equipo1", equipo1);
+		Team e2 = new Team("equipo2", equipo2);
 		lp.add(p1);
 		lp.add(p2);
-		lp.add(p3);
 		List<Cube> lc = new ArrayList<Cube>();
+		List<Team> lt = new ArrayList<Team>();
+		lt.add(e1);
+		lt.add(e2);
 		Cube c = new Cube(3, 4, p2);
 		Cube c2 = new Cube(3, 5, p1);
 		lc.add(c);
 		lc.add(c2);
-		GameTeams game = new GameTeams(b, lc, lp, Color.BEIGE);
-		game.play(3,6);
+		Game game = new GameTeams(b, lc, lp, Color.YELLOW, lt);
+		game.play(3, 6);
 		
 		System.out.print(game.report());
-	}*/
+	}
 }
