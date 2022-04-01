@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  9 MAR 2022 10:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  1 APR 2022 12:55
 entering extended mode
-**./RefactorizacionSprint2.tex
-(RefactorizacionSprint2.tex
+**./DiseñoSprint3.tex
+(DiseñoSprint3.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18>
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -109,11 +109,11 @@ mode.def
 File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count189
 \l__pdf_internal_box=\box47
-) (RefactorizacionSprint2.aux
+) (DiseñoSprint3.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
-\openout1 = `RefactorizacionSprint2.aux'.
+\openout1 = `DiseñoSprint3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
@@ -176,25 +176,25 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-(RefactorizacionSprint2.aux
+(DiseñoSprint3.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
  3386 strings out of 480790
- 49680 string characters out of 2897301
- 308113 words of memory out of 3000000
+ 49604 string characters out of 2897301
+ 309083 words of memory out of 3000000
  19422 multiletter control sequences out of 15000+200000
  536027 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,36p,436b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,6n,36p,390b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on RefactorizacionSprint2.pdf (1 page, 63125 bytes).
+Output written on DiseñoSprint3.pdf (1 page, 68078 bytes).
 PDF statistics:
  26 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
