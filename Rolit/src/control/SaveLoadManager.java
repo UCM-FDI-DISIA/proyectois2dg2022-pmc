@@ -77,7 +77,7 @@ public class SaveLoadManager {
 		return SaveLoadManager.loadReplay(REPLAY_FILE_NAME);
 	}
 	
-	private static Replay loadReplay(String filename) {
+	public static Replay loadReplay(String filename) {
 		Replay replay = null;
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			replay = new Replay();

@@ -44,18 +44,6 @@ public class StatusBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayRightButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onGameFinished() {
 		// TODO Auto-generated method stub
 		

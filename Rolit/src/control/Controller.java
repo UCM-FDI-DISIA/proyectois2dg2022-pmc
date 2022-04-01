@@ -108,7 +108,7 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				replay.addState(s, game.copyMe());
+				replay.addState(s, game.getState());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();

@@ -18,6 +18,7 @@ public abstract class Game implements Replayable {
 	
 	protected boolean finished;
 	protected List<Player> players;
+	protected Replayable state;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
@@ -32,7 +33,6 @@ public abstract class Game implements Replayable {
 		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
-		this.observers = new ArrayList<RolitObserver>();
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -90,7 +90,7 @@ public abstract class Game implements Replayable {
 					
 		gameJSONObject.put("players", playerJSONArray);
 		
-		gameJSONObject.put("turn", this.players.get(currentPlayerIndex).getColor());
+		gameJSONObject.put("turn", this.players.get(currentPlayerIndex).getColor().toString());
 		
 		return gameJSONObject;
 	}
@@ -109,18 +109,6 @@ public abstract class Game implements Replayable {
 	public void onCommandIntroduced() {
 		for(RolitObserver o : observers) {
 			o.onCommandIntroduced(this, this.board, null);
-		}
-	}
-
-	public void onReplayLeftButton() {
-		for(RolitObserver o : observers) {
-			o.onReplayLeftButton(this, this.board);
-		}
-	}
-
-	public void onReplayRightButton() {
-		for(RolitObserver o : observers) {
-			o.onReplayRightButton(this, this.board);
 		}
 	}
 
@@ -147,5 +135,9 @@ public abstract class Game implements Replayable {
 	
 	public boolean[][] getShapeMatrix() {
 		return this.board.getShapeMatrix();
+	}
+	
+	public Replayable getState() {
+		return state;
 	}
 }

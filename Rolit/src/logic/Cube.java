@@ -14,7 +14,14 @@ public class Cube implements Reportable {
 		this.y = y;
 		this.player = player;
 	}
-	
+
+	public Cube(Cube cube) {
+		this.x = cube.x;
+		this.y = cube.y;
+		this.player = cube.player;
+		//this.player = new Player(cube.player);	
+	}
+
 	public int getX() {
 		return x;
 	}

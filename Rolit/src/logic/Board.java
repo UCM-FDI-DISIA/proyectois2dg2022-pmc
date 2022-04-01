@@ -39,7 +39,11 @@ public class Board implements Reportable {
 	public Board(Board board) {		
 		List<List<Cube>> m = new ArrayList<List<Cube>>();
 		for (int i = 0; i < board.matrix.size(); i++) {
-			List<Cube> lc = new ArrayList<Cube> (board.matrix.get(i));
+			List<Cube> lc = new ArrayList<Cube> ();
+			for (int j = 0; j < board.matrix.size(); j++) {
+				if(board.matrix.get(i).get(j) != null)
+					lc.add(new Cube(board.matrix.get(i).get(j)));
+			}
 			m.add(lc);
 		}
 		

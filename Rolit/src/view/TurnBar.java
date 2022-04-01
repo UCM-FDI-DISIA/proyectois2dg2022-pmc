@@ -60,18 +60,6 @@ public class TurnBar extends JPanel implements RolitObserver {
 	public void onCommandIntroduced(Game game, Board board, Command command) {}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayRightButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onRegister(Game game, Board board, Command command) {}
 
 	@Override
