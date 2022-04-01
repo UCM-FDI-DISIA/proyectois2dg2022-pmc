@@ -16,7 +16,13 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 		this.name = name;
 		Player.playerList[color.ordinal()] = this;
 	}	
-	
+
+	public Player(Player player) {
+		this.color = player.color;
+		this.score = player.score;
+		this.name = player.name;
+	}
+
 	public Color getColor() {
 		return this.color;
 	}

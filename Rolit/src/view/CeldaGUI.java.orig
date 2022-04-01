@@ -1,7 +1,13 @@
 package view;
 
+<<<<<<< HEAD
+=======
 import java.awt.Color;
+import replay.Replay;
+
+>>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,41 +16,107 @@ import javax.swing.JButton;
 
 import commands.Command;
 import logic.Board;
+import logic.Color;
+import logic.Cube;
 import logic.Game;
 
-public class CeldaGUI implements RolitObserver {
+public class CeldaGUI implements RolitObserver, ReplayObserver {
 
 	private int x;
 	private int y;
 	private boolean validButton;
-	private boolean filled;	//Una vez se ponga un cubo no se podrá poner otro (manualmente)
+	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
 	private Game game;
+	private Replay replay;
 	private String iconPath;
+	public static final int SIDE_LENGTH = 48;
+	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 
 	public CeldaGUI(int y, int x, boolean validButton, Game g) {
+		
+		
 		this.x = x;
 		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
 		this.game = g;
 		this.button = new JButton();
-		this.button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!filled) {
-					String[] commandWords = {"p", Integer.toString(x), Integer.toString(y)};
-					Command command = Command.getCommand(commandWords);
-					command.execute(game);
+<<<<<<< HEAD
+		
+		
+		
+		if(validButton) {
+=======
+		if (validButton) {
+>>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
+			this.button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					if (!filled) {
+						String[] commandWords = { "p", Integer.toString(x), Integer.toString(y) };
+						Command command = Command.getCommand(commandWords);
+						command.execute(game);
+					}
+
 				}
-				
-			}
-		});
+			});
+		}
+		
+		
+		
 		this.button.setEnabled(validButton);
-		this.iconPath = "resources/icons/emptyCell.png";
+		this.validButton = validButton;
+		this.iconPath = EMPTY_ICON_PATH;
 		this.button.setIcon(new ImageIcon(this.iconPath));
+		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
+		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
+		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
 		this.game.addObserver(this);
+	}
+
+	public CeldaGUI(int y, int x, boolean validButton, Replay replay) {
+		this.x = x;
+		this.y = y;
+		this.replay = replay;
+		this.validButton = validButton;
+		this.filled = false;
+		this.button = new JButton();
+		this.button.setEnabled(validButton);
+		this.validButton = validButton;
+		this.iconPath = "resources/icons/emptyCell.png";
+		this.button.setIcon(new ImageIcon(this.iconPath));
+		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
+		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
+		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
+		this.button.setVisible(true);
+<<<<<<< HEAD
+
+		this.game.addObserver(this);
+
+=======
+		replay.addObserver(this);
+	}
+	
+	public void resetIcon() {
+		this.iconPath = EMPTY_ICON_PATH;
+		this.filled = true;
+
+		ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
+		Image originalImg = originalImgIcon.getImage();
+		Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+
+		this.button.setIcon(resizedImgIcon);
+
+		// else this.filled = false; //Por si pudiera desocuparse una casilla en una
+		// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
+		// interactuar con el tablero
+
+		this.button.repaint();
+>>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 	}
 
 	public int getX() {
@@ -54,54 +126,92 @@ public class CeldaGUI implements RolitObserver {
 	public int getY() {
 		return y;
 	}
-	
+
 	public JButton getButton() {
 		return button;
 	}
 
-	public void update(Game game, Board board, Command command) {
-		Cube cube = board.getCubeInPos(this.x, this.y);
-		if(cube != null) {
-			logic.Color newColor = cube.getColor();
+<<<<<<< HEAD
+	public void update() {
+		if(this.validButton) {
+			Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
+			if(cube != null) {
+				Color newColor = cube.getColor();
+				this.iconPath = newColor.getPath();
+				this.filled = true;
+				
+				ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
+				Image originalImg = originalImgIcon.getImage();
+				Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH,  java.awt.Image.SCALE_SMOOTH);
+				ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+				
+				this.button.setIcon(resizedImgIcon);
+			}
+			else this.filled = false; //Por si pudiera desocuparse una casilla en una replay, pero no estoy seguro de esto, porque en las replays no se debe poder interactuar con el tablero
+			
+=======
+	public void update(logic.Color newColor) {
+		if (this.validButton) {
 			this.iconPath = newColor.getPath();
 			this.filled = true;
-			this.button.setEnabled(false);
+
+			ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
+			Image originalImg = originalImgIcon.getImage();
+			Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+			ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+
+			this.button.setIcon(resizedImgIcon);
+
+			// else this.filled = false; //Por si pudiera desocuparse una casilla en una
+			// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
+			// interactuar con el tablero
+
+>>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
+			this.button.repaint();
 		}
-		else this.filled = false; //Por si pudiera desocuparse una casilla en una replay, pero no estoy seguro de esto, porque en las replays no se debe poder interactuar con el tablero
 	}
 
-	@Override
-	public void onGameCreated(Game game, Board board, Command command) {
-		update(game, board, command);
-	}
-	
-	@Override
-	public void onTurnPlayed(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void update() {
+		Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
+		if (cube != null) {
+			logic.Color newColor = cube.getColor();
+			update(newColor);
+		}
+
 	}
 
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
-		update(game, board, command);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onReplayLeftButton() {
 	}
 
 	@Override
-	public void onReplayRightButton(Game game, Board board, Command command) {
-		update(game, board, command);
+	public void onReplayRightButton() {
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {}
+	public void onRegister(Game game, Board board, Command command) {
+		update(); //FIXME eliminar? para mejorar optimización
+	}
 
 	@Override
 	public void onError(String err) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void onGameFinished() {
+	}
+
+	@Override
+	public void onTurnPlayed(String name, Color color) {
+		update();
 	}
 
 }

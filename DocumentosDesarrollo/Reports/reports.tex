@@ -104,5 +104,26 @@
 }
 \end{lstlisting}
 
+\newpage
+
+\subsection*{State}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "command" = String,
+ "game" = game.report() //consultar arriba,
+}
+\end{lstlisting}
+
+\subsection*{Replay}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "states" = [{"command" = String,
+ 	     "game" = game.report() //consultar arriba},
+ 	     ...
+ 	     ,{"command" = String,
+ 	     "game" = game.report() //consultar arriba}]}
+}
+\end{lstlisting}
+
 
 \end{document}

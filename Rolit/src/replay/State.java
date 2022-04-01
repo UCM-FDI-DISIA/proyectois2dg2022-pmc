@@ -34,4 +34,7 @@ public class State implements Reportable {
 		
 	}
 	
+	public String getShape(){
+		return game.report().getJSONObject("board").getString("shape");
+	}
 }

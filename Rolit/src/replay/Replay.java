@@ -3,6 +3,9 @@ package replay;
 import logic.Replayable;
 import logic.Reportable;
 import utils.StringUtils;
+import view.Observable;
+import view.ReplayObserver;
+import view.RolitObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +30,16 @@ public class Replay implements Reportable {
 
 	private Scanner input;
 	private List<State> states;
+	private List<ReplayObserver> observers;
 	private int currentState;
 	private boolean print;
 	
 	public Replay() {
 		this.input = new Scanner(System.in);
 		this.states = new ArrayList<State>();
-		currentState = 0;
-		print = true;
+		this.currentState = 0;
+		this.observers = new ArrayList<>();
+		this.print = true;
 	}
 	
 	public void addState(String commandName, Replayable game) {
@@ -52,24 +57,34 @@ public class Replay implements Reportable {
 		}
 	}
 	
+	public void previousState() {
+		if(currentState > 0) {
+			currentState--;
+			onReplayLeftButton();
+			print = true;
+		}
+		else
+			System.out.println(PREVIOUS_ERROR);
+	}
+	
+	public void nextState() {
+		if(currentState + 1 < states.size()) {
+			currentState++;
+			onReplayRightButton();
+			print = true;
+		}
+		else
+			System.out.println(NEXT_ERROR);
+	}
+	
 	private boolean execute(String in) {
 		boolean replaying = true;
 		print = false;
 		if(in.equals("+")) {
-			if(currentState + 1 < states.size()) {
-				currentState++;
-				print = true;
-			}
-			else
-				System.out.println(NEXT_ERROR);
+			nextState();
 		}
 		else if(in.equals("-")){
-			if(currentState > 0) {
-				currentState--;
-				print = true;
-			}
-			else
-				System.out.println(PREVIOUS_ERROR);
+			previousState();
 		}
 		else if(in.equals("exit") || in.equals("e")) {
 			replaying = false;
@@ -97,6 +112,14 @@ public class Replay implements Reportable {
 		return jo;
 	}
 	
+	public String getShape() {
+		return states.get(currentState).getShape();
+	}
+	
+	public JSONObject currentStateReport() {
+		return states.get(currentState).report();
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder bf = new StringBuilder();
@@ -106,5 +129,25 @@ public class Replay implements Reportable {
 		return bf.toString();
 
 	}
+
+	public void addObserver(ReplayObserver o) {
+		observers.add(o);
+	}
+
 	
+	public void removeObserver(ReplayObserver o) {
+		observers.remove(o);
+	}
+	
+	public void onReplayLeftButton() {
+		for(ReplayObserver o : observers) {
+			o.onReplayLeftButton();
+		}
+	}
+
+	public void onReplayRightButton() {
+		for(ReplayObserver o : observers) {
+			o.onReplayRightButton();
+		}
+	}
 }
