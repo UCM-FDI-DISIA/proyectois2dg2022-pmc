@@ -5,11 +5,14 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -41,6 +44,9 @@ public class CreateGameDialog extends JDialog {
 	private Game game;
 	private Frame parent;
 	private int status;
+	
+	private Map<String, ImageIcon> colorMap;
+	private Map<String, ImageIcon> boardMap;
 	
 	private JComboBox<Shape> shapesCombo;
 	private JComboBox<String> gameModeCombo;
@@ -76,6 +82,10 @@ public class CreateGameDialog extends JDialog {
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
 		
+		colorMap = new HashMap<String, ImageIcon>();
+		boardMap = new HashMap<String, ImageIcon>();
+
+		
 		setTitle("Create Game");
 		setVisible(false);
 		
@@ -90,6 +100,7 @@ public class CreateGameDialog extends JDialog {
 		
 		Shape[] shapes = Shape.values();
 		shapesCombo = new JComboBox<Shape>(shapes);
+		shapesCombo.setRenderer(new BoardRenderer());
 		
 		playersSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 1));
 		playersSpinner.addChangeListener(new ChangeListener() {
@@ -293,7 +304,9 @@ public class CreateGameDialog extends JDialog {
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setEditable(true);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setLineWrap(true);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setWrapStyleWord(true);
-			listPlayerComboColors.add(new JComboBox<Color>());
+			JComboBox<Color> aux = new JComboBox<Color>();
+			aux.setRenderer(new ColorRenderer());
+			listPlayerComboColors.add(aux);
 			listPlayerPanels.get(i).add(new JLabel(String.format("Player %d: ", i + 1)));
 			listPlayerPanels.get(i).add(new JLabel("Name: "));
 			listPlayerPanels.get(i).add(listPlayerTextAreas.get(i));
@@ -358,8 +371,9 @@ public class CreateGameDialog extends JDialog {
 			listPlayerPanels.get(i).add(new JLabel(String.format("Player %d: ", i + 1)));
 			listPlayerPanels.get(i).add(new JLabel("Name: "));
 			listPlayerPanels.get(i).add(listPlayerTextAreas.get(i));
-			
-			listPlayerComboColors.add(new JComboBox<Color>());
+			JComboBox<Color> aux = new JComboBox<Color>();
+			aux.setRenderer(new ColorRenderer());
+			listPlayerComboColors.add(aux);
 			listPlayerPanels.get(i).add(new JLabel("Color: "));
 			for(Color color : Color.values()) {
 				listPlayerComboColors.get(i).addItem(color);
