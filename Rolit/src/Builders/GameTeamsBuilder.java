@@ -24,7 +24,7 @@ public class GameTeamsBuilder extends GameBuilder {
 				
 	}
 	
-	String getType(){
+	String getName(){
 		return TYPE;
 	}
 	
@@ -35,7 +35,7 @@ public class GameTeamsBuilder extends GameBuilder {
 
 	@Override
 	protected Game GenerateGame(JSONObject o) {		
-		Color turn = Color.valueOf(o.getString("turn"));
+		Color turn = Color.valueOfIgnoreCase(o.getString("turn").charAt(0));
 		
 		List<Player> list_players = new ArrayList<Player>();
 		JSONArray playersJSONArray = o.getJSONArray("players");
@@ -45,15 +45,7 @@ public class GameTeamsBuilder extends GameBuilder {
 		}			
 
 		JSONObject boardJSONObject = o.getJSONObject("board");
-		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve
-		
-		List<Cube> list_cubes = new ArrayList<Cube>();
-		JSONArray cubesJSONArray = boardJSONObject.getJSONArray("cubes");
-		for (int i = 0; i < cubesJSONArray.length(); ++i) {
-			JSONObject cube = cubesJSONArray.getJSONObject(i);
-			list_cubes.add(new Cube(cube.getJSONArray("pos").getInt(0), cube.getJSONArray("pos").getInt(1),
-					Player.getPlayer(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)))));
-		}			
+		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve	
 		
 		JSONArray teamsJSONArray = o.getJSONArray("teams");
 		List<Team> list_teams = new ArrayList<Team>();
@@ -63,10 +55,18 @@ public class GameTeamsBuilder extends GameBuilder {
 			JSONArray playersTeamJSONArray = team.getJSONArray("players");
 			for (int j = 0; j < playersTeamJSONArray.length(); ++j) {
 				JSONObject playerTeam = playersTeamJSONArray.getJSONObject(i);
-				list_players.add(new Player(Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0)), playerTeam.getString("name")));
+				list_playersTeam.add(new Player(Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0)), playerTeam.getString("name")));
 			}
-			list_teams.add(new Team(team.getString("name"), Color.valueOfIgnoreCase(team.getString("color").charAt(0)), list_playersTeam));			
-		}			
+			list_teams.add(new Team(team.getString("name"), list_playersTeam));			
+		}
+		
+		List<Cube> list_cubes = new ArrayList<Cube>();
+		JSONArray cubesJSONArray = boardJSONObject.getJSONArray("cubes");
+		for (int i = 0; i < cubesJSONArray.length(); ++i) {
+			JSONObject cube = cubesJSONArray.getJSONObject(i);
+			list_cubes.add(new Cube(cube.getJSONArray("pos").getInt(0), cube.getJSONArray("pos").getInt(1),
+					Player.getPlayer(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)))));
+		}		
 		
 		return new GameTeams(board, list_cubes, list_players, turn, list_teams);
 	}
@@ -104,9 +104,9 @@ public class GameTeamsBuilder extends GameBuilder {
 				 try {
 					 // validamos los datos del jugador
 					 jPlayer = this.validatePlayer(jPlayers, name, color);
-					 // lo añadimos a la lista del equipo al que pertenezca
+					 // lo aï¿½adimos a la lista del equipo al que pertenezca
 					 jPlayersTeam[selectedTeam - 1].put(jPlayer);
-					 // lo añadimos a la lista global de players para game
+					 // lo aï¿½adimos a la lista global de players para game
 					 jPlayers.put(jPlayer);
 					 added = true;
 				 }				 
@@ -127,8 +127,7 @@ public class GameTeamsBuilder extends GameBuilder {
 			jTeams.put(jTeam[i]);
 		}
 		o.put("teams", jTeams);
-		o.put("players", jPlayers);
-		
+		o.put("players", jPlayers);		
 	}
 
 	

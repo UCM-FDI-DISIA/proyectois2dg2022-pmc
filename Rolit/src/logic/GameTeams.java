@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -13,7 +14,7 @@ public class GameTeams extends Game {
 		
 	public GameTeams(GameTeams game) {
 		super(game);
-		// FIXME esto puede que este mal y pero en player lo hacemos así para las replays
+		// FIXME esto puede que este mal y pero en player lo hacemos asï¿½ para las replays
 		this.teams = game.teams;
 	}
 	
@@ -41,7 +42,7 @@ public class GameTeams extends Game {
 		this.board.addCubeInPos(newCube);
 		
 		this.board.update(newCube);
-		// Tras actualizar las puntuaciones de cada jugador de forma correspondiente, entonces actualizamos la puntuación del equipo
+		// Tras actualizar las puntuaciones de cada jugador de forma correspondiente, entonces actualizamos la puntuaciï¿½n del equipo
 		for (Team team : teams)
 			team.update();
 		
@@ -49,16 +50,38 @@ public class GameTeams extends Game {
 		this.finished = board.isBoardFull();
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!this.finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-			return true;
+		if(!this.finished)
+			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		return true;
+	}
+	
+	@Override
+	public String showRanking() {
+		List<Team> teams = new ArrayList<Team>(this.teams);
+		Collections.sort(teams);
+		StringBuilder str = new StringBuilder(RANKING);
+		
+		str.append(StringUtils.LINE_SEPARATOR).append(MSG_REY).append(StringUtils.LINE_SEPARATOR);
+		
+		for (int i = 0; i < teams.size(); i++) {
+			str.append(MSG_POS).append(i + 1).append(":").append(teams.get(i).toString()).append(" " + teams.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
+		}
+		System.out.println("");
+		for (int i = 0; i < players.size(); ++i) {
+			str.append(MSG_POS).append(i + 1).append(":").append(players.get(i).getName() + "from" + Team.getTeam(players.get(i)).toString() + " " + players.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
+		}
+		
+		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
+		
+		return str.toString(); 
 	}
 
 	@Override
 	public String toString() {
-		// TODO creo que se debería mostrar algo de la puntuación de los equipos
+		// TODO creo que se deberï¿½a mostrar algo de la puntuaciï¿½n de los equipos
 		StringBuilder bf = new StringBuilder();
 		bf.append("Turno: ");
-		bf.append(getCurrentPlayer().toString());
+		bf.append(getCurrentPlayer().toString() + " from " + Team.getTeam(getCurrentPlayer())).toString();
 		bf.append(StringUtils.LINE_SEPARATOR);
 		bf.append(board.toString());
 		return bf.toString();

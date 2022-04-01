@@ -7,8 +7,15 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+<<<<<<< HEAD
+import control.Controller;
+
+public class Team implements Reportable {
+	private Color color;
+=======
 public class Team implements Reportable, Comparable<Team> {
 	private static Map<Player, Team> relations = new HashMap<>();
+>>>>>>> master
 	private String name;
 	private int score;
 	private List<Player> players;
@@ -17,6 +24,8 @@ public class Team implements Reportable, Comparable<Team> {
 		this.name = name;
 		this.score = 0;
 		this.players = list_players;
+<<<<<<< HEAD
+=======
 		for (Player p : this.players)
 			relations.put(p, this);
 	}
@@ -24,6 +33,7 @@ public class Team implements Reportable, Comparable<Team> {
 	@Override
 	public int compareTo(Team o) {
 		return -(this.score - o.score);		// lleva el menos delante para denotar que es el >
+>>>>>>> master
 	}
 	
 	public void update() {
@@ -43,6 +53,12 @@ public class Team implements Reportable, Comparable<Team> {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	
+	//lo cree para los test, si no lo necesitamos lo borramos y ya
+	public int getScore() {
+		return score;
 	}
 
 	@Override
