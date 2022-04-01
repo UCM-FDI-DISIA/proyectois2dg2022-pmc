@@ -51,8 +51,11 @@ public enum Shape {
 		return path;
 	}
 	
+	/*
 	@Override
 	public String toString() {
+		
+		this.
 		switch(this.name().charAt(1)) {
 		case 'S':
 			return "Small";
@@ -65,5 +68,7 @@ public enum Shape {
 		return null;
 		
 	}
+	 * */
+	
 	
 }

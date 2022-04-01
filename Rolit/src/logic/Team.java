@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Team implements Reportable, Comparable<Team> {
-	private static Map<Player, Team> relations = new HashMap<>();
+	private static Map<String, Team> relations = new HashMap<>();
 	private String name;
 	private int score;
 	private List<Player> players;
@@ -18,7 +18,7 @@ public class Team implements Reportable, Comparable<Team> {
 		this.score = 0;
 		this.players = list_players;
 		for (Player p : this.players)
-			relations.put(p, this);
+			relations.put(p.getName(), this);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class Team implements Reportable, Comparable<Team> {
 	}
 	
 	public static Team getTeam(Player p) {
-		return relations.get(p);
+		return relations.get(p.getName());
 	}
 	
 	public int getScore() {

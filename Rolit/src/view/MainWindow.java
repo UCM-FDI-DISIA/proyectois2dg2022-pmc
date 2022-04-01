@@ -131,16 +131,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			}
 		}
 		else if(e.getActionCommand().equals("Load game")) {
-			fileChooser = new JFileChooser();
-			int ret = fileChooser.showOpenDialog(loadGameButton);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
+			LoadGameDialog dialog = new LoadGameDialog(MainWindow.this);
+			int status = dialog.open();
+			if (status == 1) {
+				File file = dialog.getFile();
 				game = SaveLoadManager.loadGame(file.getPath());
 				initGame();
-			} 
-			else {
-				//TODO Mostrar algún mensaje
+				
 			}
+			
 		}
 		else if(e.getActionCommand().contentEquals("Load replay")) {
 			

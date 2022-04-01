@@ -54,7 +54,7 @@ public class GameTeamsBuilder extends GameBuilder {
 			List<Player> list_playersTeam = new ArrayList<Player>();
 			JSONArray playersTeamJSONArray = team.getJSONArray("players");
 			for (int j = 0; j < playersTeamJSONArray.length(); ++j) {
-				JSONObject playerTeam = playersTeamJSONArray.getJSONObject(i);
+				JSONObject playerTeam = playersTeamJSONArray.getJSONObject(j);
 				list_playersTeam.add(new Player(Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0)), playerTeam.getString("name")));
 			}
 			list_teams.add(new Team(team.getString("name"), list_playersTeam));			
