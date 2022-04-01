@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  1 APR 2022 12:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  1 APR 2022 13:11
 entering extended mode
 **./DiseñoSprint3.tex
 (DiseñoSprint3.tex
@@ -181,10 +181,10 @@ LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 3386 strings out of 480790
- 49604 string characters out of 2897301
- 309083 words of memory out of 3000000
- 19422 multiletter control sequences out of 15000+200000
+ 3385 strings out of 480790
+ 49591 string characters out of 2897301
+ 309080 words of memory out of 3000000
+ 19421 multiletter control sequences out of 15000+200000
  536027 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  30i,6n,36p,390b,361s stack positions out of 5000i,500n,10000p,200000b,50000s

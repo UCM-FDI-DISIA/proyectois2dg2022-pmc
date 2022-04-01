@@ -1,0 +1,156 @@
+\documentclass{article}
+\title{REFACTORIZACIÓN DEL SPRINT 4}
+\date{\today}
+\author{Grupo PMC}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{listings}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\begin{document}
+\maketitle
+\section*{Introducción}
+Para este Sprint hacía falta introducir todo el diseño orientado a que pueda haber distintos modos de juego. Se quedó a medias en el Sprint anterior por la complejidad que suponía ya que requería de hacer \textit{Game} abstracta y hacer instancias concretas de cada modo de juego. El principal problema viene en la creación del mismo, pues para cada uno se necesita pedir al usuario cosas distintas y en \textit{Controller} no se debería saber nada de qué había por debajo del Game abstracto que él tenía para pedir las cosas necesarias para construir el \textit{Game}.
+
+En consecuencia, se ha solventado el problema pasando toda la funcionalidad de creación del juego a una clase factoría que es el \textit{GameBuilder}. Esto permite que antes de iniciar del juego, dicha clase ya sepa qué tiene que preguntar y como tiene que construir el \textit{Game} en función de la opción que haya marcado el usuario en el \textit{Controller}.
+ 
+
+\section*{Paquete Builders}
+
+El principal punto a favor de esta refactorización es que se ha restringido la creación de un \textit{Game} a la creación del mismo a través de un \textit{JSONObject} SIEMPRE, es decir, el método \textit{createGame(JSONObject o)} solo precisa de un JSON para crear el juego y a partir de él se construye. Esto se ha hecho para que llegue como llegue la información del juego (en línea, de carga de fichero, generado por el usuario...) la factoría siempre sepa como crear el juego en cualquier caso, por tanto, se relega la responsabilidad de crear correctamente el \textit{JSONObject} a cualquiera que cargue la información del juego.
+
+Como los juego se guardan a través de un JSONObject, el \textit{SaveLoadManager} no necesita más que, una vez cargado el JSONObject guardado en el fichero, pedirle a la factoría que lo construya y esta por dentro ya sabe como hacerlo. El mismo procedimiento se pretende para el juego en línea, por ejemplo.
+
+\subsubsection*{GameBuilder}
+Para encapsular dicha funcionalidad y tal y como se ha explicado en la introducción, se creado una clase abstracta \textit{GameBuilder} con método estáticos para la generación del juego. De dicha clase abstracta, extienden otras que son \textbf{factorías específicas} de cada modo de juego concreto y que realmente crean el juego una vez que se recibe el JSONObject.
+
+En general, lo que tenemos es un método \textit{public static Game createGame(JSONObject o)} que genera el juego en GameBuilder que hace lo siguiente:
+\begin{center}
+\begin{lstlisting}[language=Java]
+	public static Game createGame(JSONObject o){
+		String type = o.getString("type");
+		GameBuilder gameGen = GameBuilder.parse(type);
+		if (gameGen == null)
+			throw new IllegalArgumentException("---");
+		else
+			return gameGen.GenerateGame(o);		
+	}
+
+	public static Game createGame(JSONObject o){
+		JSONObject o = GameBuilder.ask();
+		return this.createGame(o); 
+	}
+\end{lstlisting}
+\end{center}
+Es decir, parsea el tipo de juego que se va a generar entre las distintas factorías especializadas en cada juego y cuando alguna hace match con el tipo, entonces esa es la que genera realmente el juego. Sin embargo, no siempre nos llega un JSONObject hecho, si no que necesitamos pedirle al usuario los datos del nuevo juego que quiere generar.
+
+Por el momento y ante la ausencia de envoltura a modo de \textit{Observer} para la consola, el trabajo de preguntar lo hace la propia factoría a través de un método que se llama \textit{private JSONObject ask()} y que se llama cuando se pide generar el juego sin ningún JSON en concreto. Este método genera el JSONObject del juego a través de preguntas generales sobre el mismo (como la creación del tablero o el número de jugadores) y para hacer las preguntas concretas para cada tipo de juego (como el equipo al que puede pertenecer un jugador) se parsea de nuevo el tipo del juego y se llama al método \textit{ask()} de la factoría especializada que terminará de generar el juego correspondiente. Esto permite que la generación del juego siga yendo a través del cuello de botella del JSON y los cambios en el mismo no estropeen el resto de la práctica. El método general quedaría más o menos como:
+\begin{lstlisting}[language=Java]
+	private static JSONObject ask() {
+		JSONObject o = new JSONObject();
+		// elegimos el modo de juego concreto
+		System.out.println(AVAILABLE_MODES_MSG);
+		...
+		o.put("type", type);
+		// Elegimos el numero de jugadores
+		System.out.println(NUMBER_PLAYERS_MSG);
+		int nPlayers = input.nextInt();
+		input.nextLine();
+		while (nPlayers < 2 || nPlayers > Color.size()) {
+		...
+		}
+		...
+		// Elegimos el tablero concreto
+		System.out.print(BOARD_MSG);
+		String board_shape;
+		...
+		o.put("board", new Board(board_shape);
+		// Llamamos al metodo ask especifico de la factoria especializada
+		parse(type).whatINeed(nPlayers, o);
+		o.put("turn", o.getJSONArray("players").getJSONObject(0).get("color"));
+		
+		return o;
+	}
+\end{lstlisting}
+
+\subsubsection*{GameClassicBuilder y GameTeamsBuilder}
+Como se ha mencionado anteriormente, cada modo de juego concreto tiene una factoría especializada que extiende de \textit{GameBuilder} y que sabe crearlo a partir del JSONObject concreto. Estas factorías especializadas a su vez tienen un método \textit{public void whatIneed(JSONObject o)} que reciben el JSONObject generado por el método \textit{ask()} de \textit{GameBuilder} y completan la información del mismo con lo que necesita cada juego en específico cuando se necesita crear el JSONObject para generar el juego. Principalmente solo constan de tres métodos abstractos que tienen que implementar por extender de \textit{GameBuilder} (ya que en esta clase padre son abstractos):
+\begin{lstlisting}[language=Java]
+	protected void whatINeed(int nPlayers, JSONObject o) {
+		...
+	}
+	
+	protected abstract boolean match(String type){
+		...	
+	}
+	
+	protected abstract Game GenerateGame(JSONObject o){
+		...
+	}
+\end{lstlisting}
+
+\section*{Paquete Logic}
+Como se ha añadido la funcionalidad de poder jugar por equipos, ha sido necesaria una refactorización completa de la parte que atañe a la lógica del juego. Se ha tratado de dejar un diseño que minimice el impacto de la creación de un nuevo modo de juego en el resto de funcionalidades como el cargado o el guardado de replays.
+
+\subsubsection*{Game, GameClassic y GameTeams}
+Para poder generar los nuevos modos de juego, la clase \textit{Game} ha pasado a ser una clase abstracta de la que extenderán los futuros modos de juego. Debido a esto, ha sido necesario dejar bien definida la funcionalidad común a todos los juegos (que será la que \textit{Game} se quede como parte de su código) y la parte que corresponde a cada juego en concreto. En consecuencia, se han tenido en cuenta los siguiente criterios:
+\begin{itemize}
+\item Todos los modos de juego siguen teniendo \textit{Players} y \textit{Game} necesita de la lista de jugadores global para tener en cuenta puntuaciones, nombres, etc.
+\item Se necesitan los booleanos para saber si un juego ha terminado o se ha seleccionado salir de un juego.
+\item Siempre tenemos que saber cuál es el turno del jugador correspondiente
+\item Siempre habrá un tablero u otro (porque en el futuro igual puede haber distintos tableros).
+\end{itemize}
+
+Atendiendo a dichos criterios se ha dejado la clase \textit{Game} de la siguiente forma:
+\begin{lstlisting}[language=Java]
+	public abstract class Game implements Replayable {
+		protected boolean finished;
+		protected List<Player> players;
+		protected Board board;
+		protected int currentPlayerIndex;
+		private boolean exit;
+		...Constructores
+		
+		public void setExit() {
+			this.exit = true;
+		}	
+	
+		public boolean exited() {
+			return this.exit;
+		}
+		
+		public boolean isFinished() {
+			return this.finished || this.exit;
+		}
+			
+		public Player getCurrentPlayer() {
+			return this.players.get(currentPlayerIndex);
+		}
+		
+		public abstract boolean play(int x, int y);
+		public abstract String toString();
+		public abstract Game copyMe();
+		public abstract String showRanking();
+		
+		@Override
+		public JSONObject report() {
+			...		
+			gameJSONObject.put("board", board.report());
+			...					
+			gameJSONObject.put("players", playerJSONArray);		
+			gameJSONObject.put("turn", currentPlayerIndex.getColor());
+			
+			return gameJSONObject;
+		}
+	}
+\end{lstlisting}
+
+Claramente, las funcionalidades de jugar un turno (método \textit{play()}), de imprimirse por pantalla, copiarse y mostrar su propio ranking son inherentes al juego concreto seleccionado y por eso se dejan como entidades abstractas propia de cada clase específica. La funcionalidad de \textit{report()} también es inherente a cada tipo de juego, sin embargo, se ha dejado la parte común a todos como método \textit{report()} del \textit{Game} de modo que siempre se llame al de super() y después se añada lo que se requiera en cada clase específica.
+
+La clase nueva, \textit{GameTeams}, únicamente añade una lista de objetos del tipo \textit{Team} puesto que la parte de jugar es la misma que \textit{GameClassic} y la parte específica del report se simplifica gracias a la parte que corresponde a \textit{Team}.
+
+\subsubsection*{Team}
+Se ha creado esta nueva clase para el juego por equipos, posee una lista de jugadores que pertenecen a dicho equipo, un nombre y una puntuación. Su principal método que es \textit{update()} actualiza la puntuación del equipo al final de cada turno sumando las puntuaciones de sus jugadores y posee un método estático que dado un jugador, devuelve el equipo al que pertenece.
+
+\end{document}

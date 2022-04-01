@@ -11,12 +11,13 @@
 \begin{document}
 \maketitle
 
+\section*{Paquetes Logic y Controll}
 \subsubsection*{Controller}
-La clase \textit{Controller} conocía demasiados detalles de implementación del \textit{Game}. Para evitar que se quedase desactualizado y que no fuese operativo ante cambios hemos decidido delegar la funcionalidad de creación del juego y de sus objetos internos a otra clase nueva, la clase \textit{GameGenerator}.
+La clase \textit{Controller} conocía demasiados detalles de implementación del \textit{Game}. Para evitar que se quedase desactualizado y que no fuese operativo ante cambios hemos decidido delegar la funcionalidad de creación del juego y de sus objetos internos a otra clase nueva, la clase \textit{GameBuilder}.
 
 En \textit{Controller} solo subsisten los métodos para mostrar un menú desde el que se elija jugar, cargar u otras funcionalidades extras que se puedan ir añadiendo, los métodos de jugar un turno y el método \textit{run()} que se encarga de hacer funcionar la aplicación.
 
-\subsubsection*{GameGenerator}
+\subsubsection*{GameBuilder}
 Esta clase hace de factoría del \textit{Game} y se encarga de conocer los detalles de su implementación concreta y de pedir al usuario los datos requeridos para crear el juego.
 
 Por el momento, se debe encargar de:

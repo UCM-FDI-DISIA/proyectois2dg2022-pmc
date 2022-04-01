@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  1 APR 2022 12:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  1 APR 2022 21:42
 entering extended mode
-**./documentacionBuilders.tex
-(documentacionBuilders.tex
+**./reports.tex
+(reports.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18>
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -109,11 +109,11 @@ mode.def
 File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count189
 \l__pdf_internal_box=\box47
-) (documentacionBuilders.aux
+) (reports.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
-\openout1 = `documentacionBuilders.aux'.
+\openout1 = `reports.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
@@ -173,31 +173,43 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 12.
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
+7.
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
+
 [1
 
-{C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-(documentacionBuilders.aux
+{C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
+(reports.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 3384 strings out of 480790
- 49609 string characters out of 2897301
- 308118 words of memory out of 3000000
- 19419 multiletter control sequences out of 15000+200000
- 536334 words of font info for 37 fonts, out of 3000000 for 9000
+ 3735 strings out of 480790
+ 52737 string characters out of 2897301
+ 523433 words of memory out of 3000000
+ 19764 multiletter control sequences out of 15000+200000
+ 535988 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,36p,633b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,6n,42p,211b,1348s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiK
 TeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on documentacionBuilders.pdf (1 page, 77098 bytes).
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on reports.pdf (2 pages, 67653 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 33 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

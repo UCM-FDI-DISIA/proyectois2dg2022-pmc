@@ -1,18 +1,15 @@
 \documentclass{article}
+\title{MODIFICACIONES DE HISTORIAS DE USUARIO}
+\date{\today}
+\author{Grupo PMC}
 \usepackage[spanish]{babel}
-
-%%%%%%%%%% Start TeXmacs macros
-\newcommand{\tmem}[1]{{\em #1\/}}
-%%%%%%%%%% End TeXmacs macros
+\usepackage[utf8x]{inputenc}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{soul}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
 
 \begin{document}
-
-\title{MODIFICACIONES DE HISTORIAS DE USUARIO}
-
-\author{Grupo PMC}
-
-\date{4 marzo 2022}
-
 \maketitle
 
 \section{Historias añadidas}
@@ -31,16 +28,30 @@
 \section{Historias modificadas}
 
 \subsection{Segundo Sprint}
-
 \begin{itemize}
   \item 25 febrero de 2022
   \begin{itemize}
-    \item {\strikethrough{{\tmem{Como usuario, me gustaría que se pudiese
-    guardar y cargar partida para continuar más tarde porque permite poner
-    en pausa el juego.}}}}
+    \item \st{Como usuario, me gustar\'{\i}a a que se pudiese guardar y cargar partida para continuar m\'as tarde porque permite poner en pausa el juego.}
     
-    {\tmem{Como usuario, me gustaría poder guardar y cargar distintas
-    partidas, elegiendo el nombre del fichero donde se cargan/guardan.}}
+    \textit{Como usuario, me gustaría poder guardar y cargar distintas partidas, elegiendo el nombre del fichero donde se cargan/guardan.}
+  \end{itemize}
+  \item 1 febrero de 2022
+  \begin{itemize}
+  	\item Como usuario, me gustaría que hubiese varias modalidades de juego sobre rolit:
+		\begin{itemize}
+			\item Clásica
+			\item Por equipos
+			\item \st{Trampa del Ordenador (El ordenador me cambia las cosas)}
+			\item \st{Trampa de cada jugador (Cada jugador tiene un n\'umero fijo de oportunidades de trampa)}
+			\item \st{Bolas especiales.}
+		\end{itemize}
+	\item Como usuario, me gustaría que hubiese varias modalidades de juego sobre rolit:
+		\begin{itemize}
+			\item Clásica
+			\item Por equipos
+			\item Contra la CPU
+			\item Online
+		\end{itemize}
   \end{itemize}
 \end{itemize}
 
