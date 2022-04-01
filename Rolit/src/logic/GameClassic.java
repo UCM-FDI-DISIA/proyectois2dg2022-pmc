@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -61,6 +62,26 @@ public class GameClassic extends Game {
 		JSONObject gameJSONObject = super.report();
 		gameJSONObject.put("type", "GameClassic");
 		return gameJSONObject;
+	}
+	
+	public static void main(String[] args) {
+		Board b = new Board(Shape.DS);
+		Player p1 = new Player(Color.BEIGE, "Juandi");
+		Player p2 = new Player(Color.BLACK, "Leo");
+		Player p3 = new Player(Color.YELLOW, "dani");
+		List<Player> lp = new ArrayList<Player>();
+		lp.add(p1);
+		lp.add(p2);
+		lp.add(p3);
+		List<Cube> lc = new ArrayList<Cube>();
+		Cube c = new Cube(3, 4, p2);
+		Cube c2 = new Cube(3, 5, p1);
+		lc.add(c);
+		lc.add(c2);
+		Game game = new GameClassic(b, lc, lp, Color.BEIGE);
+		game.play(3,6);
+		
+		System.out.print(game.report());
 	}
 }
 
