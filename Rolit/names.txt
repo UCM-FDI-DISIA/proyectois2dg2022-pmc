@@ -1,5 +1,1 @@
-SAVED_GAMES.json
-C:\Users\Usuario\Documents\examples\partidaRolit.json
-C:\Users\Usuario\Documents\examples\SAVED_GAMES.json.json
-C:\Users\sergi\Documents\xxzc.json
-C:\Users\sergi\Documents\aaa.json
+SAVED_GAMES

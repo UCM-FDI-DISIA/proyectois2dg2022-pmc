@@ -33,6 +33,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
+	private JButton deleteGameButton;
 	private JButton loadReplayButton;
 	private JFileChooser fileChooser;
 	private JPanel mainPanel;
@@ -58,6 +59,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		loadGameButton = new JButton("Load game");
 		loadGameButton.setActionCommand("Load game");
 		loadGameButton.addActionListener(this);
+		deleteGameButton = new JButton("Delete game");
+		deleteGameButton.setActionCommand("Delete game");
+		deleteGameButton.addActionListener(this);
 		loadReplayButton = new JButton("Load replay");
 		loadReplayButton.setActionCommand("Load replay");
 		loadReplayButton.addActionListener(this);
@@ -65,6 +69,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		welcomePanel.add(new JLabel("Choose an option"));
 		welcomePanel.add(createGameButton);
 		welcomePanel.add(loadGameButton);
+		welcomePanel.add(deleteGameButton);
 		welcomePanel.add(loadReplayButton);
 		
 		
@@ -90,15 +95,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel.add(gamePanel);
 		//centerPanel.add(rankingPanel);
-		long startTime;
-		long endTime;
 		
 		BoardGUI tablero = new BoardGUI(game);
 		
-		startTime = System.currentTimeMillis();
 		tablero.crearTablero(boardPanel);
-		endTime = System.currentTimeMillis();
-		System.out.println(endTime-startTime);
 		
 		TurnBar turnBar = new TurnBar(game);
 		
@@ -139,6 +139,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				initGame();
 				
 			}
+			
+		}
+		else if(e.getActionCommand().equals("Delete game")) {
+			DeleteGameDialog dialog = new DeleteGameDialog(MainWindow.this);
+			dialog.open();
 			
 		}
 		else if(e.getActionCommand().contentEquals("Load replay")) {

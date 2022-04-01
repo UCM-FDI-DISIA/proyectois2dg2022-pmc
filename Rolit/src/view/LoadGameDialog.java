@@ -7,37 +7,27 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import Builders.GameBuilder;
-import Builders.GameClassicBuilder;
-import Builders.GameTeamsBuilder;
+
 import control.SaveLoadManager;
-import logic.Shape;
 
 public class LoadGameDialog extends JDialog {
 
-	private Frame parent;
 	private int status = 0;
 	
-	private List<String> savedGames;
-	private List<JRadioButton> botones;
+	private List<String> savedGamesPathList;
+	private List<JRadioButton> savedGamesRadioButtons;
 	private ButtonGroup G;
 	
 	private JPanel mainPanel;
@@ -48,7 +38,6 @@ public class LoadGameDialog extends JDialog {
 	
 	public LoadGameDialog(Frame parent) {
 		super(parent, true);
-		this.parent = parent;
 		initGUI();
 	}
 	
@@ -69,7 +58,7 @@ public class LoadGameDialog extends JDialog {
 		mainPanel.add(new JLabel("Found files from "+SaveLoadManager.FULL_DEFAULT_FILENAME+":"));
 		
 		try {
-			savedGames = SaveLoadManager.getListOfSavedGames();
+			savedGamesPathList = SaveLoadManager.getListOfSavedGames();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,13 +67,13 @@ public class LoadGameDialog extends JDialog {
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		
-		botones = new ArrayList<JRadioButton>();
+		savedGamesRadioButtons = new ArrayList<JRadioButton>();
 		G = new ButtonGroup();
 		
-		for (int i = 0; i < savedGames.size(); ++i) {
+		for (int i = 0; i < savedGamesPathList.size(); ++i) {
 			JRadioButton aux = new JRadioButton();
-			aux.setText(savedGames.get(i));
-			botones.add(aux);
+			aux.setText(savedGamesPathList.get(i));
+			savedGamesRadioButtons.add(aux);
 			G.add(aux);
 			buttonsPanel.add(aux);
 		}
@@ -110,9 +99,9 @@ public class LoadGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				status = 1;
-				for (int i = 0; i < botones.size(); ++i)
-					if (botones.get(i).isSelected())
-						file = new File(botones.get(i).getText()); 
+				for (int i = 0; i < savedGamesRadioButtons.size(); ++i)
+					if (savedGamesRadioButtons.get(i).isSelected())
+						file = new File(savedGamesRadioButtons.get(i).getText()); 
 				LoadGameDialog.this.setVisible(false);
 			}
 			

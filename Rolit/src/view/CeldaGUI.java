@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,7 @@ import javax.swing.JButton;
 
 import commands.Command;
 import logic.Board;
+import logic.Color;
 import logic.Cube;
 import logic.Game;
 
@@ -62,15 +62,9 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
-		
-		long startTime;
-		long endTime;
-		startTime = System.currentTimeMillis();
-		
+
 		this.game.addObserver(this);
-		
-		endTime = System.currentTimeMillis();
-		System.out.println(endTime-startTime);
+
 	}
 
 	public int getX() {
@@ -89,7 +83,7 @@ public class CeldaGUI implements RolitObserver {
 		if(this.validButton) {
 			Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
 			if(cube != null) {
-				logic.Color newColor = cube.getColor();
+				Color newColor = cube.getColor();
 				this.iconPath = newColor.getPath();
 				this.filled = true;
 				
@@ -124,7 +118,7 @@ public class CeldaGUI implements RolitObserver {
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
-		update();
+		update(); //FIXME eliminar? para mejorar optimización
 	}
 
 	@Override
@@ -137,7 +131,7 @@ public class CeldaGUI implements RolitObserver {
 	public void onGameFinished() {}
 
 	@Override
-	public void onTurnPlayed(String name, logic.Color color) {
+	public void onTurnPlayed(String name, Color color) {
 		update();
 	}
 

@@ -35,6 +35,14 @@ public class SaveLoadManager {
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
 	
+	public static void SaveLoadManager() {
+		try {
+			names = getListOfSavedGames();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static void saveGame(Reportable game) {
 		saveGame(game, DEFAULT_FILENAME);
 	}
@@ -129,18 +137,33 @@ public class SaveLoadManager {
 		return true;
 	}
 	
-
+	public static boolean removeGame(String filename) {
+		File fileToDelete = new File(filename);
+		boolean exito = fileToDelete.delete();
+		if (exito)
+		{
+			if (names == null) {
+				try {
+					names = getListOfSavedGames();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			names.remove(filename);
+			updateListOfSavedGames();
+		}
+		return exito;
+		
+	}
 	public static void removeGame(int option) throws Exception {
 		names = getListOfSavedGames();
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
 		String filename = names.get(option);
-		File fileToDelete = new File(filename);
-		if (fileToDelete.delete()) {
+		if (removeGame(filename)){
 			System.out.println(SUCCESS_DELETE_MSG);
-			names.remove(filename);
-			updateListOfSavedGames();
 		} else
 			System.out.println(ERROR_DELETE);
 	}
