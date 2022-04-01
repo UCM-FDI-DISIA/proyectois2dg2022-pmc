@@ -11,11 +11,13 @@ import java.io.InputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import commands.Command;
@@ -84,9 +86,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
 		
 		centerPanel = new JPanel(new GridLayout(1, 2));
-		boardPanel = new JPanel();
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
-		//rankingPanel = new JPanel(new GridLayout());
+		boardPanel = new JPanel();
+		rankingPanel = createViewPanel(new JTable(new RankingTableModel));
 		
 		centerPanel.add(gamePanel);
 		//centerPanel.add(rankingPanel);
@@ -147,6 +149,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 	}
 
+	private JPanel createViewPanel(JComponent c, String title) {
+		JPanel p = new JPanel( new BorderLayout() );
+		p.add(new JScrollPane(c));
+		return p;
+	}
+	
 	@Override
 	public void onCommandIntroduced(Game game, Board board, Command command) {
 		// TODO Auto-generated method stub

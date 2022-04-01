@@ -148,4 +148,5 @@ public abstract class Game implements Replayable {
 	public boolean[][] getShapeMatrix() {
 		return this.board.getShapeMatrix();
 	}
+	
 }

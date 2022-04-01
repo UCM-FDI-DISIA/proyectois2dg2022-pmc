@@ -54,7 +54,10 @@ public class GameTeams extends Game {
 		if(!this.finished)
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		
+		Collections.sort(teams);
+		
 		this.onTurnPlayed();
+		
 		return true;
 	}
 	
@@ -106,5 +109,9 @@ public class GameTeams extends Game {
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
 		}
+	}
+	
+	public List<Team> getTeams() {
+		return Collections.unmodifiableList(this.teams);
 	}
 }

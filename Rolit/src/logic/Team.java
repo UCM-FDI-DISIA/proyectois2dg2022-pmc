@@ -42,7 +42,7 @@ public class Team implements Reportable, Comparable<Team> {
 	
 	@Override
 	public String toString() {
-		return this.name;
+		return this.getName();
 	}
 
 	@Override
@@ -54,6 +54,10 @@ public class Team implements Reportable, Comparable<Team> {
 			playersJSONObject.put(p.report());
 		teamJSONObject.put("players", playersJSONObject);
 		return teamJSONObject;
+	}
+	
+	public String getName() {
+		return this.name; 
 	}
 
 }
