@@ -2,11 +2,12 @@ package logic;
 
 import org.json.JSONObject;
 
-public class Player implements Comparable<Player>, Reportable {
+public class Player implements Comparable<Player>, Reportable, Rival {
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
 	private String name;
+	public static final String TYPE = "Player";
 
 	// constructor habitual de un player por defecto
 	public Player(Color c, String name) {
@@ -53,6 +54,11 @@ public class Player implements Comparable<Player>, Reportable {
 	@Override
 	public String toString() {
 		return name + " (" + color.toString() + ")";
+	}
+
+	@Override
+	public String getType() {
+		return TYPE;
 	}
 
 }

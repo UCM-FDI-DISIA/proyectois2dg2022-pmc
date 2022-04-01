@@ -41,7 +41,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel centerPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
-	private JPanel rankingPanel;
 
 	public MainWindow() {
 		super("Rolit");
@@ -85,13 +84,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
 		
-		centerPanel = new JPanel(new GridLayout(1, 2));
+		centerPanel = new JPanel(new GridLayout(1, 1));
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		boardPanel = new JPanel();
-		rankingPanel = createViewPanel(new JTable(new RankingTableModel));
 		
 		centerPanel.add(gamePanel);
-		//centerPanel.add(rankingPanel);
 		long startTime;
 		long endTime;
 		
@@ -102,9 +99,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		endTime = System.currentTimeMillis();
 		System.out.println(endTime-startTime);
 		
-		TurnBar turnBar = new TurnBar(game);
+		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(game);
 		
-		gamePanel.add(turnBar, BorderLayout.PAGE_START);
+		//gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
+		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		
 		this.setContentPane(mainPanel);
@@ -147,12 +145,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		else if(e.getActionCommand().contentEquals("Load replay")) {
 			
 		}
-	}
-
-	private JPanel createViewPanel(JComponent c, String title) {
-		JPanel p = new JPanel( new BorderLayout() );
-		p.add(new JScrollPane(c));
-		return p;
 	}
 	
 	@Override

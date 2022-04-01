@@ -48,8 +48,6 @@ public class GameClassic extends Game {
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		
-		Collections.sort(players);
-		
 		this.onTurnPlayed();
 		
 		return true;
@@ -97,7 +95,8 @@ public class GameClassic extends Game {
 		}
 	}
 	
-	public List<Player> getPlayers() {
+	@Override
+	public List<Rival> getRivals() {
 		return Collections.unmodifiableList(this.players);
 	}
 }

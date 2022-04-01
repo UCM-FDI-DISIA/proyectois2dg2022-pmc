@@ -11,20 +11,24 @@ import logic.Board;
 import logic.Color;
 import logic.Game;
 import logic.Player;
+import logic.Rival;
 
-public abstract class RankingTableModel extends AbstractTableModel implements RolitObserver {
+public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
-	protected Game game;
-	protected String[] _colNames = {"Rivals", "Score"};
-	protected List<String> rivals;
-	private static RankingTableModel[] tables = {
-			new ClassicRankingTableModel(),
-			new TeamsRankingTableModel()
-	};
+	private Game game;
+	private String[] _colNames;
+	private List<Rival> rivals;
+	public static final int NUM_ROWS = 2;
 	
 	public RankingTableModel(Game game) {
 		this.game = game;
-		this.rivals = new ArrayList<>();
+		this.rivals = game.getRivals();
+		this._colNames = new String[this.rivals.size() + 1];
+		this._colNames[0] = this.rivals.get(0).getType() + "s";
+		for(int i = 1; i <= this.rivals.size(); i++) {
+			this._colNames[i] = this.rivals.get(i - 1).getName();
+		}
+		game.addObserver(this);
 	}
 	
 	public void update() {
@@ -43,34 +47,27 @@ public abstract class RankingTableModel extends AbstractTableModel implements Ro
 
 	@Override
 	public int getRowCount() {
-		return rivals.size();
+		return NUM_ROWS;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Object s = null;
-		switch (columnIndex) {
+		switch (rowIndex) {
 		case 0:
-			s = rowIndex;
+			s = _colNames[columnIndex];
 			break;
 		case 1:
-			s = rivals.get(rowIndex);
-			break;
-		case 2:
-			s = rivals.get(rowIndex);
+			if(columnIndex == 0) s = "Score";
+			else s = rivals.get(columnIndex - 1).getScore();
 			break;
 		}
 		return s;
 	}
 
-	public static RankingTable parse(String type) {
-		
-	}
-	
 	@Override
 	public void onTurnPlayed(String name, Color color) {
-		// TODO Auto-generated method stub
-		
+		update();
 	}
 
 	@Override
@@ -81,21 +78,16 @@ public abstract class RankingTableModel extends AbstractTableModel implements Ro
 
 	@Override
 	public void onReplayLeftButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
+		update();
 	}
 
 	@Override
 	public void onReplayRightButton(Game game, Board board) {
-		// TODO Auto-generated method stub
-		
+		update();
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onRegister(Game game, Board board, Command command) {}
 
 	@Override
 	public void onError(String err) {

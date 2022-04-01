@@ -7,11 +7,12 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Team implements Reportable, Comparable<Team> {
+public class Team implements Reportable, Comparable<Team>, Rival {
 	private static Map<Player, Team> relations = new HashMap<>();
 	private String name;
 	private int score;
 	private List<Player> players;
+	public static final String TYPE = "Team";
 	
 	public Team(String name, List<Player> list_players) {
 		this.name = name;
@@ -58,6 +59,11 @@ public class Team implements Reportable, Comparable<Team> {
 	
 	public String getName() {
 		return this.name; 
+	}
+
+	@Override
+	public String getType() {
+		return TYPE;
 	}
 
 }
