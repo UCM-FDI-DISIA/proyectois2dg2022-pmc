@@ -393,8 +393,12 @@ public class CreateGameDialog extends JDialog {
 	private void turnToClassicGameMode() {
 		if (classicPanel.getParent() == mainPanel)
 			mainPanel.remove(classicPanel);
-		else if (teamsPanel.getParent() == mainPanel)
+		else if (teamsPanel.getParent() == mainPanel) {
 			mainPanel.remove(teamsPanel);
+			numberOfTeamsLabel.setVisible(false);
+			teamsSpinner.setVisible(false);
+		}
+			
 		
 		buildClassicPanel();
 		mainPanel.add(classicPanel);

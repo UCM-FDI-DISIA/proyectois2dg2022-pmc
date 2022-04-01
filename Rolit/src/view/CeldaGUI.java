@@ -26,12 +26,17 @@ public class CeldaGUI implements RolitObserver {
 	public static final int SIDE_LENGTH = 48;
 
 	public CeldaGUI(int y, int x, boolean validButton, Game g) {
+		
+		
 		this.x = x;
 		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
 		this.game = g;
 		this.button = new JButton();
+		
+		
+		
 		if(validButton) {
 			this.button.addActionListener(new ActionListener() {
 				@Override
@@ -46,6 +51,9 @@ public class CeldaGUI implements RolitObserver {
 				}
 			});
 		}
+		
+		
+		
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
 		this.iconPath = "resources/icons/emptyCell.png";
@@ -54,7 +62,15 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
+		
+		long startTime;
+		long endTime;
+		startTime = System.currentTimeMillis();
+		
 		this.game.addObserver(this);
+		
+		endTime = System.currentTimeMillis();
+		System.out.println(endTime-startTime);
 	}
 
 	public int getX() {

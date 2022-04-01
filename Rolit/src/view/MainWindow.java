@@ -90,9 +90,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel.add(gamePanel);
 		//centerPanel.add(rankingPanel);
+		long startTime;
+		long endTime;
 		
 		BoardGUI tablero = new BoardGUI(game);
+		
+		startTime = System.currentTimeMillis();
 		tablero.crearTablero(boardPanel);
+		endTime = System.currentTimeMillis();
+		System.out.println(endTime-startTime);
 		
 		TurnBar turnBar = new TurnBar(game);
 		

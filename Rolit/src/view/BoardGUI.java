@@ -24,7 +24,7 @@ public class BoardGUI implements RolitObserver {
 	
 	public BoardGUI(Game game) {
 		this.game = game;
-		
+
 		boolean[][] shapeMatrix = game.getShapeMatrix();
 		
 		this.nFilas = shapeMatrix.length;
@@ -32,11 +32,17 @@ public class BoardGUI implements RolitObserver {
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
+		
+
+		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
 				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game);
 			}
 		}
+		
+		
+		
 
 		this.game.addObserver(this);
 	}
