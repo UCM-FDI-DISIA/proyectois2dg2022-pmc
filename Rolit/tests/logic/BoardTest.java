@@ -117,7 +117,7 @@ public class BoardTest {
 		Cube c4 = new Cube(7, 4, p2);
 		b.addCubeInPos(c4);
 		b.update(c4);
-		
+
 		String s = "{\"shape\":\"SM\",\"cubes\":[{\"color\":\"L\",\"pos\":[3,4]},{\"color\":\"E\",\"pos\":[4,4]},{\"color\":\"E\",\"pos\":[6,4]},{\"color\":\"L\",\"pos\":[7,4]}]}";
 		assertTrue (new JSONObject(s).similar(b.report()));
 	}
