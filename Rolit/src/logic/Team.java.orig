@@ -7,8 +7,13 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Team implements Reportable, Comparable<Team>, Rival {
+<<<<<<< HEAD
+public class Team implements Reportable, Comparable<Team> {
 	private static Map<String, Team> relations = new HashMap<>();
+=======
+public class Team implements Reportable, Comparable<Team>, Rival {
+	private static Map<Player, Team> relations = new HashMap<>();
+>>>>>>> InterfazDani
 	private String name;
 	private int score;
 	private List<Player> players;

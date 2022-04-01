@@ -61,6 +61,7 @@ public abstract class Game implements Replayable {
 	public abstract String toString();
 	public abstract Game copyMe();
 	public abstract String showRanking();
+	public abstract List<Rival> getRivals();
 	
 	public void setExit() {
 		this.exit = true;
@@ -148,4 +149,5 @@ public abstract class Game implements Replayable {
 	public boolean[][] getShapeMatrix() {
 		return this.board.getShapeMatrix();
 	}
+	
 }

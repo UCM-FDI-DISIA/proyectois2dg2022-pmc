@@ -55,6 +55,7 @@ public class GameTeams extends Game {
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		
 		this.onTurnPlayed();
+		
 		return true;
 	}
 	
@@ -111,5 +112,10 @@ public class GameTeams extends Game {
 			
 			o.onTurnPlayed(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
 		}
+	}
+
+	@Override
+	public List<Rival> getRivals() {
+		return Collections.unmodifiableList(this.teams);
 	}
 }

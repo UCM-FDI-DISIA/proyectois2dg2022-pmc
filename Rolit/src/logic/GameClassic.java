@@ -94,5 +94,10 @@ public class GameClassic extends Game {
 			o.onTurnPlayed(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
 		}
 	}
+	
+	@Override
+	public List<Rival> getRivals() {
+		return Collections.unmodifiableList(this.players);
+	}
 }
 

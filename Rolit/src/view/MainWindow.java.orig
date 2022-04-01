@@ -94,6 +94,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		boardPanel = new JPanel();
 		
 		centerPanel.add(gamePanel);
+<<<<<<< HEAD
+		//centerPanel.add(rankingPanel);
+=======
+		long startTime;
+		long endTime;
+>>>>>>> InterfazDani
 		
 		BoardGUI tablero = new BoardGUI(game);
 		
