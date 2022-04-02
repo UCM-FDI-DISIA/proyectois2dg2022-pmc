@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class SaveLoadManager {
 	
 	public static void SaveLoadManager() {
 		try {
-			names = getListOfSavedGames();
+			loadAndUpdateListOfSavedGames();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -122,13 +123,29 @@ public class SaveLoadManager {
 		}
 	}	
 	
-	public static List<String> getListOfSavedGames() throws IOException {
-		return Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+	public static void loadAndUpdateListOfSavedGames() throws IOException {
+		
+		//Comprobamos si la lista está desactualizada, y los archivos
+		//no encontrados se borran de la lista.
+		names = Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
+		
+		for (int i = 0; i < names.size(); ++i) {
+			File fileAux = new File(names.get(i));
+			if (!fileAux.canRead()) {
+				names.remove(i);
+				i--;
+			}
+				
+		}
+		
+		saveListOfSavedGamesToFile();
 	}
 
 	public static boolean showSavedGames() {
 		try (BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
-			names = getListOfSavedGames();
+			
+			loadAndUpdateListOfSavedGames();
+			saveListOfSavedGamesToFile();
 			if (names.size() > 0) {
 				for (int i = 0; i < names.size(); ++i)
 					System.out.println(i + 1 + ". " + names.get(i));
@@ -147,20 +164,20 @@ public class SaveLoadManager {
 		{
 			if (names == null) {
 				try {
-					names = getListOfSavedGames();
+					loadAndUpdateListOfSavedGames();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			names.remove(filename);
-			updateListOfSavedGames();
+			saveListOfSavedGamesToFile();
 		}
 		return exito;
 		
 	}
 	public static void removeGame(int option) throws Exception {
-		names = getListOfSavedGames();
+		loadAndUpdateListOfSavedGames();
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -205,7 +222,7 @@ public class SaveLoadManager {
 		return null;
 	}
 
-	private static void updateListOfSavedGames() {
+	private static void saveListOfSavedGamesToFile() {
 		try (BufferedWriter pointer = new BufferedWriter(new FileWriter(INDEX_FILENAME))) {
 			for (int i = 0; i < names.size(); ++i) {
 				pointer.write(names.get(i));
@@ -219,13 +236,23 @@ public class SaveLoadManager {
 
 	private static void addToListOfSavedGames(String filename) {
 		try {
-			names = getListOfSavedGames();
+			loadAndUpdateListOfSavedGames();
 			if (!names.contains(filename))
 				names.add(filename);
-			updateListOfSavedGames();
+			saveListOfSavedGamesToFile();
 
 		} catch (IOException error_file) {
 			System.out.println(ERROR_SAVE_DEFAULT);
 		}
-	}	
+	}
+	
+	public static List<String> getListOfSavedGames() {
+		try {
+			loadAndUpdateListOfSavedGames();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Collections.unmodifiableList(names);
+	}
 }

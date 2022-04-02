@@ -110,12 +110,8 @@ public class DeleteGameDialog extends JDialog {
 	}
 	
 	public void updateAndShowListGamesPanel() {
-		try {
-			savedGamesPathList = SaveLoadManager.getListOfSavedGames();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
 		
 		if (buttonsPanel != null)
 			buttonsPanel.removeAll();

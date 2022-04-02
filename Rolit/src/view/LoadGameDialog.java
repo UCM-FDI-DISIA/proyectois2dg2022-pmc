@@ -57,12 +57,7 @@ public class LoadGameDialog extends JDialog {
 		
 		mainPanel.add(new JLabel("Found files from "+SaveLoadManager.FULL_DEFAULT_FILENAME+":"));
 		
-		try {
-			savedGamesPathList = SaveLoadManager.getListOfSavedGames();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
 		
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
