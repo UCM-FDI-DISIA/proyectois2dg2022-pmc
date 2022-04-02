@@ -26,11 +26,12 @@ public class CeldaGUI implements RolitObserver {
 	private Game game;
 	private Replay replay;
 	private String iconPath;
-	public static final int SIDE_LENGTH = 48;
+	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 
-	public CeldaGUI(int y, int x, boolean validButton, Game g) {
+	public CeldaGUI(int y, int x, boolean validButton, Game g, int sideLength) {
 		
+		CeldaGUI.SIDE_LENGTH = sideLength;
 		
 		this.x = x;
 		this.y = y;
@@ -72,7 +73,8 @@ public class CeldaGUI implements RolitObserver {
 		this.game.addObserver(this);
 	}
 
-	public CeldaGUI(int y, int x, boolean validButton, Replay replay) {
+	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
+		CeldaGUI.SIDE_LENGTH = sideLength;
 		this.x = x;
 		this.y = y;
 		this.replay = replay;

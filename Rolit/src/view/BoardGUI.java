@@ -26,6 +26,7 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
+
 	public BoardGUI(Game game) {
 		this.game = game;
 
@@ -36,17 +37,13 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
-		
-
+		int sideButtonLength = shapeMatrixToSideButtonLength(shapeMatrix);
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game, sideButtonLength);
 			}
 		}
-		
-		
-		
 
 		this.game.addObserver(this);
 	
@@ -61,15 +58,29 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
+		int sideButtonLength = shape.shapeToSideButtonLength();
+		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], replay);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], replay, sideButtonLength);
 			}
 		}
 		
 		updateReplay();
 
 		this.replay.addObserver(this);
+	}
+	
+	private int shapeMatrixToSideButtonLength(boolean[][] shapeMatrix) {
+		if (shapeMatrix.length > 15)
+			return Shape.BIG_SHAPE_BUTTON_LENGTH;
+		else if (shapeMatrix.length == 15)
+			return Shape.MEDIUM_SHAPE_BUTTON_LENGTH;
+		else if (shapeMatrix.length < 15)
+			return Shape.SMALL_SHAPE_BUTTON_LENGTH;
+
+		
+		return 0;
 	}
 	
 	public void crearTablero(JPanel panel) {
