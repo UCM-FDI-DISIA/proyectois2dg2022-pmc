@@ -117,8 +117,11 @@ public class LoadGameDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
 				int ret = fileChooser.showOpenDialog(loadButton);
-				if (ret == JFileChooser.APPROVE_OPTION)
+				if (ret == JFileChooser.APPROVE_OPTION) {
+					status = 1;
 					file = fileChooser.getSelectedFile();
+				}
+					
 				LoadGameDialog.this.setVisible(false);
 			}
 			

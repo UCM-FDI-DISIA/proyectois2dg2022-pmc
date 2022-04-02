@@ -68,6 +68,7 @@ public class SaveLoadManager {
 	
 	public static Game loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+			tryToAddToListOfSavedGames(filename);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return GameBuilder.createGame(gameJSONObject);
 		} catch (IOException error_file) {
@@ -254,5 +255,18 @@ public class SaveLoadManager {
 			e.printStackTrace();
 		}
 		return Collections.unmodifiableList(names);
+	}
+	
+	private static void tryToAddToListOfSavedGames(String filename) {
+		try {
+			loadAndUpdateListOfSavedGames();
+		} catch (IOException e) { e.printStackTrace();}
+		
+		if (!names.contains(filename)) {
+			names.add(filename);
+			saveListOfSavedGamesToFile();
+		}
+		
+		
 	}
 }
