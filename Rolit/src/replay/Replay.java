@@ -1,7 +1,14 @@
 package replay;
 
+import logic.Board;
+import logic.Color;
+import logic.Cube;
+import logic.Game;
+import logic.GameClassic;
+import logic.Player;
 import logic.Replayable;
 import logic.Reportable;
+import logic.Shape;
 import utils.StringUtils;
 
 import java.util.ArrayList;
@@ -107,4 +114,26 @@ public class Replay implements Reportable {
 
 	}
 	
+	public static void main(String[] args) {
+		Board b = new Board(Shape.SL);
+		Player p1 = new Player(Color.YELLOW, "Juandi");
+		Player p2 = new Player(Color.BROWN, "Leo");
+		Player p3 = new Player(Color.RED, "dani");
+		List<Player> lp = new ArrayList<Player>();
+		lp.add(p1);
+		lp.add(p2);
+		lp.add(p3);
+		List<Cube> lc = new ArrayList<Cube>();
+		Cube c = new Cube(3, 4, p2);
+		Cube c2 = new Cube(3, 5, p1);
+		lc.add(c);
+		lc.add(c2);
+		Game game = new GameClassic(b, lc, lp, Color.YELLOW);
+		game.play(3, 6);
+		
+		Replay replay = new Replay();
+		replay.addState("p", game);
+		
+		System.out.print(replay.report());
+	}
 }
