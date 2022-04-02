@@ -106,8 +106,6 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 
 	@Override
 	public void onReplayLeftButton() {
-		JSONArray cubes = replay.currentStateReport().getJSONObject("game").getJSONObject("board").getJSONArray("cubes");
-		
 		if(lastCubeAdded != null) {
 			JSONArray posLast = lastCubeAdded.getJSONArray("pos");
 			celdas[posLast.getInt(0)][posLast.getInt(1)].resetIcon();// Cuando vamos hacia atrás es necesario quitar los iconos que estuvieran de un estado posterior
@@ -137,7 +135,9 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onGameFinished() {}
+	public void onGameFinished() {
+		
+	}
 
 	@Override
 	public void onTurnPlayed(String name, Color color) {

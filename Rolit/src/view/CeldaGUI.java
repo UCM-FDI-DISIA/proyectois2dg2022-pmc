@@ -16,7 +16,7 @@ import logic.Color;
 import logic.Cube;
 import logic.Game;
 
-public class CeldaGUI implements RolitObserver, ReplayObserver {
+public class CeldaGUI implements RolitObserver {
 
 	private int x;
 	private int y;
@@ -58,7 +58,13 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
 		this.iconPath = EMPTY_ICON_PATH;
-		this.button.setIcon(new ImageIcon(this.iconPath));
+		
+		ImageIcon originalImgIcon = new ImageIcon(EMPTY_ICON_PATH);
+		Image originalImg = originalImgIcon.getImage();
+		Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+		this.button.setIcon(resizedImgIcon);
+		
 		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
@@ -75,13 +81,15 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.button = new JButton();
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
-		this.iconPath = "resources/icons/emptyCell.png";
-		this.button.setIcon(new ImageIcon(this.iconPath));
+		ImageIcon originalImgIcon = new ImageIcon(EMPTY_ICON_PATH);
+		Image originalImg = originalImgIcon.getImage();
+		Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+		this.button.setIcon(resizedImgIcon);
 		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
-		replay.addObserver(this);
 	}
 	
 	public void resetIcon() {
@@ -150,14 +158,6 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onReplayLeftButton() {
-	}
-
-	@Override
-	public void onReplayRightButton() {
-	}
-
-	@Override
 	public void onRegister(Game game, Board board, Command command) {
 
 	}
@@ -185,12 +185,6 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 
 	@Override
 	public void onFirstPlay(String name, Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onReplayStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -38,6 +38,7 @@ import logic.Cube;
 import logic.Game;
 import logic.Player;
 import logic.Shape;
+import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
 	
@@ -70,6 +71,8 @@ public class CreateGameDialog extends JDialog {
 	
 	private List<JPanel> listNameTeamsPanel;
 	private List<JTextArea> listTextAreasTeamsPanels;
+	
+	private JLabel errorLabel;
 	
 	public CreateGameDialog(Frame parent) {
 		super(parent, true);
@@ -119,7 +122,11 @@ public class CreateGameDialog extends JDialog {
 			
 		});
 		
-		teamsSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+		
+		//FIXME bloqueamos el jspinner porque por ahora sólo pueden jugar dos equipos
+		teamsSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 0)); //step 0 para bloquear
+		((JSpinner.DefaultEditor) teamsSpinner.getEditor()).getTextField().setEditable(false);
+		
 		teamsSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -158,9 +165,27 @@ public class CreateGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				game = GameBuilder.createGame(createJSONObjectGame());
-				status = 1;
-				CreateGameDialog.this.setVisible(false);
+				Pair<Boolean, String> pair = checkIfCorrectArguments(); 
+				
+				if (pair.getFirst()) {
+					game = GameBuilder.createGame(createJSONObjectGame());
+					status = 1;
+					CreateGameDialog.this.setVisible(false);	
+					
+				}
+				
+				else {
+					
+					if (errorLabel != null)
+						remove(errorLabel);
+					
+					errorLabel = new JLabel(pair.getSecond());
+					add(errorLabel);
+					repaint();
+					validate();
+					pack();
+				}
+				
 			}
 			
 		});
@@ -435,5 +460,63 @@ public class CreateGameDialog extends JDialog {
 		teamsSpinner.setVisible(true);
 		mainPanel.repaint();
 		pack();
+	}
+	
+	private Pair<Boolean, String> checkIfCorrectArguments() {
+		HashSet<String> playerNames = new HashSet<String>();
+		HashSet<Color> playerColors = new HashSet<Color>();
+		
+		Pair<Boolean, String> pair;
+		
+		
+		for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
+			playerNames.add((String) listPlayerTextAreas.get(i).getText());
+			playerColors.add((Color) listPlayerComboColors.get(i).getSelectedItem());
+		}
+		
+		if (playerNames.size() < (int)playersSpinner.getValue()) //e.d hay un elemento repetido
+		{
+			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated name.");
+			return pair;
+		}
+		if (playerColors.size() < (int)playersSpinner.getValue()) //e.d hay un elemento repetido
+		{
+			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated color.");
+			return pair;
+		}
+		 if (teamsPanel != null && teamsPanel.getParent() == mainPanel) { //e.d estamos en el modo por equipos
+
+			 HashSet<String> teamNames = new HashSet<String>();
+			 
+			 for (int i = 0; i < listTextAreasTeamsPanels.size(); ++i)			 
+				 teamNames.add(listTextAreasTeamsPanels.get(i).getText());
+			 if (teamNames.size() < listTextAreasTeamsPanels.size()) //e.d hay un elemento repetido
+			 {
+				pair = new Pair<Boolean, String>(false, "ERROR: At least one team has a repeated name.");
+				return pair;
+			 }
+			 
+			 
+			 //comprobamos que en todos los equipos hay por
+			 //lo menos un jugador
+			 
+			 for (int i = 0; i < (int)teamsSpinner.getValue(); ++i) {
+				 boolean encontrado = false;
+				 for (int j = 0; j < (int)listComboNumberTeams.size() && !encontrado; ++j) {
+					 if (i == (int)listComboNumberTeams.get(j).getSelectedItem()-1)
+						 encontrado = true;
+				 }
+				 if (!encontrado)
+				 {
+					pair = new Pair<Boolean, String>(false, "ERROR: At least one team is empty.");
+					return pair;
+				}
+			 }
+		 }
+		 
+		pair = new Pair<Boolean, String>(true, "");
+		return pair;
+
+		
 	}
 }
