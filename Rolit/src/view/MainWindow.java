@@ -147,7 +147,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		//mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
+		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);
 		
 		
 		
@@ -230,7 +230,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onStatusChange(String msg) {
+	public void onGameStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}

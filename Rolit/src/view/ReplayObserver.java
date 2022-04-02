@@ -8,4 +8,5 @@ import logic.Game;
 public interface ReplayObserver {
 	void onReplayLeftButton();
 	void onReplayRightButton();
+	void onReplayStatusChange(String msg);
 }

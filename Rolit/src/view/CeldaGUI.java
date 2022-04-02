@@ -178,13 +178,19 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onStatusChange(String msg) {
+	public void onGameStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onFirstPlay(String name, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}

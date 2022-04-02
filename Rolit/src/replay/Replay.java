@@ -63,8 +63,11 @@ public class Replay implements Reportable {
 			onReplayLeftButton();
 			print = true;
 		}
-		else
+		else {
 			System.out.println(PREVIOUS_ERROR);
+			onChangeStatusBar(PREVIOUS_ERROR);
+		}
+			
 	}
 	
 	public void nextState() {
@@ -73,8 +76,11 @@ public class Replay implements Reportable {
 			onReplayRightButton();
 			print = true;
 		}
-		else
+		else {
 			System.out.println(NEXT_ERROR);
+			onChangeStatusBar(NEXT_ERROR);
+		}
+			
 	}
 	
 	private boolean execute(String in) {
@@ -148,6 +154,12 @@ public class Replay implements Reportable {
 	public void onReplayRightButton() {
 		for(ReplayObserver o : observers) {
 			o.onReplayRightButton();
+		}
+	}
+	
+	public void onChangeStatusBar(String msg) {
+		for(ReplayObserver o : observers) {
+			o.onReplayStatusChange(msg);
 		}
 	}
 }

@@ -116,7 +116,7 @@ public abstract class Game implements Replayable {
 	
 	public void onStatusChange(String msg) {
 		for(RolitObserver o : observers) {
-			o.onStatusChange(msg);
+			o.onGameStatusChange(msg);
 		}
 	}
 

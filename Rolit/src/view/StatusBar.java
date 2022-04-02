@@ -9,20 +9,32 @@ import control.Controller;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import replay.Replay;
 
-public class StatusBar extends JPanel implements RolitObserver {
+public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 
 	private Game game;
+	private Replay replay;
 	JLabel statusLabel;
 	private String STATUS_TEXT = "Status: ";
 	
 	public StatusBar(Game game) {
 		this.game = game;
-		statusLabel = new JLabel(STATUS_TEXT);
-		this.add(statusLabel);
+		initGUI();
 		game.addObserver(this);
 	}
 
+	public StatusBar(Replay replay) {
+		this.replay = replay;
+		initGUI();
+		replay.addObserver(this);
+	}
+
+	private void initGUI() {
+		statusLabel = new JLabel(STATUS_TEXT);
+		this.add(statusLabel);
+	}
+	
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
 		// TODO Auto-generated method stub
@@ -52,18 +64,25 @@ public class StatusBar extends JPanel implements RolitObserver {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onStatusChange(String msg) {
+	
+	private void changeStatus(String msg) {
 		this.removeAll();
 		statusLabel = new JLabel(STATUS_TEXT+msg);
 		this.add(statusLabel);
 		this.setPreferredSize(this.getPreferredSize());
 		this.repaint();
 		this.validate();
-		//statusLabel = new JLabel(STATUS_TEXT+msg);
-		//this.add(statusLabel);
-		//statusLabel.paintImmediately(statusLabel.getVisibleRect());
+	}
+
+	@Override
+	public void onGameStatusChange(String msg) {
+		changeStatus(msg);
+	}
+	
+	@Override
+	public void onReplayStatusChange(String msg) {
+		changeStatus(msg);
+		
 	}
 
 	@Override
@@ -71,5 +90,19 @@ public class StatusBar extends JPanel implements RolitObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onReplayLeftButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReplayRightButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

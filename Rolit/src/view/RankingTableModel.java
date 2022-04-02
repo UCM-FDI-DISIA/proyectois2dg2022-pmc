@@ -86,7 +86,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onStatusChange(String msg) {
+	public void onGameStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}
