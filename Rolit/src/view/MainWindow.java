@@ -113,6 +113,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
 		
 		
+		game.onFirstPlay();
 		
 		this.pack();
 		
@@ -230,6 +231,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	@Override
 	public void onStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFirstPlay(String name, Color color) {
 		// TODO Auto-generated method stub
 		
 	}

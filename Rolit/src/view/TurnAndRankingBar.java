@@ -100,4 +100,10 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 		
 	}
 
+	@Override
+	public void onFirstPlay(String name, Color color) {
+		this.onTurnPlayed(name, color);
+		
+	}
+
 }

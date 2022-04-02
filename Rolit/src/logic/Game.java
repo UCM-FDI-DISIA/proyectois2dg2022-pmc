@@ -105,8 +105,9 @@ public abstract class Game implements Replayable {
 		this.observers.remove(o);
 	}
 
+	public abstract void onFirstPlay();
 	public abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
-
+	
 	public void onCommandIntroduced() {
 		for(RolitObserver o : observers) {
 			o.onCommandIntroduced(this, this.board, null);

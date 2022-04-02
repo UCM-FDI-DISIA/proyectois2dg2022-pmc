@@ -66,4 +66,10 @@ public class StatusBar extends JPanel implements RolitObserver {
 		//statusLabel.paintImmediately(statusLabel.getVisibleRect());
 	}
 
+	@Override
+	public void onFirstPlay(String name, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

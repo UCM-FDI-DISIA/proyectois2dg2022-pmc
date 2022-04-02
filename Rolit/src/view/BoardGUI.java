@@ -151,5 +151,11 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 	}
 
+	@Override
+	public void onFirstPlay(String name, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

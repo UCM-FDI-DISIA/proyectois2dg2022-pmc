@@ -91,6 +91,14 @@ public class GameClassic extends Game {
 	}
 
 	@Override
+	public void onFirstPlay() {
+		for(RolitObserver o : observers) {
+			o.onFirstPlay(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
+		}
+		
+	}
+	
+	@Override
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
@@ -101,5 +109,7 @@ public class GameClassic extends Game {
 	public List<Rival> getRivals() {
 		return Collections.unmodifiableList(this.players);
 	}
+
+	
 }
 

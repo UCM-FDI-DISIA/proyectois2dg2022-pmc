@@ -105,13 +105,16 @@ public class GameTeams extends Game {
 	}
 	
 	@Override
+	public void onFirstPlay() {
+		for(RolitObserver o : observers) {
+			o.onFirstPlay(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
+		}
+		
+	}
+	
+	@Override
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
-			Player p = getCurrentPlayer();
-			Team t = Team.getTeam(p);
-			String nombreEquipo = t.toString();
-			Color c = players.get(currentPlayerIndex).getColor();
-			
 			o.onTurnPlayed(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
 		}
 	}
@@ -120,4 +123,5 @@ public class GameTeams extends Game {
 	public List<Rival> getRivals() {
 		return Collections.unmodifiableList(this.teams);
 	}
+
 }
