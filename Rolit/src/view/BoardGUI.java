@@ -145,5 +145,11 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 	}
 
+	@Override
+	public void onStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

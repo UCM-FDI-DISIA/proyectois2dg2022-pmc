@@ -72,7 +72,10 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			int ret = fc.showSaveDialog(this);
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				SaveLoadManager.saveGame(game, file.getPath());
+				String[] commandWords = { "s", file.getPath() };
+				Command command = Command.getCommand(commandWords);
+				command.execute(game);
+
 			} else {
 				//TODO Algo habrá que hacer
 			}
@@ -123,6 +126,12 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 
 	@Override
 	public void onGameFinished() {}
+
+	@Override
+	public void onStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

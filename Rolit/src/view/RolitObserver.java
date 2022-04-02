@@ -11,4 +11,5 @@ public interface RolitObserver {
 	void onCommandIntroduced(Game game, Board board, Command command);
 	void onRegister(Game game, Board board, Command command);
 	void onError(String err);
+	void onStatusChange(String msg);
 }

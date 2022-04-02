@@ -159,7 +159,7 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 
 	@Override
 	public void onRegister(Game game, Board board, Command command) {
-		update(); //FIXME eliminar? para mejorar optimización
+
 	}
 
 	@Override
@@ -175,6 +175,12 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	@Override
 	public void onTurnPlayed(String name, Color color) {
 		update();
+	}
+
+	@Override
+	public void onStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

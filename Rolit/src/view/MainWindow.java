@@ -228,4 +228,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 
+	@Override
+	public void onStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

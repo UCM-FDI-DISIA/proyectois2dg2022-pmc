@@ -112,6 +112,12 @@ public abstract class Game implements Replayable {
 			o.onCommandIntroduced(this, this.board, null);
 		}
 	}
+	
+	public void onStatusChange(String msg) {
+		for(RolitObserver o : observers) {
+			o.onStatusChange(msg);
+		}
+	}
 
 	public void onRegister() {
 		for(RolitObserver o : observers) {

@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import commands.Command;
+import commands.PlaceCubeCommand;
 import control.Controller;
 import logic.Board;
 import logic.Color;
@@ -12,11 +13,14 @@ import logic.Game;
 public class StatusBar extends JPanel implements RolitObserver {
 
 	private Game game;
+	JLabel statusLabel;
+	private String STATUS_TEXT = "Status: ";
 	
 	public StatusBar(Game game) {
 		this.game = game;
-		JLabel statusLabel = new JLabel("Status: ");
+		statusLabel = new JLabel(STATUS_TEXT);
 		this.add(statusLabel);
+		game.addObserver(this);
 	}
 
 	@Override
@@ -47,6 +51,19 @@ public class StatusBar extends JPanel implements RolitObserver {
 	public void onGameFinished() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onStatusChange(String msg) {
+		this.removeAll();
+		statusLabel = new JLabel(STATUS_TEXT+msg);
+		this.add(statusLabel);
+		this.setPreferredSize(this.getPreferredSize());
+		this.repaint();
+		this.validate();
+		//statusLabel = new JLabel(STATUS_TEXT+msg);
+		//this.add(statusLabel);
+		//statusLabel.paintImmediately(statusLabel.getVisibleRect());
 	}
 
 }

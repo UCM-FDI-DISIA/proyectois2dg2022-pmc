@@ -7,7 +7,9 @@ public class SaveCommand extends Command {
 	private static final String NAME = "save";
 	private static final String DETAILS = "[s]ave";
 	private static final String SHORTCUT = "s";
-	private static final String HELP = "save the game";	
+	private static final String HELP = "save the game";
+	private static final String SUCCESS_SAVE_MSG = "Game saved successfully";
+	private static final String ERROR_SAVE_MSG = "Failed to save the file";
 	private String filename;
 	
 	public SaveCommand() {
@@ -17,8 +19,19 @@ public class SaveCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		if(filename == null) SaveLoadManager.saveGame(game);
-		else SaveLoadManager.saveGame(game, filename);
+		boolean success = true;
+		if(filename == null) success = SaveLoadManager.saveGame(game);
+		else success = SaveLoadManager.saveGame(game, filename);
+		if (success) {
+			System.out.println(SUCCESS_SAVE_MSG);
+			game.onStatusChange(SUCCESS_SAVE_MSG);
+		}
+		else {
+			System.out.println(ERROR_SAVE_MSG);
+			game.onStatusChange(SUCCESS_SAVE_MSG);
+			
+		}
+			
 		return false;
 	}
 	

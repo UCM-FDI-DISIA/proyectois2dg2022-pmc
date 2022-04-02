@@ -77,20 +77,16 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	public void onCommandIntroduced(Game game, Board board, Command command) {}
 
 	@Override
-	public void onReplayLeftButton(Game game, Board board) {
-		update();
-	}
-
-	@Override
-	public void onReplayRightButton(Game game, Board board) {
-		update();
-	}
-
-	@Override
 	public void onRegister(Game game, Board board, Command command) {}
 
 	@Override
 	public void onError(String err) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChange(String msg) {
 		// TODO Auto-generated method stub
 		
 	}

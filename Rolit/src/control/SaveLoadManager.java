@@ -43,18 +43,21 @@ public class SaveLoadManager {
 			e.printStackTrace();
 		}
 	}
-	public static void saveGame(Reportable game) {
-		saveGame(game, DEFAULT_FILENAME);
+	public static boolean saveGame(Reportable game) {
+		return saveGame(game, DEFAULT_FILENAME);
 	}
 	
-	public static void saveGame(Reportable game, String filename) {
+	public static boolean saveGame(Reportable game, String filename) {
 		filename += ".json";
 		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			save_file.write(game.report().toString());
-			System.out.println(SUCCESS_SAVE_MSG);
 			addToListOfSavedGames(filename);
+			
+			return true;
+			
 		} catch (IOException error_file) {
-			System.out.println(ERROR_SAVE);
+			
+			return false;
 		}
 	}
 	
