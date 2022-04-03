@@ -116,6 +116,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		game.onFirstPlay();
 		
 		this.pack();
+		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+
 		
 	}
 	
@@ -155,6 +157,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		
 		this.pack();
+		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		
 	}
 	
