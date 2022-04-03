@@ -1,9 +1,22 @@
 package replay;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
+
+import logic.Board;
+import logic.Color;
+import logic.Cube;
+import logic.Game;
+import logic.GameClassic;
+import logic.GameTeams;
+import logic.Player;
 import logic.Replayable;
 import logic.Reportable;
+import logic.Shape;
+import logic.Team;
 import utils.StringUtils;
 
 public class State implements Reportable {

@@ -1,0 +1,35 @@
+package logic;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+
+public class ExitCommandTest {
+@Test
+
+	void executeTest() {
+	Shape shape = Shape.CL;
+	Board board1 = new Board(shape);
+	Player p1 = new Player(Color.PINK, "mar");
+	Cube c1 = new Cube(3,4, p1);
+	Player p2 = new Player(Color.BLUE, "Leo");
+	Cube c2 = new Cube(7, 4, p2);
+	
+	List<Cube> listCubes = new ArrayList<Cube>();
+	listCubes.add(c1);
+	listCubes.add(c2);
+	
+	List<Player> listPlayers = new ArrayList<Player>();
+	listPlayers.add(p1);
+	listPlayers.add(p2);
+	
+	Color currColorPlayer = Color.BLUE;
+	
+	Game game = new Game(board1,listCubes,listPlayers,currColorPlayer);
+	}
+
+}

@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Team implements Reportable, Comparable<Team> {
 	private static Map<String, Team> relations = new HashMap<>();
 =======
@@ -18,18 +19,42 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	private int score;
 	private List<Player> players;
 	public static final String TYPE = "Team";
+=======
+import control.Controller;
+
+public class Team implements Reportable {
+	private Color color;
+=======
+public class Team implements Reportable, Comparable<Team> {
+	private static Map<Player, Team> relations = new HashMap<>();
+>>>>>>> master
+	private String name;
+	private int score;
+	private List<Player> players;
+>>>>>>> jUnits
 	
 	public Team(String name, List<Player> list_players) {
 		this.name = name;
 		this.score = 0;
 		this.players = list_players;
+<<<<<<< HEAD
 		for (Player p : this.players)
 			relations.put(p.getName(), this);
+=======
+<<<<<<< HEAD
+=======
+		for (Player p : this.players)
+			relations.put(p, this);
+>>>>>>> jUnits
 	}
 	
 	@Override
 	public int compareTo(Team o) {
 		return -(this.score - o.score);		// lleva el menos delante para denotar que es el >
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> jUnits
 	}
 	
 	public void update() {
@@ -39,7 +64,11 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	}
 	
 	public static Team getTeam(Player p) {
+<<<<<<< HEAD
 		return relations.get(p.getName());
+=======
+		return relations.get(p);
+>>>>>>> jUnits
 	}
 	
 	public int getScore() {
@@ -48,7 +77,17 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return this.getName();
+=======
+		return this.name;
+	}
+
+	
+	//lo cree para los test, si no lo necesitamos lo borramos y ya
+	public int getScore() {
+		return score;
+>>>>>>> jUnits
 	}
 
 	@Override
@@ -62,6 +101,7 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 		return teamJSONObject;
 	}
 	
+<<<<<<< HEAD
 	public String getName() {
 		return this.name; 
 	}
@@ -69,6 +109,16 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	@Override
 	public String getType() {
 		return TYPE;
+=======
+	public static void main(String[] args) {
+		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
+		Player p2 = new Player(Color.YELLOW, "Leonardo Macias Pasteles");
+		List<Player> l = new ArrayList<Player>();
+		l.add(p1); l.add(p2);
+		Team equipo1 = new Team("Basados", Color.YELLOW, l);
+		
+		System.out.print(equipo1.report());
+>>>>>>> jUnits
 	}
 
 }

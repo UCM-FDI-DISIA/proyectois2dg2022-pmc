@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import control.Controller;
 import control.SaveLoadManager;
 import utils.StringUtils;
 
