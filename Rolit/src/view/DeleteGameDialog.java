@@ -28,6 +28,8 @@ public class DeleteGameDialog extends JDialog {
 	private JPanel mainPanel;
 	private JPanel buttonsPanel;
 	
+	private JLabel errorLabel;
+	
 	private File file;
 	
 	public DeleteGameDialog(Frame parent) {
@@ -63,18 +65,35 @@ public class DeleteGameDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean removedElement = false;
 				for (int i = 0; i < savedGamesCheckBoxList.size(); ++i) {
 					if (savedGamesCheckBoxList.get(i).isSelected())
-						SaveLoadManager.removeGame(savedGamesCheckBoxList.get(i).getText());
+						removedElement = SaveLoadManager.removeGame(savedGamesCheckBoxList.get(i).getText());
 					
 				}
-				updateAndShowListGamesPanel();
+				if (removedElement)
+					updateAndShowListGamesPanel();
+				else {
+					
+					if (errorLabel != null)
+						remove(errorLabel);
+					
+					errorLabel = new JLabel("No file has been selected");
+					add(errorLabel);
+					repaint();
+					validate();
+					pack();
+					
+				}
 			}
 			
 		});
 		
 		mainPanel.add(buttonsPanel);
 		mainPanel.add(deleteButton);
+		
+		if (savedGamesPathList.isEmpty())
+			deleteButton.setVisible(false);
 		
 		
 		JButton closeWindowButton = new JButton("Close Window");

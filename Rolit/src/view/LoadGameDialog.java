@@ -34,6 +34,8 @@ public class LoadGameDialog extends JDialog {
 	private JPanel buttonsPanel;
 	private JPanel okCancelPanel;
 	
+	private JLabel errorLabel;
+	
 	private File file;
 	
 	public LoadGameDialog(Frame parent) {
@@ -94,15 +96,33 @@ public class LoadGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				status = 1;
-				for (int i = 0; i < savedGamesRadioButtons.size(); ++i)
+				for (int i = 0; i < savedGamesRadioButtons.size(); ++i) {
 					if (savedGamesRadioButtons.get(i).isSelected())
 						file = new File(savedGamesRadioButtons.get(i).getText()); 
-				LoadGameDialog.this.setVisible(false);
+				}
+				if (file != null)
+					LoadGameDialog.this.setVisible(false);
+				else {
+					
+					if (errorLabel != null)
+						remove(errorLabel);
+					
+					errorLabel = new JLabel("No file has been selected");
+					add(errorLabel);
+					repaint();
+					validate();
+					pack();
+					
+				}
 			}
 			
 		});
 		
+		
 		okCancelPanel.add(okButton);
+		if (savedGamesPathList.isEmpty())
+			okButton.setVisible(false);
+		
 		okCancelPanel.add(cancelButton);
 		
 		mainPanel.add(okCancelPanel);

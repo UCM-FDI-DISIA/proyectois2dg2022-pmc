@@ -443,6 +443,12 @@ public class CreateGameDialog extends JDialog {
 		mainPanel.add(classicPanel);
 		classicPanel.setVisible(true);
 		mainPanel.repaint();
+		
+		if (errorLabel != null) //Queremos que si hay un mensaje de error, desaparezca
+			remove(errorLabel);
+			
+		repaint();
+		validate();
 		pack();
 		
 	}
@@ -459,6 +465,12 @@ public class CreateGameDialog extends JDialog {
 		numberOfTeamsLabel.setVisible(true);
 		teamsSpinner.setVisible(true);
 		mainPanel.repaint();
+		
+		if (errorLabel != null) //Queremos que si hay un mensaje de error, desaparezca
+			remove(errorLabel);
+			
+		repaint();
+		validate();
 		pack();
 	}
 	
