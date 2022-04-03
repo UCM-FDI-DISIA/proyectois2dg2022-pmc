@@ -82,7 +82,7 @@ public abstract class Game implements Replayable {
 					
 		gameJSONObject.put("players", playerJSONArray);
 		
-		gameJSONObject.put("turn", this.players.get(currentPlayerIndex).getColor());
+		gameJSONObject.put("turn", this.players.get(currentPlayerIndex).getColor().toString());
 		
 		return gameJSONObject;
 	}
