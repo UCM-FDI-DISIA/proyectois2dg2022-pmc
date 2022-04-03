@@ -24,6 +24,9 @@ import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -73,6 +76,8 @@ public class CreateGameDialog extends JDialog {
 	private List<JTextArea> listTextAreasTeamsPanels;
 	
 	private JLabel errorLabel;
+	
+	private final int MAX_TEXT_LENGTH = 15;
 	
 	public CreateGameDialog(Frame parent) {
 		super(parent, true);
@@ -325,7 +330,18 @@ public class CreateGameDialog extends JDialog {
 		
 		for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
 			listPlayerPanels.add(new JPanel());
-			listPlayerTextAreas.add(new JTextArea());
+			JTextArea auxTextArea = new JTextArea();
+			auxTextArea.setDocument(new PlainDocument() {
+			    @Override
+			    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
+			        if (str == null || auxTextArea.getText().length() >= MAX_TEXT_LENGTH) {
+			            return;
+			        }
+			 
+			        super.insertString(offs, str, a);
+			    }
+			});
+			listPlayerTextAreas.add(auxTextArea);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setEditable(true);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setLineWrap(true);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setWrapStyleWord(true);
@@ -375,7 +391,18 @@ public class CreateGameDialog extends JDialog {
 		
 		for (int i = 0; i < (int)teamsSpinner.getValue(); i++) {
 			listNameTeamsPanel.add(new JPanel());
-			listTextAreasTeamsPanels.add(new JTextArea());
+			JTextArea auxTextArea = new JTextArea();
+			auxTextArea.setDocument(new PlainDocument() {
+			    @Override
+			    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
+			        if (str == null || auxTextArea.getText().length() >= MAX_TEXT_LENGTH) {
+			            return;
+			        }
+			 
+			        super.insertString(offs, str, a);
+			    }
+			});
+			listTextAreasTeamsPanels.add(auxTextArea);
 			listTextAreasTeamsPanels.get(listTextAreasTeamsPanels.size() - 1).setEditable(true);
 			listTextAreasTeamsPanels.get(listTextAreasTeamsPanels.size() - 1).setLineWrap(true);
 			listTextAreasTeamsPanels.get(listTextAreasTeamsPanels.size() - 1).setWrapStyleWord(true);
