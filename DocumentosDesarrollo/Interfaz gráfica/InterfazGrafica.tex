@@ -1,0 +1,62 @@
+\documentclass[14pt]{extreport}
+
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{listings}
+\author{Grupo PMC}
+
+\begin{document}
+\title{Interfaz gráfica}
+\maketitle
+
+
+\section*{Pantallas}
+
+\subsection*{Pantalla principal}
+La interfaz comienza con una pantalla en la que se muestran cuatro opciones a elegir por el usuario: \textit{Create new game, Load game, Delete game, Load replay}.
+
+\subsection*{Pantallas de selección de juego y replay}
+
+\subsubsection*{Pantalla ''Create game''}
+En esta pantalla el usuario elige el modo de juego para la partida (\textit{GameClassic} o \textit{GameTeams}), la forma y tamaño del tablero (cuadrado, círculo o rombo, pequeño, mediano o grande), el número de jugadores (entre 2 y 10, ambos inclusive) y el nombre y color de cada jugador.
+
+En caso de seleccionarse el modo por equipos, el usuario introducirá el nombre de ambos equipos y el equipo al que pertenece cada jugador.
+
+Una vez el usuario presiona el botón \textit{OK} se le lleva a la pantalla de juego.
+
+Si el usuario presiona \textit{Cancel} se le lleva de vuelta a la pantalla principal.
+
+\subsubsection*{Pantalla ''Load game''}
+En esta pantalla se muestra una lista con las partidas guardadas, de forma que si se elige una de estas partidas se cargará inmediatamente.
+
+Aparece también debajo un botón de carga de ficheros por si se quiere cargar un fichero que no esté incluido en la lista de partidas guardadas.
+
+\subsubsection*{Pantalla ''Delete game''}
+En esta pantalla se muestra la lista de partidas guardadas y un botón para confirmar el borrado. Con esto, si se selecciona una de las partidas guardadas y se presiona el botón inferior, la lista se elimina de la lista de partidas guardadas.
+
+\subsubsection*{Pantalla ''Load replay''}
+En esta pantalla se muestra un explorador de archivos para que se pueda seleccionar el fichero del que se quiera cargar una replay. Una vez este sea seleccionado se pasa a otra pantalla para visualizar la replay.
+
+\subsection*{Pantalla de juego y replay}
+Esta pantalla se compone fundamentalmente de un tablero en el centro que representa la partida en el estado actual. En el modo replay este tablero solo se puede ver, pero no se puede interactuar con él. En una partida se puede seleccionar cualquier casilla para intentar poner un cubo en tal posición. En caso de hacerse esto, el tablero se actualiza al estado actual del juego.
+
+Encima del tablero se muestra el turno del jugador actual, con su nombre y su color. Al lado, se muestra el ranking de la partida en el estado actual. En el modo \textit{GameClassic} se muestra el ranking por jugadores y en el modo \textit{GameTeams} es muestra el ranking por equipos.
+
+La parte superior de la pantalla se reserva para los botones. En caso de estarse jugando una partida se muestra un botón para guardar partida, el cual se puede presionar en cualquier momento de la partida para guardarla en el mismo estado. En caso de estarse viendo una replay se muestran dos botones, uno para avanzar en la replay y otro para retroceder.
+
+En la parte inferior de la pantalla se muestra una barra de estado en la cual se muestran mensajes de utilidad durante la ejecución. Ejemplos de estos son los siguientes:
+\begin{itemize}
+\item Cuando se está visualizando una replay, si se está en el primer estado de la replay y se le da al botón de retroceder en la replay, se mostrará un mensaje al usuario diciendo que no se puede retroceder más en la replay (de forma similar si se intenta avanzar en el último estado de la replay).
+\item Cuando se guarda una partida, si el guardado se completa de forma exitosa se le mostrará un mensaje al usuario haciéndoselo saber.
+\end{itemize}
+
+\section*{Funcionamiento interno}
+
+\subsection*{Comunicación con las vistas}
+En este proyecto hemos aplicado el patrón MVC. Hay dos modelos: La clase \textit{Game} y la clase \textit{Replay}, que son las encargadas del lanzamiento de notificaciones a las vistas. No hay explícitamente una clase que se encargue del rol de Controlador, sino que son los ActionListeners principalmente los que satisfacen ese rol.
+
+\subsection*{Tablero}
+El tablero (cuya lógica interna está desarrollada en la clase \textit{BoardGUI}) se conforma por una matriz de celdas que representan el contenido de cada celda del juego. Cada celda (cuya lógica interna está desarrollada en la clase \textit{CeldaGUI}) contiene un botón que, al ser presionado, coloca en el juego un cubo perteneciente al jugador del turno. Como el tablero siempre viene dado por una matriz (es decir, es cuadrado), según la forma del juego se podrá interactuar con algunas celdas y con otras no (las cuales se ven en un color oscuro para recalcar la forma), y por tanto, algunas celdas contendrán botones con los que no se puede interactuar. La representación de los colores de los cubos se hace a través de cambiar la imagen de cada botón (las imágenes están almacenadas en el directorio resources/icons).
+
+La ruta del fichero del icono de cada color es un atributo de la clase Color.
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  25 MAR 2022 13:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  3 APR 2022 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -170,25 +170,25 @@ LaTeX Info: Redefining \% on input line 8.
 \c@lstlisting=\count275
 [1
 
-{C:/Users/dgonz/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [1]
-[2] (InterfazGrafica.aux
+{C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [1]
+[2] [3] (InterfazGrafica.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 3793 strings out of 478582
- 61427 string characters out of 2860759
- 375369 words of memory out of 3000000
- 22008 multiletter control sequences out of 15000+600000
- 473351 words of font info for 42 fonts, out of 8000000 for 9000
+ 3797 strings out of 478582
+ 61483 string characters out of 2860753
+ 376369 words of memory out of 3000000
+ 22011 multiletter control sequences out of 15000+600000
+ 473698 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,6n,62p,326b,363s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 55i,6n,62p,880b,363s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Miktex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Miktex/fonts/type1/
 public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr17.pf
-b>
-Output written on InterfazGrafica.pdf (3 pages, 47619 bytes).
+b><C:/Miktex/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on InterfazGrafica.pdf (4 pages, 65999 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
+ 35 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
