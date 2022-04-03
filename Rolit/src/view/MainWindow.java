@@ -130,6 +130,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel = new JPanel(new GridLayout(1, 2));
 		boardPanel = new JPanel();
+		boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));
+		boardPanel.setAlignmentX(CENTER_ALIGNMENT);
+		
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		//rankingPanel = new JPanel(new GridLayout());
 		
@@ -143,7 +146,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		//gamePanel.add(turnBar, BorderLayout.PAGE_START);
 		gamePanel.add(boardPanel, BorderLayout.CENTER);
-		
+
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);

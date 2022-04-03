@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.List;
 
@@ -85,10 +87,18 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	
 	public void crearTablero(JPanel panel) {
 		panel.removeAll();
-		panel.setLayout(new GridLayout(nFilas, nColumnas));
+		GridBagLayout gridbag = new GridBagLayout(); //Queremos que el tamaño del tablero sea fijo
+		panel.setLayout(gridbag);
+		
 		for (int i = 0; i < nFilas; i++) {
+			
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = i;
+			c.gridy = 0;
+			
 			for (int j = 0; j < nColumnas; j++) {
-				panel.add(celdas[i][j].getButton());
+				c.gridy = j;
+				panel.add(celdas[i][j].getButton(), c);
 			}
 		}
 		panel.revalidate();
