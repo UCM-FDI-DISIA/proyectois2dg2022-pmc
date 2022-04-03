@@ -30,21 +30,19 @@ public class GameClassicBuilderTest {
 	
 	@Test
 	void test_4() {
-		// if type is not GameClassic it returns null
-		String inputJson = "{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"kjfniwejnu\",\"pos\":[3,6]}]}}";
+		//TODO definir política valueOfIgnoreCase de Color: ¿primer caracter o analizar toda la cadena encontrada?
+		String inputJson = "{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"zjfniwejnu\",\"pos\":[3,6]}]}}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
 	@Test
 	void test_5() {
-		// if type is not GameClassic it returns null
-		String inputJson = "{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"wf2efq3e\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"kjfniwejnu\",\"pos\":[3,6]}]}}";
+		String inputJson = "{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"wf2efq3e\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"zjfniwejnu\",\"pos\":[3,6]}]}}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
 	@Test
 	void test_6() {
-		// if type is not GameClassic it returns null
 		String inputJson = "{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"color\":\"R\",\"zkjniw\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJson)));
 	}
