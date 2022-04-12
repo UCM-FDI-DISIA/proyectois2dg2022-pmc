@@ -1,11 +1,7 @@
-package view;
+package view.GUIView;
 
-<<<<<<< HEAD
-=======
-import java.awt.Color;
 import replay.Replay;
 
->>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -20,7 +16,7 @@ import logic.Color;
 import logic.Cube;
 import logic.Game;
 
-public class CeldaGUI implements RolitObserver, ReplayObserver {
+public class CeldaGUI implements RolitObserver {
 
 	private int x;
 	private int y;
@@ -30,11 +26,12 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	private Game game;
 	private Replay replay;
 	private String iconPath;
-	public static final int SIDE_LENGTH = 48;
+	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 
-	public CeldaGUI(int y, int x, boolean validButton, Game g) {
+	public CeldaGUI(int y, int x, boolean validButton, Game g, int sideLength) {
 		
+		CeldaGUI.SIDE_LENGTH = sideLength;
 		
 		this.x = x;
 		this.y = y;
@@ -42,14 +39,7 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.filled = false;
 		this.game = g;
 		this.button = new JButton();
-<<<<<<< HEAD
-		
-		
-		
-		if(validButton) {
-=======
 		if (validButton) {
->>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 			this.button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -69,7 +59,13 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
 		this.iconPath = EMPTY_ICON_PATH;
-		this.button.setIcon(new ImageIcon(this.iconPath));
+		
+		ImageIcon originalImgIcon = new ImageIcon(EMPTY_ICON_PATH);
+		Image originalImg = originalImgIcon.getImage();
+		Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+		this.button.setIcon(resizedImgIcon);
+		
 		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
@@ -77,7 +73,8 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.game.addObserver(this);
 	}
 
-	public CeldaGUI(int y, int x, boolean validButton, Replay replay) {
+	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
+		CeldaGUI.SIDE_LENGTH = sideLength;
 		this.x = x;
 		this.y = y;
 		this.replay = replay;
@@ -86,18 +83,15 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		this.button = new JButton();
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
-		this.iconPath = "resources/icons/emptyCell.png";
-		this.button.setIcon(new ImageIcon(this.iconPath));
+		ImageIcon originalImgIcon = new ImageIcon(EMPTY_ICON_PATH);
+		Image originalImg = originalImgIcon.getImage();
+		Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+		this.button.setIcon(resizedImgIcon);
 		this.button.setMinimumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
-<<<<<<< HEAD
-
-		this.game.addObserver(this);
-
-=======
-		replay.addObserver(this);
 	}
 	
 	public void resetIcon() {
@@ -116,7 +110,6 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		// interactuar con el tablero
 
 		this.button.repaint();
->>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 	}
 
 	public int getX() {
@@ -131,25 +124,6 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 		return button;
 	}
 
-<<<<<<< HEAD
-	public void update() {
-		if(this.validButton) {
-			Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
-			if(cube != null) {
-				Color newColor = cube.getColor();
-				this.iconPath = newColor.getPath();
-				this.filled = true;
-				
-				ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
-				Image originalImg = originalImgIcon.getImage();
-				Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH,  java.awt.Image.SCALE_SMOOTH);
-				ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
-				
-				this.button.setIcon(resizedImgIcon);
-			}
-			else this.filled = false; //Por si pudiera desocuparse una casilla en una replay, pero no estoy seguro de esto, porque en las replays no se debe poder interactuar con el tablero
-			
-=======
 	public void update(logic.Color newColor) {
 		if (this.validButton) {
 			this.iconPath = newColor.getPath();
@@ -166,7 +140,6 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 			// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
 			// interactuar con el tablero
 
->>>>>>> ac2fb8185fb106db4d8a32751e3799425d424f24
 			this.button.repaint();
 		}
 	}
@@ -187,16 +160,8 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onReplayLeftButton() {
-	}
-
-	@Override
-	public void onReplayRightButton() {
-	}
-
-	@Override
 	public void onRegister(Game game, Board board, Command command) {
-		update(); //FIXME eliminar? para mejorar optimización
+
 	}
 
 	@Override
@@ -212,6 +177,18 @@ public class CeldaGUI implements RolitObserver, ReplayObserver {
 	@Override
 	public void onTurnPlayed(String name, Color color) {
 		update();
+	}
+
+	@Override
+	public void onGameStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFirstPlay(String name, Color color) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

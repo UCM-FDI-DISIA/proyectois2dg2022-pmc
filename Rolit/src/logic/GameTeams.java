@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import utils.StringUtils;
-import view.RolitObserver;
+import view.GUIView.RolitObserver;
 
 public class GameTeams extends Game {
 	private List<Team> teams;

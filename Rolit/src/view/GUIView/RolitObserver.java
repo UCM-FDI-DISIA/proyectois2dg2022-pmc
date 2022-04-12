@@ -1,4 +1,4 @@
-package view;
+package view.GUIView;
 
 import commands.Command;
 import logic.Board;

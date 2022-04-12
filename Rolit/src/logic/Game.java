@@ -7,7 +7,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import view.RolitObserver;
+import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
 	// TODO deberíamos hacer una clase de constantes gráficas que almacene todas estas cosas

@@ -2,55 +2,31 @@ package control;
 
 import java.util.Scanner;
 
-import Builders.GameBuilder;
 import javax.swing.SwingUtilities;
 
-import Rolit.GameGenerator;
+import org.json.JSONObject;
+
+import Builders.GameBuilder;
 import commands.Command;
 import logic.Game;
 import replay.Replay;
-import view.GamePrinter;
-import view.MainWindow;
+import view.GUIView.GamePrinter;
+import view.GUIView.MainWindow;
 
-public class Controller {
-	private Scanner input;
+public class ControllerConsole {
 	private Game game;
-	private GamePrinter printer;
 	private Replay replay;
-	private static final String PROMPT = "Command > ";
-	private static final String INITIAL_MESSAGE = "Choose an option:";
-	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
-	private final int GO_BACK_INT = -1;
-	private final String HOW_TO_EXIT_MSG = " (" + GO_BACK_INT + " to go back)";
-	private final String NEW_GAME = "New game";
-	private final String LOAD_GAME = "Load game";
-	private final String DELETE_GAME = "Delete a game";
-	private final String LIST_MSG = "List of saved games: ";
-	private final String CHOOSE_NUMBER_MSG = "Choose a number";
-	private final String INVALID_OPTION = "Invalid option. Try again.";
-	private final String REPLAY_GAME = "Replay game";
-	private final String REPLAY_MSG = "Do you want to save the replay of the game? (y/n)";
 	
-	private static final String CHOOSE_MODE = "Choose mode: ";
-	private static final String CONSOLE_MODE = "Console Mode";
-	private static final String GUI_MODE = "GUI Mode";
-	
-	private static final String[] modes = {
-			CONSOLE_MODE,
-			GUI_MODE
-	};
-	
-	
-	private final String[] optionsArray = { NEW_GAME, LOAD_GAME, DELETE_GAME, REPLAY_GAME};
-	private boolean playMode = true;
-	
-	public Controller() {
-		input = new Scanner(System.in);
+	public ControllerConsole() {
 		replay = new Replay();
 	}
-
+	
 	private void printGame() {
-		System.out.println(this.printer);
+		System.out.println(this.game.toString());
+	}
+	
+	private void run() {
+		new Thread();
 	}
 	
 	private int menu() {
@@ -79,7 +55,7 @@ public class Controller {
 		System.out.println(CHOOSE_MODE);
 		
 		for (int i = 0; i < modes.length; ++i)
-			System.out.println(i+1 + ". " + modes[i]);
+			System.out.println(i + 1 + ". " + modes[i]);
 
 		int respuesta = 1;
 		boolean repeat = true;
@@ -98,9 +74,8 @@ public class Controller {
 		boolean refreshDisplay = true;
 		input.nextLine();
 		while (!game.isFinished()) {
-			if (refreshDisplay) {
-				printGame();
-			}
+			if (refreshDisplay) 
+				this.printGame();
 			System.out.print(PROMPT);
 			String s = input.nextLine();
 			String[] parameters = s.toLowerCase().trim().split(" ");
@@ -108,7 +83,7 @@ public class Controller {
 			try {
 				command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
-				replay.addState(s, game.copyMe());
+				replay.addState(s, game.getState());
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println();
@@ -116,18 +91,14 @@ public class Controller {
 		}
 
 		if (refreshDisplay)
-			printGame();
+			this.printGame();
 
-		if (!game.exited())
-			System.out.println(this.printer.showRanking());
+		if (!this.game.exited())
+			System.out.println(this.game.showRanking());
 		
 		if(askSaveReplay())
 			SaveLoadManager.saveReplay(replay);
 		
-	}
-
-	private void createPrinter() {
-		this.printer = new GamePrinter(game);
 	}
 	
 	// FIXME tiene que haber una forma mejor de hacerlo todo
@@ -135,29 +106,22 @@ public class Controller {
 		int selectedMode = mode();
 		
 		if (GUI_MODE.equals(modes[selectedMode-1])) {
-			
-			Controller ctrl = this; //FIXME chapuza del quince
-			
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					MainWindow mainWindow = new MainWindow(ctrl);
+					//;
+					MainWindow mainWindow = new MainWindow();
 				}
 			});
 		}
 		else if (CONSOLE_MODE.equals(modes[selectedMode-1])){
-<<<<<<< HEAD
 			
-			if (NEW_GAME.equals(optionsArray[option - 1]))
-				game = GameBuilder.createGame();
-=======
->>>>>>> fd7ce09 (Desarrollo en CeldaGUI)
 			boolean repeatMenu;
 			do {
 				repeatMenu = false;
 				int option = this.menu();
 				if (NEW_GAME.equals(optionsArray[option - 1]))
-					game = GameGenerator.createGame();
+					game = GameBuilder.createGame();
 				else if (LOAD_GAME.equals(optionsArray[option - 1]))
 				{
 						System.out.println(LIST_MSG);
@@ -219,10 +183,13 @@ public class Controller {
 				}			
 			} while (repeatMenu);
 			if(playMode) {
-				this.createPrinter();
 				this.play();
 			}
 		}
+	}
+	
+	public void createGame(JSONObject jGame) {
+		this.game = GameBuilder.createGame(jGame);
 	}
 	
 	private boolean askSaveReplay() {
@@ -230,6 +197,4 @@ public class Controller {
 		String ans = input.nextLine();
 		return "y".equals(ans.toLowerCase());
 	}
-
-	
 }

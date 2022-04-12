@@ -1,27 +1,21 @@
-package view;
+package view.GUIView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import commands.Command;
-import control.Controller;
 import control.SaveLoadManager;
 import logic.Board;
 import logic.Color;
@@ -30,10 +24,8 @@ import logic.Shape;
 import replay.Replay;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
-
 	private Game game;
 	private Replay replay;
-	private Shape boardShape;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -44,6 +36,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel centerPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
+	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR" };
 
 	public MainWindow() {
 		super("Rolit");
@@ -53,36 +46,82 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private void initGUI() {
 		
 		//Panel de bienvenida
-		welcomePanel = new JPanel();
+		welcomePanel = new JPanel(new FlowLayout());
 		this.setContentPane(welcomePanel);
-		//Botones
+		// Boton de juego nuevo
 		createGameButton = new JButton("Create new game");
-		createGameButton.setActionCommand("Create new game");
+		createGameButton.setActionCommand(BUTTONS[0]);
 		createGameButton.addActionListener(this);
+		// Boton cargar juego
 		loadGameButton = new JButton("Load game");
-		loadGameButton.setActionCommand("Load game");
+		loadGameButton.setActionCommand(BUTTONS[1]);
 		loadGameButton.addActionListener(this);
+		// Boton borrar juego
 		deleteGameButton = new JButton("Delete game");
-		deleteGameButton.setActionCommand("Delete game");
+		deleteGameButton.setActionCommand(BUTTONS[2]);
 		deleteGameButton.addActionListener(this);
+		// Boton cargar replay
 		loadReplayButton = new JButton("Load replay");
-		loadReplayButton.setActionCommand("Load replay");
+		loadReplayButton.setActionCommand(BUTTONS[3]);
 		loadReplayButton.addActionListener(this);
-
+		
+		// Colocar los botones en el panel
 		welcomePanel.add(new JLabel("Choose an option"));
 		welcomePanel.add(createGameButton);
 		welcomePanel.add(loadGameButton);
 		welcomePanel.add(deleteGameButton);
-		welcomePanel.add(loadReplayButton);
-		
-		
+		welcomePanel.add(loadReplayButton);		
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
 	}
 
-	public void initGame() {
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {		
+		switch(e.getActionCommand()) {
+		case "NG":
+			CreateGameDialog dialogNew = new CreateGameDialog(MainWindow.this);
+			int status1 = dialogNew.open();		
+			if (status1 == 1) { // se ha presionado OK
+				// FIXME no puede haber un game aquí
+				game = dialogNew.getNewGame();
+				this.initGame();
+			}
+			else {
+				//TODO Mostrar alg�n tipo de error
+			}			
+			break;
+		case "LG":
+			LoadGameDialog dialogLoad = new LoadGameDialog(MainWindow.this);
+			int status2 = dialogLoad.open();
+			if (status2 == 1) {
+				File file = dialogLoad.getFile();
+				game = SaveLoadManager.loadGame(file.getPath());
+				initGame();			
+			}
+			break;
+		case "DG":
+			DeleteGameDialog dialogDelete = new DeleteGameDialog(MainWindow.this);
+			dialogDelete.open();
+			break;
+		case "LR":
+			fileChooser = new JFileChooser();
+			int ret = fileChooser.showOpenDialog(loadGameButton);
+			if (ret == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				replay = SaveLoadManager.loadReplay(file.getPath());
+				initReplay();
+			} 
+			else {
+				//TODO Mostrar algún mensaje
+			}
+		}
+	}
+	
+	private void initGame() {
 
 		this.remove(welcomePanel);
 		
@@ -121,7 +160,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 	
-	public void initReplay() {
+	private void initReplay() {
 
 		this.remove(welcomePanel);
 		
@@ -159,50 +198,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Create new game")) {
-			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this);
-			int status = dialog.open();
-			
-			if (status == 1) { //e.d. se ha presionado OK
-				game = dialog.getNewGame();
-				initGame();
-			}
-			else {
-				//TODO Mostrar alg�n tipo de error
-			}
-		}
-		else if(e.getActionCommand().equals("Load game")) {
-			LoadGameDialog dialog = new LoadGameDialog(MainWindow.this);
-			int status = dialog.open();
-			if (status == 1) {
-				File file = dialog.getFile();
-				game = SaveLoadManager.loadGame(file.getPath());
-				initGame();
-				
-			}
-			
-		}
-		else if(e.getActionCommand().equals("Delete game")) {
-			DeleteGameDialog dialog = new DeleteGameDialog(MainWindow.this);
-			dialog.open();
-			
-		}
-		else if(e.getActionCommand().contentEquals("Load replay")) {
-			fileChooser = new JFileChooser();
-			int ret = fileChooser.showOpenDialog(loadGameButton);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
-				replay = SaveLoadManager.loadReplay(file.getPath());
-				initReplay();
-			} 
-			else {
-				//TODO Mostrar algún mensaje
-			}
-		}
 	}
 	
 	@Override

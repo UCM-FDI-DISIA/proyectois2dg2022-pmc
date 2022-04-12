@@ -3,9 +3,9 @@ package replay;
 import logic.Replayable;
 import logic.Reportable;
 import utils.StringUtils;
-import view.Observable;
-import view.ReplayObserver;
-import view.RolitObserver;
+import view.GUIView.Observable;
+import view.GUIView.ReplayObserver;
+import view.GUIView.RolitObserver;
 
 import java.util.ArrayList;
 import java.util.List;

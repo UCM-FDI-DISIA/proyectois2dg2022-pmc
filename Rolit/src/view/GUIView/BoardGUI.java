@@ -1,4 +1,4 @@
-package view;
+package view.GUIView;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
