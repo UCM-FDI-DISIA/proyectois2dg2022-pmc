@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import Builders.GameBuilder;
-import Rolit.ClientRolit;
+import client.Client;
 import commands.Command;
 import control.SaveLoadManager;
 import view.BoardGUI;
@@ -15,9 +15,9 @@ public class GameTransfer {
 	
 	private Game game;
 	private boolean puedeJugar;
-	private ClientRolit clientRolit;
+	private Client clientRolit;
 	
-	public GameTransfer(ClientRolit clientRolit) {
+	public GameTransfer(Client clientRolit) {
 		this.clientRolit = clientRolit;
 		this.puedeJugar = false;
 	}

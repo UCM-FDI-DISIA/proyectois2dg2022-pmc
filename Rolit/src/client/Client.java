@@ -1,15 +1,15 @@
-package Rolit;
+package client;
 
 import org.json.JSONObject;
 
 import view.MainWindow;
 
-public class ClientRolit {
+public class Client {
 
 	private MainWindow mainWindow;
 	private ClientController clientController;
 	
-	public ClientRolit() {
+	public Client() {
 		
 		mainWindow = new MainWindow(this);
 		

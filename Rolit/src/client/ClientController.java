@@ -1,4 +1,4 @@
-package Rolit;
+package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import view.MainWindow;
  */
 public class ClientController extends Thread{
 
-	private ClientRolit clientRolit;
+	private Client clientRolit;
 	boolean puedeJugar = false;
 
 	/*
@@ -41,7 +41,7 @@ public class ClientController extends Thread{
 	 * @param port 		Port of server
 	 * @see 				View#displayError(String)
 	 */
-	public ClientController(ClientRolit clientRolit, String ipAdress, int port){
+	public ClientController(Client clientRolit, String ipAdress, int port){
 		this.clientRolit = clientRolit;
 
 		try {

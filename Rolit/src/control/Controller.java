@@ -3,7 +3,7 @@ package control;
 import java.util.Scanner;
 
 import Builders.GameBuilder;
-import Rolit.ClientRolit;
+import client.Client;
 
 import javax.swing.SwingUtilities;
 
@@ -136,8 +136,7 @@ public class Controller {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					//;
-					ClientRolit c = new ClientRolit();
+					Client c = new Client();
 				}
 			});
 		}

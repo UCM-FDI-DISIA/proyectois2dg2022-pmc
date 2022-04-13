@@ -22,8 +22,8 @@ import javax.swing.JTable;
 
 import org.json.JSONObject;
 
-import Rolit.ClientController;
-import Rolit.ClientRolit;
+import client.ClientController;
+import client.Client;
 import commands.Command;
 import control.Controller;
 import control.SaveLoadManager;
@@ -37,11 +37,9 @@ import server.Server;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
-	private ClientRolit clientRolit;
-	private ClientController clientController;
+	private Client clientRolit;
 	private GameTransfer gameTransfer;
 	private Replay replay;
-	private Shape boardShape;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -55,7 +53,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 
-	public MainWindow(ClientRolit clientRolit) {
+	public MainWindow(Client clientRolit) {
 		super("Rolit");
 		this.clientRolit = clientRolit;
 		initGUI();
