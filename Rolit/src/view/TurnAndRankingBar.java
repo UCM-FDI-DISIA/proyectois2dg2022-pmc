@@ -18,10 +18,11 @@ import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 
 public class TurnAndRankingBar extends JPanel implements RolitObserver {
 
-	private Game game;
+	private GameTransfer game;
 	private JLabel msgLabel;
 	private JLabel colorLabel;
 	private JPanel rankingPanel;
@@ -31,10 +32,10 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	public static final int ROW_HEIGHT = 20;
 	public static final int COLUMN_WIDTH = 50;
 	
-	public TurnAndRankingBar(Game game) {
-		this.game = game;
+	public TurnAndRankingBar(GameTransfer gameTransfer) {
+		this.game = gameTransfer;
 		initGUI();
-		game.addObserver(this);
+		gameTransfer.addObserver(this);
 	}
 	
 	public void initGUI() {

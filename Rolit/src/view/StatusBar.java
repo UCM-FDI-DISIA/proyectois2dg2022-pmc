@@ -9,19 +9,20 @@ import control.Controller;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 import replay.Replay;
 
 public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 
-	private Game game;
+	private GameTransfer game;
 	private Replay replay;
 	JLabel statusLabel;
 	private String STATUS_TEXT = "Status: ";
 	
-	public StatusBar(Game game) {
-		this.game = game;
+	public StatusBar(GameTransfer gameTransfer) {
+		this.game = gameTransfer;
 		initGUI();
-		game.addObserver(this);
+		gameTransfer.addObserver(this);
 	}
 
 	public StatusBar(Replay replay) {

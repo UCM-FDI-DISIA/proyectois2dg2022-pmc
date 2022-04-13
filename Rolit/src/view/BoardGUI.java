@@ -16,6 +16,7 @@ import control.SaveLoadManager;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 import logic.Shape;
 import replay.Replay;
 
@@ -24,15 +25,15 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private int nFilas;
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
-	private Game game;
+	private GameTransfer gameTransfer;
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
 
-	public BoardGUI(Game game) {
-		this.game = game;
+	public BoardGUI(GameTransfer gameTransfer) {
+		this.gameTransfer = gameTransfer;
 
-		boolean[][] shapeMatrix = game.getShapeMatrix();
+		boolean[][] shapeMatrix = gameTransfer.getShapeMatrix();
 		
 		this.nFilas = shapeMatrix.length;
 		this.nColumnas = shapeMatrix[0].length;
@@ -43,11 +44,11 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game, sideButtonLength);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], gameTransfer, sideButtonLength);
 			}
 		}
 
-		this.game.addObserver(this);
+		this.gameTransfer.addObserver(this);
 	
 	}
 	

@@ -18,19 +18,20 @@ import control.SaveLoadManager;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 import replay.Replay;
 
 public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
-	private Game game;
+	private GameTransfer gameTransfer;
 	private Replay replay;
 	private JFileChooser fc;
 	private JButton saveFileBtn;
 	private JButton replayRightBtn;
 	private JButton replayLeftBtn;
 	
-	public ControlPanel(Game game) {
-		this.game = game;
+	public ControlPanel(GameTransfer gameTransfer) {
+		this.gameTransfer = gameTransfer;
 		
 		//SaveFile
 		saveFileBtn = new JButton();
@@ -74,7 +75,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 				File file = fc.getSelectedFile();
 				String[] commandWords = { "s", file.getPath() };
 				Command command = Command.getCommand(commandWords);
-				command.execute(game);
+				gameTransfer.executeCommand(command);
 
 			} else {
 				//TODO Algo habrá que hacer

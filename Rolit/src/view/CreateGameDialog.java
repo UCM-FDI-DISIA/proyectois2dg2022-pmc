@@ -39,13 +39,14 @@ import logic.Board;
 import logic.Color;
 import logic.Cube;
 import logic.Game;
+import logic.GameTransfer;
 import logic.Player;
 import logic.Shape;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
 	
-	private Game game;
+	private GameTransfer gameTransfer;
 	private Frame parent;
 	private int status;
 	
@@ -82,6 +83,7 @@ public class CreateGameDialog extends JDialog {
 	public CreateGameDialog(Frame parent) {
 		super(parent, true);
 		this.parent = parent;
+		this.gameTransfer = new GameTransfer();
 		initGUI();
 	}
 	
@@ -173,7 +175,7 @@ public class CreateGameDialog extends JDialog {
 				Pair<Boolean, String> pair = checkIfCorrectArguments(); 
 				
 				if (pair.getFirst()) {
-					game = GameBuilder.createGame(createJSONObjectGame());
+					gameTransfer.createGame(createJSONObjectGame());
 					status = 1;
 					CreateGameDialog.this.setVisible(false);	
 					
@@ -259,8 +261,8 @@ public class CreateGameDialog extends JDialog {
 		return (int) playersSpinner.getValue();
 	}
 	
-	public Game getNewGame() {
-		return this.game;
+	public GameTransfer getNewGame() {
+		return this.gameTransfer;
 	}
 	
 	public Shape getNewShape() {

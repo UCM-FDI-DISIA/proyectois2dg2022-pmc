@@ -18,6 +18,7 @@ public abstract class Game implements Replayable {
 	
 	protected boolean finished;
 	protected List<Player> players;
+	
 	protected Replayable state;
 	protected Board board;
 	protected int currentPlayerIndex;
@@ -148,4 +149,10 @@ public abstract class Game implements Replayable {
 	public Replayable getState() {
 		return state;
 	}
+	
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
+	}
+
+	
 }

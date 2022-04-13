@@ -159,6 +159,8 @@ public class Board implements Reportable {
 		
 		return str.toString();
 	}
+	
+	
 
 	private boolean isPositionInRange(int x, int y) {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];

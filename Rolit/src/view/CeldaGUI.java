@@ -15,6 +15,7 @@ import logic.Board;
 import logic.Color;
 import logic.Cube;
 import logic.Game;
+import logic.GameTransfer;
 
 public class CeldaGUI implements RolitObserver {
 
@@ -23,13 +24,13 @@ public class CeldaGUI implements RolitObserver {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
-	private Game game;
+	private GameTransfer gameTransfer;
 	private Replay replay;
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 
-	public CeldaGUI(int y, int x, boolean validButton, Game g, int sideLength) {
+	public CeldaGUI(int y, int x, boolean validButton, GameTransfer gameTransfer, int sideLength) {
 		
 		CeldaGUI.SIDE_LENGTH = sideLength;
 		
@@ -37,7 +38,7 @@ public class CeldaGUI implements RolitObserver {
 		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
-		this.game = g;
+		this.gameTransfer = gameTransfer;
 		this.button = new JButton();
 		if (validButton) {
 			this.button.addActionListener(new ActionListener() {
@@ -46,8 +47,9 @@ public class CeldaGUI implements RolitObserver {
 
 					if (!filled) {
 						String[] commandWords = { "p", Integer.toString(x), Integer.toString(y) };
+						
 						Command command = Command.getCommand(commandWords);
-						command.execute(game);
+						gameTransfer.executeCommand(command);
 					}
 
 				}
@@ -70,7 +72,7 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
-		this.game.addObserver(this);
+		this.gameTransfer.addObserver(this);
 	}
 
 	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
@@ -145,7 +147,7 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	public void update() {
-		Cube cube = this.game.getBoard().getCubeInPos(this.x, this.y);
+		Cube cube = this.gameTransfer.getCubeInPos(this.x, this.y);
 		if (cube != null) {
 			logic.Color newColor = cube.getColor();
 			update(newColor);

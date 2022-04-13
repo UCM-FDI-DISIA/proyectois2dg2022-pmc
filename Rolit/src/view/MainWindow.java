@@ -26,12 +26,13 @@ import control.SaveLoadManager;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 import logic.Shape;
 import replay.Replay;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 
-	private Game game;
+	private GameTransfer gameTransfer;
 	private Replay replay;
 	private Shape boardShape;
 	private JPanel welcomePanel;
@@ -97,23 +98,23 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel.add(gamePanel);
 		
-		BoardGUI tablero = new BoardGUI(game);
+		BoardGUI tablero = new BoardGUI(gameTransfer);
 		
 		tablero.crearTablero(boardPanel);
 		
-		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(game);
+		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(gameTransfer);
 		
 		//gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		
 		this.setContentPane(mainPanel);
-		mainPanel.add(new ControlPanel(game), BorderLayout.PAGE_START);
+		mainPanel.add(new ControlPanel(gameTransfer), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(game),BorderLayout.PAGE_END);
+		mainPanel.add(new StatusBar(gameTransfer),BorderLayout.PAGE_END);
 		
 		
-		game.onFirstPlay();
+		gameTransfer.onFirstPlay();
 		
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
@@ -168,7 +169,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status = dialog.open();
 			
 			if (status == 1) { //e.d. se ha presionado OK
-				game = dialog.getNewGame();
+				gameTransfer = dialog.getNewGame();
 				initGame();
 			}
 			else {
@@ -180,7 +181,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status = dialog.open();
 			if (status == 1) {
 				File file = dialog.getFile();
-				game = SaveLoadManager.loadGame(file.getPath());
+				gameTransfer.loadGame(file.getPath());
 				initGame();
 				
 			}

@@ -10,25 +10,26 @@ import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Game;
+import logic.GameTransfer;
 import logic.Player;
 import logic.Rival;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
-	private Game game;
+	private GameTransfer gameTransfer;
 	private String[] _colNames;
 	private List<Rival> rivals;
 	public static final int NUM_ROWS = 2;
 	
-	public RankingTableModel(Game game) {
-		this.game = game;
-		this.rivals = game.getRivals();
+	public RankingTableModel(GameTransfer gameTransfer) {
+		this.gameTransfer = gameTransfer;
+		this.rivals = gameTransfer.getRivals();
 		this._colNames = new String[this.rivals.size() + 1];
 		this._colNames[0] = this.rivals.get(0).getType() + "s";
 		for(int i = 1; i <= this.rivals.size(); i++) {
 			this._colNames[i] = this.rivals.get(i - 1).getName();
 		}
-		game.addObserver(this);
+		gameTransfer.addObserver(this);
 	}
 	
 	public void update() {
