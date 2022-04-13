@@ -14,10 +14,12 @@ import view.RolitObserver;
 public class GameTransfer {
 	
 	private Game game;
+	private boolean puedeJugar;
 	private ClientRolit clientRolit;
 	
 	public GameTransfer(ClientRolit clientRolit) {
 		this.clientRolit = clientRolit;
+		this.puedeJugar = false;
 	}
 
 	public void onFirstPlay() {
@@ -50,8 +52,11 @@ public class GameTransfer {
 	}
 
 	public void executeCommand(Command command) {
-		command.execute(game);
-		clientRolit.updateGameToServer();
+		if (puedeJugar) {	
+			command.execute(game);
+			clientRolit.updateGameToServer();
+		}
+		
 	}
 
 	public void createGame(JSONObject createJSONObjectGame) {
@@ -64,9 +69,15 @@ public class GameTransfer {
 		
 	}
 
-	public void updateGame(JSONObject JSONJuegoNuevo) {
+	public void updateGame(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
 		game = GameBuilder.createGame(JSONJuegoNuevo);
+		this.puedeJugar = puedeJugar; 
 		
 	}
 
+	public void updateGame(boolean puedeJugar) {
+		this.puedeJugar = puedeJugar;
+		
+	}
+	
 }

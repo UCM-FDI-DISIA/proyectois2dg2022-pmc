@@ -21,8 +21,12 @@ public class ClientRolit {
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
-		mainWindow.updateGameFromServer(JSONJuegoNuevo);
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
+		mainWindow.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
+	}
+	
+	public void updateGameFromServer(boolean puedeJugar) {
+		mainWindow.updateGameFromServer(puedeJugar);
 		
 	}
 
@@ -36,4 +40,6 @@ public class ClientRolit {
 		clientController.updateGameToServer();
 		
 	}
+
+	
 }

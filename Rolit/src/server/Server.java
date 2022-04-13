@@ -105,10 +105,13 @@ public class Server {
 					parPlayerServerClient = new Pair<Player, ServerClient>(p2, new ServerClient(p2, parPlayerSocket.getSecond(), Server.this));
 					clients.add(parPlayerServerClient);
 					
+					clients.get(turno).getSecond().setTurn();
+					
 					for (int i = 0; i < clients.size(); ++i) {
 						clients.get(i).getSecond().updateGraphics(firstReport);
-						
 					}
+					
+					
 					
 					
 				} catch (IOException e) {
@@ -129,13 +132,18 @@ public class Server {
 	 */
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
 
+		
+		turno = (turno+1)%clients.size();
+		
+		clients.get(turno).getSecond().setTurn();
+		
 		for (int i = 0; i < clients.size(); ++i) {
 			if (client != clients.get(i).getSecond())
 				clients.get(i).getSecond().updateGraphics(json);
 			
 		}
 		
-		turno = (turno+1)%clients.size();
+		
 		
 	}
 

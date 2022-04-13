@@ -298,11 +298,16 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
 		if (gameTransfer == null)
 			gameTransfer = new GameTransfer(clientRolit);
-		gameTransfer.updateGame(JSONJuegoNuevo);
+		gameTransfer.updateGame(JSONJuegoNuevo, puedeJugar);
 		initGame();
+		
+	}
+
+	public void updateGameFromServer(boolean puedeJugar) {
+		gameTransfer.updateGame(puedeJugar);
 		
 	}
 

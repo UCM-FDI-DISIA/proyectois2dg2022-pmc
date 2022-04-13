@@ -43,6 +43,10 @@ public class ServerClient {
 		thread.updateGraphics(json);
 	}
 	
+	public void setTurn() {
+		thread.setTurn();
+	}
+	
 
 	/**
 	 * @return	The color of the player

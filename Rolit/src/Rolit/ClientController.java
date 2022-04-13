@@ -22,6 +22,7 @@ import view.MainWindow;
 public class ClientController extends Thread{
 
 	private ClientRolit clientRolit;
+	boolean puedeJugar = false;
 
 	/*
 	 * Server stuff
@@ -55,8 +56,9 @@ public class ClientController extends Thread{
 	
 
 	public void updateGameToServer() {
+		puedeJugar = false;
+		clientRolit.updateGameFromServer(puedeJugar);
 		out.println(clientRolit.getGameReport().toString());
-		
 	}
 
 	
@@ -70,10 +72,16 @@ public class ClientController extends Thread{
 	public void run(){
 		try {
 			while(true){
-
+				
 				String msgFromServer = in.readLine();
-				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
-				clientRolit.updateGameFromServer(JSONJuegoNuevo);
+				if (msgFromServer.equals("Es tu turno")) {
+					puedeJugar = true;
+				}
+				else {
+					JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+					clientRolit.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
+				}
+				
 
 			} 
 
