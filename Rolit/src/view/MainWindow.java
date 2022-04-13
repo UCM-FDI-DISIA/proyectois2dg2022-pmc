@@ -20,6 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import org.json.JSONObject;
+
+import Rolit.ClientController;
+import Rolit.ClientRolit;
 import commands.Command;
 import control.Controller;
 import control.SaveLoadManager;
@@ -29,9 +33,12 @@ import logic.Game;
 import logic.GameTransfer;
 import logic.Shape;
 import replay.Replay;
+import server.Server;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
-
+	
+	private ClientRolit clientRolit;
+	private ClientController clientController;
 	private GameTransfer gameTransfer;
 	private Replay replay;
 	private Shape boardShape;
@@ -40,14 +47,17 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton loadGameButton;
 	private JButton deleteGameButton;
 	private JButton loadReplayButton;
+	private JButton createServerButton;
+	private JButton joinServerButton;
 	private JFileChooser fileChooser;
 	private JPanel mainPanel;
 	private JPanel centerPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 
-	public MainWindow() {
+	public MainWindow(ClientRolit clientRolit) {
 		super("Rolit");
+		this.clientRolit = clientRolit;
 		initGUI();
 	}
 	
@@ -56,25 +66,40 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		//Panel de bienvenida
 		welcomePanel = new JPanel();
 		this.setContentPane(welcomePanel);
+		
 		//Botones
+		
 		createGameButton = new JButton("Create new game");
 		createGameButton.setActionCommand("Create new game");
 		createGameButton.addActionListener(this);
+		
 		loadGameButton = new JButton("Load game");
 		loadGameButton.setActionCommand("Load game");
 		loadGameButton.addActionListener(this);
+		
 		deleteGameButton = new JButton("Delete game");
 		deleteGameButton.setActionCommand("Delete game");
 		deleteGameButton.addActionListener(this);
+		
 		loadReplayButton = new JButton("Load replay");
 		loadReplayButton.setActionCommand("Load replay");
 		loadReplayButton.addActionListener(this);
+		
+		createServerButton = new JButton("Create Server");
+		createServerButton.setActionCommand("Create Server");
+		createServerButton.addActionListener(this);
+		
+		joinServerButton = new JButton("Join Server");
+		joinServerButton.setActionCommand("Join Server");
+		joinServerButton.addActionListener(this);
 
 		welcomePanel.add(new JLabel("Choose an option"));
 		welcomePanel.add(createGameButton);
 		welcomePanel.add(loadGameButton);
 		welcomePanel.add(deleteGameButton);
 		welcomePanel.add(loadReplayButton);
+		welcomePanel.add(createServerButton);
+		welcomePanel.add(joinServerButton);
 		
 		
 		
@@ -84,8 +109,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	public void initGame() {
-
-		this.remove(welcomePanel);
+		if (welcomePanel != null)
+			this.remove(welcomePanel);
 		
 		this.repaint();
 		
@@ -165,7 +190,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create new game")) {
-			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this);
+			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit);
 			int status = dialog.open();
 			
 			if (status == 1) { //e.d. se ha presionado OK
@@ -202,6 +227,26 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			} 
 			else {
 				//TODO Mostrar algún mensaje
+			}
+		}
+		else if(e.getActionCommand().equals("Create Server")) {
+			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit);
+			int status = dialog.open();
+			
+			if (status == 1) { //e.d. se ha presionado OK
+				gameTransfer = dialog.getNewGame();
+				new Server(gameTransfer.getGameReport());
+			}
+			
+		}
+		else if(e.getActionCommand().equals("Join Server")) {
+			JoinServerDialog dialog = new JoinServerDialog(MainWindow.this);
+			int status = dialog.open();
+			if (status == 1) {
+				
+				clientRolit.empezarPartida(dialog.getIp(), Integer.parseInt(dialog.getPort()));
+				
+				
 			}
 		}
 	}
@@ -247,5 +292,19 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		// TODO Auto-generated method stub
 		
 	}
+
+	public JSONObject getGameReport() {
+		return gameTransfer.getGameReport();
+		
+	}
+
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
+		if (gameTransfer == null)
+			gameTransfer = new GameTransfer(clientRolit);
+		gameTransfer.updateGame(JSONJuegoNuevo);
+		initGame();
+		
+	}
+
 
 }

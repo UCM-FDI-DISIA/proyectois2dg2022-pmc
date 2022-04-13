@@ -1,4 +1,4 @@
-package network;
+package server;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

@@ -1,4 +1,4 @@
-package network;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,11 +15,11 @@ import org.json.JSONObject;
  * @since   2018-04-01
  * @version 1.0
  */
-public class ClientThread extends Thread{
+public class ServerClientThread extends Thread{
 
 	private BufferedReader input;
 	private PrintWriter output;
-	private Client client;
+	private ServerClient client;
 	private Server server;
 	private boolean isRunning = true;
 
@@ -32,7 +32,7 @@ public class ClientThread extends Thread{
 	 * @param client		Reference to owner
 	 * @throws IOException
 	 */
-	public ClientThread(Server server, Socket socket, Client client) throws IOException {
+	public ServerClientThread(Server server, Socket socket, ServerClient client) throws IOException {
 		this.server = server;
 		this.client = client;
 		input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -51,14 +51,19 @@ public class ClientThread extends Thread{
 	/**
 	 * While game {@link #isRunning is running} it takes in json from client, formats it and sends it to the {@link Server server}
 	 * 
-	 * @see Server#fromClient(String, Client)
+	 * @see Server#receiveFromClient(String, ServerClient)
 	 */
 	public void run(){
 
 		while(isRunning){
 			try {
-				JSONObject json = new JSONObject(input.readLine());			
-				server.fromClient(json, client);
+				String s = input.readLine();
+				if (s != null) {
+					JSONObject json = new JSONObject(s);			
+					server.receiveFromClient(json, client);
+					
+				}
+				
 			} catch (IOException e){}
 
 		}
@@ -68,7 +73,7 @@ public class ClientThread extends Thread{
 	/**
 	 * @param msg	Message to send to the client
 	 */
-	public void writeToClient(JSONObject json){
+	public void updateGraphics(JSONObject json){
 		String msg = json.toString();
 		if(msg != null) 
 			output.println(msg);

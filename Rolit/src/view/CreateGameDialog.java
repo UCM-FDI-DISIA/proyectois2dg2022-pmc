@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import Builders.GameBuilder;
 import Builders.GameClassicBuilder;
 import Builders.GameTeamsBuilder;
+import Rolit.ClientRolit;
 import commands.Command;
 import logic.Board;
 import logic.Color;
@@ -80,10 +81,10 @@ public class CreateGameDialog extends JDialog {
 	
 	private final int MAX_TEXT_LENGTH = 15;
 	
-	public CreateGameDialog(Frame parent) {
+	public CreateGameDialog(Frame parent, ClientRolit clientRolit) {
 		super(parent, true);
 		this.parent = parent;
-		this.gameTransfer = new GameTransfer();
+		this.gameTransfer = new GameTransfer(clientRolit);
 		initGUI();
 	}
 	

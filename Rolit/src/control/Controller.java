@@ -3,6 +3,8 @@ package control;
 import java.util.Scanner;
 
 import Builders.GameBuilder;
+import Rolit.ClientRolit;
+
 import javax.swing.SwingUtilities;
 
 import commands.Command;
@@ -135,7 +137,7 @@ public class Controller {
 				@Override
 				public void run() {
 					//;
-					MainWindow mainWindow = new MainWindow();
+					ClientRolit c = new ClientRolit();
 				}
 			});
 		}
