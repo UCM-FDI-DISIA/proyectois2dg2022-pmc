@@ -57,8 +57,8 @@ public class ClientController extends Thread{
 
 	public void updateGameToServer() {
 		puedeJugar = false;
-		clientRolit.updateGameFromServer(puedeJugar);
-		out.println(clientRolit.getGameReport().toString());
+		sendToServer(clientRolit.getGameReport());
+		
 	}
 
 	
@@ -79,7 +79,7 @@ public class ClientController extends Thread{
 				}
 				else {
 					JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
-					clientRolit.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
+					clientRolit.updateGameFromServer(JSONJuegoNuevo);
 				}
 				
 
@@ -99,6 +99,12 @@ public class ClientController extends Thread{
 				//theView.displayError("Crashed.");
 				System.exit(0);
 			}
+	}
+
+
+	public void sendToServer(JSONObject report) {
+		out.println(report.toString());
+		
 	}
 
 

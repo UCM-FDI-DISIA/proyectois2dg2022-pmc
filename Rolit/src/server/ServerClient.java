@@ -28,12 +28,25 @@ public class ServerClient {
 	 * @param server		Reference to the server
 	 * @throws IOException
 	 */
-	public ServerClient(Player p, Socket socket, Server server) throws IOException{
-		this.p = p;
+	
+	public ServerClient() {
+		
+	}
+	
+	public void setUpServer(Socket socket, Server server) throws IOException {
+		this.thread = new ServerClientThread(server, socket, this);
+		thread.start();
+		
+	}
+	
+	public ServerClient(Socket socket, Server server) throws IOException{
 		this.thread = new ServerClientThread(server, socket, this);
 		thread.start();
 	}
 	
+	public void setPlayer(Player p) {
+		this.p = p;
+	}
 	
 	/**
 	 * @param str	String to send to the client via the {@link #thread}

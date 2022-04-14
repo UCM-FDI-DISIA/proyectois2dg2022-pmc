@@ -2,12 +2,14 @@ package client;
 
 import org.json.JSONObject;
 
+import logic.Player;
 import view.MainWindow;
 
 public class Client {
 
 	private MainWindow mainWindow;
 	private ClientController clientController;
+	private Player player;
 	
 	public Client() {
 		
@@ -21,13 +23,8 @@ public class Client {
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
-		mainWindow.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
-	}
-	
-	public void updateGameFromServer(boolean puedeJugar) {
-		mainWindow.updateGameFromServer(puedeJugar);
-		
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
+		mainWindow.updateGameFromServer(JSONJuegoNuevo);
 	}
 
 	public void empezarPartida(String ip, int port) {
@@ -39,6 +36,18 @@ public class Client {
 	public void updateGameToServer() {
 		clientController.updateGameToServer();
 		
+	}
+
+	public void setPlayer(Player player) {
+		if (this.player == null) {
+			this.player = player;
+			clientController.sendToServer(player.report());
+		}
+
+	}
+
+	public Player getPlayer() {
+		return this.player;
 	}
 
 	

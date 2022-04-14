@@ -28,6 +28,10 @@ public class Server {
 	private List<Pair<Player, Socket>> sockets = new ArrayList<>();
 	private List<Pair<Player, ServerClient>> clients = new ArrayList<>();
 	
+	private List<Player> incomingPlayers = new ArrayList<>();
+	
+	private int expectedPlayers;
+	
 	private int turno;
 	
 	private ServerView sv;
@@ -81,45 +85,36 @@ public class Server {
 	 * @see ServerView#showError(String)
 	 */
 	private void waitForPlayers() throws IOException {
-		new Thread()
-		{
-			public void run() {
-
-				try {
-					/*
-					 * First player is black
-					 */
-					
-					
-					Player p1 = new Player(Color.BLUE,"Leo");
-					Pair<Player, Socket> parPlayerSocket = new Pair<Player, Socket>(p1, serverSocket.accept());
-					sockets.add(parPlayerSocket);
-					Pair<Player, ServerClient> parPlayerServerClient = new Pair<Player, ServerClient>(p1, new ServerClient(p1, parPlayerSocket.getSecond(), Server.this));
-					clients.add(parPlayerServerClient);
-					
-					turno = 0;
-					
-					Player p2 = new Player(Color.RED,"Sergio");
-					parPlayerSocket = new Pair<Player, Socket>(p2, serverSocket.accept());
-					sockets.add(parPlayerSocket);
-					parPlayerServerClient = new Pair<Player, ServerClient>(p2, new ServerClient(p2, parPlayerSocket.getSecond(), Server.this));
-					clients.add(parPlayerServerClient);
-					
-					clients.get(turno).getSecond().setTurn();
-					
-					for (int i = 0; i < clients.size(); ++i) {
-						clients.get(i).getSecond().updateGraphics(firstReport);
-					}
-					
-					
-					
-					
-				} catch (IOException e) {
-					sv.showError("Could not connect both players.");
-				}
-
-			}
-		}.start();
+	
+		expectedPlayers = 2;
+		
+	for (int i = 0; i < expectedPlayers; ++i) {
+		
+		ServerClient serverClient = new ServerClient();
+		Socket socket = new Socket();
+		Thread t = new WaitPlayerThread(serverSocket, socket, serverClient, this);
+		
+		t.start();
+		
+		try {
+			t.join();
+		} catch (InterruptedException e) { e.printStackTrace(); }
+		
+		Pair<Player, Socket> parPlayerSocket = new Pair<Player, Socket>(incomingPlayers.get(i), socket);
+		sockets.add(parPlayerSocket);
+		
+		serverClient.setPlayer(incomingPlayers.get(i));
+		Pair<Player, ServerClient> parPlayerServerClient = new Pair<Player, ServerClient>(incomingPlayers.get(i), serverClient);
+		clients.add(parPlayerServerClient);
+		
+		
+	}
+	
+	clients.get(turno).getSecond().setTurn();
+	
+	for (int i = 0; i < clients.size(); ++i) {
+		clients.get(i).getSecond().updateGraphics(firstReport);
+	}
 
 	}
 
@@ -132,16 +127,24 @@ public class Server {
 	 */
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
 
-		
-		turno = (turno+1)%clients.size();
-		
-		clients.get(turno).getSecond().setTurn();
-		
-		for (int i = 0; i < clients.size(); ++i) {
-			if (client != clients.get(i).getSecond())
-				clients.get(i).getSecond().updateGraphics(json);
+		if (json.has("turn")) { //estamos ante un juego
+			turno = (turno+1)%clients.size();
+			
+			clients.get(turno).getSecond().setTurn();
+			
+			for (int i = 0; i < clients.size(); ++i) {
+				if (client != clients.get(i).getSecond())
+					clients.get(i).getSecond().updateGraphics(json);
+				
+			}
 			
 		}
+		else { //informacion de un player nuevo
+			Player p = new Player(json);
+			incomingPlayers.add(p);
+			
+		}
+		
 		
 		
 		

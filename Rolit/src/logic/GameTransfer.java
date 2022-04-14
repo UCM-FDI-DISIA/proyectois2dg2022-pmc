@@ -55,6 +55,7 @@ public class GameTransfer {
 		if (puedeJugar) {	
 			command.execute(game);
 			clientRolit.updateGameToServer();
+			puedeJugar = false;
 		}
 		
 	}
@@ -69,17 +70,15 @@ public class GameTransfer {
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
-		if (game == null)
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
+		if (game == null) {
 			game = GameBuilder.createGame(JSONJuegoNuevo);
+			Player turno = game.getCurrentPlayer();
+			if (turno.equals(clientRolit.getPlayer()))
+				puedeJugar = true;
+		}
 		else
 			game.updateGameFromServer(GameBuilder.createGame(JSONJuegoNuevo));
-		this.puedeJugar = puedeJugar; 
-		
-	}
-
-	public void updateGameFromServer(boolean puedeJugar) {
-		this.puedeJugar = puedeJugar;
 		
 	}
 	

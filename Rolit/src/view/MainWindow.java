@@ -31,6 +31,7 @@ import logic.Board;
 import logic.Color;
 import logic.Game;
 import logic.GameTransfer;
+import logic.Player;
 import logic.Shape;
 import replay.Replay;
 import server.Server;
@@ -241,9 +242,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			JoinServerDialog dialog = new JoinServerDialog(MainWindow.this);
 			int status = dialog.open();
 			if (status == 1) {
-				
 				clientRolit.empezarPartida(dialog.getIp(), Integer.parseInt(dialog.getPort()));
-				
+				clientRolit.setPlayer(new Player(Color.RED, "Leo"));
 				
 			}
 		}
@@ -296,21 +296,16 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
 		if (gameTransfer == null) {
 			gameTransfer = new GameTransfer(clientRolit);
-			gameTransfer.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
+			gameTransfer.updateGameFromServer(JSONJuegoNuevo);
 			initGame();
 		}
 		else
-			gameTransfer.updateGameFromServer(JSONJuegoNuevo, puedeJugar);
+			gameTransfer.updateGameFromServer(JSONJuegoNuevo);
 			
 		
-		
-	}
-
-	public void updateGameFromServer(boolean puedeJugar) {
-		gameTransfer.updateGameFromServer(puedeJugar);
 		
 	}
 
