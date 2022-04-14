@@ -156,6 +156,7 @@ public abstract class Game implements Replayable {
 
 	public void updateGameFromServer(Game game) {
 		this.board = game.getBoard();
+		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.onTurnPlayed();
 	}
 

@@ -78,10 +78,5 @@ public class ServerClientThread extends Thread{
 		if(msg != null) 
 			output.println(msg);
 	}
-	
-	public void setTurn() {
-		output.println("Es tu turno");
-		
-	}
 
 }

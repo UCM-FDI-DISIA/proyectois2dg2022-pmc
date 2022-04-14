@@ -33,8 +33,6 @@ public class Server {
 	
 	private int expectedPlayers;
 	
-	private int turno;
-	
 	private ServerView sv;
 	
 	private JSONObject gameConfigJSON;
@@ -112,13 +110,10 @@ public class Server {
 		
 	}
 	
-	clients.get(turno).getSecond().setTurn();
-	
-	
 	JSONArray playersJSONArray = getPlayersJSONArray();
 	
 	this.gameConfigJSON.put("players", playersJSONArray);
-	this.gameConfigJSON.put("turn", clients.get(turno).getFirst().getColor().toString());
+	this.gameConfigJSON.put("turn", clients.get(0).getFirst().getColor().toString());
 	
 	for (int i = 0; i < clients.size(); ++i) {
 		clients.get(i).getSecond().updateGraphics(gameConfigJSON);
@@ -147,10 +142,7 @@ public class Server {
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
 
 		if (json.has("turn")) { //estamos ante un juego
-			turno = (turno+1)%clients.size();
-			
-			clients.get(turno).getSecond().setTurn();
-			
+
 			for (int i = 0; i < clients.size(); ++i) {
 				if (client != clients.get(i).getSecond())
 					clients.get(i).getSecond().updateGraphics(json);

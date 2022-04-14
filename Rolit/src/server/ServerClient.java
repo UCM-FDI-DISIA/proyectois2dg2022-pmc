@@ -55,11 +55,6 @@ public class ServerClient {
 	public void updateGraphics(JSONObject json) {
 		thread.updateGraphics(json);
 	}
-	
-	public void setTurn() {
-		thread.setTurn();
-	}
-	
 
 	/**
 	 * @return	The color of the player

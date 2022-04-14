@@ -14,12 +14,10 @@ import view.RolitObserver;
 public class GameTransfer {
 	
 	private Game game;
-	private boolean puedeJugar;
 	private Client clientRolit;
 	
 	public GameTransfer(Client clientRolit) {
 		this.clientRolit = clientRolit;
-		this.puedeJugar = false;
 	}
 
 	public GameTransfer() { //juego señuelo que crea el servidor para poder trabajar con el primer report
@@ -56,12 +54,10 @@ public class GameTransfer {
 	}
 
 	public void executeCommand(Command command) {
-		if (puedeJugar) {	
+		if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
 			command.execute(game);
 			clientRolit.updateGameToServer();
-			puedeJugar = false;
 		}
-		
 	}
 
 	public void createGame(JSONObject createJSONObjectGame) {
@@ -77,12 +73,12 @@ public class GameTransfer {
 	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
 		if (game == null) {
 			game = GameBuilder.createGame(JSONJuegoNuevo);
-			Player turno = game.getCurrentPlayer();
-			if (turno.equals(clientRolit.getPlayer()))
-				puedeJugar = true;
+			
 		}
-		else
+		else {
 			game.updateGameFromServer(GameBuilder.createGame(JSONJuegoNuevo));
+		}
+			
 		
 	}
 	

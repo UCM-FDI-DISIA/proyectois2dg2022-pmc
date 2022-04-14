@@ -74,14 +74,8 @@ public class ClientController extends Thread{
 			while(true){
 				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
-				if (msgFromServer.equals("Es tu turno")) {
-					puedeJugar = true;
-				}
-				else {
-					JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
-					clientRolit.updateGameFromServer(JSONJuegoNuevo);
-				}
-				
+				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+				clientRolit.updateGameFromServer(JSONJuegoNuevo);
 
 			} 
 
