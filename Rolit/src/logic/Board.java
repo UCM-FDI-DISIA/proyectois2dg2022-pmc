@@ -43,6 +43,8 @@ public class Board implements Reportable {
 			for (int j = 0; j < board.matrix.size(); j++) {
 				if(board.matrix.get(i).get(j) != null)
 					lc.add(new Cube(board.matrix.get(i).get(j)));
+				else
+					lc.add(null);
 			}
 			m.add(lc);
 		}

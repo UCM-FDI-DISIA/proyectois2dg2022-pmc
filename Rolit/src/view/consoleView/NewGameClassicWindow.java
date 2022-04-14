@@ -14,6 +14,7 @@ public class NewGameClassicWindow extends NewGameWindow {
 	
 	@Override
 	public boolean open() {
+		this.clear();
 		JSONArray jPlayers = new JSONArray();	
 		
 		System.out.println(NAME_PLAYERS);

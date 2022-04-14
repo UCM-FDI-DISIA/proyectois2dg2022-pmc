@@ -8,4 +8,7 @@ public abstract interface ConsoleWindow {
 	// FIXME esto esta puesto como object para que sea generico, pero podria ser JSONObject
 	public Object get();
 	public boolean open();
+	public default void clear() {
+		// TODO no borra
+	}
 }

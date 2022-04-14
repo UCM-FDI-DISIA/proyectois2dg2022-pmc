@@ -21,6 +21,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public boolean open() {
+		this.clear();
 		while (!this.close) {
 			System.out.print(PROMPT);
 			String s = input.nextLine();
@@ -42,6 +43,8 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+		this.close = true;
+		this.clear();
 		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);
 		for (int i = 0; i < rivals.size(); i++)
 			System.out.println(String.format("%d. %s: %s points", i+1, rivals.get(i).getName(), rivals.get(i).getScore()));
@@ -49,7 +52,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public void onRegister(State status) {
-		// nada		
+		System.out.println(status.toString());		
 	}
 
 	@Override

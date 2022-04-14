@@ -16,6 +16,7 @@ public class Controller {
 	
 	public void createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
+		this.replay = new Replay();
 	}
 	
 	public void startReplay(Replay r) {
@@ -34,11 +35,7 @@ public class Controller {
 		replay.addState(s, game.getState());
 	}
 	
-	private void printGame() {
-		System.out.println(this.game.toString());
-	}
-	
-	/*private boolean askSaveReplay() {
+	/*TODO private boolean askSaveReplay() {
 		System.out.println(REPLAY_MSG);
 		String ans = input.nextLine();
 		return "y".equals(ans.toLowerCase());

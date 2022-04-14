@@ -42,9 +42,7 @@ public class GameTeams extends Game {
 		//Comprobamos si la partida termina con este turno
 		this.finished = board.isBoardFull();
 		if (this.finished)
-			this.onGameFinished();					
-
-		this.state = copyMe(); //guardamos el estado del juego para que se pueda repetir partida
+			this.onGameFinished();
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished)

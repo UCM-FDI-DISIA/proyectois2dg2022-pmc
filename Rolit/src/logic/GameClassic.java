@@ -1,10 +1,7 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import utils.StringUtils;
@@ -39,8 +36,6 @@ public class GameClassic extends Game {
 		this.finished = board.isBoardFull();
 		if (this.finished)
 			this.onGameFinished();
-		
-		this.state = copyMe(); //guardamos el estado del juego para que se pueda repetir partida
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished)

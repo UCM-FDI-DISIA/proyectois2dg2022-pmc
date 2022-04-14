@@ -19,6 +19,7 @@ public class LoadGameWindow implements ConsoleWindow {
 	
 	@Override
 	public boolean open() {
+		this.clear();
 		System.out.println(LIST_MSG);
 		List<String> savedGames;
 		try {

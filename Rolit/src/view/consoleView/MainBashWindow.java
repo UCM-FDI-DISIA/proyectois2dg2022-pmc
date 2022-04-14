@@ -57,7 +57,8 @@ public class MainBashWindow implements ConsoleWindow {
 	@Override
 	public boolean open() {
 		boolean repeatMenu = false;
-		do {			
+		do {
+			this.clear();
 			int option = this.menu();
 			ConsoleWindow nextWindow;
 			// Se ha seleccionado jugar a un juego nuevo
@@ -76,7 +77,7 @@ public class MainBashWindow implements ConsoleWindow {
 			}
 			// Se ha seleccionado borrar un juego
 			else if (DELETE_GAME.equals(OPTIONS[option - 1])) {
-				nextWindow = new LoadGameWindow();
+				nextWindow = new DeleteGameWindow();
 				repeatMenu = nextWindow.open();
 			}
 			// Se ha seleccionado ver una repeticion

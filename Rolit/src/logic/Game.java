@@ -13,7 +13,6 @@ import view.GUIView.RolitObserver;
 public abstract class Game implements Replayable {
 	protected boolean finished;
 	protected List<Player> players;
-	protected Replayable state;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
@@ -54,7 +53,7 @@ public abstract class Game implements Replayable {
 	
 	public abstract void play(int x, int y) throws IllegalArgumentException;
 	public abstract String toString();
-	public abstract Game copyMe();
+	protected abstract Game copyMe();
 	
 	public void setExit() {
 		this.exit = true;
@@ -103,13 +102,13 @@ public abstract class Game implements Replayable {
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.state));
+			o.onGameStatusChange(new State(command, this.getState()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State(null, this.state));
+			o.onRegister(new State("", this.getState()));
 		}
 	}
 
@@ -127,6 +126,6 @@ public abstract class Game implements Replayable {
 	}
 	
 	public Replayable getState() {
-		return state;
+		return this.copyMe();
 	}
 }

@@ -14,6 +14,7 @@ public class DeleteGameWindow implements ConsoleWindow{
 	
 	@Override
 	public boolean open() {
+		this.clear();
 		try {
 			List<String> savedGames = SaveLoadManager.showSavedGames();
 			// En caso de que todo haya ido bien
