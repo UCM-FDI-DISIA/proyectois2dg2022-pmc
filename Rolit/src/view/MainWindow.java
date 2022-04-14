@@ -189,11 +189,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create new game")) {
-			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit);
+			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit, false);
 			int status = dialog.open();
 			
 			if (status == 1) { //e.d. se ha presionado OK
-				gameTransfer = dialog.getNewGame();
+				gameTransfer = dialog.getNewGame(); //FIXME creo que esto está mal
 				initGame();
 			}
 			else {
@@ -229,13 +229,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			}
 		}
 		else if(e.getActionCommand().equals("Create Server")) {
-			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit);
+			
+			CreateGameDialog dialog = new CreateGameDialog(MainWindow.this, clientRolit, true);
 			int status = dialog.open();
 			
 			if (status == 1) { //e.d. se ha presionado OK
-				gameTransfer = dialog.getNewGame();
-				new Server(gameTransfer.getGameReport());
+				JSONObject json = dialog.createJSONObjectGame();
+				new Server(json);
 			}
+			
 			
 		}
 		else if(e.getActionCommand().equals("Join Server")) {
@@ -243,7 +245,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status = dialog.open();
 			if (status == 1) {
 				clientRolit.empezarPartida(dialog.getIp(), Integer.parseInt(dialog.getPort()));
-				clientRolit.setPlayer(new Player(Color.RED, "Leo"));
+				clientRolit.setPlayer(new Player(dialog.getPlayerColor(), dialog.getPlayerName()));
 				
 			}
 		}

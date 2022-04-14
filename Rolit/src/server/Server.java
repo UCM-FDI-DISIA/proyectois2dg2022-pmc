@@ -13,6 +13,7 @@ import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import Builders.GameBuilder;
@@ -36,14 +37,15 @@ public class Server {
 	
 	private ServerView sv;
 	
-	private JSONObject firstReport;
+	private JSONObject gameConfigJSON;
+	
 	/**
 	 * Creates a new {@link ServerView}
+	 * @param gameConfigJSON 
 	 */
-	public Server(JSONObject firstReport) {
-		this.firstReport = firstReport;
+	public Server(JSONObject gameConfigJSON) {
 		sv = new ServerView(this);
-		
+		this.gameConfigJSON = gameConfigJSON;
 	}
 	
 	
@@ -112,10 +114,27 @@ public class Server {
 	
 	clients.get(turno).getSecond().setTurn();
 	
+	
+	JSONArray playersJSONArray = getPlayersJSONArray();
+	
+	this.gameConfigJSON.put("players", playersJSONArray);
+	this.gameConfigJSON.put("turn", clients.get(turno).getFirst().getColor().toString());
+	
 	for (int i = 0; i < clients.size(); ++i) {
-		clients.get(i).getSecond().updateGraphics(firstReport);
+		clients.get(i).getSecond().updateGraphics(gameConfigJSON);
 	}
 
+	}
+	
+	private JSONArray getPlayersJSONArray() {
+		JSONArray playersJSONArray = new JSONArray();
+		
+		for (Player player : incomingPlayers) {
+			playersJSONArray.put(player.report());
+		}
+		
+		
+		return playersJSONArray;
 	}
 
 	/**

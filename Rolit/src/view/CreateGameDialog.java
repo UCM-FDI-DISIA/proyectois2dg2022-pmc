@@ -43,6 +43,7 @@ import logic.Game;
 import logic.GameTransfer;
 import logic.Player;
 import logic.Shape;
+import server.Server;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
@@ -81,9 +82,12 @@ public class CreateGameDialog extends JDialog {
 	
 	private final int MAX_TEXT_LENGTH = 15;
 	
-	public CreateGameDialog(Frame parent, Client clientRolit) {
+	private boolean onlineMode;
+	
+	public CreateGameDialog(Frame parent, Client clientRolit, boolean onlineMode) {
 		super(parent, true);
 		this.parent = parent;
+		this.onlineMode = onlineMode;
 		this.gameTransfer = new GameTransfer(clientRolit);
 		initGUI();
 	}
@@ -174,14 +178,17 @@ public class CreateGameDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				Pair<Boolean, String> pair = checkIfCorrectArguments(); 
-				
-				if (pair.getFirst()) {
-					gameTransfer.createGame(createJSONObjectGame());
+				if (onlineMode) {
 					status = 1;
+					CreateGameDialog.this.setVisible(false);
+					
+				}
+				else if (pair.getFirst()) {
+					status = 1;
+					gameTransfer.createGame(createJSONObjectGame());
 					CreateGameDialog.this.setVisible(false);	
 					
 				}
-				
 				else {
 					
 					if (errorLabel != null)
@@ -283,17 +290,21 @@ public class CreateGameDialog extends JDialog {
 		
 		JSONArray playerJSONArray = new JSONArray();		
 		
-		for (int i = 0; i < listPlayerComboColors.size(); ++i) {
-			Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
-			if (i == 0)
-				o.put("turn", playerAux.getColor().toString());
-			playerJSONArray.put(playerAux.report());
+		if (!onlineMode) {
+			for (int i = 0; i < listPlayerComboColors.size(); ++i) {
+				Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
+				if (i == 0)
+					o.put("turn", playerAux.getColor().toString());
+				playerJSONArray.put(playerAux.report());
+				
+			}
 			
+			o.put("players", playerJSONArray);
 		}
-					
-		o.put("players", playerJSONArray);
 		
-		if (this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
+					
+		
+		if (!onlineMode && this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 			
 			JSONArray teamsJSONArray = new JSONArray();
 			
@@ -367,6 +378,8 @@ public class CreateGameDialog extends JDialog {
 		
 		JPanel buttonsPanel = new JPanel();
 		classicPanel.add(buttonsPanel);
+		
+		classicPanel.setVisible(!onlineMode);
 	
 		
 	}
@@ -471,7 +484,7 @@ public class CreateGameDialog extends JDialog {
 		
 		buildClassicPanel();
 		mainPanel.add(classicPanel);
-		classicPanel.setVisible(true);
+		classicPanel.setVisible(true && !onlineMode);
 		mainPanel.repaint();
 		
 		if (errorLabel != null) //Queremos que si hay un mensaje de error, desaparezca
@@ -491,7 +504,7 @@ public class CreateGameDialog extends JDialog {
 		
 		buildTeamsPanel();
 		mainPanel.add(teamsPanel);
-		teamsPanel.setVisible(true);
+		teamsPanel.setVisible(true && !onlineMode);
 		numberOfTeamsLabel.setVisible(true);
 		teamsSpinner.setVisible(true);
 		mainPanel.repaint();

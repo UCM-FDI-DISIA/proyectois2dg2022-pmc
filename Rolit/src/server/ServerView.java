@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.json.JSONObject;
+
 
 public class ServerView extends JFrame {
 
@@ -22,7 +24,7 @@ public class ServerView extends JFrame {
 
 	
 	private JPanel thePanel;
-	private JLabel ipLabel, portLabel;
+	private JLabel ipLabel, portLabel, numberOfPlayersLabel;
 	private JTextField portField;
 	private JButton startButton;
 	private JButton stopButton;
@@ -41,17 +43,20 @@ public class ServerView extends JFrame {
 		thePanel = new JPanel();
 		thePanel.setLayout(new GridBagLayout());
 		
+		numberOfPlayersLabel = new JLabel("Set number of players: ");
+		addComp(thePanel, numberOfPlayersLabel, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		
 		ipLabel = new JLabel("Server IP: " + server.getIp());
-		addComp(thePanel, ipLabel, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(thePanel, ipLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		portLabel = new JLabel("Insert desired host port (9001-65500): ");
-		addComp(thePanel, portLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(thePanel, portLabel, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		portField = new JTextField(5);
-		addComp(thePanel, portField, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(thePanel, portField, 1, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		startButton = new JButton("Start server");
-		addComp(thePanel, startButton, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(thePanel, startButton, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		stopButton = new JButton("Stop server");
 		
@@ -146,6 +151,11 @@ public class ServerView extends JFrame {
 	 */
 	public void showError(String msg) {
 		JOptionPane.showMessageDialog(thePanel, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+
+	public JSONObject getGameConfigJSON() {
+		return null;
 	}
 	
 }

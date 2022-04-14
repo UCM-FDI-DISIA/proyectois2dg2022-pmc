@@ -22,6 +22,10 @@ public class GameTransfer {
 		this.puedeJugar = false;
 	}
 
+	public GameTransfer() { //juego señuelo que crea el servidor para poder trabajar con el primer report
+		
+	}
+
 	public void onFirstPlay() {
 		game.onFirstPlay();
 		

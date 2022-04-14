@@ -8,12 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+
+import logic.Color;
 
 
 public class JoinServerDialog extends JDialog {
@@ -24,6 +31,11 @@ public class JoinServerDialog extends JDialog {
 	
 	private String ip;
 	private String port;
+	
+	private final int MAX_TEXT_LENGTH = 15;
+	
+	private JTextArea nameTextArea;
+	private JComboBox<Color> colorComboBox;
 	
 	
 	public JoinServerDialog(Frame parent) {
@@ -38,16 +50,46 @@ public class JoinServerDialog extends JDialog {
 
 		connectPanel = new JPanel();
 		connectPanel.setLayout(new GridBagLayout());
-
+		
+		JPanel playerPanel = new JPanel();
+		
+		nameTextArea = new JTextArea();
+		nameTextArea.setDocument(new PlainDocument() {
+		    @Override
+		    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
+		        if (str == null || nameTextArea.getText().length() >= MAX_TEXT_LENGTH) {
+		            return;
+		        }
+		 
+		        super.insertString(offs, str, a);
+		    }
+		});
+		nameTextArea.setEditable(true);
+		nameTextArea.setLineWrap(true);
+		nameTextArea.setWrapStyleWord(true);
+		colorComboBox = new JComboBox<Color>();
+		colorComboBox.setRenderer(new ColorRenderer());
+		playerPanel.add(new JLabel("Name: "));
+		playerPanel.add(nameTextArea);
+		playerPanel.add(new JLabel("Color: "));
+		
+		for(Color color : Color.values()) {
+			colorComboBox.addItem(color);
+		}
+		playerPanel.add(colorComboBox);
+		
+		addComp(connectPanel, playerPanel, 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		
+		
 		JLabel ipLabel = new JLabel("IP-Address:");
 		JTextField ipField = new JTextField(10);
-		addComp(connectPanel, ipLabel, 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
-		addComp(connectPanel, ipField, 1, 0, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addComp(connectPanel, ipLabel, 0, 1, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, ipField, 1, 1, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 
 		JLabel portLabel = new JLabel("Port:");
 		JTextField portField = new JTextField(10);
-		addComp(connectPanel, portLabel, 0, 1, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
-		addComp(connectPanel, portField, 1, 1, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addComp(connectPanel, portLabel, 0, 2, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, portField, 1, 2, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 
 		JButton connect = new JButton("Connect");
 		
@@ -73,7 +115,7 @@ public class JoinServerDialog extends JDialog {
 
 			}
 		});
-		addComp(connectPanel, connect, 1, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(connectPanel, connect, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		add(connectPanel);
 		pack();
@@ -113,6 +155,14 @@ public class JoinServerDialog extends JDialog {
 
 	public String getPort() {
 		return port;
+	}
+
+	public Color getPlayerColor() {
+		return (Color) colorComboBox.getSelectedItem();
+	}
+	
+	public String getPlayerName() {
+		return (String) nameTextArea.getText();
 	}
 	
 }
