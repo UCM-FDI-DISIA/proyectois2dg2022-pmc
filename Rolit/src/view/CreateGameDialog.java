@@ -88,7 +88,7 @@ public class CreateGameDialog extends JDialog {
 		super(parent, true);
 		this.parent = parent;
 		this.onlineMode = onlineMode;
-		this.gameTransfer = new GameTransfer(clientRolit);
+		this.gameTransfer = new GameTransfer(clientRolit, onlineMode);
 		initGUI();
 	}
 	

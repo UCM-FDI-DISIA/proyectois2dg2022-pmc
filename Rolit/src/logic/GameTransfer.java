@@ -15,8 +15,9 @@ public class GameTransfer {
 	
 	private Game game;
 	private Client clientRolit;
+	private boolean onlineMode;
 	
-	public GameTransfer(Client clientRolit) {
+	public GameTransfer(Client clientRolit, boolean onlineMode) {
 		this.clientRolit = clientRolit;
 	}
 
@@ -54,10 +55,15 @@ public class GameTransfer {
 	}
 
 	public void executeCommand(Command command) {
-		if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
-			command.execute(game);
-			clientRolit.updateGameToServer();
+		if (onlineMode) {
+			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
+				command.execute(game);
+				clientRolit.updateGameToServer();
+			}
 		}
+		else
+			command.execute(game);
+		
 	}
 
 	public void createGame(JSONObject createJSONObjectGame) {

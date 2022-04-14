@@ -53,6 +53,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel centerPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
+	
+	private boolean onlineMode = false;
 
 	public MainWindow(Client clientRolit) {
 		super("Rolit");
@@ -244,6 +246,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			JoinServerDialog dialog = new JoinServerDialog(MainWindow.this);
 			int status = dialog.open();
 			if (status == 1) {
+				onlineMode = true;
 				clientRolit.empezarPartida(dialog.getIp(), Integer.parseInt(dialog.getPort()));
 				clientRolit.setPlayer(new Player(dialog.getPlayerColor(), dialog.getPlayerName()));
 				
@@ -300,7 +303,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
 		if (gameTransfer == null) {
-			gameTransfer = new GameTransfer(clientRolit);
+			gameTransfer = new GameTransfer(clientRolit, onlineMode);
 			gameTransfer.updateGameFromServer(JSONJuegoNuevo);
 			initGame();
 		}
