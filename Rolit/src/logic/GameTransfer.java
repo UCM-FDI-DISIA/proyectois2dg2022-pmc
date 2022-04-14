@@ -18,6 +18,7 @@ public class GameTransfer {
 	private boolean onlineMode;
 	
 	public GameTransfer(Client clientRolit, boolean onlineMode) {
+		this.onlineMode = onlineMode;
 		this.clientRolit = clientRolit;
 	}
 
