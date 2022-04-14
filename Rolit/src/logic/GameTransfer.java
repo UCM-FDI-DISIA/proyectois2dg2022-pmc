@@ -69,13 +69,16 @@ public class GameTransfer {
 		
 	}
 
-	public void updateGame(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
-		game = GameBuilder.createGame(JSONJuegoNuevo);
+	public void updateGameFromServer(JSONObject JSONJuegoNuevo, boolean puedeJugar) {
+		if (game == null)
+			game = GameBuilder.createGame(JSONJuegoNuevo);
+		else
+			game.updateGameFromServer(GameBuilder.createGame(JSONJuegoNuevo));
 		this.puedeJugar = puedeJugar; 
 		
 	}
 
-	public void updateGame(boolean puedeJugar) {
+	public void updateGameFromServer(boolean puedeJugar) {
 		this.puedeJugar = puedeJugar;
 		
 	}

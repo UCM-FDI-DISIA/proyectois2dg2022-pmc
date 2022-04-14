@@ -154,5 +154,10 @@ public abstract class Game implements Replayable {
 		return Collections.unmodifiableList(players);
 	}
 
+	public void updateGameFromServer(Game game) {
+		this.board = game.getBoard();
+		this.onTurnPlayed();
+	}
+
 	
 }
