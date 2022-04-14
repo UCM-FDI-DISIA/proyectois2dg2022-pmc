@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -31,13 +29,7 @@ public class GameTeams extends Game {
 
 	// El juego funciona igual que la parte de gameClassic, el que maneja la nueva funcionalidad de los equipos es el propio player al modificar su equipo
 	@Override
-	public boolean play(int x, int y) {
-		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
-		// indicada
-		if (!this.board.tryToAddCube(x, y)) {
-			System.out.println("Not a valid position");
-			return false;
-		}
+	public void play(int x, int y) throws IllegalArgumentException {
 		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
 		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
 		this.board.addCubeInPos(newCube);
@@ -49,37 +41,14 @@ public class GameTeams extends Game {
 		
 		//Comprobamos si la partida termina con este turno
 		this.finished = board.isBoardFull();
+		if (this.finished)
+			this.onGameFinished();					
 
 		this.state = copyMe(); //guardamos el estado del juego para que se pueda repetir partida
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished)
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		
-		this.onTurnPlayed();
-		
-		return true;
-	}
-	
-	@Override
-	public String showRanking() {
-		List<Team> teams = new ArrayList<Team>(this.teams);
-		Collections.sort(teams);
-		StringBuilder str = new StringBuilder(RANKING);
-		
-		str.append(StringUtils.LINE_SEPARATOR).append(MSG_REY).append(StringUtils.LINE_SEPARATOR);
-		
-		for (int i = 0; i < teams.size(); i++) {
-			str.append(MSG_POS).append(i + 1).append(":").append(teams.get(i).toString()).append(" " + teams.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
-		}
-		System.out.println("");
-		for (int i = 0; i < players.size(); ++i) {
-			str.append(MSG_POS).append(i + 1).append(":").append(players.get(i).getName() + "from" + Team.getTeam(players.get(i)).toString() + " " + players.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
-		}
-		
-		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
-		
-		return str.toString(); 
 	}
 
 	@Override
@@ -105,14 +74,6 @@ public class GameTeams extends Game {
 	}
 	
 	@Override
-	public void onFirstPlay() {
-		for(RolitObserver o : observers) {
-			o.onFirstPlay(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
-		}
-		
-	}
-	
-	@Override
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(Team.getTeam(getCurrentPlayer()).toString(), players.get(currentPlayerIndex).getColor());
@@ -120,8 +81,9 @@ public class GameTeams extends Game {
 	}
 
 	@Override
-	public List<Rival> getRivals() {
-		return Collections.unmodifiableList(this.teams);
+	protected void onGameFinished() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

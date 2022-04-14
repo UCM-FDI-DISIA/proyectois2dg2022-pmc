@@ -18,6 +18,7 @@ import logic.Color;
 import logic.Game;
 import logic.Shape;
 import replay.Replay;
+import replay.State;
 
 public class BoardGUI implements RolitObserver, ReplayObserver {
 
@@ -151,8 +152,8 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
-		update(game, board);
+	public void onRegister(State status) {
+		update(status, board);
 	}
 
 	@Override
@@ -167,7 +168,7 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

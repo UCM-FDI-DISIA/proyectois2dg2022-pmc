@@ -19,6 +19,7 @@ import logic.Board;
 import logic.Color;
 import logic.Game;
 import replay.Replay;
+import replay.State;
 
 public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
@@ -104,7 +105,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {}
+	public void onRegister(State status) {}
 
 	@Override
 	public void onError(String err) {
@@ -128,7 +129,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	public void onGameFinished() {}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

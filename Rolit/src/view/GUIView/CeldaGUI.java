@@ -1,6 +1,7 @@
 package view.GUIView;
 
 import replay.Replay;
+import replay.State;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -11,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import commands.Command;
+import control.Controller;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
@@ -23,33 +25,29 @@ public class CeldaGUI implements RolitObserver {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
-	private Game game;
+	private Controller ctrl;
 	private Replay replay;
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 
-	public CeldaGUI(int y, int x, boolean validButton, Game g, int sideLength) {
+	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
 		CeldaGUI.SIDE_LENGTH = sideLength;
-		
+		this.ctrl = ctrl;		
 		this.x = x;
 		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
-		this.game = g;
 		this.button = new JButton();
 		if (validButton) {
 			this.button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
 					if (!filled) {
-						String[] commandWords = { "p", Integer.toString(x), Integer.toString(y) };
-						Command command = Command.getCommand(commandWords);
-						command.execute(game);
+						String commandWords = "p" + Integer.toString(x) + Integer.toString(y);
+						ctrl.executeCommand(commandWords);
 					}
-
 				}
 			});
 		}
@@ -160,7 +158,7 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
+	public void onRegister(State status) {
 
 	}
 
@@ -180,7 +178,7 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

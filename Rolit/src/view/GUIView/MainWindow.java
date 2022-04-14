@@ -22,6 +22,7 @@ import logic.Color;
 import logic.Game;
 import logic.Shape;
 import replay.Replay;
+import replay.State;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	private Game game;
@@ -207,7 +208,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
+	public void onRegister(State status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -231,7 +232,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

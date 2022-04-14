@@ -58,7 +58,9 @@ public class Board implements Reportable {
 		return matrix.get(x).get(y);
 	}
 
-	public void addCubeInPos(Cube c) {
+	public void addCubeInPos(Cube c) throws IllegalArgumentException {
+		if (!this.tryToAddCube(c.getX(), c.getY()))
+			throw new IllegalArgumentException("non valid position for a cube");
 		List<Cube> column = matrix.get(c.getX());
 		column.remove(c.getY());
 		column.add(c.getY(), c);
@@ -163,7 +165,6 @@ public class Board implements Reportable {
 	}
 	
 	public boolean tryToAddCube(int x, int y) {
-		// FIXME creo que esta función está mal
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)

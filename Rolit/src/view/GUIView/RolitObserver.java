@@ -1,16 +1,18 @@
 package view.GUIView;
 
-import commands.Command;
-import logic.Board;
+import java.util.List;
+
 import logic.Color;
-import logic.Game;
+import logic.Rival;
+import replay.State;
 
 public interface RolitObserver {
 	void onTurnPlayed(String name, Color color);
-	void onGameFinished();
-	void onCommandIntroduced(Game game, Board board, Command command);
-	void onRegister(Game game, Board board, Command command);
+	// Esto es para notificar el ranking cuando acaba la partida, la lista viene ya ordenada
+	void onGameFinished(List<? extends Rival> rivals, String rival);
+	// void onCommandIntroduced(Game game, Board board, Command command);
+	void onRegister(State status);
 	void onError(String err);
-	void onGameStatusChange(String msg);
-	void onFirstPlay(String name, Color color);
+	// Esto sirve para pasar el nuevo estado del juego a todos los que necesiten algo cuando ha cambiado
+	void onGameStatusChange(State status);
 }

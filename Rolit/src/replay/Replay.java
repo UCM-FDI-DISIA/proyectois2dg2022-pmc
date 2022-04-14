@@ -50,6 +50,7 @@ public class Replay implements Reportable {
 		boolean replaying = true;
 		while(replaying) {
 			if(print)
+				// FIXME esto no debería estar aquí
 				System.out.println(this);
 			System.out.print(PROMPT);
 			String in = input.nextLine();

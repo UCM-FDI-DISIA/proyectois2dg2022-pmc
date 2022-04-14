@@ -7,15 +7,10 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import replay.State;
 import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
-	// TODO deberíamos hacer una clase de constantes gráficas que almacene todas estas cosas
-	protected static final String RANKING = "RANKING DEL ROLIT";
-	protected static final String MSG_POS = "En la posicion numero ";
-	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
-	protected static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
-	
 	protected boolean finished;
 	protected List<Player> players;
 	protected Replayable state;
@@ -57,11 +52,9 @@ public abstract class Game implements Replayable {
 		this.observers = new ArrayList<RolitObserver>();
 	}
 	
-	public abstract boolean play(int x, int y);
+	public abstract void play(int x, int y) throws IllegalArgumentException;
 	public abstract String toString();
 	public abstract Game copyMe();
-	public abstract String showRanking();
-	public abstract List<Rival> getRivals();
 	
 	public void setExit() {
 		this.exit = true;
@@ -105,36 +98,24 @@ public abstract class Game implements Replayable {
 		this.observers.remove(o);
 	}
 
-	public abstract void onFirstPlay();
-	public abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onGameFinished();
 	
-	public void onCommandIntroduced() {
+	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onCommandIntroduced(this, this.board, null);
-		}
-	}
-	
-	public void onStatusChange(String msg) {
-		for(RolitObserver o : observers) {
-			o.onGameStatusChange(msg);
+			o.onGameStatusChange(new State(command, this.state));
 		}
 	}
 
-	public void onRegister() {
+	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(this, this.board, null);
+			o.onRegister(new State(null, this.state));
 		}
 	}
 
-	public void onError() {
+	protected void onError() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void onGameFinished() {
-		for(RolitObserver o : observers) {
-			o.onGameFinished();
-		}
 	}
 	
 	public Board getBoard() {
