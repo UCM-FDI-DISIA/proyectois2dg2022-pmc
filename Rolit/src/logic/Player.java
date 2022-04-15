@@ -3,10 +3,10 @@ package logic;
 import org.json.JSONObject;
 
 public class Player implements Comparable<Player>, Reportable, Rival {
-	private static Player[] playerList = new Player[Color.size()];
-	private Color color;
-	private int score;
-	private String name;
+	protected static Player[] playerList = new Player[Color.size()];
+	protected Color color;
+	protected int score;
+	protected String name;
 	public static final String TYPE = "Player";
 
 	// constructor habitual de un player por defecto

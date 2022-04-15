@@ -204,5 +204,9 @@ public class Board implements Reportable {
 	public boolean[][] getShapeMatrix() {
 		return this.shapeMatrix;
 	}
+	
+	public int getSize() {
+		return this.size;
+	}
 
 }

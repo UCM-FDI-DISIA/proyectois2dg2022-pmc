@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import replay.State;
+import strategy.Strategy;
 import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
@@ -27,6 +28,7 @@ public abstract class Game implements Replayable {
 		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
+		Strategy.initStrategy(this);
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -127,5 +129,10 @@ public abstract class Game implements Replayable {
 	
 	public Replayable getState() {
 		return this.copyMe();
+	}
+	
+	public Player getNextPlayer(Player player) {	//TODO Ver si es imprescindible este método, se usa para la IA
+		int index = this.players.indexOf(player);
+		return this.players.get((index + 1) % this.players.size());
 	}
 }
