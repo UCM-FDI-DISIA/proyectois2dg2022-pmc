@@ -7,12 +7,12 @@ import logic.Rival;
 import replay.State;
 
 public interface RolitObserver {
-	void onTurnPlayed(String name, Color color);
+	void onTurnPlayed(State state);
 	// Esto es para notificar el ranking cuando acaba la partida, la lista viene ya ordenada
 	void onGameFinished(List<? extends Rival> rivals, String rival);
 	// void onCommandIntroduced(Game game, Board board, Command command);
-	void onRegister(State status);
+	void onRegister(State state);
 	void onError(String err);
 	// Esto sirve para pasar el nuevo estado del juego a todos los que necesiten algo cuando ha cambiado
-	void onGameStatusChange(State status);
+	void onGameStatusChange(State state);
 }

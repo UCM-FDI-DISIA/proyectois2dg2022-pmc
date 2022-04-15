@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import logic.Game;
 import replay.Replay;
+import replay.State;
 import view.GUIView.RolitObserver;
 
 public class Controller {
@@ -37,6 +38,25 @@ public class Controller {
 		command = Command.getCommand(parameters);
 		command.execute(game);
 		replay.addState(s, game.getState());
+	}
+	
+	public void updateGameFromServer(JSONObject o) {
+		Game newGame = GameBuilder.createGame(o);
+		newGame.updateGameFromServer(game.getObserverList());
+		game = newGame;
+	}
+	
+	public State loadGame(String filePath) {
+		game = GameBuilder.createGame(SaveLoadManager.loadGame(filePath));
+		return new State(game);
+	}
+	
+	public State getState() {
+		return new State(game);
+	}
+
+	public boolean[][] getShapeMatrix() {	
+		return game.getShapeMatrix();
 	}
 	
 	/*TODO private boolean askSaveReplay() {

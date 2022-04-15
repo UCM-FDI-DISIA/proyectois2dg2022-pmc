@@ -28,6 +28,11 @@ public class State implements Reportable {
 		this.game = game;
 	}
 	
+	public State(Replayable game) {
+		this.command = "";
+		this.game = game;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-import view.MainWindow;
-
-
 /**
  * Handles all client-side logic
  *

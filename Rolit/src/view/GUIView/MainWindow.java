@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,14 +21,15 @@ import org.json.JSONObject;
 import client.ClientController;
 import client.Client;
 import commands.Command;
+import control.Controller;
 import control.SaveLoadManager;
 import logic.Board;
 import logic.Color;
-import logic.Game;
-import logic.GameTransfer;
 import logic.Player;
+import logic.Rival;
 import logic.Shape;
 import replay.Replay;
+import replay.State;
 import server.Server;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
@@ -35,6 +37,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private Client clientRolit;
 	private Controller ctrl;
 	private Replay replay;
+	private State state;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -108,11 +111,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
 		case "NG":
-			CreateGameDialog dialogNew = new CreateGameDialog(MainWindow.this);
+			CreateGameDialog dialogNew = new CreateGameDialog(MainWindow.this, false, ctrl);
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
-				// FIXME no puede haber un game aquí
-				game = dialogNew.getNewGame();
+				this.state = ctrl.getState();
 				this.initGame();
 			}
 			else {
@@ -124,7 +126,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status2 = dialogLoad.open();
 			if (status2 == 1) {
 				File file = dialogLoad.getFile();
-				game = SaveLoadManager.loadGame(file.getPath());
+				state = ctrl.loadGame(file.getPath());
 				initGame();			
 			}
 			break;
@@ -147,6 +149,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 	
 	private void initGame() {
+		
+		ctrl.addObserver(this);
 
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
@@ -162,7 +166,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel.add(gamePanel);
 		
-		BoardGUI tablero = new BoardGUI(gameTransfer);
+		BoardGUI tablero = new BoardGUI(ctrl);
 		
 		tablero.crearTablero(boardPanel);
 		
@@ -176,10 +180,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(new ControlPanel(gameTransfer), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(gameTransfer),BorderLayout.PAGE_END);
-		
-		
-		gameTransfer.onFirstPlay();
-		
+				
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 
@@ -226,64 +227,40 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 	
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onRegister(State status) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onGameFinished() {
-		// TODO Completar
-		
-	}
-
-	@Override
-	public void onTurnPlayed(String name, Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGameStatusChange(State status) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFirstPlay(String name, Color color) {
-		// TODO Auto-generated method stub
-		
+	public void onTurnPlayed(State state) {
+		this.state = state;
 	}
 
 	public JSONObject getGameReport() {
-		return gameTransfer.getGameReport();
+		return state.report().getJSONObject("game");
 		
 	}
 
-	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
-		if (gameTransfer == null) {
-			gameTransfer = new GameTransfer(clientRolit, onlineMode);
-			gameTransfer.updateGameFromServer(JSONJuegoNuevo);
-			initGame();
-		}
-		else
-			gameTransfer.updateGameFromServer(JSONJuegoNuevo);
-			
+	public void updateGameFromServer(JSONObject JSONnewState) {
+		ctrl.updateGameFromServer(JSONnewState);
+	}
+
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+		// TODO Auto-generated method stub
 		
-		
+	}
+
+	@Override
+	public void onRegister(State state) {
+		this.state = state;
+	}
+
+	@Override
+	public void onGameStatusChange(State state) {
 	}
 
 

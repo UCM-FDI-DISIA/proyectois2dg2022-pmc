@@ -3,7 +3,7 @@ package client;
 import org.json.JSONObject;
 
 import logic.Player;
-import view.MainWindow;
+import view.GUIView.MainWindow;
 
 public class Client {
 

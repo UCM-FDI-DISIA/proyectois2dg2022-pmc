@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
 
+import client.Client;
 import control.Controller;
 import view.GUIView.MainWindow;
 import view.consoleView.ConsoleWindow;
@@ -58,7 +59,7 @@ public class Rolit {
 				@Override
 				public void run() {
 					//;
-					MainWindow mainWindow = new MainWindow();
+					Client client = new Client();
 				}
 			});
 		}

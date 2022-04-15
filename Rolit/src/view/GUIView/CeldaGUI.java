@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ import logic.Board;
 import logic.Color;
 import logic.Cube;
 import logic.Game;
-import logic.GameTransfer;
+import logic.Rival;
 
 public class CeldaGUI implements RolitObserver {
 
@@ -69,7 +70,8 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setMaximumSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
-		this.gameTransfer.addObserver(this);
+		
+		this.ctrl.addObserver(this);
 	}
 
 	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
@@ -152,11 +154,6 @@ public class CeldaGUI implements RolitObserver {
 
 	}
 
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void onRegister(State status) {
@@ -169,12 +166,9 @@ public class CeldaGUI implements RolitObserver {
 
 	}
 
-	@Override
-	public void onGameFinished() {
-	}
 
 	@Override
-	public void onTurnPlayed(String name, Color color) {
+	public void onTurnPlayed(State state) {
 		update();
 	}
 
@@ -185,7 +179,7 @@ public class CeldaGUI implements RolitObserver {
 	}
 
 	@Override
-	public void onFirstPlay(String name, Color color) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
 		// TODO Auto-generated method stub
 		
 	}

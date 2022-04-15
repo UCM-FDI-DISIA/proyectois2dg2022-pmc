@@ -133,11 +133,12 @@ public abstract class Game implements Replayable {
 		return Collections.unmodifiableList(players);
 	}
 
-	public void updateGameFromServer(Game game) {
-		this.board = game.getBoard();
-		this.currentPlayerIndex = game.currentPlayerIndex;
-		this.onTurnPlayed();
+	public void updateGameFromServer(List<RolitObserver> observerList) {
+		this.observers = observerList;
 	}
 
+	public List<RolitObserver> getObserverList() {
+		return Collections.unmodifiableList(this.observers);
+	}
 	
 }

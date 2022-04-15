@@ -5,18 +5,12 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -27,33 +21,22 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import Builders.GameBuilder;
 import Builders.GameClassicBuilder;
 import Builders.GameTeamsBuilder;
-import client.Client;
-import commands.Command;
-import logic.Board;
+import control.Controller;
 import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.GameTransfer;
 import logic.Player;
 import logic.Shape;
-import server.Server;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
 	
-	private GameTransfer gameTransfer;
-	private Frame parent;
-	private int status;
+	private static final long serialVersionUID = 1L;
 	
-	private Map<String, ImageIcon> colorMap;
-	private Map<String, ImageIcon> boardMap;
+	private Controller ctrl;
+	private int status;
 	
 	private JComboBox<Shape> shapesCombo;
 	private JComboBox<String> gameModeCombo;
@@ -84,11 +67,10 @@ public class CreateGameDialog extends JDialog {
 	
 	private boolean onlineMode;
 	
-	public CreateGameDialog(Frame parent, Client clientRolit, boolean onlineMode) {
+	public CreateGameDialog(Frame parent, boolean onlineMode, Controller ctrl) {
 		super(parent, true);
-		this.parent = parent;
 		this.onlineMode = onlineMode;
-		this.gameTransfer = new GameTransfer(clientRolit, onlineMode);
+		this.ctrl = ctrl;
 		initGUI();
 	}
 	
@@ -96,11 +78,7 @@ public class CreateGameDialog extends JDialog {
 		
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
-		
-		colorMap = new HashMap<String, ImageIcon>();
-		boardMap = new HashMap<String, ImageIcon>();
 
-		
 		setTitle("Create Game");
 		setVisible(false);
 		
@@ -185,7 +163,7 @@ public class CreateGameDialog extends JDialog {
 				}
 				else if (pair.getFirst()) {
 					status = 1;
-					gameTransfer.createGame(createJSONObjectGame());
+					ctrl.createGame(createJSONObjectGame());
 					CreateGameDialog.this.setVisible(false);	
 					
 				}
@@ -269,10 +247,6 @@ public class CreateGameDialog extends JDialog {
 		return (int) playersSpinner.getValue();
 	}
 	
-	public GameTransfer getNewGame() {
-		return this.gameTransfer;
-	}
-	
 	public Shape getNewShape() {
 		return this.getBoardShape();
 	}
@@ -331,6 +305,7 @@ public class CreateGameDialog extends JDialog {
 		return o;
 	}
 	
+	@SuppressWarnings("serial")
 	private void buildClassicPanel() {
 		
 		classicPanel = new JPanel();
@@ -384,6 +359,7 @@ public class CreateGameDialog extends JDialog {
 		
 	}
 	
+	@SuppressWarnings("serial")
 	private void buildTeamsPanel() {
 		
 		teamsPanel = new JPanel();
