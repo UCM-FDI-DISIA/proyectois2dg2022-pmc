@@ -1,4 +1,4 @@
-package view;
+package view.GUIView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import logic.Game;
 import logic.GameTransfer;
 import logic.Player;
 import logic.Rival;
+import replay.State;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
@@ -78,7 +79,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	public void onCommandIntroduced(Game game, Board board, Command command) {}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {}
+	public void onRegister(State status) {}
 
 	@Override
 	public void onError(String err) {
@@ -87,7 +88,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

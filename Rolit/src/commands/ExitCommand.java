@@ -13,9 +13,7 @@ public class ExitCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Game game) {
+	public void execute(Game game) throws Exception {
 		game.setExit();
-		 System.out.println("See ya!");
-		return false;
 	}
 }

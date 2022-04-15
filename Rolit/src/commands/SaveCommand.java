@@ -18,7 +18,7 @@ public class SaveCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public void execute(Game game) throws Exception {
 		boolean success = true;
 		if(filename == null) success = SaveLoadManager.saveGame(game);
 		else success = SaveLoadManager.saveGame(game, filename);
@@ -28,11 +28,8 @@ public class SaveCommand extends Command {
 		}
 		else {
 			System.out.println(ERROR_SAVE_MSG);
-			game.onStatusChange(SUCCESS_SAVE_MSG);
-			
+			game.onStatusChange(SUCCESS_SAVE_MSG);			
 		}
-			
-		return false;
 	}
 	
 	@Override

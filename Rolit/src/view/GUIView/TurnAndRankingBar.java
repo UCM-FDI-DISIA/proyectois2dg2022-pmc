@@ -1,4 +1,4 @@
-package view;
+package view.GUIView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -18,7 +18,7 @@ import commands.Command;
 import logic.Board;
 import logic.Color;
 import logic.Game;
-import logic.GameTransfer;
+import replay.State;
 
 public class TurnAndRankingBar extends JPanel implements RolitObserver {
 
@@ -87,7 +87,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	public void onCommandIntroduced(Game game, Board board, Command command) {}
 
 	@Override
-	public void onRegister(Game game, Board board, Command command) {}
+	public void onRegister(State status) {}
 
 	@Override
 	public void onError(String err) {
@@ -96,7 +96,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
+	public void onGameStatusChange(State status) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,14 +1,11 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import utils.StringUtils;
-import view.RolitObserver;
+import view.GUIView.RolitObserver;
 
 public class GameClassic extends Game {
 	
@@ -28,14 +25,7 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
-	public boolean play(int x, int y) {
-		// Primero tenemos que comprobar que se pueda poner un cubo en la posicion
-		// indicada
-		if (!this.board.tryToAddCube(x, y)) {
-			System.out.println("Not a valid position");
-			this.onTurnPlayed();
-			return false;
-		}
+	public void play(int x, int y) throws IllegalArgumentException {		
 		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
 		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
 		this.board.addCubeInPos(newCube);
@@ -44,33 +34,12 @@ public class GameClassic extends Game {
 		
 		//Comprobamos si la partida termina con este turno
 		this.finished = board.isBoardFull();
-		
-		this.state = copyMe(); //guardamos el estado del juego para que se pueda repetir partida
+		if (this.finished)
+			this.onGameFinished();
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!this.finished) currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		
-		this.onTurnPlayed();
-		
-		return true;
-	}
-	
-	@Override
-	public String showRanking() {
-		// FIXME no tengo claro si se hace una copia o no ni tampoco de si importa esto
-		List<Player> players = new ArrayList<Player>(this.players);
-		Collections.sort(players);
-		StringBuilder str = new StringBuilder(RANKING);
-		
-		str.append(StringUtils.LINE_SEPARATOR).append(MSG_REY).append(StringUtils.LINE_SEPARATOR);
-		
-		for (int i = 0; i < players.size(); ++i) {
-			str.append(MSG_POS).append(i + 1).append(":").append(players.get(i).getName()).append(" " + players.get(i).getScore()).append(StringUtils.LINE_SEPARATOR);
-		}
-		
-		str.append(MSG_GOOD_LUCK).append(StringUtils.LINE_SEPARATOR);
-		
-		return str.toString(); 
+		if(!this.finished)
+			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 
 	@Override
@@ -89,14 +58,6 @@ public class GameClassic extends Game {
 		gameJSONObject.put("type", "GameClassic");
 		return gameJSONObject;
 	}
-
-	@Override
-	public void onFirstPlay() {
-		for(RolitObserver o : observers) {
-			o.onFirstPlay(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
-		}
-		
-	}
 	
 	@Override
 	public void onTurnPlayed() {
@@ -104,12 +65,12 @@ public class GameClassic extends Game {
 			o.onTurnPlayed(players.get(currentPlayerIndex).getName(), players.get(currentPlayerIndex).getColor());
 		}
 	}
-	
-	@Override
-	public List<Rival> getRivals() {
-		return Collections.unmodifiableList(this.players);
-	}
 
+	@Override
+	protected void onGameFinished() {
+		for (RolitObserver o : this.observers)
+			o.onGameFinished(this.players, "Players");		
+	}
 	
 }
 

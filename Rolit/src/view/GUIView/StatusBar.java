@@ -1,4 +1,4 @@
-package view;
+package view.GUIView;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +11,7 @@ import logic.Color;
 import logic.Game;
 import logic.GameTransfer;
 import replay.Replay;
+import replay.State;
 
 public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 
@@ -37,7 +38,7 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 	
 	@Override
-	public void onRegister(Game game, Board board, Command command) {
+	public void onRegister(State status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -76,8 +77,8 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(String msg) {
-		changeStatus(msg);
+	public void onGameStatusChange(State status) {
+		changeStatus(status);
 	}
 	
 	@Override

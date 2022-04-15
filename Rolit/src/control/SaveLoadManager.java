@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ public class SaveLoadManager {
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
 	
-	public static void SaveLoadManager() {
+	public SaveLoadManager() {
 		try {
 			loadAndUpdateListOfSavedGames();
 		} catch (IOException e) {
@@ -44,6 +45,7 @@ public class SaveLoadManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public static boolean saveGame(Reportable game) {
 		return saveGame(game, DEFAULT_FILENAME);
 	}
@@ -52,33 +54,32 @@ public class SaveLoadManager {
 		filename += ".json";
 		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			save_file.write(game.report().toString());
-			addToListOfSavedGames(filename);
-			
+			addToListOfSavedGames(filename);			
 			return true;
 			
-		} catch (IOException error_file) {
-			
+		} catch (IOException error_file) {			
 			return false;
 		}
 	}
 	
-	public static Game loadGame() {
+	public static JSONObject loadGame() {
 		return loadGame(DEFAULT_FILENAME);
 	}
 	
-	public static Game loadGame(String filename) {
+	public static JSONObject loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			tryToAddToListOfSavedGames(filename);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
-			return GameBuilder.createGame(gameJSONObject);
+			return gameJSONObject;
 		} catch (IOException error_file) {
+			// FIXME esta excepcion no debería estar aqui
 			System.out.println(ERROR_LOAD);
 		}
 		return null;
 	}	
 
 	// FIXME esto es chapuza
-	public static Game loadGame(int option) throws Exception {
+	public static JSONObject loadGame(int option) throws Exception {
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -124,8 +125,7 @@ public class SaveLoadManager {
 		}
 	}	
 	
-	public static void loadAndUpdateListOfSavedGames() throws IOException {
-		
+	public static void loadAndUpdateListOfSavedGames() throws IOException {		
 		//Comprobamos si la lista está desactualizada, y los archivos
 		//no encontrados se borran de la lista.
 		names = Files.readAllLines(Paths.get(INDEX_FILENAME), StandardCharsets.UTF_8);
@@ -137,25 +137,21 @@ public class SaveLoadManager {
 				i--;
 			}
 				
-		}
-		
+		}		
 		saveListOfSavedGamesToFile();
 	}
 
-	public static boolean showSavedGames() {
-		try (BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {
-			
+	public static List<String> showSavedGames() throws IOException {
+		List<String> savedGames = new ArrayList<>();
+		try (BufferedReader pointer = new BufferedReader(new FileReader(INDEX_FILENAME))) {			
 			loadAndUpdateListOfSavedGames();
 			saveListOfSavedGamesToFile();
-			if (names.size() > 0) {
-				for (int i = 0; i < names.size(); ++i)
-					System.out.println(i + 1 + ". " + names.get(i));
-			}
+			for (int i = 0; i < names.size(); ++i)
+				savedGames.add(names.get(i));
 		} catch (IOException error_file) {
-			System.out.println(ERROR_LOAD_DEFAULT);
-			return false;
+			throw new IOException(ERROR_LOAD_DEFAULT);
 		}
-		return true;
+		return savedGames;
 	}
 	
 	public static boolean removeGame(String filename) {

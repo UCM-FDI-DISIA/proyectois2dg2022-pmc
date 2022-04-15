@@ -1,5 +1,6 @@
 package commands;
 
+import RolitExceptions.HelpException;
 import logic.Game;
 
 public class HelpCommand extends Command {	
@@ -13,12 +14,11 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public void execute(Game game) throws Exception {
 		StringBuilder buffer = new StringBuilder("Available commands:");
 		for(Command c : AVAILABLE_COMMANDS) {
 			buffer.append(String.format("%n%s", c.infoForHelp()));
 		}
-		System.out.println(buffer.toString());
-		return false;
+		throw new HelpException(buffer.toString());		
 	}
 }

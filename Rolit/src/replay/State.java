@@ -23,7 +23,7 @@ public class State implements Reportable {
 	String command;
 	Replayable game;
 	
-	State(String commandName, Replayable game){
+	public State(String commandName, Replayable game){
 		this.command = commandName;
 		this.game = game;
 	}
@@ -32,7 +32,7 @@ public class State implements Reportable {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Command > ").append(command).append(StringUtils.LINE_SEPARATOR);
-		str.append(game);
+		str.append(game.toString());
 		return str.toString();
 	}
 	
