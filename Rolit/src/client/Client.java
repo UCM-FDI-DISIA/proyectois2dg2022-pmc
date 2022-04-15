@@ -2,6 +2,7 @@ package client;
 
 import org.json.JSONObject;
 
+import logic.Color;
 import logic.Player;
 import view.GUIView.MainWindow;
 
@@ -38,9 +39,9 @@ public class Client {
 		
 	}
 
-	public void setPlayer(Player player) {
+	public void join(String name, Color color) {
 		if (this.player == null) {
-			this.player = player;
+			this.player = new Player(color, name);
 			clientController.sendToServer(player.report());
 		}
 

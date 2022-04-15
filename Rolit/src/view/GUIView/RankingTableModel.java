@@ -1,36 +1,26 @@
 package view.GUIView;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-
-import commands.Command;
-import logic.Board;
-import logic.Color;
-import logic.Game;
-import logic.GameTransfer;
-import logic.Player;
+import org.json.JSONArray;
+import control.Controller;
 import logic.Rival;
 import replay.State;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
-	private GameTransfer gameTransfer;
 	private String[] _colNames;
-	private List<Rival> rivals;
+	private JSONArray rivals;
 	public static final int NUM_ROWS = 2;
 	
-	public RankingTableModel(GameTransfer gameTransfer) {
-		this.gameTransfer = gameTransfer;
-		this.rivals = gameTransfer.getRivals();
-		this._colNames = new String[this.rivals.size() + 1];
-		this._colNames[0] = this.rivals.get(0).getType() + "s";
-		for(int i = 1; i <= this.rivals.size(); i++) {
-			this._colNames[i] = this.rivals.get(i - 1).getName();
+	public RankingTableModel(Controller ctrl, State state) {
+		this.rivals = state.getRivals();
+		this._colNames = new String[this.rivals.length() + 1];
+		this._colNames[0] = state.getType();
+		for(int i = 1; i <= this.rivals.length(); i++) {
+			this._colNames[i] = this.rivals.getJSONObject(i - 1).getString("name");
 		}
-		gameTransfer.addObserver(this);
+		ctrl.addObserver(this);
 	}
 	
 	public void update() {
@@ -61,22 +51,11 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 			break;
 		case 1:
 			if(columnIndex == 0) s = "Score";
-			else s = rivals.get(columnIndex - 1).getScore();
+			else s = rivals.getJSONObject(columnIndex - 1).getInt("score");
 			break;
 		}
 		return s;
 	}
-
-	@Override
-	public void onTurnPlayed(String name, Color color) {
-		update();
-	}
-
-	@Override
-	public void onGameFinished() {}
-
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {}
 
 	@Override
 	public void onRegister(State status) {}
@@ -88,13 +67,21 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(State state) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void onFirstPlay(String name, Color color) {
+	public void onTurnPlayed(State state) {
+		// TODO Auto-generated method stub
+		update();
+		this.rivals = state.getRivals();
+	}
+
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
 		// TODO Auto-generated method stub
 		
 	}

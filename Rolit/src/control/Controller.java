@@ -19,9 +19,10 @@ public class Controller {
 	private Replay replay;
 	
 	
-	public void createGame(JSONObject o) {
+	public State createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
 		this.replay = new Replay();
+		return new State(game);
 	}
 	
 	public void startReplay(Replay r) {
@@ -34,10 +35,9 @@ public class Controller {
 	
 	public void executeCommand(String s) throws Exception {
 		String[] parameters = s.toLowerCase().trim().split(" ");
-		Command command = null;
-		command = Command.getCommand(parameters);
+		Command command = Command.getCommand(parameters);
 		command.execute(game);
-		replay.addState(s, game.getState());
+		replay.addState(s, game.getReplayable());
 	}
 	
 	public void updateGameFromServer(JSONObject o) {
@@ -49,14 +49,6 @@ public class Controller {
 	public State loadGame(String filePath) {
 		game = GameBuilder.createGame(SaveLoadManager.loadGame(filePath));
 		return new State(game);
-	}
-	
-	public State getState() {
-		return new State(game);
-	}
-
-	public boolean[][] getShapeMatrix() {	
-		return game.getShapeMatrix();
 	}
 	
 	/*TODO private boolean askSaveReplay() {

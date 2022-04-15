@@ -1,33 +1,26 @@
 package view.GUIView;
 
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import commands.Command;
-import commands.PlaceCubeCommand;
 import control.Controller;
-import logic.Board;
-import logic.Color;
-import logic.Game;
-import logic.GameTransfer;
+import logic.Rival;
 import replay.Replay;
 import replay.State;
 
 public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
-
-	private GameTransfer game;
-	private Replay replay;
+	
+	private static final long serialVersionUID = 1L;
+	
 	JLabel statusLabel;
 	private String STATUS_TEXT = "Status: ";
 	
-	public StatusBar(GameTransfer gameTransfer) {
-		this.game = gameTransfer;
+	public StatusBar(Controller ctrl) {
 		initGUI();
-		gameTransfer.addObserver(this);
+		ctrl.addObserver(this);
 	}
 
 	public StatusBar(Replay replay) {
-		this.replay = replay;
 		initGUI();
 		replay.addObserver(this);
 	}
@@ -48,24 +41,6 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onTurnPlayed(String name, Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGameFinished() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private void changeStatus(String msg) {
 		this.removeAll();
@@ -77,19 +52,13 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
-		changeStatus(status);
+	public void onGameStatusChange(State state) {
+		changeStatus(state.getCommand());
 	}
 	
 	@Override
 	public void onReplayStatusChange(String msg) {
 		changeStatus(msg);
-		
-	}
-
-	@Override
-	public void onFirstPlay(String name, Color color) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -101,6 +70,18 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 
 	@Override
 	public void onReplayRightButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnPlayed(State state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
 		// TODO Auto-generated method stub
 		
 	}

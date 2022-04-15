@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import control.Controller;
 import control.SaveLoadManager;
+import logic.Color;
 import logic.Rival;
 import logic.Shape;
 import replay.Replay;
@@ -19,14 +20,15 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
 	private Controller ctrl;
+	private State state;
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
 
-	public BoardGUI(Controller ctrl) {
+	public BoardGUI(Controller ctrl, State state) {
 		this.ctrl = ctrl;
 
-		boolean[][] shapeMatrix = ctrl.getShapeMatrix();
+		boolean[][] shapeMatrix = SaveLoadManager.loadShape(Shape.valueOf(state.getShape()).getFilename());
 		
 		this.nFilas = shapeMatrix.length;
 		this.nColumnas = shapeMatrix[0].length;
@@ -99,11 +101,12 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	public void update() {
-		for(int i = 0; i < nFilas; i++) {
-			for(int j = 0; j < nColumnas; j++) {
-				celdas[i][j].update();
-			}
+		JSONArray cubes = state.getCubes();
+		for (int i = 0; i < cubes.length(); i++) {
+			JSONObject cube = cubes.getJSONObject(i);
+			celdas[cube.getJSONArray("pos").getInt(1)][cube.getJSONArray("pos").getInt(0)].update(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)));
 		}
+	
 	}
 
 	@Override
@@ -138,18 +141,19 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onRegister(State status) {
+	public void onRegister(State state) {
+		this.state = state;
 		update();
 	}
 
 	@Override
 	public void onTurnPlayed(State state) {
-		// TODO Auto-generated method stub
-		
+		this.state = state;
+		update();
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(State state) {
 		// TODO Auto-generated method stub
 		
 	}

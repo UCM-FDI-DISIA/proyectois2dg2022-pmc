@@ -29,6 +29,7 @@ import control.Controller;
 import logic.Color;
 import logic.Player;
 import logic.Shape;
+import replay.State;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
@@ -36,6 +37,7 @@ public class CreateGameDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller ctrl;
+	private State state;
 	private int status;
 	
 	private JComboBox<Shape> shapesCombo;
@@ -163,7 +165,7 @@ public class CreateGameDialog extends JDialog {
 				}
 				else if (pair.getFirst()) {
 					status = 1;
-					ctrl.createGame(createJSONObjectGame());
+					state = ctrl.createGame(createJSONObjectGame());
 					CreateGameDialog.this.setVisible(false);	
 					
 				}
@@ -549,5 +551,9 @@ public class CreateGameDialog extends JDialog {
 		return pair;
 
 		
+	}
+	
+	public State getState() {
+		return this.state;
 	}
 }

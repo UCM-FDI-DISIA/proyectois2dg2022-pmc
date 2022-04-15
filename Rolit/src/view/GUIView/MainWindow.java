@@ -8,31 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.json.JSONObject;
-
-import client.ClientController;
 import client.Client;
-import commands.Command;
 import control.Controller;
 import control.SaveLoadManager;
-import logic.Board;
-import logic.Color;
-import logic.Player;
 import logic.Rival;
-import logic.Shape;
 import replay.Replay;
 import replay.State;
 import server.Server;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
+	
+
+	private static final long serialVersionUID = 1L;
 	
 	private Client clientRolit;
 	private Controller ctrl;
@@ -52,10 +46,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel gamePanel;
 	
 	private boolean onlineMode = false;
-	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR" };
+	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
 
 	public MainWindow(Client clientRolit) {
 		super("Rolit");
+		this.ctrl = new Controller();
 		this.clientRolit = clientRolit;
 		initGUI();
 	}
@@ -86,11 +81,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		loadReplayButton.addActionListener(this);
 		
 		createServerButton = new JButton("Create Server");
-		createServerButton.setActionCommand("Create Server");
+		createServerButton.setActionCommand(BUTTONS[4]);
 		createServerButton.addActionListener(this);
 		
 		joinServerButton = new JButton("Join Server");
-		joinServerButton.setActionCommand("Join Server");
+		joinServerButton.setActionCommand(BUTTONS[5]);
 		joinServerButton.addActionListener(this);
 
 		// Colocar los botones en el panel
@@ -114,7 +109,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			CreateGameDialog dialogNew = new CreateGameDialog(MainWindow.this, false, ctrl);
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
-				this.state = ctrl.getState();
+				this.state = dialogNew.getState();
 				this.initGame();
 			}
 			else {
@@ -145,6 +140,21 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			else {
 				//TODO Mostrar algún mensaje
 			}
+			break;
+		case "CS":
+			CreateGameDialog dialogNewOnline = new CreateGameDialog(MainWindow.this, true, ctrl);
+			int statuscs = dialogNewOnline.open();
+			if(statuscs == 1)
+				new Server(dialogNewOnline.createJSONObjectGame());
+			break;
+		case "JS":
+			JoinServerDialog jsd = new JoinServerDialog(this);
+			int statusjs = jsd.open();
+			if(statusjs == 1) {
+				onlineMode = true;
+				clientRolit.empezarPartida(jsd.getIp(), Integer.parseInt(jsd.getPort()));
+				clientRolit.join(jsd.getPlayerName(), jsd.getPlayerColor());
+			}
 		}
 	}
 	
@@ -166,20 +176,20 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel.add(gamePanel);
 		
-		BoardGUI tablero = new BoardGUI(ctrl);
+		BoardGUI tablero = new BoardGUI(ctrl, state);
 		
 		tablero.crearTablero(boardPanel);
 		
-		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(gameTransfer);
+		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		
 		//gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		
 		this.setContentPane(mainPanel);
-		mainPanel.add(new ControlPanel(gameTransfer), BorderLayout.PAGE_START);
+		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(gameTransfer),BorderLayout.PAGE_END);
+		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
 				
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
@@ -245,6 +255,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	public void updateGameFromServer(JSONObject JSONnewState) {
+		if(state.getCubes().length() == 0)
+			initGame();
 		ctrl.updateGameFromServer(JSONnewState);
 	}
 

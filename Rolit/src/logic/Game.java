@@ -102,13 +102,13 @@ public abstract class Game implements Replayable {
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.getState()));
+			o.onGameStatusChange(new State(command, this.getReplayable()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State("", this.getState()));
+			o.onRegister(new State("", this.getReplayable()));
 		}
 	}
 
@@ -125,7 +125,7 @@ public abstract class Game implements Replayable {
 		return this.board.getShapeMatrix();
 	}
 	
-	public Replayable getState() {
+	public Replayable getReplayable() {
 		return this.copyMe();
 	}
 	

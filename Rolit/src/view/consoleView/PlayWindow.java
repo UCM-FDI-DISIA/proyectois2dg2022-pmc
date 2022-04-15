@@ -37,7 +37,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(String name, Color color) {
+	public void onTurnPlayed(State state) {
 		// TODO Auto-generated method stub		
 	}
 
@@ -51,8 +51,8 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onRegister(State status) {
-		System.out.println(status.toString());		
+	public void onRegister(State states) {
+		System.out.println(states.toString());		
 	}
 
 	@Override

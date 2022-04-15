@@ -20,7 +20,7 @@ import logic.Cube;
 import logic.Game;
 import logic.Rival;
 
-public class CeldaGUI implements RolitObserver {
+public class CeldaGUI {
 
 	private int x;
 	private int y;
@@ -47,8 +47,12 @@ public class CeldaGUI implements RolitObserver {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (!filled) {
-						String commandWords = "p" + Integer.toString(x) + Integer.toString(y);
-						ctrl.executeCommand(commandWords);
+						String commandWords = "p " + Integer.toString(x) + " " + Integer.toString(y);
+						try {
+							ctrl.executeCommand(commandWords);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 			});
@@ -71,7 +75,6 @@ public class CeldaGUI implements RolitObserver {
 		this.button.setPreferredSize(new Dimension(SIDE_LENGTH, SIDE_LENGTH));
 		this.button.setVisible(true);
 		
-		this.ctrl.addObserver(this);
 	}
 
 	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
@@ -143,45 +146,6 @@ public class CeldaGUI implements RolitObserver {
 
 			this.button.repaint();
 		}
-	}
-
-	public void update() {
-		Cube cube = this.gameTransfer.getCubeInPos(this.x, this.y);
-		if (cube != null) {
-			logic.Color newColor = cube.getColor();
-			update(newColor);
-		}
-
-	}
-
-
-	@Override
-	public void onRegister(State status) {
-
-	}
-
-	@Override
-	public void onError(String err) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void onTurnPlayed(State state) {
-		update();
-	}
-
-	@Override
-	public void onGameStatusChange(State status) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

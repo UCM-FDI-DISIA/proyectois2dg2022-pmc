@@ -1,22 +1,12 @@
 package replay;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import logic.Board;
-import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.GameClassic;
-import logic.GameTeams;
-import logic.Player;
 import logic.Replayable;
 import logic.Reportable;
-import logic.Shape;
-import logic.Team;
 import utils.StringUtils;
 
 public class State implements Reportable {
@@ -52,7 +42,65 @@ public class State implements Reportable {
 		
 	}
 	
+	public JSONArray getCubes() {
+		return game.report().getJSONObject("board").getJSONArray("cubes");
+	}
+	
+	private char getTurnColorShorcut() {
+		return game.report().getString("turn").charAt(0);
+	}
+	
+	private int findNextPlayer() {
+		String shortcut = String.valueOf(getTurnColorShorcut());
+		JSONArray players = game.report().getJSONArray("players");
+		int i = 0;
+		boolean found = false;;
+		while(i < players.length() && !found) {
+			if(shortcut.equals(players.getJSONObject(i).getString("color"))) {
+				found = true;
+			}
+			i++;
+		}
+		return i % players.length();
+	}
+	
+	public char getNextTurnColorShorcut() {
+		JSONArray players = game.report().getJSONArray("players");
+		return players.getJSONObject( findNextPlayer()).getString("color").charAt(0);	
+	}
+	
+	public String getNextTurnName() {
+		JSONArray players = game.report().getJSONArray("players");
+		return players.getJSONObject( findNextPlayer()).getString("name");
+	}
+	
 	public String getShape(){
 		return game.report().getJSONObject("board").getString("shape");
+	}
+	
+	public JSONArray getRivals() {
+		JSONObject gameReport = game.report();
+		if(gameReport.has("teams")) 
+			return gameReport.getJSONArray("teams");
+		else
+			return gameReport.getJSONArray("players");
+	}
+	
+	public String getType() {
+		return game.report().getString("type");
+	}
+	
+	public String getCommand() {
+		return this.command;
+	}
+	
+	public String getFirstPlayerName() {
+		JSONArray players = game.report().getJSONArray("players");
+		return players.getJSONObject(0).getString("name");
+	}
+	
+	public char getFirstPlayerColorShortcut() {
+		JSONArray players = game.report().getJSONArray("players");
+		return players.getJSONObject(0).getString("color").charAt(0);
 	}
 }
