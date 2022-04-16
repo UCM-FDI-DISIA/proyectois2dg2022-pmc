@@ -57,7 +57,8 @@ public class ClientController extends Thread{
 
 	public void updateGameToServer() {
 		puedeJugar = false;
-		sendToServer(clientRolit.getGameReport());
+		JSONObject report = clientRolit.getGameReport();
+		sendToServer(report);
 		
 	}
 
@@ -118,7 +119,8 @@ public class ClientController extends Thread{
 
 
 	public void sendToServer(JSONObject report) {
-		out.println(report.toString());
+		String msg = report.toString();
+		out.println(msg);
 		
 	}
 
