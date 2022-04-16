@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.net.Socket;
+import java.util.LinkedHashMap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -59,7 +62,26 @@ public class ServerClientThread extends Thread{
 			try {
 				String s = input.readLine();
 				if (s != null) {
-					JSONObject json = new JSONObject(s);			
+					JSONObject json = new JSONObject(s){
+					    /**
+					     * changes the value of JSONObject.map to a LinkedHashMap in order to maintain
+					     * order of keys.
+					     */
+					    @Override
+					    public JSONObject put(String key, Object value) throws JSONException {
+					        try {
+					            Field map = JSONObject.class.getDeclaredField("map");
+					            map.setAccessible(true);
+					            Object mapValue = map.get(this);
+					            if (!(mapValue instanceof LinkedHashMap)) {
+					                map.set(this, new LinkedHashMap<>());
+					            }
+					        } catch (NoSuchFieldException | IllegalAccessException e) {
+					            throw new RuntimeException(e);
+					        }
+					        return super.put(key, value);
+					    }
+					};	
 					server.receiveFromClient(json, client);
 					
 				}

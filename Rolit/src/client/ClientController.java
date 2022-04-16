@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -71,9 +74,28 @@ public class ClientController extends Thread{
 			while(true){
 				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
-				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer){
+				    /**
+				     * changes the value of JSONObject.map to a LinkedHashMap in order to maintain
+				     * order of keys.
+				     */
+				    @Override
+				    public JSONObject put(String key, Object value) throws JSONException {
+				        try {
+				            Field map = JSONObject.class.getDeclaredField("map");
+				            map.setAccessible(true);
+				            Object mapValue = map.get(this);
+				            if (!(mapValue instanceof LinkedHashMap)) {
+				                map.set(this, new LinkedHashMap<>());
+				            }
+				        } catch (NoSuchFieldException | IllegalAccessException e) {
+				            throw new RuntimeException(e);
+				        }
+				        return super.put(key, value);
+				    }
+				};
 				clientRolit.updateGameFromServer(JSONJuegoNuevo);
-
+				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			} 
 
 		} catch (IOException e) {
@@ -86,7 +108,9 @@ public class ClientController extends Thread{
 				try {
 					in.close();
 					socket.close();
-				} catch (IOException e2) {}
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
 				//theView.displayError("Crashed.");
 				System.exit(0);
 			}
