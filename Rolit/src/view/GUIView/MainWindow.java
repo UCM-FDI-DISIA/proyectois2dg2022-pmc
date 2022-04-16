@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.json.JSONObject;
 import client.Client;
@@ -149,8 +150,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		case "CS":
 			CreateGameDialog dialogNewOnline = new CreateGameDialog(MainWindow.this, true, ctrl);
 			int statuscs = dialogNewOnline.open();
-			if(statuscs == 1)
+			if(statuscs == 1) {
+				JOptionPane.showMessageDialog(mainPanel,  "If a server is created, the full application will be blocked until a match is created.", "Warning", JOptionPane.WARNING_MESSAGE);
 				new Server(dialogNewOnline.createJSONObjectGame());
+			}
+				
 			break;
 		case "JS":
 			JoinServerDialog jsd = new JoinServerDialog(this);
@@ -187,7 +191,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		
-		//gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		

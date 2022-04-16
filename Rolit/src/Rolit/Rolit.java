@@ -23,10 +23,13 @@ public class Rolit {
 	
 	
 	public static void main(String[] args) {		
-		version();
-		System.out.println();
+		
 		Controller controller = new Controller();
-		Rolit.run(controller);
+		MainWindow mainWindow = new MainWindow(controller);
+		//version();
+		//System.out.println();
+		
+		//Rolit.run(controller);
 	}
 
 	private static void version() {

@@ -34,7 +34,6 @@ public class WaitPlayerThread extends Thread {
 			
 				
 		} catch (IOException e) {
-			//sv.showError("Could not connect both players.");
 		}
 
 	}

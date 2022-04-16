@@ -36,54 +36,23 @@ public class Server {
 	private ServerView sv;
 	
 	private JSONObject gameConfigJSON;
-	
-	/**
-	 * Creates a new {@link ServerView}
-	 * @param gameConfigJSON 
-	 */
+
 	public Server(JSONObject gameConfigJSON) {
 		sv = new ServerView(this);
 		this.gameConfigJSON = gameConfigJSON;
 	}
 	
-	
-	/**
-	 * Starts the server at port
-	 * 
-	 * @param port			Requested port of the new server
-	 * @throws IOException
-	 * @see					Server#waitForPlayers()	
-	 * @see					ChessLogic#setGameRunning(boolean)			
-	 */
 	public void start(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		waitForPlayers();
-		
-		//logic.setGameRunning(true);
 	}
 	
-	
-	/**
-	 * Sends a message to all {@link ServerClient clients} and stops the server
-	 * 
-	 * @see	ChessLogic#setGameRunning(boolean)
-	 */
+
 	public void stop() {
-//		game.setGameRunning(false);
-//		for (PlayerColor c : clients.keySet()) {
-//			clients.get(c).send("Error_Server not responding.");
-//		}
-//		System.exit(0);
+		System.exit(0);
 	}
 
-	
-	/**
-	 * A thread that waits for new players to connect
-	 * 
-	 * @throws IOException
-	 * @see	Server#sendPositions(PlayerColor)
-	 * @see ServerView#showError(String)
-	 */
+
 	private void waitForPlayers() throws IOException {
 	
 		expectedPlayers = 2;
@@ -132,13 +101,7 @@ public class Server {
 		return playersJSONArray;
 	}
 
-	/**
-	 * Handles incoming click from a client
-	 * 
-	 * @param json		Clock in json-format
-	 * @param client		The client sending the data
-	 * @see				ChessLogic
-	 */
+
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
 
 		if (json.has("turn")) { //estamos ante un juego
@@ -161,9 +124,7 @@ public class Server {
 		
 	}
 
-	/**
-	 * @return	The IP-address of the server
-	 */
+
 	public String getIp() {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();

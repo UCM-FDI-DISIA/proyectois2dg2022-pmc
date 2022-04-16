@@ -11,13 +11,6 @@ import java.util.LinkedHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Thread that handles all the IO for a client
- *
- * @author  Oliver Ekberg
- * @since   2018-04-01
- * @version 1.0
- */
 public class ServerClientThread extends Thread{
 
 	private BufferedReader input;
@@ -26,15 +19,6 @@ public class ServerClientThread extends Thread{
 	private Server server;
 	private boolean isRunning = true;
 
-	
-	/**
-	 * Sets variables and creates a input and output
-	 * 
-	 * @param server		Reference to the server
-	 * @param socket		Reference to socket
-	 * @param client		Reference to owner
-	 * @throws IOException
-	 */
 	public ServerClientThread(Server server, Socket socket, ServerClient client) throws IOException {
 		this.server = server;
 		this.client = client;
@@ -43,45 +27,19 @@ public class ServerClientThread extends Thread{
 	} 
 
 	
-	/**
-	 * Kills the thread
-	 */
+
 	public void kill() {
 		isRunning = false;
 	}
 
 	
-	/**
-	 * While game {@link #isRunning is running} it takes in json from client, formats it and sends it to the {@link Server server}
-	 * 
-	 * @see Server#receiveFromClient(String, ServerClient)
-	 */
 	public void run(){
 
 		while(isRunning){
 			try {
 				String s = input.readLine();
 				if (s != null) {
-					JSONObject json = new JSONObject(s){
-					    /**
-					     * changes the value of JSONObject.map to a LinkedHashMap in order to maintain
-					     * order of keys.
-					     */
-					    @Override
-					    public JSONObject put(String key, Object value) throws JSONException {
-					        try {
-					            Field map = JSONObject.class.getDeclaredField("map");
-					            map.setAccessible(true);
-					            Object mapValue = map.get(this);
-					            if (!(mapValue instanceof LinkedHashMap)) {
-					                map.set(this, new LinkedHashMap<>());
-					            }
-					        } catch (NoSuchFieldException | IllegalAccessException e) {
-					            throw new RuntimeException(e);
-					        }
-					        return super.put(key, value);
-					    }
-					};	
+					JSONObject json = new JSONObject(s);	
 					server.receiveFromClient(json, client);
 					
 				}
@@ -91,10 +49,7 @@ public class ServerClientThread extends Thread{
 		}
 	}
 
-	
-	/**
-	 * @param msg	Message to send to the client
-	 */
+
 	public void updateGraphics(JSONObject json){
 		String msg = json.toString();
 		if(msg != null) 

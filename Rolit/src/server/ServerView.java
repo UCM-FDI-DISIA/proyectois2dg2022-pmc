@@ -24,16 +24,12 @@ public class ServerView extends JFrame {
 
 	
 	private JPanel thePanel;
-	private JLabel ipLabel, portLabel, numberOfPlayersLabel;
+	private JLabel ipLabel, portLabel;
 	private JTextField portField;
 	private JButton startButton;
 	private JButton stopButton;
 	
-	/**
-	 * Creates the GUI
-	 * 
-	 * @param server		Reference to the controller
-	 */
+
 	public ServerView(Server server) {
 		
 		setSize(400,400);
@@ -58,10 +54,6 @@ public class ServerView extends JFrame {
 		stopButton = new JButton("Stop server");
 		
 		
-		/*
-		 * ActionListner for the startbutton. Will retrieve port and IP-address from the fields and start the server with these values.
-		 * Will also change the GUI.
-		 */
 		startButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -72,6 +64,7 @@ public class ServerView extends JFrame {
 					JOptionPane.showMessageDialog(thePanel, "Port not within limits, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+				
 				thePanel.remove(portLabel);
 				thePanel.remove(portField);
 				thePanel.remove(startButton);
@@ -91,9 +84,7 @@ public class ServerView extends JFrame {
 			}
 		});
 		
-		/*
-		 * ActionListner for stop button. Will stop the server.
-		 */
+
 		stopButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -111,18 +102,6 @@ public class ServerView extends JFrame {
 	}
 	
 
-	/**
-	 * Adds a component to a panel
-	 * 
-	 * @param thePanel
-	 * @param comp
-	 * @param xPos
-	 * @param yPos
-	 * @param compWidth
-	 * @param compHeight
-	 * @param place
-	 * @param stretch
-	 */
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();
@@ -141,18 +120,10 @@ public class ServerView extends JFrame {
 	}
 	
 	
-	/**
-	 * Displays an error for the server
-	 * 
-	 * @param msg	Error message to display
-	 */
+
 	public void showError(String msg) {
 		JOptionPane.showMessageDialog(thePanel, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 
-	public JSONObject getGameConfigJSON() {
-		return null;
-	}
-	
 }
