@@ -45,11 +45,12 @@ public class GameTeams extends Game {
 		if (this.finished)
 			this.onGameFinished();
 		
-		onTurnPlayed();
 		
 		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 		if(!this.finished)
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+		
+		onTurnPlayed();
 	}
 
 	@Override
@@ -76,8 +77,9 @@ public class GameTeams extends Game {
 	
 	@Override
 	public void onTurnPlayed() {
+		State state = new State(this.getReplayable());
 		for(RolitObserver o : observers) {
-			o.onTurnPlayed(new State(this.getReplayable()));
+			o.onTurnPlayed(state);
 		}
 	}
 

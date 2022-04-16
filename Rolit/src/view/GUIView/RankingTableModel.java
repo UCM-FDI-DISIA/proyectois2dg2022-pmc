@@ -85,5 +85,4 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 		// TODO Auto-generated method stub
 		
 	}
-
 }

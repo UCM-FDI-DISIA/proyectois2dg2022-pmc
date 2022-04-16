@@ -46,11 +46,11 @@ public class State implements Reportable {
 		return game.report().getJSONObject("board").getJSONArray("cubes");
 	}
 	
-	private char getTurnColorShorcut() {
+	public char getTurnColorShorcut() {
 		return game.report().getString("turn").charAt(0);
 	}
 	
-	private int findNextPlayer() {
+	private int findTurnPlayer() {
 		String shortcut = String.valueOf(getTurnColorShorcut());
 		JSONArray players = game.report().getJSONArray("players");
 		int i = 0;
@@ -59,20 +59,12 @@ public class State implements Reportable {
 			if(shortcut.equals(players.getJSONObject(i).getString("color"))) {
 				found = true;
 			}
-			i++;
+			else
+				i++;
 		}
 		return i % players.length();
 	}
 	
-	public char getNextTurnColorShorcut() {
-		JSONArray players = game.report().getJSONArray("players");
-		return players.getJSONObject( findNextPlayer()).getString("color").charAt(0);	
-	}
-	
-	public String getNextTurnName() {
-		JSONArray players = game.report().getJSONArray("players");
-		return players.getJSONObject( findNextPlayer()).getString("name");
-	}
 	
 	public String getShape(){
 		return game.report().getJSONObject("board").getString("shape");
@@ -102,5 +94,10 @@ public class State implements Reportable {
 	public char getFirstPlayerColorShortcut() {
 		JSONArray players = game.report().getJSONArray("players");
 		return players.getJSONObject(0).getString("color").charAt(0);
+	}
+
+	public String getTurnName() {
+		JSONArray players = game.report().getJSONArray("players");
+		return players.getJSONObject(findTurnPlayer()).getString("name");
 	}
 }

@@ -85,7 +85,6 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 		// TODO Auto-generated method stub
 		
 	}
-
 	
 
 }

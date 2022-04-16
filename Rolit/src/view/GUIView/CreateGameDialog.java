@@ -90,8 +90,13 @@ public class CreateGameDialog extends JDialog {
 
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
-		gameModeCombo = new JComboBox<String>(gameModes);
+		String[] localGameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
+		String[] onlineGameModes = {GameClassicBuilder.TYPE};
+
+		if (onlineMode)
+			gameModeCombo = new JComboBox<String>(onlineGameModes);
+		else
+			gameModeCombo = new JComboBox<String>(localGameModes);
 		
 		Shape[] shapes = Shape.values();
 		shapesCombo = new JComboBox<Shape>(shapes);

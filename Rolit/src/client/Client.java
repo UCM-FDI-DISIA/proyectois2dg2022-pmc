@@ -12,9 +12,9 @@ public class Client {
 	private ClientController clientController;
 	private Player player;
 	
-	public Client() {
+	public Client(MainWindow mW) {
 		
-		mainWindow = new MainWindow(this);
+		mainWindow = mW;
 		
 	}
 	

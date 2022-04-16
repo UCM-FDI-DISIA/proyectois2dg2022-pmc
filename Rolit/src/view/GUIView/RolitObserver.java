@@ -15,4 +15,5 @@ public interface RolitObserver {
 	void onError(String err);
 	// Esto sirve para pasar el nuevo estado del juego a todos los que necesiten algo cuando ha cambiado
 	void onGameStatusChange(State state);
+
 }

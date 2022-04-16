@@ -79,7 +79,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	@Override
 	public void onTurnPlayed(State state) {	//TODO Si esto funciona dios existe
 		this.state = state;
-		update(state.getNextTurnName(), Color.valueOfIgnoreCase(state.getNextTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
 	}
 
 	@Override

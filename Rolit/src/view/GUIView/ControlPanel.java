@@ -135,5 +135,4 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 		
 	}
 
-
 }

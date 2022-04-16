@@ -45,13 +45,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 	
-	private boolean onlineMode = false;
+	private boolean onlineGameStarted = false;
+	
 	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
 
-	public MainWindow(Client clientRolit) {
+	public MainWindow(Controller ctrl) {
 		super("Rolit");
-		this.ctrl = new Controller();
-		this.clientRolit = clientRolit;
+		
+		this.clientRolit = new Client(this);
+		
+		this.ctrl = ctrl;
+		this.ctrl.setClient(clientRolit);
+		
 		initGUI();
 	}
 	
@@ -151,7 +156,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			JoinServerDialog jsd = new JoinServerDialog(this);
 			int statusjs = jsd.open();
 			if(statusjs == 1) {
-				onlineMode = true;
+				ctrl.setOnlineMode(true);
 				clientRolit.empezarPartida(jsd.getIp(), Integer.parseInt(jsd.getPort()));
 				clientRolit.join(jsd.getPlayerName(), jsd.getPlayerColor());
 			}
@@ -255,8 +260,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	public void updateGameFromServer(JSONObject JSONnewState) {
-		if(state.getCubes().length() == 0)
+
+		if(!onlineGameStarted) {
+			onlineGameStarted = true;
+			state = ctrl.createGame(JSONnewState);
 			initGame();
+		}
+			
 		ctrl.updateGameFromServer(JSONnewState);
 	}
 
@@ -273,7 +283,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	@Override
 	public void onGameStatusChange(State state) {
+		
 	}
-
 
 }

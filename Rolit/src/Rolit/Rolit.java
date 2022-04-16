@@ -59,7 +59,7 @@ public class Rolit {
 				@Override
 				public void run() {
 					//;
-					Client client = new Client();
+					MainWindow mainWindow = new MainWindow(ctr);
 				}
 			});
 		}
