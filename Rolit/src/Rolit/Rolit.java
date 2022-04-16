@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
 
+import client.Client;
 import control.Controller;
 import view.GUIView.MainWindow;
 import view.consoleView.ConsoleWindow;
@@ -11,7 +12,7 @@ import view.consoleView.MainBashWindow;
 
 public class Rolit {
 	private static final String TITLE = "		ROLIT";
-	private static final String VERSION = "Sprint Week 4";
+	private static final String VERSION = "Sprint Week 5";
 	private static final String DEFAULT_MODE = "console";
 	private static final String CHOOSE_MODE = "Choose mode: ";
 	private static final String CONSOLE_MODE = "Console Mode";
@@ -22,10 +23,13 @@ public class Rolit {
 	
 	
 	public static void main(String[] args) {		
-		version();
-		System.out.println();
+		
 		Controller controller = new Controller();
-		Rolit.run(controller);
+		MainWindow mainWindow = new MainWindow(controller);
+		//version();
+		//System.out.println();
+		
+		//Rolit.run(controller);
 	}
 
 	private static void version() {
@@ -58,7 +62,7 @@ public class Rolit {
 				@Override
 				public void run() {
 					//;
-					MainWindow mainWindow = new MainWindow();
+					MainWindow mainWindow = new MainWindow(ctr);
 				}
 			});
 		}

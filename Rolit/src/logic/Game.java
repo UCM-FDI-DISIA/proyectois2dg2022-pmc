@@ -104,13 +104,19 @@ public abstract class Game implements Replayable {
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.getState()));
+			o.onGameStatusChange(new State(command, this.getReplayable()));
+		}
+	}
+	
+	public void onStatusChange() {
+		for(RolitObserver o : observers) {
+			o.onGameStatusChange(new State(this.getReplayable()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State("", this.getState()));
+			o.onRegister(new State(this.getReplayable()));
 		}
 	}
 
@@ -127,7 +133,7 @@ public abstract class Game implements Replayable {
 		return this.board.getShapeMatrix();
 	}
 	
-	public Replayable getState() {
+	public Replayable getReplayable() {
 		return this.copyMe();
 	}
 	
@@ -135,4 +141,17 @@ public abstract class Game implements Replayable {
 		int index = this.players.indexOf(player);
 		return this.players.get((index + 1) % this.players.size());
 	}
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
+	}
+
+	public void updateGameFromServer(List<RolitObserver> observerList) {
+		this.observers = observerList;
+		this.onTurnPlayed();
+	}
+
+	public List<RolitObserver> getObserverList() {
+		return Collections.unmodifiableList(this.observers);
+	}
+	
 }

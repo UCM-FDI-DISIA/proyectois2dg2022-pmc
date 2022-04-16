@@ -1,7 +1,14 @@
 package replay;
 
+import logic.Board;
+import logic.Color;
+import logic.Cube;
+import logic.Game;
+import logic.GameClassic;
+import logic.Player;
 import logic.Replayable;
 import logic.Reportable;
+import logic.Shape;
 import utils.StringUtils;
 import view.GUIView.Observable;
 import view.GUIView.ReplayObserver;

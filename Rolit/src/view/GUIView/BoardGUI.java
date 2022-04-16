@@ -1,21 +1,15 @@
 package view.GUIView;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.List;
-
 import javax.swing.JPanel;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import commands.Command;
+import control.Controller;
 import control.SaveLoadManager;
-import logic.Board;
 import logic.Color;
-import logic.Game;
+import logic.Rival;
 import logic.Shape;
 import replay.Replay;
 import replay.State;
@@ -25,15 +19,16 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private int nFilas;
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
-	private Game game;
+	private Controller ctrl;
+	private State state;
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
 
-	public BoardGUI(Game game) {
-		this.game = game;
+	public BoardGUI(Controller ctrl, State state) {
+		this.ctrl = ctrl;
 
-		boolean[][] shapeMatrix = game.getShapeMatrix();
+		boolean[][] shapeMatrix = SaveLoadManager.loadShape(Shape.valueOf(state.getShape()).getFilename());
 		
 		this.nFilas = shapeMatrix.length;
 		this.nColumnas = shapeMatrix[0].length;
@@ -44,11 +39,11 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], game, sideButtonLength);
+				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], ctrl, sideButtonLength);
 			}
 		}
 
-		this.game.addObserver(this);
+		this.ctrl.addObserver(this);
 	
 	}
 	
@@ -105,23 +100,17 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		panel.revalidate();
 	}
 
-	public void update(Game game, Board board) {
-		for(int i = 0; i < nFilas; i++) {
-			for(int j = 0; j < nColumnas; j++) {
-				celdas[i][j].update();
-			}
+	public void update() {
+		JSONArray cubes = state.getCubes();
+		for (int i = 0; i < cubes.length(); i++) {
+			JSONObject cube = cubes.getJSONObject(i);
+			celdas[cube.getJSONArray("pos").getInt(1)][cube.getJSONArray("pos").getInt(0)].update(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)));
 		}
+	
 	}
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -152,29 +141,19 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onRegister(State status) {
-		update(status, board);
+	public void onRegister(State state) {
+		this.state = state;
+		update();
 	}
 
 	@Override
-	public void onGameFinished() {
-		
+	public void onTurnPlayed(State state) {
+		this.state = state;
+		update();
 	}
 
 	@Override
-	public void onTurnPlayed(String name, Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGameStatusChange(State status) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFirstPlay(String name, Color color) {
+	public void onGameStatusChange(State state) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -185,5 +164,10 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		
 	}
 
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

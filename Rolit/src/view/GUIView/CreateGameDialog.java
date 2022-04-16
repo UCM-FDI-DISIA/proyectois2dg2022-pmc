@@ -5,18 +5,12 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -27,30 +21,24 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import Builders.GameBuilder;
 import Builders.GameClassicBuilder;
 import Builders.GameTeamsBuilder;
-import commands.Command;
-import logic.Board;
+import control.Controller;
 import logic.Color;
-import logic.Cube;
-import logic.Game;
 import logic.Player;
 import logic.Shape;
+import replay.State;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
 	
-	private Game game;
-	private Frame parent;
-	private int status;
+	private static final long serialVersionUID = 1L;
 	
-	private Map<String, ImageIcon> colorMap;
-	private Map<String, ImageIcon> boardMap;
+	private Controller ctrl;
+	private State state;
+	private int status;
 	
 	private JComboBox<Shape> shapesCombo;
 	private JComboBox<String> gameModeCombo;
@@ -79,9 +67,12 @@ public class CreateGameDialog extends JDialog {
 	
 	private final int MAX_TEXT_LENGTH = 15;
 	
-	public CreateGameDialog(Frame parent) {
+	private boolean onlineMode;
+	
+	public CreateGameDialog(Frame parent, boolean onlineMode, Controller ctrl) {
 		super(parent, true);
-		this.parent = parent;
+		this.onlineMode = onlineMode;
+		this.ctrl = ctrl;
 		initGUI();
 	}
 	
@@ -89,11 +80,7 @@ public class CreateGameDialog extends JDialog {
 		
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
-		
-		colorMap = new HashMap<String, ImageIcon>();
-		boardMap = new HashMap<String, ImageIcon>();
 
-		
 		setTitle("Create Game");
 		setVisible(false);
 		
@@ -103,8 +90,13 @@ public class CreateGameDialog extends JDialog {
 
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
-		gameModeCombo = new JComboBox<String>(gameModes);
+		String[] localGameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
+		String[] onlineGameModes = {GameClassicBuilder.TYPE};
+
+		if (onlineMode)
+			gameModeCombo = new JComboBox<String>(onlineGameModes);
+		else
+			gameModeCombo = new JComboBox<String>(localGameModes);
 		
 		Shape[] shapes = Shape.values();
 		shapesCombo = new JComboBox<Shape>(shapes);
@@ -171,14 +163,17 @@ public class CreateGameDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				Pair<Boolean, String> pair = checkIfCorrectArguments(); 
-				
-				if (pair.getFirst()) {
-					game = GameBuilder.createGame(createJSONObjectGame());
+				if (onlineMode) {
 					status = 1;
+					CreateGameDialog.this.setVisible(false);
+					
+				}
+				else if (pair.getFirst()) {
+					status = 1;
+					state = ctrl.createGame(createJSONObjectGame());
 					CreateGameDialog.this.setVisible(false);	
 					
 				}
-				
 				else {
 					
 					if (errorLabel != null)
@@ -259,10 +254,6 @@ public class CreateGameDialog extends JDialog {
 		return (int) playersSpinner.getValue();
 	}
 	
-	public Game getNewGame() {
-		return this.game;
-	}
-	
 	public Shape getNewShape() {
 		return this.getBoardShape();
 	}
@@ -280,17 +271,21 @@ public class CreateGameDialog extends JDialog {
 		
 		JSONArray playerJSONArray = new JSONArray();		
 		
-		for (int i = 0; i < listPlayerComboColors.size(); ++i) {
-			Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
-			if (i == 0)
-				o.put("turn", playerAux.getColor().toString());
-			playerJSONArray.put(playerAux.report());
+		if (!onlineMode) {
+			for (int i = 0; i < listPlayerComboColors.size(); ++i) {
+				Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
+				if (i == 0)
+					o.put("turn", playerAux.getColor().toString());
+				playerJSONArray.put(playerAux.report());
+				
+			}
 			
+			o.put("players", playerJSONArray);
 		}
-					
-		o.put("players", playerJSONArray);
 		
-		if (this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
+					
+		
+		if (!onlineMode && this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 			
 			JSONArray teamsJSONArray = new JSONArray();
 			
@@ -317,6 +312,7 @@ public class CreateGameDialog extends JDialog {
 		return o;
 	}
 	
+	@SuppressWarnings("serial")
 	private void buildClassicPanel() {
 		
 		classicPanel = new JPanel();
@@ -364,10 +360,13 @@ public class CreateGameDialog extends JDialog {
 		
 		JPanel buttonsPanel = new JPanel();
 		classicPanel.add(buttonsPanel);
+		
+		classicPanel.setVisible(!onlineMode);
 	
 		
 	}
 	
+	@SuppressWarnings("serial")
 	private void buildTeamsPanel() {
 		
 		teamsPanel = new JPanel();
@@ -468,7 +467,7 @@ public class CreateGameDialog extends JDialog {
 		
 		buildClassicPanel();
 		mainPanel.add(classicPanel);
-		classicPanel.setVisible(true);
+		classicPanel.setVisible(true && !onlineMode);
 		mainPanel.repaint();
 		
 		if (errorLabel != null) //Queremos que si hay un mensaje de error, desaparezca
@@ -488,7 +487,7 @@ public class CreateGameDialog extends JDialog {
 		
 		buildTeamsPanel();
 		mainPanel.add(teamsPanel);
-		teamsPanel.setVisible(true);
+		teamsPanel.setVisible(true && !onlineMode);
 		numberOfTeamsLabel.setVisible(true);
 		teamsSpinner.setVisible(true);
 		mainPanel.repaint();
@@ -557,5 +556,9 @@ public class CreateGameDialog extends JDialog {
 		return pair;
 
 		
+	}
+	
+	public State getState() {
+		return this.state;
 	}
 }

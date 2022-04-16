@@ -36,6 +36,7 @@
 \begin{lstlisting}[frame=single, language=Java]
 {
  "name" = String,
+ "score" = int,
  "color" = String
 }
 \end{lstlisting}
@@ -45,9 +46,10 @@
 \begin{lstlisting}[frame=single, language=Java]
 {
  "name" = String,
- "players" = [{"name" = String, "color" = String},
+ "score" = int,
+ "players" = [{"name" = String, "score" = int, "color" = String},
  	  ...
- 	  ,{"name" = String, "color" = String}]
+ 	  ,{"name" = String, "score" = int, "color" = String}]
 }
 \end{lstlisting}
 
@@ -64,9 +66,9 @@
   	  ,{"color": String, "pos": [int x, int y]}]
  },
  
- "players" = [{"name" = String, "color" = String},
+ "players" = [{"name" = String,"score" = int, "color" = String},
  	  ...
- 	  ,{"name" = String, "color" = String}],
+ 	  ,{"name" = String, "score" = int, "color" = String}],
  
  "turn" = String	
 }
@@ -83,26 +85,26 @@
   	  ,{"color": String, "pos": [int x, int y]}]
  },
  
- "players" = [{"name" = String, "color" = String},
+ "players" = [{"name" = String, "score" = int, "color" = String},
  	  ...
- 	  ,{"name" = String, "color" = String}],
+ 	  ,{"name" = String, "score" = int, "color" = String}],
  
- "teams" = [{"name" = String,
- 	     "players" = [{"name" = String, "color" = String},
+ "teams" = [{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
  	     ...
- 	     ,{"name" = String, "color" = String}]},
+ 	     ,{"name" = String, "score" = int, "color" = String}]},
  	     
  	     ...
  	     
- 	    ,{"name" = String,
- 	     "players" = [{"name" = String, "color" = String},
+ 	    ,{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
  	     ...
- 	     ,{"name" = String, "color" = String}]}
+ 	     ,{"name" = String, "score" = int, "color" = String}]}
 	   }],
 	   
- "players" = [{"name" = String, "color" = String},
+ "players" = [{"name" = String, "score" = int, "color" = String},
  	  ...
- 	  ,{"name" = String, "color" = String}],
+ 	  ,{"name" = String, "score" = int, "color" = String}],
  
  "turn" = String	
 }

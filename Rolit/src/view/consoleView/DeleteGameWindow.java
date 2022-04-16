@@ -2,7 +2,6 @@ package view.consoleView;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 import control.SaveLoadManager;
 

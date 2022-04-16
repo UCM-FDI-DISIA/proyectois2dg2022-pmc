@@ -4,34 +4,31 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-import commands.Command;
 import control.Controller;
-import control.SaveLoadManager;
-import logic.Board;
-import logic.Color;
-import logic.Game;
+import logic.Rival;
 import replay.Replay;
 import replay.State;
 
 public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
-	private Game game;
+	private static final long serialVersionUID = 1L;
+	
+	private Controller ctrl;
 	private Replay replay;
 	private JFileChooser fc;
 	private JButton saveFileBtn;
 	private JButton replayRightBtn;
 	private JButton replayLeftBtn;
 	
-	public ControlPanel(Game game) {
-		this.game = game;
+	public ControlPanel(Controller ctrl) {
+		this.ctrl = ctrl;
 		
 		//SaveFile
 		saveFileBtn = new JButton();
@@ -73,9 +70,11 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			int ret = fc.showSaveDialog(this);
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				String[] commandWords = { "s", file.getPath() };
-				Command command = Command.getCommand(commandWords);
-				command.execute(game);
+				try {
+					ctrl.executeCommand("s " + file.getPath());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 
 			} else {
 				//TODO Algo habrá que hacer
@@ -88,19 +87,6 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			replay.nextState();
 
 		}
-		
-	}
-
-
-	@Override
-	public void onCommandIntroduced(Game game, Board board, Command command) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTurnPlayed(String name, Color color) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -126,16 +112,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onGameFinished() {}
-
-	@Override
 	public void onGameStatusChange(State status) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFirstPlay(String name, Color color) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -146,5 +123,16 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 		
 	}
 
+	@Override
+	public void onTurnPlayed(State state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

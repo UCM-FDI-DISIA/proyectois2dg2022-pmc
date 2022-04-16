@@ -1,0 +1,137 @@
+package control;
+
+import Builders.GameBuilder;
+<<<<<<< HEAD
+import client.Client;
+
+import javax.swing.SwingUtilities;
+
+=======
+>>>>>>> NewGraphics
+import commands.Command;
+
+import org.json.JSONObject;
+
+import logic.Game;
+import replay.Replay;
+import view.GUIView.RolitObserver;
+
+public class Controller {
+	private Game game;
+	private Replay replay;
+	
+	
+	public void createGame(JSONObject o) {
+		this.game = GameBuilder.createGame(o);
+		this.replay = new Replay();
+	}
+	
+	public void startReplay(Replay r) {
+		r.startReplay();
+	}
+	
+	public void addObserver(RolitObserver o) {
+		game.addObserver(o);
+	}
+	
+<<<<<<< HEAD
+	// FIXME tiene que haber una forma mejor de hacerlo todo
+	public void run() {
+		int selectedMode = mode();
+		
+		if (GUI_MODE.equals(modes[selectedMode-1])) {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					Client c = new Client();
+				}
+			});
+		}
+		else if (CONSOLE_MODE.equals(modes[selectedMode-1])){
+			
+			boolean repeatMenu;
+			do {
+				repeatMenu = false;
+				int option = this.menu();
+				if (NEW_GAME.equals(optionsArray[option - 1]))
+					game = GameBuilder.createGame();
+				else if (LOAD_GAME.equals(optionsArray[option - 1]))
+				{
+						System.out.println(LIST_MSG);
+						boolean opened = SaveLoadManager.showSavedGames();
+						if (!opened) {
+							System.out.println(LOAD_MSG);
+							String fileName = input.next();
+							if(".".equals(fileName)) {
+								game = SaveLoadManager.loadGame();
+							}
+							else
+								game = SaveLoadManager.loadGame(fileName);
+						}
+						else {
+							boolean repeatChooseNumber;
+							do {
+								repeatChooseNumber = false;
+								System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG + " :");
+								try {
+									int numberOfSavedGameInt = Integer.valueOf(input.next());
+									if (numberOfSavedGameInt != GO_BACK_INT)
+										game = SaveLoadManager.loadGame(numberOfSavedGameInt);
+									else
+										repeatMenu = true;
+								} catch (Exception e) {
+									System.out.println(INVALID_OPTION);
+									repeatChooseNumber = true;
+								}
+							} while (repeatChooseNumber);
+						}
+				}
+				else if (DELETE_GAME.equals(optionsArray[option - 1])) {
+					repeatMenu = true;
+					playMode = false;
+					boolean opened = SaveLoadManager.showSavedGames();
+					if (opened) {
+						boolean repeatChooseNumber;
+						do {
+							repeatChooseNumber = false;
+							System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG);
+							try {
+								int numberOfSavedGameInt = Integer.valueOf(input.next());
+								if (numberOfSavedGameInt != GO_BACK_INT)
+									SaveLoadManager.removeGame(numberOfSavedGameInt);
+							} catch (Exception e) {
+								System.out.println(INVALID_OPTION);
+								repeatChooseNumber = true;
+							}
+						} while (repeatChooseNumber);
+					}
+				}
+				else if(REPLAY_GAME.equals(optionsArray[option - 1])) {
+					playMode = false;
+					//System.out.print("Escribe el nombre del replay a cargar .txt (temporal):");
+					//input.nextLine();
+					//String loadFile = input.nextLine();
+					replay = SaveLoadManager.loadReplay();
+					replay.startReplay();
+				}			
+			} while (repeatMenu);
+			if(playMode) {
+				this.play();
+			}
+		}
+=======
+	public void executeCommand(String s) throws Exception {
+		String[] parameters = s.toLowerCase().trim().split(" ");
+		Command command = null;
+		command = Command.getCommand(parameters);
+		command.execute(game);
+		replay.addState(s, game.getState());
+>>>>>>> NewGraphics
+	}
+	
+	/*TODO private boolean askSaveReplay() {
+		System.out.println(REPLAY_MSG);
+		String ans = input.nextLine();
+		return "y".equals(ans.toLowerCase());
+	}*/
+}
