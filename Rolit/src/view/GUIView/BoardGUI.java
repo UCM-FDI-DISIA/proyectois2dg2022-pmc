@@ -25,8 +25,9 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private JSONObject lastCubeAdded;
 	
 
-	public BoardGUI(Controller ctrl, State state) {
+	public BoardGUI(Controller ctrl) {
 		this.ctrl = ctrl;
+		this.ctrl.addObserver(this);	
 
 		boolean[][] shapeMatrix = SaveLoadManager.loadShape(Shape.valueOf(state.getShape()).getFilename());
 		
@@ -43,8 +44,7 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 			}
 		}
 
-		this.ctrl.addObserver(this);
-	
+		
 	}
 	
 	public BoardGUI(Replay replay) {
@@ -79,6 +79,10 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 
 		
 		return 0;
+	}
+	
+	public void clickOn(int x, int y) {
+		this.celdas[x][y].clickOn();
 	}
 	
 	public void crearTablero(JPanel panel) {

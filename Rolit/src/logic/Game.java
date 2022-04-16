@@ -7,8 +7,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import CPU.Strategy;
 import replay.State;
-import strategy.Strategy;
 import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {

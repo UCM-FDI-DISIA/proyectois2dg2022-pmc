@@ -58,8 +58,6 @@ public class CeldaGUI {
 			});
 		}
 		
-		
-		
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
 		this.iconPath = EMPTY_ICON_PATH;
@@ -126,6 +124,10 @@ public class CeldaGUI {
 
 	public JButton getButton() {
 		return button;
+	}
+	
+	public void clickOn() {
+		this.button.doClick();
 	}
 
 	public void update(logic.Color newColor) {

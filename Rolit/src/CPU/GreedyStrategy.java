@@ -1,4 +1,4 @@
-package strategy;
+package CPU;
 
 import logic.Player;
 import utils.Pair;

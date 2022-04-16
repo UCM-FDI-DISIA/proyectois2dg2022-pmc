@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.json.JSONObject;
+
+import CPU.PlayerView;
 import client.Client;
 import control.Controller;
 import control.SaveLoadManager;
@@ -41,10 +45,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton createServerButton;
 	private JButton joinServerButton;
 	private JFileChooser fileChooser;
-	private JPanel mainPanel;
 	private JPanel centerPanel;
+	private JPanel mainPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
+	private Map<String, PlayerView> playersViews;
 	
 	private boolean onlineGameStarted = false;
 	
@@ -67,8 +72,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		welcomePanel = new JPanel(new FlowLayout());
 		this.setContentPane(welcomePanel);
 		
-		//Botones
-		
+		//Botones		
 		// Boton de juego nuevo
 		createGameButton = new JButton("Create new game");
 		createGameButton.setActionCommand(BUTTONS[0]);
@@ -171,22 +175,19 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		ctrl.addObserver(this);
 
+		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
 		
-		this.repaint();
-		
 		mainPanel = new JPanel(new BorderLayout());
-		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
-		
-		centerPanel = new JPanel(new GridLayout(1, 1));
+		this.setContentPane(mainPanel);
+	
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		boardPanel = new JPanel();
 		
-		centerPanel.add(gamePanel);
+		BoardGUI tablero = new BoardGUI(ctrl);
 		
-		BoardGUI tablero = new BoardGUI(ctrl, state);
-		
+		// TODO cambiar a ingles el cambiar tablero
 		tablero.crearTablero(boardPanel);
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
@@ -196,7 +197,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		mainPanel.add(gamePanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
 				
 		this.pack();
@@ -255,6 +256,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onTurnPlayed(State state) {
 		this.state = state;
+		this.playersViews.get(state.getTurnName()).nextMove();
 	}
 
 	public JSONObject getGameReport() {
