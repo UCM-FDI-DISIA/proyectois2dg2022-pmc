@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -62,6 +63,12 @@ public class CreateGameDialog extends JDialog {
 	
 	private List<JPanel> listNameTeamsPanel;
 	private List<JTextArea> listTextAreasTeamsPanels;
+	
+	private List<JCheckBox> listIACheckBoxes;
+	
+	private List<JComboBox> listIAComboBoxes;
+	
+	private String[] IADifficulties = {"EASY", "MEDIUM", "HARD"};	//TODO Cambiar esta chapuza
 	
 	private JLabel errorLabel;
 	
@@ -323,6 +330,8 @@ public class CreateGameDialog extends JDialog {
 		listPlayerPanels = new ArrayList<>();
 		listPlayerTextAreas = new ArrayList<>();
 		listPlayerComboColors = new ArrayList<>();
+		listIACheckBoxes = new ArrayList<>();
+		listIAComboBoxes = new ArrayList<>();
 		
 		for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
 			listPlayerPanels.add(new JPanel());
@@ -336,6 +345,25 @@ public class CreateGameDialog extends JDialog {
 			 
 			        super.insertString(offs, str, a);
 			    }
+			});
+			JCheckBox auxCheckBox = new JCheckBox();
+			JComboBox<String> difficultiesCombo = new JComboBox<>(IADifficulties);
+			difficultiesCombo.setVisible(false);
+			listIAComboBoxes.add(difficultiesCombo);
+			listIACheckBoxes.add(auxCheckBox);
+			auxCheckBox.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = listIACheckBoxes.indexOf(auxCheckBox);
+					if(listIACheckBoxes.get(index).isSelected()) {
+						listIAComboBoxes.get(index).setVisible(true);
+					}
+					else {
+						listIAComboBoxes.get(index).setVisible(false);
+					}
+				}
+				
 			});
 			listPlayerTextAreas.add(auxTextArea);
 			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setEditable(true);
@@ -352,6 +380,9 @@ public class CreateGameDialog extends JDialog {
 				listPlayerComboColors.get(i).addItem(color);
 			}
 			listPlayerPanels.get(i).add(listPlayerComboColors.get(i));
+			listPlayerPanels.get(i).add(new JLabel("AI: "));
+			listPlayerPanels.get(i).add(listIACheckBoxes.get(i));
+			listPlayerPanels.get(i).add(listIAComboBoxes.get(i));
 		}
 		
 		for(JPanel panel : listPlayerPanels) {
@@ -556,6 +587,31 @@ public class CreateGameDialog extends JDialog {
 		return pair;
 
 		
+	}
+	
+	public List<Pair<Color, Pair<Boolean, Integer>>> getPlayersData() {	//TODO Tremenda chapuza
+		List<Pair<Color, Pair<Boolean, Integer>>> list = new ArrayList<>();
+		for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
+			Color color = (Color) listPlayerComboColors.get(i).getSelectedItem();
+			Boolean AI = (Boolean) listIACheckBoxes.get(i).isSelected();
+			Integer difficulty = 0;
+			if(AI) {
+				switch ((String) listIAComboBoxes.get(i).getSelectedItem()) {
+				case "EASY":
+					difficulty = 1;
+					break;
+				case "MEDIUM":
+					difficulty = 2;
+					break;
+				case "HARD":
+					difficulty = 3;
+					break;
+				}
+			}
+			Pair<Boolean, Integer> data = new Pair<Boolean, Integer>(AI, difficulty);
+			list.add(new Pair<Color, Pair<Boolean, Integer>>(color, data));
+		}
+		return list;
 	}
 	
 	public State getState() {

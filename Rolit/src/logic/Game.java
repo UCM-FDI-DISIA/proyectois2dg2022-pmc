@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import CPU.Strategy;
 import replay.State;
+import view.GUIView.RolitMainObserver;
 import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
@@ -18,6 +19,7 @@ public abstract class Game implements Replayable {
 	protected int currentPlayerIndex;
 	private boolean exit;
 	protected List<RolitObserver> observers;
+	protected RolitMainObserver mainObserver;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -28,7 +30,6 @@ public abstract class Game implements Replayable {
 		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
-		Strategy.initStrategy(this);
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -95,6 +96,11 @@ public abstract class Game implements Replayable {
 		this.onRegister();
 	}
 
+	public void addMainObserver(RolitMainObserver o) {
+		if(this.mainObserver == null) this.mainObserver = o;
+		this.addObserver(o);
+	}
+	
 	public void removeObserver(RolitObserver o) {
 		this.observers.remove(o);
 	}

@@ -43,7 +43,7 @@ public class GameClassic extends Game {
 			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		
 		onTurnPlayed();
-		
+		this.mainObserver.onNextTurn();
 	}
 
 	@Override

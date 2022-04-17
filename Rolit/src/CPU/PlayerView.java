@@ -1,23 +1,25 @@
 package CPU;
 
-import java.util.List;
-
 import control.Controller;
-import logic.Rival;
-import replay.State;
+import logic.Color;
 import view.GUIView.BoardGUI;
-import view.GUIView.RolitObserver;
 
 public class PlayerView {
-	protected BoardGUI board;
-	private String name; 
 	
-	public PlayerView (String name, Controller ctr) {
-		this.board = new BoardGUI(ctr);	
+	protected BoardGUI boardGUI;
+	protected Color color;
+	
+	public PlayerView (Color color, Controller ctr) {
+		this.boardGUI = new BoardGUI(ctr);
+		this.color = color;
 	}
 	
 	public void nextMove() {
 		// no hacemos nada
 	}
 
+	public BoardGUI getBoardGUI() {
+		return this.boardGUI;
+	}
+	
 }

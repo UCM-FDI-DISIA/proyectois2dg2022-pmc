@@ -2,30 +2,33 @@ package CPU;
 
 import java.util.Random;
 
-import logic.Board;
-import logic.Game;
-import logic.Player;
+import logic.Color;
+import replay.State;
 import utils.Pair;
 
 public class RandomStrategy extends Strategy {
 
 	private Random random;
 	
-	public RandomStrategy(Player player) {
+	public RandomStrategy() {
 		this.random = new Random();
-		this.player = player;
 	}
 	
 	@Override
-	public Pair<Integer, Integer> calculateNextMove(Player currentPlayer) {
+	public Pair<Integer, Integer> calculateNextMove(Color currentColor, State state) {
+		this.simplifiedBoard = new SimplifiedBoard(state, this);
 		Integer x, y;
-		Board board = game.getBoard();
-		int size = board.getSize();
+		int size = simplifiedBoard.getSize();
 		do {
 			x = random.nextInt(size);
 			y = random.nextInt(size);
-		} while(!game.getBoard().tryToAddCube(x, y));
+		} while(!simplifiedBoard.tryToAddCube(x, y));
 		return new Pair<Integer, Integer>(x, y);
+	}
+
+	@Override
+	public int simulate(Color currentColor, int depth) {
+		return 0;
 	}
 
 	

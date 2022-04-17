@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +20,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.json.JSONObject;
 
+import CPU.CPUPlayerView;
 import CPU.PlayerView;
 import client.Client;
 import control.Controller;
 import control.SaveLoadManager;
+import logic.Color;
 import logic.Rival;
 import replay.Replay;
 import replay.State;
 import server.Server;
+import utils.Pair;
 
-public class MainWindow extends JFrame implements RolitObserver, ActionListener {
+public class MainWindow extends JFrame implements RolitMainObserver, ActionListener {
 	
-
 	private static final long serialVersionUID = 1L;
 	
 	private Client clientRolit;
@@ -49,7 +52,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel mainPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
-	private Map<String, PlayerView> playersViews;
+	private List<PlayerView> playersViews;
+	private int currentPlayerView;
 	
 	private boolean onlineGameStarted = false;
 	
@@ -59,6 +63,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		super("Rolit");
 		
 		this.clientRolit = new Client(this);
+		
+		this.currentPlayerView = 0;
+		this.playersViews = new ArrayList<>();
 		
 		this.ctrl = ctrl;
 		this.ctrl.setClient(clientRolit);
@@ -120,6 +127,14 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
+				List<Pair<Color, Pair<Boolean, Integer>>> data = dialogNew.getPlayersData();
+				for(int i = 0; i < data.size(); i++) {	//TODO Cambiar para que sea como una clase Command y no tener que diferenciar casos
+					if(data.get(i).getSecond().getFirst()) {
+						this.playersViews.add(new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond()));
+					}
+					else
+						this.playersViews.add(new PlayerView(data.get(i).getFirst(), this.ctrl));
+				}
 				this.initGame();
 			}
 			else {
@@ -173,7 +188,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	
 	private void initGame() {
 		
-		ctrl.addObserver(this);
+		ctrl.addMainObserver(this);
 
 		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
@@ -185,7 +200,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		boardPanel = new JPanel();
 		
-		BoardGUI tablero = new BoardGUI(ctrl);
+		BoardGUI tablero = this.playersViews.get(0).getBoardGUI();
 		
 		// TODO cambiar a ingles el cambiar tablero
 		tablero.crearTablero(boardPanel);
@@ -203,7 +218,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 
-		
 	}
 	
 	private void initReplay() {
@@ -246,8 +260,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 	
-
-
 	@Override
 	public void onError(String err) {
 		
@@ -256,7 +268,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onTurnPlayed(State state) {
 		this.state = state;
-		this.playersViews.get(state.getTurnName()).nextMove();
+		this.currentPlayerView = (this.currentPlayerView + 1) % this.playersViews.size();
+		BoardGUI tablero = this.playersViews.get(currentPlayerView).getBoardGUI();
+		if(this.gamePanel != null && this.boardPanel != null) {
+			this.gamePanel.remove(boardPanel);
+		}
+		
+		// TODO cambiar a ingles el cambiar tablero
+		tablero.crearTablero(boardPanel);
+		gamePanel.add(boardPanel, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+		this.pack();
 	}
 
 	public JSONObject getGameReport() {
@@ -289,6 +312,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onGameStatusChange(State state) {
 		
+	}
+
+	@Override
+	public void onNextTurn() {
+		this.playersViews.get(this.currentPlayerView).nextMove();
 	}
 
 }

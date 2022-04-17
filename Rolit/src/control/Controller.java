@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import logic.Game;
 import replay.Replay;
 import replay.State;
+import view.GUIView.RolitMainObserver;
 import view.GUIView.RolitObserver;
 
 public class Controller {
@@ -35,6 +36,10 @@ public class Controller {
 	
 	public void addObserver(RolitObserver o) {
 		game.addObserver(o);
+	}
+	
+	public void addMainObserver(RolitMainObserver o) {
+		game.addMainObserver(o);
 	}
 	
 	public void executeCommand(String s) throws Exception {

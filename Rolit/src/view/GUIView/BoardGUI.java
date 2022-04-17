@@ -24,7 +24,6 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
-
 	public BoardGUI(Controller ctrl) {
 		this.ctrl = ctrl;
 		this.ctrl.addObserver(this);	
@@ -44,7 +43,6 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 			}
 		}
 
-		
 	}
 	
 	public BoardGUI(Replay replay) {
@@ -144,6 +142,10 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		this.lastCubeAdded = cubes.getJSONObject(cubes.length() - 1);
 	}
 
+	public State getState() {
+		return this.state;
+	}
+	
 	@Override
 	public void onRegister(State state) {
 		this.state = state;
