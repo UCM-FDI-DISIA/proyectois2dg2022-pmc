@@ -59,6 +59,12 @@ public class Board implements Reportable {
 		this.size = board.size;
 		this.numCubes = board.numCubes;
 	}
+	
+	//por ahora es para los tests
+	public void clearOrderedCubeList() {
+		orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); 
+	}
+	
 
 	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);

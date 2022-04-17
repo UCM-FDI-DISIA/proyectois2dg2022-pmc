@@ -35,11 +35,11 @@ public class GameTeamsTest {
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.YELLOW, lt);
 		
-		assertFalse(game.play(3, 4));
-		assertFalse(game.play(0, -1));
-		assertTrue(game.play(3,6));
+		assertThrows(IllegalArgumentException.class, () -> game.play(3, 4));
+		assertThrows(IllegalArgumentException.class, () -> game.play(0, -1));
+		game.play(3,6);
 		assertEquals(b.getCubeInPos(3, 6).getColor(), Color.YELLOW);
-		//assertEquals(1, e1.getScore()); //TODO
+		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -68,8 +68,9 @@ public class GameTeamsTest {
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.YELLOW, lt);
 		game.play(3, 6);
-		
-		String s = "{\"teams\":[{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"players\":[{\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
+		//{"teams":[{"score":3,"players":[{"score":2,"color":"Y","name":"Juandi"},{"score":1,"color":"W","name":"Leo"}],"name":"equipo1"},{"score":0,"players":[{"score":0,"color":"R","name":"dani"}],"name":"equipo2"}],"players":[{"score":2,"color":"Y","name":"Juandi"},{"score":1,"color":"W","name":"Leo"}],"turn":"W","type":"GameTeams","board":{"shape":"SM","cubes":[{"color":"W","pos":[3,4]},{"color":"Y","pos":[3,5]},{"color":"Y","pos":[3,6]}]}}
+		String s = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));
+		b.clearOrderedCubeList();
 	}
 }

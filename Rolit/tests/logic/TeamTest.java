@@ -29,7 +29,7 @@ public class TeamTest {
 		List<Player> l = new ArrayList<Player>();
 		l.add(p1); l.add(p2);
 		Team equipo1 = new Team("Basados", l);
-		String s = "{\"players\":[{\"color\":\"Y\",\"name\":\"Chacon Chacon\"},{\"color\":\"R\",\"name\":\"Leonardo Macias Pasteles\"}],\"name\":\"Basados\"}";
+		String s = "{\"score\":0,\"players\":[{\"score\":0,\"color\":\"Y\",\"name\":\"Chacon Chacon\"},{\"score\":0,\"color\":\"R\",\"name\":\"Leonardo Macias Pasteles\"}],\"name\":\"Basados\"}";
 		assertTrue (new JSONObject(s).similar(equipo1.report()));
 	}
 }
