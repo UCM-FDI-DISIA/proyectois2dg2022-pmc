@@ -7,18 +7,12 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import view.RolitObserver;
+import replay.State;
+import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
-	// TODO deberíamos hacer una clase de constantes gráficas que almacene todas estas cosas
-	protected static final String RANKING = "RANKING DEL ROLIT";
-	protected static final String MSG_POS = "En la posicion numero ";
-	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
-	protected static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
-	
 	protected boolean finished;
 	protected List<Player> players;
-	protected Replayable state;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
@@ -57,11 +51,9 @@ public abstract class Game implements Replayable {
 		this.observers = new ArrayList<RolitObserver>();
 	}
 	
-	public abstract boolean play(int x, int y);
+	public abstract void play(int x, int y) throws IllegalArgumentException;
 	public abstract String toString();
-	public abstract Game copyMe();
-	public abstract String showRanking();
-	public abstract List<Rival> getRivals();
+	protected abstract Game copyMe();
 	
 	public void setExit() {
 		this.exit = true;
@@ -105,36 +97,30 @@ public abstract class Game implements Replayable {
 		this.observers.remove(o);
 	}
 
-	public abstract void onFirstPlay();
-	public abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onGameFinished();
 	
-	public void onCommandIntroduced() {
+	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onCommandIntroduced(this, this.board, null);
+			o.onGameStatusChange(new State(command, this.getReplayable()));
 		}
 	}
 	
-	public void onStatusChange(String msg) {
+	public void onStatusChange() {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(msg);
+			o.onGameStatusChange(new State(this.getReplayable()));
 		}
 	}
 
-	public void onRegister() {
+	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(this, this.board, null);
+			o.onRegister(new State(this.getReplayable()));
 		}
 	}
 
-	public void onError() {
+	protected void onError() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void onGameFinished() {
-		for(RolitObserver o : observers) {
-			o.onGameFinished();
-		}
 	}
 	
 	public Board getBoard() {
@@ -145,7 +131,21 @@ public abstract class Game implements Replayable {
 		return this.board.getShapeMatrix();
 	}
 	
-	public Replayable getState() {
-		return state;
+	public Replayable getReplayable() {
+		return this.copyMe();
 	}
+	
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
+	}
+
+	public void updateGameFromServer(List<RolitObserver> observerList) {
+		this.observers = observerList;
+		this.onTurnPlayed();
+	}
+
+	public List<RolitObserver> getObserverList() {
+		return Collections.unmodifiableList(this.observers);
+	}
+	
 }

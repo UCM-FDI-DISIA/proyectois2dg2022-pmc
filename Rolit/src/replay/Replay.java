@@ -10,9 +10,9 @@ import logic.Replayable;
 import logic.Reportable;
 import logic.Shape;
 import utils.StringUtils;
-import view.Observable;
-import view.ReplayObserver;
-import view.RolitObserver;
+import view.GUIView.Observable;
+import view.GUIView.ReplayObserver;
+import view.GUIView.RolitObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,7 @@ public class Replay implements Reportable {
 		boolean replaying = true;
 		while(replaying) {
 			if(print)
+				// FIXME esto no debería estar aquí
 				System.out.println(this);
 			System.out.print(PROMPT);
 			String in = input.nextLine();

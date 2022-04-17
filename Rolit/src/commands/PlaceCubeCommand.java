@@ -18,14 +18,9 @@ public class PlaceCubeCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
-		if(!game.play(x, y)) {
-			System.out.println(INVALID_COOR_MSG);
-			game.onStatusChange(INVALID_COOR_MSG);
-		}
-		else
-			game.onStatusChange(SUCCESS_MSG);
-		return true;
+	public void execute(Game game) throws Exception {
+		game.play(x, y);
+		game.onStatusChange(String.format("%s %d % d", SHORTCUT, this.x, this.y));
 	}
 	
 	@Override

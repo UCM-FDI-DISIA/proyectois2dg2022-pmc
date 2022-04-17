@@ -42,7 +42,7 @@ public abstract class Command implements Replayable {
 		return command;
 	}
 	
-	public abstract boolean execute(Game game);
+	public abstract void execute(Game game) throws Exception;
 
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) || this.name.equalsIgnoreCase(name);

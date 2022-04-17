@@ -6,6 +6,7 @@ import java.util.List;
 
 import control.Controller;
 import control.SaveLoadManager;
+import utils.Pair;
 import utils.StringUtils;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ public class Board implements Reportable {
 	
 	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
+	private static List<Pair<Integer, Integer>> orderedCubeList = new ArrayList<Pair<Integer, Integer>>();
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
@@ -45,6 +47,8 @@ public class Board implements Reportable {
 			for (int j = 0; j < board.matrix.size(); j++) {
 				if(board.matrix.get(i).get(j) != null)
 					lc.add(new Cube(board.matrix.get(i).get(j)));
+				else
+					lc.add(null);
 			}
 			m.add(lc);
 		}
@@ -55,15 +59,35 @@ public class Board implements Reportable {
 		this.size = board.size;
 		this.numCubes = board.numCubes;
 	}
+	
+	//por ahora es para los tests
+	public void clearOrderedCubeList() {
+		orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); 
+	}
+	
 
 	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
 
-	public void addCubeInPos(Cube c) {
+	private boolean checkIfCubeIsInList(Pair<Integer, Integer> p) {
+		for (int i = 0; i < orderedCubeList.size(); ++i) {
+			Pair<Integer, Integer> iPair = orderedCubeList.get(i);
+			if (iPair.getFirst().equals(p.getFirst()) && iPair.getSecond().equals(p.getSecond()))
+				return true;
+		}
+		return false;
+		
+	}
+	public void addCubeInPos(Cube c) throws IllegalArgumentException {
+		if (!this.tryToAddCube(c.getX(), c.getY()))
+			throw new IllegalArgumentException("non valid position for a cube");
 		List<Cube> column = matrix.get(c.getX());
 		column.remove(c.getY());
 		column.add(c.getY(), c);
+		Pair<Integer, Integer> pair = new Pair<Integer, Integer>(c.getX(), c.getY());
+		if (!checkIfCubeIsInList(pair))
+			orderedCubeList.add(pair);
 		c.addPlayerScore();
 		this.numCubes++;
 	}
@@ -159,13 +183,14 @@ public class Board implements Reportable {
 		
 		return str.toString();
 	}
+	
+	
 
 	private boolean isPositionInRange(int x, int y) {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
 	public boolean tryToAddCube(int x, int y) {
-		// FIXME creo que esta función está mal
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
@@ -187,13 +212,11 @@ public class Board implements Reportable {
 		JSONObject jo = new JSONObject();
 		
 		JSONArray jo1 = new JSONArray();
-		for (int i = 0; i< matrix.size(); i++)
-			for (int j = 0; j< matrix.get(i).size(); j++) {
-				Cube c = getCubeInPos(i,j);
-				if(c != null)
-					jo1.put(getCubeInPos(i,j).report());	
-			}
-
+		for (int i = 0; i < orderedCubeList.size(); i++) {
+			Pair<Integer, Integer> p = orderedCubeList.get(i);
+			jo1.put(getCubeInPos(p.getFirst(),p.getSecond()).report());
+			
+		}
 		
 		jo.put("shape", shapeName);
 		jo.put("cubes", jo1);

@@ -17,22 +17,11 @@ import logic.Team;
 
 public class GameTeamsBuilder extends GameBuilder {
 	public static final String TYPE = "GameTeams";
-	private static final int MAX_TEAMS = 2;
-	private static final String CHOOSE_TEAM = String.format("Choose a team between 1-%d: ", MAX_TEAMS);	
 
 	GameTeamsBuilder() {
 				
 	}
 	
-	String getName(){
-		return TYPE;
-	}
-	
-	@Override
-	protected boolean match(String type) {
-		return TYPE.equals(type);
-	}
-
 	@Override
 	protected Game GenerateGame(JSONObject o) {		
 		Color turn = Color.valueOfIgnoreCase(o.getString("turn").charAt(0));
@@ -72,63 +61,12 @@ public class GameTeamsBuilder extends GameBuilder {
 	}
 
 	@Override
-	protected void whatINeed(int nPlayers, JSONObject o) {
-		JSONArray jPlayers = new JSONArray();
-		JSONObject jPlayer = new JSONObject();
-		JSONArray jPlayersTeam[] = new JSONArray[MAX_TEAMS];
-		JSONArray jTeams = new JSONArray();
-		JSONObject jTeam[] = new JSONObject[MAX_TEAMS];
-
-		for (int i = 0; i < MAX_TEAMS; i++) {
-			jTeam[i] = new JSONObject();
-			jPlayersTeam[i] = new JSONArray();
-			jTeam[i].put("name", String.format("Team %d", i+1));
-		}			
-		
-		System.out.println(NAME_PLAYERS);
-		System.out.println();
-		
-		for (int i = 0; i < nPlayers; ++i) {
-			boolean added = false;
-			System.out.print("Player " + (i + 1) + ": ");
-			String name = input.nextLine();
-			 while (!added) {
-				 System.out.println(this.availableColors(jPlayers));
-				 System.out.print(CHOOSE_COLOR);
-				 char c = input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
-				 input.nextLine();
-				 Color color = Color.valueOfIgnoreCase(c);
-				 System.out.print(CHOOSE_TEAM);
-				 int selectedTeam = input.nextInt();
-				 input.nextLine();
-				 try {
-					 // validamos los datos del jugador
-					 jPlayer = this.validatePlayer(jPlayers, name, color);
-					 // lo a�adimos a la lista del equipo al que pertenezca
-					 jPlayersTeam[selectedTeam - 1].put(jPlayer);
-					 // lo a�adimos a la lista global de players para game
-					 jPlayers.put(jPlayer);
-					 added = true;
-				 }				 
-				 catch (IllegalArgumentException e) {
-					System.out.println(e.getMessage());
-					added = false;
-				 }
-				 // FIXME posiblemente no sea la excepcion para cuando nos salimos del array
-				 catch (IndexOutOfBoundsException e) {
-					 System.out.println("Team index must be valid");
-					 added = false;
-				 }
-			}
-		}
-		// cuando ya hemos terminado, solo tenemos que juntarlo todo
-		for (int i = 0; i < MAX_TEAMS; i++) {
-			jTeam[i].put("players", jPlayersTeam[i]);
-			jTeams.put(jTeam[i]);
-		}
-		o.put("teams", jTeams);
-		o.put("players", jPlayers);		
+	protected boolean match(String type) {
+		return TYPE.equals(type);
 	}
 
-	
+	@Override
+	protected String getName() {
+		return TYPE;
+	}	
 }

@@ -51,6 +51,7 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	public JSONObject report() {
 		JSONObject teamJSONObject = new JSONObject();
 		teamJSONObject.put("name", this.name);
+		teamJSONObject.put("score", this.score);
 		JSONArray playersJSONObject = new JSONArray();
 		for (Player p : this.players)
 			playersJSONObject.put(p.report());

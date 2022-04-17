@@ -23,6 +23,10 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 		this.name = player.name;
 	}
 
+	public Player(JSONObject json) {
+		this(Color.valueOfIgnoreCase(json.getString("color").charAt(0)), json.getString("name"));
+	}
+
 	public Color getColor() {
 		return this.color;
 	}
@@ -52,6 +56,7 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 	public JSONObject report() {
 		JSONObject jo1 = new JSONObject();
 		jo1.put("name", name);
+		jo1.put("score", score);
 		jo1.put("color", color.toString());
 		
 		return jo1;

@@ -17,13 +17,13 @@ import logic.Shape;
 public class ExitCommandTest {
 @Test
 
-	void executeTest() {
+	void executeTest() throws Exception {
 	Shape shape = Shape.CL;
 	Board board1 = new Board(shape);
 	Player p1 = new Player(Color.PINK, "mar");
 	Cube c1 = new Cube(3,4, p1);
 	Player p2 = new Player(Color.BLUE, "Leo");
-	Cube c2 = new Cube(7, 4, p2);
+	Cube c2 = new Cube(4, 4, p2);
 	
 	List<Cube> listCubes = new ArrayList<Cube>();
 	listCubes.add(c1);
