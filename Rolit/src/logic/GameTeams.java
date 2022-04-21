@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import commands.PlaceCubeCommand;
 import replay.State;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
@@ -30,27 +31,32 @@ public class GameTeams extends Game {
 
 	// El juego funciona igual que la parte de gameClassic, el que maneja la nueva funcionalidad de los equipos es el propio player al modificar su equipo
 	@Override
-	public void play(int x, int y) throws IllegalArgumentException {
-		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
-		this.board.addCubeInPos(newCube);
-		
-		this.board.update(newCube);
-		// Tras actualizar las puntuaciones de cada jugador de forma correspondiente, entonces actualizamos la puntuaci�n del equipo
-		for (Team team : teams)
-			team.update();
-		
-		//Comprobamos si la partida termina con este turno
-		this.finished = board.isBoardFull();
-		if (this.finished)
-			this.onGameFinished();
-		
-		
-		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!this.finished)
-			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		
-		onTurnPlayed();
+	public void play() throws IllegalArgumentException {
+		while(!this.commandQueue.isEmpty()) {
+			PlaceCubeCommand c = this.commandQueue.poll();
+			int x = c.getX();
+			int y = c.getY();
+			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
+			Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
+			this.board.addCubeInPos(newCube);
+			
+			this.board.update(newCube);
+			// Tras actualizar las puntuaciones de cada jugador de forma correspondiente, entonces actualizamos la puntuaci�n del equipo
+			for (Team team : teams)
+				team.update();
+			
+			//Comprobamos si la partida termina con este turno
+			this.finished = board.isBoardFull();
+			if (this.finished)
+				this.onGameFinished();
+			
+			
+			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+			if(!this.finished)
+				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+			
+			onTurnPlayed();
+		}
 	}
 
 	@Override

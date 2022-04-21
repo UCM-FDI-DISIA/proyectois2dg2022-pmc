@@ -1,15 +1,16 @@
 package logic;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import CPU.Strategy;
+import commands.PlaceCubeCommand;
 import replay.State;
-import view.GUIView.RolitMainObserver;
 import view.GUIView.RolitObserver;
 
 public abstract class Game implements Replayable {
@@ -19,7 +20,7 @@ public abstract class Game implements Replayable {
 	protected int currentPlayerIndex;
 	private boolean exit;
 	protected List<RolitObserver> observers;
-	protected RolitMainObserver mainObserver;
+	protected Queue<PlaceCubeCommand> commandQueue;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -52,9 +53,10 @@ public abstract class Game implements Replayable {
 		}
 		
 		this.observers = new ArrayList<RolitObserver>();
+		this.commandQueue = new ArrayDeque<>();
 	}
 	
-	public abstract void play(int x, int y) throws IllegalArgumentException;
+	public abstract void play() throws IllegalArgumentException;
 	public abstract String toString();
 	protected abstract Game copyMe();
 	
@@ -94,11 +96,6 @@ public abstract class Game implements Replayable {
 	public void addObserver(RolitObserver o) {
 		this.observers.add(o);
 		this.onRegister();
-	}
-
-	public void addMainObserver(RolitMainObserver o) {
-		if(this.mainObserver == null) this.mainObserver = o;
-		this.addObserver(o);
 	}
 	
 	public void removeObserver(RolitObserver o) {
@@ -160,4 +157,12 @@ public abstract class Game implements Replayable {
 		return Collections.unmodifiableList(this.observers);
 	}
 	
+	public void addCommandAndPlay(PlaceCubeCommand c) {
+		this.commandQueue.add(c);
+		this.play();
+	}
+	
+	public void addCommand(PlaceCubeCommand c) {
+		this.commandQueue.add(c);
+	}
 }

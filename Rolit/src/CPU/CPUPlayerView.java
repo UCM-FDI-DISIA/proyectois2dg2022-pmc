@@ -2,6 +2,7 @@ package CPU;
 
 import control.Controller;
 import logic.Color;
+import replay.State;
 import utils.Pair;
 
 public class CPUPlayerView extends PlayerView {
@@ -18,8 +19,8 @@ public class CPUPlayerView extends PlayerView {
 	}
 	
 	@Override
-	public void nextMove() {
-		Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, this.boardGUI.getState());
-		this.boardGUI.clickOn(coor.getSecond(), coor.getFirst());	//Se ponen al revés porque así funcionan las CeldaGUI
+	public void nextMove(State state) {
+		Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, state);
+		this.ctrl.addCommandToQueue(coor.getFirst(), coor.getSecond());
 	}
 }

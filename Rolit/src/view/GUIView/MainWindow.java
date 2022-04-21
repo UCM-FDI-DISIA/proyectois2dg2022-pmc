@@ -32,7 +32,7 @@ import replay.State;
 import server.Server;
 import utils.Pair;
 
-public class MainWindow extends JFrame implements RolitMainObserver, ActionListener {
+public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -188,7 +188,7 @@ public class MainWindow extends JFrame implements RolitMainObserver, ActionListe
 	
 	private void initGame() {
 		
-		ctrl.addMainObserver(this);
+		ctrl.addObserver(this);
 
 		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
@@ -200,7 +200,7 @@ public class MainWindow extends JFrame implements RolitMainObserver, ActionListe
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		boardPanel = new JPanel();
 		
-		BoardGUI tablero = this.playersViews.get(0).getBoardGUI();
+		BoardGUI tablero = new BoardGUI(ctrl);
 		
 		// TODO cambiar a ingles el cambiar tablero
 		tablero.crearTablero(boardPanel);
@@ -269,14 +269,7 @@ public class MainWindow extends JFrame implements RolitMainObserver, ActionListe
 	public void onTurnPlayed(State state) {
 		this.state = state;
 		this.currentPlayerView = (this.currentPlayerView + 1) % this.playersViews.size();
-		BoardGUI tablero = this.playersViews.get(currentPlayerView).getBoardGUI();
-		if(this.gamePanel != null && this.boardPanel != null) {
-			this.gamePanel.remove(boardPanel);
-		}
-		
-		// TODO cambiar a ingles el cambiar tablero
-		tablero.crearTablero(boardPanel);
-		gamePanel.add(boardPanel, BorderLayout.CENTER);
+		this.playersViews.get(currentPlayerView).nextMove(state);
 		this.revalidate();
 		this.repaint();
 		this.pack();
@@ -312,11 +305,6 @@ public class MainWindow extends JFrame implements RolitMainObserver, ActionListe
 	@Override
 	public void onGameStatusChange(State state) {
 		
-	}
-
-	@Override
-	public void onNextTurn() {
-		this.playersViews.get(this.currentPlayerView).nextMove();
 	}
 
 }

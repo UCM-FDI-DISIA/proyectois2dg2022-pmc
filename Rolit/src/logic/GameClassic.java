@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import commands.Command;
+import commands.PlaceCubeCommand;
 import replay.State;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
@@ -26,24 +28,29 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
-	public void play(int x, int y) throws IllegalArgumentException {		
-		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
-		this.board.addCubeInPos(newCube);
+	public void play() throws IllegalArgumentException {	
+		while(!this.commandQueue.isEmpty()) {
+			PlaceCubeCommand c = this.commandQueue.poll();
+			int x = c.getX();
+			int y = c.getY();
+			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
+			Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
+			this.board.addCubeInPos(newCube);
+			
+			this.board.update(newCube);
+			
+			//Comprobamos si la partida termina con este turno
+			this.finished = board.isBoardFull();
+			if (this.finished)
+				this.onGameFinished();
+			
+			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+			if(!this.finished)
+				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+			
+			onTurnPlayed();
+		}
 		
-		this.board.update(newCube);
-		
-		//Comprobamos si la partida termina con este turno
-		this.finished = board.isBoardFull();
-		if (this.finished)
-			this.onGameFinished();
-		
-		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!this.finished)
-			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		
-		onTurnPlayed();
-		this.mainObserver.onNextTurn();
 	}
 
 	@Override

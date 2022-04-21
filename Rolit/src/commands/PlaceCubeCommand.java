@@ -19,7 +19,7 @@ public class PlaceCubeCommand extends Command {
 
 	@Override
 	public void execute(Game game) throws Exception {
-		game.play(x, y);
+		game.addCommandAndPlay(this);
 		game.onStatusChange(String.format("%s %d % d", SHORTCUT, this.x, this.y));
 	}
 	
@@ -37,5 +37,13 @@ public class PlaceCubeCommand extends Command {
 			return this;
 		}
 		return null;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
 	}
 }

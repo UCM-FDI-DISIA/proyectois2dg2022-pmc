@@ -6,13 +6,13 @@ import client.Client;
 import javax.swing.SwingUtilities;
 
 import commands.Command;
+import commands.PlaceCubeCommand;
 
 import org.json.JSONObject;
 
 import logic.Game;
 import replay.Replay;
 import replay.State;
-import view.GUIView.RolitMainObserver;
 import view.GUIView.RolitObserver;
 
 public class Controller {
@@ -36,10 +36,6 @@ public class Controller {
 	
 	public void addObserver(RolitObserver o) {
 		game.addObserver(o);
-	}
-	
-	public void addMainObserver(RolitMainObserver o) {
-		game.addMainObserver(o);
 	}
 	
 	public void executeCommand(String s) throws Exception {
@@ -86,4 +82,10 @@ public class Controller {
 		String ans = input.nextLine();
 		return "y".equals(ans.toLowerCase());
 	}*/
+	
+	public void addCommandToQueue(Integer x, Integer y) {
+		String[] commandWords = {"p", x.toString(), y.toString() };
+		Command c = Command.getCommand(commandWords);
+		this.game.addCommand((PlaceCubeCommand) c);
+	}
 }

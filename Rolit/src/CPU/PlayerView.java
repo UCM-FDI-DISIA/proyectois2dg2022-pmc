@@ -2,24 +2,21 @@ package CPU;
 
 import control.Controller;
 import logic.Color;
+import replay.State;
 import view.GUIView.BoardGUI;
 
 public class PlayerView {
 	
-	protected BoardGUI boardGUI;
+	protected Controller ctrl;
 	protected Color color;
 	
 	public PlayerView (Color color, Controller ctr) {
-		this.boardGUI = new BoardGUI(ctr);
+		this.ctrl = ctr;
 		this.color = color;
 	}
 	
-	public void nextMove() {
+	public void nextMove(State state) {
 		// no hacemos nada
-	}
-
-	public BoardGUI getBoardGUI() {
-		return this.boardGUI;
 	}
 	
 }
