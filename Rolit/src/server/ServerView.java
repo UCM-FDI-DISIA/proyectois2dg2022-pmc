@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import org.json.JSONObject;
 
@@ -28,10 +29,11 @@ public class ServerView extends JFrame {
 	private JTextField portField;
 	private JButton startButton;
 	private JButton stopButton;
-	
+	protected Server server;
+	protected int port;
 
 	public ServerView(Server server) {
-		
+		this.server = server;
 		setSize(400,400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -59,7 +61,7 @@ public class ServerView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				int port = Integer.parseInt(portField.getText().trim());
+				port = Integer.parseInt(portField.getText().trim());
 				if(port < 9001 || port > 65500) {
 					JOptionPane.showMessageDialog(thePanel, "Port not within limits, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
@@ -73,13 +75,8 @@ public class ServerView extends JFrame {
 				ServerView.this.repaint();
 				thePanel.setVisible(true);
 				
+				new ServerWorker().execute();
 				
-				try {
-					server.start(port);
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(thePanel, "Server could not be started.", "Error", JOptionPane.ERROR_MESSAGE);
-					server.stop();
-				}
 				
 			}
 		});
@@ -125,5 +122,19 @@ public class ServerView extends JFrame {
 		JOptionPane.showMessageDialog(thePanel, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
+	public class ServerWorker extends SwingWorker<Void, Void> {
+
+		// Método obligatorio
+		@Override
+		protected Void doInBackground() {
+			try {
+				server.start(port);
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(thePanel, "Server could not be started.", "Error", JOptionPane.ERROR_MESSAGE);
+				server.stop();
+			}
+			return null;
+		}
+	}
 
 }

@@ -151,7 +151,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			CreateGameDialog dialogNewOnline = new CreateGameDialog(MainWindow.this, true, ctrl);
 			int statuscs = dialogNewOnline.open();
 			if(statuscs == 1) {
-				JOptionPane.showMessageDialog(mainPanel,  "If a server is created, the full application will be blocked until a match is created.", "Warning", JOptionPane.WARNING_MESSAGE);
 				new Server(dialogNewOnline.createJSONObjectGame());
 			}
 				
