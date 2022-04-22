@@ -49,7 +49,10 @@ public class ClientController extends Thread{
 				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
 				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
-				clientRolit.updateGameFromServer(JSONJuegoNuevo);
+				if (JSONJuegoNuevo.getString("notification").equals("updateGraphics"))
+					clientRolit.updateGameFromServer(JSONJuegoNuevo);
+				else if (JSONJuegoNuevo.getString("notification").equals("chooseTeam"))
+					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			} 
 
@@ -73,6 +76,14 @@ public class ClientController extends Thread{
 
 	public void sendToServer(JSONObject report) {
 		String msg = report.toString();
+		out.println(msg);
+		
+	}
+
+
+	public void sendChosenTeamToServer(JSONObject selectedTeamJSON) {
+		selectedTeamJSON.put("notification", "chooseTeam");
+		String msg = selectedTeamJSON.toString();
 		out.println(msg);
 		
 	}

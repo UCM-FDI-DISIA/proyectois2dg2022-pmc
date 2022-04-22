@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
+
 import org.json.JSONObject;
 import client.Client;
 import control.Controller;
@@ -23,6 +26,7 @@ import logic.Rival;
 import replay.Replay;
 import replay.State;
 import server.Server;
+import server.ServerView.ServerWorker;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
@@ -196,7 +200,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
+		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
 				
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
@@ -286,6 +290,30 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onGameStatusChange(State state) {
 		
+	}
+	
+	public class WaitWorker extends SwingWorker<Void, Void> {
+
+		// Método obligatorio
+		@Override
+		protected Void doInBackground() {
+			try {
+				wait(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+
+	public void chooseTeamFromServer(JSONObject JSONJuegoNuevo) {
+		ChooseTeamFromServerDialog ctfsd = new ChooseTeamFromServerDialog(this, JSONJuegoNuevo);
+		int statusjs = ctfsd.open();
+		if(statusjs == 1) {
+			clientRolit.sendChosenTeamToServer(ctfsd.getSelectedTeamJSON());
+			
+		}
 	}
 
 }

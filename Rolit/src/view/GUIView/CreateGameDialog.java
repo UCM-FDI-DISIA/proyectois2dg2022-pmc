@@ -90,13 +90,9 @@ public class CreateGameDialog extends JDialog {
 
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		String[] localGameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
-		String[] onlineGameModes = {GameClassicBuilder.TYPE};
+		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
 
-		if (onlineMode)
-			gameModeCombo = new JComboBox<String>(onlineGameModes);
-		else
-			gameModeCombo = new JComboBox<String>(localGameModes);
+		gameModeCombo = new JComboBox<String>(gameModes);
 		
 		Shape[] shapes = Shape.values();
 		shapesCombo = new JComboBox<Shape>(shapes);
@@ -162,7 +158,10 @@ public class CreateGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Pair<Boolean, String> pair = checkIfCorrectArguments(); 
+				Pair<Boolean, String> pair = null;
+				
+				if (!onlineMode) pair = checkIfCorrectArguments(); 
+				
 				if (onlineMode) {
 					status = 1;
 					CreateGameDialog.this.setVisible(false);
@@ -285,7 +284,7 @@ public class CreateGameDialog extends JDialog {
 		
 					
 		
-		if (!onlineMode && this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
+		if (this.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 			
 			JSONArray teamsJSONArray = new JSONArray();
 			
@@ -296,15 +295,19 @@ public class CreateGameDialog extends JDialog {
 				teamsJSONArray.put(aux);
 			}
 			
-			for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
-				Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
-				if (i == 0)
-					o.put("turn", playerAux.getColor().toString());
-				JSONObject JSONObjectaux = (JSONObject) teamsJSONArray.get((int)listComboNumberTeams.get(i).getSelectedItem()-1);
-				JSONObjectaux.getJSONArray("players").put(playerAux.report());
+			if (!onlineMode) {
+				for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
+					Player playerAux = new Player((Color) listPlayerComboColors.get(i).getSelectedItem(), (String) listPlayerTextAreas.get(i).getText());
+					if (i == 0)
+						o.put("turn", playerAux.getColor().toString());
+					JSONObject JSONObjectaux = (JSONObject) teamsJSONArray.get((int)listComboNumberTeams.get(i).getSelectedItem()-1);
+					JSONObjectaux.getJSONArray("players").put(playerAux.report());
+				}
+				
 			}
 			
 			o.put("teams", teamsJSONArray);
+			
 			
 		}
 		
@@ -412,42 +415,47 @@ public class CreateGameDialog extends JDialog {
 			
 		}
 		
-		for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
-			listPlayerPanels.add(new JPanel());
-			listPlayerTextAreas.add(new JTextArea());
-			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setEditable(true);
-			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setLineWrap(true);
-			listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setWrapStyleWord(true);
-			
-			listPlayerPanels.get(i).add(new JLabel(String.format("Player %d: ", i + 1)));
-			listPlayerPanels.get(i).add(new JLabel("Name: "));
-			listPlayerPanels.get(i).add(listPlayerTextAreas.get(i));
-			JComboBox<Color> aux = new JComboBox<Color>();
-			aux.setRenderer(new ColorRenderer());
-			listPlayerComboColors.add(aux);
-			listPlayerPanels.get(i).add(new JLabel("Color: "));
-			for(Color color : Color.values()) {
-				listPlayerComboColors.get(i).addItem(color);
-			}
-			listPlayerPanels.get(i).add(listPlayerComboColors.get(i));
-			
-			
-			listComboNumberTeams.add(new JComboBox<Integer>());
-			
-			listPlayerPanels.get(i).add(new JLabel("Team: "));
-			for (int j = 0; j < (int)teamsSpinner.getValue(); j++)
-					listComboNumberTeams.get(i).addItem((Integer)j+1);
-			listPlayerPanels.get(i).add(listComboNumberTeams.get(i));
-			}
-
-		
 		for(JPanel panel : listNameTeamsPanel) {
 			teamsPanel.add(panel);
 		}
-		for(JPanel panel : listPlayerPanels) {
-			teamsPanel.add(panel);
+		
+		if (!onlineMode) {
+			
+			for(int i = 0; i < (int)playersSpinner.getValue(); i++) {
+				listPlayerPanels.add(new JPanel());
+				listPlayerTextAreas.add(new JTextArea());
+				listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setEditable(true);
+				listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setLineWrap(true);
+				listPlayerTextAreas.get(listPlayerTextAreas.size() - 1).setWrapStyleWord(true);
+				
+				listPlayerPanels.get(i).add(new JLabel(String.format("Player %d: ", i + 1)));
+				listPlayerPanels.get(i).add(new JLabel("Name: "));
+				listPlayerPanels.get(i).add(listPlayerTextAreas.get(i));
+				JComboBox<Color> aux = new JComboBox<Color>();
+				aux.setRenderer(new ColorRenderer());
+				listPlayerComboColors.add(aux);
+				listPlayerPanels.get(i).add(new JLabel("Color: "));
+				for(Color color : Color.values()) {
+					listPlayerComboColors.get(i).addItem(color);
+				}
+				listPlayerPanels.get(i).add(listPlayerComboColors.get(i));
+				
+				
+				listComboNumberTeams.add(new JComboBox<Integer>());
+				
+				listPlayerPanels.get(i).add(new JLabel("Team: "));
+				for (int j = 0; j < (int)teamsSpinner.getValue(); j++)
+						listComboNumberTeams.get(i).addItem((Integer)j+1);
+				listPlayerPanels.get(i).add(listComboNumberTeams.get(i));
+				}
+
+			for(JPanel panel : listPlayerPanels) {
+				teamsPanel.add(panel);
+			}
+			
 		}
 		
+
 		JPanel buttonsPanel = new JPanel();
 		teamsPanel.add(buttonsPanel);
 	
@@ -487,7 +495,7 @@ public class CreateGameDialog extends JDialog {
 		
 		buildTeamsPanel();
 		mainPanel.add(teamsPanel);
-		teamsPanel.setVisible(true && !onlineMode);
+		teamsPanel.setVisible(true);
 		numberOfTeamsLabel.setVisible(true);
 		teamsSpinner.setVisible(true);
 		mainPanel.repaint();

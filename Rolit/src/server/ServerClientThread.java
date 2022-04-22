@@ -44,16 +44,29 @@ public class ServerClientThread extends Thread{
 					
 				}
 				
-			} catch (IOException e){}
+			} catch (IOException e){
+				server.stop();
+			}
 
 		}
 	}
 
 
 	public void updateGraphics(JSONObject json){
+		json.put("notification", "updateGraphics");
 		String msg = json.toString();
 		if(msg != null) 
 			output.println(msg);
+	}
+
+
+
+	public void notifyClientToChooseTeam(JSONObject gameConfigJSON) {
+		gameConfigJSON.put("notification", "chooseTeam");
+		String msg = gameConfigJSON.toString();
+		if(msg != null) 
+			output.println(msg);
+		
 	}
 
 }

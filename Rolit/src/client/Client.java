@@ -51,5 +51,14 @@ public class Client {
 		return this.player;
 	}
 
+	public void chooseTeamFromServer(JSONObject JSONJuegoNuevo) {
+		mainWindow.chooseTeamFromServer(JSONJuegoNuevo);
+		
+	}
+
+	public void sendChosenTeamToServer(JSONObject selectedTeamJSON) {
+		clientController.sendChosenTeamToServer(selectedTeamJSON);		
+	}
+
 	
 }

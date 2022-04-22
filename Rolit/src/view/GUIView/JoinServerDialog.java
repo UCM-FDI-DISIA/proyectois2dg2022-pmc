@@ -119,6 +119,7 @@ public class JoinServerDialog extends JDialog {
 		
 		add(connectPanel);
 		pack();
+
 		
 	}
 	

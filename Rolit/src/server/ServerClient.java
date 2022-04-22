@@ -39,5 +39,10 @@ public class ServerClient {
 	public Player getPlayer() {
 		return p;
 	}
+
+	public void notifyClientToChooseTeam(JSONObject gameConfigJSON) {
+		thread.notifyClientToChooseTeam(gameConfigJSON);
+		
+	}
 	
 }

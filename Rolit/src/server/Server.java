@@ -27,7 +27,8 @@ public class Server {
 	private ServerSocket serverSocket = null;
 
 	private List<Pair<Player, Socket>> sockets = new ArrayList<>();
-	private List<Pair<Player, ServerClient>> clients = new ArrayList<>();
+	private List<Pair<ServerClient, Player>> clients = new ArrayList<>();
+	private HashMap<ServerClient, String> mapClientTeam = new HashMap<>();
 	
 	private List<Player> incomingPlayers = new ArrayList<>();
 	
@@ -57,7 +58,7 @@ public class Server {
 	
 		expectedPlayers = 2;
 		
-	for (int i = 0; i < expectedPlayers; ++i) {
+		for (int i = 0; i < expectedPlayers; ++i) {
 		
 		ServerClient serverClient = new ServerClient();
 		Socket socket = new Socket();
@@ -73,19 +74,33 @@ public class Server {
 		sockets.add(parPlayerSocket);
 		
 		serverClient.setPlayer(incomingPlayers.get(i));
-		Pair<Player, ServerClient> parPlayerServerClient = new Pair<Player, ServerClient>(incomingPlayers.get(i), serverClient);
-		clients.add(parPlayerServerClient);
+		Pair<ServerClient, Player> parServerClientPlayer = new Pair<ServerClient, Player>(serverClient, incomingPlayers.get(i));
+		clients.add(parServerClientPlayer);
 		
 		
 	}
 	
+	if (gameConfigJSON.get("type").equals("GameTeams")) {
+		for (int i = 0; i < clients.size(); ++i) {
+			clients.get(i).getFirst().notifyClientToChooseTeam(gameConfigJSON);
+		}
+		
+		waitForAllPlayersToChooseTeam();
+		
+		completeGameConfigTeams();
+		
+	}
+	
+	
+		
+	
 	JSONArray playersJSONArray = getPlayersJSONArray();
 	
 	this.gameConfigJSON.put("players", playersJSONArray);
-	this.gameConfigJSON.put("turn", clients.get(0).getFirst().getColor().toString());
+	this.gameConfigJSON.put("turn", clients.get(0).getSecond().getColor().toString());
 	
 	for (int i = 0; i < clients.size(); ++i) {
-		clients.get(i).getSecond().updateGraphics(gameConfigJSON);
+		clients.get(i).getFirst().updateGraphics(gameConfigJSON);
 	}
 
 	}
@@ -103,12 +118,15 @@ public class Server {
 
 
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
-
-		if (json.has("turn")) { //estamos ante un juego
+		if (json.has("notification") && json.getString("notification").equals("chooseTeam")) {
+			mapClientTeam.put(client, json.getString("team"));
+				
+		}
+		else if (json.has("turn")) { //estamos ante un juego
 
 			for (int i = 0; i < clients.size(); ++i) {
-				if (client != clients.get(i).getSecond())
-					clients.get(i).getSecond().updateGraphics(json);
+				if (client != clients.get(i).getFirst())
+					clients.get(i).getFirst().updateGraphics(json);
 				
 			}
 			
@@ -125,6 +143,38 @@ public class Server {
 	}
 
 
+	private void completeGameConfigTeams() {
+		
+		JSONArray teamsArray = gameConfigJSON.getJSONArray("teams");
+		
+		for (Map.Entry<ServerClient, String> entry : mapClientTeam.entrySet()) {
+		    ServerClient s = entry.getKey();
+		    String t = entry.getValue();
+		    
+		    JSONObject teamToFind = null;
+		    
+		    for (int i = 0; i < teamsArray.length(); ++i) {
+				JSONObject team = teamsArray.getJSONObject(i);
+				if (team.getString("name").equals(t))
+					teamToFind = team;
+			}
+		    
+		    JSONArray teamPlayers = teamToFind.getJSONArray("players");
+		   
+		    Player playerToFind = null;
+		    
+		    for (int i = 0; i < clients.size(); ++i) {
+				Pair<ServerClient, Player> p = clients.get(i);
+				if (p.getFirst().equals(s))
+					playerToFind = p.getSecond();
+			}
+		    
+		    teamPlayers.put(playerToFind.report());
+		    
+		}
+		
+	}
+
 	public String getIp() {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
@@ -132,4 +182,16 @@ public class Server {
 		return null;
 	}
 
+	public synchronized void waitForAllPlayersToChooseTeam() {
+		
+		while ((mapClientTeam.size() != expectedPlayers)) {
+			try {
+				wait(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+	}
 }
