@@ -3,10 +3,7 @@ package control;
 import Builders.GameBuilder;
 import client.Client;
 
-import javax.swing.SwingUtilities;
-
 import commands.Command;
-import commands.PlaceCubeCommand;
 
 import org.json.JSONObject;
 
@@ -38,24 +35,18 @@ public class Controller {
 		game.addObserver(o);
 	}
 	
-	public void executeCommand(String s) throws Exception {
-		
-		String[] parameters = s.toLowerCase().trim().split(" ");
-		Command command = Command.getCommand(parameters);
-		
-
-		if (onlineMode) {
-			
+	public void executeCommand(Command c) throws Exception {
+		if (onlineMode) {			
 			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
-				command.execute(game);
+				c.execute(game);
 				clientRolit.updateGameToServer();
-			}
-			
+			}			
 		}
 		else
-			command.execute(game);
+			c.execute(game);
 		
-		replay.addState(s, game.getReplayable());
+		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
+		replay.addState(c.toString(), game.copyMe());
 	}
 	
 	public void updateGameFromServer(JSONObject o) {
@@ -77,15 +68,16 @@ public class Controller {
 		this.clientRolit = clientRolit;
 	}
 	
+	public void run() {
+		while(game == null) {
+			
+		}
+		this.game.run();
+	}
+	
 	/*TODO private boolean askSaveReplay() {
 		System.out.println(REPLAY_MSG);
 		String ans = input.nextLine();
 		return "y".equals(ans.toLowerCase());
 	}*/
-	
-	public void addCommandToQueue(Integer x, Integer y) {
-		String[] commandWords = {"p", x.toString(), y.toString() };
-		Command c = Command.getCommand(commandWords);
-		this.game.addCommand((PlaceCubeCommand) c);
-	}
 }

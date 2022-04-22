@@ -79,10 +79,6 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		return 0;
 	}
 	
-	public void clickOn(int x, int y) {
-		this.celdas[x][y].clickOn();
-	}
-	
 	public void crearTablero(JPanel panel) {
 		panel.removeAll();
 		GridBagLayout gridbag = new GridBagLayout(); //Queremos que el tamaño del tablero sea fijo

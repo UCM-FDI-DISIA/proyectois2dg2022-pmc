@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import commands.Command;
+import commands.PlaceCubeCommand;
 import control.Controller;
 import logic.Board;
 import logic.Color;
@@ -47,9 +48,8 @@ public class CeldaGUI {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (!filled) {
-						String commandWords = "p " + Integer.toString(x) + " " + Integer.toString(y);
 						try {
-							ctrl.executeCommand(commandWords);
+							ctrl.executeCommand(new PlaceCubeCommand(x,y));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
@@ -126,10 +126,6 @@ public class CeldaGUI {
 		return button;
 	}
 	
-	public void clickOn() {
-		this.button.doClick();
-	}
-
 	public void update(logic.Color newColor) {
 		if (this.validButton) {
 			this.iconPath = newColor.getPath();

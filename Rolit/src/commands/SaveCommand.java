@@ -16,6 +16,11 @@ public class SaveCommand extends Command {
 		super(NAME, DETAILS, SHORTCUT, HELP);
 		filename = null;
 	}
+	
+	public SaveCommand(String filename) {
+		this();
+		this.filename = filename;
+	}
 
 	@Override
 	public void execute(Game game) throws Exception {

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JToolBar;
 
+import commands.SaveCommand;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
@@ -71,7 +72,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				try {
-					ctrl.executeCommand("s " + file.getPath());
+					ctrl.executeCommand(new SaveCommand(file.getPath()));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

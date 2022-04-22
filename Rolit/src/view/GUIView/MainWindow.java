@@ -52,24 +52,16 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel mainPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
-	private List<PlayerView> playersViews;
-	private int currentPlayerView;
 	
 	private boolean onlineGameStarted = false;
 	
 	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
 
 	public MainWindow(Controller ctrl) {
-		super("Rolit");
-		
-		this.clientRolit = new Client(this);
-		
-		this.currentPlayerView = 0;
-		this.playersViews = new ArrayList<>();
-		
+		super("Rolit");		
+		this.clientRolit = new Client(this);		
 		this.ctrl = ctrl;
-		this.ctrl.setClient(clientRolit);
-		
+		this.ctrl.setClient(clientRolit);		
 		initGUI();
 	}
 	
@@ -130,10 +122,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				List<Pair<Color, Pair<Boolean, Integer>>> data = dialogNew.getPlayersData();
 				for(int i = 0; i < data.size(); i++) {	//TODO Cambiar para que sea como una clase Command y no tener que diferenciar casos
 					if(data.get(i).getSecond().getFirst()) {
-						this.playersViews.add(new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond()));
+						new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond());
 					}
 					else
-						this.playersViews.add(new PlayerView(data.get(i).getFirst(), this.ctrl));
+						new PlayerView(data.get(i).getFirst(), this.ctrl);
 				}
 				this.initGame();
 			}
@@ -268,8 +260,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	@Override
 	public void onTurnPlayed(State state) {
 		this.state = state;
-		this.currentPlayerView = (this.currentPlayerView + 1) % this.playersViews.size();
-		this.playersViews.get(currentPlayerView).nextMove(state);
 		this.revalidate();
 		this.repaint();
 		this.pack();

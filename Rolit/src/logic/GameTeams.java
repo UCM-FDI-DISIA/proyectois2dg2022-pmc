@@ -32,8 +32,8 @@ public class GameTeams extends Game {
 	// El juego funciona igual que la parte de gameClassic, el que maneja la nueva funcionalidad de los equipos es el propio player al modificar su equipo
 	@Override
 	public void play() throws IllegalArgumentException {
-		while(!this.commandQueue.isEmpty()) {
-			PlaceCubeCommand c = this.commandQueue.poll();
+		while(!this.pendingCubes.isEmpty()) {
+			PlaceCubeCommand c = this.pendingCubes.poll();
 			int x = c.getX();
 			int y = c.getY();
 			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero

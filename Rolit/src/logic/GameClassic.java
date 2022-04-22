@@ -28,13 +28,13 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
-	public void play() throws IllegalArgumentException {	
-		while(!this.commandQueue.isEmpty()) {
-			PlaceCubeCommand c = this.commandQueue.poll();
-			int x = c.getX();
-			int y = c.getY();
+	public void play() throws IllegalArgumentException {
+		if (!this.pendingCubes.isEmpty()) {
+			// FIXME no puede ser la mejor forma de hacerlo
+			Cube c = this.pendingCubes.poll();
+			
 			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-			Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
+			Cube newCube = new Cube(c.getX(), c.getY(), players.get(currentPlayerIndex));
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
@@ -49,8 +49,7 @@ public class GameClassic extends Game {
 				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 			
 			onTurnPlayed();
-		}
-		
+		}		
 	}
 
 	@Override
@@ -72,7 +71,7 @@ public class GameClassic extends Game {
 	
 	@Override
 	public void onTurnPlayed() {
-		State state = new State(this.getReplayable());
+		State state = new State(this.copyMe());
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(state);
 		}

@@ -58,7 +58,6 @@ public class Rolit {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					//;
 					MainWindow mainWindow = new MainWindow(ctr);
 				}
 			});
@@ -67,6 +66,8 @@ public class Rolit {
 			ConsoleWindow view = new MainBashWindow(ctr);
 			view.open();
 		}
+		
+		ctr.run();
 	}
 	
 	

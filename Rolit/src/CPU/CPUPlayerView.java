@@ -1,5 +1,6 @@
 package CPU;
 
+import commands.PlaceCubeCommand;
 import control.Controller;
 import logic.Color;
 import replay.State;
@@ -20,7 +21,13 @@ public class CPUPlayerView extends PlayerView {
 	
 	@Override
 	public void nextMove(State state) {
-		Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, state);
-		this.ctrl.addCommandToQueue(coor.getFirst(), coor.getSecond());
+		if (this.color.equals(Color.valueOfIgnoreCase(state.report().getJSONObject("game").getString("turn").charAt(0)))) {
+			Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, state);
+			try {
+				this.ctrl.executeCommand(new PlaceCubeCommand(coor.getFirst(), coor.getSecond()));
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}		
 	}
 }

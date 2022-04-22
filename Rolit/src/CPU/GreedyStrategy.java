@@ -1,7 +1,6 @@
 package CPU;
 
 import logic.Color;
-import logic.Player;
 import replay.State;
 import utils.Pair;
 

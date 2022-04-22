@@ -178,8 +178,7 @@ public class CreateGameDialog extends JDialog {
 				else if (pair.getFirst()) {
 					status = 1;
 					state = ctrl.createGame(createJSONObjectGame());
-					CreateGameDialog.this.setVisible(false);	
-					
+					CreateGameDialog.this.setVisible(false);					
 				}
 				else {
 					

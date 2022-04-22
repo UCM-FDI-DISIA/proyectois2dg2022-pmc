@@ -20,15 +20,13 @@ public abstract class Game implements Replayable {
 	protected int currentPlayerIndex;
 	private boolean exit;
 	protected List<RolitObserver> observers;
-	protected Queue<PlaceCubeCommand> commandQueue;
+	protected Queue<Cube> pendingCubes;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
 		this.finished = game.finished;
-		this.players = game.players;
-		
-		this.board = new Board(game.board);
-		
+		this.players = game.players;		
+		this.board = new Board(game.board);		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
 	}
@@ -53,12 +51,18 @@ public abstract class Game implements Replayable {
 		}
 		
 		this.observers = new ArrayList<RolitObserver>();
-		this.commandQueue = new ArrayDeque<>();
+		this.pendingCubes = new ArrayDeque<>();
+	}
+	
+	public void run() {
+		while (!this.finished && !this.exit) {
+			this.play();
+		}
 	}
 	
 	public abstract void play() throws IllegalArgumentException;
 	public abstract String toString();
-	protected abstract Game copyMe();
+	public abstract Game copyMe();
 	
 	public void setExit() {
 		this.exit = true;
@@ -107,45 +111,25 @@ public abstract class Game implements Replayable {
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.getReplayable()));
+			o.onGameStatusChange(new State(command, this.copyMe()));
 		}
 	}
 	
 	public void onStatusChange() {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(this.getReplayable()));
+			o.onGameStatusChange(new State(this.copyMe()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State(this.getReplayable()));
+			o.onRegister(new State(this.copyMe()));
 		}
 	}
 
 	protected void onError() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public Board getBoard() {
-		return this.board;
-	}
-	
-	public boolean[][] getShapeMatrix() {
-		return this.board.getShapeMatrix();
-	}
-	
-	public Replayable getReplayable() {
-		return this.copyMe();
-	}
-	
-	public Player getNextPlayer(Player player) {	//TODO Ver si es imprescindible este método, se usa para la IA
-		int index = this.players.indexOf(player);
-		return this.players.get((index + 1) % this.players.size());
-	}
-	public List<Player> getPlayers() {
-		return Collections.unmodifiableList(players);
 	}
 
 	public void updateGameFromServer(List<RolitObserver> observerList) {
@@ -157,12 +141,7 @@ public abstract class Game implements Replayable {
 		return Collections.unmodifiableList(this.observers);
 	}
 	
-	public void addCommandAndPlay(PlaceCubeCommand c) {
-		this.commandQueue.add(c);
-		this.play();
-	}
-	
-	public void addCommand(PlaceCubeCommand c) {
-		this.commandQueue.add(c);
+	public void addCubeToQueue(Cube c) {
+		this.pendingCubes.add(c);
 	}
 }
