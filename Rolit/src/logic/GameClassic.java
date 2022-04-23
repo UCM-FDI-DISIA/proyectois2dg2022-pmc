@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import commands.Command;
-import commands.PlaceCubeCommand;
 import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
@@ -68,6 +66,14 @@ public class GameClassic extends Game {
 		JSONObject gameJSONObject = super.report();
 		gameJSONObject.put("type", "GameClassic");
 		return gameJSONObject;
+	}
+	
+	@Override
+	protected void onFirstPlay() {
+		GameState state = new GameState(this.copyMe());
+		for(RolitObserver o : observers) {
+			o.onFirstPlay(state);
+		}
 	}
 	
 	@Override

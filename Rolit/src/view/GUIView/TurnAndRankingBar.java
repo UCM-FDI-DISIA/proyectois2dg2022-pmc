@@ -106,4 +106,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 		
 	}
 
+	@Override
+	public void onFirstPlay(GameState state) {}
+
 }

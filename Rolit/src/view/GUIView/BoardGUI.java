@@ -171,5 +171,8 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onFirstPlay(GameState state) {}
 	
 }
