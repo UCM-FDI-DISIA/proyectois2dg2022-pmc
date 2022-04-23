@@ -40,8 +40,7 @@ public class ServerClientThread extends Thread{
 				String s = input.readLine();
 				if (s != null) {
 					JSONObject json = new JSONObject(s);	
-					server.receiveFromClient(json, client);
-					
+					server.receiveFromClient(json, client);					
 				}
 				
 			} catch (IOException e){}

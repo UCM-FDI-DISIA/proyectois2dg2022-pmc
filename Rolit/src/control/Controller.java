@@ -13,9 +13,9 @@ import replay.GameState;
 import view.GUIView.RolitObserver;
 
 public class Controller {
-	private Game game;
+	private volatile Game game;
 	private Replay replay;
-	private Client clientRolit;
+	private volatile Client clientRolit;
 	private boolean onlineMode = false;
 	
 	public Controller() {
@@ -51,9 +51,11 @@ public class Controller {
 	}
 	
 	public void updateGameFromServer(JSONObject o) {
+		this.game.interrupt();
 		Game newGame = GameBuilder.createGame(o);
-		newGame.updateGameFromServer(game.getObserverList());
+		newGame.updateGameFromServer(game.getObserverList());		
 		game = newGame;
+		game.start();
 	}
 	
 	public GameState loadGame(String filePath) {

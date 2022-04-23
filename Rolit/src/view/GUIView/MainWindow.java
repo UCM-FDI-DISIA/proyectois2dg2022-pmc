@@ -41,7 +41,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private Client clientRolit;
 	private Controller ctrl;
 	private Replay replay;
-	private GameState state;
+	private volatile GameState state;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -259,6 +259,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.state = state;
 		this.revalidate();
 		this.repaint();
+		// FIXME dice Leo que hay que quitarlo
 		this.pack();
 	}
 

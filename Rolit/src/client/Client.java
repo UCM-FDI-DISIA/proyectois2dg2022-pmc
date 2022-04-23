@@ -8,20 +8,16 @@ import view.GUIView.MainWindow;
 
 public class Client {
 
-	private MainWindow mainWindow;
+	private volatile MainWindow mainWindow;
 	private ClientController clientController;
 	private Player player;
 	
-	public Client(MainWindow mW) {
-		
-		mainWindow = mW;
-		
+	public Client(MainWindow mW) {		
+		mainWindow = mW;		
 	}
 	
 	protected JSONObject getGameReport() {
-		return mainWindow.getGameReport();
-		
-		
+		return mainWindow.getGameReport();		
 	}
 
 	public void updateGameFromServer(JSONObject JSONJuegoNuevo) {
@@ -35,8 +31,7 @@ public class Client {
 	}
 
 	public void updateGameToServer() {
-		clientController.updateGameToServer();
-		
+		clientController.updateGameToServer();		
 	}
 
 	public void join(String name, Color color) {
