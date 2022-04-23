@@ -66,8 +66,6 @@ public class Rolit {
 			ConsoleWindow view = new MainBashWindow(ctr);
 			view.open();
 		}
-		
-		ctr.run();
 	}
 	
 	

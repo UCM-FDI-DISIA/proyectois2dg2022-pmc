@@ -3,7 +3,7 @@ package CPU;
 import java.util.Random;
 
 import logic.Color;
-import replay.State;
+import replay.GameState;
 import utils.Pair;
 
 public class RandomStrategy extends Strategy {
@@ -15,7 +15,7 @@ public class RandomStrategy extends Strategy {
 	}
 	
 	@Override
-	public Pair<Integer, Integer> calculateNextMove(Color currentColor, State state) {
+	public Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state) {
 		this.simplifiedBoard = new SimplifiedBoard(state, this);
 		Integer x, y;
 		int size = simplifiedBoard.getSize();

@@ -1,7 +1,7 @@
 package view.GUIView;
 
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -50,6 +50,7 @@ public class CeldaGUI {
 					if (!filled) {
 						try {
 							ctrl.executeCommand(new PlaceCubeCommand(x,y));
+							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}

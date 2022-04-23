@@ -15,7 +15,7 @@ import commands.SaveCommand;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
@@ -92,7 +92,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onRegister(State status) {}
+	public void onRegister(GameState status) {}
 
 	@Override
 	public void onError(String err) {
@@ -113,7 +113,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(GameState status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -125,7 +125,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}

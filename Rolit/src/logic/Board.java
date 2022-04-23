@@ -184,7 +184,7 @@ public class Board implements Reportable {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
-	public boolean tryToAddCube(int x, int y) {
+	private boolean tryToAddCube(int x, int y) {
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
@@ -216,13 +216,4 @@ public class Board implements Reportable {
 		jo.put("cubes", jo1);
 		return jo;
 	}
-
-	public boolean[][] getShapeMatrix() {
-		return this.shapeMatrix;
-	}
-	
-	public int getSize() {
-		return this.size;
-	}
-
 }

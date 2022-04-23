@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import logic.Game;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 import view.GUIView.RolitObserver;
 
 public class Controller {
@@ -21,10 +21,11 @@ public class Controller {
 	public Controller() {
 	}
 	
-	public State createGame(JSONObject o) {
+	public GameState createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
+		this.game.start();
 		this.replay = new Replay();
-		return new State(game);
+		return new GameState(game);
 	}
 	
 	public void startReplay(Replay r) {
@@ -55,9 +56,9 @@ public class Controller {
 		game = newGame;
 	}
 	
-	public State loadGame(String filePath) {
+	public GameState loadGame(String filePath) {
 		game = GameBuilder.createGame(SaveLoadManager.loadGame(filePath));
-		return new State(game);
+		return new GameState(game);
 	}
 	
 	public void setOnlineMode(boolean onlineMode) {
@@ -66,13 +67,6 @@ public class Controller {
 	
 	public void setClient(Client clientRolit) {
 		this.clientRolit = clientRolit;
-	}
-	
-	public void run() {
-		while(game == null) {
-			
-		}
-		this.game.run();
 	}
 	
 	/*TODO private boolean askSaveReplay() {

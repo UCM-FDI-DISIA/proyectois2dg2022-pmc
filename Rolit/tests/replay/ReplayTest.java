@@ -37,7 +37,7 @@ public class ReplayTest {
 		lc.add(c2);
 		Game game = new GameClassic(b, lc, lp, Color.YELLOW);
 		game.play(3, 6);
-		State state = new State("p", game);
+		GameState state = new GameState("p", game);
 		
 		Replay replay = new Replay();
 		replay.addState("p", game);

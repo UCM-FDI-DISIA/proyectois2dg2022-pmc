@@ -30,6 +30,7 @@ public class GameTeamsBuilder extends GameBuilder {
 		JSONArray playersJSONArray = o.getJSONArray("players");
 		for (int i = 0; i < playersJSONArray.length(); ++i) {
 			JSONObject player = playersJSONArray.getJSONObject(i);
+			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
 			list_players.add(new Player(Color.valueOfIgnoreCase(player.getString("color").charAt(0)), player.getString("name")));
 		}			
 

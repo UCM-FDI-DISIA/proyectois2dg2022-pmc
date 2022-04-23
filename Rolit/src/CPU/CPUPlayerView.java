@@ -3,7 +3,7 @@ package CPU;
 import commands.PlaceCubeCommand;
 import control.Controller;
 import logic.Color;
-import replay.State;
+import replay.GameState;
 import utils.Pair;
 
 public class CPUPlayerView extends PlayerView {
@@ -20,7 +20,7 @@ public class CPUPlayerView extends PlayerView {
 	}
 	
 	@Override
-	public void nextMove(State state) {
+	public void nextMove(GameState state) {
 		if (this.color.equals(Color.valueOfIgnoreCase(state.report().getJSONObject("game").getString("turn").charAt(0)))) {
 			Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, state);
 			try {

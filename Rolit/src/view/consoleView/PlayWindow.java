@@ -5,7 +5,7 @@ import java.util.List;
 import control.Controller;
 import logic.Color;
 import logic.Rival;
-import replay.State;
+import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -37,7 +37,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub		
 	}
 
@@ -51,7 +51,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onRegister(State states) {
+	public void onRegister(GameState states) {
 		System.out.println(states.toString());		
 	}
 
@@ -62,7 +62,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(GameState status) {
 		System.out.println(status.toString());		
 	}
 

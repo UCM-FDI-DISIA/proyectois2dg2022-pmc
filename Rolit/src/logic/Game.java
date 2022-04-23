@@ -9,18 +9,17 @@ import java.util.Queue;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import commands.PlaceCubeCommand;
-import replay.State;
+import replay.GameState;
 import view.GUIView.RolitObserver;
 
-public abstract class Game implements Replayable {
+public abstract class Game extends Thread implements Replayable {
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
-	protected List<RolitObserver> observers;
-	protected Queue<Cube> pendingCubes;
+	protected volatile List<RolitObserver> observers;
+	protected volatile Queue<Cube> pendingCubes;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -51,19 +50,27 @@ public abstract class Game implements Replayable {
 		}
 		
 		this.observers = new ArrayList<RolitObserver>();
+		// FIXME esto tiene que dar problemas a la hora de cargar seguro
 		this.pendingCubes = new ArrayDeque<>();
 	}
 	
+	@Override
 	public void run() {
+		// FIXME en la depuración esto no llega a terminar nunca
 		while (!this.finished && !this.exit) {
 			this.play();
 		}
+		
+		// FIXME mostrar el ranking
+		int i = 0;
 	}
 	
+	// Este es el método que realmente sirve para hacer lo que sería un turno completo
 	public abstract void play() throws IllegalArgumentException;
 	public abstract String toString();
 	public abstract Game copyMe();
 	
+	// FIXME tiene que haber una forma de restringir esto seguro
 	public void setExit() {
 		this.exit = true;
 	}
@@ -99,6 +106,7 @@ public abstract class Game implements Replayable {
 
 	public void addObserver(RolitObserver o) {
 		this.observers.add(o);
+		// FIXME sospecho que solo sería necesario llamar al onRegister del que se acaba de registrar
 		this.onRegister();
 	}
 	
@@ -106,30 +114,29 @@ public abstract class Game implements Replayable {
 		this.observers.remove(o);
 	}
 
-	protected abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onTurnPlayed();	// Cada modo de juego debe tener su propia implementación
 	protected abstract void onGameFinished();
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.copyMe()));
+			o.onGameStatusChange(new GameState(command, this.copyMe()));
 		}
 	}
 	
 	public void onStatusChange() {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(this.copyMe()));
+			o.onGameStatusChange(new GameState(this.copyMe()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State(this.copyMe()));
+			o.onRegister(new GameState(this.copyMe()));
 		}
 	}
 
 	protected void onError() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void updateGameFromServer(List<RolitObserver> observerList) {

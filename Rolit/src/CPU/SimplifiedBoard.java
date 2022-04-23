@@ -14,7 +14,7 @@ import logic.Cube;
 import logic.Game;
 import logic.Player;
 import logic.Shape;
-import replay.State;
+import replay.GameState;
 import utils.Pair;
 
 public class SimplifiedBoard {
@@ -24,11 +24,11 @@ public class SimplifiedBoard {
 	private List<Integer> scores;
 	private Stack<Pair<Pair<Integer, Integer>, Color>> changesStack;	//TODO Podría hacerse una clase Coordenadas para los Pair<Integer, Integer>
 	private Stack<Integer> numberOfChangesStack;
-	private State state;
+	private GameState state;
 	private Strategy strat;
 	private int numCubes;
 	
-	public SimplifiedBoard(State state, Strategy strat) {
+	public SimplifiedBoard(GameState state, Strategy strat) {
 		this.numCubes = 0;
 		JSONObject json = state.report();
 		JSONObject jGame = json.getJSONObject("game");

@@ -5,7 +5,7 @@ import java.util.List;
 import control.Controller;
 import logic.Color;
 import logic.Rival;
-import replay.State;
+import replay.GameState;
 import view.GUIView.BoardGUI;
 import view.GUIView.RolitObserver;
 
@@ -20,22 +20,22 @@ public class PlayerView implements RolitObserver {
 		this.ctrl.addObserver(this);
 	}
 	
-	public void nextMove(State state) {
+	public void nextMove(GameState state) {
 		// no hacemos nada
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		this.nextMove(state);		
 	}
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {
-		// nada		
+		// nada
 	}
 
 	@Override
-	public void onRegister(State state) {
+	public void onRegister(GameState state) {
 		// TODO Auto-generated method stub
 	}
 
@@ -46,7 +46,7 @@ public class PlayerView implements RolitObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}

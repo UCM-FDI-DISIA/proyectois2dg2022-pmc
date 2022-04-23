@@ -30,7 +30,7 @@ import control.Controller;
 import logic.Color;
 import logic.Player;
 import logic.Shape;
-import replay.State;
+import replay.GameState;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
@@ -38,9 +38,11 @@ public class CreateGameDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller ctrl;
-	private State state;
+	// FIXME de nuevo, esta clase no debería tener un estate, no le hace falta para nada ni para afuera nada
+	private GameState state;
 	private int status;
 	
+	// FIXME esto de aquí debería ser como lo hicimos en la consola, con vistas especializadas para cada tipo de juego
 	private JComboBox<Shape> shapesCombo;
 	private JComboBox<String> gameModeCombo;
 	private JSpinner playersSpinner;
@@ -64,8 +66,7 @@ public class CreateGameDialog extends JDialog {
 	private List<JPanel> listNameTeamsPanel;
 	private List<JTextArea> listTextAreasTeamsPanels;
 	
-	private List<JCheckBox> listIACheckBoxes;
-	
+	private List<JCheckBox> listIACheckBoxes;	
 	private List<JComboBox> listIAComboBoxes;
 	
 	private String[] IADifficulties = {"EASY", "MEDIUM", "HARD"};	//TODO Cambiar esta chapuza
@@ -83,20 +84,18 @@ public class CreateGameDialog extends JDialog {
 		initGUI();
 	}
 	
-	public void initGUI () {
-		
+	public void initGUI () {		
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
 
 		setTitle("Create Game");
 		setVisible(false);
 		
-		mainPanel = new JPanel();
-		
+		mainPanel = new JPanel();		
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
+		// FIXME hay un método de esto en la factoría, se puede cambiar para que devuelva un array y así se pueda usar aquí, pero esto es sucio
 		String[] localGameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
 		String[] onlineGameModes = {GameClassicBuilder.TYPE};
 
@@ -613,7 +612,7 @@ public class CreateGameDialog extends JDialog {
 		return list;
 	}
 	
-	public State getState() {
+	public GameState getState() {
 		return this.state;
 	}
 }

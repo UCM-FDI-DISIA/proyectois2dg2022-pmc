@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import org.json.JSONArray;
 import control.Controller;
 import logic.Rival;
-import replay.State;
+import replay.GameState;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
@@ -13,7 +13,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	private JSONArray rivals;
 	public static final int NUM_ROWS = 2;
 	
-	public RankingTableModel(Controller ctrl, State state) {
+	public RankingTableModel(Controller ctrl, GameState state) {
 		this.rivals = state.getRivals();
 		this._colNames = new String[this.rivals.length() + 1];
 		this._colNames[0] = state.getType();
@@ -58,7 +58,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onRegister(State status) {}
+	public void onRegister(GameState status) {}
 
 	@Override
 	public void onError(String err) {
@@ -67,14 +67,14 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		update();
 		this.rivals = state.getRivals();

@@ -12,7 +12,7 @@ import logic.Color;
 import logic.Rival;
 import logic.Shape;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 public class BoardGUI implements RolitObserver, ReplayObserver {
 
@@ -20,7 +20,7 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 	private int nColumnas;
 	private CeldaGUI[][] celdas;
 	private Controller ctrl;
-	private State state;
+	private GameState state;
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	
@@ -138,24 +138,24 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		this.lastCubeAdded = cubes.getJSONObject(cubes.length() - 1);
 	}
 
-	public State getState() {
+	public GameState getState() {
 		return this.state;
 	}
 	
 	@Override
-	public void onRegister(State state) {
+	public void onRegister(GameState state) {
 		this.state = state;
 		update();
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		this.state = state;
 		update();
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}

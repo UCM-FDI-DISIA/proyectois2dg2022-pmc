@@ -9,16 +9,16 @@ import logic.Replayable;
 import logic.Reportable;
 import utils.StringUtils;
 
-public class State implements Reportable {
+public class GameState implements Reportable {
 	String command;
 	Replayable game;
 	
-	public State(String commandName, Replayable game){
+	public GameState(String commandName, Replayable game){
 		this.command = commandName;
 		this.game = game;
 	}
 	
-	public State(Replayable game) {
+	public GameState(Replayable game) {
 		this.command = "";
 		this.game = game;
 	}

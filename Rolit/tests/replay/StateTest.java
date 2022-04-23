@@ -34,7 +34,7 @@ public class StateTest {
 		lc.add(c2);
 		Game game = new GameClassic(b, lc, lp, Color.YELLOW);
 		game.play(3, 6);
-		State state = new State("p", game);
+		GameState state = new GameState("p", game);
 		
 		String s = "{\"game\":{\"players\":[{\"color\":\"Y\",\"name\":\"Juandi\"},{\"color\":\"W\",\"name\":\"Leo\"},{\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}},\"command\":\"p\"}";
 		JSONObject d = new JSONObject(s);

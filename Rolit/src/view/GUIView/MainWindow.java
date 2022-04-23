@@ -28,18 +28,20 @@ import control.SaveLoadManager;
 import logic.Color;
 import logic.Rival;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 import server.Server;
 import utils.Pair;
 
+// FIXME creo que no tiene mucho sentido que esta clase sea observadora
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
 	private static final long serialVersionUID = 1L;
+	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
 	
 	private Client clientRolit;
 	private Controller ctrl;
 	private Replay replay;
-	private State state;
+	private GameState state;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -53,9 +55,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 	
-	private boolean onlineGameStarted = false;
-	
-	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
+	private boolean onlineGameStarted = false;	
 
 	public MainWindow(Controller ctrl) {
 		super("Rolit");		
@@ -121,9 +121,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				this.state = dialogNew.getState();
 				List<Pair<Color, Pair<Boolean, Integer>>> data = dialogNew.getPlayersData();
 				for(int i = 0; i < data.size(); i++) {	//TODO Cambiar para que sea como una clase Command y no tener que diferenciar casos
-					if(data.get(i).getSecond().getFirst()) {
+					if(data.get(i).getSecond().getFirst())
 						new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond());
-					}
 					else
 						new PlayerView(data.get(i).getFirst(), this.ctrl);
 				}
@@ -178,10 +177,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 	}
 	
-	private void initGame() {
-		
+	private void initGame() {		
 		ctrl.addObserver(this);
-
 		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
@@ -258,7 +255,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		this.state = state;
 		this.revalidate();
 		this.repaint();
@@ -267,33 +264,29 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 
 	public JSONObject getGameReport() {
 		return state.report().getJSONObject("game");
-		
 	}
 
 	public void updateGameFromServer(JSONObject JSONnewState) {
-
 		if(!onlineGameStarted) {
 			onlineGameStarted = true;
 			state = ctrl.createGame(JSONnewState);
 			initGame();
-		}
-			
+		}			
 		ctrl.updateGameFromServer(JSONnewState);
 	}
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
-	public void onRegister(State state) {
+	public void onRegister(GameState state) {
 		this.state = state;
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		
 	}
 

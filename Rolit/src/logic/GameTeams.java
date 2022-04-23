@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import commands.PlaceCubeCommand;
-import replay.State;
+import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -83,7 +83,7 @@ public class GameTeams extends Game {
 	
 	@Override
 	public void onTurnPlayed() {
-		State state = new State(this.getReplayable());
+		GameState state = new GameState(this.copyMe());
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(state);
 		}

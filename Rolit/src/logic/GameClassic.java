@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import commands.Command;
 import commands.PlaceCubeCommand;
-import replay.State;
+import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -45,10 +45,11 @@ public class GameClassic extends Game {
 				this.onGameFinished();
 			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-			if(!this.finished)
+			if(!this.finished) {
 				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+				onTurnPlayed();
+			}			
 			
-			onTurnPlayed();
 		}		
 	}
 
@@ -71,7 +72,7 @@ public class GameClassic extends Game {
 	
 	@Override
 	public void onTurnPlayed() {
-		State state = new State(this.copyMe());
+		GameState state = new GameState(this.copyMe());
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(state);
 		}
