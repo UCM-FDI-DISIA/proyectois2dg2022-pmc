@@ -17,13 +17,16 @@ public class RandomStrategy extends Strategy {
 	@Override
 	public Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state) {
 		this.simplifiedBoard = new SimplifiedBoard(state, this);
-		Integer x, y;
-		int size = simplifiedBoard.getSize();
-		do {
-			x = random.nextInt(size);
-			y = random.nextInt(size);
-		} while(!simplifiedBoard.tryToAddCube(x, y));
-		return new Pair<Integer, Integer>(x, y);
+		if(!simplifiedBoard.isBoardFull()) {
+			Integer x, y;
+			int size = simplifiedBoard.getSize();
+			do {
+				x = random.nextInt(size);
+				y = random.nextInt(size);
+			} while(!simplifiedBoard.tryToAddCube(x, y));
+			return new Pair<Integer, Integer>(x, y);
+		}
+		else return null;
 	}
 
 	@Override

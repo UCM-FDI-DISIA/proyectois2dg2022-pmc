@@ -24,7 +24,8 @@ public class CPUPlayerView extends PlayerView {
 		if (this.color.equals(Color.valueOfIgnoreCase(state.report().getJSONObject("game").getString("turn").charAt(0)))) {
 			Pair<Integer, Integer> coor = this.strat.calculateNextMove(color, state);
 			try {
-				this.ctrl.executeCommand(new PlaceCubeCommand(coor.getFirst(), coor.getSecond()));
+				if(coor != null)
+					this.ctrl.executeCommand(new PlaceCubeCommand(coor.getFirst(), coor.getSecond()));
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

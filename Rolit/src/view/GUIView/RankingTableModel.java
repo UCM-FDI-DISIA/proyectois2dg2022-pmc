@@ -73,6 +73,9 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
+	public void onFirstPlay(GameState state) {}
+	
+	@Override
 	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		update();
@@ -84,4 +87,5 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 		// TODO Auto-generated method stub
 		
 	}
+
 }

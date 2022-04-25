@@ -6,7 +6,6 @@ import control.Controller;
 import logic.Color;
 import logic.Rival;
 import replay.GameState;
-import view.GUIView.BoardGUI;
 import view.GUIView.RolitObserver;
 
 public class PlayerView implements RolitObserver {
@@ -24,6 +23,11 @@ public class PlayerView implements RolitObserver {
 		// no hacemos nada
 	}
 
+	@Override
+	public void onFirstPlay(GameState state) {
+		this.nextMove(state);
+	}
+	
 	@Override
 	public void onTurnPlayed(GameState state) {
 		this.nextMove(state);		

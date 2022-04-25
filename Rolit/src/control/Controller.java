@@ -23,9 +23,12 @@ public class Controller {
 	
 	public GameState createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
-		this.game.start();
 		this.replay = new Replay();
 		return new GameState(game);
+	}
+	
+	public void startGame() {
+		this.game.start();
 	}
 	
 	public void startReplay(Replay r) {

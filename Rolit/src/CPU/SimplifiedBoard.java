@@ -8,11 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import control.SaveLoadManager;
-import logic.Board;
 import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.Player;
 import logic.Shape;
 import replay.GameState;
 import utils.Pair;
@@ -27,6 +23,7 @@ public class SimplifiedBoard {
 	private GameState state;
 	private Strategy strat;
 	private int numCubes;
+	private int maxCapacity;
 	
 	public SimplifiedBoard(GameState state, Strategy strat) {
 		this.numCubes = 0;
@@ -36,6 +33,12 @@ public class SimplifiedBoard {
 		Shape shape = Shape.valueOfIgnoreCase(jBoard.getString("shape"));
 		this.availablePositions = SaveLoadManager.loadShape(shape);
 		int length = this.availablePositions.length;
+		this.maxCapacity = 0;
+		for(int i = 0; i < length; i++) {
+			for(int j = 0; j < length; j++) {
+				if(availablePositions[i][j]) this.maxCapacity++;
+			}
+		}
 		JSONArray cubes = jBoard.getJSONArray("cubes");
 		this.scores = new ArrayList<>();
 		for(int i = 0; i < Color.size(); i++) {
@@ -59,7 +62,7 @@ public class SimplifiedBoard {
 	public int simulateMove(int x, int y, Color color, int maxDepth) {
 		this.applyChanges(x, y, color);
 		int currentScore = this.scores.get(color.ordinal());
-		if(maxDepth > 0) {
+		if(maxDepth > 0 && !this.isBoardFull()) {
 			JSONArray players = state.report().getJSONObject("game").getJSONArray("players");
 			boolean found = false;
 			int currentIndex = 0;
@@ -76,7 +79,7 @@ public class SimplifiedBoard {
 			Color nextColor = Color.valueOfIgnoreCase(players.getJSONObject(nextIndex).getString("color").charAt(0));
 			currentScore = strat.simulate(nextColor, maxDepth - 1);
 		}
-		this.revertChanges(color);
+		this.revertChanges(x, y, color);
 		return currentScore;
 	}
 	
@@ -89,8 +92,6 @@ public class SimplifiedBoard {
 		Color color;
 		int numberOfChanges = 0;
 
-		this.matrix[posX][posY] = currentColor;
-		
 		for (int dirX = -1; dirX <= 1; dirX++) {
 			for (int dirY = -1; dirY <= 1; dirY++) {
 				if (!(dirX == 0 && dirY == 0)) {
@@ -132,11 +133,16 @@ public class SimplifiedBoard {
 				}
 			}
 		}
-		this.numberOfChangesStack.push(numberOfChanges);
+		
+		//Nuevo cubo
+		this.matrix[posX][posY] = currentColor;
+		this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) + 1);
 		this.numCubes++;
+		
+		this.numberOfChangesStack.push(numberOfChanges);
 	}
 	
-	private void revertChanges(Color currentColor) {
+	private void revertChanges(int x, int y, Color currentColor) {
 		for(int i = 0; i < this.numberOfChangesStack.peek(); i++) {
 			Pair<Integer, Integer> coords = this.changesStack.get(0).getFirst();
 			Color color = this.changesStack.get(0).getSecond();
@@ -145,8 +151,10 @@ public class SimplifiedBoard {
 			this.matrix[coords.getFirst()][coords.getSecond()] = color;
 			this.changesStack.pop();
 		}
-		this.numberOfChangesStack.pop();
+		this.matrix[x][y] = null;
+		this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) - 1);
 		this.numCubes--;
+		this.numberOfChangesStack.pop();
 	}
 
 	private boolean isPositionInRange(int x, int y) {
@@ -175,7 +183,15 @@ public class SimplifiedBoard {
 			}
 			return nearbyCube;
 		} else
-			return isPositionInRange(x, y);
+			return isPositionInRange(x, y) && this.availablePositions[x][y];
+	}
+	
+	public boolean isBoardEmpty() {
+		return this.numCubes == 0;
+	}
+	
+	public boolean isBoardFull() {
+		return this.numCubes == this.maxCapacity;
 	}
 	
 }

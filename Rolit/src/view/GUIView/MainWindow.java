@@ -7,9 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -203,10 +201,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
 		mainPanel.add(gamePanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
-				
+		
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
-
+		
+		this.ctrl.startGame();
+		
 	}
 	
 	private void initReplay() {
@@ -252,6 +252,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 
+	@Override
+	public void onFirstPlay(GameState state) {}
+	
 	@Override
 	public void onTurnPlayed(GameState state) {
 		this.state = state;

@@ -57,6 +57,7 @@ public abstract class Game extends Thread implements Replayable {
 	
 	@Override
 	public void run() {
+		this.onFirstPlay();
 		// FIXME en la depuración esto no llega a terminar nunca
 		while (!this.finished && !this.exit && !Thread.interrupted()) {
 			this.play();
@@ -113,6 +114,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.observers.remove(o);
 	}
 
+	protected abstract void onFirstPlay();
 	protected abstract void onTurnPlayed();	// Cada modo de juego debe tener su propia implementación
 	protected abstract void onGameFinished();
 	
