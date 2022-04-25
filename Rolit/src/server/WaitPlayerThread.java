@@ -6,10 +6,10 @@ import java.net.Socket;
 
 public class WaitPlayerThread extends Thread {
 	
-	private Server server;
+	private volatile Server server;
 	private ServerSocket serverSocket;
 	private Socket socket;
-	public ServerClient serverClient;
+	public volatile ServerClient serverClient;
 	
 	public WaitPlayerThread(ServerSocket serverSocket, Socket socket, ServerClient serverClient, Server server) {
 		this.server = server;

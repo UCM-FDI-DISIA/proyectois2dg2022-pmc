@@ -10,7 +10,7 @@ import logic.Player;
 public class ServerClient {
 	
 	private Player p;
-	private ServerClientThread thread;
+	private volatile ServerClientThread thread;
 	
 
 	public ServerClient() {

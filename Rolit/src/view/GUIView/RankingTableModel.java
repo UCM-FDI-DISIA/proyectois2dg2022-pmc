@@ -72,7 +72,6 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 		
 	}
 
-
 	@Override
 	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub

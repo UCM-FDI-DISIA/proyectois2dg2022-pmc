@@ -26,8 +26,7 @@ public class Client {
 
 	public void empezarPartida(String ip, int port) {
 		clientController = new ClientController(this, ip, port);
-		clientController.start();
-		
+		clientController.start();		
 	}
 
 	public void updateGameToServer() {
@@ -39,7 +38,6 @@ public class Client {
 			this.player = new Player(color, name);
 			clientController.sendToServer(player.report());
 		}
-
 	}
 
 	public Player getPlayer() {

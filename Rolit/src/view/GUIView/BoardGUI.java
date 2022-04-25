@@ -18,9 +18,9 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 
 	private int nFilas;
 	private int nColumnas;
-	private CeldaGUI[][] celdas;
-	private Controller ctrl;
-	private GameState state;
+	private volatile CeldaGUI[][] celdas;
+	private volatile Controller ctrl;
+	private volatile GameState state;
 	private Replay replay;
 	private JSONObject lastCubeAdded;
 	

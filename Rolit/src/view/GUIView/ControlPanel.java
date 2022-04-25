@@ -21,7 +21,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 
 	private static final long serialVersionUID = 1L;
 	
-	private Controller ctrl;
+	private volatile Controller ctrl;
 	private Replay replay;
 	private JFileChooser fc;
 	private JButton saveFileBtn;

@@ -27,9 +27,9 @@ public class Server {
 	private ServerSocket serverSocket = null;
 
 	private List<Pair<Player, Socket>> sockets = new ArrayList<>();
-	private List<Pair<Player, ServerClient>> clients = new ArrayList<>();
+	private volatile List<Pair<Player, ServerClient>> clients = new ArrayList<>();
 	
-	private List<Player> incomingPlayers = new ArrayList<>();
+	private volatile List<Player> incomingPlayers = new ArrayList<>();
 	
 	private int expectedPlayers;
 	
@@ -108,8 +108,7 @@ public class Server {
 
 			for (int i = 0; i < clients.size(); ++i) {
 				if (client != clients.get(i).getSecond())
-					clients.get(i).getSecond().updateGraphics(json);
-				
+					clients.get(i).getSecond().updateGraphics(json);				
 			}
 			
 		}
@@ -117,11 +116,7 @@ public class Server {
 			Player p = new Player(json);
 			incomingPlayers.add(p);
 			
-		}
-		
-		
-		
-		
+		}		
 	}
 
 

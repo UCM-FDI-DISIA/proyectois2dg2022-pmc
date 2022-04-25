@@ -20,9 +20,7 @@ import org.json.JSONObject;
 
 public class ServerView extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-
-	
+	private static final long serialVersionUID = 1L;	
 	private JPanel thePanel;
 	private JLabel ipLabel, portLabel;
 	private JTextField portField;

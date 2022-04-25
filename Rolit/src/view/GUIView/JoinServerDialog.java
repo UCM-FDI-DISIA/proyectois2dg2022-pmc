@@ -24,7 +24,6 @@ import logic.Color;
 
 
 public class JoinServerDialog extends JDialog {
-
 	
 	private JPanel connectPanel;
 	private int status = 0;
@@ -101,25 +100,18 @@ public class JoinServerDialog extends JDialog {
 				if(e.getSource() == connect) {
 					ip = ipField.getText().trim();
 					port = portField.getText().trim();
-
 					try {
 						status = 1;
 						JoinServerDialog.this.setVisible(false);
-
 					} catch (NumberFormatException e1) {
 						displayError("Wrong port format. Try again.");
 					}
-
-
 				}
-
 			}
 		});
-		addComp(connectPanel, connect, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-		
+		addComp(connectPanel, connect, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		add(connectPanel);
-		pack();
-		
+		pack();		
 	}
 	
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){

@@ -45,21 +45,20 @@ public class ClientController extends Thread{
 	
 	public void run(){
 		try {
-			while(true){
-				
+			// FIXME hay un while true
+			while(true){				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
 				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
 				clientRolit.updateGameFromServer(JSONJuegoNuevo);
+				// FIXME esto no tiene que escribir
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
-			} 
-
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally{
 			if(out != null)
-				out.close();
-	
+				out.close();	
 				try {
 					in.close();
 					socket.close();

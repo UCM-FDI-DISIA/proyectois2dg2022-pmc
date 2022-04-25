@@ -40,6 +40,9 @@ public class Controller {
 		if (onlineMode) {			
 			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
 				c.execute(game);
+				while(!game.executedTurn()) {
+					
+				}
 				clientRolit.updateGameToServer();
 			}			
 		}

@@ -49,7 +49,7 @@ public class GameClassic extends Game {
 				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 				onTurnPlayed();
 			}			
-			
+			this.executedTurn = true;
 		}		
 	}
 

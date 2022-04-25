@@ -55,7 +55,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 	
-	private boolean onlineGameStarted = false;	
+	private volatile boolean onlineGameStarted = false;	
 
 	public MainWindow(Controller ctrl) {
 		super("Rolit");		
@@ -240,9 +240,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);
-		
-		
+		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);		
 		
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos

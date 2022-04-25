@@ -20,6 +20,7 @@ public abstract class Game extends Thread implements Replayable {
 	private boolean exit;
 	protected volatile List<RolitObserver> observers;
 	protected volatile Queue<Cube> pendingCubes;
+	protected boolean executedTurn = false;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -149,4 +150,13 @@ public abstract class Game extends Thread implements Replayable {
 	public void addCubeToQueue(Cube c) {
 		this.pendingCubes.add(c);
 	}
+	
+	public boolean executedTurn() {
+		if(!this.executedTurn) return false;
+		else {
+			this.executedTurn = false;
+			return true;
+		}
+	}
+
 }
