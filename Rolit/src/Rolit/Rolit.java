@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
 
-import client.Client;
 import control.Controller;
 import view.GUIView.MainWindow;
 import view.consoleView.ConsoleWindow;
@@ -23,13 +22,10 @@ public class Rolit {
 	
 	
 	public static void main(String[] args) {		
-		
+		version();
+		System.out.println();
 		Controller controller = new Controller();
-		MainWindow mainWindow = new MainWindow(controller);
-		//version();
-		//System.out.println();
-		
-		//Rolit.run(controller);
+		Rolit.run(controller);
 	}
 
 	private static void version() {
@@ -61,7 +57,6 @@ public class Rolit {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					//;
 					MainWindow mainWindow = new MainWindow(ctr);
 				}
 			});

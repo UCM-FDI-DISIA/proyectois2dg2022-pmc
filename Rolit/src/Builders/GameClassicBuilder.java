@@ -2,7 +2,6 @@ package Builders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +30,7 @@ public class GameClassicBuilder extends GameBuilder {
 		List<Player> list_players = new ArrayList<Player>();
 		JSONArray playersJSONArray = o.getJSONArray("players");
 		for (int i = 0; i < playersJSONArray.length(); ++i)
+			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
 			list_players.add(new Player(Color.valueOfIgnoreCase(playersJSONArray.getJSONObject(i).getString("color").charAt(0)),
 					playersJSONArray.getJSONObject(i).getString("name")));
 

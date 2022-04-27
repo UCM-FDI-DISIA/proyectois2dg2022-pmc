@@ -3,30 +3,32 @@ package control;
 import Builders.GameBuilder;
 import client.Client;
 
-import javax.swing.SwingUtilities;
-
 import commands.Command;
 
 import org.json.JSONObject;
 
 import logic.Game;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 import view.GUIView.RolitObserver;
 
 public class Controller {
-	private Game game;
+	private volatile Game game;
 	private Replay replay;
-	private Client clientRolit;
+	private volatile Client clientRolit;
 	private boolean onlineMode = false;
 	
 	public Controller() {
 	}
 	
-	public State createGame(JSONObject o) {
+	public GameState createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
 		this.replay = new Replay();
-		return new State(game);
+		return new GameState(game);
+	}
+	
+	public void startGame() {
+		this.game.start();
 	}
 	
 	public void startReplay(Replay r) {
@@ -37,35 +39,34 @@ public class Controller {
 		game.addObserver(o);
 	}
 	
-	public void executeCommand(String s) throws Exception {
-		
-		String[] parameters = s.toLowerCase().trim().split(" ");
-		Command command = Command.getCommand(parameters);
-		
-
-		if (onlineMode) {
-			
+	public void executeCommand(Command c) throws Exception {
+		if (onlineMode) {			
 			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
-				command.execute(game);
+				c.execute(game);
+				while(!game.executedTurn()) {
+					
+				}
 				clientRolit.updateGameToServer();
-			}
-			
+			}			
 		}
 		else
-			command.execute(game);
+			c.execute(game);
 		
-		replay.addState(s, game.getReplayable());
+		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
+		replay.addState(c.toString(), game.copyMe());
 	}
 	
 	public void updateGameFromServer(JSONObject o) {
+		this.game.interrupt();
 		Game newGame = GameBuilder.createGame(o);
-		newGame.updateGameFromServer(game.getObserverList());
+		newGame.updateGameFromServer(game.getObserverList());		
 		game = newGame;
+		game.start();
 	}
 	
-	public State loadGame(String filePath) {
+	public GameState loadGame(String filePath) {
 		game = GameBuilder.createGame(SaveLoadManager.loadGame(filePath));
-		return new State(game);
+		return new GameState(game);
 	}
 	
 	public void setOnlineMode(boolean onlineMode) {

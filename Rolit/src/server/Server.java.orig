@@ -27,8 +27,12 @@ public class Server {
 	private ServerSocket serverSocket = null;
 
 	private List<Pair<Player, Socket>> sockets = new ArrayList<>();
-	private volatile List<Pair<ServerClient, Player>> clients = new ArrayList<>();
+<<<<<<< HEAD
+	private List<Pair<ServerClient, Player>> clients = new ArrayList<>();
 	private HashMap<ServerClient, String> mapClientTeam = new HashMap<>();
+=======
+	private volatile List<Pair<Player, ServerClient>> clients = new ArrayList<>();
+>>>>>>> CPUPlayers
 	
 	private volatile List<Player> incomingPlayers = new ArrayList<>();
 	

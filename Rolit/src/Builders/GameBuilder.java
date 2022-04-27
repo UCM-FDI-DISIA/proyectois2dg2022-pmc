@@ -1,15 +1,9 @@
 package Builders;
 
-import java.util.Scanner;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import logic.Board;
-import logic.Color;
 import logic.Game;
-import logic.GameClassic;
-import logic.Shape;
+
 
 public abstract class GameBuilder {
 	private static GameBuilder[] builders = {

@@ -11,12 +11,12 @@ import java.util.LinkedHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ServerClientThread extends Thread{
+public class ServerClientThread extends Thread {
 
 	private BufferedReader input;
 	private PrintWriter output;
-	private ServerClient client;
-	private Server server;
+	private volatile ServerClient client;
+	private volatile Server server;
 	private boolean isRunning = true;
 
 	public ServerClientThread(Server server, Socket socket, ServerClient client) throws IOException {
@@ -40,8 +40,7 @@ public class ServerClientThread extends Thread{
 				String s = input.readLine();
 				if (s != null) {
 					JSONObject json = new JSONObject(s);	
-					server.receiveFromClient(json, client);
-					
+					server.receiveFromClient(json, client);					
 				}
 				
 			} catch (IOException e){

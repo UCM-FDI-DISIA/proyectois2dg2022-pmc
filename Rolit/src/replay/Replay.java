@@ -36,21 +36,21 @@ public class Replay implements Reportable {
 
 
 	private Scanner input;
-	private List<State> states;
+	private List<GameState> states;
 	private List<ReplayObserver> observers;
 	private int currentState;
 	private boolean print;
 	
 	public Replay() {
 		this.input = new Scanner(System.in);
-		this.states = new ArrayList<State>();
+		this.states = new ArrayList<GameState>();
 		this.currentState = 0;
 		this.observers = new ArrayList<>();
 		this.print = true;
 	}
 	
 	public void addState(String commandName, Replayable game) {
-		states.add(new State(commandName, game));
+		states.add(new GameState(commandName, game));
 	}
 	
 	public void startReplay() {
@@ -117,7 +117,7 @@ public class Replay implements Reportable {
 		JSONObject jo = new JSONObject();
 		JSONArray ja = new JSONArray();
 		
-		for (State s : states) {
+		for (GameState s : states) {
 			ja.put(s.report());
 		}
 		

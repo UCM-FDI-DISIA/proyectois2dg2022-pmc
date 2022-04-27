@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	
@@ -31,7 +31,7 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 	
 	@Override
-	public void onRegister(State status) {
+	public void onRegister(GameState status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -52,7 +52,7 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		changeStatus(state.getCommand());
 	}
 	
@@ -75,7 +75,7 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -85,6 +85,9 @@ public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onFirstPlay(GameState state) {}
 	
 
 }

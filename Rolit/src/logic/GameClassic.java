@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import replay.State;
+import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -29,24 +29,29 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
-	public void play(int x, int y) throws IllegalArgumentException {		
-		// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-		Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
-		this.board.addCubeInPos(newCube);
-		
-		this.board.update(newCube);
-		
-		//Comprobamos si la partida termina con este turno
-		this.finished = board.isBoardFull();
-		if (this.finished)
-			this.onGameFinished();
-		
-		// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-		if(!this.finished)
-			currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		
-		onTurnPlayed();
-		
+	public void play() throws IllegalArgumentException {
+		if (!this.pendingCubes.isEmpty()) {
+			// FIXME no puede ser la mejor forma de hacerlo
+			Cube c = this.pendingCubes.poll();
+			
+			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
+			Cube newCube = new Cube(c.getX(), c.getY(), players.get(currentPlayerIndex));
+			this.board.addCubeInPos(newCube);
+			
+			this.board.update(newCube);
+			
+			//Comprobamos si la partida termina con este turno
+			this.finished = board.isBoardFull();
+			if (this.finished)
+				this.onGameFinished();
+			
+			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+			if(!this.finished) {
+				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+				onTurnPlayed();
+			}			
+			this.executedTurn = true;
+		}		
 	}
 
 	@Override
@@ -67,8 +72,16 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
+	protected void onFirstPlay() {
+		GameState state = new GameState(this.copyMe());
+		for(RolitObserver o : observers) {
+			o.onFirstPlay(state);
+		}
+	}
+	
+	@Override
 	public void onTurnPlayed() {
-		State state = new State(this.getReplayable());
+		GameState state = new GameState(this.copyMe());
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(state);
 		}

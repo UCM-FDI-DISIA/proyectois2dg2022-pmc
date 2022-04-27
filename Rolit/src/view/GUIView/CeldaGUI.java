@@ -1,7 +1,7 @@
 package view.GUIView;
 
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import commands.Command;
+import commands.PlaceCubeCommand;
 import control.Controller;
 import logic.Board;
 import logic.Color;
@@ -27,7 +28,7 @@ public class CeldaGUI {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
-	private Controller ctrl;
+	private volatile Controller ctrl;
 	private Replay replay;
 	private String iconPath;
 	public static int SIDE_LENGTH;
@@ -47,9 +48,9 @@ public class CeldaGUI {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (!filled) {
-						String commandWords = "p " + Integer.toString(x) + " " + Integer.toString(y);
 						try {
-							ctrl.executeCommand(commandWords);
+							ctrl.executeCommand(new PlaceCubeCommand(x,y));
+							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
@@ -57,8 +58,6 @@ public class CeldaGUI {
 				}
 			});
 		}
-		
-		
 		
 		this.button.setEnabled(validButton);
 		this.validButton = validButton;
@@ -127,7 +126,7 @@ public class CeldaGUI {
 	public JButton getButton() {
 		return button;
 	}
-
+	
 	public void update(logic.Color newColor) {
 		if (this.validButton) {
 			this.iconPath = newColor.getPath();

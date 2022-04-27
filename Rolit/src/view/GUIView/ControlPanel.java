@@ -11,16 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JToolBar;
 
+import commands.SaveCommand;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 
 public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Controller ctrl;
+	private volatile Controller ctrl;
 	private Replay replay;
 	private JFileChooser fc;
 	private JButton saveFileBtn;
@@ -71,7 +72,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				try {
-					ctrl.executeCommand("s " + file.getPath());
+					ctrl.executeCommand(new SaveCommand(file.getPath()));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -87,11 +88,10 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 			replay.nextState();
 
 		}
-		
 	}
 
 	@Override
-	public void onRegister(State status) {}
+	public void onRegister(GameState status) {}
 
 	@Override
 	public void onError(String err) {
@@ -112,7 +112,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(GameState status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -124,7 +124,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -134,5 +134,8 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onFirstPlay(GameState state) {}
 
 }

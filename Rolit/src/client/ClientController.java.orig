@@ -49,10 +49,15 @@ public class ClientController extends Thread{
 			while(true){				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
 				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+<<<<<<< HEAD
 				if (JSONJuegoNuevo.getString("notification").equals("updateGraphics"))
 					clientRolit.updateGameFromServer(JSONJuegoNuevo);
 				else if (JSONJuegoNuevo.getString("notification").equals("chooseTeam"))
 					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
+=======
+				clientRolit.updateGameFromServer(JSONJuegoNuevo);
+				// FIXME esto no tiene que escribir
+>>>>>>> CPUPlayers
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			}
 		} catch (IOException e) {

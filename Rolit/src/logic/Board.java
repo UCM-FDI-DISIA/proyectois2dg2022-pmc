@@ -1,10 +1,8 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import control.Controller;
 import control.SaveLoadManager;
 import utils.Pair;
 import utils.StringUtils;
@@ -79,6 +77,7 @@ public class Board implements Reportable {
 		return false;
 		
 	}
+	
 	public void addCubeInPos(Cube c) throws IllegalArgumentException {
 		if (!this.tryToAddCube(c.getX(), c.getY()))
 			throw new IllegalArgumentException("non valid position for a cube");
@@ -183,14 +182,12 @@ public class Board implements Reportable {
 		
 		return str.toString();
 	}
-	
-	
 
 	private boolean isPositionInRange(int x, int y) {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
-	public boolean tryToAddCube(int x, int y) {
+	private boolean tryToAddCube(int x, int y) {
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
@@ -222,9 +219,4 @@ public class Board implements Reportable {
 		jo.put("cubes", jo1);
 		return jo;
 	}
-
-	public boolean[][] getShapeMatrix() {
-		return this.shapeMatrix;
-	}
-
 }

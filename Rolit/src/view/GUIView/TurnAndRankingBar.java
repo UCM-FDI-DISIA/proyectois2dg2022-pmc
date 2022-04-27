@@ -13,14 +13,14 @@ import javax.swing.JTable;
 import control.Controller;
 import logic.Color;
 import logic.Rival;
-import replay.State;
+import replay.GameState;
 
 public class TurnAndRankingBar extends JPanel implements RolitObserver {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Controller ctrl;
-	private State state;
+	private GameState state;
 	private JLabel msgLabel;
 	private JLabel colorLabel;
 	private JPanel rankingPanel;
@@ -30,7 +30,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	public static final int ROW_HEIGHT = 20;
 	public static final int COLUMN_WIDTH = 50;
 	
-	public TurnAndRankingBar(Controller ctrl, State state) {
+	public TurnAndRankingBar(Controller ctrl, GameState state) {
 		this.state = state;
 		this.ctrl = ctrl;
 		initGUI();
@@ -77,13 +77,13 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	}
 	
 	@Override
-	public void onTurnPlayed(State state) {	//TODO Si esto funciona dios existe
+	public void onTurnPlayed(GameState state) {	//TODO Si esto funciona dios existe
 		this.state = state;
 		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
 	}
 
 	@Override
-	public void onRegister(State state) {
+	public void onRegister(GameState state) {
 		this.state = state;
 		update(state.getFirstPlayerName(), Color.valueOfIgnoreCase(state.getFirstPlayerColorShortcut()));
 	}
@@ -95,7 +95,7 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onGameStatusChange(State status) {
+	public void onGameStatusChange(GameState status) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -105,5 +105,8 @@ public class TurnAndRankingBar extends JPanel implements RolitObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onFirstPlay(GameState state) {}
 
 }

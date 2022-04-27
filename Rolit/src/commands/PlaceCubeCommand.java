@@ -1,5 +1,6 @@
 package commands;
 
+import logic.Cube;
 import logic.Game;
 
 public class PlaceCubeCommand extends Command {
@@ -16,11 +17,17 @@ public class PlaceCubeCommand extends Command {
 	public PlaceCubeCommand() {
 		super(NAME, DETAILS, SHORTCUT, HELP);
 	}
+	
+	public PlaceCubeCommand(int x, int y) {
+		this();
+		this.x = x;
+		this.y = y;
+	}
 
 	@Override
 	public void execute(Game game) throws Exception {
-		game.play(x, y);
-		game.onStatusChange(String.format("%s %d % d", SHORTCUT, this.x, this.y));
+		// FIXME simplemente añadimos un cubo y el game sabra agregarle el jugador que este jugando
+		game.addCubeToQueue(new Cube(this.x, this.y, null));
 	}
 	
 	@Override

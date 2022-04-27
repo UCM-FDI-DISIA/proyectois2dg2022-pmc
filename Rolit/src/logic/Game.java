@@ -1,30 +1,32 @@
 package logic;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import replay.State;
+import replay.GameState;
 import view.GUIView.RolitObserver;
 
-public abstract class Game implements Replayable {
+public abstract class Game extends Thread implements Replayable {
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
 	protected int currentPlayerIndex;
 	private boolean exit;
-	protected List<RolitObserver> observers;
+	protected volatile List<RolitObserver> observers;
+	protected volatile Queue<Cube> pendingCubes;
+	protected boolean executedTurn = false;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
 		this.finished = game.finished;
-		this.players = game.players;
-		
-		this.board = new Board(game.board);
-		
+		this.players = game.players;		
+		this.board = new Board(game.board);		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
 	}
@@ -49,12 +51,26 @@ public abstract class Game implements Replayable {
 		}
 		
 		this.observers = new ArrayList<RolitObserver>();
+		// FIXME esto tiene que dar problemas a la hora de cargar seguro
+		this.pendingCubes = new ArrayDeque<>();
 	}
 	
-	public abstract void play(int x, int y) throws IllegalArgumentException;
-	public abstract String toString();
-	protected abstract Game copyMe();
+	@Override
+	public void run() {
+		this.onFirstPlay();
+		// FIXME en la depuración esto no llega a terminar nunca
+		while (!this.finished && !this.exit && !Thread.interrupted()) {
+			this.play();
+		}		
+		// FIXME mostrar el ranking
+	}
 	
+	// Este es el método que realmente sirve para hacer lo que sería un turno completo
+	public abstract void play() throws IllegalArgumentException;
+	public abstract String toString();
+	public abstract Game copyMe();
+	
+	// FIXME tiene que haber una forma de restringir esto seguro
 	public void setExit() {
 		this.exit = true;
 	}
@@ -90,53 +106,38 @@ public abstract class Game implements Replayable {
 
 	public void addObserver(RolitObserver o) {
 		this.observers.add(o);
+		// FIXME sospecho que solo sería necesario llamar al onRegister del que se acaba de registrar
 		this.onRegister();
 	}
-
+	
 	public void removeObserver(RolitObserver o) {
 		this.observers.remove(o);
 	}
 
-	protected abstract void onTurnPlayed();	//Cada modo de juego debe tener su propia implementación
+	protected abstract void onFirstPlay();
+	protected abstract void onTurnPlayed();	// Cada modo de juego debe tener su propia implementación
 	protected abstract void onGameFinished();
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(command, this.getReplayable()));
+			o.onGameStatusChange(new GameState(command, this.copyMe()));
 		}
 	}
 	
 	public void onStatusChange() {
 		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new State(this.getReplayable()));
+			o.onGameStatusChange(new GameState(this.copyMe()));
 		}
 	}
 
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
-			o.onRegister(new State(this.getReplayable()));
+			o.onRegister(new GameState(this.copyMe()));
 		}
 	}
 
 	protected void onError() {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	public Board getBoard() {
-		return this.board;
-	}
-	
-	public boolean[][] getShapeMatrix() {
-		return this.board.getShapeMatrix();
-	}
-	
-	public Replayable getReplayable() {
-		return this.copyMe();
-	}
-	
-	public List<Player> getPlayers() {
-		return Collections.unmodifiableList(players);
 	}
 
 	public void updateGameFromServer(List<RolitObserver> observerList) {
@@ -148,4 +149,16 @@ public abstract class Game implements Replayable {
 		return Collections.unmodifiableList(this.observers);
 	}
 	
+	public void addCubeToQueue(Cube c) {
+		this.pendingCubes.add(c);
+	}
+	
+	public boolean executedTurn() {
+		if(!this.executedTurn) return false;
+		else {
+			this.executedTurn = false;
+			return true;
+		}
+	}
+
 }

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,24 +20,29 @@ import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
 import org.json.JSONObject;
+
+import CPU.CPUPlayerView;
+import CPU.PlayerView;
 import client.Client;
 import control.Controller;
 import control.SaveLoadManager;
+import logic.Color;
 import logic.Rival;
 import replay.Replay;
-import replay.State;
+import replay.GameState;
 import server.Server;
 import server.ServerView.ServerWorker;
 
+// FIXME creo que no tiene mucho sentido que esta clase sea observadora
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
-
 	private static final long serialVersionUID = 1L;
+	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
 	
 	private Client clientRolit;
 	private Controller ctrl;
 	private Replay replay;
-	private State state;
+	private volatile GameState state;
 	private JPanel welcomePanel;
 	private JButton createGameButton;
 	private JButton loadGameButton;
@@ -45,23 +51,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton createServerButton;
 	private JButton joinServerButton;
 	private JFileChooser fileChooser;
-	private JPanel mainPanel;
 	private JPanel centerPanel;
+	private JPanel mainPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
 	
-	private boolean onlineGameStarted = false;
-	
-	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
+	private volatile boolean onlineGameStarted = false;	
 
 	public MainWindow(Controller ctrl) {
-		super("Rolit");
-		
-		this.clientRolit = new Client(this);
-		
+		super("Rolit");		
+		this.clientRolit = new Client(this);		
 		this.ctrl = ctrl;
-		this.ctrl.setClient(clientRolit);
-		
+		this.ctrl.setClient(clientRolit);		
 		initGUI();
 	}
 	
@@ -71,8 +72,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		welcomePanel = new JPanel(new FlowLayout());
 		this.setContentPane(welcomePanel);
 		
-		//Botones
-		
+		//Botones		
 		// Boton de juego nuevo
 		createGameButton = new JButton("Create new game");
 		createGameButton.setActionCommand(BUTTONS[0]);
@@ -120,6 +120,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
+				List<Pair<Color, Pair<Boolean, Integer>>> data = dialogNew.getPlayersData();
+				for(int i = 0; i < data.size(); i++) {	//TODO Cambiar para que sea como una clase Command y no tener que diferenciar casos
+					if(data.get(i).getSecond().getFirst())
+						new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond());
+					else
+						new PlayerView(data.get(i).getFirst(), this.ctrl);
+				}
 				this.initGame();
 			}
 			else {
@@ -170,26 +177,21 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 	}
 	
-	private void initGame() {
-		
+	private void initGame() {		
 		ctrl.addObserver(this);
-
+		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
 		
-		this.repaint();
-		
 		mainPanel = new JPanel(new BorderLayout());
-		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
-		
-		centerPanel = new JPanel(new GridLayout(1, 1));
+		this.setContentPane(mainPanel);
+	
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		boardPanel = new JPanel();
 		
-		centerPanel.add(gamePanel);
+		BoardGUI tablero = new BoardGUI(ctrl);
 		
-		BoardGUI tablero = new BoardGUI(ctrl, state);
-		
+		// TODO cambiar a ingles el cambiar tablero
 		tablero.crearTablero(boardPanel);
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
@@ -199,12 +201,19 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
+<<<<<<< HEAD
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
 				
+=======
+		mainPanel.add(gamePanel, BorderLayout.CENTER);
+		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
+		
+>>>>>>> CPUPlayers
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
-
+		
+		this.ctrl.startGame();
 		
 	}
 	
@@ -239,56 +248,53 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);
-		
-		
+		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);		
 		
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		
 	}
 	
-
-
 	@Override
 	public void onError(String err) {
 		
 	}
 
 	@Override
-	public void onTurnPlayed(State state) {
+	public void onFirstPlay(GameState state) {}
+	
+	@Override
+	public void onTurnPlayed(GameState state) {
 		this.state = state;
+		this.revalidate();
+		this.repaint();
 	}
 
 	public JSONObject getGameReport() {
 		return state.report().getJSONObject("game");
-		
 	}
 
 	public void updateGameFromServer(JSONObject JSONnewState) {
-
 		if(!onlineGameStarted) {
 			onlineGameStarted = true;
 			state = ctrl.createGame(JSONnewState);
 			initGame();
-		}
-			
+		}			
 		ctrl.updateGameFromServer(JSONnewState);
 	}
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
-	public void onRegister(State state) {
+	public void onRegister(GameState state) {
 		this.state = state;
 	}
 
 	@Override
-	public void onGameStatusChange(State state) {
+	public void onGameStatusChange(GameState state) {
 		
 	}
 	
