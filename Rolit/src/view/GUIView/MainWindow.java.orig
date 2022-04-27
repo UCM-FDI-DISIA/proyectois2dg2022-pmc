@@ -240,7 +240,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
+<<<<<<< HEAD
 		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);		
+=======
+		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);
+>>>>>>> 154d267fbfb430a86172e7288f3df6afda3f5daa
 		
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
@@ -260,6 +264,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.state = state;
 		this.revalidate();
 		this.repaint();
+		// FIXME dice Leo que hay que quitarlo
+		this.pack();
 	}
 
 	public JSONObject getGameReport() {
