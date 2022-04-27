@@ -1,23 +1,26 @@
 package view.GUIView;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import javax.swing.Box;
+import javax.swing.Box.Filler;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
-
 import org.json.JSONObject;
 import client.Client;
 import control.Controller;
@@ -26,12 +29,14 @@ import logic.Rival;
 import replay.Replay;
 import replay.State;
 import server.Server;
-import server.ServerView.ServerWorker;
+import view.GUIView.RolitComponents.RolitButton;
+import view.GUIView.createGame.CreateGameDialog;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
 
 	private static final long serialVersionUID = 1L;
+	private static final String ICONS_PATH = "resources\\icons\\";
 	
 	private Client clientRolit;
 	private Controller ctrl;
@@ -49,6 +54,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel centerPanel;
 	private JPanel boardPanel;
 	private JPanel gamePanel;
+	private JLabel rolitLogo;
+	private JLabel optionMessage;
 	
 	private boolean onlineGameStarted = false;
 	
@@ -66,47 +73,81 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 	
 	private void initGUI() {
+		//Icono de la ventana
+		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
 		
 		//Panel de bienvenida
-		welcomePanel = new JPanel(new FlowLayout());
+		welcomePanel = new JPanel();
+		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.Y_AXIS));
+		welcomePanel.setBackground(Color.WHITE);
 		this.setContentPane(welcomePanel);
+		
+		//Logo
+		rolitLogo = new JLabel(resizeIcon(new ImageIcon(ICONS_PATH + "\\logoRolit.png"), 400, 150));
+		rolitLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		welcomePanel.add(rolitLogo);
 		
 		//Botones
 		
 		// Boton de juego nuevo
-		createGameButton = new JButton("Create new game");
+		createGameButton = new RolitButton("Create game");
 		createGameButton.setActionCommand(BUTTONS[0]);
+		createGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		createGameButton.addActionListener(this);
 		// Boton cargar juego
-		loadGameButton = new JButton("Load game");
+		loadGameButton = new RolitButton("Load game");
 		loadGameButton.setActionCommand(BUTTONS[1]);
+		loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loadGameButton.addActionListener(this);
 		// Boton borrar juego
-		deleteGameButton = new JButton("Delete game");
+		deleteGameButton = new RolitButton("Delete game");
 		deleteGameButton.setActionCommand(BUTTONS[2]);
+		deleteGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		deleteGameButton.addActionListener(this);
 		// Boton cargar replay
-		loadReplayButton = new JButton("Load replay");
+		loadReplayButton = new RolitButton("Load replay");
 		loadReplayButton.setActionCommand(BUTTONS[3]);
+		loadReplayButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loadReplayButton.addActionListener(this);
-		
-		createServerButton = new JButton("Create Server");
+		// Boton cargar server
+		createServerButton = new RolitButton("Create Server");
 		createServerButton.setActionCommand(BUTTONS[4]);
+		createServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		createServerButton.addActionListener(this);
-		
-		joinServerButton = new JButton("Join Server");
+		// Boton unirse a server
+		joinServerButton = new RolitButton("Join Server");
 		joinServerButton.setActionCommand(BUTTONS[5]);
+		joinServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinServerButton.addActionListener(this);
+		
+		//Labels
+		optionMessage = new JLabel("Choose an option:");
+		optionMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		//Separador del final (para que haya un hueco entre el ultimo compente y el final del jframe)
+		Box.Filler glue = (Filler) Box.createVerticalGlue();
+	    glue.changeShape(glue.getMinimumSize(),  new Dimension(0, 10), glue.getMaximumSize());
 
-		// Colocar los botones en el panel
-		welcomePanel.add(new JLabel("Choose an option"));
-		welcomePanel.add(createGameButton);
-		welcomePanel.add(loadGameButton);
-		welcomePanel.add(deleteGameButton);
-		welcomePanel.add(loadReplayButton);
-		welcomePanel.add(createServerButton);
-		welcomePanel.add(joinServerButton);
 				
+		// Colocar los botones en el panel
+	  
+		welcomePanel.add(optionMessage);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5))); //hueco en blanco
+		welcomePanel.add(createGameButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		welcomePanel.add(loadGameButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		welcomePanel.add(deleteGameButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		welcomePanel.add(loadReplayButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		welcomePanel.add(createServerButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		welcomePanel.add(joinServerButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
+		
+		
+	    welcomePanel.add(glue);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
@@ -178,6 +219,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			this.remove(welcomePanel);
 		
 		this.repaint();
+
 		
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
@@ -201,7 +243,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
-				
+						
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 
@@ -314,6 +356,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			clientRolit.sendChosenTeamToServer(ctfsd.getSelectedTeamJSON());
 			
 		}
+	}
+
+	
+	private Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+	    Image img = icon.getImage();  
+	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);  
+	    return new ImageIcon(resizedImage);
 	}
 
 }
