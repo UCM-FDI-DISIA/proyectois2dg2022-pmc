@@ -27,21 +27,17 @@ public class CreateGameDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private Controller ctrl;
-	private State state;
-	private int status;
+	protected Controller ctrl;
+	protected State state;
+	protected int status;
 
 	GameConfigurationPanel gameConfig;
-	CreatePlayersPanel playersPanel;
 	CreateTeamsPanel teamsPanel;
 
-	private JPanel mainPanel;
+	protected JPanel mainPanel;
 
-	private boolean onlineMode;
-
-	public CreateGameDialog(Frame parent, boolean onlineMode, Controller ctrl) {
+	public CreateGameDialog(Frame parent, Controller ctrl) {
 		super(parent, true);
-		this.onlineMode = onlineMode;
 		this.ctrl = ctrl;
 		initGUI();
 	}
@@ -61,15 +57,13 @@ public class CreateGameDialog extends JDialog {
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		gameConfig = new GameConfigurationPanel(this);
-		playersPanel = new CreatePlayersPanel(false);
 		teamsPanel = new CreateTeamsPanel();
 
 		mainPanel.add(gameConfig);
 		mainPanel.add(teamsPanel);
-		mainPanel.add(playersPanel); // por defecto se muestra para elegir jugadores en el modo GameClassic
 
 		setContentPane(mainPanel);
-		setMinimumSize(new Dimension(700, 150));
+		setMinimumSize(new Dimension(700, 80));
 
 		this.pack();
 	}
@@ -90,26 +84,13 @@ public class CreateGameDialog extends JDialog {
 
 		o.put("board", boardJSONObject);
 
-		if (!onlineMode) {
-			JSONArray players = playersPanel.getPlayersReport();
-			o.put("players", players);
-			o.put("turn", players.getJSONObject(0).getString("color"));
-		}
-
 		if (gameConfig.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 
 			JSONArray teamsJSONArray = new JSONArray();
 
 			for (int i = 0; i < teamsPanel.numTeams(); ++i) {
 				JSONObject aux = teamsPanel.getTeamReport(i);
-				aux.put("players", playersPanel.getPlayersFromTeam(i));
 				teamsJSONArray.put(aux);
-			}
-
-			if (!onlineMode) {
-				JSONArray players = playersPanel.getPlayersReport();
-				o.put("players", players);
-				o.put("turn", players.getJSONObject(0).getString("color"));
 			}
 
 			o.put("teams", teamsJSONArray);
@@ -120,54 +101,10 @@ public class CreateGameDialog extends JDialog {
 	}
 
 	void update(int numberPlayers, boolean isGameMode) {
-		playersPanel.update(numberPlayers, isGameMode);
 		teamsPanel.update(isGameMode);
 		mainPanel.repaint();
 
 		this.pack();
-	}
-
-	Pair<Boolean, String> checkIfCorrectArguments(boolean isTeamMode) {
-		HashSet<String> playerNames = playersPanel.getPlayersNames();
-		HashSet<Color> playerColors = playersPanel.getPlayersColors();
-		HashSet<String> teamNames = teamsPanel.getTeamNames();
-
-		Pair<Boolean, String> pair;
-
-		if (playerNames.size() < gameConfig.getPlayerSpinnerValue()) // e.d hay un elemento repetido
-		{
-			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated name.");
-			return pair;
-		}
-		if (playerColors.size() < gameConfig.getPlayerSpinnerValue()) // e.d hay un elemento repetido
-		{
-			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated color.");
-			return pair;
-		}
-		if (isTeamMode) { // e.d estamos en el modo por equipos
-			if (teamNames.size() < teamsPanel.numTeams()) // e.d hay un elemento repetido
-			{
-				pair = new Pair<Boolean, String>(false, "ERROR: At least one team has a repeated name.");
-				return pair;
-			}
-
-			// comprobamos que en todos los equipos hay por
-			// lo menos un jugador
-	
-			boolean encontrado = false;
-			for (int j = 0; j < teamsPanel.numTeams() && !encontrado; ++j) {
-				if (!playersPanel.existPlayerAtTeam(j))
-					encontrado = true;
-			}
-			if (encontrado) {
-				pair = new Pair<Boolean, String>(false, "ERROR: At least one team is empty.");
-				return pair;
-			}
-		}
-
-		pair = new Pair<Boolean, String>(true, "");
-		return pair;
-
 	}
 
 	public State getState() {
@@ -188,5 +125,11 @@ public class CreateGameDialog extends JDialog {
 	int getPlayerSpinnerValue() {
 		return gameConfig.getPlayerSpinnerValue();
 	}
+	
+	Pair<Boolean, String> checkIfCorrectArguments(boolean isTeamMode) {
+		
+		return new Pair<Boolean, String>(true, null);
+	}
+	
 
 }

@@ -1,5 +1,6 @@
 package view.GUIView.createGame;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +38,7 @@ public class GameConfigurationPanel extends RolitPanel {
 	
 	private void initGUI() {
 		this.setLayout(new FlowLayout());
+		this.setMinimumSize(new Dimension(700, 20));
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		
 		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
@@ -74,20 +76,10 @@ public class GameConfigurationPanel extends RolitPanel {
 		this.add(cancelButton);
 	}
 	
-	
 	GameConfigurationPanel(CreateGameDialog cgdialog){
 		initGUI();
-		playersSpinner.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				isGameMode = getGameMode().equals(GameTeamsBuilder.TYPE);
-				cgdialog.update(getNumPlayers(), isGameMode);
-				update(isGameMode);			}
-			
-		});
 		
-		teamsSpinner.addChangeListener(new ChangeListener() {
+		playersSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
@@ -105,7 +97,7 @@ public class GameConfigurationPanel extends RolitPanel {
 			}
 			
 		});
-
+		
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -128,12 +120,10 @@ public class GameConfigurationPanel extends RolitPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isGameMode = getGameMode().equals(GameTeamsBuilder.TYPE);
-				cgdialog.update(getNumPlayers(), isGameMode);
 				update(isGameMode);
+				cgdialog.update(getNumPlayers(), isGameMode);
 			}
 		});
-
-		
 	}
 	
 	void update(boolean isGameMode) {

@@ -3,6 +3,8 @@ package view.GUIView;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,8 +15,9 @@ import logic.Rival;
 import logic.Shape;
 import replay.Replay;
 import replay.State;
+import view.GUIView.RolitComponents.RolitPanel;
 
-public class BoardGUI implements RolitObserver, ReplayObserver {
+public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserver {
 
 	private int nFilas;
 	private int nColumnas;
@@ -42,8 +45,10 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], ctrl, sideButtonLength);
 			}
 		}
-
+		
 		this.ctrl.addObserver(this);
+		
+		initGUI();
 	
 	}
 	
@@ -81,10 +86,12 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 		return 0;
 	}
 	
-	public void crearTablero(JPanel panel) {
-		panel.removeAll();
+	public void initGUI() {
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setAlignmentX(CENTER_ALIGNMENT);
+		this.removeAll();
 		GridBagLayout gridbag = new GridBagLayout(); //Queremos que el tamaño del tablero sea fijo
-		panel.setLayout(gridbag);
+		this.setLayout(gridbag);
 		
 		for (int i = 0; i < nFilas; i++) {
 			
@@ -94,10 +101,10 @@ public class BoardGUI implements RolitObserver, ReplayObserver {
 			
 			for (int j = 0; j < nColumnas; j++) {
 				c.gridy = j;
-				panel.add(celdas[i][j].getButton(), c);
+				this.add(celdas[i][j].getButton(), c);
 			}
 		}
-		panel.revalidate();
+		this.revalidate();
 	}
 
 	public void update() {

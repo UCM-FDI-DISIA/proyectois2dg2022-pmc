@@ -28,9 +28,9 @@ import control.SaveLoadManager;
 import logic.Rival;
 import replay.Replay;
 import replay.State;
-import server.Server;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.createGame.CreateGameDialog;
+import view.GUIView.createGame.CreateGameWithPlayersDialog;
 
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
@@ -52,7 +52,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JFileChooser fileChooser;
 	private JPanel mainPanel;
 	private JPanel centerPanel;
-	private JPanel boardPanel;
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
@@ -75,6 +74,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private void initGUI() {
 		//Icono de la ventana
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
+		this.setLocationRelativeTo(null);
 		
 		//Panel de bienvenida
 		welcomePanel = new JPanel();
@@ -157,7 +157,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
 		case "NG":
-			CreateGameDialog dialogNew = new CreateGameDialog(MainWindow.this, false, ctrl);
+			CreateGameDialog dialogNew = new CreateGameWithPlayersDialog(MainWindow.this, ctrl);
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
@@ -193,10 +193,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			}
 			break;
 		case "CS":
-			CreateGameDialog dialogNewOnline = new CreateGameDialog(MainWindow.this, true, ctrl);
-			int statuscs = dialogNewOnline.open();
+			CreateGameDialog dialogCS = new CreateGameDialog(MainWindow.this, ctrl);
+			int statuscs = dialogCS.open();
 			if(statuscs == 1) {
-				new Server(dialogNewOnline.createJSONObjectGame());
+				//new Server(dialogNewOnline.createJSONObjectGame());
 			}
 				
 			break;
@@ -226,18 +226,14 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		centerPanel = new JPanel(new GridLayout(1, 1));
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
-		boardPanel = new JPanel();
-		
 		centerPanel.add(gamePanel);
 		
 		BoardGUI tablero = new BoardGUI(ctrl, state);
 		
-		tablero.crearTablero(boardPanel);
-		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
-		gamePanel.add(boardPanel, BorderLayout.CENTER);
+		gamePanel.add(tablero, BorderLayout.CENTER);
 		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
@@ -260,9 +256,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
 		
 		centerPanel = new JPanel(new GridLayout(1, 2));
-		boardPanel = new JPanel();
-		boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));
-		boardPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		//rankingPanel = new JPanel(new GridLayout());
@@ -270,13 +263,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		centerPanel.add(gamePanel);
 		//centerPanel.add(rankingPanel);
 		
-		BoardGUI tablero = new BoardGUI(replay);
-		tablero.crearTablero(boardPanel);
-		
+		BoardGUI tablero = new BoardGUI(replay);		
 		//TurnBar turnBar = new TurnBar(game);
 		
 		//gamePanel.add(turnBar, BorderLayout.PAGE_START);
-		gamePanel.add(boardPanel, BorderLayout.CENTER);
+		gamePanel.add(tablero, BorderLayout.CENTER);
 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
