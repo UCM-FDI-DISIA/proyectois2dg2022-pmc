@@ -86,6 +86,7 @@ public class MainBashWindow implements ConsoleWindow {
 				this.ctr.startReplay(SaveLoadManager.loadReplay());
 			}			
 		} while (repeatMenu);
+		ctr.startGame();
 		ConsoleWindow gameWindow = new PlayWindow(this.ctr);
 		gameWindow.open();		
 		return true;

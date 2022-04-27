@@ -19,6 +19,7 @@ public class Controller {
 	private boolean onlineMode = false;
 	
 	public Controller() {
+		
 	}
 	
 	public GameState createGame(JSONObject o) {
@@ -40,11 +41,11 @@ public class Controller {
 	}
 	
 	public void executeCommand(Command c) throws Exception {
-		if (onlineMode) {			
+		if (onlineMode) {
 			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
 				c.execute(game);
 				while(!game.executedTurn()) {
-					
+					//No se hace nada para esperar a que el modelo haga lo que le haga falta
 				}
 				clientRolit.updateGameToServer();
 			}			

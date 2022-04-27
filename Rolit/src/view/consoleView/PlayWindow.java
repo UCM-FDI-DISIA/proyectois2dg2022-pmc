@@ -2,8 +2,8 @@ package view.consoleView;
 
 import java.util.List;
 
+import commands.Command;
 import control.Controller;
-import logic.Color;
 import logic.Rival;
 import replay.GameState;
 import utils.StringUtils;
@@ -26,7 +26,9 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 			System.out.print(PROMPT);
 			String s = input.nextLine();
 			try {
-				ctr.executeCommand(s);
+				String[] args = s.trim().split(" ");
+				Command command = Command.getCommand(args);
+				ctr.executeCommand(command);
 			}
 			catch(Exception e) {
 				System.out.println(e.getMessage());
@@ -35,12 +37,12 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 		}
 		return true;
 	}
-
+	
 	@Override
 	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub		
+		System.out.println(state.toString());				
 	}
-
+	
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {
 		this.close = true;
@@ -49,7 +51,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 		for (int i = 0; i < rivals.size(); i++)
 			System.out.println(String.format("%d. %s: %s points", i+1, rivals.get(i).getName(), rivals.get(i).getScore()));
 	}
-
+	
 	@Override
 	public void onRegister(GameState states) {
 		System.out.println(states.toString());		
@@ -70,6 +72,12 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	public Object get() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void onFirstPlay(GameState state) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

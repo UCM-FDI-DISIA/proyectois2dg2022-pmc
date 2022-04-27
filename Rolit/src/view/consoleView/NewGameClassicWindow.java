@@ -22,9 +22,14 @@ public class NewGameClassicWindow extends NewGameWindow {
 		
 		for (int i = 0; i < this.nPlayers; ++i) {
 			boolean added = false;
+			
 			System.out.print("Player " + (i + 1) + ": ");
 			String name = input.nextLine();
-			 while (!added) {
+			if(name.endsWith(" AI")) {
+				name = name.substring(0, name.length() - 3);
+				//FIXME Continuar por aqui
+			}
+			while (!added) {
 				 System.out.println(this.availableColors(jPlayers));
 				 System.out.print(CHOOSE_COLOR);
 				 char c = input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER

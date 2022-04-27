@@ -6,6 +6,9 @@ import utils.Pair;
 
 public class GreedyStrategy extends MinimaxStrategy {
 	
+	public static final String NAME = "GREEDY";
+	public static final String DIFFICULTY = "MEDIUM";
+	
 	public GreedyStrategy(Color color) {
 		super(color);
 	}

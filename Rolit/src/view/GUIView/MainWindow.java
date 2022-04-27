@@ -32,6 +32,7 @@ import replay.Replay;
 import replay.GameState;
 import server.Server;
 import server.ServerView.ServerWorker;
+import utils.Pair;
 
 // FIXME creo que no tiene mucho sentido que esta clase sea observadora
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
@@ -201,15 +202,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
-<<<<<<< HEAD
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
-				
-=======
 		mainPanel.add(gamePanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(ctrl),BorderLayout.PAGE_END);
+		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
 		
->>>>>>> CPUPlayers
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		

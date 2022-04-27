@@ -1,8 +1,5 @@
 package logic;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -53,7 +50,7 @@ public class GameClassic extends Game {
 			this.executedTurn = true;
 		}		
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder bf = new StringBuilder();
@@ -92,27 +89,6 @@ public class GameClassic extends Game {
 		for (RolitObserver o : this.observers)
 			o.onGameFinished(this.players, "Players");		
 	}
-	
-	public static void main(String[] args) {		
-		Board b1 = new Board(Shape.SM);
-		Player p1 = new Player(Color.PURPLE, "Maria jose");
-		Player p2 = new Player(Color.BLUE, "paco");
-		Player p3 = new Player(Color.RED, "lucia la de cuenca");
-		List<Player> lp = new ArrayList<Player>();
-		lp.add(p1);
-		lp.add(p2);
-		lp.add(p3);
-		List<Cube> lc = new ArrayList<Cube>();
-		Cube c = new Cube(5, 7, p2);
-		Cube c2 = new Cube(5, 6, p1);
-		lc.add(c);
-		lc.add(c2);
-		Game game = new GameClassic(b1, lc, lp, Color.BLUE);
-		game.play(5, 8);
-		String s = game.report().toString();
-		System.out.println(s);
-	}
-	
 	
 }
 

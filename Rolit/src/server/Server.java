@@ -125,14 +125,8 @@ public class Server {
 		else if (json.has("turn")) { //estamos ante un juego
 
 			for (int i = 0; i < clients.size(); ++i) {
-<<<<<<< HEAD
 				if (client != clients.get(i).getFirst())
 					clients.get(i).getFirst().updateGraphics(json);
-				
-=======
-				if (client != clients.get(i).getSecond())
-					clients.get(i).getSecond().updateGraphics(json);				
->>>>>>> CPUPlayers
 			}
 			
 		}

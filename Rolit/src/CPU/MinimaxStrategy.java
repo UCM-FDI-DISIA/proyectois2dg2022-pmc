@@ -8,6 +8,9 @@ import utils.Pair;
 
 public class MinimaxStrategy extends Strategy {
 
+	public static final String NAME = "MINIMAX";
+	public static final String DIFFICULTY = "HARD";
+	
 	protected int x;
 	protected int y;
 	public static final int MAX_DEPTH = 3;
@@ -64,6 +67,16 @@ public class MinimaxStrategy extends Strategy {
 			currentScore = simplifiedBoard.simulateMove(x, y, currentColor, 0);
 		}
 		return score;
+	}
+
+	@Override
+	protected String getName() {
+		return NAME;
+	}
+
+	@Override
+	protected String getDifficulty() {
+		return DIFFICULTY;
 	}
 
 }

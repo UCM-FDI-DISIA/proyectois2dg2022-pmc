@@ -9,7 +9,7 @@ import utils.Pair;
 public class CPUPlayerView extends PlayerView {
 	private Strategy strat;
 
-	public CPUPlayerView(Color color, Controller ctr, int dificulty) {
+	public CPUPlayerView(Color color, Controller ctr, int dificulty) {	//FIXME
 		super(color, ctr);
 		if (dificulty == 1)
 			this.strat = new RandomStrategy();

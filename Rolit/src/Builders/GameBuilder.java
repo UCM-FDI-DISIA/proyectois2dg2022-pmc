@@ -46,5 +46,4 @@ public abstract class GameBuilder {
 	protected abstract Game GenerateGame(JSONObject o);
 	protected abstract String getName();
 	
-	
 }

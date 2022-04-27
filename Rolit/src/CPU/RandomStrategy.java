@@ -8,6 +8,9 @@ import utils.Pair;
 
 public class RandomStrategy extends Strategy {
 
+	public static final String NAME = "RANDOM";
+	public static final String DIFFICULTY = "EASY";
+	
 	private Random random;
 	
 	public RandomStrategy() {
@@ -32,6 +35,16 @@ public class RandomStrategy extends Strategy {
 	@Override
 	public int simulate(Color currentColor, int depth) {
 		return 0;
+	}
+
+	@Override
+	protected String getName() {
+		return NAME;
+	}
+
+	@Override
+	protected String getDifficulty() {
+		return DIFFICULTY;
 	}
 
 	
