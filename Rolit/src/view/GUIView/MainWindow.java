@@ -28,6 +28,7 @@ import control.SaveLoadManager;
 import logic.Rival;
 import replay.Replay;
 import replay.State;
+import server.Server;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.createGame.CreateGameDialog;
 import view.GUIView.createGame.CreateGameWithPlayersDialog;
@@ -74,7 +75,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private void initGUI() {
 		//Icono de la ventana
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
-		this.setLocationRelativeTo(null);
 		
 		//Panel de bienvenida
 		welcomePanel = new JPanel();
@@ -151,8 +151,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
@@ -196,7 +199,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			CreateGameDialog dialogCS = new CreateGameDialog(MainWindow.this, ctrl);
 			int statuscs = dialogCS.open();
 			if(statuscs == 1) {
-				//new Server(dialogNewOnline.createJSONObjectGame());
+				new Server(dialogCS.createJSONObjectGame());
 			}
 				
 			break;
@@ -242,7 +245,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 						
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
-
+		this.setLocationRelativeTo(null);
 		
 	}
 	

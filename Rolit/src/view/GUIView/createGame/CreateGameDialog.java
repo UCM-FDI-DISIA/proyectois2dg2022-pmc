@@ -83,7 +83,7 @@ public class CreateGameDialog extends JDialog {
 		boardJSONObject.put("cubes", new JSONArray());
 
 		o.put("board", boardJSONObject);
-
+		
 		if (gameConfig.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 
 			JSONArray teamsJSONArray = new JSONArray();
@@ -116,9 +116,8 @@ public class CreateGameDialog extends JDialog {
 		this.setVisible(false);
 	}
 
-	void generateGame() {
+	void okAction() {
 		status = 1;
-		state = ctrl.createGame(createJSONObjectGame());
 		this.setVisible(false);
 	}
 

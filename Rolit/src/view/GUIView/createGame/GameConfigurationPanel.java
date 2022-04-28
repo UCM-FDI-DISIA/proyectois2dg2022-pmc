@@ -32,6 +32,8 @@ public class GameConfigurationPanel extends RolitPanel {
 	private JSpinner playersSpinner;
 	private JSpinner teamsSpinner;
 	private JLabel numberOfTeamsLabel;
+	private JLabel numberOfPlayersLabel;
+	private JLabel shapeLabel;
 	private JButton cancelButton;
 	private JButton okButton;
 	private boolean isGameMode;
@@ -57,19 +59,19 @@ public class GameConfigurationPanel extends RolitPanel {
 		((JSpinner.DefaultEditor) teamsSpinner.getEditor()).getTextField().setEditable(false);
 		teamsSpinner.setVisible(false);
 		
-		this.setLayout(new FlowLayout());
-		this.setAlignmentX(CENTER_ALIGNMENT);
+		numberOfPlayersLabel = new JLabel("Number of players: ");
+		numberOfTeamsLabel = new JLabel("Number of teams: ");
+		shapeLabel = new JLabel("Shape: ");
+		numberOfTeamsLabel.setVisible(false);
 		
 		cancelButton = new RolitButton("Cancel", 1);
 		okButton = new RolitButton("OK", 1);
 		
 		this.add(gameModeCombo);
+		this.add(shapeLabel);
 		this.add(shapesCombo);
-		this.add(new JLabel("Number of players: "));
+		this.add(numberOfPlayersLabel);
 		this.add(playersSpinner);
-		
-		numberOfTeamsLabel = new JLabel("Number of teams: ");
-		numberOfTeamsLabel.setVisible(false);
 		this.add(numberOfTeamsLabel);
 		this.add(teamsSpinner);
 		this.add(okButton);
@@ -107,7 +109,7 @@ public class GameConfigurationPanel extends RolitPanel {
 				pair = cgdialog.checkIfCorrectArguments(isGameMode);
 			
 				if (pair.getFirst()) {
-					cgdialog.generateGame();
+					cgdialog.okAction();
 				}
 				else {
 					

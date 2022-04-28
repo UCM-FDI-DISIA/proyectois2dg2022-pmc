@@ -3,9 +3,7 @@ package view.GUIView;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
-
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import control.Controller;
@@ -18,7 +16,7 @@ import replay.State;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserver {
-
+	private static final long serialVersionUID = 1L;
 	private int nFilas;
 	private int nColumnas;
 	private CeldaGUI[][] celdas;

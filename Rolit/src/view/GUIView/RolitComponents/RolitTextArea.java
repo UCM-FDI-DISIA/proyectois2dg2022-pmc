@@ -1,5 +1,6 @@
 package view.GUIView.RolitComponents;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
@@ -13,8 +14,8 @@ public class RolitTextArea extends JTextArea {
 	private static final Color BLUE_ROLIT = new Color(0, 67, 152);
 
 	public RolitTextArea(){
-		Border innerBorder = this.getBorder();
-		Border outerBorder = BorderFactory.createLineBorder(BLUE_ROLIT, 1);
-		this.setBorder(new CompoundBorder(outerBorder, innerBorder));
+		   Border blueLineBorder=  BorderFactory.createStrokeBorder(new BasicStroke());
+	        Border emptyBorder = BorderFactory.createEmptyBorder(this.getBorder().getBorderInsets(this).top, this.getBorder().getBorderInsets(this).left, this.getBorder().getBorderInsets(this).bottom, this.getBorder().getBorderInsets(this).right);
+		    this.setBorder(BorderFactory.createCompoundBorder( blueLineBorder, emptyBorder));
 	}
 }

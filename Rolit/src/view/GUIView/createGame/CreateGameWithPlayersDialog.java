@@ -112,7 +112,7 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 	}
 	
 	@Override
-	void generateGame() {
+	void okAction() {
 		status = 1;
 		state = ctrl.createGame(createJSONObjectGame());
 		this.setVisible(false);

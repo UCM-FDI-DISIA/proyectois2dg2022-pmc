@@ -1,12 +1,11 @@
 package view.GUIView.RolitComponents;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 
 public class RolitButton extends JButton {
 
@@ -18,7 +17,6 @@ public class RolitButton extends JButton {
 	private static final int PREFERRED_HEIGHT = 50;
 	private static final int PREFERRED_BORDER = 2;
 
-
 	public RolitButton(String text){
 		this(text, new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT));
 	}
@@ -28,18 +26,23 @@ public class RolitButton extends JButton {
 
 	}
 	
-	public RolitButton(String text, Dimension d, int borderWidth){
+	public RolitButton(String text, Dimension d, int thickness){
 		this.setBackground(Color.WHITE);
 		this.setText(text);
 		this.setMaximumSize(d);
 		this.setSize(d);
-		Border innerBorder = this.getBorder();
-		Border outerBorder = BorderFactory.createLineBorder(BLUE_ROLIT, borderWidth);
-		this.setBorder(new CompoundBorder(outerBorder, innerBorder));
+		this.setOpaque(false);
+        this.setFocusPainted(false);
+        //this.setForeground(BLUE_ROLIT);
+        
+       // Border blueLineBorder=  BorderFactory.createStrokeBorder(new BasicStroke());
+        Border blueLineBorder=  BorderFactory.createLineBorder(BLUE_ROLIT, thickness);
+        Border emptyBorder = BorderFactory.createEmptyBorder(this.getBorder().getBorderInsets(this).top, this.getBorder().getBorderInsets(this).left, this.getBorder().getBorderInsets(this).bottom, this.getBorder().getBorderInsets(this).right);
+	    this.setBorder(BorderFactory.createCompoundBorder( blueLineBorder, emptyBorder));
 	}
 	
 	
-	public RolitButton(String text, int borderWidth){
-		this(text, new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT), borderWidth);
+	public RolitButton(String text, int thickness){
+		this(text, new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT), thickness);
 	}
 }

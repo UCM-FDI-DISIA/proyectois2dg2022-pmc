@@ -2,13 +2,13 @@ package view.GUIView;
 
 import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
 import replay.State;
+import view.GUIView.RolitComponents.RolitPanel;
 
-public class StatusBar extends JPanel implements RolitObserver, ReplayObserver {
+public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserver {
 	
 	private static final long serialVersionUID = 1L;
 	

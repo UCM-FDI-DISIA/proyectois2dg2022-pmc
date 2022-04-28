@@ -14,8 +14,9 @@ import control.Controller;
 import logic.Color;
 import logic.Rival;
 import replay.State;
+import view.GUIView.RolitComponents.RolitPanel;
 
-public class TurnAndRankingBar extends JPanel implements RolitObserver {
+public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 
 	private static final long serialVersionUID = 1L;
 	

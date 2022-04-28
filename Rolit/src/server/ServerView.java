@@ -1,5 +1,6 @@
 package server;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -7,21 +8,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
 import org.json.JSONObject;
 
+import view.GUIView.RolitComponents.RolitButton;
+import view.GUIView.RolitComponents.RolitPanel;
+import view.GUIView.RolitComponents.RolitTextArea;
+import view.GUIView.RolitComponents.RolitTextField;
+
 
 public class ServerView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static final String ICONS_PATH = "resources\\icons\\";
 
 	
 	private JPanel thePanel;
@@ -33,12 +42,14 @@ public class ServerView extends JFrame {
 	protected int port;
 
 	public ServerView(Server server) {
+		this.setTitle("Server Set-Up");
+		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
 		this.server = server;
 		setSize(400,400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		thePanel = new JPanel();
+		thePanel = new RolitPanel();
 		thePanel.setLayout(new GridBagLayout());
 
 		ipLabel = new JLabel("Server IP: " + server.getIp());
@@ -47,13 +58,13 @@ public class ServerView extends JFrame {
 		portLabel = new JLabel("Insert desired host port (9001-65500): ");
 		addComp(thePanel, portLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		portField = new JTextField(5);
-		addComp(thePanel, portField, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		portField = new RolitTextField(5);
+		addComp(thePanel, portField, 1, 1, 100, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		startButton = new JButton("Start server");
+		startButton = new RolitButton("Start server");
 		addComp(thePanel, startButton, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		stopButton = new JButton("Stop server");
+		stopButton = new RolitButton("Stop server");
 		
 		
 		startButton.addActionListener(new ActionListener() {

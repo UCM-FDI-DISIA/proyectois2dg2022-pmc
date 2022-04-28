@@ -1,24 +1,13 @@
 package view.GUIView;
 
 import replay.Replay;
-import replay.State;
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
-import commands.Command;
 import control.Controller;
-import logic.Board;
-import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.Rival;
 
 public class CeldaGUI {
 
@@ -27,8 +16,6 @@ public class CeldaGUI {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
-	private Controller ctrl;
-	private Replay replay;
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
@@ -36,7 +23,6 @@ public class CeldaGUI {
 	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
 		CeldaGUI.SIDE_LENGTH = sideLength;
-		this.ctrl = ctrl;		
 		this.x = x;
 		this.y = y;
 		this.validButton = validButton;
@@ -81,7 +67,6 @@ public class CeldaGUI {
 		CeldaGUI.SIDE_LENGTH = sideLength;
 		this.x = x;
 		this.y = y;
-		this.replay = replay;
 		this.validButton = validButton;
 		this.filled = false;
 		this.button = new JButton();
