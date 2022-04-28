@@ -12,8 +12,12 @@ import logic.Color;
 import logic.Rival;
 import logic.Shape;
 import replay.Replay;
+<<<<<<< HEAD
 import replay.GameState;
+=======
+import replay.State;
 import view.GUIView.RolitComponents.RolitPanel;
+>>>>>>> iconosGUI
 
 public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserver {
 	private static final long serialVersionUID = 1L;

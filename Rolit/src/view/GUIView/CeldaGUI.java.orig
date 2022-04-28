@@ -1,17 +1,23 @@
 package view.GUIView;
 
 import replay.Replay;
+<<<<<<< HEAD
 import replay.GameState;
 
+=======
+>>>>>>> iconosGUI
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+<<<<<<< HEAD
 
 import commands.Command;
 import commands.PlaceCubeCommand;
+=======
+>>>>>>> iconosGUI
 import control.Controller;
 
 public class CeldaGUI {
@@ -21,8 +27,11 @@ public class CeldaGUI {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
+<<<<<<< HEAD
 	private volatile Controller ctrl;
 	private Replay replay;
+=======
+>>>>>>> iconosGUI
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";

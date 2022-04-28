@@ -14,7 +14,10 @@ import logic.Shape;
 
 
 public class BoardRenderer extends DefaultListCellRenderer {
-    private Map<Shape, ImageIcon> iconMap = new HashMap<>();
+
+	private static final long serialVersionUID = 1L;
+	
+	private Map<Shape, ImageIcon> iconMap = new HashMap<>();
     private java.awt.Color background = new java.awt.Color(0, 100, 255, 15);
     private java.awt.Color defaultBackground = (java.awt.Color) UIManager.get("List.background");
     

@@ -21,9 +21,18 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import logic.Color;
+import view.GUIView.RolitComponents.RolitComboBox;
+import view.GUIView.RolitComponents.RolitPanel;
+import view.GUIView.RolitComponents.RolitTextArea;
+import view.GUIView.RolitComponents.RolitTextField;
 
 
 public class JoinServerDialog extends JDialog {
+<<<<<<< HEAD
+=======
+
+	private static final long serialVersionUID = 1L;
+>>>>>>> iconosGUI
 	
 	private JPanel connectPanel;
 	private int status = 0;
@@ -43,16 +52,15 @@ public class JoinServerDialog extends JDialog {
 		
 	}
 	
+	@SuppressWarnings("serial")
 	private void initGUI() {
 
 		setSize(300,400);
 
-		connectPanel = new JPanel();
+		connectPanel = new RolitPanel();
 		connectPanel.setLayout(new GridBagLayout());
 		
-		JPanel playerPanel = new JPanel();
-		
-		nameTextArea = new JTextArea();
+		nameTextArea = new RolitTextArea();
 		nameTextArea.setDocument(new PlainDocument() {
 		    @Override
 		    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
@@ -66,27 +74,27 @@ public class JoinServerDialog extends JDialog {
 		nameTextArea.setEditable(true);
 		nameTextArea.setLineWrap(true);
 		nameTextArea.setWrapStyleWord(true);
-		colorComboBox = new JComboBox<Color>();
+		colorComboBox = new RolitComboBox<Color>();
 		colorComboBox.setRenderer(new ColorRenderer());
-		playerPanel.add(new JLabel("Name: "));
-		playerPanel.add(nameTextArea);
-		playerPanel.add(new JLabel("Color: "));
 		
 		for(Color color : Color.values()) {
 			colorComboBox.addItem(color);
 		}
-		playerPanel.add(colorComboBox);
 		
-		addComp(connectPanel, playerPanel, 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
-		
+		//addComp(connectPanel, playerPanel, 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, new JLabel("Name: "), 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, nameTextArea, 1, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, new JLabel("Color: "), 2, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+		addComp(connectPanel, colorComboBox, 3, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
+
 		
 		JLabel ipLabel = new JLabel("IP-Address:");
-		JTextField ipField = new JTextField(10);
+		JTextField ipField = new RolitTextField(10);
 		addComp(connectPanel, ipLabel, 0, 1, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, ipField, 1, 1, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 
 		JLabel portLabel = new JLabel("Port:");
-		JTextField portField = new JTextField(10);
+		JTextField portField = new RolitTextField(10);
 		addComp(connectPanel, portLabel, 0, 2, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, portField, 1, 2, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 
@@ -111,13 +119,7 @@ public class JoinServerDialog extends JDialog {
 		});
 		addComp(connectPanel, connect, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		add(connectPanel);
-<<<<<<< HEAD
-		pack();
-
-		
-=======
 		pack();		
->>>>>>> CPUPlayers
 	}
 	
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){

@@ -13,8 +13,12 @@ import javax.swing.JTable;
 import control.Controller;
 import logic.Color;
 import logic.Rival;
+<<<<<<< HEAD
 import replay.GameState;
+=======
+import replay.State;
 import view.GUIView.RolitComponents.RolitPanel;
+>>>>>>> iconosGUI
 
 public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 

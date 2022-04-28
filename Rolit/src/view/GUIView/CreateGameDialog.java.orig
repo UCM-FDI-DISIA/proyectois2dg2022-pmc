@@ -95,13 +95,7 @@ public class CreateGameDialog extends JDialog {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-<<<<<<< HEAD
 		String[] gameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
-=======
-		// FIXME hay un método de esto en la factoría, se puede cambiar para que devuelva un array y así se pueda usar aquí, pero esto es sucio
-		String[] localGameModes = {GameClassicBuilder.TYPE, GameTeamsBuilder.TYPE};
-		String[] onlineGameModes = {GameClassicBuilder.TYPE};
->>>>>>> CPUPlayers
 
 		gameModeCombo = new JComboBox<String>(gameModes);
 		

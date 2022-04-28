@@ -5,8 +5,12 @@ import javax.swing.JLabel;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
+<<<<<<< HEAD
 import replay.GameState;
+=======
+import replay.State;
 import view.GUIView.RolitComponents.RolitPanel;
+>>>>>>> iconosGUI
 
 public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserver {
 	

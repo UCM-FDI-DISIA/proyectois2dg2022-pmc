@@ -29,10 +29,14 @@ import view.GUIView.RolitComponents.RolitTextField;
 
 public class ServerView extends JFrame {
 
+<<<<<<< HEAD
+	private static final long serialVersionUID = 1L;	
+=======
 	private static final long serialVersionUID = 1L;
 	private static final String ICONS_PATH = "resources\\icons\\";
 
 	
+>>>>>>> iconosGUI
 	private JPanel thePanel;
 	private JLabel ipLabel, portLabel;
 	private JTextField portField;
