@@ -26,12 +26,13 @@ public abstract class Strategy {
 	public static String availableStrategies() {
 		StringBuilder str = new StringBuilder();
 		for (Strategy s : strategies) {
+			str.append(String.format("%s strategy: %s difficulty%n", s.getName(), s.getDifficulty()));
 			str.append(" " + s.getName());
 		}
 		str.append(": ");
 		return str.toString();
 	}
 	
-	protected abstract String getName();
-	protected abstract String getDifficulty();
+	public abstract String getName();
+	public abstract String getDifficulty();
 }

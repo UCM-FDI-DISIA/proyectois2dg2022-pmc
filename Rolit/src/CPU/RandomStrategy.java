@@ -38,12 +38,12 @@ public class RandomStrategy extends Strategy {
 	}
 
 	@Override
-	protected String getName() {
+	public String getName() {
 		return NAME;
 	}
 
 	@Override
-	protected String getDifficulty() {
+	public String getDifficulty() {
 		return DIFFICULTY;
 	}
 

@@ -2,6 +2,7 @@ package view.consoleView;
 
 import org.json.JSONArray;
 
+import CPU.Strategy;
 import logic.Color;
 
 public class NewGameClassicWindow extends NewGameWindow {
@@ -27,7 +28,10 @@ public class NewGameClassicWindow extends NewGameWindow {
 			String name = input.nextLine();
 			if(name.endsWith(" AI")) {
 				name = name.substring(0, name.length() - 3);
-				//FIXME Continuar por aqui
+				System.out.println(CHOOSE_AI_DIFFICULTY_MSG);
+				System.out.print(Strategy.availableStrategies());
+				String strat = input.nextLine();
+				//FIXME Seguir por aquí
 			}
 			while (!added) {
 				 System.out.println(this.availableColors(jPlayers));

@@ -15,9 +15,9 @@ public class NewGameWindow implements ConsoleWindow {
 	private static String AVAILABLE_MODES_MSG = "Choose game mode between" + GameBuilder.availableModes();
 	private static final String BOARD_MSG = "Choose a board shape. ";
 	private static final String BOARD_ERROR = "ERROR: Not found such shape. ";
-	protected static final String NAME_PLAYERS = "Name the players (if you want a player to be an AI, end the name with AI (i.e. Dani AI): ";
+	protected static final String NAME_PLAYERS = "Name the players (if you want a player to be an AI, end the name with AI (i.e. Mark AI): ";
 	protected static final String CHOOSE_COLOR = "Choose a color shortcut: ";
-	protected static final String CHOOSE_AI_DIFFICULTY = "Choose the AI difficulty: ";
+	protected static final String CHOOSE_AI_DIFFICULTY_MSG = "Choose the AI difficulty: ";
 	
 	private static final String TYPE = "Game";
 	private	static NewGameWindow[] everyGameWindows = { new NewGameClassicWindow(), new NewGameTeamsWindow() };
