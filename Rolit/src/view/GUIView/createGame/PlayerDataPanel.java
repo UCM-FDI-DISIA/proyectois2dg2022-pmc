@@ -1,7 +1,10 @@
 package view.GUIView.createGame;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -11,6 +14,7 @@ import javax.swing.text.PlainDocument;
 
 import org.json.JSONObject;
 
+import CPU.Strategy;
 import logic.Color;
 import view.GUIView.ColorRenderer;
 import view.GUIView.RolitComponents.RolitComboBox;
@@ -30,13 +34,16 @@ public class PlayerDataPanel extends RolitPanel {
 	private JLabel teamLabel;
 	private JComboBox<String> teamCombo;
 
+	private JLabel AILabel;
+	private JCheckBox AICheckBox;
+	private JComboBox<Strategy> AICombo;
+	
 	private boolean isTeamMode;
 
 	private static final int MAX_TEXT_LENGTH = 15;
 
-	
 	@SuppressWarnings("serial")
-	PlayerDataPanel(int number, boolean isTeamMode){
+	PlayerDataPanel(int number, boolean isTeamMode) {
 		this.setLayout(new FlowLayout());
 		this.isTeamMode = isTeamMode;
 		
@@ -72,7 +79,24 @@ public class PlayerDataPanel extends RolitPanel {
 		nameLabel = new JLabel("Name: ");
 		colorLabel = new JLabel("Color: ");
 		teamLabel = new JLabel("Team: ");
+		
+		//AI
+		AILabel = new JLabel("AI: ");
+		AICheckBox = new JCheckBox();
+		AICheckBox.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(AICheckBox.isSelected())
+					AICombo.setVisible(true);
+				else
+					AICombo.setVisible(false);
+			}
+			
+		});
+		AICombo = new JComboBox<Strategy>(Strategy.strategies);
+		AICombo.setVisible(false);
+		
 		this.add(playerLabel);
 		this.add(nameLabel);
 		this.add(nameTextArea);
@@ -80,6 +104,9 @@ public class PlayerDataPanel extends RolitPanel {
 		this.add(colorCombo);
 		this.add(teamLabel);
 		this.add(teamCombo);
+		this.add(AILabel);
+		this.add(AICheckBox);
+		this.add(AICombo);
 		
 		updateMode(isTeamMode);
 		
@@ -88,6 +115,10 @@ public class PlayerDataPanel extends RolitPanel {
 	
 	public String getPlayerName() {
 		return this.nameTextArea.getText();
+	}
+	
+	public Strategy getPlayerStrategy() {
+		return (Strategy) AICombo.getSelectedItem();
 	}
 	
 	public Color getPlayerColor() {
@@ -119,6 +150,8 @@ public class PlayerDataPanel extends RolitPanel {
 		player.put("name", getPlayerName());
 		player.put("color",  getPlayerColor().toString());
 		player.put("score", 0);
+		if(AICheckBox.isSelected() && getPlayerStrategy() != null)
+			player.put("strategy", getPlayerStrategy());
 		return player;
 	}
 }

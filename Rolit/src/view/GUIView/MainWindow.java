@@ -23,18 +23,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 import org.json.JSONObject;
 
-import CPU.CPUPlayerView;
-import CPU.PlayerView;
 import client.Client;
 import control.Controller;
 import control.SaveLoadManager;
-import logic.Color;
 import logic.Rival;
 import replay.Replay;
 import replay.GameState;
 import server.Server;
-import server.ServerView.ServerWorker;
-import utils.Pair;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.createGame.CreateGameDialog;
 import view.GUIView.createGame.CreateGameWithPlayersDialog;
@@ -58,6 +53,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton createServerButton;
 	private JButton joinServerButton;
 	private JFileChooser fileChooser;
+	private JPanel mainPanel;
 	private JPanel centerPanel;
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
@@ -155,8 +151,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setLocationRelativeTo(null);
 	}
 
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
@@ -165,13 +159,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
-				List<Pair<Color, Pair<Boolean, Integer>>> data = dialogNew.getPlayersData();
-				for(int i = 0; i < data.size(); i++) {	//TODO Cambiar para que sea como una clase Command y no tener que diferenciar casos
-					if(data.get(i).getSecond().getFirst())
-						new CPUPlayerView(data.get(i).getFirst(), this.ctrl, data.get(i).getSecond().getSecond());
-					else
-						new PlayerView(data.get(i).getFirst(), this.ctrl);
-				}
 				this.initGame();
 			}
 			else {
@@ -230,14 +217,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		this.repaint();
 
-		
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel);
 	
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		centerPanel.add(gamePanel);
 		
-		BoardGUI tablero = new BoardGUI(ctrl, state);
+		BoardGUI tablero = new BoardGUI(ctrl);
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		

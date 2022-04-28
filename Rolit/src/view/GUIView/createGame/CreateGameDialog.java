@@ -20,7 +20,7 @@ import Builders.GameTeamsBuilder;
 import control.Controller;
 import logic.Color;
 import logic.Player;
-import replay.State;
+import replay.GameState;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {
@@ -28,7 +28,7 @@ public class CreateGameDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	protected Controller ctrl;
-	protected State state;
+	protected GameState state;
 	protected int status;
 
 	GameConfigurationPanel gameConfig;
@@ -107,7 +107,7 @@ public class CreateGameDialog extends JDialog {
 		this.pack();
 	}
 
-	public State getState() {
+	public GameState getState() {
 		return this.state;
 	}
 

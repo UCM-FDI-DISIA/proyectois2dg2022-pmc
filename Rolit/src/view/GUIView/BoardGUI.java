@@ -43,15 +43,8 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], ctrl, sideButtonLength);
 			}
 		}
-<<<<<<< HEAD
-
-=======
-		
 		this.ctrl.addObserver(this);
-		
 		initGUI();
-	
->>>>>>> iconosGUI
 	}
 	
 	public BoardGUI(Replay replay) {
