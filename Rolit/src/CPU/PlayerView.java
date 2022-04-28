@@ -9,7 +9,7 @@ import replay.GameState;
 import view.GUIView.RolitObserver;
 
 public class PlayerView implements RolitObserver {
-	
+	//FIXME Deberiamos ponerle un nombre como PlayerObserver, puesto que a efectos practicos la clase no es una vista, no es un componente visual
 	protected Controller ctrl;
 	protected Color color;
 	

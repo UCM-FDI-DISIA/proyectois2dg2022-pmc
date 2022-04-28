@@ -1,6 +1,5 @@
 package CPU;
 
-import Builders.GameBuilder;
 import logic.Color;
 import replay.GameState;
 import utils.Pair;
@@ -35,4 +34,9 @@ public abstract class Strategy {
 	
 	public abstract String getName();
 	public abstract String getDifficulty();
+	
+	@Override
+	public String toString() {
+		return getName(); 
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import replay.GameState;
+import utils.Pair;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -46,6 +47,8 @@ public class GameClassic extends Game {
 			if(!this.finished) {
 				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 				onTurnPlayed();
+				Cube nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+				if(nextCube != null) this.addCubeToQueue(nextCube);
 			}			
 			this.executedTurn = true;
 		}		

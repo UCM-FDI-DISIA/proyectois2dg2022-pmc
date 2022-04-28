@@ -21,6 +21,7 @@ public abstract class Game extends Thread implements Replayable {
 	protected volatile List<RolitObserver> observers;
 	protected volatile Queue<Cube> pendingCubes;
 	protected boolean executedTurn = false;
+	protected TurnManager turnManager;
 	
 	// Constructor de copia para generar los estados de las replays
 	public Game(Game game) {
@@ -29,6 +30,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.board = new Board(game.board);		
 		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
+		this.turnManager = game.turnManager;
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -53,6 +55,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.observers = new ArrayList<RolitObserver>();
 		// FIXME esto tiene que dar problemas a la hora de cargar seguro
 		this.pendingCubes = new ArrayDeque<>();
+		this.turnManager = new TurnManager(list_players);
 	}
 	
 	@Override

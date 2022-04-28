@@ -2,27 +2,52 @@ package logic;
 
 import org.json.JSONObject;
 
-public class Player implements Comparable<Player>, Reportable, Rival {
-	protected static Player[] playerList = new Player[Color.size()];
-	protected Color color;
-	protected int score;
-	protected String name;
-	public static final String TYPE = "Player";
+import CPU.Strategy;
+import commands.PlaceCubeCommand;
+import replay.GameState;
+import utils.Pair;
 
+public class Player implements Comparable<Player>, Reportable, Rival {
+	private static Player[] playerList = new Player[Color.size()];
+	private Color color;
+	private int score;
+	private String name;
+	private Strategy strategy;
+	public static final String TYPE = "Player";
+	
 	// constructor habitual de un player por defecto
 	public Player(Color c, String name) {
+		this(c, name, null);
+	}	
+
+	public Player(Color c, String name, Strategy strat) {
 		this.color = c;
 		this.score = 0;
 		this.name = name;
 		Player.playerList[color.ordinal()] = this;
-	}	
-
+		this.strategy = strat;
+	}
+	
 	public Player(Player player) {
 		this.color = player.color;
 		this.score = player.score;
 		this.name = player.name;
+		this.strategy = player.strategy;	//FIXME Esto puede dar algun problema, no es seguro
 	}
-
+	
+	public Pair<Integer, Integer> play(GameState state) {
+		if(this.strategy != null) {
+			Pair<Integer, Integer> coor = this.strategy.calculateNextMove(color, state);
+			try {
+				if(coor != null)
+					return coor;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 	public Player(JSONObject json) {
 		this(Color.valueOfIgnoreCase(json.getString("color").charAt(0)), json.getString("name"));
 	}
