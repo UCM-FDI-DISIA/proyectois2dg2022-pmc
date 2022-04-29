@@ -21,8 +21,6 @@ public class CeldaGUI {
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
-	private volatile Controller ctrl;
-	private Replay replay;
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";

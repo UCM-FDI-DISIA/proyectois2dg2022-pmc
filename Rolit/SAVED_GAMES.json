@@ -1,1 +1,1 @@
-{"teams":[{"players":[{"color":"O","name":"dani"},{"color":"O","name":"dani"}],"name":"Team 1"},{"players":[],"name":"Team 2"}],"players":[{"color":"O","name":"dani"},{"color":"E","name":"leo"}],"turn":"ORANGE","type":"GameTeams","board":{"shape":"DM","cubes":[{"color":"O","pos":[5,5]},{"color":"E","pos":[5,6]},{"color":"O","pos":[6,5]},{"color":"E","pos":[6,6]}]}}
+{"players":[{"score":1,"color":"E","name":"Dani"},{"score":0,"color":"W","name":"Juandi"}],"turn":"W","type":"GameClassic","board":{"shape":"SS","cubes":[{"color":"E","pos":[1,1]}]}}

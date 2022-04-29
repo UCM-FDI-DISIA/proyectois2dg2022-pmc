@@ -16,7 +16,6 @@ public abstract class Game extends Thread implements Replayable {
 	protected boolean finished;
 	protected List<Player> players;
 	protected Board board;
-	protected int currentPlayerIndex;
 	private boolean exit;
 	protected volatile List<RolitObserver> observers;
 	protected volatile Queue<Cube> pendingCubes;
@@ -28,7 +27,6 @@ public abstract class Game extends Thread implements Replayable {
 		this.finished = game.finished;
 		this.players = game.players;		
 		this.board = new Board(game.board);		
-		this.currentPlayerIndex = game.currentPlayerIndex;
 		this.exit = game.exit;
 		this.turnManager = game.turnManager;
 	}
@@ -43,11 +41,9 @@ public abstract class Game extends Thread implements Replayable {
 		}
 		this.players = list_players;
 		int index = 0;
-		boolean found = false;
-		while (!found && index < players.size()) {
+		while (index < players.size()) {
 			if (players.get(index).getColor().equals(currentPlayerColor)) {
-				found = true;
-				this.currentPlayerIndex = index;
+				break;
 			}
 			index++;
 		}
@@ -55,16 +51,20 @@ public abstract class Game extends Thread implements Replayable {
 		this.observers = new ArrayList<RolitObserver>();
 		// FIXME esto tiene que dar problemas a la hora de cargar seguro
 		this.pendingCubes = new ArrayDeque<>();
-		this.turnManager = new TurnManager(list_players);
+		this.turnManager = new TurnManager(list_players, index);
 	}
 	
 	@Override
 	public void run() {
-		this.onFirstPlay();
 		// FIXME en la depuración esto no llega a terminar nunca
+		Cube nextCube;
+		 nextCube = this.turnManager.firstTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+		if(nextCube != null) this.addCubeToQueue(nextCube);
 		while (!this.finished && !this.exit && !Thread.interrupted()) {
 			this.play();
-		}		
+			nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+			if(nextCube != null) this.addCubeToQueue(nextCube);
+		}
 		// FIXME mostrar el ranking
 	}
 	
@@ -76,6 +76,7 @@ public abstract class Game extends Thread implements Replayable {
 	// FIXME tiene que haber una forma de restringir esto seguro
 	public void setExit() {
 		this.exit = true;
+		this.onGameExited();
 	}
 
 	public boolean exited() {
@@ -85,9 +86,9 @@ public abstract class Game extends Thread implements Replayable {
 	public boolean isFinished() {
 		return this.finished || this.exit;
 	}
-		
+	
 	public Player getCurrentPlayer() {
-		return this.players.get(currentPlayerIndex);
+		return this.players.get(turnManager.getCurrentPlayerIndex());
 	}
 	
 	@Override
@@ -102,7 +103,7 @@ public abstract class Game extends Thread implements Replayable {
 					
 		gameJSONObject.put("players", playerJSONArray);
 		
-		gameJSONObject.put("turn", this.players.get(currentPlayerIndex).getColor().toString());
+		gameJSONObject.put("turn", this.players.get(turnManager.getCurrentPlayerIndex()).getColor().toString());
 		
 		return gameJSONObject;
 	}
@@ -136,6 +137,12 @@ public abstract class Game extends Thread implements Replayable {
 	protected void onRegister() {
 		for(RolitObserver o : observers) {
 			o.onRegister(new GameState(this.copyMe()));
+		}
+	}
+	
+	public void onGameExited() {
+		for(RolitObserver o : observers) {
+			o.onGameExited();
 		}
 	}
 

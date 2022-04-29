@@ -12,6 +12,7 @@ public interface RolitObserver {
 	void onTurnPlayed(GameState state);
 	// Esto es para notificar el ranking cuando acaba la partida, la lista viene ya ordenada
 	void onGameFinished(List<? extends Rival> rivals, String rival);
+	void onGameExited();
 	// void onCommandIntroduced(Game game, Board board, Command command);
 	void onRegister(GameState state);
 	void onError(String err);

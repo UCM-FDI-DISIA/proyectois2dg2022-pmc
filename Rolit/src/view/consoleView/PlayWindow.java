@@ -80,4 +80,9 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 		
 	}
 
+	@Override
+	public void onGameExited() {
+		this.close = true;
+	}
+
 }

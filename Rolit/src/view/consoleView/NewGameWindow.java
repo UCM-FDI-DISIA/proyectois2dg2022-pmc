@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import Builders.GameBuilder;
+import Strategy.Strategy;
 import logic.Board;
 import logic.Color;
 import logic.Shape;
@@ -79,7 +80,7 @@ public class NewGameWindow implements ConsoleWindow {
 		return this.json;
 	}
 	
-	protected final JSONObject validatePlayer(JSONArray players, String name, Color color) {
+	protected final JSONObject validatePlayer(JSONArray players, String name, Color color, String strat) {
 		JSONObject jPlayer = new JSONObject();
 		if (color == null)
 			 throw new IllegalArgumentException("The shortcut does not match any color");
@@ -87,8 +88,14 @@ public class NewGameWindow implements ConsoleWindow {
 			if (players.getJSONObject(j).get("color").equals(color.toString()))
 			 	 throw new IllegalArgumentException("The selected color is not available");
 		}
+		Strategy s = null;
+		if(strat != null) {
+			s = Strategy.parse(color, strat);
+		}
 		jPlayer.put("name", name);
 		jPlayer.put("color", color.toString());
+		if(s != null)
+			jPlayer.put("strategy", s.toString());
 		return jPlayer;
 	}
 	

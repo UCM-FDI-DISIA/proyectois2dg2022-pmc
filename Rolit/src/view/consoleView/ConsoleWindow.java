@@ -9,6 +9,11 @@ public abstract interface ConsoleWindow {
 	public Object get();
 	public boolean open();
 	public default void clear() {
-		// TODO no borra
+		try {
+			Runtime.getRuntime().exec("cls");
+		}
+		catch(Exception e) {
+			
+		}
 	}
 }

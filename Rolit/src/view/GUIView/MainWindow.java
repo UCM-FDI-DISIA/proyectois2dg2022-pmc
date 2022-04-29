@@ -159,6 +159,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			int status1 = dialogNew.open();		
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
+				ctrl.createGame(dialogNew.createJSONObjectGame());
+				ctrl.startGame();
 				this.initGame();
 			}
 			else {
@@ -196,7 +198,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			if(statuscs == 1) {
 				new Server(dialogCS.createJSONObjectGame());
 			}
-				
 			break;
 		case "JS":
 			JoinServerDialog jsd = new JoinServerDialog(this);
@@ -221,7 +222,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setContentPane(mainPanel);
 	
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
-		centerPanel.add(gamePanel);
+		//centerPanel.add(gamePanel);
 		
 		BoardGUI tablero = new BoardGUI(ctrl);
 		
@@ -346,6 +347,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	    Image img = icon.getImage();  
 	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);  
 	    return new ImageIcon(resizedImage);
+	}
+
+	@Override
+	public void onGameExited() {
+		this.initGUI();
 	}
 
 }

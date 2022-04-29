@@ -1,12 +1,17 @@
 package view.consoleView;
 
+import java.util.List;
+
 import org.json.JSONObject;
 
 import control.Controller;
 import control.SaveLoadManager;
 import logic.Color;
+import logic.Rival;
+import replay.GameState;
+import view.GUIView.RolitObserver;
 
-public class MainBashWindow implements ConsoleWindow {
+public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	// Hay que hacer una clase contenedora de todas estas constantes
 	private final static String NEW_GAME = "New Game";
 	private final static String LOAD_GAME = "Load Game";
@@ -87,8 +92,33 @@ public class MainBashWindow implements ConsoleWindow {
 			}			
 		} while (repeatMenu);
 		ctr.startGame();
+		ctr.addObserver(this);
 		ConsoleWindow gameWindow = new PlayWindow(this.ctr);
 		gameWindow.open();		
 		return true;
 	}
+
+	@Override
+	public void onFirstPlay(GameState state) {}
+
+	@Override
+	public void onTurnPlayed(GameState state) {}
+
+	@Override
+	public void onGameFinished(List<? extends Rival> rivals, String rival) {}
+
+	@Override
+	public void onGameExited() {
+		this.clear();
+		this.menu();
+	}
+
+	@Override
+	public void onRegister(GameState state) {}
+
+	@Override
+	public void onError(String err) {}
+
+	@Override
+	public void onGameStatusChange(GameState state) {}
 }

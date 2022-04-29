@@ -1,4 +1,4 @@
-package CPU;
+package Strategy;
 
 import logic.Color;
 import replay.GameState;
@@ -30,6 +30,24 @@ public abstract class Strategy {
 		}
 		str.append(": ");
 		return str.toString();
+	}
+	
+	public static Strategy parse(Color color, String type) {
+		Strategy s = null;
+		switch(type) {
+		case "RANDOM":
+			s = new RandomStrategy();
+			break;
+		case "GREEDY":
+			s = new GreedyStrategy(color);
+			break;
+		case "MINIMAX":
+			s = new MinimaxStrategy(color);
+			break;
+		default:
+			throw new IllegalArgumentException("Not a parseable difficulty");
+		}
+		return s;
 	}
 	
 	public abstract String getName();

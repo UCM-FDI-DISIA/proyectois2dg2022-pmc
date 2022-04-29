@@ -63,11 +63,10 @@ public class Board implements Reportable {
 		orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); 
 	}
 	
-
 	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
-
+	
 	private boolean checkIfCubeIsInList(Pair<Integer, Integer> p) {
 		for (int i = 0; i < orderedCubeList.size(); ++i) {
 			Pair<Integer, Integer> iPair = orderedCubeList.get(i);
@@ -90,11 +89,11 @@ public class Board implements Reportable {
 		c.addPlayerScore();
 		this.numCubes++;
 	}
-
+	
 	public boolean isBoardFull() {
 		return numCubes == size * size;
 	}
-
+	
 	public void update(Cube newCube) {
 		int posX = newCube.getX(), posY = newCube.getY();
 		int newX, newY;

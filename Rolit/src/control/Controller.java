@@ -41,19 +41,17 @@ public class Controller {
 	}
 	
 	public void executeCommand(Command c) throws Exception {
-		if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
-			if (onlineMode) {
+		if (onlineMode) {
+			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
 				c.execute(game);
 				while(!game.executedTurn()) {
 					//No se hace nada para esperar a que el modelo haga lo que le haga falta
 				}
 				clientRolit.updateGameToServer();
 			}			
-			else
-				c.execute(game);
 		}
-		
-		
+		else	//FIXME hay que asegurar que el turno sea del jugador actual
+			c.execute(game);
 		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
 		replay.addState(c.toString(), game.copyMe());
 	}

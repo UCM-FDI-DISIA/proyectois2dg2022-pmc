@@ -33,7 +33,7 @@ public class GameClassic extends Game {
 			Cube c = this.pendingCubes.poll();
 			
 			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-			Cube newCube = new Cube(c.getX(), c.getY(), players.get(currentPlayerIndex));
+			Cube newCube = new Cube(c.getX(), c.getY(), players.get(turnManager.getCurrentPlayerIndex()));
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
@@ -45,12 +45,13 @@ public class GameClassic extends Game {
 			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			if(!this.finished) {
-				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 				onTurnPlayed();
+				this.executedTurn = true;
 				Cube nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 			}			
-			this.executedTurn = true;
+			else
+				this.executedTurn = true;
 		}		
 	}
 	

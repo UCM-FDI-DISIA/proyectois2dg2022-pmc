@@ -1,4 +1,4 @@
-package CPU;
+package Strategy;
 
 import logic.Color;
 import replay.GameState;

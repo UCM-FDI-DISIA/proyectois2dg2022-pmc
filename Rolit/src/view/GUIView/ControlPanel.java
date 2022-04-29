@@ -138,4 +138,7 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 	@Override
 	public void onFirstPlay(GameState state) {}
 
+	@Override
+	public void onGameExited() {}
+
 }

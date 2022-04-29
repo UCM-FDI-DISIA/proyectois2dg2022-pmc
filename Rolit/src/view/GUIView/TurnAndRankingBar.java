@@ -110,4 +110,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 	@Override
 	public void onFirstPlay(GameState state) {}
 
+	@Override
+	public void onGameExited() {}
+
 }

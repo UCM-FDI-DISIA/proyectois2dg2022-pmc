@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import Strategy.Strategy;
 import logic.Board;
 import logic.Color;
 import logic.Cube;
@@ -29,10 +30,16 @@ public class GameClassicBuilder extends GameBuilder {
 		
 		List<Player> list_players = new ArrayList<Player>();
 		JSONArray playersJSONArray = o.getJSONArray("players");
-		for (int i = 0; i < playersJSONArray.length(); ++i)
+		for (int i = 0; i < playersJSONArray.length(); ++i) {
+			Color c = Color.valueOfIgnoreCase(playersJSONArray.getJSONObject(i).getString("color").charAt(0));
+			Strategy s = null;
+			if(playersJSONArray.getJSONObject(i).has("strategy")) {
+				s = Strategy.parse(c, playersJSONArray.getJSONObject(i).getString("strategy"));
+			}
 			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
-			list_players.add(new Player(Color.valueOfIgnoreCase(playersJSONArray.getJSONObject(i).getString("color").charAt(0)),
-					playersJSONArray.getJSONObject(i).getString("name")));
+			list_players.add(new Player(c, playersJSONArray.getJSONObject(i).getString("name"), s));
+		}
+			
 
 		JSONObject boardJSONObject = o.getJSONObject("board");
 		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve

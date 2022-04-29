@@ -88,4 +88,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 		
 	}
 
+	@Override
+	public void onGameExited() {}
+
 }

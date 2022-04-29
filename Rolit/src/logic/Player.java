@@ -2,7 +2,7 @@ package logic;
 
 import org.json.JSONObject;
 
-import CPU.Strategy;
+import Strategy.Strategy;
 import commands.PlaceCubeCommand;
 import replay.GameState;
 import utils.Pair;
@@ -83,7 +83,8 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 		jo1.put("name", name);
 		jo1.put("score", score);
 		jo1.put("color", color.toString());
-		
+		if(strategy != null)
+			jo1.put("strategy", strategy.toString());
 		return jo1;
 	}
 

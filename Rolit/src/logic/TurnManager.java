@@ -10,8 +10,7 @@ public class TurnManager {
 	private int currentPlayer;
 	
 	public TurnManager(List<Player> players) {
-		this.players = players;
-		this.currentPlayer = 0;
+		this(players, 0);
 	}
 	
 	public TurnManager(List<Player> players, int currentPlayer) {
@@ -19,12 +18,20 @@ public class TurnManager {
 		this.currentPlayer = currentPlayer;
 	}
 	
+	public Cube firstTurn(GameState state) {
+		return this.nextTurn(state);
+	}
+	
 	public Cube nextTurn(GameState state) {
-		Pair<Integer, Integer> coords = players.get((currentPlayer + 1) % players.size()).play(state);
+		Pair<Integer, Integer> coords = players.get(currentPlayer).play(state);
 		Cube newCube = null;
 		if(coords != null) newCube = new Cube(coords.getFirst(), coords.getSecond(), players.get(currentPlayer));
-		currentPlayer++;
+		currentPlayer = (currentPlayer + 1) % players.size();
 		return newCube;
+	}
+	
+	public int getCurrentPlayerIndex() {
+		return this.currentPlayer;
 	}
 	
 }

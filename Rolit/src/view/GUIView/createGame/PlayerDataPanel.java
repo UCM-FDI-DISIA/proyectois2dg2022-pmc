@@ -14,7 +14,7 @@ import javax.swing.text.PlainDocument;
 
 import org.json.JSONObject;
 
-import CPU.Strategy;
+import Strategy.Strategy;
 import logic.Color;
 import view.GUIView.ColorRenderer;
 import view.GUIView.RolitComponents.RolitComboBox;
@@ -151,7 +151,7 @@ public class PlayerDataPanel extends RolitPanel {
 		player.put("color",  getPlayerColor().toString());
 		player.put("score", 0);
 		if(AICheckBox.isSelected() && getPlayerStrategy() != null)
-			player.put("strategy", getPlayerStrategy());
+			player.put("strategy", getPlayerStrategy().toString());
 		return player;
 	}
 }
