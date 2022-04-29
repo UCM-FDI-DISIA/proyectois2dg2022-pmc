@@ -5,18 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JToolBar;
-
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
 import replay.State;
+import view.GUIView.RolitComponents.RolitIconButton;
+import view.GUIView.RolitComponents.RolitToolBar;
 
-public class ControlPanel extends JToolBar implements ActionListener, RolitObserver, ReplayObserver {
+public class ControlPanel extends RolitToolBar implements ActionListener, RolitObserver, ReplayObserver {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -31,11 +30,9 @@ public class ControlPanel extends JToolBar implements ActionListener, RolitObser
 		this.ctrl = ctrl;
 		
 		//SaveFile
-		saveFileBtn = new JButton();
+		saveFileBtn = new RolitIconButton(new ImageIcon("resources/icons/save.png"));
 		saveFileBtn.setActionCommand("Save");
-		saveFileBtn.setIcon(new ImageIcon("resources/icons/save.png"));
 		saveFileBtn.addActionListener(this);
-		saveFileBtn.setMinimumSize(new Dimension(75, 20));
 		this.add(saveFileBtn);
 			
 		fc = new JFileChooser();

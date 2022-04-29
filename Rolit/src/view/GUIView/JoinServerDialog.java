@@ -21,6 +21,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import logic.Color;
+import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextArea;
@@ -51,7 +52,8 @@ public class JoinServerDialog extends JDialog {
 	
 	@SuppressWarnings("serial")
 	private void initGUI() {
-
+		this.setTitle("Join Server");
+		
 		setSize(300,400);
 
 		connectPanel = new RolitPanel();
@@ -95,7 +97,7 @@ public class JoinServerDialog extends JDialog {
 		addComp(connectPanel, portLabel, 0, 2, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, portField, 1, 2, 2, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 
-		JButton connect = new JButton("Connect");
+		JButton connect = new RolitButton("Connect");
 		
 		//Actionlistner for the connect button
 		connect.addActionListener(new ActionListener() {

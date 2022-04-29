@@ -2,6 +2,9 @@ package view.GUIView;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -21,19 +25,25 @@ import javax.swing.JRadioButton;
 
 
 import control.SaveLoadManager;
+import view.GUIView.RolitComponents.RolitButton;
+import view.GUIView.RolitComponents.RolitIconButton;
+import view.GUIView.RolitComponents.RolitPanel;
+import view.GUIView.RolitComponents.RolitRadioButton;
 
 public class LoadGameDialog extends JDialog {
+
+	private static final long serialVersionUID = 1L;
 
 	private int status = 0;
 	
 	private List<String> savedGamesPathList;
 	private List<JRadioButton> savedGamesRadioButtons;
 	private ButtonGroup G;
-	
 	private JPanel mainPanel;
 	private JPanel buttonsPanel;
 	private JPanel okCancelPanel;
-	
+	private JLabel foundGamesMsg;
+	private JLabel loadFileMsg;
 	private JLabel errorLabel;
 	
 	private File file;
@@ -51,36 +61,36 @@ public class LoadGameDialog extends JDialog {
 		setTitle("Load Game");
 		setVisible(false);
 		
-		mainPanel = new JPanel();
+		mainPanel = new RolitPanel();
 		
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new GridBagLayout());
 
-		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
+		//mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		mainPanel.add(new JLabel("Found files from "+SaveLoadManager.FULL_DEFAULT_FILENAME+":"));
+		foundGamesMsg = new JLabel("Found files from "+SaveLoadManager.FULL_DEFAULT_FILENAME+":");
+		addComp(mainPanel, foundGamesMsg, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
 		
-		buttonsPanel = new JPanel();
+		buttonsPanel = new RolitPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		
 		savedGamesRadioButtons = new ArrayList<JRadioButton>();
 		G = new ButtonGroup();
 		
 		for (int i = 0; i < savedGamesPathList.size(); ++i) {
-			JRadioButton aux = new JRadioButton();
+			JRadioButton aux = new RolitRadioButton();
 			aux.setText(savedGamesPathList.get(i));
 			savedGamesRadioButtons.add(aux);
 			G.add(aux);
 			buttonsPanel.add(aux);
 		}
 		
-		mainPanel.add(buttonsPanel);
+		addComp(mainPanel, buttonsPanel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		
+		okCancelPanel = new RolitPanel();
 		
-		okCancelPanel = new JPanel();
-		
-		JButton cancelButton = new JButton("Cancel");
+		JButton cancelButton = new RolitButton("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -90,7 +100,7 @@ public class LoadGameDialog extends JDialog {
 			}
 			
 		});
-		JButton okButton = new JButton("OK");
+		JButton okButton = new RolitButton("OK");
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -125,12 +135,13 @@ public class LoadGameDialog extends JDialog {
 		
 		okCancelPanel.add(cancelButton);
 		
-		mainPanel.add(okCancelPanel);
+		addComp(mainPanel, okCancelPanel, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		mainPanel.add(new JLabel("Alternatively, load from external file: "));
+		//loadFileMsg = new JLabel("Alternatively, load from external file: ");
+		//addComp(mainPanel, loadFileMsg, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+
 		
-		JButton loadButton = new JButton();
-		loadButton.setIcon(new ImageIcon("resources/icons/open.png"));
+		JButton loadButton = new RolitIconButton(new ImageIcon("resources/icons/open.png"));
 		loadButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -147,7 +158,7 @@ public class LoadGameDialog extends JDialog {
 			
 		});
 		loadButton.setMinimumSize(new Dimension(75, 20));
-		mainPanel.add(loadButton);
+		addComp(mainPanel, loadButton, 0, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		setContentPane(mainPanel);
 		setMinimumSize(new Dimension(100, 100));
@@ -167,4 +178,22 @@ public class LoadGameDialog extends JDialog {
 	public File getFile() {
 		return file;
 	}
+	
+	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
+
+		GridBagConstraints gridConstraints = new GridBagConstraints();
+
+		gridConstraints.gridx = xPos;
+		gridConstraints.gridy = yPos;
+		gridConstraints.gridwidth = compWidth;
+		gridConstraints.gridheight = compHeight;
+		gridConstraints.weightx = 100;
+		gridConstraints.weighty = 100;
+		gridConstraints.insets = new Insets(5,5,5,5);
+		gridConstraints.anchor = place;
+		gridConstraints.fill = stretch;
+
+		thePanel.add(comp, gridConstraints);
+	}
+	
 }
