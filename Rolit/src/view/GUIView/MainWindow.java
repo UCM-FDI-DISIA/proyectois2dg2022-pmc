@@ -60,7 +60,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JLabel optionMessage;
 	
 	private volatile boolean onlineGameStarted = false;	
-
+	
 	public MainWindow(Controller ctrl) {
 		super("Rolit");		
 		this.clientRolit = new Client(this);		
@@ -150,7 +150,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
@@ -207,6 +207,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				clientRolit.empezarPartida(jsd.getIp(), Integer.parseInt(jsd.getPort()));
 				clientRolit.join(jsd.getPlayerName(), jsd.getPlayerColor());
 			}
+			break;
 		}
 	}
 	

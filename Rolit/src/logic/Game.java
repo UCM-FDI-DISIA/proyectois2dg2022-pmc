@@ -62,8 +62,6 @@ public abstract class Game extends Thread implements Replayable {
 		if(nextCube != null) this.addCubeToQueue(nextCube);
 		while (!this.finished && !this.exit && !Thread.interrupted()) {
 			this.play();
-			nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
-			if(nextCube != null) this.addCubeToQueue(nextCube);
 		}
 		// FIXME mostrar el ranking
 	}

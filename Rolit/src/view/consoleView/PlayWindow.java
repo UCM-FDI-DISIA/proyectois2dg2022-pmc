@@ -83,6 +83,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	@Override
 	public void onGameExited() {
 		this.close = true;
+		System.out.println("Nos vimos maquina"); //FIXME He puesto esto por poner algo
 	}
 
 }

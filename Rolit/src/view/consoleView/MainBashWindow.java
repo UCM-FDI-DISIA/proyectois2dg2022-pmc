@@ -110,7 +110,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	@Override
 	public void onGameExited() {
 		this.clear();
-		this.menu();
 	}
 
 	@Override
