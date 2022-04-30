@@ -84,7 +84,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
 		
 	}

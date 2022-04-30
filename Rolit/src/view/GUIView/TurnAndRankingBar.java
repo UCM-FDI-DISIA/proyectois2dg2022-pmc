@@ -103,7 +103,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
 		
 	}

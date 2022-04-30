@@ -23,6 +23,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 
 	public StatusBar(Replay replay) {
 		initGUI();
+		this.changeStatus("0 / " + replay.getNumStates());
 		replay.addObserver(this);
 	}
 
@@ -81,7 +82,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
 		
 	}

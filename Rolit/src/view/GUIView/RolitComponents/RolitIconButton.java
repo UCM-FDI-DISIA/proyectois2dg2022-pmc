@@ -22,5 +22,6 @@ public class RolitIconButton extends JButton {
 		Image img = icon.getImage();
 		this.setIcon(new ImageIcon(img.getScaledInstance((int)d.getWidth(), (int) d.getHeight(),  java.awt.Image.SCALE_SMOOTH)));
 		this.setMinimumSize(d);
+        this.setFocusPainted(false);
 	}
 }

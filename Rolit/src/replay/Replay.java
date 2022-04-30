@@ -66,28 +66,31 @@ public class Replay implements Reportable {
 		}
 	}
 	
-	public void previousState() {
+	public boolean previousState() {
 		if(currentState > 0) {
 			currentState--;
 			onReplayLeftButton();
 			print = true;
+			onChangeStatusBar(currentState + 1 + " / " + states.size());
+			return true;
 		}
 		else {
-			System.out.println(PREVIOUS_ERROR);
-			onChangeStatusBar(PREVIOUS_ERROR);
+			return false;
 		}
 			
 	}
 	
-	public void nextState() {
+	public boolean nextState() {
 		if(currentState + 1 < states.size()) {
 			currentState++;
 			onReplayRightButton();
 			print = true;
+			onChangeStatusBar(currentState + 1 + " / " + states.size());
+			return true;
 		}
 		else {
-			System.out.println(NEXT_ERROR);
-			onChangeStatusBar(NEXT_ERROR);
+			return false;
+
 		}
 			
 	}
@@ -96,10 +99,10 @@ public class Replay implements Reportable {
 		boolean replaying = true;
 		print = false;
 		if(in.equals("+")) {
-			nextState();
+			if(!nextState()) {System.out.println(NEXT_ERROR);}
 		}
 		else if(in.equals("-")){
-			previousState();
+			if(!previousState()) {System.out.println(PREVIOUS_ERROR);}  			
 		}
 		else if(in.equals("exit") || in.equals("e")) {
 			replaying = false;
@@ -170,6 +173,10 @@ public class Replay implements Reportable {
 		for(ReplayObserver o : observers) {
 			o.onReplayStatusChange(msg);
 		}
+	}
+
+	public int getNumStates() {
+		return states.size();
 	}
 
 }

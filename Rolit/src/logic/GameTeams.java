@@ -103,7 +103,7 @@ public class GameTeams extends Game {
 	@Override
 	protected void onGameFinished() {
 		for (RolitObserver o : this.observers)
-			o.onGameFinished(this.players, "Players");		
+			o.onGameFinished(this.players, "Players", replay);		
 	}
 
 }

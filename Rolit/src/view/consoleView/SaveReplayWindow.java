@@ -66,43 +66,37 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 
 	@Override
 	public void onFirstPlay(GameState state) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
-		// TODO Auto-generated method stub
-		
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+		this.replay = replay;
+		this.open();
 	}
 
 	@Override
 	public void onGameExited(Replay replay) {
-		// TODO Auto-generated method stub
 		this.replay = replay;
 		this.open();
 	}
 
 	@Override
 	public void onRegister(GameState state) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onGameStatusChange(GameState state) {
-		// TODO Auto-generated method stub
 		
 	}
 

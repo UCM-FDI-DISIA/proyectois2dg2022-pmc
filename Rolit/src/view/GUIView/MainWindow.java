@@ -163,10 +163,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				ctrl.createGame(dialogNew.createJSONObjectGame());
 				ctrl.startGame();
 				this.initGame();
-			}
-			else {
-				//TODO Mostrar alg�n tipo de error
-			}			
+				new SaveReplayDialog(this, ctrl);
+			}		
 			break;
 		case "LG":
 			LoadGameDialog dialogLoad = new LoadGameDialog(MainWindow.this);
@@ -174,7 +172,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			if (status2 == 1) {
 				File file = dialogLoad.getFile();
 				state = ctrl.loadGame(file.getPath());
-				initGame();			
+				initGame();
+				new SaveReplayDialog(this, ctrl);
 			}
 			break;
 		case "DG":
@@ -299,7 +298,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub		
 	}
 

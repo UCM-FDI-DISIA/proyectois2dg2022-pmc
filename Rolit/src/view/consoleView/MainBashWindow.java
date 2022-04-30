@@ -109,7 +109,7 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	public void onTurnPlayed(GameState state) {}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {}
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {}
 
 	@Override
 	public void onGameExited(Replay replay) {

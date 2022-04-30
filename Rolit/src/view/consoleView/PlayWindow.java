@@ -45,7 +45,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 	
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		this.close = true;
 		this.clear();
 		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);

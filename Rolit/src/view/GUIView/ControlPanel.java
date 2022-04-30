@@ -48,19 +48,15 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 		this.replay = replay;
 
 		//Replay <-
-		replayLeftBtn = new JButton();
+		replayLeftBtn = new RolitIconButton(new ImageIcon("resources/icons/replayLeft.png"), new Dimension(75, 50));
 		replayLeftBtn.setActionCommand("Replay left");
-		replayLeftBtn.setIcon(new ImageIcon("resources/icons/replayLeft.png"));
 		replayLeftBtn.addActionListener(this);
-		replayLeftBtn.setMinimumSize(new Dimension(75, 20));
 		this.add(replayLeftBtn);
 
 		//Replay ->
-		replayRightBtn = new JButton();
+		replayRightBtn = new RolitIconButton(new ImageIcon("resources/icons/replayRight.png"), new Dimension(75, 50));
 		replayRightBtn.setActionCommand("Replay right");
-		replayRightBtn.setIcon(new ImageIcon("resources/icons/replayRight.png"));
 		replayRightBtn.addActionListener(this);
-		replayRightBtn.setMinimumSize(new Dimension(75, 20));
 		this.add(replayRightBtn);
 
 		replay.addObserver(this);
@@ -132,7 +128,7 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
 		
 	}

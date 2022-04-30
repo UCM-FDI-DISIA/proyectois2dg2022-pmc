@@ -171,7 +171,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
 		
 	}

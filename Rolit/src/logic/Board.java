@@ -17,6 +17,7 @@ public class Board implements Reportable {
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
+	private int numValidPos;
 	private int numCubes;
 	private static final char SPACE = ' ';
 	
@@ -27,6 +28,16 @@ public class Board implements Reportable {
 		this.shapeMatrix = SaveLoadManager.loadShape(shape.getFilename());
 		this.orderedCubeList = new ArrayList<Pair<Integer, Integer>>();
 		this.size = SaveLoadManager.getShapeSize(shape.getFilename());
+		this.numValidPos = 0;
+		for (int i = 0; i < shapeMatrix.length; i++) {
+			for (int j = 0; j < shapeMatrix.length; j++) {
+				if(shapeMatrix[i][j]) {
+					numValidPos++;
+				}
+			}
+		}
+		
+		
 		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
@@ -100,7 +111,7 @@ public class Board implements Reportable {
 	}
 	
 	public boolean isBoardFull() {
-		return numCubes == size * size;
+		return numCubes == numValidPos;
 	}
 	
 	public void update(Cube newCube) {

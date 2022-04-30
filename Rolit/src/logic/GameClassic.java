@@ -94,7 +94,7 @@ public class GameClassic extends Game {
 	@Override
 	protected void onGameFinished() {
 		for (RolitObserver o : this.observers)
-			o.onGameFinished(this.players, "Players");		
+			o.onGameFinished(this.players, "Players", replay);		
 	}
 	
 }
