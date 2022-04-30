@@ -50,10 +50,9 @@ public class Controller {
 				clientRolit.updateGameToServer();
 			}			
 		}
-		else	//FIXME hay que asegurar que el turno sea del jugador actual
+		else {	//FIXME hay que asegurar que el turno sea del jugador actual
 			c.execute(game);
-		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
-		replay.addState(c.toString(), game.copyMe());
+		}
 	}
 	
 	public void updateGameFromServer(JSONObject o) {

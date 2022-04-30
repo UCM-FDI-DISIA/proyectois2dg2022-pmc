@@ -37,7 +37,7 @@ public class NewGameClassicWindow extends NewGameWindow {
 						System.out.println(CHOOSE_AI_DIFFICULTY_MSG);
 						System.out.print(Strategy.availableStrategies());
 						strat = input.nextLine();
-					}
+				 }
 				 try {
 					 // FIXME no se si al dar excepcion antes de hacer el put realmente no se hace put de nada
 					 jPlayers.put(this.validatePlayer(jPlayers, name, color, strat));

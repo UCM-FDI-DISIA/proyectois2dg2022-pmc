@@ -1,7 +1,5 @@
 package replay;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,7 +24,7 @@ public class GameState implements Reportable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Command > ").append(command).append(StringUtils.LINE_SEPARATOR);
+		//str.append("Command > ").append(command).append(StringUtils.LINE_SEPARATOR);
 		str.append(game.toString());
 		return str.toString();
 	}

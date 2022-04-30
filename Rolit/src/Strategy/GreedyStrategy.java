@@ -20,4 +20,14 @@ public class GreedyStrategy extends MinimaxStrategy {
 		return new Pair<Integer, Integer>(x, y);
 	}
 	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+
+	@Override
+	public String getDifficulty() {
+		return DIFFICULTY;
+	}
+	
 }

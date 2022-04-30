@@ -44,7 +44,6 @@ public class Board implements Reportable {
 			List<Cube> lc = new ArrayList<Cube> ();
 			for (int j = 0; j < board.matrix.size(); j++) {
 				if(board.matrix.get(i).get(j) != null) {
-					System.out.println(i + " " + j);
 					lc.add(new Cube(board.matrix.get(i).get(j)));
 				}
 				else

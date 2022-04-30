@@ -29,7 +29,6 @@ public class GameClassic extends Game {
 	@Override
 	public void play() throws IllegalArgumentException {
 		if (!this.pendingCubes.isEmpty()) {
-			// FIXME no puede ser la mejor forma de hacerlo
 			Cube c = this.pendingCubes.poll();
 			
 			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
@@ -37,8 +36,6 @@ public class GameClassic extends Game {
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
-
-			this.replay.addState("p " + newCube.getX() + " " + newCube.getY(), this.copyMe());
 			
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
@@ -47,10 +44,10 @@ public class GameClassic extends Game {
 			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			if(!this.finished) {
-				onTurnPlayed();
-				this.executedTurn = true;
 				Cube nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
+				onTurnPlayed();
+				this.executedTurn = true;
 			}			
 			else
 				this.executedTurn = true;

@@ -51,7 +51,6 @@ public class NewGameWindow implements ConsoleWindow {
 		String board_shape;
 		do {
 			System.out.print(Shape.availableShapes());
-			System.out.print(PROMPT);
 			board_shape = input.nextLine();
 			if (Shape.valueOfIgnoreCase(board_shape) == null) {
 				System.out.print(BOARD_ERROR);

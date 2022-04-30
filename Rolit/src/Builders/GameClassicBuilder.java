@@ -39,8 +39,7 @@ public class GameClassicBuilder extends GameBuilder {
 			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
 			list_players.add(new Player(c, playersJSONArray.getJSONObject(i).getString("name"), s));
 		}
-			
-
+		
 		JSONObject boardJSONObject = o.getJSONObject("board");
 		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve
 		
