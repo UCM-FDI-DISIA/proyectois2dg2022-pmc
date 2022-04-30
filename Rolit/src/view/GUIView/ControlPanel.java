@@ -141,6 +141,6 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 	public void onFirstPlay(GameState state) {}
 
 	@Override
-	public void onGameExited() {}
+	public void onGameExited(Replay replay) {}
 
 }

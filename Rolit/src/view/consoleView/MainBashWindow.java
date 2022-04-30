@@ -9,6 +9,7 @@ import control.SaveLoadManager;
 import logic.Color;
 import logic.Rival;
 import replay.GameState;
+import replay.Replay;
 import view.GUIView.RolitObserver;
 
 public class MainBashWindow implements ConsoleWindow, RolitObserver {
@@ -71,14 +72,17 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				nextWindow = new NewGameWindow();
 				repeatMenu = nextWindow.open();
 				ctr.createGame((JSONObject) nextWindow.get());
+				new SaveReplayWindow(ctr);
 			}				
 			// Se ha seleccionado cargar un juego antiguo
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new LoadGameWindow();
 				repeatMenu = nextWindow.open();
 				JSONObject game = (JSONObject) nextWindow.get();
-				if (game != null)
+				if (game != null) {
 					ctr.createGame(game);	
+					new SaveReplayWindow(ctr);
+				}
 			}
 			// Se ha seleccionado borrar un juego
 			else if (DELETE_GAME.equals(OPTIONS[option - 1])) {
@@ -108,7 +112,7 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	public void onGameFinished(List<? extends Rival> rivals, String rival) {}
 
 	@Override
-	public void onGameExited() {
+	public void onGameExited(Replay replay) {
 		this.clear();
 	}
 

@@ -14,6 +14,7 @@ import control.Controller;
 import logic.Color;
 import logic.Rival;
 import replay.GameState;
+import replay.Replay;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
@@ -111,6 +112,6 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 	public void onFirstPlay(GameState state) {}
 
 	@Override
-	public void onGameExited() {}
+	public void onGameExited(Replay replay) {}
 
 }

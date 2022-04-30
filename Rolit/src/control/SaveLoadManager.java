@@ -121,6 +121,7 @@ public class SaveLoadManager {
 			save_file.write(replay.report().toString());
 			System.out.println(SUCCESS_SAVE_MSG);
 		} catch (IOException error_file) {
+			error_file.printStackTrace();
 			System.out.println(ERROR_SAVE);
 		}
 	}	

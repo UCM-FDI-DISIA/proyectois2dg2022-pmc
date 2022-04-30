@@ -6,6 +6,7 @@ import commands.Command;
 import control.Controller;
 import logic.Rival;
 import replay.GameState;
+import replay.Replay;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;
 
@@ -81,7 +82,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onGameExited() {
+	public void onGameExited(Replay replay) {
 		this.close = true;
 		System.out.println("Nos vimos maquina"); //FIXME He puesto esto por poner algo
 	}

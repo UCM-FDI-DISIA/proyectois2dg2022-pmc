@@ -13,7 +13,7 @@ public class Board implements Reportable {
 	
 	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
-	private static List<Pair<Integer, Integer>> orderedCubeList = new ArrayList<Pair<Integer, Integer>>();
+	private static List<Pair<Integer, Integer>> orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); //FIXME SI FALLA ALGO DE LA RED ES PORQUE HAY QUE PONER ESTO ESTATICO
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
@@ -43,8 +43,10 @@ public class Board implements Reportable {
 		for (int i = 0; i < board.matrix.size(); i++) {
 			List<Cube> lc = new ArrayList<Cube> ();
 			for (int j = 0; j < board.matrix.size(); j++) {
-				if(board.matrix.get(i).get(j) != null)
+				if(board.matrix.get(i).get(j) != null) {
+					System.out.println(i + " " + j);
 					lc.add(new Cube(board.matrix.get(i).get(j)));
+				}
 				else
 					lc.add(null);
 			}

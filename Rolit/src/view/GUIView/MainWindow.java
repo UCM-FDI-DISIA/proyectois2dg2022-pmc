@@ -351,7 +351,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameExited() {
+	public void onGameExited(Replay replay) {
 		this.initGUI();
 	}
 

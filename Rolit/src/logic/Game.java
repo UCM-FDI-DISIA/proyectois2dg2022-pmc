@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import replay.GameState;
+import replay.Replay;
 import view.GUIView.RolitObserver;
 
 public abstract class Game extends Thread implements Replayable {
@@ -19,6 +20,8 @@ public abstract class Game extends Thread implements Replayable {
 	private boolean exit;
 	protected volatile List<RolitObserver> observers;
 	protected volatile Queue<Cube> pendingCubes;
+	protected Replay replay;
+	protected GameState state;
 	protected boolean executedTurn = false;
 	protected TurnManager turnManager;
 	
@@ -52,6 +55,8 @@ public abstract class Game extends Thread implements Replayable {
 		// FIXME esto tiene que dar problemas a la hora de cargar seguro
 		this.pendingCubes = new ArrayDeque<>();
 		this.turnManager = new TurnManager(list_players, index);
+		this.replay = new Replay();
+
 	}
 	
 	@Override
@@ -140,7 +145,7 @@ public abstract class Game extends Thread implements Replayable {
 	
 	public void onGameExited() {
 		for(RolitObserver o : observers) {
-			o.onGameExited();
+			o.onGameExited(replay);
 		}
 	}
 
@@ -168,5 +173,5 @@ public abstract class Game extends Thread implements Replayable {
 			return true;
 		}
 	}
-
+	
 }

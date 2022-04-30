@@ -36,7 +36,7 @@ public class Replay implements Reportable {
 
 
 	private Scanner input;
-	private List<GameState> states;
+	private volatile List<GameState> states;
 	private List<ReplayObserver> observers;
 	private int currentState;
 	private boolean print;

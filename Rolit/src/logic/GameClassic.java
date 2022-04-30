@@ -37,6 +37,8 @@ public class GameClassic extends Game {
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
+
+			this.replay.addState("p " + newCube.getX() + " " + newCube.getY(), this.copyMe());
 			
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();

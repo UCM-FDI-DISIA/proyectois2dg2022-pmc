@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import control.Controller;
 import logic.Rival;
 import replay.GameState;
+import replay.Replay;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver {
 
@@ -89,6 +90,6 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	}
 
 	@Override
-	public void onGameExited() {}
+	public void onGameExited(Replay replay) {}
 
 }

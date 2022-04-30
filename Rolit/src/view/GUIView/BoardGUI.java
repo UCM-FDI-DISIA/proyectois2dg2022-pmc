@@ -180,6 +180,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	public void onFirstPlay(GameState state) {}
 
 	@Override
-	public void onGameExited() {}
+	public void onGameExited(Replay replay) {}
 	
 }
