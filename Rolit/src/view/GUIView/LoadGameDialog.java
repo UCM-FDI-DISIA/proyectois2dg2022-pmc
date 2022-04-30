@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -22,11 +21,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
-
 import control.SaveLoadManager;
 import view.GUIView.RolitComponents.RolitButton;
-import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitRadioButton;
 
@@ -38,14 +34,15 @@ public class LoadGameDialog extends JDialog {
 	
 	private List<String> savedGamesPathList;
 	private List<JRadioButton> savedGamesRadioButtons;
-	private ButtonGroup G;
+	private ButtonGroup buttonGroup;
 	private JPanel mainPanel;
 	private JPanel buttonsPanel;
 	private JPanel okCancelPanel;
 	private JLabel foundGamesMsg;
-	private JLabel loadFileMsg;
 	private JLabel errorLabel;
-	
+	private JButton cancelButton;
+	private JButton okButton;
+	private JButton loadButton;
 	private File file;
 	
 	public LoadGameDialog(Frame parent) {
@@ -62,35 +59,32 @@ public class LoadGameDialog extends JDialog {
 		setVisible(false);
 		
 		mainPanel = new RolitPanel();
-		
 		mainPanel.setLayout(new GridBagLayout());
-
-		//mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		foundGamesMsg = new JLabel("Found files from "+SaveLoadManager.FULL_DEFAULT_FILENAME+":");
+		//Create and add components
+			//Saved games label
+		foundGamesMsg = new JLabel("SAVED GAMES: ");
 		addComp(mainPanel, foundGamesMsg, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
-		
+			//RadioButtons
 		buttonsPanel = new RolitPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-		
+		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
 		savedGamesRadioButtons = new ArrayList<JRadioButton>();
-		G = new ButtonGroup();
-		
+		buttonGroup = new ButtonGroup();
 		for (int i = 0; i < savedGamesPathList.size(); ++i) {
 			JRadioButton aux = new RolitRadioButton();
 			aux.setText(savedGamesPathList.get(i));
 			savedGamesRadioButtons.add(aux);
-			G.add(aux);
+			buttonGroup.add(aux);
 			buttonsPanel.add(aux);
 		}
-		
 		addComp(mainPanel, buttonsPanel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		
+			//OkCancelButtonsPanel
 		okCancelPanel = new RolitPanel();
-		
-		JButton cancelButton = new RolitButton("Cancel");
+				//CancelButton
+		cancelButton = new RolitButton("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -100,7 +94,8 @@ public class LoadGameDialog extends JDialog {
 			}
 			
 		});
-		JButton okButton = new RolitButton("OK");
+				//OkButton
+		okButton = new RolitButton("OK");
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -128,20 +123,17 @@ public class LoadGameDialog extends JDialog {
 			
 		});
 		
-		
 		okCancelPanel.add(okButton);
+		
 		if (savedGamesPathList.isEmpty())
 			okButton.setVisible(false);
 		
 		okCancelPanel.add(cancelButton);
 		
-		addComp(mainPanel, okCancelPanel, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(mainPanel, okCancelPanel, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
-		//loadFileMsg = new JLabel("Alternatively, load from external file: ");
-		//addComp(mainPanel, loadFileMsg, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-
-		
-		JButton loadButton = new RolitIconButton(new ImageIcon("resources/icons/open.png"));
+			//LoadButton
+		loadButton = new RolitButton("Browse...");
 		loadButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -157,16 +149,12 @@ public class LoadGameDialog extends JDialog {
 			}
 			
 		});
-		loadButton.setMinimumSize(new Dimension(75, 20));
-		addComp(mainPanel, loadButton, 0, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		addComp(mainPanel, loadButton, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		setContentPane(mainPanel);
 		setMinimumSize(new Dimension(100, 100));
 		
 		this.pack();
-		
-		//TODO Antes de pasar a crear el Game hay que crear los players
-		//Hay que pedir los nombres y colores para crearlos
 	}
 	
 	int open() {

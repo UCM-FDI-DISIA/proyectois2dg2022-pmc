@@ -39,8 +39,9 @@ public class Server {
 	private JSONObject gameConfigJSON;
 
 	public Server(JSONObject gameConfigJSON) {
-		sv = new ServerView(this);
 		this.gameConfigJSON = gameConfigJSON;
+		loadExpectedPlayers();
+		sv = new ServerView(this);
 	}
 	
 	public void start(int port) throws IOException {
@@ -52,12 +53,14 @@ public class Server {
 	public void stop() {
 		System.exit(0);
 	}
+	
+	private void loadExpectedPlayers() {
+		expectedPlayers = gameConfigJSON.getJSONArray("players").length();
+	}
 
 
 	private void waitForPlayers() throws IOException {
 	
-		expectedPlayers = 2;
-		
 		for (int i = 0; i < expectedPlayers; ++i) {
 		
 		ServerClient serverClient = new ServerClient();
@@ -77,6 +80,8 @@ public class Server {
 		Pair<ServerClient, Player> parServerClientPlayer = new Pair<ServerClient, Player>(serverClient, incomingPlayers.get(i));
 		clients.add(parServerClientPlayer);
 		
+		sv.updateNumPlayers();
+		
 		
 	}
 	
@@ -91,8 +96,6 @@ public class Server {
 		
 	}
 	
-	
-		
 	
 	JSONArray playersJSONArray = getPlayersJSONArray();
 	
@@ -193,5 +196,13 @@ public class Server {
 			}
 		
 		}
+	}
+	
+	public int getExpectedPlayers() {
+		return this.expectedPlayers;
+	}
+	
+	public int getNumPlayers() {
+		return this.clients.size();
 	}
 }

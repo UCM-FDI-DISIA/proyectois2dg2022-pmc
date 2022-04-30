@@ -84,6 +84,12 @@ public class CreateGameDialog extends JDialog {
 
 		o.put("board", boardJSONObject);
 		
+		JSONArray players = new JSONArray();
+		for (int i = 0; i < gameConfig.getNumPlayers(); i++) {
+			players.put("");
+		}
+		o.put("players", players);
+		
 		if (gameConfig.getGameMode().equals(GameTeamsBuilder.TYPE)) {
 
 			JSONArray teamsJSONArray = new JSONArray();
