@@ -81,6 +81,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 		// TODO Auto-generated method stub
 		update();
 		this.rivals = state.getRivals();
+		
 	}
 
 	@Override

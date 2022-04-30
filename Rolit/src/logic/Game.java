@@ -32,6 +32,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.board = new Board(game.board);		
 		this.exit = game.exit;
 		this.turnManager = game.turnManager;
+		
 	}
 	
 	// Constructor de creaci�n a partir de carga
@@ -56,7 +57,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.pendingCubes = new ArrayDeque<>();
 		this.turnManager = new TurnManager(list_players, index);
 		this.replay = new Replay();
-
+		this.state = new GameState(this);
 	}
 	
 	@Override

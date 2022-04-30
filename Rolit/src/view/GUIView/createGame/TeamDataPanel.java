@@ -51,6 +51,7 @@ public class TeamDataPanel extends RolitPanel {
 	public JSONObject getTeamReport() {
 		JSONObject jo = new JSONObject();
 		jo.put("name", nameTextArea.getText());
+		jo.put("players", new JSONObject());
 		jo.put("score", 0);
 		return jo;
 	}
