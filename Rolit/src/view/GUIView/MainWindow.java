@@ -251,26 +251,19 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
-		
-		centerPanel = new JPanel(new GridLayout(1, 2));
-		
+				
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
-		//rankingPanel = new JPanel(new GridLayout());
-		
-		centerPanel.add(gamePanel);
-		//centerPanel.add(rankingPanel);
-		
+				
 		BoardGUI tablero = new BoardGUI(replay);		
-		//TurnBar turnBar = new TurnBar(game);
 		
-		//gamePanel.add(turnBar, BorderLayout.PAGE_START);
 		gamePanel.add(tablero, BorderLayout.CENTER);
 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		mainPanel.add(gamePanel, BorderLayout.CENTER);
 		mainPanel.add(new StatusBar(replay),BorderLayout.PAGE_END);		
 		
+		this.repaint();
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		

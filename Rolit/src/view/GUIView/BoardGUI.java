@@ -66,6 +66,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		
 		updateReplay();
 
+		initGUI();
 		this.replay.addObserver(this);
 	}
 	
@@ -108,7 +109,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 			JSONObject cube = cubes.getJSONObject(i);
 			celdas[cube.getJSONArray("pos").getInt(1)][cube.getJSONArray("pos").getInt(0)].update(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)));
 		}
-	
 	}
 
 	@Override

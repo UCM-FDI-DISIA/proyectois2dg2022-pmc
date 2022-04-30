@@ -13,7 +13,7 @@ public class Board implements Reportable {
 	
 	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
-	private static List<Pair<Integer, Integer>> orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); //FIXME SI FALLA ALGO DE LA RED ES PORQUE HAY QUE PONER ESTO ESTATICO
+	private List<Pair<Integer, Integer>> orderedCubeList;//FIXME SI FALLA ALGO DE LA RED ES PORQUE HAY QUE PONER ESTO ESTATICO
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
@@ -25,6 +25,7 @@ public class Board implements Reportable {
 		this.matrix = new ArrayList<List<Cube>>();
 		this.shapeName = shape.name();
 		this.shapeMatrix = SaveLoadManager.loadShape(shape.getFilename());
+		this.orderedCubeList = new ArrayList<Pair<Integer, Integer>>();
 		this.size = SaveLoadManager.getShapeSize(shape.getFilename());
 		//aqui se llamara a una funcion que cargue la mtriz de booleanos
 		for (int i = 0; i < size; i++) {
@@ -44,7 +45,6 @@ public class Board implements Reportable {
 			List<Cube> lc = new ArrayList<Cube> ();
 			for (int j = 0; j < board.matrix.size(); j++) {
 				if(board.matrix.get(i).get(j) != null) {
-					System.out.println(i + " " + j);
 					lc.add(new Cube(board.matrix.get(i).get(j)));
 				}
 				else
@@ -53,6 +53,13 @@ public class Board implements Reportable {
 			m.add(lc);
 		}
 		
+		List<Pair<Integer, Integer>> ol = new ArrayList<Pair<Integer, Integer>>();
+		for (int i = 0; i < board.orderedCubeList.size(); i++) {
+			Pair<Integer, Integer> p = board.orderedCubeList.get(i);
+			ol.add(new Pair<Integer, Integer>(p.getFirst(), p.getSecond()));
+		}
+		
+		this.orderedCubeList = ol;
 		this.matrix = m;
 		this.shapeMatrix = board.shapeMatrix;
 		this.shapeName = board.shapeName;

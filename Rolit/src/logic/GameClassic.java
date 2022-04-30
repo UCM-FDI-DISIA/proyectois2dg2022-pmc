@@ -37,9 +37,8 @@ public class GameClassic extends Game {
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
-
-			this.replay.addState("p " + newCube.getX() + " " + newCube.getY(), this.copyMe());
-			
+			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
+						
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished)
@@ -49,11 +48,13 @@ public class GameClassic extends Game {
 			if(!this.finished) {
 				onTurnPlayed();
 				this.executedTurn = true;
-				Cube nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 			}			
 			else
 				this.executedTurn = true;
+			
+			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 		}		
 	}
 	
@@ -84,9 +85,8 @@ public class GameClassic extends Game {
 	
 	@Override
 	public void onTurnPlayed() {
-		GameState state = new GameState(this.copyMe());
 		for(RolitObserver o : observers) {
-			o.onTurnPlayed(state);
+			o.onTurnPlayed(this.state);
 		}
 	}
 

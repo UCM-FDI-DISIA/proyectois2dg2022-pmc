@@ -10,8 +10,8 @@ import logic.Reportable;
 import utils.StringUtils;
 
 public class GameState implements Reportable {
-	String command;
-	Replayable game;
+	private String command;
+	private Replayable game;
 	
 	public GameState(String commandName, Replayable game){
 		this.command = commandName;

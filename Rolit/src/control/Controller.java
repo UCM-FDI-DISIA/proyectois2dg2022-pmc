@@ -14,7 +14,7 @@ import view.GUIView.RolitObserver;
 
 public class Controller {
 	private volatile Game game;
-	private Replay replay;
+	//private Replay replay;
 	private volatile Client clientRolit;
 	private boolean onlineMode = false;
 	
@@ -24,7 +24,7 @@ public class Controller {
 	
 	public GameState createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
-		this.replay = new Replay();
+		//this.replay = new Replay();
 		return new GameState(game);
 	}
 	
@@ -50,10 +50,15 @@ public class Controller {
 				clientRolit.updateGameToServer();
 			}			
 		}
-		else	//FIXME hay que asegurar que el turno sea del jugador actual
+		else {
+			//FIXME hay que asegurar que el turno sea del jugador actual
 			c.execute(game);
+		}
 		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
-		replay.addState(c.toString(), game.copyMe());
+		while(!game.executedTurn()) {
+			//No se hace nada para esperar a que el modelo haga lo que le haga falta
+		}
+		//game.addState(c.toString());
 	}
 	
 	public void updateGameFromServer(JSONObject o) {

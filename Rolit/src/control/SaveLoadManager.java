@@ -21,6 +21,7 @@ import Builders.GameBuilder;
 import logic.Game;
 import logic.Reportable;
 import logic.Shape;
+import replay.GameState;
 import replay.Replay;
 
 public class SaveLoadManager {
@@ -104,7 +105,7 @@ public class SaveLoadManager {
 				JSONObject state = states.getJSONObject(i);
 				String commandName = state.getString("command");
 				Game game = GameBuilder.createGame(state.getJSONObject("game"));
-				replay.addState(commandName, game);
+				replay.addState(new GameState(commandName, game));
 			}
 		} catch (IOException | JSONException error_file) {
 			System.out.println(ERROR_LOAD + ": " + error_file);

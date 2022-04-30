@@ -11,8 +11,9 @@ import logic.Reportable;
 import logic.Shape;
 import utils.StringUtils;
 import view.GUIView.Observable;
-import view.GUIView.ReplayObserver;
 import view.GUIView.RolitObserver;
+import view.GUIView.ReplayObserver;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +50,8 @@ public class Replay implements Reportable {
 		this.print = true;
 	}
 	
-	public void addState(String commandName, Replayable game) {
-		states.add(new GameState(commandName, game));
+	public void addState(GameState state) {
+		states.add(state);
 	}
 	
 	public void startReplay() {
@@ -170,4 +171,5 @@ public class Replay implements Reportable {
 			o.onReplayStatusChange(msg);
 		}
 	}
+
 }
