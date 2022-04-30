@@ -3,6 +3,7 @@ package view.consoleView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import Strategy.Strategy;
 import logic.Color;
 
 public class NewGameTeamsWindow extends NewGameWindow {
@@ -33,9 +34,10 @@ public class NewGameTeamsWindow extends NewGameWindow {
 		System.out.println();
 		
 		for (int i = 0; i < nPlayers; ++i) {
-			boolean added = false;
-			System.out.print("Player " + (i + 1) + ": ");
-			String name = input.nextLine();
+			 boolean added = false;
+			 System.out.print("Player " + (i + 1) + ": ");
+			 String name = input.nextLine();
+			 String strat = null;
 			 while (!added) {
 				 System.out.println(this.availableColors(jPlayers));
 				 System.out.print(CHOOSE_COLOR);
@@ -45,9 +47,15 @@ public class NewGameTeamsWindow extends NewGameWindow {
 				 System.out.print(CHOOSE_TEAM);
 				 int selectedTeam = input.nextInt();
 				 input.nextLine();
+				 if(name.endsWith(" AI")) {
+						name = name.substring(0, name.length() - 3);
+						System.out.println(CHOOSE_AI_DIFFICULTY_MSG);
+						System.out.print(Strategy.availableStrategies());
+						strat = input.nextLine();
+				 }
 				 try {
 					 // validamos los datos del jugador
-					 jPlayer = this.validatePlayer(jPlayers, name, color);
+					 jPlayer = this.validatePlayer(jPlayers, name, color, strat);
 					 // lo a�adimos a la lista del equipo al que pertenezca
 					 jPlayersTeam[selectedTeam - 1].put(jPlayer);
 					 // lo a�adimos a la lista global de players para game

@@ -19,14 +19,17 @@ public class TurnManager {
 	}
 	
 	public Cube firstTurn(GameState state) {
-		return this.nextTurn(state);
-	}
-	
-	public Cube nextTurn(GameState state) {
 		Pair<Integer, Integer> coords = players.get(currentPlayer).play(state);
 		Cube newCube = null;
 		if(coords != null) newCube = new Cube(coords.getFirst(), coords.getSecond(), players.get(currentPlayer));
+		return newCube;
+	}
+	
+	public Cube nextTurn(GameState state) {
 		currentPlayer = (currentPlayer + 1) % players.size();
+		Pair<Integer, Integer> coords = players.get(currentPlayer).play(state);
+		Cube newCube = null;
+		if(coords != null) newCube = new Cube(coords.getFirst(), coords.getSecond(), players.get(currentPlayer));
 		return newCube;
 	}
 	

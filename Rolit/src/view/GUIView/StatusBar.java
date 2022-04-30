@@ -39,7 +39,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
+		changeStatus(err);
 		
 	}
 	
@@ -77,8 +77,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 
 	@Override
 	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub
-		
+		changeStatus("");
 	}
 
 	@Override

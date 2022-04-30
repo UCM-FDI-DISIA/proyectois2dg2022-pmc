@@ -63,10 +63,15 @@ public abstract class Game extends Thread implements Replayable {
 	public void run() {
 		// FIXME en la depuración esto no llega a terminar nunca
 		Cube nextCube;
-		 nextCube = this.turnManager.firstTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+		nextCube = this.turnManager.firstTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
 		if(nextCube != null) this.addCubeToQueue(nextCube);
 		while (!this.finished && !this.exit && !Thread.interrupted()) {
-			this.play();
+			try {
+				this.play();
+			}
+			catch (IllegalArgumentException e) {
+				this.onError(e.getMessage());
+			}
 		}
 		// FIXME mostrar el ranking
 	}
@@ -149,8 +154,10 @@ public abstract class Game extends Thread implements Replayable {
 		}
 	}
 
-	protected void onError() {
-		// TODO Auto-generated method stub
+	protected void onError(String msg) {
+		for(RolitObserver o : observers) {
+			o.onError(msg);
+		}
 	}
 
 	public void updateGameFromServer(List<RolitObserver> observerList) {

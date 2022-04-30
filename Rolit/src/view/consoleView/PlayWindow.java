@@ -24,7 +24,6 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	public boolean open() {
 		this.clear();
 		while (!this.close) {
-			System.out.print(PROMPT);
 			String s = input.nextLine();
 			try {
 				String[] args = s.trim().split(" ");
@@ -41,7 +40,8 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onTurnPlayed(GameState state) {
-		System.out.println(state.toString());				
+		System.out.println(state.toString());
+		System.out.print(PROMPT);	//Se pone el PROMPT aquí porque si no sale antes del estado porque el game tarda en mandar la notificación
 	}
 	
 	@Override
@@ -55,7 +55,8 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onRegister(GameState states) {
-		System.out.println(states.toString());		
+		System.out.println(states.toString());	
+		System.out.print(PROMPT);
 	}
 
 	@Override
@@ -66,7 +67,8 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public void onGameStatusChange(GameState status) {
-		System.out.println(status.toString());		
+		System.out.println(status.toString());	
+		System.out.print(PROMPT);
 	}
 
 	@Override

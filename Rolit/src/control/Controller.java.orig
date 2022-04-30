@@ -50,9 +50,21 @@ public class Controller {
 				clientRolit.updateGameToServer();
 			}			
 		}
+<<<<<<< HEAD
+		else {
+			//FIXME hay que asegurar que el turno sea del jugador actual
+			c.execute(game);
+		}
+		// FIXME esto funciona mal seguro por el toString(), no sabemos si pone el commando bien
+		while(!game.executedTurn()) {
+			//No se hace nada para esperar a que el modelo haga lo que le haga falta
+		}
+		//game.addState(c.toString());
+=======
 		else {	//FIXME hay que asegurar que el turno sea del jugador actual
 			c.execute(game);
 		}
+>>>>>>> 96bdaa6a7bbdf95fb90abc0e4451e931b7f79945
 	}
 	
 	public void updateGameFromServer(JSONObject o) {

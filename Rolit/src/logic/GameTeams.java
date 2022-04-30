@@ -34,11 +34,10 @@ public class GameTeams extends Game {
 	@Override
 	public void play() throws IllegalArgumentException {
 		while(!this.pendingCubes.isEmpty()) {
-			PlaceCubeCommand c = this.pendingCubes.poll();
-			int x = c.getX();
-			int y = c.getY();
+			Cube c = this.pendingCubes.poll();
+			
 			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
-			Cube newCube = new Cube(x, y, players.get(currentPlayerIndex));
+			Cube newCube = new Cube(c.getX(), c.getY(), players.get(turnManager.getCurrentPlayerIndex()));
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
@@ -51,12 +50,15 @@ public class GameTeams extends Game {
 			if (this.finished)
 				this.onGameFinished();
 			
-			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-			if(!this.finished)
-				currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-			
-			onTurnPlayed();
+			if(!this.finished) {
+				Cube nextCube = this.turnManager.nextTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+				if(nextCube != null) this.addCubeToQueue(nextCube);
+				onTurnPlayed();
+				this.executedTurn = true;
+			}			
+			else
+				this.executedTurn = true;
 		}
 	}
 
@@ -83,6 +85,14 @@ public class GameTeams extends Game {
 	}
 	
 	@Override
+	protected void onFirstPlay() {
+		GameState state = new GameState(this.copyMe());
+		for(RolitObserver o : observers) {
+			o.onFirstPlay(state);
+		}
+	}
+	
+	@Override
 	public void onTurnPlayed() {
 		GameState state = new GameState(this.copyMe());
 		for(RolitObserver o : observers) {
@@ -92,8 +102,8 @@ public class GameTeams extends Game {
 
 	@Override
 	protected void onGameFinished() {
-		// TODO Auto-generated method stub
-		
+		for (RolitObserver o : this.observers)
+			o.onGameFinished(this.players, "Players");		
 	}
 
 }
