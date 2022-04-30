@@ -21,6 +21,7 @@ import javax.swing.SwingWorker;
 
 import org.json.JSONObject;
 
+import view.GUIView.DeleteGameDialog;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextArea;
@@ -34,7 +35,7 @@ public class ServerView extends JFrame {
 
 	
 	private JPanel thePanel;
-	private JLabel ipLabel, portLabel;
+	private JLabel ipLabel, portLabel, waitingLabel, numPlayersLabel;
 	private JTextField portField;
 	private JButton startButton;
 	private JButton stopButton;
@@ -45,7 +46,7 @@ public class ServerView extends JFrame {
 		this.setTitle("Server Set-Up");
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
 		this.server = server;
-		setSize(400,400);
+		setSize(420,420);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -58,6 +59,8 @@ public class ServerView extends JFrame {
 		portLabel = new JLabel("Insert desired host port (9001-65500): ");
 		addComp(thePanel, portLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
+		waitingLabel = new JLabel("Waiting for players...");
+		
 		portField = new RolitTextField(5);
 		addComp(thePanel, portField, 1, 1, 100, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
@@ -65,7 +68,6 @@ public class ServerView extends JFrame {
 		addComp(thePanel, startButton, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		stopButton = new RolitButton("Stop server");
-		
 		
 		startButton.addActionListener(new ActionListener() {
 			
@@ -81,7 +83,11 @@ public class ServerView extends JFrame {
 				thePanel.remove(portLabel);
 				thePanel.remove(portField);
 				thePanel.remove(startButton);
-				addComp(thePanel, stopButton, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+				numPlayersLabel = new JLabel(server.getNumPlayers() + " / " + server.getExpectedPlayers());
+				addComp(thePanel, numPlayersLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+				addComp(thePanel, waitingLabel, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+				addComp(thePanel, stopButton, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+				ServerView.this.setSize(ServerView.this.getWidth(), 150);
 				ServerView.this.revalidate();
 				ServerView.this.repaint();
 				thePanel.setVisible(true);
@@ -146,6 +152,14 @@ public class ServerView extends JFrame {
 			}
 			return null;
 		}
+	}
+	
+	public void updateNumPlayers() {
+		thePanel.remove(numPlayersLabel);
+		numPlayersLabel = new JLabel(server.getNumPlayers() + " / " + server.getExpectedPlayers());
+		addComp(thePanel, numPlayersLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		ServerView.this.revalidate();
+		ServerView.this.repaint();
 	}
 
 }
