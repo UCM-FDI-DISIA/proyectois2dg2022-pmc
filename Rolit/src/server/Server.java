@@ -157,6 +157,8 @@ public class Server {
 					teamToFind = team;
 			}
 		    
+		    JSONArray arrayPlayers = new JSONArray();
+		    teamToFind.put("players", arrayPlayers);
 		    JSONArray teamPlayers = teamToFind.getJSONArray("players");
 		   
 		    Player playerToFind = null;

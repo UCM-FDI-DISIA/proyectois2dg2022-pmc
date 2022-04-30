@@ -55,7 +55,7 @@ public class ClientController extends Thread{
 					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		finally{
