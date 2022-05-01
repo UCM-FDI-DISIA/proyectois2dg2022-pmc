@@ -31,7 +31,7 @@ public abstract class Game extends Thread implements Replayable {
 		this.players = game.players;		
 		this.board = new Board(game.board);		
 		this.exit = game.exit;
-		this.turnManager = game.turnManager;
+		this.turnManager = new TurnManager(game.turnManager);
 		
 	}
 	

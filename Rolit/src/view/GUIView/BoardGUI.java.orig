@@ -152,6 +152,10 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
+<<<<<<< HEAD
+		//update();
+=======
+>>>>>>> replay
 	}
 
 	@Override

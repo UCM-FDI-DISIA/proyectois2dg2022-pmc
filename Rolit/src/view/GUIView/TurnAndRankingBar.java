@@ -17,7 +17,7 @@ import replay.GameState;
 import replay.Replay;
 import view.GUIView.RolitComponents.RolitPanel;
 
-public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
+public class TurnAndRankingBar extends RolitPanel implements RolitObserver, ReplayObserver {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,6 +27,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 	private JLabel colorLabel;
 	private JPanel rankingPanel;
 	private String colorPath;
+	private Replay replay;
 	public static final String TURN_MSG = "Turn for ";
 	public static final String FINISHED_GAME_MSG = "Game has finished!";
 	public static final int ROW_HEIGHT = 20;
@@ -39,6 +40,14 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 		ctrl.addObserver(this);
 	}
 	
+	public TurnAndRankingBar(Replay replay) {
+		this.replay = replay;
+		this.state = replay.getCurrentState();
+		initGUIReplay();
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		replay.addObserver(this);
+	}
+	
 	public void initGUI() {
 		
 		msgLabel = new JLabel();
@@ -48,6 +57,29 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 		colorLabel.setMinimumSize(new Dimension(CeldaGUI.SIDE_LENGTH, CeldaGUI.SIDE_LENGTH));
 		
 		JTable rankingTable = new JTable(new RankingTableModel(ctrl, state));
+		rankingTable.setTableHeader(null);
+		rankingTable.setSize(new Dimension(300, ROW_HEIGHT * 3));
+		
+		rankingPanel = createViewPanel(rankingTable);
+		JScrollPane scrollPane = new JScrollPane(rankingPanel);
+		scrollPane.setMinimumSize(new Dimension(300, ROW_HEIGHT * 2));
+		scrollPane.setPreferredSize(new Dimension(300, ROW_HEIGHT * 2));
+		scrollPane.setMaximumSize(new Dimension(300, ROW_HEIGHT * 2));
+		this.add(msgLabel);
+		this.add(colorLabel);
+		this.add(rankingTable);
+		this.setVisible(true);
+	}
+	
+public void initGUIReplay() {
+		
+		msgLabel = new JLabel();
+		msgLabel.setMinimumSize(new Dimension(CeldaGUI.SIDE_LENGTH, 10));
+		
+		colorLabel = new JLabel();
+		colorLabel.setMinimumSize(new Dimension(CeldaGUI.SIDE_LENGTH, CeldaGUI.SIDE_LENGTH));
+		
+		JTable rankingTable = new JTable(new RankingTableModel(replay));
 		rankingTable.setTableHeader(null);
 		rankingTable.setSize(new Dimension(300, ROW_HEIGHT * 3));
 		
@@ -113,5 +145,25 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver {
 
 	@Override
 	public void onGameExited(Replay replay) {}
+
+	@Override
+	public void onReplayLeftButton() {
+		// TODO Auto-generated method stub
+		this.state = replay.getCurrentState();
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+	}
+
+	@Override
+	public void onReplayRightButton() {
+		// TODO Auto-generated method stub
+		this.state = replay.getCurrentState();
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+	}
+
+	@Override
+	public void onReplayStatusChange(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

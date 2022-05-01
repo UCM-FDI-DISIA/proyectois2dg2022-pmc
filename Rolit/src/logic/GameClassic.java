@@ -38,6 +38,9 @@ public class GameClassic extends Game {
 			this.board.update(newCube);
 			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
 						
+			//Añadimos el estado actual a replay
+			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
+
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished)
@@ -45,15 +48,12 @@ public class GameClassic extends Game {
 			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			if(!this.finished) {
-				onTurnPlayed();
-				this.executedTurn = true;
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 			}			
 			else
 				this.executedTurn = true;
 			
-			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 		}		
 	}
 	

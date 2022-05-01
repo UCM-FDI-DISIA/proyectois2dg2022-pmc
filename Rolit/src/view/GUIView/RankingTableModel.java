@@ -8,10 +8,11 @@ import logic.Rival;
 import replay.GameState;
 import replay.Replay;
 
-public class RankingTableModel extends AbstractTableModel implements RolitObserver {
+public class RankingTableModel extends AbstractTableModel implements RolitObserver, ReplayObserver {
 
 	private String[] _colNames;
 	private JSONArray rivals;
+	private Replay replay;
 	public static final int NUM_ROWS = 2;
 	
 	public RankingTableModel(Controller ctrl, GameState state) {
@@ -22,6 +23,20 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 			this._colNames[i] = this.rivals.getJSONObject(i - 1).getString("name");
 		}
 		ctrl.addObserver(this);
+	}
+	
+	public RankingTableModel(Replay replay) {
+		this.replay = replay;
+		GameState state = replay.getCurrentState();
+		this.rivals = state.getRivals();
+		this._colNames = new String[this.rivals.length() + 1];
+		this._colNames[0] = state.getType();
+		for(int i = 1; i <= this.rivals.length(); i++) {
+			this._colNames[i] = this.rivals.getJSONObject(i - 1).getString("name");
+		}
+		update();
+		this.rivals = replay.getCurrentState().getRivals();
+		replay.addObserver(this);
 	}
 	
 	public void update() {
@@ -63,14 +78,10 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onGameStatusChange(GameState state) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -78,7 +89,6 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	
 	@Override
 	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub
 		update();
 		this.rivals = state.getRivals();
 		
@@ -86,11 +96,26 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onGameExited(Replay replay) {}
+
+	@Override
+	public void onReplayLeftButton() {
+		update();
+		this.rivals = replay.getCurrentState().getRivals();
+	}
+
+	@Override
+	public void onReplayRightButton() {
+		update();
+		this.rivals = replay.getCurrentState().getRivals();
+	}
+
+	@Override
+	public void onReplayStatusChange(String msg) {
+		
+	}
 
 }
