@@ -36,7 +36,6 @@ public class PlayerTest {
 		String s = "{\"score\":0,\"color\":\"K\",\"name\":\"mar\"}";
 		assertTrue (new JSONObject(s).similar(p1.report()));
 		String s2 = "{\"score\":1,\"color\":\"L\",\"name\":\"Juan Diego\"}";
-		String s3 = p2.report().toString();
 		assertTrue (new JSONObject(s2).similar(p2.report()));
 	}
 }

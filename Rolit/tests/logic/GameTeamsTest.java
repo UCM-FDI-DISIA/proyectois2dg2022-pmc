@@ -34,10 +34,12 @@ public class GameTeamsTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.YELLOW, lt);
-		
-		assertThrows(IllegalArgumentException.class, () -> game.play(3, 4));
-		assertThrows(IllegalArgumentException.class, () -> game.play(0, -1));
-		game.play(3,6);
+		game.addCubeToQueue(new Cube(3,4, null));
+		game.addCubeToQueue(new Cube(0,-1, null));
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		game.addCubeToQueue(new Cube(3,6, null));
+		game.play();
 		assertEquals(b.getCubeInPos(3, 6).getColor(), Color.YELLOW);
 		b.clearOrderedCubeList();
 	}
@@ -67,7 +69,8 @@ public class GameTeamsTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.YELLOW, lt);
-		game.play(3, 6);
+		game.addCubeToQueue(new Cube(3,6, null));
+		game.play();
 		//{"teams":[{"score":3,"players":[{"score":2,"color":"Y","name":"Juandi"},{"score":1,"color":"W","name":"Leo"}],"name":"equipo1"},{"score":0,"players":[{"score":0,"color":"R","name":"dani"}],"name":"equipo2"}],"players":[{"score":2,"color":"Y","name":"Juandi"},{"score":1,"color":"W","name":"Leo"}],"turn":"W","type":"GameTeams","board":{"shape":"SM","cubes":[{"color":"W","pos":[3,4]},{"color":"Y","pos":[3,5]},{"color":"Y","pos":[3,6]}]}}
 		String s = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));

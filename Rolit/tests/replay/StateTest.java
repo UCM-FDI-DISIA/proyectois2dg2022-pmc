@@ -33,7 +33,8 @@ public class StateTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameClassic(b, lc, lp, Color.YELLOW);
-		game.play(3, 6);
+		game.addCubeToQueue(new Cube(3,6, null));
+		game.play();
 		GameState state = new GameState("p", game);
 		
 		String s = "{\"game\":{\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}},\"command\":\"p\"}";
