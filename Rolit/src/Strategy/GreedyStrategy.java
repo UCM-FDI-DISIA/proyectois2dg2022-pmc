@@ -11,13 +11,14 @@ public class GreedyStrategy extends MinimaxStrategy {
 	
 	public GreedyStrategy(Color color) {
 		super(color);
+		this.original_depth = 0;
 	}
 
 	@Override
 	public Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state) {
 		this.simplifiedBoard = new SimplifiedBoard(state, this);
-		this.simulate(currentColor, 0);
-		return new Pair<Integer, Integer>(x, y);
+		this.simulate(currentColor, original_depth, -10000, 10000);
+		return this.result;
 	}
 	
 	@Override
