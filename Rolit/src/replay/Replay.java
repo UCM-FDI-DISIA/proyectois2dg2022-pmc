@@ -134,9 +134,7 @@ public class Replay implements Reportable {
 		return states.get(currentState).getShape();
 	}
 	
-	public JSONObject currentStateReport() {
-		return states.get(currentState).report();
-	}
+
 	
 	@Override
 	public String toString() {
@@ -179,4 +177,7 @@ public class Replay implements Reportable {
 		return states.size();
 	}
 
+	public GameState getCurrentState() {
+		return states.get(currentState);
+	}
 }

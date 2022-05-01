@@ -9,6 +9,14 @@ public class TurnManager {
 	private List<Player> players;
 	private int currentPlayer;
 	
+	//Constructor de copia
+	public TurnManager(TurnManager t) {
+		if(t != null) {
+			this.players = t.players;
+			this.currentPlayer = t.currentPlayer;
+		}
+	}
+	
 	public TurnManager(List<Player> players) {
 		this(players, 0);
 	}

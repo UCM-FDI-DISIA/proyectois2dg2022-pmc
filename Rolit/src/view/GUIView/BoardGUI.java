@@ -133,7 +133,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	}
 	
 	private void updateReplay() {
-		JSONArray cubes = replay.currentStateReport().getJSONObject("game").getJSONObject("board").getJSONArray("cubes");
+		JSONArray cubes = replay.getCurrentState().report().getJSONObject("game").getJSONObject("board").getJSONArray("cubes");
 		for (int i = 0; i < cubes.length(); i++) {
 			JSONArray pos = cubes.getJSONObject(i).getJSONArray("pos");
 			char color = cubes.getJSONObject(i).getString("color").charAt(0);
@@ -149,7 +149,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
-		update();
 	}
 
 	@Override
@@ -172,6 +171,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+		update();
 		// TODO Auto-generated method stub
 		
 	}

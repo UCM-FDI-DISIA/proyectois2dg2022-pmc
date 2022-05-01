@@ -55,7 +55,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton joinServerButton;
 	private JFileChooser fileChooser;
 	private JPanel mainPanel;
-	private JPanel centerPanel;
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
@@ -251,11 +250,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
-				
+			
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 				
 		BoardGUI tablero = new BoardGUI(replay);		
-		
+		TurnAndRankingBar trbar = new TurnAndRankingBar(replay);
+
+		gamePanel.add(trbar, BorderLayout.PAGE_START);
 		gamePanel.add(tablero, BorderLayout.CENTER);
 
 		this.setContentPane(mainPanel);
