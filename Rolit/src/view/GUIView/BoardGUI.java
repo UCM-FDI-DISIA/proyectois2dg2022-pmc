@@ -132,7 +132,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	public void onReplayLeftButton() {
 		if(lastCubeAdded != null) {
 			JSONArray posLast = lastCubeAdded.getJSONArray("pos");
-			celdas[posLast.getInt(0)][posLast.getInt(1)].resetIcon();// Cuando vamos hacia atrás es necesario quitar los iconos que estuvieran de un estado posterior
+			celdas[posLast.getInt(1)][posLast.getInt(0)].resetIcon();// Cuando vamos hacia atrás es necesario quitar los iconos que estuvieran de un estado posterior
 		}
 		
 		updateReplay();
