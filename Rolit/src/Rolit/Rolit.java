@@ -11,7 +11,7 @@ import view.consoleView.MainBashWindow;
 
 public class Rolit {
 	private static final String TITLE = "		ROLIT";
-	private static final String VERSION = "Sprint Week 5";
+	private static final String VERSION = "Sprint Week 6";
 	private static final String DEFAULT_MODE = "console";
 	private static final String CHOOSE_MODE = "Choose mode: ";
 	private static final String CONSOLE_MODE = "Console Mode";
