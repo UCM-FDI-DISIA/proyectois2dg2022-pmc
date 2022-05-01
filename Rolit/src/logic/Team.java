@@ -22,6 +22,11 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 			relations.put(p.getName(), this);
 	}
 	
+	public Team(String name, List<Player> list_players, int score) {
+		this(name, list_players);
+		this.score = score;
+	}
+
 	@Override
 	public int compareTo(Team o) {
 		return -(this.score - o.score);		// lleva el menos delante para denotar que es el >

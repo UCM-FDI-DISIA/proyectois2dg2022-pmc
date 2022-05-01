@@ -46,6 +46,7 @@ public class GameTeamsBuilder extends GameBuilder {
 		List<Team> list_teams = new ArrayList<Team>();
 		for (int i = 0; i < teamsJSONArray.length(); i++) {
 			JSONObject team = teamsJSONArray.getJSONObject(i);
+			int score = team.getInt("score");
 			List<Player> list_playersTeam = new ArrayList<Player>();
 			JSONArray playersTeamJSONArray = team.getJSONArray("players");
 			for (int j = 0; j < playersTeamJSONArray.length(); ++j) {
@@ -59,7 +60,7 @@ public class GameTeamsBuilder extends GameBuilder {
 				}
 				
 			}
-			list_teams.add(new Team(team.getString("name"), list_playersTeam));			
+			list_teams.add(new Team(team.getString("name"), list_playersTeam, score));			
 		}
 		
 		List<Cube> list_cubes = new ArrayList<Cube>();
