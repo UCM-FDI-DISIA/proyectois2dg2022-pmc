@@ -38,7 +38,7 @@ public class BoardRenderer extends DefaultListCellRenderer {
                                                   boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         Shape c = (Shape) value;
-        this.setText(c.toString());
+        this.setText(c.toSizeString());
         this.setIcon(iconMap.get(c));
         if (!isSelected) {
             this.setBackground(index % 2 == 0 ? background : defaultBackground);

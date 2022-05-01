@@ -27,6 +27,33 @@ public enum Color {
 		return String.valueOf(shortcut);
 	}
 	
+	public String toFullNameString() {
+		switch(this.shortcut) {
+		case 'Y':
+			return "Yellow";
+		case 'O':
+			return "Orange";
+		case 'B':
+			return "Black";
+		case 'R':
+			return "Red";
+		case 'K':
+			return "Pink";
+		case 'W':
+			return "Brown";
+		case 'G':
+			return "Green";
+		case 'P':
+			return "Purple";
+		case 'E':
+			return "Beige";
+		case 'L':
+			return "Blue";
+		}
+		return null;
+		
+	}
+	
 	public String getPath() {
 		return this.path;
 	}
