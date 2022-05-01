@@ -50,6 +50,8 @@ public class GameClassic extends Game {
 			if(!this.finished) {
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
+				onTurnPlayed();
+				this.executedTurn = true;
 			}			
 			else
 				this.executedTurn = true;

@@ -162,8 +162,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			if (status1 == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
 				ctrl.createGame(dialogNew.createJSONObjectGame());
-				ctrl.startGame();
 				this.initGame();
+				ctrl.startGame();
 				new SaveReplayDialog(this, ctrl);
 			}		
 			break;
