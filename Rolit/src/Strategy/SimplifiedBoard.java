@@ -14,7 +14,7 @@ import replay.GameState;
 import utils.Pair;
 
 public class SimplifiedBoard {
-
+	
 	private Color[][] matrix;
 	private boolean[][] availablePositions;
 	private List<Integer> scores;
@@ -59,7 +59,7 @@ public class SimplifiedBoard {
 		this.state = state;
 	}
 	
-	public int simulateMove(int x, int y, Color color, int maxDepth) {
+	public int simulateMove(int x, int y, Color color, int maxDepth, int alpha, int beta) {
 		this.applyChanges(x, y, color);
 		int currentScore = this.scores.get(color.ordinal());
 		if(maxDepth > 0 && !this.isBoardFull()) {
@@ -77,7 +77,7 @@ public class SimplifiedBoard {
 			}
 			int nextIndex = (currentIndex + 1) % players.length();
 			Color nextColor = Color.valueOfIgnoreCase(players.getJSONObject(nextIndex).getString("color").charAt(0));
-			currentScore = strat.simulate(nextColor, maxDepth - 1);
+			currentScore = strat.simulate(nextColor, maxDepth - 1, alpha, beta);
 		}
 		this.revertChanges(x, y, color);
 		return currentScore;
@@ -124,7 +124,7 @@ public class SimplifiedBoard {
 							this.changesStack.add(new Pair<Pair<Integer, Integer>, Color>(coords, color));
 							this.scores.set(color.ordinal(), this.scores.get(color.ordinal()) - 1);
 							this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) + 1);
-							this.matrix[newX][newY] = color;
+							this.matrix[newX][newY] = currentColor;	//FIXME Antes ponía color (creo que está mal)
 							numberOfChanges++;
 							newX += dirX;
 							newY += dirY;
@@ -144,12 +144,12 @@ public class SimplifiedBoard {
 	
 	private void revertChanges(int x, int y, Color currentColor) {
 		for(int i = 0; i < this.numberOfChangesStack.peek(); i++) {
-			Pair<Integer, Integer> coords = this.changesStack.get(0).getFirst();
-			Color color = this.changesStack.get(0).getSecond();
+			Pair<Integer, Integer> coords = this.changesStack.peek().getFirst();
+			Color color = this.changesStack.peek().getSecond();
+			this.changesStack.pop();
 			this.scores.set(color.ordinal(), this.scores.get(color.ordinal()) + 1);
 			this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) - 1);
 			this.matrix[coords.getFirst()][coords.getSecond()] = color;
-			this.changesStack.pop();
 		}
 		this.matrix[x][y] = null;
 		this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) - 1);

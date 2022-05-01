@@ -37,6 +37,12 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 	
 	public Pair<Integer, Integer> play(GameState state) {
 		if(this.strategy != null) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Pair<Integer, Integer> coor = this.strategy.calculateNextMove(color, state);
 			try {
 				if(coor != null)

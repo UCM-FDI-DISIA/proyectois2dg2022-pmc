@@ -11,60 +11,86 @@ public class MinimaxStrategy extends Strategy {
 	public static final String NAME = "MINIMAX";
 	public static final String DIFFICULTY = "HARD";
 	
-	protected int x;
-	protected int y;
+	protected Pair<Integer, Integer> result;
 	public static final int MAX_DEPTH = 3;
+	protected int original_depth;
 	private boolean maximize;
 	
 	public MinimaxStrategy(Color color) {
 		this.color = color;
+		this.original_depth = MAX_DEPTH;
 	}
 	
 	@Override
 	public Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state) {
+		this.result = null;
 		this.simplifiedBoard = new SimplifiedBoard(state, this);
 		if(!simplifiedBoard.isBoardFull()) {
-			this.simulate(currentColor, MAX_DEPTH);
-			return new Pair<Integer, Integer>(x, y);
+			this.simulate(currentColor, MAX_DEPTH, -10000, 10000);
+			return result;
 		}
 		else return null;
 	}
 	
-	public int simulate(Color currentColor, int depth) {
+	public int simulate(Color currentColor, int depth, int alpha, int beta) {
 		this.maximize = (color.equals(currentColor));
 		int size = simplifiedBoard.getSize();
 		int currentScore;
 		int score = simplifiedBoard.getSimulatedScore(this.color);
+		boolean keepSearching = true;
 		if(!simplifiedBoard.isBoardEmpty()) {
-			for(int i = 0; i < size; i++) {
-				for(int j = 0; j < size; j++) {
+			for(int i = 0; i < size && keepSearching; i++) {
+				for(int j = 0; j < size && keepSearching; j++) {
 					if(simplifiedBoard.tryToAddCube(i, j)) {
-						currentScore = simplifiedBoard.simulateMove(i, j, currentColor, depth);
+						currentScore = simplifiedBoard.simulateMove(i, j, currentColor, depth, alpha, beta);
+						if(depth == original_depth) {
+							int asdflk = 0;	//FIXME Es para depurar
+						}
 						if(maximize) {
-							if(currentScore > score) {
+							if(currentScore >= score) {
 								score = currentScore;
-								x = i;
-								y = j;
+								if(depth == original_depth) {
+									this.result = new Pair<Integer, Integer>(i, j);
+								}
 							}
+							if(currentScore >= beta)
+								keepSearching = false;
+							if(currentScore > alpha) alpha = currentScore;
 						}
 						else {
-							if(currentScore < score) {
+							if(currentScore <= score) {
 								score = currentScore;
-								x = i;
-								y = j;
+								if(depth == original_depth) {
+									this.result = new Pair<Integer, Integer>(i, j);
+								}
 							}
+							if(currentScore <= alpha)
+								keepSearching = false;
+							if(currentScore < beta) beta = currentScore;
 						}
 					}	
 				}
 			}
+			if(this.result == null) {
+				Random random = new Random();
+				int x, y;
+				do {
+					x = random.nextInt(size);
+					y = random.nextInt(size);
+				} while(!simplifiedBoard.tryToAddCube(x, y));
+				score = simplifiedBoard.simulateMove(x, y, currentColor, 0, -10000, 10000);
+				if(depth == original_depth) this.result = new Pair<Integer, Integer>(x, y);
+			}
 		}
 		else {
 			Random random = new Random();
+			int x, y;
 			do {
 				x = random.nextInt(size);
 				y = random.nextInt(size);
 			} while(!simplifiedBoard.tryToAddCube(x, y));
-			currentScore = simplifiedBoard.simulateMove(x, y, currentColor, 0);
+			score = simplifiedBoard.simulateMove(x, y, currentColor, 0, -10000, 10000);
+			if(depth == original_depth) this.result = new Pair<Integer, Integer>(x, y);
 		}
 		return score;
 	}

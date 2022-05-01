@@ -33,11 +33,6 @@ public class RandomStrategy extends Strategy {
 	}
 
 	@Override
-	public int simulate(Color currentColor, int depth) {
-		return 0;
-	}
-
-	@Override
 	public String getName() {
 		return NAME;
 	}
@@ -45,6 +40,11 @@ public class RandomStrategy extends Strategy {
 	@Override
 	public String getDifficulty() {
 		return DIFFICULTY;
+	}
+
+	@Override
+	public int simulate(Color currentColor, int depth, int alpha, int beta) {
+		return 0;
 	}
 
 	
