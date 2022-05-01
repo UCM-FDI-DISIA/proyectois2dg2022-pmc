@@ -91,8 +91,12 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 			}
 			// Se ha seleccionado ver una repeticion
 			else if(REPLAY_GAME.equals(OPTIONS[option - 1])) {
-				repeatMenu = false;
-				this.ctr.startReplay(SaveLoadManager.loadReplay());
+				nextWindow = new LoadReplayWindow();
+				repeatMenu = nextWindow.open();
+				Replay replay = (Replay) nextWindow.get();
+				if (replay != null) {
+					this.ctr.startReplay(replay);
+				}
 			}			
 		} while (repeatMenu);
 		ctr.startGame();

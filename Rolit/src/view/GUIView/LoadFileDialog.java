@@ -8,10 +8,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -21,32 +19,32 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import control.SaveLoadManager;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitRadioButton;
 
-public class LoadGameDialog extends JDialog {
+public class LoadFileDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
 	private int status = 0;
 	
-	private List<String> savedGamesPathList;
-	private List<JRadioButton> savedGamesRadioButtons;
+	private List<String> savedFilesPathList;
+	private List<JRadioButton> savedFilesRadioButtons;
 	private ButtonGroup buttonGroup;
 	private JPanel mainPanel;
 	private JPanel buttonsPanel;
 	private JPanel okCancelPanel;
-	private JLabel foundGamesMsg;
+	private JLabel foundFilesMsg;
 	private JLabel errorLabel;
 	private JButton cancelButton;
 	private JButton okButton;
 	private JButton loadButton;
 	private File file;
 	
-	public LoadGameDialog(Frame parent) {
+	public LoadFileDialog(Frame parent, List<String> savedGamesPathList) {
 		super(parent, true);
+		this.savedFilesPathList = savedGamesPathList;
 		initGUI();
 	}
 	
@@ -55,7 +53,7 @@ public class LoadGameDialog extends JDialog {
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
 		
-		setTitle("Load Game");
+		setTitle("Load File");
 		setVisible(false);
 		
 		mainPanel = new RolitPanel();
@@ -63,19 +61,18 @@ public class LoadGameDialog extends JDialog {
 		
 		//Create and add components
 			//Saved games label
-		foundGamesMsg = new JLabel("SAVED GAMES: ");
-		addComp(mainPanel, foundGamesMsg, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		foundFilesMsg = new JLabel("SAVED FILES: ");
+		addComp(mainPanel, foundFilesMsg, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 			//RadioButtons
 		buttonsPanel = new RolitPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-		savedGamesPathList = SaveLoadManager.getListOfSavedGames();
-		savedGamesRadioButtons = new ArrayList<JRadioButton>();
+		savedFilesRadioButtons = new ArrayList<JRadioButton>();
 		buttonGroup = new ButtonGroup();
-		for (int i = 0; i < savedGamesPathList.size(); ++i) {
+		for (int i = 0; i < savedFilesPathList.size(); ++i) {
 			JRadioButton aux = new RolitRadioButton();
-			aux.setText(savedGamesPathList.get(i));
-			savedGamesRadioButtons.add(aux);
+			aux.setText(savedFilesPathList.get(i));
+			savedFilesRadioButtons.add(aux);
 			buttonGroup.add(aux);
 			buttonsPanel.add(aux);
 		}
@@ -90,7 +87,7 @@ public class LoadGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				status = 0;
-				LoadGameDialog.this.setVisible(false);
+				LoadFileDialog.this.setVisible(false);
 			}
 			
 		});
@@ -101,12 +98,12 @@ public class LoadGameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				status = 1;
-				for (int i = 0; i < savedGamesRadioButtons.size(); ++i) {
-					if (savedGamesRadioButtons.get(i).isSelected())
-						file = new File(savedGamesRadioButtons.get(i).getText()); 
+				for (int i = 0; i < savedFilesRadioButtons.size(); ++i) {
+					if (savedFilesRadioButtons.get(i).isSelected())
+						file = new File(savedFilesRadioButtons.get(i).getText()); 
 				}
 				if (file != null)
-					LoadGameDialog.this.setVisible(false);
+					LoadFileDialog.this.setVisible(false);
 				else {
 					
 					if (errorLabel != null)
@@ -125,7 +122,7 @@ public class LoadGameDialog extends JDialog {
 		
 		okCancelPanel.add(okButton);
 		
-		if (savedGamesPathList.isEmpty())
+		if (savedFilesPathList.isEmpty())
 			okButton.setVisible(false);
 		
 		okCancelPanel.add(cancelButton);
@@ -145,7 +142,7 @@ public class LoadGameDialog extends JDialog {
 					file = fileChooser.getSelectedFile();
 				}
 					
-				LoadGameDialog.this.setVisible(false);
+				LoadFileDialog.this.setVisible(false);
 			}
 			
 		});

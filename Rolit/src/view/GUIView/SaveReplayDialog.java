@@ -22,6 +22,7 @@ import view.GUIView.RolitComponents.RolitPanel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -58,8 +59,13 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SaveLoadManager.saveReplay(replay);
+				JFileChooser saveDialog = new JFileChooser();
 				setVisible(false);
+				int ans = saveDialog.showSaveDialog(null);
+				if(ans == JFileChooser.APPROVE_OPTION) {
+					SaveLoadManager.saveReplay(saveDialog.getSelectedFile().getAbsolutePath(), replay);
+				}
+				
 			}
 			
 		});

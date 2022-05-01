@@ -1,8 +1,6 @@
 package view.consoleView;
 
-import java.io.IOException;
 import java.util.List;
-
 import control.SaveLoadManager;
 
 public class DeleteGameWindow implements ConsoleWindow{
@@ -14,8 +12,7 @@ public class DeleteGameWindow implements ConsoleWindow{
 	@Override
 	public boolean open() {
 		this.clear();
-		try {
-			List<String> savedGames = SaveLoadManager.showSavedGames();
+			List<String> savedGames = SaveLoadManager.getListOfSavedGames();
 			// En caso de que todo haya ido bien
 			if (!savedGames.isEmpty()) {
 				boolean repeatChooseNumber;
@@ -32,16 +29,11 @@ public class DeleteGameWindow implements ConsoleWindow{
 					}
 				} while (repeatChooseNumber);
 			}
-		}
-		catch(IOException e) {
-			System.out.println(e.getMessage());
-		}
 		return true;
 	}
 
 	@Override
 	public Object get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

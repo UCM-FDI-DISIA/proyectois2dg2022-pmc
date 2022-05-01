@@ -168,7 +168,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			}		
 			break;
 		case "LG":
-			LoadGameDialog dialogLoad = new LoadGameDialog(MainWindow.this);
+			LoadFileDialog dialogLoad = new LoadFileDialog(MainWindow.this, SaveLoadManager.getListOfSavedGames());
 			int status2 = dialogLoad.open();
 			if (status2 == 1) {
 				File file = dialogLoad.getFile();
@@ -182,16 +182,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			dialogDelete.open();
 			break;
 		case "LR":
-			fileChooser = new JFileChooser();
-			int ret = fileChooser.showOpenDialog(loadGameButton);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
+			LoadFileDialog dialogLoadReplay = new LoadFileDialog(MainWindow.this, SaveLoadManager.getListOfSavedReplays());
+			int status3 = dialogLoadReplay.open();
+			
+			if (status3 == 1) {
+				File file = dialogLoadReplay.getFile();
 				replay = SaveLoadManager.loadReplay(file.getPath());
 				initReplay();
-			} 
-			else {
-				//TODO Mostrar algún mensaje
 			}
+		
 			break;
 		case "CS":
 			CreateGameDialog dialogCS = new CreateGameDialog(MainWindow.this, ctrl);
