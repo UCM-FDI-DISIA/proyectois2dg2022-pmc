@@ -14,10 +14,6 @@ public enum Shape {
 	private String info;
 	private String path;
 	private String directory = "./resources/shapes/";
-	
-	public static int BIG_SHAPE_BUTTON_LENGTH = 28;
-	public static int MEDIUM_SHAPE_BUTTON_LENGTH = 36;
-	public static int SMALL_SHAPE_BUTTON_LENGTH = 48;
 
 	Shape(String filename, String info, String path) {
 		this.filename =  directory + filename;
@@ -55,19 +51,18 @@ public enum Shape {
 		return path;
 	}
 
-	public int shapeToSideButtonLength() {
+	public String toSizeString() {
 		
 		switch(this.name().charAt(1)) {
 		case 'S':
-			return SMALL_SHAPE_BUTTON_LENGTH;
+			return "Small";
 		case 'M':
-			return MEDIUM_SHAPE_BUTTON_LENGTH;
+			return "Medium";
 		case 'L':
-			return BIG_SHAPE_BUTTON_LENGTH;
+			return "Large";
 		
 		}
-		
-		return 0;
+		return null;
 	}
 	
 	/*

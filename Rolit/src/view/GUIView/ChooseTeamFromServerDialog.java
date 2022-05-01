@@ -2,6 +2,9 @@ package view.GUIView;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,12 +12,17 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import view.GUIView.RolitComponents.RolitButton;
+import view.GUIView.RolitComponents.RolitPanel;
+import view.GUIView.RolitComponents.RolitRadioButton;
 
 public class ChooseTeamFromServerDialog extends JDialog {
 	
@@ -23,7 +31,7 @@ public class ChooseTeamFromServerDialog extends JDialog {
 	private JSONObject gameConfig;
 	private JPanel mainPanel;
 	private List<String> teamsList = new ArrayList<>();
-	private List<JRadioButton> listTeamsRadioButtons;
+	private List<RolitRadioButton> listTeamsRadioButtons;
 	private ButtonGroup G;
 	private int status = 0;
 	
@@ -44,27 +52,24 @@ public class ChooseTeamFromServerDialog extends JDialog {
 	public void initGUI () {
 		
 		this.setLocation(50, 50);
-		this.setSize(700, 200);
 		
 		setTitle("Delete Game");
 		setVisible(false);
 		
-		mainPanel = new JPanel();
+		mainPanel = new RolitPanel();
 		
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
-		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.setLayout(new GridBagLayout());
 		
-		mainPanel.add(new JLabel("Choose team:"));
+		addComp(mainPanel, new JLabel("Choose team:"), 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		
-		JPanel buttonsPanel = new JPanel();
+		RolitPanel buttonsPanel = new RolitPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		
-		listTeamsRadioButtons = new ArrayList<JRadioButton>();
+		listTeamsRadioButtons = new ArrayList<RolitRadioButton>();
 		G = new ButtonGroup();
 		
 		for (int i = 0; i < teamsList.size(); ++i) {
-			JRadioButton aux = new JRadioButton();
+			RolitRadioButton aux = new RolitRadioButton();
 			aux.setText(teamsList.get(i));
 			listTeamsRadioButtons.add(aux);
 			G.add(aux);
@@ -74,11 +79,11 @@ public class ChooseTeamFromServerDialog extends JDialog {
 				aux.setSelected(true); //poner uno seleccionado por defecto
 		}
 		
-		mainPanel.add(buttonsPanel);
+		addComp(mainPanel, buttonsPanel, 1, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		
 		
-		JButton doneButton = new JButton("Done");
+		RolitButton doneButton = new RolitButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -90,10 +95,11 @@ public class ChooseTeamFromServerDialog extends JDialog {
 			
 		});
 		
-		mainPanel.add(doneButton);
+		addComp(mainPanel, doneButton, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		setContentPane(mainPanel);
-		setMinimumSize(new Dimension(100, 100));
+		
+		setMinimumSize(new Dimension(300, 180));
 		
 		this.pack();
 		
@@ -121,6 +127,24 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		
 		return o;
 		
+	}
+	
+	
+	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
+
+		GridBagConstraints gridConstraints = new GridBagConstraints();
+
+		gridConstraints.gridx = xPos;
+		gridConstraints.gridy = yPos;
+		gridConstraints.gridwidth = compWidth;
+		gridConstraints.gridheight = compHeight;
+		gridConstraints.weightx = 100;
+		gridConstraints.weighty = 100;
+		gridConstraints.insets = new Insets(5,5,5,5);
+		gridConstraints.anchor = place;
+		gridConstraints.fill = stretch;
+
+		thePanel.add(comp, gridConstraints);
 	}
 	
 }
