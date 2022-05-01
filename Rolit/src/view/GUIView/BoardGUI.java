@@ -28,6 +28,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	
 	public BoardGUI(Controller ctrl) {
 		this.ctrl = ctrl;
+		
 		this.ctrl.addObserver(this);	
 
 		boolean[][] shapeMatrix = SaveLoadManager.loadShape(Shape.valueOf(state.getShape()).getFilename());
@@ -100,10 +101,14 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 				this.add(celdas[i][j].getButton(), c);
 			}
 		}
+		
+		this.update();
+		
 		this.revalidate();
 	}
 
 	public void update() {
+
 		cubes = state.getCubes();
 		for (int i = 0; i < cubes.length(); i++) {
 			JSONObject cube = cubes.getJSONObject(i);

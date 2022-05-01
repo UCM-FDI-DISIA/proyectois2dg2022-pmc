@@ -119,7 +119,8 @@ public void initGUIReplay() {
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
-		update(state.getFirstPlayerName(), Color.valueOfIgnoreCase(state.getFirstPlayerColorShortcut()));
+		//FIXME antes estaba getFirstTurn... ahora parece que se puede usar sin ello
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
 	}
 
 	@Override
