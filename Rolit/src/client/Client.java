@@ -24,7 +24,7 @@ public class Client {
 		mainWindow.updateGameFromServer(JSONJuegoNuevo);
 	}
 
-	public void empezarPartida(String ip, int port) {
+	public void empezarPartida(String ip, int port) throws Exception {
 		clientController = new ClientController(this, ip, port);
 		clientController.start();		
 	}

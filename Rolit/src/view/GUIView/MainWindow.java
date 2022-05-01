@@ -60,6 +60,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
 	
+	JoinServerDialog jsd;
+	
 	private volatile boolean onlineGameStarted = false;	
 	
 	public MainWindow(Controller ctrl) {
@@ -200,12 +202,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			}
 			break;
 		case "JS":
-			JoinServerDialog jsd = new JoinServerDialog(this);
+			jsd = new JoinServerDialog(this);
 			int statusjs = jsd.open();
 			if(statusjs == 1) {
 				ctrl.setOnlineMode(true);
-				clientRolit.empezarPartida(jsd.getIp(), Integer.parseInt(jsd.getPort()));
+				try {
+					clientRolit.empezarPartida(jsd.getIp(), jsd.getPort());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(jsd, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
 				clientRolit.join(jsd.getPlayerName(), jsd.getPlayerColor());
+				jsd.showWaitingDialog();
 			}
 			break;
 		}
@@ -291,6 +299,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	public void updateGameFromServer(JSONObject JSONnewState) {
 		if(!onlineGameStarted) {
 			onlineGameStarted = true;
+			jsd.closeWaitingDialog();
 			state = ctrl.createGame(JSONnewState);
 			initGame();
 		}			

@@ -19,6 +19,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import logic.Color;
+import server.ServerView;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;
@@ -31,10 +32,15 @@ public class JoinServerDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel connectPanel;
+	
+	private JLabel waitingLabel;
+	
+	private JButton stopConnectionButton;
+	
 	private int status = 0;
 	
 	private String ip;
-	private String port;
+	private int port;
 	
 	private final int MAX_TEXT_LENGTH = 15;
 	
@@ -103,14 +109,17 @@ public class JoinServerDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == connect) {
-					ip = ipField.getText().trim();
-					port = portField.getText().trim();
 					try {
+						ip = ipField.getText().trim();
+						port = Integer.parseInt(portField.getText().trim());
 						status = 1;
 						JoinServerDialog.this.setVisible(false);
+
 					} catch (NumberFormatException e1) {
+						status = 0;
 						displayError("Wrong port format. Try again.");
 					}
+					
 				}
 			}
 		});
@@ -150,7 +159,7 @@ public class JoinServerDialog extends JDialog {
 		return ip;
 	}
 
-	public String getPort() {
+	public int getPort() {
 		return port;
 	}
 
@@ -160,6 +169,26 @@ public class JoinServerDialog extends JDialog {
 	
 	public String getPlayerName() {
 		return (String) nameTextArea.getText();
+	}
+
+	public void showWaitingDialog() {
+		connectPanel.removeAll();
+		
+		waitingLabel = new JLabel("Waiting for all players to be connected...");
+		
+		addComp(connectPanel, waitingLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		
+		JoinServerDialog.this.setSize(JoinServerDialog.this.getWidth(), 150);
+		JoinServerDialog.this.revalidate();
+		JoinServerDialog.this.repaint();
+		connectPanel.setVisible(true);
+		JoinServerDialog.this.setVisible(true);
+		
+	}
+
+	public void closeWaitingDialog() {
+		JoinServerDialog.this.setVisible(false);
+		
 	}
 	
 }
