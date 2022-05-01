@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -24,6 +26,7 @@ public class CeldaGUI {
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
+	private HashMap<logic.Color, ImageIcon> mapColorIcon = new HashMap<>();
 
 	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
@@ -117,22 +120,38 @@ public class CeldaGUI {
 	}
 	
 	public void update(logic.Color newColor) {
+		
+		
 		if (this.validButton) {
-			this.iconPath = newColor.getPath();
-			this.filled = true;
+			
+			ImageIcon icon = mapColorIcon.get(newColor);
+			
+			if (icon == null) {
+				
+				this.iconPath = newColor.getPath();
+				this.filled = true;
+				
+				ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
+				
+				Image originalImg = originalImgIcon.getImage();
 
-			ImageIcon originalImgIcon = new ImageIcon(this.iconPath);
-			Image originalImg = originalImgIcon.getImage();
-			Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
-			ImageIcon resizedImgIcon = new ImageIcon(resizedImg);
+				Image resizedImg = originalImg.getScaledInstance(SIDE_LENGTH, SIDE_LENGTH, java.awt.Image.SCALE_SMOOTH);
 
-			this.button.setIcon(resizedImgIcon);
+				icon = new ImageIcon(resizedImg);
+				
+				mapColorIcon.put(newColor, icon);
+				
+			}
+
+			this.button.setIcon(icon);
 
 			// else this.filled = false; //Por si pudiera desocuparse una casilla en una
 			// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
 			// interactuar con el tablero
 
 			this.button.repaint();
+			
+			
 		}
 	}
 
