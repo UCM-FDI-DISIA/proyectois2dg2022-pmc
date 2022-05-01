@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import Strategy.Strategy;
 import logic.Color;
 import view.GUIView.ColorRenderer;
+import view.GUIView.RolitComponents.RolitCheckBox;
 import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextArea;
@@ -82,7 +83,7 @@ public class PlayerDataPanel extends RolitPanel {
 		
 		//AI
 		AILabel = new JLabel("AI: ");
-		AICheckBox = new JCheckBox();
+		AICheckBox = new RolitCheckBox();
 		AICheckBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -94,7 +95,7 @@ public class PlayerDataPanel extends RolitPanel {
 			}
 			
 		});
-		AICombo = new JComboBox<Strategy>(Strategy.strategies);
+		AICombo = new RolitComboBox<Strategy>(Strategy.strategies);
 		AICombo.setVisible(false);
 		
 		this.add(playerLabel);
