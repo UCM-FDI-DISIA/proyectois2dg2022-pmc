@@ -71,7 +71,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 		this.setVisible(true);
 	}
 	
-public void initGUIReplay() {
+	public void initGUIReplay() {
 		
 		msgLabel = new JLabel();
 		msgLabel.setMinimumSize(new Dimension(CeldaGUI.SIDE_LENGTH, 10));

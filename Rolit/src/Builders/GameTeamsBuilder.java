@@ -37,7 +37,7 @@ public class GameTeamsBuilder extends GameBuilder {
 			}
 			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
 			list_players.add(new Player(c, playersJSONArray.getJSONObject(i).getString("name"), s));
-		}			
+		}
 
 		JSONObject boardJSONObject = o.getJSONObject("board");
 		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve	
@@ -49,8 +49,15 @@ public class GameTeamsBuilder extends GameBuilder {
 			List<Player> list_playersTeam = new ArrayList<Player>();
 			JSONArray playersTeamJSONArray = team.getJSONArray("players");
 			for (int j = 0; j < playersTeamJSONArray.length(); ++j) {
-				JSONObject playerTeam = playersTeamJSONArray.getJSONObject(j);
-				list_playersTeam.add(new Player(Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0)), playerTeam.getString("name")));
+				for(int k = 0; k < list_players.size(); k++) {
+					JSONObject playerTeam = playersTeamJSONArray.getJSONObject(j);
+					Color currentColor = Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0));
+					if(list_players.get(k).getColor().equals(currentColor)) {
+						list_playersTeam.add(list_players.get(k)); //Hay que coger los players ya creados, no crear copias
+						break;
+					}
+				}
+				
 			}
 			list_teams.add(new Team(team.getString("name"), list_playersTeam));			
 		}

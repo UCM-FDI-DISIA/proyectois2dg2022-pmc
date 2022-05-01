@@ -1,12 +1,10 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import commands.PlaceCubeCommand;
 import replay.GameState;
 import utils.StringUtils;
 import view.GUIView.RolitObserver;

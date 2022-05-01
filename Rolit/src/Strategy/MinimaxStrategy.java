@@ -39,7 +39,7 @@ public class MinimaxStrategy extends Strategy {
 			for(int i = 0; i < size; i++) {
 				for(int j = 0; j < size; j++) {
 					if(simplifiedBoard.tryToAddCube(i, j)) {
-						currentScore = simplifiedBoard.simulateMove(i, j, currentColor, 0);
+						currentScore = simplifiedBoard.simulateMove(i, j, currentColor, depth);
 						if(maximize) {
 							if(currentScore > score) {
 								score = currentScore;
