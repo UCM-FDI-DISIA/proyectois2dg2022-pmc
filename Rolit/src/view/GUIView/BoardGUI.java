@@ -46,6 +46,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 			}
 		}
 		initGUI();
+		this.update();
 	}
 	
 	public BoardGUI(Replay replay) {
@@ -101,9 +102,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 				this.add(celdas[i][j].getButton(), c);
 			}
 		}
-		
-		this.update();
-		
+				
 		this.revalidate();
 	}
 
@@ -176,9 +175,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		update();
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
