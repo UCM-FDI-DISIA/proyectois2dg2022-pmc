@@ -113,12 +113,15 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	}
 
 	public void update() {
-
-		cubes = state.getCubes();
-		for (int i = 0; i < cubes.length(); i++) {
-			JSONObject cube = cubes.getJSONObject(i);
-			celdas[cube.getJSONArray("pos").getInt(1)][cube.getJSONArray("pos").getInt(0)].update(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)));
+		if (celdas != null && state != null) {
+			cubes = state.getCubes();
+			for (int i = 0; i < cubes.length(); i++) {
+				JSONObject cube = cubes.getJSONObject(i);
+				celdas[cube.getJSONArray("pos").getInt(1)][cube.getJSONArray("pos").getInt(0)].update(Color.valueOfIgnoreCase(cube.getString("color").charAt(0)));
+			}
+			
 		}
+		
 	}
 
 	@Override
