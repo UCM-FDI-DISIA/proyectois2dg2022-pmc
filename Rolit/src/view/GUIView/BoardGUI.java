@@ -148,7 +148,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		for (int i = 0; i < cubes.length(); i++) {
 			JSONArray pos = cubes.getJSONObject(i).getJSONArray("pos");
 			char color = cubes.getJSONObject(i).getString("color").charAt(0);
-			celdas[pos.getInt(0)][pos.getInt(1)].update(logic.Color.valueOfIgnoreCase(color));
+			celdas[pos.getInt(1)][pos.getInt(0)].update(logic.Color.valueOfIgnoreCase(color));
 		}
 		this.lastCubeAdded = cubes.getJSONObject(cubes.length() - 1);
 	}
