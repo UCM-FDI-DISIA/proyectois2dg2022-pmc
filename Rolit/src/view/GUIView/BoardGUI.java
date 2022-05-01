@@ -26,6 +26,11 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	private JSONObject lastCubeAdded;
 	private JSONArray cubes;
 	
+	private final int BIG_SHAPE_BUTTON_LENGTH = 28;
+	private final int MEDIUM_SHAPE_BUTTON_LENGTH = 36;
+	private final int SMALL_SHAPE_BUTTON_LENGTH = 48;
+	private final int MATRIX_LENGTH_FRONTIER_VALUE = 15;
+	
 	public BoardGUI(Controller ctrl) {
 		this.ctrl = ctrl;
 		
@@ -57,7 +62,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		
 		this.celdas = new CeldaGUI[nFilas][nColumnas];
 		
-		int sideButtonLength = shape.shapeToSideButtonLength();
+		int sideButtonLength = shapeMatrixToSideButtonLength(shapeMatrix);
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
@@ -72,12 +77,12 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	}
 	
 	private int shapeMatrixToSideButtonLength(boolean[][] shapeMatrix) {
-		if (shapeMatrix.length > 15)
-			return Shape.BIG_SHAPE_BUTTON_LENGTH;
-		else if (shapeMatrix.length == 15)
-			return Shape.MEDIUM_SHAPE_BUTTON_LENGTH;
-		else if (shapeMatrix.length < 15)
-			return Shape.SMALL_SHAPE_BUTTON_LENGTH;
+		if (shapeMatrix.length > MATRIX_LENGTH_FRONTIER_VALUE)
+			return this.BIG_SHAPE_BUTTON_LENGTH;
+		else if (shapeMatrix.length == MATRIX_LENGTH_FRONTIER_VALUE)
+			return this.MEDIUM_SHAPE_BUTTON_LENGTH;
+		else if (shapeMatrix.length < MATRIX_LENGTH_FRONTIER_VALUE)
+			return this.SMALL_SHAPE_BUTTON_LENGTH;
 
 		
 		return 0;
