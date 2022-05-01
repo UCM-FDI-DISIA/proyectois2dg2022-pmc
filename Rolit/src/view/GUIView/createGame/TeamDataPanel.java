@@ -13,9 +13,9 @@ import view.GUIView.RolitComponents.RolitTextArea;
 
 public class TeamDataPanel extends RolitPanel {
 	private static final long serialVersionUID = 1L;
-
+	
 	private static final int MAX_TEXT_LENGTH = 15;
-
+	
 	private JTextArea nameTextArea;
 	private JLabel nameLabel;
 	
@@ -42,7 +42,7 @@ public class TeamDataPanel extends RolitPanel {
 		this.add(nameLabel);
 		this.add(nameTextArea);
 	}
-
+	
 	public String getTeamName() {
 		return nameTextArea.getText();
 	}
