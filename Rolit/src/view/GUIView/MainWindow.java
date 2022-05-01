@@ -174,6 +174,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				File file = dialogLoad.getFile();
 				state = ctrl.loadGame(file.getPath());
 				initGame();
+				ctrl.startGame();
 				new SaveReplayDialog(this, ctrl);
 			}
 			break;
