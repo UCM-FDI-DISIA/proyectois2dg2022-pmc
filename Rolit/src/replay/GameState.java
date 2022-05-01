@@ -44,12 +44,12 @@ public class GameState implements Reportable {
 		return game.report().getJSONObject("board").getJSONArray("cubes");
 	}
 	
-	public char getTurnColorShorcut() {
+	public char getTurnColorShortcut() {
 		return game.report().getString("turn").charAt(0);
 	}
 	
 	private int findTurnPlayer() {
-		String shortcut = String.valueOf(getTurnColorShorcut());
+		String shortcut = String.valueOf(getTurnColorShortcut());
 		JSONArray players = game.report().getJSONArray("players");
 		int i = 0;
 		boolean found = false;;

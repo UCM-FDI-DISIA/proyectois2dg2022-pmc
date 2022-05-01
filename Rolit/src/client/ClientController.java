@@ -34,21 +34,24 @@ public class ClientController extends Thread{
 	public void updateGameToServer() {
 		puedeJugar = false;
 		JSONObject report = clientRolit.getGameReport();
-		sendToServer(report);
+		sendGameToServer(report);
 		
 	}
 
-	
+
 	public void run(){
 		try {
 			// FIXME hay un while true
 			while(true){				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
+				
 				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+				
 				if (JSONJuegoNuevo.getString("notification").equals("updateGraphics"))
 					clientRolit.updateGameFromServer(JSONJuegoNuevo);
 				else if (JSONJuegoNuevo.getString("notification").equals("chooseTeam"))
 					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
+				
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			}
 		} catch (Exception e) {
@@ -77,9 +80,19 @@ public class ClientController extends Thread{
 
 	public void sendChosenTeamToServer(JSONObject selectedTeamJSON) {
 		selectedTeamJSON.put("notification", "chooseTeam");
-		String msg = selectedTeamJSON.toString();
-		out.println(msg);
+		sendToServer(selectedTeamJSON);
 		
+	}
+
+
+	public void sendPlayerInfoToServer(JSONObject report) {
+		report.put("notification", "playerInfo");
+		sendToServer(report);
+	}
+	
+	public void sendGameToServer(JSONObject report) {
+		report.put("notification", "updateGraphics");
+		sendToServer(report);
 	}
 
 

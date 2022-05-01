@@ -45,25 +45,29 @@ public class GameTeams extends Game {
 			for (Team team : teams)
 				team.update();
 			
-			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-			//Añadimos el estado actual a replay
-			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
-			
-			onTurnPlayed();
-			this.executedTurn = true;
-			
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished)
 				this.onGameFinished();
 			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
-			if(!this.finished) {
+			else {
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 				
-			}			
+			}
+			
+			onTurnPlayed();
+			this.executedTurn = true;
+			
+			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
+			//Añadimos el estado actual a replay
+			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
+			
 		}
+		
+
+		
 	}
 
 	@Override

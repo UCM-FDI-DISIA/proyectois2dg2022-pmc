@@ -36,7 +36,7 @@ public class Client {
 	public void join(String name, Color color) {
 		if (this.player == null) {
 			this.player = new Player(color, name);
-			clientController.sendToServer(player.report());
+			clientController.sendPlayerInfoToServer(player.report());
 		}
 	}
 

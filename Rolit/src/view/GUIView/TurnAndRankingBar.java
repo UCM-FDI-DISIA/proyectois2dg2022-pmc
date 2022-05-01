@@ -44,7 +44,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 		this.replay = replay;
 		this.state = replay.getCurrentState();
 		initGUIReplay();
-		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 		replay.addObserver(this);
 	}
 	
@@ -113,14 +113,15 @@ public void initGUIReplay() {
 	@Override
 	public void onTurnPlayed(GameState state) {	//TODO Si esto funciona dios existe
 		this.state = state;
-		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 	}
 
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
 		//FIXME antes estaba getFirstTurn... ahora parece que se puede usar sin ello
-		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
+		
 	}
 
 	@Override
@@ -151,14 +152,14 @@ public void initGUIReplay() {
 	public void onReplayLeftButton() {
 		// TODO Auto-generated method stub
 		this.state = replay.getCurrentState();
-		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 	}
 
 	@Override
 	public void onReplayRightButton() {
 		// TODO Auto-generated method stub
 		this.state = replay.getCurrentState();
-		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShorcut()));
+		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 	}
 
 	@Override

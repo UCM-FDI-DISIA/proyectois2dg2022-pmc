@@ -24,6 +24,7 @@ import utils.Pair;
 
 
 public class Server {
+	
 	private ServerSocket serverSocket = null;
 
 	private List<Pair<Player, Socket>> sockets = new ArrayList<>();
@@ -121,11 +122,14 @@ public class Server {
 
 
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
-		if (json.has("notification") && json.getString("notification").equals("chooseTeam")) {
+		
+		String notification = json.getString("notification");
+		
+		if (notification.equals("chooseTeam")) {
 			mapClientTeam.put(client, json.getString("team"));
 				
 		}
-		else if (json.has("turn")) { //estamos ante un juego
+		else if (notification.equals("updateGraphics")) { //estamos ante un juego
 
 			for (int i = 0; i < clients.size(); ++i) {
 				if (client != clients.get(i).getFirst())
@@ -133,7 +137,7 @@ public class Server {
 			}
 			
 		}
-		else { //informacion de un player nuevo
+		else if (notification.equals("playerInfo")){ //informacion de un player nuevo
 			Player p = new Player(json);
 			incomingPlayers.add(p);
 			

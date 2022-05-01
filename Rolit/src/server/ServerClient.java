@@ -33,7 +33,7 @@ public class ServerClient {
 	}
 
 	public void updateGraphics(JSONObject json) {
-		thread.updateGraphics(json);
+		thread.sendUpdateGraphicsToClient(json);
 	}
 
 	public Player getPlayer() {
@@ -41,7 +41,7 @@ public class ServerClient {
 	}
 
 	public void notifyClientToChooseTeam(JSONObject gameConfigJSON) {
-		thread.notifyClientToChooseTeam(gameConfigJSON);
+		thread.sendChooseTeamToClient(gameConfigJSON);
 		
 	}
 	

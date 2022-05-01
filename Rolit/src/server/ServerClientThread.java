@@ -50,21 +50,23 @@ public class ServerClientThread extends Thread {
 		}
 	}
 
-
-	public void updateGraphics(JSONObject json){
-		json.put("notification", "updateGraphics");
+	public void sendToClient(JSONObject json) {
 		String msg = json.toString();
 		if(msg != null) 
 			output.println(msg);
+		
+	}
+
+	public void sendUpdateGraphicsToClient(JSONObject json){
+		json.put("notification", "updateGraphics");
+		sendToClient(json);
 	}
 
 
 
-	public void notifyClientToChooseTeam(JSONObject gameConfigJSON) {
+	public void sendChooseTeamToClient(JSONObject gameConfigJSON) {
 		gameConfigJSON.put("notification", "chooseTeam");
-		String msg = gameConfigJSON.toString();
-		if(msg != null) 
-			output.println(msg);
+		sendToClient(gameConfigJSON);
 		
 	}
 
