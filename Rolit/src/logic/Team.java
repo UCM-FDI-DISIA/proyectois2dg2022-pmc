@@ -7,7 +7,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Team implements Reportable, Comparable<Team>, Rival {
+public class Team implements Reportable, Rival {
 	private static Map<String, Team> relations = new HashMap<>();
 	private String name;
 	private int score;
@@ -25,11 +25,6 @@ public class Team implements Reportable, Comparable<Team>, Rival {
 	public Team(String name, List<Player> list_players, int score) {
 		this(name, list_players);
 		this.score = score;
-	}
-
-	@Override
-	public int compareTo(Team o) {
-		return -(this.score - o.score);		// lleva el menos delante para denotar que es el >
 	}
 	
 	public void update() {

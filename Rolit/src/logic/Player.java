@@ -7,7 +7,7 @@ import commands.PlaceCubeCommand;
 import replay.GameState;
 import utils.Pair;
 
-public class Player implements Comparable<Player>, Reportable, Rival {
+public class Player implements Reportable, Rival {
 	private static Player[] playerList = new Player[Color.size()];
 	private Color color;
 	private int score;
@@ -68,11 +68,6 @@ public class Player implements Comparable<Player>, Reportable, Rival {
 
 	public void addScore(int score) {
 		this.score += score;
-	}
-
-	@Override
-	public int compareTo(Player p) {
-		return -(this.score - p.score);	//Lleva un - delante para que no sea orden natural, sino mayor a menor
 	}
 	
 	public String getName() {

@@ -308,9 +308,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		// TODO Auto-generated method stub		
-	}
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {}
 
 	@Override
 	public void onRegister(GameState state) {
