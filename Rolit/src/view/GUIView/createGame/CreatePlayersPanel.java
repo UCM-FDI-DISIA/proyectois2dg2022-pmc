@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import logic.Color;
 import view.GUIView.RolitComponents.RolitPanel;
 

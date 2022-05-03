@@ -140,6 +140,7 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		this.remove(colorLabel);
 		this.remove(msgLabel);
+		this.revalidate();
 
 	}
 

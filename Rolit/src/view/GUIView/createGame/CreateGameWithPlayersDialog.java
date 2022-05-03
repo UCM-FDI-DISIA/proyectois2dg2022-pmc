@@ -51,7 +51,6 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 			}
 
 			o.put("players", players);
-			//o.put("turn", players.getJSONObject(0).getString("color")); //FIXME LO COMENTO PORQUE CREO QUE NO HACE FALTA
 			o.put("teams", teamsJSONArray);
 
 		}

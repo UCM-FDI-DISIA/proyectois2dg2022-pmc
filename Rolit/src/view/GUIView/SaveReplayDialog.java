@@ -39,6 +39,7 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	public SaveReplayDialog(Frame parent, Controller ctrl) {
 		super(parent, true);
 		ctrl.addObserver(this);
+		this.setLocationRelativeTo(null);
 	}
 	
 	
@@ -103,6 +104,12 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(1000); //añadimos un tiempo de espera para que se vea bien el ranking
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.replay = replay;
 		initGUI();
 

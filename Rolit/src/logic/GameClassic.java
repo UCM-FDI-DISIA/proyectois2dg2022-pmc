@@ -41,9 +41,15 @@ public class GameClassic extends Game {
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished) {
+				onTurnPlayed();
+				try {
+					Thread.sleep(500); // añadimos tiempo de espera para que se coloque ultimo cubo
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				this.onGameFinished();
 			}
-				
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			else {
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed

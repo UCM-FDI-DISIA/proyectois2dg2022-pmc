@@ -53,12 +53,13 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton loadReplayButton;
 	private JButton createServerButton;
 	private JButton joinServerButton;
-	private JFileChooser fileChooser;
 	private JPanel mainPanel;
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
-	private BoardGUI tablero;
+	private JPanel tablero;
+	private ControlPanel controlPanel;
+	private JPanel statusBar;
 	
 	JoinServerDialog jsd;
 	
@@ -240,13 +241,16 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
 		gamePanel.add(tablero, BorderLayout.CENTER);
 		
+		controlPanel = new ControlPanel(ctrl);
+		statusBar = new StatusBar(ctrl);
 		this.setContentPane(mainPanel);
-		mainPanel.add(new ControlPanel(ctrl), BorderLayout.PAGE_START);
+		mainPanel.add(controlPanel, BorderLayout.PAGE_START);
 		mainPanel.add(gamePanel, BorderLayout.CENTER);
-		mainPanel.add(new StatusBar(ctrl), BorderLayout.PAGE_END);
+		mainPanel.add(statusBar, BorderLayout.PAGE_END);
 						
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 		
 	}
@@ -276,7 +280,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.repaint();
 		this.pack();
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
-		
+		this.setMinimumSize(this.getSize());
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override
@@ -313,6 +318,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		gamePanel.remove(tablero);
 		RankingPanel r_panel = new RankingPanel(rivals);
 		gamePanel.add(r_panel);
+		this.remove(controlPanel);
+		this.remove(statusBar);
+		this.revalidate();
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class CreateGameDialog extends JDialog {
 		mainPanel.add(teamsPanel);
 
 		setContentPane(mainPanel);
-		setMinimumSize(new Dimension(700, 80));
+		setMinimumSize(new Dimension(725, 80));
 
 		this.pack();
 	}
