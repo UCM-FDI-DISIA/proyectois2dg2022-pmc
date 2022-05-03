@@ -58,6 +58,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
+	private BoardGUI tablero;
 	
 	JoinServerDialog jsd;
 	
@@ -232,7 +233,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		//centerPanel.add(gamePanel);
 		
-		BoardGUI tablero = new BoardGUI(ctrl);
+		tablero = new BoardGUI(ctrl);
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		
@@ -261,7 +262,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 				
-		BoardGUI tablero = new BoardGUI(replay);		
+		tablero = new BoardGUI(replay);		
 		TurnAndRankingBar trbar = new TurnAndRankingBar(replay);
 
 		gamePanel.add(trbar, BorderLayout.PAGE_START);
@@ -308,7 +309,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {}
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+		gamePanel.remove(tablero);
+		RankingPanel r_panel = new RankingPanel(rivals);
+		gamePanel.add(r_panel);
+	}
 
 	@Override
 	public void onRegister(GameState state) {

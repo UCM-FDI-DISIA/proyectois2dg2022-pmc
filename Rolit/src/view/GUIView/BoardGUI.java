@@ -91,8 +91,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	}
 	
 	public void initGUI() {
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.removeAll();
 		GridBagLayout gridbag = new GridBagLayout(); //Queremos que el tamaño del tablero sea fijo
 		this.setLayout(gridbag);
@@ -182,9 +180,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		RankingPanel r_panel = new RankingPanel(rivals);
-		this.removeAll();
-		this.add(r_panel);
 	}
 
 	@Override

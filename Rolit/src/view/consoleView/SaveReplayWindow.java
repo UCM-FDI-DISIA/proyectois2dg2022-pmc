@@ -36,7 +36,7 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		ans = ConsoleWindow.input.next();
 		
 		int parse =  parse(ans) ;
-		while(parse < 0) {
+		while(parse == 0) {
 			System.out.println(String.format("%s %n", HELP_MSG));
 			ans = ConsoleWindow.input.next();
 		}
@@ -50,7 +50,7 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		return false;
 	}
 	
-	//Returns a positive number if the ans is yes, 0 if ans is no or a negative number if ans is not valid
+	//Returns a positive number if the ans is yes, negative number  if ans is no or a 0 if ans is not valid
 	private int parse(String ans) {
 		for (int i = 0; i < yesArray.length; i++) {
 			if(yesArray[i].equals(ans.toLowerCase()))
