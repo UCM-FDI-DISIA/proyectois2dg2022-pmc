@@ -9,12 +9,11 @@ import org.json.JSONObject;
 
 import logic.Game;
 import replay.Replay;
+import view.RolitObserver;
 import replay.GameState;
-import view.GUIView.RolitObserver;
 
 public class Controller {
 	private volatile Game game;
-	//private Replay replay;
 	private volatile Client clientRolit;
 	private boolean onlineMode = false;
 	
@@ -24,7 +23,6 @@ public class Controller {
 	
 	public GameState createGame(JSONObject o) {
 		this.game = GameBuilder.createGame(o);
-		//this.replay = new Replay();
 		return new GameState(game);
 	}
 	

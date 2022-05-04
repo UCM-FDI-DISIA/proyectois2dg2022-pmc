@@ -10,8 +10,8 @@ import logic.Replayable;
 import logic.Reportable;
 import logic.Shape;
 import utils.StringUtils;
+import view.RolitObserver;
 import view.GUIView.Observable;
-import view.GUIView.RolitObserver;
 import view.GUIView.ReplayObserver;
 
 

@@ -8,7 +8,7 @@ import logic.Rival;
 import replay.GameState;
 import replay.Replay;
 import utils.StringUtils;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public class PlayWindow implements ConsoleWindow, RolitObserver {
 	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";

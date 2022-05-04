@@ -15,6 +15,7 @@ import logic.Color;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class TurnAndRankingBar extends RolitPanel implements RolitObserver, ReplayObserver {

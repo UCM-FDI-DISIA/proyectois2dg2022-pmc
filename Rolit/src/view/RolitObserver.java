@@ -1,4 +1,4 @@
-package view.GUIView;
+package view;
 
 import java.util.List;
 

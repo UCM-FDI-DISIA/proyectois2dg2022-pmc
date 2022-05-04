@@ -7,6 +7,7 @@ import control.Controller;
 import logic.Rival;
 import replay.Replay;
 import replay.GameState;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserver {

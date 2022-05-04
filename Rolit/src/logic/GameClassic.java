@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import replay.GameState;
 import utils.Pair;
 import utils.StringUtils;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public class GameClassic extends Game {
 	

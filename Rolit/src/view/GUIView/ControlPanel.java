@@ -18,6 +18,7 @@ import replay.GameState;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitToolBar;
 

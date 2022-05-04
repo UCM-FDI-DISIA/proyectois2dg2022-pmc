@@ -31,6 +31,7 @@ import logic.Rival;
 import replay.Replay;
 import replay.GameState;
 import server.Server;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.createGame.CreateGameDialog;
 import view.GUIView.createGame.CreateGameWithPlayersDialog;

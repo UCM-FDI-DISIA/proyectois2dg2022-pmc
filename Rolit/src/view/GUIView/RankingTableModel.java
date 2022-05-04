@@ -7,6 +7,7 @@ import control.Controller;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
+import view.RolitObserver;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver, ReplayObserver {
 

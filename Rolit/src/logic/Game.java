@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import replay.GameState;
 import replay.Replay;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public abstract class Game extends Thread implements Replayable {
 	protected boolean finished;

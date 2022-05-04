@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import replay.GameState;
 import utils.StringUtils;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public class GameTeams extends Game {
 	private List<Team> teams;

@@ -10,7 +10,7 @@ import logic.Color;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	// Hay que hacer una clase contenedora de todas estas constantes

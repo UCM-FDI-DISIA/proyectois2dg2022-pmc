@@ -7,7 +7,7 @@ import control.SaveLoadManager;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 
 public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	private final static String SAVE_QUESTION = "Do you want to save the replay of this game? (y/n)";

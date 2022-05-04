@@ -13,6 +13,7 @@ import logic.Rival;
 import logic.Shape;
 import replay.Replay;
 import replay.GameState;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserver {

@@ -15,7 +15,7 @@ import control.SaveLoadManager;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
-import view.GUIView.RolitObserver;
+import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 
