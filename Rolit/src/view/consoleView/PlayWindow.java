@@ -1,5 +1,6 @@
 package view.consoleView;
 
+import java.util.Collections;
 import java.util.List;
 
 import commands.Command;
@@ -46,11 +47,18 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+		Collections.sort(rivals);
 		this.close = true;
 		this.clear();
 		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);
 		for (int i = 0; i < rivals.size(); i++)
 			System.out.println(String.format("%d. %s: %s points", i+1, rivals.get(i).getName(), rivals.get(i).getScore()));
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -86,7 +94,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	@Override
 	public void onGameExited(Replay replay) {
 		this.close = true;
-		System.out.println("Nos vimos maquina"); //FIXME He puesto esto por poner algo
+		System.out.println("See you!");
 	}
 
 }

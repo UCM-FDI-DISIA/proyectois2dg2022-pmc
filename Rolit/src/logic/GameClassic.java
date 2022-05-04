@@ -1,11 +1,8 @@
 package logic;
 
 import java.util.List;
-
 import org.json.JSONObject;
-
 import replay.GameState;
-import utils.Pair;
 import utils.StringUtils;
 import view.RolitObserver;
 
@@ -54,10 +51,12 @@ public class GameClassic extends Game {
 			else {
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
+				
+				onTurnPlayed();
+				this.executedTurn = true;
 			}
 			
-			onTurnPlayed();
-			this.executedTurn = true;
+			
 			
 			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
 			//Añadimos el estado actual a replay

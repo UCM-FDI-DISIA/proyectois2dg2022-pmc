@@ -1,6 +1,7 @@
 package view.consoleView;
 
 import java.util.List;
+import java.util.Scanner;
 
 import control.Controller;
 import control.SaveLoadManager;
@@ -33,12 +34,12 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		String ans;
 		this.clear();
 		System.out.println(String.format("%s %n", SAVE_QUESTION));
-		ans = ConsoleWindow.input.next();
-		
+		Scanner sc = new Scanner(System.in);
+		ans = sc.nextLine();
 		int parse =  parse(ans) ;
 		while(parse == 0) {
 			System.out.println(String.format("%s %n", HELP_MSG));
-			ans = ConsoleWindow.input.next();
+			ans = sc.nextLine();
 		}
 		
 		//Answer is yes
@@ -47,6 +48,7 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 			System.out.println(SUCCESS_MSG);
 		}
 		
+		sc.close();
 		return false;
 	}
 	
