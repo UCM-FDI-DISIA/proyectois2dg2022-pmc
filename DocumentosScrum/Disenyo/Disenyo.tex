@@ -1,0 +1,58 @@
+\documentclass{article}
+\begin{document}
+
+\section{Diseño y evolución de las clases principales del Modelo}
+
+\subsection{Diseño del tablero}
+Toda la lógica que implementa el concepto del tablero queda reflejada a lo largo de todo el proyecto en la clase Board.
+\subsubsection{Sprint 1}
+La clase Board es un simple contenedor de cubos, organizados en forma de matriz.
+No tiene interacción con otros objetos del modelo.
+\subsubsection{Sprint 2}
+Ahora la clase Board tiene la funcionalidad de actualizarse a sí mismo una vez se coloca un nuevo cubo, funcionalidad que antes estaba delegada a la clase Game.
+\subsubsection{Sprint 3}
+A partir de este Sprint los tableros tienen forma (es decir, la forma no es necesariamente siempre cuadrada) y tamaño elegido por los usuarios. A parte, Board tiene una representación en forma de String y de JSONObject, a través de los métodos toString() y report().
+\subsubsection{Sprint 5}
+Ahora, aparte de guardarse los cubos del tablero en forma de matriz, se guardan en forma de lista por ser una representación de los datos muy conveniente en distintas partes del proyecto, entre otras, para la red.
+\subsection{Diseño de los colores}
+
+\subsection{Diseño de los cubos}
+
+\subsection{Diseño del juego}
+
+\subsection{Diseño de los jugadores}
+
+\subsection{Diseño de los equipos}
+
+\subsection{Diseño del gestor de turnos}
+
+\subsection{Diseño de los estados del juego}
+
+\subsection{Diseño de las replays}
+
+\subsection{Diseño de las Inteligencias Artificiales}
+
+
+\section{Diseño del Controlador}
+
+
+\section{Diseño de la Vista de GUI}
+
+\subsection{Diseño del menú principal y pantallas pre-juego}
+
+\subsection{Diseño de la pantalla de juego}
+
+
+\section{Diseño de la Vista de Consola}
+
+\subsection{Diseño del menú principal y pantallas pre-juego}
+
+\subsection{Diseño de la pantalla de juego}
+
+
+\section{Diseño de la red}
+
+\subsection{Diseño del servidor}
+
+\subsection{Diseño de los clientes}
+\end{document}
