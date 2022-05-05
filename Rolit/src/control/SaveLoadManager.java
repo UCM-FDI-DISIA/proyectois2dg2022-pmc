@@ -57,7 +57,7 @@ public class SaveLoadManager {
 	}
 	
 	public static JSONObject loadGame(String filename) {
-		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename + ".json"))) {
 			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;

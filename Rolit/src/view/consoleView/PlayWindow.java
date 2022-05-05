@@ -15,6 +15,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
 	private boolean close;
 	private Controller ctr;
+	private GameState state;
 	
 	PlayWindow(Controller ctr){
 		this.ctr = ctr;
@@ -41,6 +42,7 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onTurnPlayed(GameState state) {
+		this.state = state;
 		System.out.println(state.toString());
 		System.out.print(PROMPT);	//Se pone el PROMPT aquí porque si no sale antes del estado porque el game tarda en mandar la notificación
 	}
@@ -63,18 +65,20 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onRegister(GameState states) {
+		this.state = states;
 		System.out.println(states.toString());	
 		System.out.print(PROMPT);
 	}
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(err);
+		System.out.println(this.state.toString());		
 	}
 
 	@Override
 	public void onGameStatusChange(GameState status) {
+		this.state = status;
 		System.out.println(status.toString());	
 		System.out.print(PROMPT);
 	}

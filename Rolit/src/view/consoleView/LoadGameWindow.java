@@ -27,6 +27,7 @@ public class LoadGameWindow implements ConsoleWindow {
 			System.out.print(CHOOSE_NUMBER_MSG + HOW_TO_EXIT_MSG + " :");
 			try {
 				int numberOfSavedGameInt = Integer.valueOf(input.next());
+				input.nextLine();
 				if (numberOfSavedGameInt != GO_BACK_INT)
 					this.state = SaveLoadManager.loadGame(numberOfSavedGameInt);
 				else {
