@@ -1,6 +1,5 @@
 package server;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,16 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
-import org.json.JSONObject;
-
-import view.GUIView.DeleteGameDialog;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
-import view.GUIView.RolitComponents.RolitTextArea;
 import view.GUIView.RolitComponents.RolitTextField;
 
 

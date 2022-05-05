@@ -8,16 +8,12 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JToolBar;
 
 import commands.SaveCommand;
 import control.Controller;
 import logic.Rival;
 import replay.Replay;
 import replay.GameState;
-import control.Controller;
-import logic.Rival;
-import replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitToolBar;

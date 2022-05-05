@@ -3,7 +3,6 @@ package view.GUIView;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
-import javax.swing.BoxLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import control.Controller;

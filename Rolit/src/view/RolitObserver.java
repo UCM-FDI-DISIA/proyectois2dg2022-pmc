@@ -2,7 +2,6 @@ package view;
 
 import java.util.List;
 
-import logic.Color;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;

@@ -1,6 +1,5 @@
 package view.GUIView;
 
-import java.awt.Color;
 import java.util.List;
 import javax.swing.JLabel;
 import control.Controller;

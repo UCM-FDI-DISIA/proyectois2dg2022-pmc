@@ -1,6 +1,5 @@
 package view.GUIView.RolitComponents;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;

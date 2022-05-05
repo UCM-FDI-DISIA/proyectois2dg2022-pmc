@@ -71,12 +71,12 @@ public class NewGameWindow implements ConsoleWindow {
 	}
 	
 	protected boolean match(String type) {
-		return this.TYPE.equals(type);
+		return NewGameWindow.TYPE.equals(type);
 	}
 
 	@Override
 	public Object get() {
-		return this.json;
+		return NewGameWindow.json;
 	}
 	
 	protected final JSONObject validatePlayer(JSONArray players, String name, Color color, String strat) {

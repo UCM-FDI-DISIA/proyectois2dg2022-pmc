@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 
 import org.json.JSONObject;
 
-import logic.Color;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class CreateTeamsPanel extends RolitPanel {

@@ -1,12 +1,10 @@
 package view.GUIView.RolitComponents;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 
 public class RolitTextArea extends JTextArea {
 	private static final long serialVersionUID = 1L;

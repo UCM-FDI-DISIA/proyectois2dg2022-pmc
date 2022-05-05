@@ -1,7 +1,6 @@
 package view.GUIView;
 
 import replay.Replay;
-import replay.GameState;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -12,7 +11,6 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import commands.Command;
 import commands.PlaceCubeCommand;
 import control.Controller;
 

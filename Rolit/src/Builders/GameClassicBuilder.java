@@ -17,9 +17,7 @@ import logic.Shape;
 
 public class GameClassicBuilder extends GameBuilder {
 	public static final String TYPE = "GameClassic";
-	private static final String NAME_PLAYERS = "Name the players: ";
-	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
-
+	
 	GameClassicBuilder(){
 		
 	};
@@ -36,8 +34,7 @@ public class GameClassicBuilder extends GameBuilder {
 			if(playersJSONArray.getJSONObject(i).has("strategy")) {
 				s = Strategy.parse(c, playersJSONArray.getJSONObject(i).getString("strategy"));
 			}
-			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
-			list_players.add(new Player(c, playersJSONArray.getJSONObject(i).getString("name"), s));
+			list_players.add(new Player(playersJSONArray.getJSONObject(i), s));
 		}
 		
 		JSONObject boardJSONObject = o.getJSONObject("board");

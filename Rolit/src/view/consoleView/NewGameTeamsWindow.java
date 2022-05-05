@@ -13,7 +13,7 @@ public class NewGameTeamsWindow extends NewGameWindow {
 	
 	@Override
 	protected boolean match(String type) {
-		return this.TYPE.equals(type);
+		return NewGameTeamsWindow.TYPE.equals(type);
 	}
 	
 	@Override
@@ -78,8 +78,8 @@ public class NewGameTeamsWindow extends NewGameWindow {
 			jTeam[i].put("players", jPlayersTeam[i]);
 			jTeams.put(jTeam[i]);
 		}
-		this.json.put("teams", jTeams);
-		this.json.put("players", jPlayers);
+		NewGameWindow.json.put("teams", jTeams);
+		NewGameWindow.json.put("players", jPlayers);
 		return true;
 	}
 }
