@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper,openright]{book}
+\title{SCRUM}
+\date{\today}
+\author{Grupo PMC}
+\pagestyle{plain}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\usepackage{subfiles}
+\usepackage{ulem}
+\usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+    \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{0pt}{\Huge #1}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{#1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{#1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{#1}
+
+\begin{document}
+\maketitle
+
+\chapter{SPRINTS}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
+\subfile{./DocumentacionSprints/Sprint1/DocumentacionSprint1.tex}
+\subfile{./DocumentacionSprints/Sprint2/DocumentacionSprint2.tex}
+\subfile{./DocumentacionSprints/Sprint3/DocumentacionSprint3.tex}
+\subfile{./DocumentacionSprints/Sprint4/DocumentacionSprint4.tex}
+\subfile{./DocumentacionSprints/Sprint5/DocumentacionSprint5.tex}
+\subfile{./DocumentacionSprints/Sprint6/DocumentacionSprint6.tex}
+
+
+\end{document}
