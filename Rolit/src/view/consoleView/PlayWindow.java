@@ -90,12 +90,6 @@ public class PlayWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onGameExited(Replay replay) {
 		this.close = true;
 		System.out.println("See you!");

@@ -124,23 +124,12 @@ public abstract class Game extends Thread implements Replayable {
 		this.onRegister();
 	}
 	
-	public void removeObserver(RolitObserver o) {
-		this.observers.remove(o);
-	}
-
-	protected abstract void onFirstPlay();
 	protected abstract void onTurnPlayed();	// Cada modo de juego debe tener su propia implementación
 	protected abstract void onGameFinished();
 	
 	public void onStatusChange(String command) {
 		for(RolitObserver o : observers) {
 			o.onGameStatusChange(new GameState(command, this.copyMe()));
-		}
-	}
-	
-	public void onStatusChange() {
-		for(RolitObserver o : observers) {
-			o.onGameStatusChange(new GameState(this.copyMe()));
 		}
 	}
 

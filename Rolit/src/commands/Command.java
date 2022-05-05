@@ -13,6 +13,7 @@ public abstract class Command implements Replayable {
 	private final String shortcut;
 	private final String details;
 	private final String help;
+	
 	protected static final Command[] AVAILABLE_COMMANDS = {
 			new ExitCommand(),
 			new HelpCommand(),

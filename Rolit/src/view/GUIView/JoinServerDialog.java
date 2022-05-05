@@ -100,7 +100,6 @@ public class JoinServerDialog extends JDialog {
 
 		JButton connect = new RolitButton("Connect");
 		
-		//Actionlistner for the connect button
 		connect.addActionListener(new ActionListener() {
 
 			@Override

@@ -1,17 +1,7 @@
 package replay;
 
-import logic.Board;
-import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.GameClassic;
-import logic.Player;
-import logic.Replayable;
 import logic.Reportable;
-import logic.Shape;
 import utils.StringUtils;
-import view.RolitObserver;
-import view.GUIView.Observable;
 import view.GUIView.ReplayObserver;
 
 
@@ -148,11 +138,6 @@ public class Replay implements Reportable {
 
 	public void addObserver(ReplayObserver o) {
 		observers.add(o);
-	}
-
-	
-	public void removeObserver(ReplayObserver o) {
-		observers.remove(o);
 	}
 	
 	public void onReplayLeftButton() {

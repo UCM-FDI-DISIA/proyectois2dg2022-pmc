@@ -16,8 +16,6 @@ import control.Controller;
 
 public class CeldaGUI {
 
-	private int x;
-	private int y;
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
 	private JButton button;
@@ -29,8 +27,6 @@ public class CeldaGUI {
 	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
 		CeldaGUI.SIDE_LENGTH = sideLength;
-		this.x = x;
-		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
 		this.button = new JButton();
@@ -67,10 +63,8 @@ public class CeldaGUI {
 		
 	}
 
-	public CeldaGUI(int y, int x, boolean validButton, Replay replay, int sideLength) {
+	public CeldaGUI(boolean validButton, Replay replay, int sideLength) {
 		CeldaGUI.SIDE_LENGTH = sideLength;
-		this.x = x;
-		this.y = y;
 		this.validButton = validButton;
 		this.filled = false;
 		this.button = new JButton();
@@ -105,20 +99,11 @@ public class CeldaGUI {
 		this.button.repaint();
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
 	public JButton getButton() {
 		return button;
 	}
 	
 	public void update(logic.Color newColor) {
-		
 		
 		if (this.validButton) {
 			

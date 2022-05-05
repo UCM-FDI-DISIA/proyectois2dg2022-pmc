@@ -101,9 +101,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {}
-
-	@Override
 	public void onTurnPlayed(GameState state) {}
 
 	@Override

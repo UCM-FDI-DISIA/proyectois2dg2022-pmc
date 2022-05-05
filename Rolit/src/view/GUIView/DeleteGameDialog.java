@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +40,6 @@ public class DeleteGameDialog extends JDialog {
 	private JPanel okCancelPanel;
 	private JButton cancelButton;
 	private JButton okButton;
-
-	private File file;
 
 	public DeleteGameDialog(Frame parent) {
 		super(parent, true);
@@ -138,10 +135,6 @@ public class DeleteGameDialog extends JDialog {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
-	}
-
-	public File getFile() {
-		return file;
 	}
 
 	public void updateAndShowListGamesPanel() {

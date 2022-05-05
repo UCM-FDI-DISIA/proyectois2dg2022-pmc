@@ -12,6 +12,5 @@ public class RolitTextField extends JTextField {
 	public RolitTextField(int n){
 		super(n);
 		this.setBorder(BorderFactory.createLineBorder(BLUE_ROLIT, 1));
-
 	}
 }

@@ -88,9 +88,6 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {}
-
-	@Override
 	public void onGameExited(Replay replay) {}
 	
 

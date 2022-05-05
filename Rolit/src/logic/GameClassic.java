@@ -84,14 +84,6 @@ public class GameClassic extends Game {
 	}
 	
 	@Override
-	protected void onFirstPlay() {
-		GameState state = new GameState(this.copyMe());
-		for(RolitObserver o : observers) {
-			o.onFirstPlay(state);
-		}
-	}
-	
-	@Override
 	public void onTurnPlayed() {
 		for(RolitObserver o : observers) {
 			o.onTurnPlayed(this.state);

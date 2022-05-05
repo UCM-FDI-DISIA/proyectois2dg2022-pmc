@@ -71,7 +71,6 @@ public class Server {
 		Pair<Player, Socket> parPlayerSocket = new Pair<Player, Socket>(incomingPlayers.get(i), socket);
 		sockets.add(parPlayerSocket);
 		
-		serverClient.setPlayer(incomingPlayers.get(i));
 		Pair<ServerClient, Player> parServerClientPlayer = new Pair<ServerClient, Player>(serverClient, incomingPlayers.get(i));
 		clients.add(parServerClientPlayer);
 		

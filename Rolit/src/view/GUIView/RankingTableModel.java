@@ -86,9 +86,6 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	@Override
 	public void onGameStatusChange(GameState state) {
 	}
-
-	@Override
-	public void onFirstPlay(GameState state) {}
 	
 	@Override
 	public void onTurnPlayed(GameState state) {

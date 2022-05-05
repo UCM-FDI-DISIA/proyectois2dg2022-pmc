@@ -17,10 +17,6 @@ public class TurnManager {
 		}
 	}
 	
-	public TurnManager(List<Player> players) {
-		this(players, 0);
-	}
-	
 	public TurnManager(List<Player> players, int currentPlayer) {
 		this.players = players;
 		this.currentPlayer = currentPlayer;

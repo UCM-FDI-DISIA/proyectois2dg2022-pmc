@@ -37,9 +37,5 @@ public class WaitPlayerThread extends Thread {
 		}
 
 	}
-	
-	public ServerClient getServerClient() {
-		return serverClient;
-	}
 
 }

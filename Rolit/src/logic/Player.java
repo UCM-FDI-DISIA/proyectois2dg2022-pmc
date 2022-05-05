@@ -27,13 +27,6 @@ public class Player implements Reportable, Rival {
 		this.strategy = strat;
 	}
 	
-	public Player(Player player) {
-		this.color = player.color;
-		this.score = player.score;
-		this.name = player.name;
-		this.strategy = player.strategy;	//FIXME Esto puede dar algun problema, no es seguro
-	}
-	
 	public Pair<Integer, Integer> play(GameState state) {
 		if(this.strategy != null) {
 			try {
@@ -96,11 +89,6 @@ public class Player implements Reportable, Rival {
 	@Override
 	public String toString() {
 		return name + " (" + color.toString() + ")";
-	}
-
-	@Override
-	public String getType() {
-		return TYPE;
 	}
 
 }
