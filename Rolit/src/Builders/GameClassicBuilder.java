@@ -20,7 +20,7 @@ public class GameClassicBuilder extends GameBuilder {
 	
 	GameClassicBuilder(){
 		
-	};
+	}
 	
 	@Override
 	protected Game GenerateGame(JSONObject o) {

@@ -115,10 +115,6 @@ public class CreateGameDialog extends JDialog {
 		status = 1;
 		this.setVisible(false);
 	}
-
-	int getPlayerSpinnerValue() {
-		return gameConfig.getPlayerSpinnerValue();
-	}
 	
 	Pair<Boolean, String> checkIfCorrectArguments(boolean isTeamMode) {
 		

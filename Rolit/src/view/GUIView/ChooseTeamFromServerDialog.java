@@ -47,7 +47,7 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		}
 	}
 
-	public void initGUI () {
+	public void initGUI() {
 		
 		this.setLocation(50, 50);
 		

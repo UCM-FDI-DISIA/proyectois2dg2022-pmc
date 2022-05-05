@@ -14,7 +14,6 @@ public class ServerClientThread extends Thread {
 	private PrintWriter output;
 	private volatile ServerClient client;
 	private volatile Server server;
-	private boolean isRunning = true;
 
 	public ServerClientThread(Server server, Socket socket, ServerClient client) throws IOException {
 		this.server = server;
@@ -22,17 +21,10 @@ public class ServerClientThread extends Thread {
 		input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		output = new PrintWriter(socket.getOutputStream(), true);
 	} 
-
-	
-
-	public void kill() {
-		isRunning = false;
-	}
-
 	
 	public void run(){
 
-		while(isRunning){
+		while(true){
 			try {
 				String s = input.readLine();
 				if (s != null) {

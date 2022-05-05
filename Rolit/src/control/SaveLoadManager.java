@@ -52,10 +52,6 @@ public class SaveLoadManager {
 		}
 	}
 	
-	public static JSONObject loadGame() {
-		return loadGame(DEFAULT_GAME_FILENAME);
-	}
-	
 	public static JSONObject loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);
@@ -90,10 +86,6 @@ public class SaveLoadManager {
 			error_file.printStackTrace();
 		}
 	}	
-	
-	public static Replay loadReplay() {
-		return SaveLoadManager.loadReplay(DEFAULT_REPLAY_FILENAME);
-	}
 	
 	public static Replay loadReplay(String filename) {
 		Replay replay = null;

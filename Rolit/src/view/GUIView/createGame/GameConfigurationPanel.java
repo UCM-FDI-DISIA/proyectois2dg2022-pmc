@@ -143,10 +143,6 @@ public class GameConfigurationPanel extends RolitPanel {
 		return (Shape) shapesCombo.getSelectedItem();
 	}
 	
-	
-	public Shape getNewShape() {
-		return this.getBoardShape();
-	}
 
 	public int getNumPlayers() {
 		return (int) playersSpinner.getValue();

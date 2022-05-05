@@ -62,9 +62,4 @@ public class Team implements Reportable, Rival {
 		return this.name; 
 	}
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
-
 }

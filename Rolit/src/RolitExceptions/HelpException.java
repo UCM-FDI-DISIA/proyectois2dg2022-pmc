@@ -2,9 +2,8 @@ package RolitExceptions;
 
 public class HelpException extends Exception {
 	
-	public HelpException() {
-		super();
-	}
+	private static final long serialVersionUID = 1L;
+	
 	public HelpException(String msg) {
 		super(msg);
 	}

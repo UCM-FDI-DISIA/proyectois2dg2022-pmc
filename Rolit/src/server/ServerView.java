@@ -27,7 +27,6 @@ public class ServerView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String ICONS_PATH = "resources\\icons\\";
 
-	
 	private JPanel thePanel;
 	private JLabel ipLabel, portLabel, waitingLabel, numPlayersLabel;
 	private JTextField portField;
@@ -126,16 +125,9 @@ public class ServerView extends JFrame {
 
 		thePanel.add(comp, gridConstraints);
 	}
-	
-	
-
-	public void showError(String msg) {
-		JOptionPane.showMessageDialog(thePanel, msg, "Error", JOptionPane.ERROR_MESSAGE);
-	}
 
 	public class ServerWorker extends SwingWorker<Void, Void> {
 
-		// Método obligatorio
 		@Override
 		protected Void doInBackground() {
 			try {

@@ -12,10 +12,6 @@ public abstract class Strategy {
 	public abstract Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state);
 	public abstract int simulate(Color currentColor, int depth, int alpha, int beta);
 	
-	public static void initStrategy() {
-		
-	}
-	
 	public static Strategy[] strategies = {
 		new RandomStrategy(),
 		new GreedyStrategy(null),

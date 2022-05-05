@@ -86,12 +86,6 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
-	
-	@Override
-	public void onFirstPlay(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onTurnPlayed(GameState state) {

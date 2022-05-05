@@ -10,9 +10,9 @@ import view.consoleView.ConsoleWindow;
 import view.consoleView.MainBashWindow;
 
 public class Rolit {
+	
 	private static final String TITLE = "		ROLIT";
-	private static final String VERSION = "Sprint Week 6";
-	private static final String DEFAULT_MODE = "console";
+	private static final String VERSION = "Sprint Week 7";
 	private static final String CHOOSE_MODE = "Choose mode: ";
 	private static final String CONSOLE_MODE = "Console Mode";
 	private static final String GUI_MODE = "GUI Mode";
@@ -57,6 +57,7 @@ public class Rolit {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
+					@SuppressWarnings("unused")
 					MainWindow mainWindow = new MainWindow(ctr);
 				}
 			});

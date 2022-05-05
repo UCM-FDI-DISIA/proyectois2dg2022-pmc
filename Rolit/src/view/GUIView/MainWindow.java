@@ -289,9 +289,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {}
-	
-	@Override
 	public void onTurnPlayed(GameState state) {
 		this.state = state;
 		this.revalidate();
@@ -334,13 +331,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	
 	public class WaitWorker extends SwingWorker<Void, Void> {
 
-		// Método obligatorio
 		@Override
 		protected Void doInBackground() {
 			try {
 				wait(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;
