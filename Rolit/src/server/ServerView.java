@@ -46,7 +46,7 @@ public class ServerView extends JFrame {
 		thePanel = new RolitPanel();
 		thePanel.setLayout(new GridBagLayout());
 
-		ipLabel = new JLabel("Server IP: " + server.getIp());
+		ipLabel = new JLabel("Server IP: " + "your IPv4 (check ipconfig/ifconfig)");
 		addComp(thePanel, ipLabel, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		portLabel = new JLabel("Insert desired host port (9001-65500): ");

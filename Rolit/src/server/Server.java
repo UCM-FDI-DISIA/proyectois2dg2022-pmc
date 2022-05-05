@@ -1,10 +1,8 @@
 package server;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -172,12 +170,6 @@ public class Server {
 		
 	}
 
-	public String getIp() {
-		try {
-			return InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) {}
-		return null;
-	}
 
 	public synchronized void waitForAllPlayersToChooseTeam() {
 		
