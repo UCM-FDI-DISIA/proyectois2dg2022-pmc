@@ -4,11 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.net.Socket;
-import java.util.LinkedHashMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ServerClientThread extends Thread {
@@ -17,7 +14,6 @@ public class ServerClientThread extends Thread {
 	private PrintWriter output;
 	private volatile ServerClient client;
 	private volatile Server server;
-	private boolean isRunning = true;
 
 	public ServerClientThread(Server server, Socket socket, ServerClient client) throws IOException {
 		this.server = server;
@@ -25,17 +21,10 @@ public class ServerClientThread extends Thread {
 		input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		output = new PrintWriter(socket.getOutputStream(), true);
 	} 
-
-	
-
-	public void kill() {
-		isRunning = false;
-	}
-
 	
 	public void run(){
 
-		while(isRunning){
+		while(true){
 			try {
 				String s = input.readLine();
 				if (s != null) {

@@ -3,7 +3,6 @@ package view.GUIView;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
-import javax.swing.BoxLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import control.Controller;
@@ -68,7 +67,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		
 		for (int i = 0; i < nFilas; i++) {
 			for (int j = 0; j < nColumnas; j++) {
-				this.celdas[i][j] = new CeldaGUI(i, j, shapeMatrix[i][j], replay, sideButtonLength);
+				this.celdas[i][j] = new CeldaGUI(shapeMatrix[i][j], replay, sideButtonLength);
 			}
 		}
 		
@@ -123,7 +122,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 
 	@Override
 	public void onError(String err) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -152,10 +150,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		this.lastCubeAdded = cubes.getJSONObject(cubes.length() - 1);
 	}
 
-	public GameState getState() {
-		return this.state;
-	}
-	
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
@@ -182,9 +176,6 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 	}
-
-	@Override
-	public void onFirstPlay(GameState state) {}
 
 	@Override
 	public void onGameExited(Replay replay) {}

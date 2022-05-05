@@ -19,7 +19,6 @@ public class Cube implements Reportable {
 		this.x = cube.x;
 		this.y = cube.y;
 		this.player = cube.player;
-		//this.player = new Player(cube.player);	
 	}
 
 	public int getX() {
@@ -47,10 +46,6 @@ public class Cube implements Reportable {
 	@Override
 	public String toString() {
 		return this.getColor().toString();
-	}
-
-	public String serialize() {
-		return (this.toString() + " " + x + " " + y);
 	}
 	
 	@Override

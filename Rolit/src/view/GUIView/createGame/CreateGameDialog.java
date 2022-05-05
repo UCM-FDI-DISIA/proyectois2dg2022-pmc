@@ -2,24 +2,13 @@ package view.GUIView.createGame;
 
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import Builders.GameTeamsBuilder;
 import control.Controller;
-import logic.Color;
-import logic.Player;
 import replay.GameState;
 import utils.Pair;
 
@@ -125,10 +114,6 @@ public class CreateGameDialog extends JDialog {
 	void okAction() {
 		status = 1;
 		this.setVisible(false);
-	}
-
-	int getPlayerSpinnerValue() {
-		return gameConfig.getPlayerSpinnerValue();
 	}
 	
 	Pair<Boolean, String> checkIfCorrectArguments(boolean isTeamMode) {

@@ -1,13 +1,11 @@
 package view.GUIView.RolitComponents;
 
 import java.awt.Color;
-import java.awt.Shape;
-
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 
 public class RolitComboBox<E> extends JComboBox<E> {
-	private static final Color BLUE_ROLIT = new Color(0, 67, 152);
+
+	private static final long serialVersionUID = 1L;
 
 	public RolitComboBox(){
 		this.setBackground(Color.WHITE);

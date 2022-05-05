@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 import logic.Replayable;
 import logic.Reportable;
-import utils.StringUtils;
 
 public class GameState implements Reportable {
+	
 	private String command;
 	private Replayable game;
 	
@@ -24,7 +24,6 @@ public class GameState implements Reportable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		//str.append("Command > ").append(command).append(StringUtils.LINE_SEPARATOR);
 		str.append(game.toString());
 		return str.toString();
 	}
@@ -52,7 +51,7 @@ public class GameState implements Reportable {
 		String shortcut = String.valueOf(getTurnColorShortcut());
 		JSONArray players = game.report().getJSONArray("players");
 		int i = 0;
-		boolean found = false;;
+		boolean found = false;
 		while(i < players.length() && !found) {
 			if(shortcut.equals(players.getJSONObject(i).getString("color"))) {
 				found = true;
@@ -82,16 +81,6 @@ public class GameState implements Reportable {
 	
 	public String getCommand() {
 		return this.command;
-	}
-	
-	public String getFirstPlayerName() {
-		JSONArray players = game.report().getJSONArray("players");
-		return players.getJSONObject(0).getString("name");
-	}
-	
-	public char getFirstPlayerColorShortcut() {
-		JSONArray players = game.report().getJSONArray("players");
-		return players.getJSONObject(0).getString("color").charAt(0);
 	}
 
 	public String getTurnName() {

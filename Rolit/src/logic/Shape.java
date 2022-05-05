@@ -65,24 +65,4 @@ public enum Shape {
 		return null;
 	}
 	
-	/*
-	@Override
-	public String toString() {
-		
-		this.
-		switch(this.name().charAt(1)) {
-		case 'S':
-			return "Small";
-		case 'M':
-			return "Medium";
-		case 'L':
-			return "Large";
-		
-		}
-		return null;
-		
-	}
-	 * */
-	
-	
 }

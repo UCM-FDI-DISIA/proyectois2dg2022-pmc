@@ -12,8 +12,6 @@ public class CubeTest {
 		Player p1 = new Player(Color.PINK, "mar");
 		Cube c1 = new Cube(3,4, p1);
 		
-		Player p2 = new Player(Color.PURPLE, "virginia");
-		
 		c1.changeOwner(Color.PURPLE);
 		assertEquals(Color.PURPLE, c1.getColor());
 	}

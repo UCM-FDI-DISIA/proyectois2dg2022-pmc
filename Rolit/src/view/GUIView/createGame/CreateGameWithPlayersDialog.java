@@ -18,7 +18,7 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 	public CreateGameWithPlayersDialog(Frame parent, Controller ctrl) {
 		super(parent, ctrl);
 		
-		playersPanel = new  CreatePlayersPanel(false);
+		playersPanel = new CreatePlayersPanel(false);
 		mainPanel.add(playersPanel); // por defecto se muestra para elegir jugadores en el modo GameClassic
 		this.pack();
 	}

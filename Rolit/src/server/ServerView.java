@@ -1,6 +1,5 @@
 package server;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,16 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
-import org.json.JSONObject;
-
-import view.GUIView.DeleteGameDialog;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
-import view.GUIView.RolitComponents.RolitTextArea;
 import view.GUIView.RolitComponents.RolitTextField;
 
 
@@ -33,7 +27,6 @@ public class ServerView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String ICONS_PATH = "resources\\icons\\";
 
-	
 	private JPanel thePanel;
 	private JLabel ipLabel, portLabel, waitingLabel, numPlayersLabel;
 	private JTextField portField;
@@ -132,16 +125,9 @@ public class ServerView extends JFrame {
 
 		thePanel.add(comp, gridConstraints);
 	}
-	
-	
-
-	public void showError(String msg) {
-		JOptionPane.showMessageDialog(thePanel, msg, "Error", JOptionPane.ERROR_MESSAGE);
-	}
 
 	public class ServerWorker extends SwingWorker<Void, Void> {
 
-		// Método obligatorio
 		@Override
 		protected Void doInBackground() {
 			try {

@@ -3,7 +3,6 @@ package logic;
 import org.json.JSONObject;
 
 import Strategy.Strategy;
-import commands.PlaceCubeCommand;
 import replay.GameState;
 import utils.Pair;
 
@@ -28,13 +27,6 @@ public class Player implements Reportable, Rival {
 		this.strategy = strat;
 	}
 	
-	public Player(Player player) {
-		this.color = player.color;
-		this.score = player.score;
-		this.name = player.name;
-		this.strategy = player.strategy;	//FIXME Esto puede dar algun problema, no es seguro
-	}
-	
 	public Pair<Integer, Integer> play(GameState state) {
 		if(this.strategy != null) {
 			try {
@@ -56,6 +48,11 @@ public class Player implements Reportable, Rival {
 	
 	public Player(JSONObject json) {
 		this(Color.valueOfIgnoreCase(json.getString("color").charAt(0)), json.getString("name"));
+	}
+	
+	public Player(JSONObject json, Strategy s) {
+		this(json);
+		this.strategy = s;
 	}
 
 	public Color getColor() {
@@ -92,11 +89,6 @@ public class Player implements Reportable, Rival {
 	@Override
 	public String toString() {
 		return name + " (" + color.toString() + ")";
-	}
-
-	@Override
-	public String getType() {
-		return TYPE;
 	}
 
 }

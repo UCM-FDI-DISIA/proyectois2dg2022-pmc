@@ -1,2 +1,1 @@
-C:\Users\leona\OneDrive\Documentos\falta1cubo.json
-C:\Users\leona\OneDrive\Documentos\falta1cubo3.json
+DEFAULT_SAVED_GAME

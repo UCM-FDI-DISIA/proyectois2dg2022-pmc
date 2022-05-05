@@ -8,9 +8,7 @@ public class PlaceCubeCommand extends Command {
 	private static final String DETAILS = "[p]lace_cube <x> <y>";
 	private static final String SHORTCUT = "p";
 	private static final String HELP = "place a cube in position x, y";	
-	private static final String COOR_IS_NUMBER_MSNG = "the coordenates must be integers";	
-	private static final String INVALID_COOR_MSG = "Invalid position";
-	private static final String SUCCESS_MSG = "Cube placed succesfully";
+	private static final String COOR_IS_NUMBER_MSNG = "the coordenates must be integers";
 	private int x;
 	private int y;
 	

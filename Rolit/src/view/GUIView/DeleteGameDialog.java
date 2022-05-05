@@ -7,26 +7,21 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import control.SaveLoadManager;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitCheckBox;
 import view.GUIView.RolitComponents.RolitPanel;
-import view.GUIView.RolitComponents.RolitRadioButton;
 
 public class DeleteGameDialog extends JDialog {
 
@@ -36,7 +31,6 @@ public class DeleteGameDialog extends JDialog {
 
 	private List<String> savedGamesPathList;
 	private List<JCheckBox> savedGamesCheckBoxList;
-	private ButtonGroup buttonGroup;
 
 	private JPanel mainPanel;
 	private JPanel buttonsPanel;
@@ -46,8 +40,6 @@ public class DeleteGameDialog extends JDialog {
 	private JPanel okCancelPanel;
 	private JButton cancelButton;
 	private JButton okButton;
-
-	private File file;
 
 	public DeleteGameDialog(Frame parent) {
 		super(parent, true);
@@ -143,10 +135,6 @@ public class DeleteGameDialog extends JDialog {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
-	}
-
-	public File getFile() {
-		return file;
 	}
 
 	public void updateAndShowListGamesPanel() {

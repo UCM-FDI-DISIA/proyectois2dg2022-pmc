@@ -5,13 +5,9 @@ import java.net.Socket;
 
 import org.json.JSONObject;
 
-import logic.Player;
-
 public class ServerClient {
 	
-	private Player p;
 	private volatile ServerClientThread thread;
-	
 
 	public ServerClient() {
 		
@@ -28,16 +24,8 @@ public class ServerClient {
 		thread.start();
 	}
 	
-	public void setPlayer(Player p) {
-		this.p = p;
-	}
-
 	public void updateGraphics(JSONObject json) {
 		thread.sendUpdateGraphicsToClient(json);
-	}
-
-	public Player getPlayer() {
-		return p;
 	}
 
 	public void notifyClientToChooseTeam(JSONObject gameConfigJSON) {

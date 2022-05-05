@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
@@ -31,10 +30,7 @@ public class SaveLoadManager {
 	private static final String DEFAULT_REPLAY_FILENAME = "DEFAULT_SAVED_REPLAY.json";
 	public static final String FULL_DEFAULT_FILENAME = "SAVED_GAMES.txt";
 	private static final String ERROR_LOAD = "Failed to load the file";
-	private static final String ERROR_LOAD_DEFAULT = "Failed to load the saved games index.";
-	private static final String ERROR_SAVE = "Failed to save the file";
 	private static final String ERROR_SAVE_DEFAULT = "Failed to update the saved games index";
-	private static final String SUCCESS_SAVE_MSG = "Game saved successfully";
 	private static final String SUCCESS_DELETE_MSG = "Game deleted successfully";
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
@@ -55,12 +51,8 @@ public class SaveLoadManager {
 		}
 	}
 	
-	public static JSONObject loadGame() {
-		return loadGame(DEFAULT_GAME_FILENAME);
-	}
-	
 	public static JSONObject loadGame(String filename) {
-		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename + ".json"))) {
 			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;
@@ -93,10 +85,6 @@ public class SaveLoadManager {
 			error_file.printStackTrace();
 		}
 	}	
-	
-	public static Replay loadReplay() {
-		return SaveLoadManager.loadReplay(DEFAULT_REPLAY_FILENAME);
-	}
 	
 	public static Replay loadReplay(String filename) {
 		Replay replay = null;

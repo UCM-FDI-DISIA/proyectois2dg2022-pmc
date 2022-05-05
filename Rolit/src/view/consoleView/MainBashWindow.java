@@ -5,8 +5,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import control.Controller;
-import control.SaveLoadManager;
-import logic.Color;
 import logic.Rival;
 import replay.GameState;
 import replay.Replay;
@@ -24,13 +22,9 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	private static final String INVALID_OPTION = "Invalid option. Try again.";
 	protected static final String MSG_POS = "En la posicion numero ";
 	protected static final String MSG_GOOD_LUCK = "Suerte para la siguiente :)";
-	private static final String ERROR_MODES_MSG = "Game mode must be on of these:";
-	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
-	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
 	protected static final String NAME_PLAYERS = "Name the players: ";
 	protected static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 	
-	private final String REPLAY_MSG = "Do you want to save the replay of the game? (y/n)";	
 	private Controller ctr;
 	
 	public MainBashWindow(Controller ctr) {
@@ -105,9 +99,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 		gameWindow.open();		
 		return true;
 	}
-
-	@Override
-	public void onFirstPlay(GameState state) {}
 
 	@Override
 	public void onTurnPlayed(GameState state) {}

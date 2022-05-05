@@ -49,7 +49,7 @@ public class NewGameClassicWindow extends NewGameWindow {
 				}
 			}
 		}
-		this.json.put("players", jPlayers);
+		NewGameWindow.json.put("players", jPlayers);
 		return true;
 	}
 

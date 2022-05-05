@@ -146,9 +146,6 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {}
-
-	@Override
 	public void onGameExited(Replay replay) {}
 
 	@Override

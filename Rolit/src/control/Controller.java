@@ -73,10 +73,4 @@ public class Controller {
 	public void setClient(Client clientRolit) {
 		this.clientRolit = clientRolit;
 	}
-	
-	/*TODO private boolean askSaveReplay() {
-		System.out.println(REPLAY_MSG);
-		String ans = input.nextLine();
-		return "y".equals(ans.toLowerCase());
-	}*/
 }

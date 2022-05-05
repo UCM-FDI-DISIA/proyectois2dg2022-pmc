@@ -9,16 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NavigableMap;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Builders.GameBuilder;
-import logic.Color;
-import logic.Game;
 import logic.Player;
 import utils.Pair;
 
@@ -77,7 +71,6 @@ public class Server {
 		Pair<Player, Socket> parPlayerSocket = new Pair<Player, Socket>(incomingPlayers.get(i), socket);
 		sockets.add(parPlayerSocket);
 		
-		serverClient.setPlayer(incomingPlayers.get(i));
 		Pair<ServerClient, Player> parServerClientPlayer = new Pair<ServerClient, Player>(serverClient, incomingPlayers.get(i));
 		clients.add(parServerClientPlayer);
 		

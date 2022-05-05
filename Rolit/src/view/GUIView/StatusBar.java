@@ -1,6 +1,5 @@
 package view.GUIView;
 
-import java.awt.Color;
 import java.util.List;
 import javax.swing.JLabel;
 import control.Controller;
@@ -87,9 +86,6 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onFirstPlay(GameState state) {}
 
 	@Override
 	public void onGameExited(Replay replay) {}

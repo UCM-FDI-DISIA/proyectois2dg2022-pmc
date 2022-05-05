@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,6 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -291,9 +289,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 
 	@Override
-	public void onFirstPlay(GameState state) {}
-	
-	@Override
 	public void onTurnPlayed(GameState state) {
 		this.state = state;
 		this.revalidate();
@@ -336,13 +331,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	
 	public class WaitWorker extends SwingWorker<Void, Void> {
 
-		// Método obligatorio
 		@Override
 		protected Void doInBackground() {
 			try {
 				wait(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;

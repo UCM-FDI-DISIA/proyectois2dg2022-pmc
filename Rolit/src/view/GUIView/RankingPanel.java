@@ -11,22 +11,19 @@ import java.awt.Insets;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import Rolit.Rolit;
-import control.Controller;
 import logic.Rival;
-import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class RankingPanel extends RolitPanel {
+
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel title;
 	private JLabel place1;
 	private JLabel place2;
@@ -169,6 +166,9 @@ public class RankingPanel extends RolitPanel {
 	}
 	
 	private class RolitLabel extends JLabel {
+
+		private static final long serialVersionUID = 1L;
+
 		RolitLabel(String text, int s){
 			super(text);
 			this.setHorizontalAlignment(JLabel.CENTER);

@@ -11,6 +11,8 @@ import view.RolitObserver;
 
 public class RankingTableModel extends AbstractTableModel implements RolitObserver, ReplayObserver {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String[] _colNames;
 	private JSONArray rivals;
 	private Replay replay;
@@ -84,9 +86,6 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	@Override
 	public void onGameStatusChange(GameState state) {
 	}
-
-	@Override
-	public void onFirstPlay(GameState state) {}
 	
 	@Override
 	public void onTurnPlayed(GameState state) {
