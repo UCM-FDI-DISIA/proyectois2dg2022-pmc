@@ -1,13 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  5 MAY 2022 20:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  5 MAY 2022 23:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **"./Trabajos individuales.tex"
 (Trabajos individuales.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-24> (C:\Miktex\tex/latex/base\article.cls
+L3 programming layer <2022-02-24>
+(C:\Users\mar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(C:\Miktex\tex/latex/base\size10.clo
+(C:\Users\mar\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
@@ -22,7 +23,8 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
+(C:\Users\mar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdfte
+x.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count193
 \l__pdf_internal_box=\box50
@@ -67,24 +69,30 @@ lo de dise~no quer^^S^^Pamos
 
 [1
 
-{C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-[3] [4] (Trabajos individuales.aux) ) 
+{C:/Users/mar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3]
+Overfull \hbox (5.11166pt too wide) in paragraph at lines 104--105
+[]\OT1/cmr/m/n/10 Creaci^^Son de las clases hered-eras de Com-mand, junto con D
+aniel, aplic^^Sandose
+ []
+
+[4] [5] (Trabajos individuales.aux) ) 
 Here is how much of TeX's memory you used:
  436 strings out of 478582
- 8426 string characters out of 2860753
- 304489 words of memory out of 3000000
+ 8625 string characters out of 2845289
+ 305489 words of memory out of 3000000
  18694 multiletter control sequences out of 15000+600000
  473541 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,38p,376b,197s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\Usuario\AppData\Local\MiKTeX\fo
-nts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Miktex/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Mikt
-ex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfo
-nts/cm/cmr17.pfb>
-Output written on "Trabajos individuales.pdf" (4 pages, 65269 bytes).
+ 34i,6n,38p,576b,197s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\mar\AppData\Local\MiKTeX\fonts/
+pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/mar/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/mar/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mar/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/mar/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on "Trabajos individuales.pdf" (5 pages, 68121 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
+ 43 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
