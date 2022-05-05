@@ -39,7 +39,6 @@ public class SaveLoadManager {
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
 	
-	
 	public static boolean saveGame(Reportable game) {
 		return saveGame(game, DEFAULT_GAME_FILENAME);
 	}
