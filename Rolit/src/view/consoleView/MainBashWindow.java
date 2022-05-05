@@ -38,7 +38,7 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 		for (int i = 0; i < OPTIONS.length; i++)
 			System.out.println(String.format("%d. %s", i + 1, OPTIONS[i]));		
 		do {
-			option = ConsoleWindow.input.nextInt();
+			option = Integer.valueOf(ConsoleWindow.input.nextInt());
 			input.nextLine();
 			if (option - 1 >= 0 && option - 1 < OPTIONS.length)
 				repeat = false;
@@ -66,7 +66,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				nextWindow = new NewGameWindow();
 				repeatMenu = nextWindow.open();
 				ctr.createGame((JSONObject) nextWindow.get());
-				new SaveReplayWindow(ctr);
 			}				
 			// Se ha seleccionado cargar un juego antiguo
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
@@ -75,7 +74,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				JSONObject game = (JSONObject) nextWindow.get();
 				if (game != null) {
 					ctr.createGame(game);	
-					new SaveReplayWindow(ctr);
 				}
 			}
 			// Se ha seleccionado borrar un juego
@@ -96,7 +94,8 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 		ctr.startGame();
 		ctr.addObserver(this);
 		ConsoleWindow gameWindow = new PlayWindow(this.ctr);
-		gameWindow.open();		
+		new SaveReplayWindow(ctr);
+		gameWindow.open();
 		return true;
 	}
 
