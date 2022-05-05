@@ -1,32 +1,32 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  5 MAY 2022 19:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  5 MAY 2022 20:31
 entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
 **"./Trabajos individuales.tex"
-("Trabajos individuales.tex"
-LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-01-09> xparse <2020-03-03>
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+(Trabajos individuales.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24> (C:\Miktex\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Miktex\tex/latex/base\size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count177
-\c@section=\count178
-\c@subsection=\count179
-\c@subsubsection=\count180
-\c@paragraph=\count181
-\c@subparagraph=\count182
-\c@figure=\count183
-\c@table=\count184
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
-File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count185
-\l__pdf_internal_box=\box47
-) ("Trabajos individuales.aux")
+(C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count193
+\l__pdf_internal_box=\box50
+) (Trabajos individuales.aux)
 \openout1 = `"Trabajos individuales.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -55,42 +55,36 @@ LaTeX Warning: No \author given.
 
 
 Overfull \hbox (8.86171pt too wide) in paragraph at lines 15--16
-[]\OT1/cmr/m/n/10 Realice di-ver-sas la-bores de op-ti-mizacion para sol-ven-
-tar un po-bre rendimiento
+[]\OT1/cmr/m/n/10 Realic^^Se di-ver-sas la-bores de op-ti-mizaci^^Son para sol-
+ven-tar un po-bre rendimiento
  []
 
 
 Overfull \hbox (11.63953pt too wide) in paragraph at lines 23--24
-\OT1/cmr/m/n/10 primeros pro-toti-pos para poder de-ter-mi-nar por que es-tilo
- de dise~no queramos
+\OT1/cmr/m/n/10 primeros pro-toti-pos para poder de-ter-mi-nar por qu^^Se es-ti
+lo de dise~no quer^^S^^Pamos
  []
 
 [1
 
-{C:/Users/leona/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Overfull \hbox (11.63953pt too wide) in paragraph at lines 26--27
-\OT1/cmr/m/n/10 primeros pro-toti-pos para poder de-ter-mi-nar por que es-tilo
- de dise~no queramos
- []
-
-[2] [3] ("Trabajos individuales.aux") ) 
+{C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+[3] [4] (Trabajos individuales.aux) ) 
 Here is how much of TeX's memory you used:
- 425 strings out of 479618
- 8020 string characters out of 2865026
- 283446 words of memory out of 3000000
- 17669 multiletter control sequences out of 15000+200000
- 407712 words of font info for 41 fonts, out of 3000000 for 9000
+ 436 strings out of 478582
+ 8426 string characters out of 2860753
+ 304489 words of memory out of 3000000
+ 18694 multiletter control sequences out of 15000+600000
+ 473541 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,6n,50p,375b,195s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\leona\AppData\Local\MiKTeX\fo
-nts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/leona/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/leona/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/leona/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users
-/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on "Trabajos individuales.pdf" (3 pages, 59364 bytes).
+ 34i,6n,38p,376b,197s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\Usuario\AppData\Local\MiKTeX\fo
+nts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Miktex/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Mikt
+ex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfo
+nts/cm/cmr17.pfb>
+Output written on "Trabajos individuales.pdf" (4 pages, 65269 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
+ 40 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
