@@ -54,7 +54,7 @@ public class ClientController extends Thread{
 				
 				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally{

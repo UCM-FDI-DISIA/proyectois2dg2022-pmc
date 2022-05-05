@@ -72,6 +72,7 @@ public abstract class Game extends Thread implements Replayable {
 			}
 			catch (IllegalArgumentException e) {
 				this.onError(e.getMessage());
+				this.executedTurn = true;
 			}
 		}
 		// FIXME mostrar el ranking
