@@ -14,7 +14,11 @@ public class Cube implements Reportable {
 		this.y = y;
 		this.player = player;
 	}
-
+	/**
+	 * Copy constructor
+	 * @return Deep copy of a given board
+	 * @param cube
+	 */
 	public Cube(Cube cube) {
 		this.x = cube.x;
 		this.y = cube.y;

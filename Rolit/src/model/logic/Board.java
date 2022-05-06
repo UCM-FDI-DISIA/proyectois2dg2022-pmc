@@ -2,19 +2,22 @@ package model.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import utils.Pair;
 import utils.StringUtils;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import model.SaveLoadManager;
+
+/**
+ * This class represents the physical Board of a Rolit game
+ * @author PMC
+ *
+ */
 public class Board implements Reportable {	
 	
 	public final static int MAX_SIZE = 15;	
 	private List<List<Cube>> matrix;
-	private List<Pair<Integer, Integer>> orderedCubeList;//FIXME SI FALLA ALGO DE LA RED ES PORQUE HAY QUE PONER ESTO ESTATICO
+	private List<Pair<Integer, Integer>> orderedCubeList;
 	private boolean[][] shapeMatrix;
 	private String shapeName;
 	private int size;
@@ -22,6 +25,11 @@ public class Board implements Reportable {
 	private int numCubes;
 	private static final char SPACE = ' ';
 	
+	/**
+	 * Constructor
+	 * @return Creates a Board given a shape
+	 * @param shape
+	 */
 	public Board(Shape shape) {
 		this.numCubes = 0;
 		this.matrix = new ArrayList<List<Cube>>();
@@ -30,6 +38,8 @@ public class Board implements Reportable {
 		this.orderedCubeList = new ArrayList<Pair<Integer, Integer>>();
 		this.size = SaveLoadManager.getShapeSize(shape.getFilename());
 		this.numValidPos = 0;
+		
+		//cargamos la forma
 		for (int i = 0; i < shapeMatrix.length; i++) {
 			for (int j = 0; j < shapeMatrix.length; j++) {
 				if(shapeMatrix[i][j]) {
@@ -38,8 +48,7 @@ public class Board implements Reportable {
 			}
 		}
 		
-		
-		//aqui se llamara a una funcion que cargue la mtriz de booleanos
+		//inicializamos la matriz de cubos
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
 		}
@@ -51,6 +60,11 @@ public class Board implements Reportable {
 		}
 	}
 	
+	/**
+	 * Copy constructor
+	 * @return Deep copy of a given board
+	 * @param board
+	 */
 	public Board(Board board) {		
 		List<List<Cube>> m = new ArrayList<List<Cube>>();
 		for (int i = 0; i < board.matrix.size(); i++) {
@@ -84,6 +98,7 @@ public class Board implements Reportable {
 		orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); 
 	}
 	
+	
 	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
@@ -98,9 +113,14 @@ public class Board implements Reportable {
 		
 	}
 	
+	/**
+	 * This method adds the cube c to the Board, if it is in an valid position
+	 * @param c Cube to add
+	 * @throws IllegalArgumentException
+	 */
 	public void addCubeInPos(Cube c) throws IllegalArgumentException {
 		if (!this.tryToAddCube(c.getX(), c.getY()))
-			throw new IllegalArgumentException("non valid position for a cube");
+			throw new IllegalArgumentException("Non valid position for a cube");
 		List<Cube> column = matrix.get(c.getX());
 		column.remove(c.getY());
 		column.add(c.getY(), c);
@@ -115,6 +135,10 @@ public class Board implements Reportable {
 		return numCubes == numValidPos;
 	}
 	
+	/**
+	 * This method updates the cubes that have been trapped between newCube and other cubes belonging to the newCube owner.
+	 * @param newCube Added cube
+	 */
 	public void update(Cube newCube) {
 		int posX = newCube.getX(), posY = newCube.getY();
 		int newX, newY;
@@ -207,7 +231,7 @@ public class Board implements Reportable {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
-	boolean tryToAddCube(int x, int y) {
+	private boolean tryToAddCube(int x, int y) {
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
@@ -224,6 +248,7 @@ public class Board implements Reportable {
 			return isPositionInRange(x, y);
 	}
 
+	
 	@Override
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
