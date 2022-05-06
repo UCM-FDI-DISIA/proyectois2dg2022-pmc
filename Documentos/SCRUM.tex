@@ -1,32 +1,111 @@
-\documentclass[10pt,a4paper,openright]{book}
-\title{SCRUM}
+\documentclass[12pt,a4paper,openright]{book}
+\title{\Huge SCRUM}
 \date{\today}
 \author{Grupo PMC}
 \pagestyle{plain}
 \usepackage[spanish]{babel}
 \usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\setlength{\parskip}{0.25cm} %edicion de espaciado
+\setlength{\parindent}{0cm} %edicion de sangría
 \clubpenalty=10000 %líneas viudas NO
 \widowpenalty=10000 %líneas viudas NO
 
 \usepackage{subfiles}
 \usepackage{ulem}
 \usepackage[explicit]{titlesec} %Formato de capitulos y secciones
-    \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{0pt}{\Huge #1}[\titlerule]
-    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{#1}
-    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{#1}}
-    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{#1}
 
+\newcommand{\defaultformat}{
+	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge ##1}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{##1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
+}
+    
 \begin{document}
+\defaultformat
 \maketitle
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\tableofcontents
+
+\chapter{LA METODOLOGÍA SCRUM}
+%% FIXME esto debería estar a parte
+Durante este segundo cuatrimestre el grupo PMC nos hemos dedicado a adaptar a la era digital el tradicional juego de mesa \textit{Rolit}, convirtiéndose en nuestro primer proyecto auto-organizado y de temática libre.
+
+La magnitud del proyecto, el número de integrantes del equipo y los requerimientos de la asignatura de Ingeniería del Software II hacen que sea necesario establecer una metodología de trabajo eficaz para las características de nuestro equipo. En nuestro caso nos hemos organizado dentro del marco SCRUM.
+
+En este documento expondremos cómo hemos materializado los principios de esta técnica de trabajo a lo largo del tiempo de desarrollo, mostrando nuestra evolución y aprendizaje.
+
+Comencemos hablando sobre los fundamentos de SCRUM para poder contextualizar correctamente nuestro trabajo dentro de un marco teórico.
+
+SCRUM se trata de una de las metodologías ágiles para desarrollo de proyectos más extendidas en el mundo laboral y se caracteriza por su adaptabilidad a los cambios, así como por la gran visibilidad que ofrece al cliente durante la etapa de desarrollo.
+
+Así pues, esta técnica de trabajo ofrece un enfoque iterativo e incremental. Estas iteraciones suelen tener una duración media de dos semanas y cada una de ellas recibe el nombre de \textit{sprint}. En cada \textit{sprint}, el equipo de desarrollo se compromete a completar una lista de requisitos que conforman, junto a posibles tareas internas, el llamado \textit{Sprint Backlog}.
+
+Los requisitos pueden ir variando en el tiempo, de manera que surgan nuevas características, se modifiquen las ya existentes o se decida eliminar alguna. Estos requerimientos, que en la nomenclatura de SCRUM se llaman \textit{Historias de Usuario}, se almacenan en el \textit{Product Backlog}. A diferencia del \textit{Product Backlog}, el \textit{Sprint Backlog} debe permanecer inalterado durante la ejecución del \textit{sprint}.
+
+Además, existe una alta comunicación entre los miembros del equipo de desarrollo gracias al \textit{Daily Scrum}, una reunión diaria de aproximadamente 15 minutos en la que se habla sobre la evolución del proyecto. En la misma línea se sitúan los Sprint Retrospectives y Sprint Reviews que reflexionan sobre el trabajo realizado en el sprint.
+
+Para el correcto funcionamiento de esta metodología se precisa de personas que se dediquen expresamente a cerciorarse de ello, así como unos desarrolladores expertos, dando lugar, de forma natural, a una estructura no jerarquizada para los equipos SCRUM.
+
+\section{ESTRUCTURA Y FUNCIONAMIENTO}
+Como ya hemos adelantado en la sección anterior, de los principios básicos de SCRUM surge la necesidad intrínseca de establecer una estructura de equipo muy concreta.
+
+Los grupos que se regulan según esta técnica son auto-organizados, de forma que los propios integrantes son quienes deciden como distribuir y realizar su trabajo, sin la participación de agentes externos. Esta característica, ligada a la multifuncionalidad exigida a los desarrolladores, obliga a que los miembros del equipo sean personas con experiencia.
+
+Aunque en SCRUM no existen figuras que tengan una mayor autoridad que otras, sí que nos encontramos con distintos cargos que se encargan de unas responsabilidades específicas.
+\subsection{Product Owner}
+El \textit{Product Owner} tiene la responsabilidad de maximizar el valor del producto resultante del trabajo del equipo de desarrollo. Las formas de conseguir este objetivo dependen cada organización, \textit{Scrum Team} e individuos.
+
+Además, el \textit{Product Owner} es el encargado de la gestión eficiente del \textit{Product Backlog}, que incluye:
+
+\begin{itemize}
+\item El desarrollo y comunicación explícita del producto final.
+\item Comunicar claramente los cambios y la creación de elementos del \textit{Product Backlog}.
+\item Mantener el \textit{Product Backlog} ordenado, limpio, visible y bien explicado.
+\end{itemize}
+
+En términos informales podría considerarse que el \textit{Product Owner} es la ``voz del cliente", pues es quien se comunica con ellos y transforma sus ideas en productos tangibles.
+
+Siguiendo el espíritu democrático de SCRUM, al comienzo del cuatrimestre, PMC escogió a Virginia Chacón Pérez como \textit{Product Owner}.
+
+\subsection{Scrum Master}
+El \textit{Scrum Master} es quien se encarga de promocionar y mantener  SCRUM. Esta tarea se realiza asegurándose que todas las personas entiende las reglas, valores y técnicas de SCRUM para mejorar el flujo de trabajo del equipo.
+
+Así, las habilidades interpersonales y la capacidad de ayudar a los miembros del equipo a crecer y mejorar son esenciales para el \textit{Scrum Master}. Entre las obligaciones de esta figura se pueden destacar:
+\begin{itemize}
+\item Organizar las reuniones de planificación de los sprints.
+\item Organizar las Daily Scrums.
+\item Eliminar cualquier obstáculo que dificulte el desarrollo del proyecto.
+\end{itemize}
+
+Una vez más, este puesto fue sometido a votación y los miembros de PMC decidieron que Leonardo Macías Sánchez ocupara el cargo.
+
+\subsection{Development Team}
+El equipo de desarrollo está formado por el conjunto de personas que se dedican a desarrollar cualquier aspecto de un incremento usable en cada \textit{sprint}. El Development Team de este proyecto está formado por:
+\begin{itemize}
+\item Juan Diego Barrado Daganzo
+\item Virginia Chachón Pérez
+\item Sergio Miguel García Jiménez
+\item Daniel González Arbelo
+\item Leonardo Macías Sánchez
+\item María del Mar Ramiro Ortega
+\end{itemize}
+
+\chapter{HISTORIAS DE USUARIO}
+\section{PRODUCT BACKLOG}
+\subfile{./HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex}
+\section{REGISTRO DE CAMBIOS}
+\subfile{./HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex}
 
 \chapter{SPRINTS}
-\titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{#1}
 \subfile{./DocumentacionSprints/Sprint1/DocumentacionSprint1.tex}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
 \subfile{./DocumentacionSprints/Sprint2/DocumentacionSprint2.tex}
 \subfile{./DocumentacionSprints/Sprint3/DocumentacionSprint3.tex}
 \subfile{./DocumentacionSprints/Sprint4/DocumentacionSprint4.tex}
 \subfile{./DocumentacionSprints/Sprint5/DocumentacionSprint5.tex}
 \subfile{./DocumentacionSprints/Sprint6/DocumentacionSprint6.tex}
-
 
 \end{document}

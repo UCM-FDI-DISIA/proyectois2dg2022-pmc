@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  5 MAY 2022 11:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  6 MAY 2022 12:26
 entering extended mode
 **./SCRUM.tex
 (SCRUM.tex
@@ -6,8 +6,8 @@ LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18>
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
 Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\bk10.clo
-File: bk10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+File: bk12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count167
 \c@chapter=\count168
@@ -121,22 +121,22 @@ LaTeX Info: Redefining \% on input line 8.
 )
 \openout1 = `SCRUM.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Info: Redefining \. on input line 19.
-LaTeX Info: Redefining \% on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Info: Redefining \. on input line 24.
+LaTeX Info: Redefining \% on input line 24.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -154,15 +154,15 @@ LaTeX Info: Redefining \% on input line 19.
 * \textheight=702.78308pt
 * \oddsidemargin=13.08827pt
 * \evensidemargin=13.08827pt
-* \topmargin=-31.2056pt
+* \topmargin=-33.0119pt
 * \headheight=12.0pt
-* \headsep=18.06749pt
-* \topskip=10.0pt
-* \footskip=25.29494pt
-* \marginparwidth=115.0pt
+* \headsep=19.8738pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=88.0pt
 * \marginparsep=7.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -173,46 +173,86 @@ LaTeX Info: Redefining \% on input line 19.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 20.
+(Font)              <14.4> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 20.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 20.
+(Font)              <7> on input line 26.
 [1
 
 
 {C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2
 
 ]
+(SCRUM.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+ [3])
+\tf@toc=\write3
+\openout3 = `SCRUM.toc'.
+
+ [4]
 Cap\'{\i }tulo 1.
-(DocumentacionSprints/Sprint1/DocumentacionSprint1.tex [3] [4])
-(DocumentacionSprints/Sprint2/DocumentacionSprint2.tex [5] [6])
-(DocumentacionSprints/Sprint3/DocumentacionSprint3.tex [7] [8])
-(DocumentacionSprints/Sprint4/DocumentacionSprint4.tex [9] [10])
-(DocumentacionSprints/Sprint5/DocumentacionSprint5.tex [11] [12])
-(DocumentacionSprints/Sprint6/DocumentacionSprint6.tex [13] [14]) [15]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5
+
+]
+[6] [7] [8
+
+]
+Cap\'{\i }tulo 2.
+(HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex
+\c@epic=\count184
+\c@story=\count185
+ [9] [10] [11] [12])
+(HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex
+[13] [14] [15]) [16]
+Cap\'{\i }tulo 3.
+(DocumentacionSprints/Sprint1/DocumentacionSprint1.tex
+Underfull \vbox (badness 7397) has occurred while \output is active []
+
+ [17
+
+]
+[18]) (DocumentacionSprints/Sprint2/DocumentacionSprint2.tex [19]
+Underfull \vbox (badness 6141) has occurred while \output is active []
+
+ [20]
+[21]) (DocumentacionSprints/Sprint3/DocumentacionSprint3.tex [22]
+Underfull \vbox (badness 6380) has occurred while \output is active []
+
+ [23])
+(DocumentacionSprints/Sprint4/DocumentacionSprint4.tex [24] [25] [26])
+(DocumentacionSprints/Sprint5/DocumentacionSprint5.tex [27] [28])
+(DocumentacionSprints/Sprint6/DocumentacionSprint6.tex [29] [30]) [31]
 (SCRUM.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 2563 strings out of 480790
- 39068 string characters out of 2897301
- 302601 words of memory out of 3000000
- 18554 multiletter control sequences out of 15000+200000
- 537958 words of font info for 43 fonts, out of 3000000 for 9000
+ 2605 strings out of 480790
+ 40297 string characters out of 2897301
+ 301783 words of memory out of 3000000
+ 18579 multiletter control sequences out of 15000+200000
+ 538902 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,38p,738b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmbx10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on SCRUM.pdf (15 pages, 114162 bytes).
+ 30i,6n,38p,738b,399s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\jdbar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
+m1200.pk><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jdbar/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on SCRUM.pdf (31 pages, 133103 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
+ 127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
