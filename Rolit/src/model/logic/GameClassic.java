@@ -7,14 +7,28 @@ import model.replay.GameState;
 import utils.StringUtils;
 import view.RolitObserver;
 
+/**
+ * This class represents the Classic game mode of Rolit.
+ * @author PMC
+ *
+ */
 public class GameClassic extends Game {
 	
-	// Constructor de copia para generar los estados de las replays
+	/**
+	 * Copy constructor (deep copy)
+	 * @param game Game to copy
+	 */
 	public GameClassic(GameClassic game) {
 		super(game);
 	}
 	
-	// Constructor de creaci�n a partir de carga
+	/**
+	 * Constructor
+	 * @param board Game board
+	 * @param list_cubes List with the cubes that are already in the board
+	 * @param list_players List with the players
+	 * @param currentPlayerColor First turn player color
+	 */
 	public GameClassic(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor) {
 		super(board, list_cubes, list_players, currentPlayerColor);
 	}

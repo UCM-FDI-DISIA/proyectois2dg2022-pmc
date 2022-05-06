@@ -5,7 +5,17 @@ package model.logic;
  *
  */
 public interface Rival extends Comparable<Rival>{
+	
+	/**
+	 * This method returns the rival name
+	 * @return The rival name
+	 */
 	public String getName();
+	
+	/**
+	 * It returns the rival score
+	 * @return The rival score
+	 */
 	public int getScore();
 	
 	@Override

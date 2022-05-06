@@ -2,22 +2,38 @@ package model.logic;
 
 import java.util.List;
 
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import model.replay.GameState;
 import utils.StringUtils;
 import view.RolitObserver;
-
+/**
+ * This class represents the Team game mode of Rolit.
+ * @author PMC
+ *
+ */
 public class GameTeams extends Game {
 	private List<Team> teams;
-		
+	
+	/**
+	 * Copy constructor (deep copy)
+	 * @param game Game to copy
+	 */
 	public GameTeams(GameTeams game) {
 		super(game);
-		// FIXME esto puede que este mal y pero en player lo hacemos as� para las replays
 		this.teams = game.teams;
 	}
 	
+	/**
+	 * Constructor
+	 * @param board Game board
+	 * @param list_cubes List with the cubes that are already in the board
+	 * @param list_players List with the players
+	 * @param currentPlayerColor First turn player color
+	 * @param teams_list List of teams
+	 */
 	public GameTeams(Board board, List<Cube> list_cubes, List<Player> list_players, Color currentPlayerColor, List<Team> teams_list) {
 		super(board, list_cubes, list_players, currentPlayerColor);
 		this.teams = teams_list;

@@ -14,9 +14,17 @@ import model.SaveLoadManager;
  *
  */
 public class Board implements Reportable {	
-	
+	/**
+	 * Max board size
+	 */
 	public final static int MAX_SIZE = 15;	
+	/**
+	 * Cubes container
+	 */
 	private List<List<Cube>> matrix;
+	/**
+	 * Cubes container ordered by
+	 */
 	private List<Pair<Integer, Integer>> orderedCubeList;
 	private boolean[][] shapeMatrix;
 	private String shapeName;
@@ -27,8 +35,7 @@ public class Board implements Reportable {
 	
 	/**
 	 * Constructor
-	 * @return Creates a Board given a shape
-	 * @param shape
+	 * @param shape Board shape
 	 */
 	public Board(Shape shape) {
 		this.numCubes = 0;
@@ -61,9 +68,8 @@ public class Board implements Reportable {
 	}
 	
 	/**
-	 * Copy constructor
-	 * @return Deep copy of a given board
-	 * @param board
+	 * Copy constructor (deep copy)
+	 * @param board Board to copy
 	 */
 	public Board(Board board) {		
 		List<List<Cube>> m = new ArrayList<List<Cube>>();
@@ -93,16 +99,21 @@ public class Board implements Reportable {
 		this.numCubes = board.numCubes;
 	}
 	
-	//por ahora es para los tests
-	public void clearOrderedCubeList() {
-		orderedCubeList = new ArrayList<Pair<Integer, Integer>>(); 
-	}
-	
-	
+	/**
+	 * This method returns the cube in the position x, y
+	 * @param x x coordinate of the cube
+	 * @param y y coordinate of the cube
+	 * @return Cube in position (x, y)
+	 */
 	public Cube getCubeInPos(int x, int y) {
 		return matrix.get(x).get(y);
 	}
 	
+	/**
+	 * This method checks whether if there is a cube in the position p
+	 * @param p coordinates x, y of the cube
+	 * @return true if there is a cube in position p or false if not
+	 */
 	private boolean checkIfCubeIsInList(Pair<Integer, Integer> p) {
 		for (int i = 0; i < orderedCubeList.size(); ++i) {
 			Pair<Integer, Integer> iPair = orderedCubeList.get(i);
@@ -116,7 +127,7 @@ public class Board implements Reportable {
 	/**
 	 * This method adds the cube c to the Board, if it is in an valid position
 	 * @param c Cube to add
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException This exception is thrown if the cube is not in a valid position.
 	 */
 	public void addCubeInPos(Cube c) throws IllegalArgumentException {
 		if (!this.tryToAddCube(c.getX(), c.getY()))
@@ -131,6 +142,10 @@ public class Board implements Reportable {
 		this.numCubes++;
 	}
 	
+	/**
+	 * This method checks if the board is full
+	 * @return true if the board is full and false otherwise
+	 */
 	public boolean isBoardFull() {
 		return numCubes == numValidPos;
 	}
@@ -202,6 +217,12 @@ public class Board implements Reportable {
 		
 	}
 	
+	/**
+	 * Given a position it is converted to String
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return Cube shortcut if the position is not empty or an space if it is.
+	 */
 	private String positionToString(int x, int y) {
 		Cube cube = getCubeInPos(x, y);
 		if (cube == null)
@@ -227,10 +248,22 @@ public class Board implements Reportable {
 		return str.toString();
 	}
 
+	/**
+	 * Checks if a position is within the board boundaries
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return true if the position (x,y) is in the board and false otherwise
+	 */
 	private boolean isPositionInRange(int x, int y) {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
+	/**
+	 * This method verifies if a position is valid to place a cube
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return true if the position (x, y) is valid and false otherwise.
+	 */
 	private boolean tryToAddCube(int x, int y) {
 		if (numCubes > 0) {
 			boolean nearbyCube = false;

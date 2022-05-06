@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public interface Reportable {
 	/**
-	 * 
+	 * This method serializes an object into a JSON
 	 * @return Serialization of the object in JSONObject
 	 */
 	public JSONObject report();
