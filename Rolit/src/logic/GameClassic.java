@@ -49,10 +49,11 @@ public class GameClassic extends Game {
 			}
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			else {
+				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 				
-				onTurnPlayed();
+				
 				this.executedTurn = true;
 			}
 			

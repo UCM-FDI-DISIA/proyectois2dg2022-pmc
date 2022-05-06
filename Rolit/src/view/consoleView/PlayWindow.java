@@ -1,5 +1,7 @@
 package view.consoleView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import commands.Command;
@@ -25,16 +27,36 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 	public boolean open() {
 		this.clear();
 		while (!this.close) {
-			String s = input.nextLine();
-			try {
-				String[] args = s.trim().split(" ");
-				Command command = Command.getCommand(args);
-				ctr.executeCommand(command);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println();
+			
+			//Evaluación perezosa: si no se ha acabado el juego, se espera a que haya cosas en el input
+			//En cuanto el juego se acaba, no se ejecuta input.hasNext(). Esto nos interesa porque
+			//input.hasNext "monopoliza" el uso de System.in. Por tanto, SaveReplay ahora puede
+			//acceder al System.in y llegar a tiempo a recibir la y/n.
+			System.out.println("PlayWindow" + System.currentTimeMillis());
+			
+			while (!this.close && !input.hasNext()) {
+				System.out.println("PlayWindow" + System.currentTimeMillis());
 			}
+			
+			if (!this.close) {
+				String s = input.nextLine();
+				try {
+					String[] args = s.trim().split(" ");
+					Command command = Command.getCommand(args);
+					ctr.executeCommand(command);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println();
+				}
+			}
+			else {
+				System.out.println("PlayWindow" + System.currentTimeMillis());
+				
+			}
+				
+				
 		}
+			
 
 		return true;
 	}
@@ -51,6 +73,10 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		Collections.sort(rivals);
 		this.close = true;
+		System.out.println("Cerrado en: " + System.currentTimeMillis());
+//		String s = "\n";
+//		InputStream targetStream = new ByteArrayInputStream(s.getBytes());
+//		System.setIn(targetStream);
 		this.clear();
 		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);
 		for (int i = 0; i < rivals.size(); i++)
@@ -62,6 +88,9 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
 	}
 
 	@Override
