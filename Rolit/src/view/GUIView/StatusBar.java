@@ -2,10 +2,11 @@ package view.GUIView;
 
 import java.util.List;
 import javax.swing.JLabel;
-import control.Controller;
-import logic.Rival;
-import replay.Replay;
-import replay.GameState;
+
+import controller.Controller;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 

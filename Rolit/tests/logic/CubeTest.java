@@ -4,6 +4,10 @@ package logic;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+
+import model.logic.Color;
+import model.logic.Cube;
+import model.logic.Player;
  
 public class CubeTest {
 

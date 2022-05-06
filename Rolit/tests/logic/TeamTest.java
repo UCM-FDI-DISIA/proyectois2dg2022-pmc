@@ -8,6 +8,10 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import model.logic.Color;
+import model.logic.Player;
+import model.logic.Team;
+
 public class TeamTest {
 	@Test
 	void update_test() {

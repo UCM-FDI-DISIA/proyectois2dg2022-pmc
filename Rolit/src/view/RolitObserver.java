@@ -2,9 +2,9 @@ package view;
 
 import java.util.List;
 
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 
 public interface RolitObserver {
 	

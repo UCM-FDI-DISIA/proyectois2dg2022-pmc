@@ -5,13 +5,14 @@ import java.awt.GridBagLayout;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import control.Controller;
-import control.SaveLoadManager;
-import logic.Color;
-import logic.Rival;
-import logic.Shape;
-import replay.Replay;
-import replay.GameState;
+
+import controller.Controller;
+import model.SaveLoadManager;
+import model.logic.Color;
+import model.logic.Rival;
+import model.logic.Shape;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 
@@ -145,7 +146,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 		for (int i = 0; i < cubes.length(); i++) {
 			JSONArray pos = cubes.getJSONObject(i).getJSONArray("pos");
 			char color = cubes.getJSONObject(i).getString("color").charAt(0);
-			celdas[pos.getInt(1)][pos.getInt(0)].update(logic.Color.valueOfIgnoreCase(color));
+			celdas[pos.getInt(1)][pos.getInt(0)].update(model.logic.Color.valueOfIgnoreCase(color));
 		}
 		this.lastCubeAdded = cubes.getJSONObject(cubes.length() - 1);
 	}

@@ -2,7 +2,8 @@ package view.consoleView;
 
 import java.util.List;
 import org.json.JSONObject;
-import control.SaveLoadManager;
+
+import model.SaveLoadManager;
 
 public class LoadGameWindow implements ConsoleWindow {
 	private static final String LIST_MSG = "List of saved replays: ";

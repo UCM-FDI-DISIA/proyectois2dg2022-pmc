@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import control.Controller;
-import logic.Color;
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+
+import controller.Controller;
+import model.logic.Color;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitPanel;
 

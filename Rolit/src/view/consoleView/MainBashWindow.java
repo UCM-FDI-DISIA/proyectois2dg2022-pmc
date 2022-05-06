@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import control.Controller;
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+import controller.Controller;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 
 public class MainBashWindow implements ConsoleWindow, RolitObserver {

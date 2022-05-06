@@ -7,9 +7,10 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import Builders.GameTeamsBuilder;
-import control.Controller;
-import replay.GameState;
+
+import controller.Controller;
+import model.builders.GameTeamsBuilder;
+import model.replay.GameState;
 import utils.Pair;
 
 public class CreateGameDialog extends JDialog {

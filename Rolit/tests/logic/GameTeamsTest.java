@@ -8,6 +8,15 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import model.logic.Board;
+import model.logic.Color;
+import model.logic.Cube;
+import model.logic.Game;
+import model.logic.GameTeams;
+import model.logic.Player;
+import model.logic.Shape;
+import model.logic.Team;
+
 public class GameTeamsTest {
 	@Test
 	void play_test() {

@@ -3,6 +3,8 @@ package commands;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
+import model.commands.PlaceCubeCommand;
+
 
 public class PlaceCubeCommandTest {
 	@Test

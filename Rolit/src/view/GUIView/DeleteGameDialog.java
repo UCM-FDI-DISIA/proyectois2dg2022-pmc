@@ -18,7 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import control.SaveLoadManager;
+import model.SaveLoadManager;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitCheckBox;
 import view.GUIView.RolitComponents.RolitPanel;

@@ -1,8 +1,9 @@
 package view.consoleView;
 
 import java.util.List;
-import control.SaveLoadManager;
-import replay.Replay;
+
+import model.SaveLoadManager;
+import model.replay.Replay;
 
 public class LoadReplayWindow implements ConsoleWindow {
 	private static final String LIST_MSG = "List of saved replays: ";
