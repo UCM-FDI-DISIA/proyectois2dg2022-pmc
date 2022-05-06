@@ -6,7 +6,8 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
  
 public class CubeTest {
-
+	//El nombre de la función que se está probando aparece en el nombre de cada test
+	
 	@Test
 	void change_owner() {
 		Player p1 = new Player(Color.PINK, "mar");

@@ -6,6 +6,8 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {
+	//El nombre de la función que se está probando aparece en el nombre de cada test
+	
 	@Test
 	void addCubeInPos_trytoAdd() {
 		Board b = new Board(Shape.CM);

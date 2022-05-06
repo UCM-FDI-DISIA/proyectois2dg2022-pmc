@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 public class GameClassicTest {
+	//probamos principalmente la clase play, que es la principal.
 	@Test
 	void play_test() {
 		Board b = new Board(Shape.SM);
@@ -35,6 +36,7 @@ public class GameClassicTest {
 		b.clearOrderedCubeList();
 	}
 	
+	//comprobamos que el report final es el esperado
 	@Test
 	void test_report() {
 		Board b = new Board(Shape.SM);
@@ -105,5 +107,58 @@ public class GameClassicTest {
 		String s = "{\"players\":[{\"score\":1,\"color\":\"P\",\"name\":\"Maria jose\"},{\"score\":2,\"color\":\"L\",\"name\":\"paco\"},{\"score\":0,\"color\":\"R\",\"name\":\"lucia la de cuenca\"}],\"turn\":\"R\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"L\",\"pos\":[5,7]},{\"color\":\"P\",\"pos\":[5,6]},{\"color\":\"L\",\"pos\":[5,8]}]}}"; 
 		assertTrue (new JSONObject(s).similar(game.report()));
 		b1.clearOrderedCubeList();
+	}
+	
+	@Test
+	void play_test3() {
+		Board b = new Board(Shape.DM);
+		Player p1 = new Player(Color.GREEN, "uwu uwu");
+		Player p2 = new Player(Color.ORANGE, "prueba 3 prueba 3");
+		Player p3 = new Player(Color.BROWN, "paquito el chocolatero");
+		List<Player> lp = new ArrayList<Player>();
+		lp.add(p1);
+		lp.add(p2);
+		lp.add(p3);
+		List<Cube> lc = new ArrayList<Cube>();
+		Cube c = new Cube(8, 9, p2);
+		Cube c2 = new Cube(8, 8, p1);
+		lc.add(c);
+		lc.add(c2);
+		Game game = new GameClassic(b, lc, lp, Color.GREEN);
+		game.addCubeToQueue(new Cube(8, 9, null));
+		game.addCubeToQueue(new Cube(100,5, null));
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		game.addCubeToQueue(new Cube(8,7, null));
+		game.play();
+		assertEquals(b.getCubeInPos(8, 7).getColor(), Color.GREEN);
+		b.clearOrderedCubeList();
+	}
+	
+	@Test
+	void test_report3() {
+		Board b = new Board(Shape.DM);
+		Player p1 = new Player(Color.GREEN, "uwu uwu");
+		Player p2 = new Player(Color.ORANGE, "prueba 3 prueba 3");
+		Player p3 = new Player(Color.BROWN, "paquito el chocolatero");
+		List<Player> lp = new ArrayList<Player>();
+		lp.add(p1);
+		lp.add(p2);
+		lp.add(p3);
+		List<Cube> lc = new ArrayList<Cube>();
+		Cube c = new Cube(8, 9, p2);
+		Cube c2 = new Cube(8, 8, p1);
+		lc.add(c);
+		lc.add(c2);
+		Game game = new GameClassic(b, lc, lp, Color.GREEN);
+		game.addCubeToQueue(new Cube(8, 9, null));
+		game.addCubeToQueue(new Cube(100,5, null));
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		assertThrows(IllegalArgumentException.class, () -> game.play());
+		game.addCubeToQueue(new Cube(8,7, null));
+		game.play();
+		String s = "{\"players\":[{\"score\":2,\"color\":\"G\",\"name\":\"uwu uwu\"},{\"score\":1,\"color\":\"O\",\"name\":\"prueba 3 prueba 3\"},{\"score\":0,\"color\":\"W\",\"name\":\"paquito el chocolatero\"}],\"turn\":\"O\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"DM\",\"cubes\":[{\"color\":\"O\",\"pos\":[8,9]},{\"color\":\"G\",\"pos\":[8,8]},{\"color\":\"G\",\"pos\":[8,7]}]}}";
+		assertTrue (new JSONObject(s).similar(game.report()));
+		b.clearOrderedCubeList();
 	}
 }

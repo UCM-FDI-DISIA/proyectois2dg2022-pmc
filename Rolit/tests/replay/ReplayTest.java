@@ -44,4 +44,31 @@ public class ReplayTest {
 		assertTrue (new JSONObject(s).similar(replay.report()));
 	}
 	
+	
+	@Test
+	void test_2() {
+		Board b = new Board(Shape.DL);
+		Player p1 = new Player(Color.ORANGE, "werfj");
+		Player p2 = new Player(Color.BLUE, "Lesdhfe wkerrnfo");
+		Player p3 = new Player(Color.BLACK, "djjjjjjd jdj");
+		List<Player> lp = new ArrayList<Player>();
+		lp.add(p1);
+		lp.add(p2);
+		lp.add(p3);
+		List<Cube> lc = new ArrayList<Cube>();
+		Cube c = new Cube(8, 9, p2);
+		Cube c2 = new Cube(8, 8, p1);
+		lc.add(c);
+		lc.add(c2);
+		Game game = new GameClassic(b, lc, lp, Color.ORANGE);
+		game.addCubeToQueue(new Cube(8,7, null));
+		game.play();
+		GameState state = new GameState("p", game);
+		
+		Replay replay = new Replay();
+		replay.addState(state);
+		
+		String s = "{\"states\":[{\"game\":{\"players\":[{\"score\":2,\"color\":\"O\",\"name\":\"werfj\"},{\"score\":1,\"color\":\"L\",\"name\":\"Lesdhfe wkerrnfo\"},{\"score\":0,\"color\":\"B\",\"name\":\"djjjjjjd jdj\"}],\"turn\":\"L\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"DL\",\"cubes\":[{\"color\":\"L\",\"pos\":[8,9]},{\"color\":\"O\",\"pos\":[8,8]},{\"color\":\"O\",\"pos\":[8,7]}]}},\"command\":\"p\"}]}";
+		assertTrue (new JSONObject(s).similar(replay.report()));
+	}
 }

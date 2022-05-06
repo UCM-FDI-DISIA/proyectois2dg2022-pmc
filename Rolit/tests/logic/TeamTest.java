@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 public class TeamTest {
+	//comprueba que funcione bien la función update
 	@Test
 	void update_test() {
 		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
@@ -22,6 +23,7 @@ public class TeamTest {
 		assertEquals(8, equipo1.getScore());
 	}
 	
+	//comprueba que el report final es igual al deseado
 	@Test
 	void test_report() {
 		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
@@ -32,4 +34,17 @@ public class TeamTest {
 		String s = "{\"score\":0,\"players\":[{\"score\":0,\"color\":\"Y\",\"name\":\"Chacon Chacon\"},{\"score\":0,\"color\":\"R\",\"name\":\"Leonardo Macias Pasteles\"}],\"name\":\"Basados\"}";
 		assertTrue (new JSONObject(s).similar(equipo1.report()));
 	}
+	
+	//comprueba que el report final es igual al deseado
+		@Test
+		void test_report2() {
+			Player p1 = new Player(Color.BROWN, "uwuuuuuuuu");
+			Player p2 = new Player(Color.ORANGE, "no quiero estudiar");
+			List<Player> l = new ArrayList<Player>();
+			l.add(p1); l.add(p2);
+			Team equipo1 = new Team("buenisimos", l);
+			String s = "{\"score\":0,\"players\":[{\"score\":0,\"color\":\"W\",\"name\":\"uwuuuuuuuu\"},{\"score\":0,\"color\":\"O\",\"name\":\"no quiero estudiar\"}],\"name\":\"buenisimos\"}";
+			assertTrue (new JSONObject(s).similar(equipo1.report()));
+		}
+	
 }
