@@ -9,15 +9,17 @@ public class BoardTest {
 	//El nombre de la función que se está probando aparece en el nombre de cada test
 	
 	@Test
-	void addCubeInPos_trytoAdd() {
+	void addCubeInPos_addCubeInPos() {
 		Board b = new Board(Shape.CM);
 		Player p1 = new Player(Color.GREEN, "delegau");
 		Cube c2 = new Cube(6, 5, p1);
 		b.addCubeInPos(c2);
 		Cube c = new Cube(5, 5, p1);
-		assertTrue(b.tryToAddCube(5, 5));
-		assertFalse(b.tryToAddCube(30, 15));
+		Cube c3 = new Cube(5, 5, p1);
+		Cube c4 = new Cube(30, 15, p1);
 		b.addCubeInPos(c);
+		assertThrows(IllegalArgumentException.class, () -> b.addCubeInPos(c3));
+		assertThrows(IllegalArgumentException.class, () -> b.addCubeInPos(c4));
 		assertEquals(c, b.getCubeInPos(5, 5));
 		b.clearOrderedCubeList();
 	}
