@@ -8,13 +8,14 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import logic.Board;
-import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.GameClassic;
-import logic.Player;
-import logic.Shape;
+import model.logic.Board;
+import model.logic.Color;
+import model.logic.Cube;
+import model.logic.Game;
+import model.logic.GameClassic;
+import model.logic.Player;
+import model.logic.Shape;
+import model.replay.GameState;
 
 public class StateTest {
 	@Test

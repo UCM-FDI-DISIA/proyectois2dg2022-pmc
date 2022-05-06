@@ -1,115 +1,112 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  12 APR 2022 19:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  6 MAY 2022 12:48
 entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
 **./DiseñoPlayers.tex
 (DiseñoPlayers.tex
-LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-06-18>
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-04-29>
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count167
-\c@section=\count168
-\c@subsection=\count169
-\c@subsubsection=\count170
-\c@paragraph=\count171
-\c@subparagraph=\count172
-\c@figure=\count173
-\c@table=\count174
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
-\bibindent=\dimen134
+\bibindent=\dimen138
 )
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2020/06/10 3.45 The Babel package
+(C:\Program Files\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2022/04/30 3.74 The Babel package
+\babel@savecnt=\count193
+\U@D=\dimen139
+\l@unhyphenated=\language79
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.def
-File: babel.def 2020/06/10 3.45 Babel common definitions
-\babel@savecnt=\count175
-\U@D=\dimen135
-\l@babelnohyphens=\language79
-
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+(C:\Program Files\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
-)
-\bbl@dirlevel=\count176
+\bbl@dirlevel=\count194
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+(C:\Program Files\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/babel-spanish\spanish.l
-df
-Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
-\es@quottoks=\toks15
-\es@quotdepth=\count177
-Package babel Info: Making " an active character on input line 561.
-Package babel Info: Making . an active character on input line 662.
-Package babel Info: Making < an active character on input line 707.
-Package babel Info: Making > an active character on input line 707.
+(C:\Users\sergi\AppData\Roaming\MiKTeX\tex/latex/babel-spanish\spanish.ldf
+Language: spanish.ldf 2021/05/27 v5.0q Spanish support from the babel system
+\es@quottoks=\toks16
+\es@quotdepth=\count195
+Package babel Info: Making " an active character on input line 570.
+Package babel Info: Making . an active character on input line 675.
+Package babel Info: Making < an active character on input line 722.
+Package babel Info: Making > an active character on input line 722.
 ))
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\sergi\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count178
-\Gm@cntv=\count179
-\c@Gm@tempcnt=\count180
-\Gm@bindingoffset=\dimen136
-\Gm@wd@mp=\dimen137
-\Gm@odd@mp=\dimen138
-\Gm@even@mp=\dimen139
-\Gm@layoutwidth=\dimen140
-\Gm@layoutheight=\dimen141
-\Gm@layouthoffset=\dimen142
-\Gm@layoutvoffset=\dimen143
-\Gm@dimlist=\toks17
+\Gm@cnth=\count196
+\Gm@cntv=\count197
+\c@Gm@tempcnt=\count198
+\Gm@bindingoffset=\dimen140
+\Gm@wd@mp=\dimen141
+\Gm@odd@mp=\dimen142
+\Gm@even@mp=\dimen143
+\Gm@layoutwidth=\dimen144
+\Gm@layoutheight=\dimen145
+\Gm@layouthoffset=\dimen146
+\Gm@layoutvoffset=\dimen147
+\Gm@dimlist=\toks18
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count181
-\lst@gtempboxa=\box45
-\lst@token=\toks18
-\lst@length=\count182
-\lst@currlwidth=\dimen144
-\lst@column=\count183
-\lst@pos=\count184
-\lst@lostspace=\dimen145
-\lst@width=\dimen146
-\lst@newlines=\count185
-\lst@lineno=\count186
-\lst@maxwidth=\dimen147
+(C:\Users\sergi\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count199
+\lst@gtempboxa=\box50
+\lst@token=\toks19
+\lst@length=\count266
+\lst@currlwidth=\dimen148
+\lst@column=\count267
+\lst@pos=\count268
+\lst@lostspace=\dimen149
+\lst@width=\dimen150
+\lst@newlines=\count269
+\lst@lineno=\count270
+\lst@maxwidth=\dimen151
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count187
-\lst@skipnumbers=\count188
-\lst@framebox=\box46
+\c@lstnumber=\count271
+\lst@skipnumbers=\count272
+\lst@framebox=\box51
 )
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-mode.def
-File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count189
-\l__pdf_internal_box=\box47
-) (DiseñoPlayers.aux
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count273
+\l__pdf_internal_box=\box52
+)
+(DiseñoPlayers.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -166,7 +163,7 @@ LaTeX Info: Redefining \% on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count190
+\c@lstlisting=\count274
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -175,26 +172,25 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 12.
 [1
 
-{C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+{C:/Users/sergi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 (DiseñoPlayers.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 3375 strings out of 480790
- 49500 string characters out of 2897301
- 305084 words of memory out of 3000000
- 19413 multiletter control sequences out of 15000+200000
- 535373 words of font info for 34 fonts, out of 3000000 for 9000
+ 3761 strings out of 478619
+ 59746 string characters out of 2853061
+ 370011 words of memory out of 3000000
+ 21939 multiletter control sequences out of 15000+600000
+ 472294 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,36p,218b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr17.pfb>
-Output written on DiseñoPlayers.pdf (1 page, 29646 bytes).
+ 55i,6n,62p,223b,363s stack positions out of 10000i,1000n,20000p,200000b,80000s
+<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on DiseñoPlayers.pdf (1 page, 32425 bytes).
 PDF statistics:
- 18 PDF objects out of 1000 (max. 8388607)
+ 21 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

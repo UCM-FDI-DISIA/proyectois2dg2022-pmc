@@ -2,8 +2,8 @@ package view.consoleView;
 
 import org.json.JSONArray;
 
-import Strategy.Strategy;
-import logic.Color;
+import model.logic.Color;
+import model.strategy.Strategy;
 
 public class NewGameClassicWindow extends NewGameWindow {
 	private static final String TYPE = "GameClassic";

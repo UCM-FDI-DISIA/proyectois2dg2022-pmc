@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.Board;
-import logic.Color;
-import logic.Cube;
-import logic.Game;
-import logic.GameClassic;
-import logic.Player;
-import logic.Shape;
+import model.logic.Board;
+import model.logic.Color;
+import model.logic.Cube;
+import model.logic.Game;
+import model.logic.GameClassic;
+import model.logic.Player;
+import model.logic.Shape;
+import model.replay.GameState;
+import model.replay.Replay;
 
 public class ReplayTest {
 	@Test

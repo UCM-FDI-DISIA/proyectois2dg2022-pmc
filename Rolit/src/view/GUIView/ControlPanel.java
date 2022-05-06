@@ -9,11 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
-import commands.SaveCommand;
-import control.Controller;
-import logic.Rival;
-import replay.Replay;
-import replay.GameState;
+import controller.Controller;
+import model.commands.SaveCommand;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitToolBar;

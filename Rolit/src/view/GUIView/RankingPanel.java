@@ -17,7 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import logic.Rival;
+import model.logic.Rival;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class RankingPanel extends RolitPanel {

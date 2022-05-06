@@ -6,9 +6,9 @@ import java.util.HashSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Builders.GameTeamsBuilder;
-import control.Controller;
-import logic.Color;
+import controller.Controller;
+import model.builders.GameTeamsBuilder;
+import model.logic.Color;
 import utils.Pair;
 
 public class CreateGameWithPlayersDialog extends CreateGameDialog {

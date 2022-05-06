@@ -1,7 +1,5 @@
 package view.GUIView;
 
-import replay.Replay;
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,8 +9,9 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import commands.PlaceCubeCommand;
-import control.Controller;
+import controller.Controller;
+import model.commands.PlaceCubeCommand;
+import model.replay.Replay;
 
 public class CeldaGUI {
 
@@ -22,7 +21,7 @@ public class CeldaGUI {
 	private String iconPath;
 	public static int SIDE_LENGTH;
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
-	private HashMap<logic.Color, ImageIcon> mapColorIcon = new HashMap<>();
+	private HashMap<model.logic.Color, ImageIcon> mapColorIcon = new HashMap<>();
 
 	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
@@ -103,7 +102,7 @@ public class CeldaGUI {
 		return button;
 	}
 	
-	public void update(logic.Color newColor) {
+	public void update(model.logic.Color newColor) {
 		
 		if (this.validButton) {
 			

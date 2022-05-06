@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
-import logic.Shape;
+import model.logic.Shape;
 
 
 public class BoardRenderer extends DefaultListCellRenderer {

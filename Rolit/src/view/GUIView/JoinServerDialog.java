@@ -18,7 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-import logic.Color;
+
+import model.logic.Color;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;

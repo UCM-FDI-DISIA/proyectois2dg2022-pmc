@@ -1,7 +1,8 @@
 package view.consoleView;
 
 import java.util.List;
-import control.SaveLoadManager;
+
+import model.SaveLoadManager;
 
 public class DeleteGameWindow implements ConsoleWindow {
 	private static final String CHOOSE_NUMBER_MSG = "Choose a number";
