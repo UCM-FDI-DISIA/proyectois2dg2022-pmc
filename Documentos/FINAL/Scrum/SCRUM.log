@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  6 MAY 2022 12:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  6 MAY 2022 13:07
 entering extended mode
 **./SCRUM.tex
 (SCRUM.tex
@@ -121,22 +121,22 @@ LaTeX Info: Redefining \% on input line 8.
 )
 \openout1 = `SCRUM.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Info: Redefining \. on input line 24.
-LaTeX Info: Redefining \% on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Info: Redefining \. on input line 26.
+LaTeX Info: Redefining \% on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -173,9 +173,9 @@ LaTeX Info: Redefining \% on input line 24.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 26.
+(Font)              <14.4> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 26.
+(Font)              <7> on input line 28.
 [1
 
 
@@ -207,42 +207,56 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 Cap\'{\i }tulo 2.
-(HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex
+
+(../../HistoriasDeUsuario/Historias/../../HistoriasDeUsuario/Historias/Historia
+sDeUsuario.tex
 \c@epic=\count184
 \c@story=\count185
  [9] [10] [11] [12])
-(HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex
-[13] [14] [15]) [16]
+(../../HistoriasDeUsuario/Modificaciones/../../HistoriasDeUsuario/Modificacione
+s/ModificacionesHistoriasDeUsuario.tex [13] [14]) [15] [16]
 Cap\'{\i }tulo 3.
-(DocumentacionSprints/Sprint1/DocumentacionSprint1.tex
+
+(../../DocumentacionSprints/Sprint1/../../DocumentacionSprints/Sprint1/Document
+acionSprint1.tex
 Underfull \vbox (badness 7397) has occurred while \output is active []
 
  [17
 
 ]
-[18]) (DocumentacionSprints/Sprint2/DocumentacionSprint2.tex [19]
+[18])
+(../../DocumentacionSprints/Sprint2/../../DocumentacionSprints/Sprint2/Document
+acionSprint2.tex [19]
 Underfull \vbox (badness 6141) has occurred while \output is active []
 
  [20]
-[21]) (DocumentacionSprints/Sprint3/DocumentacionSprint3.tex [22]
+[21])
+(../../DocumentacionSprints/Sprint3/../../DocumentacionSprints/Sprint3/Document
+acionSprint3.tex [22]
 Underfull \vbox (badness 6380) has occurred while \output is active []
 
  [23])
-(DocumentacionSprints/Sprint4/DocumentacionSprint4.tex [24] [25] [26])
-(DocumentacionSprints/Sprint5/DocumentacionSprint5.tex [27] [28])
-(DocumentacionSprints/Sprint6/DocumentacionSprint6.tex [29] [30]) [31]
-(SCRUM.aux
+(../../DocumentacionSprints/Sprint4/../../DocumentacionSprints/Sprint4/Document
+acionSprint4.tex [24] [25] [26])
+(../../DocumentacionSprints/Sprint5/../../DocumentacionSprints/Sprint5/Document
+acionSprint5.tex [27] [28])
+(../../DocumentacionSprints/Sprint6/../../DocumentacionSprints/Sprint6/Document
+acionSprint6.tex [29] [30]) [31] [32
+
+]
+Cap\'{\i }tulo 4.
+[33] (SCRUM.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 2605 strings out of 480790
- 40297 string characters out of 2897301
- 301783 words of memory out of 3000000
- 18579 multiletter control sequences out of 15000+200000
+ 2600 strings out of 480790
+ 40584 string characters out of 2897301
+ 301331 words of memory out of 3000000
+ 18581 multiletter control sequences out of 15000+200000
  538902 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,38p,738b,399s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,6n,38p,742b,399s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jdbar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
 m1200.pk><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/pub
@@ -250,9 +264,9 @@ lic/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jdbar/AppData/Local/Programs
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on SCRUM.pdf (31 pages, 133103 bytes).
+Output written on SCRUM.pdf (33 pages, 134731 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

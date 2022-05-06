@@ -13,6 +13,7 @@
 \usepackage{subfiles}
 \usepackage{ulem}
 \usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+\usepackage{import}
 
 \newcommand{\defaultformat}{
 	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge ##1}[\titlerule]
@@ -20,6 +21,7 @@
     \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
     \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
 }
+
     
 \begin{document}
 \defaultformat
@@ -94,18 +96,28 @@ El equipo de desarrollo está formado por el conjunto de personas que se dedican
 
 \chapter{HISTORIAS DE USUARIO}
 \section{PRODUCT BACKLOG}
-\subfile{./HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex}
+\subfile{../../HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex}
+\defaultformat
 \section{REGISTRO DE CAMBIOS}
-\subfile{./HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex}
+\subfile{../../HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex}
+\defaultformat
 
 \chapter{SPRINTS}
 \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{#1}
-\subfile{./DocumentacionSprints/Sprint1/DocumentacionSprint1.tex}
+\subfile{../../DocumentacionSprints/Sprint1/DocumentacionSprint1.tex}
 \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
-\subfile{./DocumentacionSprints/Sprint2/DocumentacionSprint2.tex}
-\subfile{./DocumentacionSprints/Sprint3/DocumentacionSprint3.tex}
-\subfile{./DocumentacionSprints/Sprint4/DocumentacionSprint4.tex}
-\subfile{./DocumentacionSprints/Sprint5/DocumentacionSprint5.tex}
-\subfile{./DocumentacionSprints/Sprint6/DocumentacionSprint6.tex}
+\subfile{../../DocumentacionSprints/Sprint2/DocumentacionSprint2.tex}
+\subfile{../../DocumentacionSprints/Sprint3/DocumentacionSprint3.tex}
+\subfile{../../DocumentacionSprints/Sprint4/DocumentacionSprint4.tex}
+\subfile{../../DocumentacionSprints/Sprint5/DocumentacionSprint5.tex}
+\subfile{../../DocumentacionSprints/Sprint6/DocumentacionSprint6.tex}
+\defaultformat
+
+\chapter{DESCRIPCIÓN DE TRABAJO}
+\section{LEONARDO}
+\section{DANIEL GONZÁLEZ}
+\section{MAR}
+\section{SERGIO}
+
 
 \end{document}

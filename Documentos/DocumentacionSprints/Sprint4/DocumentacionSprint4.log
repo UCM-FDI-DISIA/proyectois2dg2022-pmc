@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  6 MAY 2022 12:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=latex 2020.10.8)  6 MAY 2022 12:56
 entering extended mode
 **./DocumentacionSprint4.tex
 (DocumentacionSprint4.tex
@@ -6,11 +6,11 @@ LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18>
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/subfiles\subfiles.cls
 Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
-Preamble taken from file `../../SCRUM.tex'
+Preamble taken from file `../../FINAL/Scrum/SCRUM.tex'
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/import\import.sty
 Package: import 2020/04/01  v 6.2
 )
-(../../SCRUM.tex
+(../../FINAL/Scrum/SCRUM.tex
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
 Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
 (C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
@@ -114,11 +114,16 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \titlewidthlast=\dimen150
 \titlewidthfirst=\dimen151
 )))
-(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-mode.def
-File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count183
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-dvi
+ps.def
+File: l3backend-dvips.def 2020-06-29 L3 backend support: dvips
 \l__pdf_internal_box=\box49
+\g__pdf_backend_object_int=\count183
+\l__pdf_backend_content_box=\box50
+\l__pdf_backend_model_box=\box51
+\g__pdf_backend_annotation_int=\count184
+\g__pdf_backend_link_int=\count185
+\g__pdf_backend_link_sf_int=\count186
 ) (DocumentacionSprint4.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
@@ -143,9 +148,9 @@ LaTeX Info: Redefining \. on input line 4.
 LaTeX Info: Redefining \% on input line 4.
 
 *geometry* driver: auto-detecting
-*geometry* detected driver: pdftex
+*geometry* detected driver: dvips
 *geometry* verbose mode - [ preamble ] result:
-* driver: pdftex
+* driver: dvips
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -178,26 +183,17 @@ LaTeX Info: Redefining \% on input line 4.
 
 [1
 
-{C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
-(DocumentacionSprint4.aux
+] [2] (DocumentacionSprint4.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 ) ) 
 Here is how much of TeX's memory you used:
- 2502 strings out of 480790
- 36887 string characters out of 2897301
- 299996 words of memory out of 3000000
- 18530 multiletter control sequences out of 15000+200000
+ 2505 strings out of 480791
+ 37104 string characters out of 2897327
+ 301444 words of memory out of 3000000
+ 18534 multiletter control sequences out of 15000+200000
  534607 words of font info for 32 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,4n,41p,590b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmti12.pfb>
-Output written on DocumentacionSprint4.pdf (2 pages, 49384 bytes).
-PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+Output written on DocumentacionSprint4.dvi (2 pages, 4984 bytes).
