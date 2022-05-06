@@ -75,7 +75,6 @@ public abstract class Game extends Thread implements Replayable {
 				this.executedTurn = true;
 			}
 		}
-		// FIXME mostrar el ranking
 	}
 	
 	// Este es el método que realmente sirve para hacer lo que sería un turno completo

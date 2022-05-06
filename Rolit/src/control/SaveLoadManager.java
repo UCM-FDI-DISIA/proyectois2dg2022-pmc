@@ -26,7 +26,7 @@ import replay.Replay;
 public class SaveLoadManager {
 	private static final String INDEX_GAME_FILENAME = "SAVED_GAMES.txt";
 	private static final String INDEX_REPLAY_FILENAME = "SAVED_REPLAYS.txt";
-	private static final String DEFAULT_GAME_FILENAME = "DEFAULT_SAVED_GAME";
+	private static final String DEFAULT_GAME_FILENAME = "DEFAULT_SAVED_GAME.json";
 	private static final String DEFAULT_REPLAY_FILENAME = "DEFAULT_SAVED_REPLAY.json";
 	public static final String FULL_DEFAULT_FILENAME = "SAVED_GAMES.txt";
 	private static final String ERROR_LOAD = "Failed to load the file";
@@ -34,7 +34,6 @@ public class SaveLoadManager {
 	private static final String SUCCESS_DELETE_MSG = "Game deleted successfully";
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
-	
 	
 	public static boolean saveGame(Reportable game) {
 		return saveGame(game, DEFAULT_GAME_FILENAME);
@@ -53,7 +52,7 @@ public class SaveLoadManager {
 	}
 	
 	public static JSONObject loadGame(String filename) {
-		try (BufferedReader save_file = new BufferedReader(new FileReader(filename + ".json"))) {
+		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;

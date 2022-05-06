@@ -34,6 +34,8 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		String ans;
 		this.clear();
 		System.out.println(String.format("%s %n", SAVE_QUESTION));
+		//int prueba = input.nextInt();
+		//input.close();
 		Scanner sc = new Scanner(System.in);
 		ans = sc.nextLine();
 		int parse =  parse(ans) ;
