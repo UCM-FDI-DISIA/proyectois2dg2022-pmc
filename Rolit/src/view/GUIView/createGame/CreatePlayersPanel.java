@@ -6,7 +6,8 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import org.json.JSONArray;
-import logic.Color;
+
+import model.logic.Color;
 import view.GUIView.RolitComponents.RolitPanel;
 
 public class CreatePlayersPanel extends RolitPanel {

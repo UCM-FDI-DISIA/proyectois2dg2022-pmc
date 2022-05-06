@@ -3,11 +3,11 @@ package view.consoleView;
 import java.util.List;
 import java.util.Scanner;
 
-import control.Controller;
-import control.SaveLoadManager;
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+import controller.Controller;
+import model.SaveLoadManager;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 
 public class SaveReplayWindow implements ConsoleWindow, RolitObserver{

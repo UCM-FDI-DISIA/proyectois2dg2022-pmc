@@ -2,11 +2,11 @@ package view.consoleView;
 
 import java.util.Collections;
 import java.util.List;
-import commands.Command;
-import control.Controller;
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+import controller.Controller;
+import model.commands.Command;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import utils.StringUtils;
 import view.RolitObserver;
 

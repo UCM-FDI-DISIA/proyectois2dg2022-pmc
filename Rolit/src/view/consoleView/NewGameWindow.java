@@ -3,11 +3,11 @@ package view.consoleView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Builders.GameBuilder;
-import Strategy.Strategy;
-import logic.Board;
-import logic.Color;
-import logic.Shape;
+import model.builders.GameBuilder;
+import model.logic.Board;
+import model.logic.Color;
+import model.logic.Shape;
+import model.strategy.Strategy;
 
 public class NewGameWindow implements ConsoleWindow {
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";

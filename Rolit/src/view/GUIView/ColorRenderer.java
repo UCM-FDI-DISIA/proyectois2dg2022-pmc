@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
-import logic.Color;
+import model.logic.Color;
 
 public class ColorRenderer extends DefaultListCellRenderer {
 

@@ -14,9 +14,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Builders.GameClassicBuilder;
-import Builders.GameTeamsBuilder;
-import logic.Shape;
+import model.builders.GameClassicBuilder;
+import model.builders.GameTeamsBuilder;
+import model.logic.Shape;
 import utils.Pair;
 import view.GUIView.BoardRenderer;
 import view.GUIView.RolitComponents.RolitButton;

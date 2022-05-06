@@ -14,8 +14,8 @@ import javax.swing.text.PlainDocument;
 
 import org.json.JSONObject;
 
-import Strategy.Strategy;
-import logic.Color;
+import model.logic.Color;
+import model.strategy.Strategy;
 import view.GUIView.ColorRenderer;
 import view.GUIView.RolitComponents.RolitCheckBox;
 import view.GUIView.RolitComponents.RolitComboBox;

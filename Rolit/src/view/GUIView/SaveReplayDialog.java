@@ -8,11 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import control.Controller;
-import control.SaveLoadManager;
-import logic.Rival;
-import replay.GameState;
-import replay.Replay;
+import model.SaveLoadManager;
+import model.logic.Rival;
+import model.replay.GameState;
+import model.replay.Replay;
 import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
@@ -23,6 +22,8 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import controller.Controller;
 
 public class SaveReplayDialog extends JDialog implements RolitObserver{
 

@@ -3,8 +3,8 @@ package view.consoleView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Strategy.Strategy;
-import logic.Color;
+import model.logic.Color;
+import model.strategy.Strategy;
 
 public class NewGameTeamsWindow extends NewGameWindow {
 	private static final String TYPE = "GameTeams";

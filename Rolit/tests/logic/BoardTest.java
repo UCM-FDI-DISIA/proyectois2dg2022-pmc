@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import model.logic.Board;
+import model.logic.Color;
+import model.logic.Cube;
+import model.logic.Player;
+import model.logic.Shape;
+
 public class BoardTest {
 	@Test
 	void addCubeInPos_trytoAdd() {

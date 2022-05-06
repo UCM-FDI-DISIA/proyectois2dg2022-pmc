@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import logic.Game;
+import model.builders.GameTeamsBuilder;
+import model.logic.Game;
 
 public class GameTeamsBuilderTest {
 	@Test
