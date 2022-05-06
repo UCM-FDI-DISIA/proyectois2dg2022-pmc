@@ -1,0 +1,73 @@
+# Minimax.calculateNextMove()
+
+@startuml
+participant Actor
+Actor -> MinimaxStrategy : calculateNextMove(ownerColor, state)
+activate MinimaxStrategy
+MinimaxStrategy -> SimplifiedBoard : new(state, this)
+activate SimplifiedBoard
+SimplifiedBoard --> MinimaxStrategy
+deactivate SimplifiedBoard
+MinimaxStrategy -> MinimaxStrategy : simulate(color, initialDepth, -infty, infty)
+activate MinimaxStrategy
+MinimaxStrategy -> SimplifiedBoard : getSimulatedScore
+activate SimplifiedBoard
+SimplifiedBoard --> MinimaxStrategy : currentScore
+loop positionInRange
+deactivate SimplifiedBoard
+MinimaxStrategy -> SimplifiedBoard : tryToAddCube
+activate SimplifiedBoard
+SimplifiedBoard --> MinimaxStrategy : validPosition
+alt validPosition == true && keepSearching == true
+deactivate SimplifiedBoard
+MinimaxStrategy -> SimplifiedBoard : simulateMove(depth, alpha, beta)
+activate SimplifiedBoard
+SimplifiedBoard -> SimplifiedBoard : applyChanges
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+SimplifiedBoard -> SimplifiedBoard : updateNewScore
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard : newScore
+deactivate SimplifiedBoard
+alt depth > 0
+SimplifiedBoard -> MinimaxStrategy : simulate(nextColor, depth - 1, alpha, beta)
+activate MinimaxStrategy
+MinimaxStrategy --> SimplifiedBoard : newScore
+deactivate MinimaxStrategy
+end alt
+SimplifiedBoard -> SimplifiedBoard : revertChanges
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+SimplifiedBoard --> MinimaxStrategy : newScore
+deactivate SimplifiedBoard
+end alt
+alt color == currentColor
+alt newScore > currentScore
+MinimaxStrategy -> MinimaxStrategy : updateResult
+activate MinimaxStrategy
+deactivate MinimaxStrategy
+end alt
+alt currentScore >= beta
+MinimaxStrategy -> MinimaxStrategy : stopSearching
+activate MinimaxStrategy
+deactivate MinimaxStrategy
+end alt
+else 
+alt newScore < currentScore
+MinimaxStrategy -> MinimaxStrategy : updateResult
+activate MinimaxStrategy
+deactivate MinimaxStrategy
+end alt
+alt currentScore <= alpha
+MinimaxStrategy -> MinimaxStrategy : stopSearching
+activate MinimaxStrategy
+deactivate MinimaxStrategy
+end alt
+end
+end loop
+MinimaxStrategy --> MinimaxStrategy
+deactivate MinimaxStrategy
+return
+@enduml
