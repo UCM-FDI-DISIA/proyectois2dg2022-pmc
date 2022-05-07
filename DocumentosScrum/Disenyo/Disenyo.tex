@@ -141,12 +141,21 @@ La clase \textit{BoardGUI} extiende de \textit{JPanel} y es la encargada de visu
 
 El \textit{ControlPanel} es una \textit{JToolBar} que cuenta con un botón para guardar partidas, que puede ser pulsado en cualquier momento durante la ejecución del juego.
 
+\begin{center}
+\includegraphics[scale=0.8]{control-panel-replay-sprint3.png}
+\end{center}
+
+En el caso de las \textit{replays}, en el \textit{ControlPanel} aparecen dos flechas para poder recorrer los estados.
+
 \underline{TurnAndRankingBar}
 \begin{center}
 \includegraphics[scale=1]{turn-ranking-panel-sprint3.png}
 \end{center}
 
 Esta clase es un \textit{JPanel} se encarga de mostrar a los usuarios del turno del jugador actual, las puntuaciones de cada uno de los participantes y la modalidad de juego.
+
+\underline{StatusBar}
+
 
 \underline{CreateGameDialog}
 \begin{center}
@@ -155,10 +164,51 @@ Esta clase es un \textit{JPanel} se encarga de mostrar a los usuarios del turno 
 
 Como su propio nombre indica, esta ventana extiende de \textit{JDialog} y tiene como objetivo poder configurar una partida desde cero, combinando todas las características posibles para crear un juego a gusto de los usuarios.
 
+En esta pantalla el usuario elige el modo de juego para la partida (\textit{GameClassic} o \textit{GameTeams}), la forma y tamaño del tablero (cuadrado, círculo o rombo, pequeño, mediano o grande), el número de jugadores (entre 2 y 10, ambos inclusive) y el nombre y color de cada jugador.
 
+En caso de seleccionarse el modo por equipos, el usuario introducirá el nombre de ambos equipos y el equipo al que pertenece cada jugador.
 
+Una vez el usuario presiona el botón \textit{OK} se le lleva a la pantalla de juego.
 
-Esta ventana permitía elegir entre las principales opciones disponibles en el momento. Si se elige crear o cargar un juego, una vez configurado o cargado, el panel principal de la clase es reemplazado po 
+Si el usuario presiona \textit{Cancel} se le lleva de vuelta a la pantalla principal.
+
+\underline{LoadGameDialog}
+\begin{center}
+\includegraphics[scale=0.8]{load-dialog-sprint3.png}
+\end{center}
+
+En esta pantalla se muestra una lista con las partidas guardadas, de forma que si se elige una de estas partidas se cargará inmediatamente.
+
+Aparece también debajo un botón de carga de ficheros que abre un  \textit{JFileChooser} por si se quiere cargar un juego que no esté incluido en la lista de partidas guardadas.
+
+\underline{DeleteGameDialog}
+\begin{center}
+\includegraphics[scale=0.8]{delete-dialog-sprint3.png}
+\end{center}
+
+En esta pantalla se muestra la lista de partidas guardadas y un botón para confirmar el borrado. Con esto, si se selecciona una de las partidas guardadas y se presiona el botón inferior, la lista se elimina de la lista de partidas guardadas.
+
+Si se ha decidido jugar a una partida o cargar una replay, el panel principal de la \textit{MainWindow} será reemplazado por un panel que contiene, de arriba a abajo, un ControlPanel, una TurnAndRankingBar, un BoardGUI y una StatusBar.
+
+\underline{MainWindow}
+\begin{center}
+\includegraphics[scale=0.8]{menu-sprint3.png}
+\end{center}
+
+Inicialmente la ventana principal comienza con una pantalla en la que se muestran cuatro opciones a elegir por el usuario: \textit{Create new game, Load game, Delete game, Load replay}.
+
+\begin{center}
+\includegraphics[scale=0.9]{game-sprint3.png}
+
+Jugar una partida
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.9]{replay-sprint3.png}
+
+Reproducir una replay
+\end{center}
+
 
 \end{sprint}
 
