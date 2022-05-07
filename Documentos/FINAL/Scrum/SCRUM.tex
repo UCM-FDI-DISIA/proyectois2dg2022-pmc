@@ -21,7 +21,7 @@
     \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
     \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
 }
-
+\usepackage{hyperref}
     
 \begin{document}
 \defaultformat
@@ -30,7 +30,7 @@
 \setcounter{secnumdepth}{3}
 \tableofcontents
 
-\chapter{LA METODOLOGÍA SCRUM}
+\chapter{LA METODOLOGÍA SCRUM}\label{scrum_mth}
 %% FIXME esto debería estar a parte
 Durante este segundo cuatrimestre el grupo PMC nos hemos dedicado a adaptar a la era digital el tradicional juego de mesa \textit{Rolit}, convirtiéndose en nuestro primer proyecto auto-organizado y de temática libre.
 
@@ -50,7 +50,7 @@ Además, existe una alta comunicación entre los miembros del equipo de desarrol
 
 Para el correcto funcionamiento de esta metodología se precisa de personas que se dediquen expresamente a cerciorarse de ello, así como unos desarrolladores expertos, dando lugar, de forma natural, a una estructura no jerarquizada para los equipos SCRUM.
 
-\section{ESTRUCTURA Y FUNCIONAMIENTO}
+\section{ESTRUCTURA Y FUNCIONAMIENTO}\label{estruc_func}
 Como ya hemos adelantado en la sección anterior, de los principios básicos de SCRUM surge la necesidad intrínseca de establecer una estructura de equipo muy concreta.
 
 Los grupos que se regulan según esta técnica son auto-organizados, de forma que los propios integrantes son quienes deciden como distribuir y realizar su trabajo, sin la participación de agentes externos. Esta característica, ligada a la multifuncionalidad exigida a los desarrolladores, obliga a que los miembros del equipo sean personas con experiencia.
@@ -94,15 +94,15 @@ El equipo de desarrollo está formado por el conjunto de personas que se dedican
 \item María del Mar Ramiro Ortega
 \end{itemize}
 
-\chapter{HISTORIAS DE USUARIO}
-\section{PRODUCT BACKLOG}
+\chapter{HISTORIAS DE USUARIO}\label{historias_usuario}
+\section{PRODUCT BACKLOG}\label{product_backlog}
 \subfile{../../HistoriasDeUsuario/Historias/HistoriasDeUsuario.tex}
 \defaultformat
-\section{REGISTRO DE CAMBIOS}
+\section{REGISTRO DE CAMBIOS}\label{reg_cambios}
 \subfile{../../HistoriasDeUsuario/Modificaciones/ModificacionesHistoriasDeUsuario.tex}
 \defaultformat
 
-\chapter{SPRINTS}
+\chapter{SPRINTS}\label{sprints}
 \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{#1}
 \subfile{../../DocumentacionSprints/Sprint1/DocumentacionSprint1.tex}
 \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
@@ -113,11 +113,10 @@ El equipo de desarrollo está formado por el conjunto de personas que se dedican
 \subfile{../../DocumentacionSprints/Sprint6/DocumentacionSprint6.tex}
 \defaultformat
 
-\chapter{DESCRIPCIÓN DE TRABAJO}
-\section{LEONARDO}
-\section{DANIEL GONZÁLEZ}
-\section{MAR}
-\section{SERGIO}
+\chapter{DESCRIPCIÓN DE TRABAJO}\label{work_desc}
+Como trabajo conjunto, es importante destacar la discusión sobre el diseño previa al desarrollo del código en la que todos los integrantes se han puesto de acuerdo en el reparto de tareas, especificación de resposabilidades, acotación de conceptos... Se ha dedicado mucho tiempo a esto y, aunque no se ve a simple vista en el código, claramente se ve reflejado en el resultado final y en la capacidad de cambio del proyecto.
 
+\subfile{../../Trabajos Individuales/Trabajos individuales.tex}
+\defaultformat
 
 \end{document}
