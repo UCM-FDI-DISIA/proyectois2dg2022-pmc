@@ -1,0 +1,424 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  7 MAY 2022 23:19
+entering extended mode
+**./Disenyo.tex
+(Disenyo.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-06-18>
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/ntheorem\ntheorem.sty
+Style `ntheorem', Version 1.33 <2011/08/15>
+Package: ntheorem 2011/08/15 1.33
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\theorem@style=\toks16
+\theorem@@style=\toks17
+\theorembodyfont=\toks18
+\theoremnumbering=\toks19
+\theorempreskipamount=\skip49
+\theorempostskipamount=\skip50
+\theoremframepreskipamount=\skip51
+\theoremframepostskipamount=\skip52
+\theoreminframepreskipamount=\skip53
+\theoreminframepostskipamount=\skip54
+\theorem@preskip=\toks20
+\theorem@postskip=\toks21
+\theorem@framepreskip=\toks22
+\theorem@framepostskip=\toks23
+\theorem@inframepreskip=\toks24
+\theorem@inframepostskip=\toks25
+\theoremindent=\dimen137
+\theorem@indent=\dimen138
+\theoremrightindent=\dimen139
+\theorem@rightindent=\dimen140
+\theoremheaderfont=\toks26
+\theoremseparator=\toks27
+\theoremprework=\toks28
+\theorempostwork=\toks29
+\theoremsymbol=\toks30
+\qedsymbol=\toks31
+\theoremkeyword=\toks32
+\qedsymbol=\toks33
+\thm@topsep=\skip55
+\thm@topsepadd=\skip56
+)
+\c@sprint=\count175
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+mode.def
+File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count176
+\l__pdf_internal_box=\box45
+) (Disenyo.aux)
+\openout1 = `Disenyo.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count177
+\scratchdimen=\dimen141
+\scratchbox=\box46
+\nofMPsegments=\count178
+\nofMParguments=\count179
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count180
+\MPscratchDim=\dimen142
+\MPnumerator=\count181
+\makeMPintoPDFobject=\count182
+\everyMPtoPDFconversion=\toks35
+)
+(C:\Users\jdbar\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+Overfull \hbox (3.87558pt too wide) in paragraph at lines 39--40
+\OT1/cmr/m/n/10 La clase Game re-sponde a eje-cu-ciones del Place-CubeCom-mand,
+ colo-cando nuevos
+ []
+
+[1
+
+{C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 101.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 101.
+ [3]
+[4]
+<./fotos/yellowCube.png, id=17, 62.196pt x 61.977pt>
+File: ./fotos/yellowCube.png Graphic file (type png)
+<use ./fotos/yellowCube.png>
+Package pdftex.def Info: ./fotos/yellowCube.png  used on input line 124.
+(pdftex.def)             Requested size: 31.09792pt x 30.98842pt.
+<./fotos/emptyCell.png, id=19, 62.196pt x 61.977pt>
+File: ./fotos/emptyCell.png Graphic file (type png)
+<use ./fotos/emptyCell.png>
+Package pdftex.def Info: ./fotos/emptyCell.png  used on input line 125.
+(pdftex.def)             Requested size: 31.09792pt x 30.98842pt.
+<./fotos/board-gui-cubos-sprint3.png, id=20, 408.3255pt x 409.53pt>
+File: ./fotos/board-gui-cubos-sprint3.png Graphic file (type png)
+<use ./fotos/board-gui-cubos-sprint3.png>
+Package pdftex.def Info: ./fotos/board-gui-cubos-sprint3.png  used on input lin
+e 132.
+(pdftex.def)             Requested size: 326.66083pt x 327.62444pt.
+ [5 <./fotos/yellowCube.png> <./fotos/emptyCell.png> <./fotos/board-gui-cubos-s
+print3.png>]
+<./fotos/control-panel-sprint3.png, id=26, 435.42674pt x 61.4295pt>
+File: ./fotos/control-panel-sprint3.png Graphic file (type png)
+<use ./fotos/control-panel-sprint3.png>
+Package pdftex.def Info: ./fotos/control-panel-sprint3.png  used on input line 
+139.
+(pdftex.def)             Requested size: 348.34186pt x 49.14365pt.
+
+Overfull \hbox (3.34186pt too wide) in paragraph at lines 139--140
+ [] 
+ []
+
+<./fotos/control-panel-replay-sprint3.png, id=27, 432.4155pt x 87.9285pt>
+File: ./fotos/control-panel-replay-sprint3.png Graphic file (type png)
+<use ./fotos/control-panel-replay-sprint3.png>
+Package pdftex.def Info: ./fotos/control-panel-replay-sprint3.png  used on inpu
+t line 145.
+(pdftex.def)             Requested size: 345.93286pt x 70.34288pt.
+
+Overfull \hbox (0.93286pt too wide) in paragraph at lines 145--146
+ [] 
+ []
+
+<./fotos/turn-ranking-panel-sprint3.png, id=28, 292.6935pt x 40.35075pt>
+File: ./fotos/turn-ranking-panel-sprint3.png Graphic file (type png)
+<use ./fotos/turn-ranking-panel-sprint3.png>
+Package pdftex.def Info: ./fotos/turn-ranking-panel-sprint3.png  used on input 
+line 152.
+(pdftex.def)             Requested size: 292.69278pt x 40.35065pt.
+<./fotos/create-game-sprint3.png, id=29, 362.5545pt x 111.41624pt>
+File: ./fotos/create-game-sprint3.png Graphic file (type png)
+<use ./fotos/create-game-sprint3.png>
+Package pdftex.def Info: ./fotos/create-game-sprint3.png  used on input line 16
+2.
+(pdftex.def)             Requested size: 290.04399pt x 89.1331pt.
+[6 <./fotos/control-panel-sprint3.png> <./fotos/control-panel-replay-sprint3.pn
+g> <./fotos/turn-ranking-panel-sprint3.png> <./fotos/create-game-sprint3.png>]
+<./fotos/load-dialog-sprint3.png, id=35, 189.1065pt x 127.677pt>
+File: ./fotos/load-dialog-sprint3.png Graphic file (type png)
+<use ./fotos/load-dialog-sprint3.png>
+Package pdftex.def Info: ./fotos/load-dialog-sprint3.png  used on input line 17
+7.
+(pdftex.def)             Requested size: 151.2854pt x 102.14172pt.
+<./fotos/delete-dialog-sprint3.png, id=36, 158.994pt x 70.46326pt>
+File: ./fotos/delete-dialog-sprint3.png Graphic file (type png)
+<use ./fotos/delete-dialog-sprint3.png>
+Package pdftex.def Info: ./fotos/delete-dialog-sprint3.png  used on input line 
+186.
+(pdftex.def)             Requested size: 127.19536pt x 56.37067pt.
+<./fotos/menu-sprint3.png, id=37, 424.58624pt x 52.998pt>
+File: ./fotos/menu-sprint3.png Graphic file (type png)
+<use ./fotos/menu-sprint3.png>
+Package pdftex.def Info: ./fotos/menu-sprint3.png  used on input line 195.
+(pdftex.def)             Requested size: 339.66945pt x 42.39844pt.
+<./fotos/game-sprint3.png, id=38, 443.85825pt x 539.616pt>
+File: ./fotos/game-sprint3.png Graphic file (type png)
+<use ./fotos/game-sprint3.png>
+Package pdftex.def Info: ./fotos/game-sprint3.png  used on input line 201.
+(pdftex.def)             Requested size: 399.46872pt x 485.64992pt.
+
+Overfull \hbox (54.46872pt too wide) in paragraph at lines 201--202
+ [] 
+ []
+
+[7 <./fotos/load-dialog-sprint3.png> <./fotos/delete-dialog-sprint3.png> <./fot
+os/menu-sprint3.png>]
+<./fotos/replay-sprint3.png, id=45, 432.4155pt x 525.76425pt>
+File: ./fotos/replay-sprint3.png Graphic file (type png)
+<use ./fotos/replay-sprint3.png>
+Package pdftex.def Info: ./fotos/replay-sprint3.png  used on input line 207.
+(pdftex.def)             Requested size: 389.17035pt x 473.18344pt.
+
+Overfull \hbox (44.17035pt too wide) in paragraph at lines 207--208
+ [] 
+ []
+
+[8 <./fotos/game-sprint3.png>]
+Overfull \hbox (14.15564pt too wide) in paragraph at lines 215--215
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
+s
+ []
+
+[9 <./fotos/replay-sprint3.png>] [10]
+<./fotos/minimaxExample.jpg, id=56, 899.61093pt x 498.36188pt>
+File: ./fotos/minimaxExample.jpg Graphic file (type jpg)
+<use ./fotos/minimaxExample.jpg>
+Package pdftex.def Info: ./fotos/minimaxExample.jpg  used on input line 255.
+(pdftex.def)             Requested size: 449.80437pt x 249.18033pt.
+
+Overfull \hbox (104.80437pt too wide) in paragraph at lines 255--256
+ [] 
+ []
+
+[11 <./fotos/minimaxExample.jpg>] [12]
+<./fotos/Minimax.calculateNextMove()-Sprint5.png, id=63, 693.59125pt x 1049.922
+5pt>
+File: ./fotos/Minimax.calculateNextMove()-Sprint5.png Graphic file (type png)
+<use ./fotos/Minimax.calculateNextMove()-Sprint5.png>
+Package pdftex.def Info: ./fotos/Minimax.calculateNextMove()-Sprint5.png  used 
+on input line 290.
+(pdftex.def)             Requested size: 346.79477pt x 524.95996pt.
+
+Overfull \hbox (1.79477pt too wide) in paragraph at lines 290--291
+ [] 
+ []
+
+[13] [14 <./fotos/Minimax.calculateNextMove()-Sprint5.png (PNG copy)>]
+<./fotos/poda alfa-beta.png, id=71, 401.5pt x 203.76125pt>
+File: ./fotos/poda alfa-beta.png Graphic file (type png)
+<use ./fotos/poda alfa-beta.png>
+Package pdftex.def Info: ./fotos/poda alfa-beta.png  used on input line 307.
+(pdftex.def)             Requested size: 200.7495pt x 101.88037pt.
+<./fotos/Minimax.calculateNextMove()-Sprint6.png, id=72, 773.89125pt x 1257.698
+75pt>
+File: ./fotos/Minimax.calculateNextMove()-Sprint6.png Graphic file (type png)
+<use ./fotos/Minimax.calculateNextMove()-Sprint6.png>
+Package pdftex.def Info: ./fotos/Minimax.calculateNextMove()-Sprint6.png  used 
+on input line 317.
+(pdftex.def)             Requested size: 386.94467pt x 628.84784pt.
+
+Overfull \hbox (41.94467pt too wide) in paragraph at lines 317--318
+ [] 
+ []
+
+[15 <./fotos/poda alfa-beta.png>]
+Overfull \vbox (78.84784pt too high) has occurred while \output is active []
+
+
+[16 <./fotos/Minimax.calculateNextMove()-Sprint6.png (PNG copy)>]
+Overfull \hbox (14.15564pt too wide) in paragraph at lines 322--322
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
+s
+ []
+
+<./fotos/save-load-manager-sprint1.png, id=81, 219.82124pt x 166.6225pt>
+File: ./fotos/save-load-manager-sprint1.png Graphic file (type png)
+<use ./fotos/save-load-manager-sprint1.png>
+Package pdftex.def Info: ./fotos/save-load-manager-sprint1.png  used on input l
+ine 329.
+(pdftex.def)             Requested size: 109.91034pt x 83.31104pt.
+<./fotos/load-sprint1.png, id=82, 548.0475pt x 382.42876pt>
+File: ./fotos/load-sprint1.png Graphic file (type png)
+<use ./fotos/load-sprint1.png>
+Package pdftex.def Info: ./fotos/load-sprint1.png  used on input line 336.
+(pdftex.def)             Requested size: 274.02307pt x 191.2139pt.
+<./fotos/save-game-sprint1.png, id=83, 473.77pt x 307.1475pt>
+File: ./fotos/save-game-sprint1.png Graphic file (type png)
+<use ./fotos/save-game-sprint1.png>
+Package pdftex.def Info: ./fotos/save-game-sprint1.png  used on input line 343.
+
+(pdftex.def)             Requested size: 236.88441pt x 153.57336pt.
+[17 <./fotos/save-load-manager-sprint1.png (PNG copy)> <./fotos/load-sprint1.pn
+g>]
+<./fotos/saveable-sprint2.png, id=88, 322.20375pt x 148.555pt>
+File: ./fotos/saveable-sprint2.png Graphic file (type png)
+<use ./fotos/saveable-sprint2.png>
+Package pdftex.def Info: ./fotos/saveable-sprint2.png  used on input line 354.
+(pdftex.def)             Requested size: 161.10147pt x 74.27731pt.
+<./fotos/reportable.png, id=89, 149.55875pt x 94.3525pt>
+File: ./fotos/reportable.png Graphic file (type png)
+<use ./fotos/reportable.png>
+Package pdftex.def Info: ./fotos/reportable.png  used on input line 366.
+(pdftex.def)             Requested size: 74.77919pt x 47.17612pt.
+ [18 <./fotos/save-game-sprint1.png (PNG copy)> <./fotos/saveable-sprint2.png (
+PNG copy)> <./fotos/reportable.png (PNG copy)>]
+<./fotos/save-load-manager-sprint3.png, id=93, 245.91875pt x 600.2425pt>
+File: ./fotos/save-load-manager-sprint3.png Graphic file (type png)
+<use ./fotos/save-load-manager-sprint3.png>
+Package pdftex.def Info: ./fotos/save-load-manager-sprint3.png  used on input l
+ine 374.
+(pdftex.def)             Requested size: 122.95906pt x 300.12051pt.
+ [19 <./fotos/save-load-manager-sprint3.png (PNG copy)>]
+<./fotos/save-load-manager-sprint2.png, id=98, 235.88126pt x 256.96pt>
+File: ./fotos/save-load-manager-sprint2.png Graphic file (type png)
+<use ./fotos/save-load-manager-sprint2.png>
+Package pdftex.def Info: ./fotos/save-load-manager-sprint2.png  used on input l
+ine 395.
+(pdftex.def)             Requested size: 117.94034pt x 128.47968pt.
+<./fotos/replayable-reportable-sprint-3.png, id=99, 149.55875pt x 222.8325pt>
+File: ./fotos/replayable-reportable-sprint-3.png Graphic file (type png)
+<use ./fotos/replayable-reportable-sprint-3.png>
+Package pdftex.def Info: ./fotos/replayable-reportable-sprint-3.png  used on in
+put line 411.
+(pdftex.def)             Requested size: 74.77919pt x 111.41597pt.
+ [20 <./fotos/save-load-manager-sprint2.png (PNG copy)>]
+<./fotos/state-sprint-3.png, id=103, 173.64874pt x 166.6225pt>
+File: ./fotos/state-sprint-3.png Graphic file (type png)
+<use ./fotos/state-sprint-3.png>
+Package pdftex.def Info: ./fotos/state-sprint-3.png  used on input line 417.
+(pdftex.def)             Requested size: 86.82416pt x 83.31104pt.
+<./fotos/addState-replay-sprint-3.png, id=104, 306.14375pt x 218.8175pt>
+File: ./fotos/addState-replay-sprint-3.png Graphic file (type png)
+<use ./fotos/addState-replay-sprint-3.png>
+Package pdftex.def Info: ./fotos/addState-replay-sprint-3.png  used on input li
+ne 423.
+(pdftex.def)             Requested size: 183.68765pt x 131.2915pt.
+<./fotos/saveReplay-sprint3.png, id=105, 423.5825pt x 372.39125pt>
+File: ./fotos/saveReplay-sprint3.png Graphic file (type png)
+<use ./fotos/saveReplay-sprint3.png>
+Package pdftex.def Info: ./fotos/saveReplay-sprint3.png  used on input line 431
+.
+(pdftex.def)             Requested size: 254.15146pt x 223.43646pt.
+ [21 <./fotos/replayable-reportable-sprint-3.png (PNG copy)> <./fotos/state-spr
+int-3.png (PNG copy)> <./fotos/addState-replay-sprint-3.png>]
+<./fotos/consola-replay-sprint-3.png, id=110, 208.3785pt x 302.93175pt>
+File: ./fotos/consola-replay-sprint-3.png Graphic file (type png)
+<use ./fotos/consola-replay-sprint-3.png>
+Package pdftex.def Info: ./fotos/consola-replay-sprint-3.png  used on input lin
+e 441.
+(pdftex.def)             Requested size: 145.86394pt x 212.05077pt.
+ [22 <./fotos/saveReplay-sprint3.png>]
+<./fotos/rolit-observer-sprint4.png, id=115, 236.885pt x 130.4875pt>
+File: ./fotos/rolit-observer-sprint4.png Graphic file (type png)
+<use ./fotos/rolit-observer-sprint4.png>
+Package pdftex.def Info: ./fotos/rolit-observer-sprint4.png  used on input line
+ 454.
+(pdftex.def)             Requested size: 118.4422pt x 65.24358pt.
+<./fotos/replay-state-sprint-4.png, id=116, 541.02126pt x 527.9725pt>
+File: ./fotos/replay-state-sprint-4.png Graphic file (type png)
+<use ./fotos/replay-state-sprint-4.png>
+Package pdftex.def Info: ./fotos/replay-state-sprint-4.png  used on input line 
+460.
+(pdftex.def)             Requested size: 270.50996pt x 263.9856pt.
+ [23 <./fotos/consola-replay-sprint-3.png> <./fotos/rolit-observer-sprint4.png 
+(PNG copy)>]
+<./fotos/addState-replay-sprint-6.png, id=120, 318.18875pt x 204.765pt>
+File: ./fotos/addState-replay-sprint-6.png Graphic file (type png)
+<use ./fotos/addState-replay-sprint-6.png>
+Package pdftex.def Info: ./fotos/addState-replay-sprint-6.png  used on input li
+ne 474.
+(pdftex.def)             Requested size: 159.09398pt x 102.38223pt.
+ [24 <./fotos/replay-state-sprint-4.png (PNG copy)>]
+<./fotos/exit-sprint2.png, id=124, 357.335pt x 218.8175pt>
+File: ./fotos/exit-sprint2.png Graphic file (type png)
+<use ./fotos/exit-sprint2.png>
+Package pdftex.def Info: ./fotos/exit-sprint2.png  used on input line 484.
+(pdftex.def)             Requested size: 178.66705pt x 109.40848pt.
+\tf@thm=\write3
+\openout3 = `Disenyo.thm'.
+
+ [25 <./fotos/addState-replay-sprint-6.png> <./fotos/exit-sprint2.png>] (Diseny
+o.aux) ) 
+Here is how much of TeX's memory you used:
+ 1682 strings out of 480790
+ 28139 string characters out of 2897301
+ 259402 words of memory out of 3000000
+ 17697 multiletter control sequences out of 15000+200000
+ 534202 words of font info for 30 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 30i,5n,25p,1102b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jdbar/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Disenyo.pdf (25 pages, 615875 bytes).
+PDF statistics:
+ 148 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+
