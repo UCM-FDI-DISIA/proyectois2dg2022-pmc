@@ -127,18 +127,35 @@ En este sprint se desarrolló una primera versión de la interfaz gráfica, lo c
 
 Esta clase representa cada una de las posiciones del tablero y puede ser vacía o tener un cubo. La mayor parte de funciones de esta clase  tienen como objetivo cambiar el color del cubo que representa cada celda.
 
-\begin{center}
-\includegraphics[scale=0.5]{celda-gui-sprint3}
-\end{center}
-
-
-
 \underline{BoardGUI}
 \begin{center}
 \includegraphics[scale=0.8]{board-gui-cubos-sprint3.png}
 \end{center}
 
-La clase \textit{BoardGUI} extiende de JPanel y es la encargada de visualizar el tablero de la partida. Se puede apreciar que el tablero está formado por un conjunto de \textit{CeldaGUI}.
+La clase \textit{BoardGUI} extiende de \textit{JPanel} y es la encargada de visualizar el tablero de la partida. Se puede apreciar que el tablero está formado por un conjunto de \textit{CeldaGUI}.
+
+\underline{ControlPanel}
+\begin{center}
+\includegraphics[scale=0.8]{control-panel-sprint3.png}
+\end{center}
+
+El \textit{ControlPanel} es una \textit{JToolBar} que cuenta con un botón para guardar partidas, que puede ser pulsado en cualquier momento durante la ejecución del juego.
+
+\underline{TurnAndRankingBar}
+\begin{center}
+\includegraphics[scale=1]{turn-ranking-panel-sprint3.png}
+\end{center}
+
+Esta clase es un \textit{JPanel} se encarga de mostrar a los usuarios del turno del jugador actual, las puntuaciones de cada uno de los participantes y la modalidad de juego.
+
+\underline{CreateGameDialog}
+\begin{center}
+\includegraphics[scale=0.8]{create-game-sprint3.png}
+\end{center}
+
+Como su propio nombre indica, esta ventana extiende de \textit{JDialog} y tiene como objetivo poder configurar una partida desde cero, combinando todas las características posibles para crear un juego a gusto de los usuarios.
+
+
 
 
 Esta ventana permitía elegir entre las principales opciones disponibles en el momento. Si se elige crear o cargar un juego, una vez configurado o cargado, el panel principal de la clase es reemplazado po 
