@@ -13,7 +13,13 @@ import controller.Controller;
 import model.commands.PlaceCubeCommand;
 import model.replay.Replay;
 
-public class CeldaGUI {
+/**
+ * This class represents a cell of the BoardGUI. It is responsible of its
+ * own design and of capturing the users' clicks.
+ * @author PMC
+ */
+
+public class CellGUI {
 
 	private boolean validButton;
 	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
@@ -23,9 +29,18 @@ public class CeldaGUI {
 	private static final String EMPTY_ICON_PATH = "resources/icons/emptyCell.png";
 	private HashMap<model.logic.Color, ImageIcon> mapColorIcon = new HashMap<>();
 
-	public CeldaGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
+	/**
+	 * Constructor
+	 * @param y The y-coordinate in which the cell must be created
+	 * @param x The x-coordinate in which the cell must be created
+	 * @param validButton A boolean value that specifies whether is a valid cell or not (i.e.
+	 * clickable or unclickable)
+	 * @param ctrl The controller
+	 * @param sideLength The length of the side of the button (squared)
+	 */
+	public CellGUI(int y, int x, boolean validButton, Controller ctrl, int sideLength) {
 		
-		CeldaGUI.SIDE_LENGTH = sideLength;
+		CellGUI.SIDE_LENGTH = sideLength;
 		this.validButton = validButton;
 		this.filled = false;
 		this.button = new JButton();
@@ -62,8 +77,15 @@ public class CeldaGUI {
 		
 	}
 
-	public CeldaGUI(boolean validButton, Replay replay, int sideLength) {
-		CeldaGUI.SIDE_LENGTH = sideLength;
+	/**
+	 * Constructor
+	 * @param validButton A boolean value that specifies whether is a valid cell or not (i.e.
+	 * clickable or unclickable)
+	 * @param replay The replay
+	 * @param sideLength The length of the side of the button (squared)
+	 */
+	public CellGUI(boolean validButton, Replay replay, int sideLength) {
+		CellGUI.SIDE_LENGTH = sideLength;
 		this.validButton = validButton;
 		this.filled = false;
 		this.button = new JButton();
@@ -80,6 +102,9 @@ public class CeldaGUI {
 		this.button.setVisible(true);
 	}
 	
+	/**
+	 * This method is in charge of putting the cell to an empty one
+	 */
 	public void resetIcon() {
 		this.iconPath = EMPTY_ICON_PATH;
 		this.filled = true;
@@ -98,10 +123,18 @@ public class CeldaGUI {
 		this.button.repaint();
 	}
 
+	/**
+	 * Getter of the JButton attribute
+	 * @return The JButton attribute
+	 */
 	public JButton getButton() {
 		return button;
 	}
 	
+	/**
+	 * This method paints the cell with a given color
+	 * @param newColor The color that the cell must now show
+	 */
 	public void update(model.logic.Color newColor) {
 		
 		if (this.validButton) {
