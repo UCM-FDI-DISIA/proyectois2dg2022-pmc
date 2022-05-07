@@ -207,7 +207,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			if(statusjs == 1) {
 				ctrl.setOnlineMode(true);
 				try {
-					clientRolit.empezarPartida(jsd.getIp(), jsd.getPort());
+					clientRolit.startMatch(jsd.getIp(), jsd.getPort());
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(jsd, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();

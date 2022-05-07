@@ -21,7 +21,11 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextField;
 
-
+/**
+ * This class is in charge of showing a GUI that lets the user
+ * choose the port in which they want the server to connect
+ * @author PMC
+ */
 public class ServerView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +39,10 @@ public class ServerView extends JFrame {
 	protected Server server;
 	protected int port;
 
+	/**
+	 * Constructor
+	 * @param server The instance of the server, which needs to be stored
+	 */
 	public ServerView(Server server) {
 		this.setTitle("Server Set-Up");
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
@@ -108,7 +116,17 @@ public class ServerView extends JFrame {
 		
 	}
 	
-
+	/**
+	 * This method adds a JComponent in a specified JPanel
+	 * @param thePanel Panel in which the component is to be added
+	 * @param comp The JComponent to be added
+	 * @param xPos The horizontal component of the position in which the component is to be added
+	 * @param yPos The vertical component of the position in which the component is to be added
+	 * @param compWidth The width of the component to be added
+	 * @param compHeight The height of the component to be added
+	 * @param place Where in the display area should the component be added
+	 * @param stretch Integer that determines whether to resize the component, and if so, how. 
+	 */
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();
@@ -125,7 +143,22 @@ public class ServerView extends JFrame {
 
 		thePanel.add(comp, gridConstraints);
 	}
-
+	
+	/**
+	 * This method updates in GUI the number of players that have already been connected
+	 */
+	public void updateNumPlayers() {
+		thePanel.remove(numPlayersLabel);
+		numPlayersLabel = new JLabel(server.getNumPlayers() + " / " + server.getExpectedPlayers());
+		addComp(thePanel, numPlayersLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
+		ServerView.this.revalidate();
+		ServerView.this.repaint();
+	}
+	
+	/**
+	 * This class is in charge of starting a server from a SwingWorker
+	 * so that the servers' threads can correctly work with Swing's thread
+	 */
 	public class ServerWorker extends SwingWorker<Void, Void> {
 
 		@Override
@@ -138,14 +171,6 @@ public class ServerView extends JFrame {
 			}
 			return null;
 		}
-	}
-	
-	public void updateNumPlayers() {
-		thePanel.remove(numPlayersLabel);
-		numPlayersLabel = new JLabel(server.getNumPlayers() + " / " + server.getExpectedPlayers());
-		addComp(thePanel, numPlayersLabel, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-		ServerView.this.revalidate();
-		ServerView.this.repaint();
 	}
 
 }

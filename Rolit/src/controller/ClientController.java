@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 import model.online.Client;
 
+/**
+ * This class is from the Client's perspective. It is the controller that
+ * manages the information sent by the server, as well as it sending it
+ * @author PMC
+ */
 public class ClientController extends Thread{
 
 	private Client clientRolit;
@@ -20,6 +25,12 @@ public class ClientController extends Thread{
 	private PrintWriter out; 
 
 
+	/**
+	 * Constructor 
+	 * @param clientRolit Instance of the client associated
+	 * @param ipAddress String of the IP address chosen to connect
+	 * @param port Integer of the port in which that IP address from server hypothetically operates  
+	 */
 	public ClientController(Client clientRolit, String ipAdress, int port) throws Exception {
 		this.clientRolit = clientRolit;
 		socket = new Socket(ipAdress, port);
@@ -28,6 +39,10 @@ public class ClientController extends Thread{
 	}
 	
 
+	/**
+	 * This method extract the report of the game currently played
+	 * and sends it to the server
+	 */
 	public void updateGameToServer() {
 		puedeJugar = false;
 		JSONObject report = clientRolit.getGameReport();
@@ -35,7 +50,11 @@ public class ClientController extends Thread{
 		
 	}
 
-
+	/**
+	 * This method runs the thread in charge of receiving information from server.
+	 * It checks the nature of the information looking in the notification field of the
+	 * sent JSON, and based from that it calls particular methods.
+	 */
 	public void run(){
 		try {
 			// FIXME hay un while true
@@ -48,8 +67,7 @@ public class ClientController extends Thread{
 					clientRolit.updateGameFromServer(JSONJuegoNuevo);
 				else if (JSONJuegoNuevo.getString("notification").equals("chooseTeam"))
 					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
-				
-				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -68,31 +86,51 @@ public class ClientController extends Thread{
 	}
 
 
+	/**
+	 * This method sends a given JSONObject to the server
+	 * @param report JSONObject to be sent
+	 */
 	public void sendToServer(JSONObject report) {
 		String msg = report.toString();
 		out.println(msg);
 		
 	}
 
-
+	/**
+	 * This method modifies a given JSONObject including it the
+	 * chooseTeam notification so that, when sent, the Server knows
+	 * that this information is to be processed as the order of
+	 * retrieving information of the new team chosen.
+	 * @param selectedTeamJSON JSONObject to be modified
+	 */
 	public void sendChosenTeamToServer(JSONObject selectedTeamJSON) {
 		selectedTeamJSON.put("notification", "chooseTeam");
 		sendToServer(selectedTeamJSON);
 		
 	}
 
-
+	/**
+	 * This method modifies a given JSONObject including it the
+	 * playerInfo notification so that, when sent, the Server knows
+	 * that this information is to be processed as the order of
+	 * getting information of the player created by the client.
+	 * @param report JSONObject to be modified
+	 */
 	public void sendPlayerInfoToServer(JSONObject report) {
 		report.put("notification", "playerInfo");
 		sendToServer(report);
 	}
 	
+	/**
+	 * This method modifies a given JSONObject including it the
+	 * chooseTeam notification so that, when sent, the Server knows
+	 * that this information is to be processed as the order of
+	 * update all the other clients' GUI with the new game data
+	 * @param report JSONObject to be modified
+	 */
 	public void sendGameToServer(JSONObject report) {
 		report.put("notification", "updateGraphics");
 		sendToServer(report);
 	}
-
-
-
 
 }

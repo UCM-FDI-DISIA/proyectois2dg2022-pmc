@@ -177,6 +177,17 @@ public class RankingPanel extends RolitPanel {
 		}
 	}
 	
+	/**
+	 * This method adds a JComponent in a specified JPanel
+	 * @param thePanel Panel in which the component is to be added
+	 * @param comp The JComponent to be added
+	 * @param xPos The horizontal component of the position in which the component is to be added
+	 * @param yPos The vertical component of the position in which the component is to be added
+	 * @param compWidth The width of the component to be added
+	 * @param compHeight The height of the component to be added
+	 * @param place Where in the display area should the component be added
+	 * @param stretch Integer that determines whether to resize the component, and if so, how. 
+	 */
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();
