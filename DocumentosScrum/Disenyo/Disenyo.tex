@@ -93,9 +93,10 @@ Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Playe
 
 \section{Diseño y evolución de las Historias de Usuario}
 
-\subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador: Inteligencias Artificiales}
+\subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 
-\subsubsection{Sprint 5}
+\subsubsection{Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}
+\begin{sprint}[5]
 Este fue el Sprint en el que se empezaron a desarrollar las distintas estrategias de las inteligencias artificiales. Se planearon tres, recogidas en las siguiente clases, todas herederas de la clase abstracta Strategy: RandomStrategy, GreedyStrategy y MinimaxStrategy.
 
 La idea de la estrategia es que, cuando le toque jugar a una inteligencia artificial, la estrategia se encarge de calcular
@@ -170,7 +171,9 @@ El cómputo del movimiento a jugar a través de la estrategia Minimax, llevado a
 \includegraphics[scale=0.5]{Minimax.calculateNextMove()-Sprint5.png}
 \end{center}
 
-\subsubsection{Sprint 6}
+\end{sprint}
+
+\begin{sprint}[6]
 Por motivos de eficiencia de MinimaxStrategy, se ha implementado de forma complementaria la poda alfa-beta, que se explica a continuación:
 
 \textbf{Poda alfa-beta}:
@@ -194,6 +197,8 @@ Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritm
 \centering
 \includegraphics[scale=0.5]{Minimax.calculateNextMove()-Sprint6.png}
 \end{center}
+
+\end{sprint}
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
 \subsubsection{Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}
@@ -262,6 +267,17 @@ Para implementar los observadores se creó la interfaz \textit{ReplayObserver} q
 \end{sprint}
 
 \begin{sprint}[5]
-La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters.
+La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \textit{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
+\end{sprint}
+
+\begin{sprint}[6]
+El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \textit{Replay}.
+
+Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \textit{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
+\begin{center}
+\includegraphics[scale=0.5]{addState-replay-sprint-6.png}
+\end{center}
+
+
 \end{sprint}
 \end{document}

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import Builders.GameClassicBuilder;
-import logic.Cube;
-import logic.Game;
+import model.builders.GameClassicBuilder;
+import model.logic.Cube;
+import model.logic.Game;
 
 public class IATest {
 	//Un jugador normal y una ia, justo le toca poner el último cubo al jugador, comprobamos que no salta excepción

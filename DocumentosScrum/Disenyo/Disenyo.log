@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  7 MAY 2022 13:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  7 MAY 2022 15:54
 entering extended mode
 **./Disenyo.tex
 (Disenyo.tex
@@ -142,14 +142,18 @@ Overfull \hbox (14.15564pt too wide) in paragraph at lines 96--96
 s
  []
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 99.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 99.
 [3] [4]
 <fotos//minimaxExample.jpg, id=17, 899.61093pt x 498.36188pt>
 File: fotos//minimaxExample.jpg Graphic file (type jpg)
 <use fotos//minimaxExample.jpg>
-Package pdftex.def Info: fotos//minimaxExample.jpg  used on input line 135.
+Package pdftex.def Info: fotos//minimaxExample.jpg  used on input line 136.
 (pdftex.def)             Requested size: 449.80437pt x 249.18033pt.
 
-Overfull \hbox (104.80437pt too wide) in paragraph at lines 135--136
+Overfull \hbox (104.80437pt too wide) in paragraph at lines 136--137
  [] 
  []
 
@@ -159,32 +163,28 @@ pt>
 File: fotos//Minimax.calculateNextMove()-Sprint5.png Graphic file (type png)
 <use fotos//Minimax.calculateNextMove()-Sprint5.png>
 Package pdftex.def Info: fotos//Minimax.calculateNextMove()-Sprint5.png  used o
-n input line 170.
+n input line 171.
 (pdftex.def)             Requested size: 346.79477pt x 524.95996pt.
 
-Overfull \hbox (1.79477pt too wide) in paragraph at lines 170--171
+Overfull \hbox (1.79477pt too wide) in paragraph at lines 171--172
  [] 
  []
 
 [7] [8 <./fotos//Minimax.calculateNextMove()-Sprint5.png (PNG copy)>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 177.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 177.
 <fotos//poda alfa-beta.png, id=32, 401.5pt x 203.76125pt>
 File: fotos//poda alfa-beta.png Graphic file (type png)
 <use fotos//poda alfa-beta.png>
-Package pdftex.def Info: fotos//poda alfa-beta.png  used on input line 185.
+Package pdftex.def Info: fotos//poda alfa-beta.png  used on input line 188.
 (pdftex.def)             Requested size: 200.7495pt x 101.88037pt.
 <fotos//Minimax.calculateNextMove()-Sprint6.png, id=34, 773.89125pt x 1257.6987
 5pt>
 File: fotos//Minimax.calculateNextMove()-Sprint6.png Graphic file (type png)
 <use fotos//Minimax.calculateNextMove()-Sprint6.png>
 Package pdftex.def Info: fotos//Minimax.calculateNextMove()-Sprint6.png  used o
-n input line 195.
+n input line 198.
 (pdftex.def)             Requested size: 386.94467pt x 628.84784pt.
 
-Overfull \hbox (41.94467pt too wide) in paragraph at lines 195--196
+Overfull \hbox (41.94467pt too wide) in paragraph at lines 198--199
  [] 
  []
 
@@ -193,7 +193,7 @@ Overfull \vbox (78.84784pt too high) has occurred while \output is active []
 
 
 [10 <./fotos//Minimax.calculateNextMove()-Sprint6.png (PNG copy)>]
-Overfull \hbox (14.15564pt too wide) in paragraph at lines 198--198
+Overfull \hbox (14.15564pt too wide) in paragraph at lines 203--203
 []\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
 s
  []
@@ -202,12 +202,12 @@ s
 File: fotos//replayable-reportable-sprint-3.png Graphic file (type png)
 <use fotos//replayable-reportable-sprint-3.png>
 Package pdftex.def Info: fotos//replayable-reportable-sprint-3.png  used on inp
-ut line 210.
+ut line 215.
 (pdftex.def)             Requested size: 74.77919pt x 111.41597pt.
 <fotos//state-sprint-3.png, id=44, 173.64874pt x 166.6225pt>
 File: fotos//state-sprint-3.png Graphic file (type png)
 <use fotos//state-sprint-3.png>
-Package pdftex.def Info: fotos//state-sprint-3.png  used on input line 216.
+Package pdftex.def Info: fotos//state-sprint-3.png  used on input line 221.
 (pdftex.def)             Requested size: 86.82416pt x 83.31104pt.
 [11 <./fotos//replayable-reportable-sprint-3.png (PNG copy)> <./fotos//state-sp
 rint-3.png (PNG copy)>]
@@ -215,12 +215,12 @@ rint-3.png (PNG copy)>]
 File: fotos//addState-replay-sprint-3.png Graphic file (type png)
 <use fotos//addState-replay-sprint-3.png>
 Package pdftex.def Info: fotos//addState-replay-sprint-3.png  used on input lin
-e 222.
+e 227.
 (pdftex.def)             Requested size: 183.68765pt x 131.2915pt.
 <fotos//saveReplay-sprint3.png, id=50, 423.5825pt x 372.39125pt>
 File: fotos//saveReplay-sprint3.png Graphic file (type png)
 <use fotos//saveReplay-sprint3.png>
-Package pdftex.def Info: fotos//saveReplay-sprint3.png  used on input line 230.
+Package pdftex.def Info: fotos//saveReplay-sprint3.png  used on input line 235.
 
 (pdftex.def)             Requested size: 254.15146pt x 223.43646pt.
  [12 <./fotos//addState-replay-sprint-3.png> <./fotos//saveReplay-sprint3.png>]
@@ -228,13 +228,13 @@ Package pdftex.def Info: fotos//saveReplay-sprint3.png  used on input line 230.
 File: fotos//consola-replay-sprint-3.png Graphic file (type png)
 <use fotos//consola-replay-sprint-3.png>
 Package pdftex.def Info: fotos//consola-replay-sprint-3.png  used on input line
- 240.
+ 245.
 (pdftex.def)             Requested size: 145.86394pt x 212.05077pt.
 <fotos//rolit-observer-sprint4.png, id=57, 236.885pt x 130.4875pt>
 File: fotos//rolit-observer-sprint4.png Graphic file (type png)
 <use fotos//rolit-observer-sprint4.png>
 Package pdftex.def Info: fotos//rolit-observer-sprint4.png  used on input line 
-253.
+258.
 (pdftex.def)             Requested size: 118.4422pt x 65.24358pt.
  [13 <./fotos//consola-replay-sprint-3.png> <./fotos//rolit-observer-sprint4.pn
 g (PNG copy)>]
@@ -242,30 +242,37 @@ g (PNG copy)>]
 File: fotos//replay-state-sprint-4.png Graphic file (type png)
 <use fotos//replay-state-sprint-4.png>
 Package pdftex.def Info: fotos//replay-state-sprint-4.png  used on input line 2
-59.
+64.
 (pdftex.def)             Requested size: 270.50996pt x 263.9856pt.
+<fotos//addState-replay-sprint-6.png, id=63, 318.18875pt x 204.765pt>
+File: fotos//addState-replay-sprint-6.png Graphic file (type png)
+<use fotos//addState-replay-sprint-6.png>
+Package pdftex.def Info: fotos//addState-replay-sprint-6.png  used on input lin
+e 278.
+(pdftex.def)             Requested size: 159.09398pt x 102.38223pt.
+ [14 <./fotos//replay-state-sprint-4.png (PNG copy)>]
 \tf@thm=\write3
 \openout3 = `Disenyo.thm'.
 
- [14 <./fotos//replay-state-sprint-4.png (PNG copy)>] (Disenyo.aux) ) 
+ [15 <./fotos//addState-replay-sprint-6.png>] (Disenyo.aux) ) 
 Here is how much of TeX's memory you used:
- 1603 strings out of 479618
- 25649 string characters out of 2865026
+ 1609 strings out of 479618
+ 25871 string characters out of 2865026
  300903 words of memory out of 3000000
- 18800 multiletter control sequences out of 15000+200000
+ 18805 multiletter control sequences out of 15000+200000
  405294 words of font info for 33 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,5n,74p,1102b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/
-leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmti10.pfb>
-Output written on Disenyo.pdf (14 pages, 389262 bytes).
+<C:/Users/leona/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users
+/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmti10.pfb>
+Output written on Disenyo.pdf (15 pages, 400324 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
+ 88 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
