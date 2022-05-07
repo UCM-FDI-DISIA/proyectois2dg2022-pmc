@@ -6,7 +6,7 @@ import utils.Pair;
 
 /**
  * This class represents de logic behind de artificial intelligences' strategies.
- * @autor PMC
+ * @author PMC
  * 
  */
 public abstract class Strategy {

@@ -52,7 +52,7 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 	
 	/**
 	 * Constructor given a replay (i.e. called when playing a replay)
-	 * @param ctrl The replay
+	 * @param replay The replay
 	 */
 	public ControlPanel(Replay replay) {
 		this.replay = replay;

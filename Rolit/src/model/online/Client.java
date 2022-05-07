@@ -23,6 +23,7 @@ public class Client {
 	
 	/**
 	 * Constructor
+	 * @param mW completar
 	 */
 	public Client(MainWindow mW) {		
 		mainWindow = mW;		
@@ -51,6 +52,7 @@ public class Client {
 	 * the exchange of information between server and the current client
 	 * @param ip String that represents the ip in which the server is operating
 	 * @param port Integer that represents the port in which the ip of the server is operating
+	 * @throws Exception completar
 	 */
 	public void startMatch(String ip, int port) throws Exception {
 		clientController = new ClientController(this, ip, port);

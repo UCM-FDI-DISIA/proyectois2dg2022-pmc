@@ -27,7 +27,7 @@ public class RankingTableModel extends AbstractTableModel implements RolitObserv
 	/**
 	 * Constructor
 	 * @param ctrl The controller
-	 * @param ctrl A game state
+	 * @param state A game state
 	 */
 	public RankingTableModel(Controller ctrl, GameState state) {
 		this.rivals = state.getRivals();

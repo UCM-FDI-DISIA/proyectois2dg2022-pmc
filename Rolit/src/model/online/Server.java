@@ -55,6 +55,7 @@ public class Server {
 	 * Then, it calls waitForPlayers the perform the expected connections
 	 * @param port Integer that specifies the port in which user has specified to open the connection
 	 * specified by CreateGameDialog.
+	 * @throws IOException completar
 	 */
 	public void start(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
@@ -150,6 +151,8 @@ public class Server {
 	 * This synchronized method allows server to process the information
 	 * sent by a client and perform several tasks depending on the nature
 	 * of the information sent (i.e. the type of notification)
+	 * @param json completar
+	 * @param client completar
 	 */
 	public synchronized void receiveFromClient(JSONObject json, ServerClient client) {
 		

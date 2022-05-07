@@ -30,10 +30,11 @@ public class ClientController extends Thread{
 	 * @param clientRolit Instance of the client associated
 	 * @param ipAddress String of the IP address chosen to connect
 	 * @param port Integer of the port in which that IP address from server hypothetically operates  
+	 * @throws Exception completar
 	 */
-	public ClientController(Client clientRolit, String ipAdress, int port) throws Exception {
+	public ClientController(Client clientRolit, String ipAddress, int port) throws Exception {
 		this.clientRolit = clientRolit;
-		socket = new Socket(ipAdress, port);
+		socket = new Socket(ipAddress, port);
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(), true);
 	}

@@ -33,7 +33,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 
 	/**
 	 * Constructor
-	 * @param ctrl The replay
+	 * @param replay The replay
 	 */
 	public StatusBar(Replay replay) {
 		initGUI();
