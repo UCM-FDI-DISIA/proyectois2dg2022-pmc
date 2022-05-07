@@ -164,6 +164,7 @@ public class LoadFileDialog extends JDialog {
 		return file;
 	}
 	
+	
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();

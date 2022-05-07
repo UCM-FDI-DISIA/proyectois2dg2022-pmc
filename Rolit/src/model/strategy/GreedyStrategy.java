@@ -14,6 +14,7 @@ public class GreedyStrategy extends MinimaxStrategy {
 		this.original_depth = 0;
 	}
 
+
 	@Override
 	public Pair<Integer, Integer> calculateNextMove(Color currentColor, GameState state) {
 		this.simplifiedBoard = new SimplifiedBoard(state, this);
