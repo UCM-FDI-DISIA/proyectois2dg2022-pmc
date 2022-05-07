@@ -165,7 +165,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	}
 	
 	/**
-	 * This method, overridden from ActionaLIstener, manages all the options when clicked
+	 * This method, overridden from ActionListener, manages all the options when clicked
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {		
