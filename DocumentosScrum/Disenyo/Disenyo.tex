@@ -1,5 +1,19 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
+
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{}
+\theoremseparator{\vspace{0.2cm}}
+\theorempreskip{\topsep}
+\theorempostskip{\topsep}
+\theoremindent0cm
+\theoremnumbering{arabic}
+\theoremsymbol{}
+\theoremprework{\vspace{0.2cm}}
+\theorempostwork{\vspace{0.2cm}}
+    \newtheorem*{sprint}{Sprint}
 \begin{document}
 \graphicspath{{fotos/}}
 \section{Diseño y evolución de las clases principales del Modelo}
@@ -181,4 +195,73 @@ Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritm
 \includegraphics[scale=0.5]{Minimax.calculateNextMove()-Sprint6.png}
 \end{center}
 
+\subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
+\subsubsection{Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}
+\begin{sprint}[3]
+Durante el sprint 3 comenzó el desarrollo de esta funcionalidad, que de ahora en adelante denominaremos como \textit{replays}. Para su implementación, se planteó abstraer la clase Game mediante estados que representen cada uno de los momentos que atraviesa el juego a lo largo de una partida. Así, mediante un conjunto de estados es posible replicar una partida al completo.
+
+Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \textit{Game} en el momento deseado.
+
+Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \textit{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
+
+De esta manera surge la interfaz \textit{Replayable}, que extiende de la interfaz \textit{Reportable} y que contiene dos métodos: \textit{toString()}, para facilitar la visualización en la vista de consola, y \textit{report()}, para poder almacenar los estados en formato JSON.
+
+\begin{center}
+\includegraphics[scale=0.5]{replayable-reportable-sprint-3.png}
+\end{center}
+
+Una vez ideada esta interfaz, ya es posible definir la clase \textit{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
+
+\begin{center}
+\includegraphics[scale=0.5]{state-sprint-3.png}
+\end{center}
+
+El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \textit{Replay}. Esta clase contiene una lista de \textit{State} que se completa durante una partida.
+
+\begin{center}
+\includegraphics[scale=0.6]{addState-replay-sprint-3.png}
+
+Generación de lista de estados
+\end{center}
+
+Cuando la partida acaba o el usuario hace que acabe (mediante el uso del comando exit), se pregunta si desea que se guarde la repetición y se procede según su respuesta.
+
+\begin{center}
+\includegraphics[scale=0.6]{saveReplay-sprint3.png}
+
+Guardado de Replay
+\end{center}
+
+Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \textit{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
+
+La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \textit{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \textit{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
+
+\begin{center}
+\includegraphics[scale=0.7]{consola-replay-sprint-3.png}
+\end{center}
+
+Con estas repeticiones de partidas funcionales dimos por completada esta tarea en el Sprint 3.
+\end{sprint}
+
+\begin{sprint}[4]
+
+Este sprint se caracterizó por la implementación de una GUI funcional, lo que conlleva la adaptación de las \textit{replays} a este nuevo formato. Decidimos que la comunicación entre modelo y vista se llevara a cabo mediante el uso del patrón observador, lo cual supuso un reto inicial para las repeticiones de partidas.
+
+Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \textit{Game} no interviene en el proceso, pues es la clase \textit{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \textit{Replay} es también un modelo que debe ser observado.
+
+\begin{center}
+\includegraphics[scale=0.5]{rolit-observer-sprint4.png}
+\end{center}
+
+Para implementar los observadores se creó la interfaz \textit{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \textit{Replay} y \textit{State}.
+
+\begin{center}
+\includegraphics[scale=0.5]{replay-state-sprint-4.png}
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[5]
+La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters.
+\end{sprint}
 \end{document}

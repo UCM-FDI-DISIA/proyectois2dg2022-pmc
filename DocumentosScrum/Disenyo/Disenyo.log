@@ -1,115 +1,155 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  6 MAY 2022 19:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  7 MAY 2022 13:42
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
 **./Disenyo.tex
 (Disenyo.tex
-LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-24> (C:\Miktex\tex/latex/base\article.cls
-Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(C:\Miktex\tex/latex/base\size10.clo
-File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-01-09> xparse <2020-03-03>
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count185
-\c@section=\count186
-\c@subsection=\count187
-\c@subsubsection=\count188
-\c@paragraph=\count189
-\c@subparagraph=\count190
-\c@figure=\count191
-\c@table=\count192
+\c@part=\count177
+\c@section=\count178
+\c@subsection=\count179
+\c@subsubsection=\count180
+\c@paragraph=\count181
+\c@subparagraph=\count182
+\c@figure=\count183
+\c@table=\count184
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Miktex\tex/latex/graphics\graphicx.sty
-Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Miktex\tex/latex/graphics\keyval.sty
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks15
 )
-(C:\Miktex\tex/latex/graphics\graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Miktex\tex/latex/graphics\trig.sty
-Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(C:\Miktex\tex/latex/graphics-cfg\graphics.cfg
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 107.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 
-(C:\Miktex\tex/latex/graphics-def\pdftex.def
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen139
 \Gin@req@width=\dimen140
 )
-(C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count193
-\l__pdf_internal_box=\box50
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/ntheorem\ntheorem.sty
+Style `ntheorem', Version 1.33 <2011/08/15>
+Package: ntheorem 2011/08/15 1.33
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\theorem@style=\toks16
+\theorem@@style=\toks17
+\theorembodyfont=\toks18
+\theoremnumbering=\toks19
+\theorempreskipamount=\skip49
+\theorempostskipamount=\skip50
+\theoremframepreskipamount=\skip51
+\theoremframepostskipamount=\skip52
+\theoreminframepreskipamount=\skip53
+\theoreminframepostskipamount=\skip54
+\theorem@preskip=\toks20
+\theorem@postskip=\toks21
+\theorem@framepreskip=\toks22
+\theorem@framepostskip=\toks23
+\theorem@inframepreskip=\toks24
+\theorem@inframepostskip=\toks25
+\theoremindent=\dimen141
+\theorem@indent=\dimen142
+\theoremrightindent=\dimen143
+\theorem@rightindent=\dimen144
+\theoremheaderfont=\toks26
+\theoremseparator=\toks27
+\theoremprework=\toks28
+\theorempostwork=\toks29
+\theoremsymbol=\toks30
+\qedsymbol=\toks31
+\theoremkeyword=\toks32
+\qedsymbol=\toks33
+\thm@topsep=\skip55
+\thm@topsepadd=\skip56
+)
+\c@sprint=\count185
+
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count186
+\l__pdf_internal_box=\box47
 ) (Disenyo.aux)
 \openout1 = `Disenyo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
-(C:\Miktex\tex/context/base/mkii\supp-pdf.mkii
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count194
-\scratchdimen=\dimen141
-\scratchbox=\box51
-\nofMPsegments=\count195
-\nofMParguments=\count196
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count197
-\MPscratchDim=\dimen142
-\MPnumerator=\count198
-\makeMPintoPDFobject=\count199
-\everyMPtoPDFconversion=\toks18
-) (C:\Miktex\tex/latex/epstopdf-pkg\epstopdf-base.sty
+\scratchcounter=\count187
+\scratchdimen=\dimen145
+\scratchbox=\box48
+\nofMPsegments=\count188
+\nofMParguments=\count189
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count190
+\MPscratchDim=\dimen146
+\MPnumerator=\count191
+\makeMPintoPDFobject=\count192
+\everyMPtoPDFconversion=\toks35
+)
+(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(C:\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-))
-Overfull \hbox (3.87558pt too wide) in paragraph at lines 25--26
+)
+Overfull \hbox (3.87558pt too wide) in paragraph at lines 39--40
 \OT1/cmr/m/n/10 La clase Game re-sponde a eje-cu-ciones del Place-CubeCom-mand,
  colo-cando nuevos
  []
 
 [1
 
-{C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-Overfull \hbox (14.15564pt too wide) in paragraph at lines 82--82
-[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-ter^^S^^Ps
-ticas
+{C:/Users/leona/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
+Overfull \hbox (14.15564pt too wide) in paragraph at lines 96--96
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
+s
  []
 
 [3] [4]
 <fotos//minimaxExample.jpg, id=17, 899.61093pt x 498.36188pt>
 File: fotos//minimaxExample.jpg Graphic file (type jpg)
 <use fotos//minimaxExample.jpg>
-Package pdftex.def Info: fotos//minimaxExample.jpg  used on input line 121.
+Package pdftex.def Info: fotos//minimaxExample.jpg  used on input line 135.
 (pdftex.def)             Requested size: 449.80437pt x 249.18033pt.
 
-Overfull \hbox (104.80437pt too wide) in paragraph at lines 121--122
+Overfull \hbox (104.80437pt too wide) in paragraph at lines 135--136
  [] 
  []
 
@@ -119,32 +159,32 @@ pt>
 File: fotos//Minimax.calculateNextMove()-Sprint5.png Graphic file (type png)
 <use fotos//Minimax.calculateNextMove()-Sprint5.png>
 Package pdftex.def Info: fotos//Minimax.calculateNextMove()-Sprint5.png  used o
-n input line 156.
+n input line 170.
 (pdftex.def)             Requested size: 346.79477pt x 524.95996pt.
 
-Overfull \hbox (1.79477pt too wide) in paragraph at lines 156--157
+Overfull \hbox (1.79477pt too wide) in paragraph at lines 170--171
  [] 
  []
 
 [7] [8 <./fotos//Minimax.calculateNextMove()-Sprint5.png (PNG copy)>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 163.
+(Font)              <7> on input line 177.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 163.
+(Font)              <5> on input line 177.
 <fotos//poda alfa-beta.png, id=32, 401.5pt x 203.76125pt>
 File: fotos//poda alfa-beta.png Graphic file (type png)
 <use fotos//poda alfa-beta.png>
-Package pdftex.def Info: fotos//poda alfa-beta.png  used on input line 171.
+Package pdftex.def Info: fotos//poda alfa-beta.png  used on input line 185.
 (pdftex.def)             Requested size: 200.7495pt x 101.88037pt.
 <fotos//Minimax.calculateNextMove()-Sprint6.png, id=34, 773.89125pt x 1257.6987
 5pt>
 File: fotos//Minimax.calculateNextMove()-Sprint6.png Graphic file (type png)
 <use fotos//Minimax.calculateNextMove()-Sprint6.png>
 Package pdftex.def Info: fotos//Minimax.calculateNextMove()-Sprint6.png  used o
-n input line 181.
+n input line 195.
 (pdftex.def)             Requested size: 386.94467pt x 628.84784pt.
 
-Overfull \hbox (41.94467pt too wide) in paragraph at lines 181--182
+Overfull \hbox (41.94467pt too wide) in paragraph at lines 195--196
  [] 
  []
 
@@ -152,22 +192,80 @@ Overfull \hbox (41.94467pt too wide) in paragraph at lines 181--182
 Overfull \vbox (78.84784pt too high) has occurred while \output is active []
 
 
-[10 <./fotos//Minimax.calculateNextMove()-Sprint6.png (PNG copy)>] (Disenyo.aux
-) ) 
+[10 <./fotos//Minimax.calculateNextMove()-Sprint6.png (PNG copy)>]
+Overfull \hbox (14.15564pt too wide) in paragraph at lines 198--198
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
+s
+ []
+
+<fotos//replayable-reportable-sprint-3.png, id=43, 149.55875pt x 222.8325pt>
+File: fotos//replayable-reportable-sprint-3.png Graphic file (type png)
+<use fotos//replayable-reportable-sprint-3.png>
+Package pdftex.def Info: fotos//replayable-reportable-sprint-3.png  used on inp
+ut line 210.
+(pdftex.def)             Requested size: 74.77919pt x 111.41597pt.
+<fotos//state-sprint-3.png, id=44, 173.64874pt x 166.6225pt>
+File: fotos//state-sprint-3.png Graphic file (type png)
+<use fotos//state-sprint-3.png>
+Package pdftex.def Info: fotos//state-sprint-3.png  used on input line 216.
+(pdftex.def)             Requested size: 86.82416pt x 83.31104pt.
+[11 <./fotos//replayable-reportable-sprint-3.png (PNG copy)> <./fotos//state-sp
+rint-3.png (PNG copy)>]
+<fotos//addState-replay-sprint-3.png, id=49, 306.14375pt x 218.8175pt>
+File: fotos//addState-replay-sprint-3.png Graphic file (type png)
+<use fotos//addState-replay-sprint-3.png>
+Package pdftex.def Info: fotos//addState-replay-sprint-3.png  used on input lin
+e 222.
+(pdftex.def)             Requested size: 183.68765pt x 131.2915pt.
+<fotos//saveReplay-sprint3.png, id=50, 423.5825pt x 372.39125pt>
+File: fotos//saveReplay-sprint3.png Graphic file (type png)
+<use fotos//saveReplay-sprint3.png>
+Package pdftex.def Info: fotos//saveReplay-sprint3.png  used on input line 230.
+
+(pdftex.def)             Requested size: 254.15146pt x 223.43646pt.
+ [12 <./fotos//addState-replay-sprint-3.png> <./fotos//saveReplay-sprint3.png>]
+<fotos//consola-replay-sprint-3.png, id=56, 208.3785pt x 302.93175pt>
+File: fotos//consola-replay-sprint-3.png Graphic file (type png)
+<use fotos//consola-replay-sprint-3.png>
+Package pdftex.def Info: fotos//consola-replay-sprint-3.png  used on input line
+ 240.
+(pdftex.def)             Requested size: 145.86394pt x 212.05077pt.
+<fotos//rolit-observer-sprint4.png, id=57, 236.885pt x 130.4875pt>
+File: fotos//rolit-observer-sprint4.png Graphic file (type png)
+<use fotos//rolit-observer-sprint4.png>
+Package pdftex.def Info: fotos//rolit-observer-sprint4.png  used on input line 
+253.
+(pdftex.def)             Requested size: 118.4422pt x 65.24358pt.
+ [13 <./fotos//consola-replay-sprint-3.png> <./fotos//rolit-observer-sprint4.pn
+g (PNG copy)>]
+<fotos//replay-state-sprint-4.png, id=62, 541.02126pt x 527.9725pt>
+File: fotos//replay-state-sprint-4.png Graphic file (type png)
+<use fotos//replay-state-sprint-4.png>
+Package pdftex.def Info: fotos//replay-state-sprint-4.png  used on input line 2
+59.
+(pdftex.def)             Requested size: 270.50996pt x 263.9856pt.
+\tf@thm=\write3
+\openout3 = `Disenyo.thm'.
+
+ [14 <./fotos//replay-state-sprint-4.png (PNG copy)>] (Disenyo.aux) ) 
 Here is how much of TeX's memory you used:
- 1299 strings out of 478582
- 21705 string characters out of 2860753
- 316645 words of memory out of 3000000
- 19523 multiletter control sequences out of 15000+600000
- 470777 words of font info for 33 fonts, out of 8000000 for 9000
+ 1603 strings out of 479618
+ 25649 string characters out of 2865026
+ 300903 words of memory out of 3000000
+ 18800 multiletter control sequences out of 15000+200000
+ 405294 words of font info for 33 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,6n,62p,1111b,176s stack positions out of 10000i,1000n,20000p,200000b,80000s
-<C:/Miktex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Miktex/fonts/type1/
-public/amsfonts/cm/cmbx12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.p
-fb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Disenyo.pdf (10 pages, 309462 bytes).
+ 68i,5n,74p,1102b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/
+leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
+x12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmti10.pfb>
+Output written on Disenyo.pdf (14 pages, 389262 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
+ 83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
