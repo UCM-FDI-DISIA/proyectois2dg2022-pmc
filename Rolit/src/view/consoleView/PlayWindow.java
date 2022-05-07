@@ -85,7 +85,6 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -115,7 +114,6 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public Object get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
