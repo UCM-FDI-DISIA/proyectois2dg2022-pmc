@@ -1,0 +1,116 @@
+\documentclass{article}
+
+\begin{document}
+\subsection{SPRINT BACKLOG 1}\label{sprint-backlog-1}
+
+\textbf{Como usuario, me gustaría poder jugar a rolit siguiendo un
+conjunto mínimo de normas (mirar normas rolit)}
+
+\begin{itemize}
+\item
+  Consta de un tablero cuadrado de 8x8 casillas
+\item
+  Consta de hasta 4 jugadores con colores asignados: amarillo, rojo,
+  verde y azul.
+\item
+  Las piezas del juego son cubos redondos de colores que se introducen
+  en las casillas del tablero.
+\item
+  Gana el jugador que más bolas de su color tenga sobre el tablero
+  cuando este se llena completamente.
+\item
+  El juego acaba cuando el tablero se llena completamente
+\item
+  Se decide al azar quien coloca el primer cubo.
+\item
+  Solo se puede colocar un cubo redondo en una casilla vacía adyacente a
+  una ya ocupada, excepto el primer cubo que se coloca en la posición
+  que se desee.
+\item
+  Un cubo se dice atrapado, cuando se encuentra en la línea que une un
+  cubo recién puesto con otro del mismo color.
+\item
+  Cuando se coloca un cubo, se cambian de color todos los cubos
+  atrapados en las direcciones válidas.
+\item
+  Las direcciones válidas son las líneas rectas dadas por alguna de las
+  casillas adyacentes.
+\item
+  En cada turno un jugador pone un único cubo y se pasa turno al
+  siguiente jugador después de haber cambiado de color los posibles
+  cubos atrapados.
+\item
+  El orden de turnos es la secuencia: amarillo, rojo, verde, azul.
+\end{itemize}
+
+\textbf{Como usuario, me gustaría poder guardar y cargar partida}
+
+\begin{itemize}
+\item
+  Se debe poder guardar la partida y salir del juego en cualquier
+  momento durante la ejecución del mismo.
+\item
+  Al iniciar el juego, debe poderse elegir entre cargar una partida
+  guardada o iniciar una nueva.
+\item
+  Se pueden tener varias partidas guardadas
+\item
+  Para cargar una partida, se muestra una lista para poder elegir la
+  partida a continuar.
+\item
+  Para guardar partida, se debe elegir un nombre identificativo para
+  denotar a dicha partida.
+\end{itemize}
+
+\subsection{SPRINT BACKLOG 2}\label{sprint-backlog-2}
+
+\textbf{Como usuario, me gustaría que el número de jugadores fuese
+variable para adaptarse mejor a diferentes grupos de personas.}
+
+\begin{itemize}
+\item
+  Cuando el usuario decida crear una nueva partida, se le debe preguntar
+  por el número de jugadores para dicha partida.
+\item
+  El número mínimo de jugadores es 2.
+\item
+  El número máximo de jugadores es 10.
+\end{itemize}
+
+\textbf{Como usuario, me gustaría que se pudiesen personalizar los
+colores con los que jugamos cada uno para hacer más visual el juego.}
+
+\begin{itemize}
+
+\item
+  Los jugadores deben poder elegir entre los siguientes colores: rojo,
+  amarillo, azul, rosa, verde, morado, negro, naranja, marrón y beige.
+\end{itemize}
+
+\textbf{Como usuario, me gustaría poder salir del juego en cualquier
+momento.}
+
+\begin{itemize}
+\item
+  La partida debe finalizar cuando cualquier jugador así lo indique.
+\item
+  Se usará un comando exit para llevar a cabo esta funcionalidad.
+\end{itemize}
+
+\textbf{Como usuario, me gustaría que hubiese distintos tamaños de
+tablero seleccionables.}
+
+\begin{itemize}
+\item
+  Se puede elegir la longitud del lado del tablero (cuadrado).
+\item
+  El tamaño mínimo será de 8 x 8 y el máximo de 15 x 15 casillas.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Registro de cambios}\label{registro-de-cambios}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\end{document}

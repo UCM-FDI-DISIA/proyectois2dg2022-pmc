@@ -1,0 +1,143 @@
+\documentclass[../FINAL/Scrum/SCRUM.tex]{subfiles}
+\defaultformat
+
+\begin{document}
+\section{Sergio Miguel García Jiménez}
+\subsection*{Código}
+
+\begin{itemize}
+\item Crear parte del menú principal en modo consola.
+\item Colaborar en el diseño de la clase Player.
+\item Desarrollar gran parte de la lógica de cargar, guardar y borrar partida (SaveLoadManager).
+\item Contribuir a que modelo trabaje exclusivamente con JSON. Esto incluía la concepción del diseño de reports así como su implementación en las distintas clases, tarea inicialmente desarrollada por Leo, Virginia y yo, y continuada por el resto de compañeros.
+\item Desarrollé junto con Leo toda la funcionalidad de red, incluyendo elementos de la GUI que precisa, su extensión a todos los modos de juego y la lógica detrás de las conexiones.
+\item Me encargué junto a otros del desarrollo de la estructura de la GUI; concretamente en lo referente al tablero, diálogos de cargar, crear, borrar partida y la interacción de la GUI con el modelo, así como una participación activa en su pulido y debug por las posteriores características introducidas por el modelo.
+\item Realicé diversas labores de optimización para solventar un pobre rendimiento de la GUI a la hora de mostrar el tablero, actualizándose ahora en tiempo casi instantáneo y constante.
+\item El debug de las características que estaba desarrollando conllevó a debugear otras clases referentes al modelo para perfeccionarlo.
+\item Encargado de realizar algunos merge y etiquetado.
+\item Proponer y solventar algunas de las issues.
+\end{itemize}
+
+\subsection*{Documentación}
+\begin{itemize}
+\item He realizado los primeros diagramas de clases y UML para ofrecer unos primeros prototipos para poder determinar por qué estilo de diseño queríamos adoptar.
+\item Concebí el diseño de la refactorización de las historias de usuario para adaptarlas al formato de la asignatura, tarea después completada por compañeros.
+\item Creación de los primeros artículos y la estructura preliminar de la Wiki en los primeros sprints.
+\item Trabajo UML preliminar con Modelio.
+\item Pugnar por pasar de trabajar en el software Modelio a PlantUML para trabajar con mayor comodidad.
+\end{itemize}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{\newpage #1}
+\section{Leonardo Macías Sánchez}
+\subsection*{Código}
+\begin{itemize}
+\item Concepción, diseño y desarrollo de la clase SaveLoadManager, que en sprints futuros sería refactorizada por Sergio para adaptarla a las nuevas necesidades.
+
+\item Desarrollo de las clases Player, Cube y Color, sobre todo durante la etapa inicial del proyecto.
+
+\item Refactorización de la clase Board para que contuviera la lógica del juego.
+
+\item Desarrollo y adaptación del juego a la red, incluyendo una extensión de la interfaz gráfica que facilitase el funcionamiento al usuario. Esta tarea fue desarrollada conjuntamente con Sergio.
+
+\item Diseño y desarrollo del paquete replay, que abarca la interfaz Replayable y las clases Replay y GameState. Además de implementar toda la lógica, también me he dedicado a su correcta visualización, tanto en consola como en GUI.
+
+\item Principal impulsor y defensor del uso de JSONObjects en el proyecto. Ideé la interfaz Reportable y me encargué del diseño de los JSON y de su posterior implementación junto con Sergio y Virginia.
+
+\item Diseño e implementación de los métodos toString() del modelo.
+
+\item Colaboración en el diseño de los GameBuilders junto con Juan Diego y Daniel.
+
+\item Refactorización, junto a Juan Diego, de la clase Game para poder introducir las modalidades de GameTeams y GameClassic.
+
+\item Ayudar a Virginia y Mar con problemas que surgieron al crear JUnits.
+
+\item Creación del ranking junto con Mar.
+
+\item Refactorización completa de todas las clases de la GUI, rediseñandola al completo (a excepción del tablero) y creando nuestros propios componentes visuales, los RolitComponents.
+
+\item Propuse la creación de la clase TurnManager.
+
+\item Labores de debug.
+
+\end{itemize}
+
+\subsection*{Documentación}
+\begin{itemize}
+\item Diseño de los reports.
+\item Redactar el funcionamiento de los Builders.
+\item Desarrollo de diagramas de secuencia.
+\item Redactar algunos de los sprint reviews y retrospectives.
+\item Colaboración en el desarrollo de la wiki.
+\item Búsqueda de una alternativa a Modelio para el desarrollo de diagramas de clases.
+\end{itemize}
+
+\section{Daniel González Arbelo}
+\subsection*{Código}
+\begin{itemize}
+\item Desarrollo en las etapas más tempranas del proyecto de las clases Game y Board, implementando los métodos encargados de la ejecución y actualización del juego en los turnos.
+\item Retoques y debug en las primeras etapas de la clase SaveLoadManager para el funcionamiento de cargado y guardado de partida.
+\item Creación de las clases herederas de Command, junto con Mar, aplicándose el patrón comando.
+\item Desarrollo de la lectura de datos de entrada para la creación del juego por consola junto con Leo y Mar.
+\item Creación de los ficheros para las formas de los tableros y las imágenes de las celdas en GUI.
+\item Creación de las primeras versiones funcionales de la GUI  (ventanas de creación de juego, tablero, ranking, etc.), desarrolladas todas conjuntamente con Sergio.
+\item Creación, desarrollo y debug de las inteligencias artificiales y sus estrategias (y desarrollo de algunas alternativas para su funcionamiento con Juan Diego, que fueron finalmente deprecadas).
+\item Resolución de algún fallo en el funcionamiento de la red.
+\item Refactorización, junto con Juan Diego, del modelo para que trabajase en su propia hebra, y de la vista por consola.
+\item Refactorización del manejo de turnos (con la creación de TurnManager, idea elaborada con Leo) y de la clase Player para adaptarlos al funcionamiento con la hebra del modelo y las inteligencias artificiales.
+\item Creación de la lógica encargada del funcionamiento del tutorial.
+\item Tareas de debug, manejo de excepciones y resolución de issues.
+\end{itemize}
+
+\subsection*{Documentación}
+\begin{itemize}
+\item Creación de los primeros diagramas de secuencia para fijar el formato.
+\item Establecimiento de un procedimiento para el desarrollo de los diagramas de secuencia usando PlantUML y IntelliJ.
+\item Documentación acerca del funcionamiento de la GUI.
+\item Participación en los sprint reviews y retrospectives.
+
+\end{itemize}
+
+
+\section{María del Mar Ramiro Ortega}
+\subsection*{Código}
+\begin{itemize}
+\item Desarrollo de un primer modelo de ranking, mostrado al final de la partida y ordenado por puntos.
+\item Creación de las clases herederas de Command, junto con Daniel, aplicándose el patrón comando.
+\item Diseño, junto con Daniel, y desarrollo de los distintos tamaños y formas del tablero, tanto a nivel de lógica del juego como a nivel de su carga y guardado por medio de la clase SaveLoadManager.
+\item Desarrollo de la lectura de datos de entrada para la creación del juego por consola junto con Daniel y Leo.
+\item Realización de una versión incial de los JUnits con mi compañera Virginia.
+\item Actualización de los JUnits en todas las refactorizaciones siguientes junto con Sergio.
+\item Añadido de nuevos tests a los JUnits de las distintas historias de usuario que íbamos implementando.
+\item Creación del ranking de GUI junto con Leo y mejora del ranking de console.
+\item Creo que es importante destacar, no solo por mi parte sino un destacado general, algo que no se ve a simple vista por el código pero que llevamos haciendo a lo largo del curso y creo que es muy positivo, y esto es la discusión previa a la realización del código en la que todos nos poníamos de acuerdo en la manera de abordar la especificación de cada tarea y ayudábamos en la medida de lo posible al resto. Hemos dedicado mucho tiempo a esto y claramente se ve reflejado en el resultado final.
+\end{itemize}
+
+\subsection*{Documentación}
+\begin{itemize}
+\item Creación de diagramas de secuencia.
+\item Desarrollo de una refactorización de las Historias de Usuario junto con Virginia, que fueron actualizadas y subidas a la wiki.
+\item Documento acerca de los diversos cambios que hicimos durante los distintos sprints junto con Leo, así como su actualización en la wiki.
+\item Redactar algún sprint review y retrospective, así como la actualización de la wiki respecto a varios sprints reviews y retrospectives que realizamos en PDF.
+\item Participación en los sprint reviews y retrospectives, junto con el resto de mis compañeros.
+
+\section{Juan Diego Barrado Daganzo}
+\subsection*{Código}
+\begin{itemize}
+\item Creación y diseño de la clase builder y de la refactorización del juego a través de factorías.
+\item Encapsulación del modelo en la clase abstracta de Game, definición de las responsabilidades de cada una de las clases hijas (GameClassic y GameTeams) e implementación de las mismas.
+\item Adaptación del Modelo-Vista-Controlador a través de la generación de un hilo propio para el modelo
+\end{itemize}
+\subsection*{Documentación}
+
+\section{Virginia Chacón Pérez}
+\subsection*{Código}
+\begin{itemize}
+\item 
+\end{itemize}
+\subsection*{Documentación}
+
+
+
+\end{itemize}
+
+\end{document}

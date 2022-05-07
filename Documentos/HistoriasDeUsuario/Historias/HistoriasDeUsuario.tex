@@ -1,0 +1,159 @@
+\documentclass[../../FINAL/Scrum/SCRUM.tex]{subfiles}
+\title{HISTORIAS DE USUARIO}
+\date{\today}
+\author{Grupo PMC}
+\usepackage[spanish]{babel}
+\usepackage{soul}
+\usepackage{ulem}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
+\begin{document}
+\newcounter{epic}
+\newcounter{story}
+\titleformat{\subsection}[frame]{\normalfont\large\bfseries}{\stepcounter{epic}ÉPICA\ \theepic}{3pt}{\centering ``#1''}
+
+\titleformat{\subsubsection}[block]{\normalfont\large\bfseries}{\stepcounter{story}\uline{Historia de usuario \thestory : #1}}{0pt}{}
+
+\setcounter{secnumdepth}{3}
+
+\subsection{Como usuario quiero poder jugar a \\ Rolit...}
+\subsubsection{... siguiendo un conjunto mínimo de normas}
+\textbf{Fase descriptiva}: se establece un conjunto de normas que se deberán cumplir durante el juego.
+
+\textbf{Prioridad}: alta, las normas del juego son la base para crear el mismo.
+
+\textbf{Tamaño estimado}: 1 sprint para la base, aunque se irá mejorando a lo largo del proyecto.
+
+\textbf{Condiciones de aceptación}: el juego es totalmente funcional con el conjunto de normas especificado.
+
+\textbf{Explicación detallada}
+Esta historia de usuario fue concebida como tal y ejecutada en el primer sprint. Los  bullet points a continuación enumerados forman parte de la historia de usuario homónima en el Sprint Backlog 1.
+Esta historia de usuario conlleva implementar las siguientes normas en el juego:
+\begin{itemize}
+\item Consta de un tablero cuadrado de 8x8 casillas
+\item Consta de hasta 4 jugadores con colores asignados: amarillo, rojo, verde y azul.
+\item Las piezas del juego son cubos redondos de colores que se introducen en las casillas del tablero.
+\item Gana el jugador que más bolas de su color tenga sobre el tablero cuando este se llena completamente.
+\item El juego acaba cuando el tablero se llena completamente
+\item Se decide al azar quien coloca el primer cubo.
+\item Solo se puede colocar un cubo redondo en una casilla vacía adyacente a una ya ocupada, excepto el primer cubo que se coloca en la posición que se desee.
+\item Un cubo se dice atrapado, cuando se encuentra en la línea que une un cubo recién puesto con otro del mismo color.
+\item Cuando se coloca un cubo, se cambian de color todos los cubos atrapados en las direcciones válidas.
+\item Las direcciones válidas son las líneas rectas dadas por alguna de las casillas adyacentes.
+\item En cada turno un jugador pone un único cubo y se pasa turno al siguiente jugador después de haber cambiado de color los posibles cubos atrapados.
+\item El orden de turnos es la secuencia: amarillo, rojo, verde, azul.\end{itemize}
+
+\subsubsection{... con una interfaz agradable}
+\textbf{Frase descriptiva}: tener una interfaz gráfica que permita al usuario interactuar con el juego de manera sencilla e intuitiva.
+
+\textbf{Prioridad}: media, no es imprescindible para el funcionamiento del juego.
+
+\textbf{Tamaño estimado}: 3 sprints.
+
+\textbf{Condiciones de aceptación}: tener una interfaz gráfica funcional y sin bugs y que pueda ser utilizada por cualquier usuario externo al proyecto.
+
+\textbf{Explicación detallada}
+Esta historia de usuario surge fruto de juntar las deprecadas historias de usuario:
+\begin{itemize}
+\item  Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego. 
+
+    Dicha  ``historia de usuario '', que a la luz de esta refactorización consideramos  ``tarea '' de esta nueva historia de usuario superior, fue implementada en el Sprint 2. Las tareas descritas en el Sprint Backlog 2 pasan a constituir las siguientes subtareas:
+     * Los jugadores deben poder elegir entre los siguientes colores: rojo, amarillo, azul, rosa, verde, morado, negro, naranja, marrón y beige.
+
+\item  Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.
+\end{itemize}
+
+\subsection{Como usuario quiero que Rolit introduzca características innovadoras...}
+\subsubsection{... pensando en las posibilidades que brinda el multijugador}
+\textbf{Frase descriptiva}: tener varias modalidades de juego teniendo en cuenta el número de jugadores, así como diferentes tamaños, formas para el tablero, la posibilidad de jugar en red, o con inteligencias artificiales.
+
+\textbf{Prioridad}: media.
+
+\textbf{Tamaño estimado}: 5 sprints.
+
+\textbf{Condiciones de aceptación}: se puede elegir entre varios tamaños y formas para el tablero, y además las modalidades de juego por equipos, jugador automático y clásica son completamente funcionales tanto al jugar con inteligencias artificiales como en red.
+
+\textbf{Explicación detallada}
+Esta historia de usuario surge fruto de juntar las deprecadas historias de usuario:
+\begin{itemize}
+\item  Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas. 
+
+    Dicha  ``historia de usuario '', que a la luz de esta refactorización consideramos  ``tarea '' de esta nueva historia de usuario superior, fue implementada en el Sprint 2. Las tareas descritas en el Sprint Backlog 2 pasan a constituir las siguientes subtareas:
+    \begin{itemize}
+  	  \item Cuando el usuario decida crear una nueva partida, se le debe preguntar por el número de jugadores para dicha partida.
+      \item El número mínimo de jugadores es 2.
+      \item El número máximo de jugadores es 10.
+    \end{itemize}
+
+\item  Como usuario, me gustaría que hubiese tableros distintos para poder tener distintas estrategias a la hora de jugar. 
+
+\item  Como usuario, me gustaría que el tamaño del tablero sea variable porque se adapta mejor a los grupos variables. 
+
+    Dicha  ``historia de usuario'', que a la luz de esta refactorización consideramos  ``tarea'' de esta nueva historia de usuario superior, fue implementada en el Sprint 2. Las tareas descritas en el Sprint Backlog 2 pasan a constituir la siguiente subtarea:
+     - se puede elegir tamaño entre: pequeño (9x9), mediano (13x13), grande (17x17)
+
+\item  Como usuario, me gustaría que la forma del tablero fuese variable para que cambiasen las estrategias. 
+    Ahora hay diferentes formas del tablero, cada una de ellas con los tres tamaños mencionados previamente, estas son:
+    \begin{itemize}
+    	\item Círculo
+    	\item Rombo
+    	\item Cuadrado
+    \end{itemize}
+
+\item  Como usuario, me gustaría que se pudiera jugar en red. 
+    Existe la posibilidad de jugar tanto en tu propio ordenador como de jugar en red contra otros usuarios.
+
+\item  Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas. 
+    Será posible jugar contra inteligencias artificiales, estas cuentan como jugadores, es decir, podrá el número de inteligencias sumado al número de personas debe sobrepasar 2 y no ser más de 10.
+
+\item Como usuario, me gustaría que hubiese modalidades de juego sobre rolit:
+\begin{itemize}
+	\item  Clásica 
+     \item  Por equipos 
+     \item Como usuario, me gustaría poder poner mi nombre como nickname durante la partida.
+     \item Como usuario, quiero que al final se muestre un ranking de puntos de la partida.
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{... siendo intuitivo y cómodo de jugar}
+\textbf{Frase descriptiva}: tener un tutorial al inicio del juego, poder cargar y guardar partida, poder ver la repetición de una partida paso a paso y poder salir del juego en cualquier momento durante la ejecución del mismo.
+
+\textbf{Prioridad}: baja, son elementos adicionales a la funcionalidad del juego.
+
+\textbf{Tamaño estimado}: 4 sprints
+
+\textbf{Condiciones de aceptación}: existe la posibilidad de ejecutar un tutorial al inicio del juego para entender las normas, las opciones de cargar y guardar partida se ejecutan correctamente en cualquier momento del juego, y al salir del juego en cualquier momento no se lancen excepciones y funcione correctamente.
+
+\textbf{Explicación detallada}
+Esta historia de usuario surge fruto de juntar las deprecadas historias de usuario:
+\begin{itemize}
+\item  Como usuario, me gustaría que hubiese un tutorial para entender bien las normas y excepciones del juego. 
+
+\item  Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde. 
+
+\item  Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego 
+    Ya deprecado antes de esta refactorización, pero fue implementada en el Sprint Backlog 1 bajo las siguientes características:
+    \begin{itemize}
+    \item Se debe poder guardar la partida y salir del juego en cualquier momento durante la ejecución del mismo.
+     \item Al iniciar el juego, debe poderse elegir entre cargar una partida guardada o iniciar una nueva.
+     \item Se pueden tener varias partidas guardadas
+     \item Para cargar una partida, se muestra una lista para poder elegir la partida a continuar.
+     \item Para guardar partida, se debe elegir un nombre identificativo para denotar a dicha partida.
+    \end{itemize}
+\item  Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan. 
+    Se trata de un refinamiento del punto anterior que se introdujo sin dificultades en el Sprint 2.
+    
+\item  Como usuario, me gustaría poder salir del juego en cualquier momento (introducida el 17 de febrero de 2022) 
+
+    Dicha  ``historia de usuario '', que a la luz de esta refactorización consideramos  ``tarea '' de esta nueva historia de usuario superior, fue implementada en el Sprint 2. Las tareas descritas en el Sprint Backlog 2 pasan a constituir las siguientes subtareas:
+    \begin{itemize}
+    \item La partida debe finalizar cuando cualquier jugador así lo indique.
+    \item Se usará un comando  exit  para llevar a cabo esta funcionalidad.
+    \end{itemize}
+\end{itemize}
+
+\defaultformat
+\end{document}
