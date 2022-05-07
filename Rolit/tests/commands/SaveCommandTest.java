@@ -8,17 +8,15 @@ import model.commands.Command;
 import model.commands.SaveCommand;
 
 public class SaveCommandTest {
+	//prueba que el comando de guardar funcione adecuadamente
 	@Test
-
 	void parseTest() {
-	
-	SaveCommand save = new SaveCommand();
-	
-	
-	String[] s = {"s", "4", "a"};
-	assertThrows(IllegalArgumentException.class, () -> save.parse(s));
+		SaveCommand save = new SaveCommand();
+		String[] s = {"s", "4", "a"};
+		assertThrows(IllegalArgumentException.class, () -> save.parse(s));
 	}
 
+	//Comprueba que se lance la excepción
 	@Test
 	void exceptionTest() {
 		String[] s = {"77","43"};

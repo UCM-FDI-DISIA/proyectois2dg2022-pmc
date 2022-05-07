@@ -52,8 +52,11 @@ public class GameClassic extends Game {
 				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
 				if(nextCube != null) this.addCubeToQueue(nextCube);
+<<<<<<< HEAD:Rolit/src/model/logic/GameClassic.java
 				
 				
+=======
+>>>>>>> mar2:Rolit/src/logic/GameClassic.java
 				this.executedTurn = true;
 			}
 			

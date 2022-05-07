@@ -50,7 +50,6 @@ public class GameTeams extends Game {
 				try {
 					Thread.sleep(500); // añadimos tiempo de espera para que se coloque ultimo cubo
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				this.onGameFinished();

@@ -10,7 +10,8 @@ import model.logic.Cube;
 import model.logic.Player;
  
 public class CubeTest {
-
+	//El nombre de la función que se está probando aparece en el nombre de cada test
+	
 	@Test
 	void change_owner() {
 		Player p1 = new Player(Color.PINK, "mar");

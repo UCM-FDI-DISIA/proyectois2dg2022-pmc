@@ -207,7 +207,7 @@ public class Board implements Reportable {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
-	boolean tryToAddCube(int x, int y) {
+	private boolean tryToAddCube(int x, int y) {
 		if (numCubes > 0) {
 			boolean nearbyCube = false;
 			if (!isPositionInRange(x, y) || getCubeInPos(x, y) != null)
