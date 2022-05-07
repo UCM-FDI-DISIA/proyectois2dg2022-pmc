@@ -16,6 +16,7 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	private final static String HELP_MSG = "Please enter a valid answer: yes/no";
 	private final static String[] yesArray = {"y", "yes"};
 	private final static String[] noArray = {"n", "no"};
+	private Scanner sc = new Scanner(System.in);
 	private Replay replay;
 	
 	SaveReplayWindow(Controller ctr){
@@ -36,7 +37,8 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		System.out.println(String.format("%s %n", SAVE_QUESTION));
 		//int prueba = input.nextInt();
 		//input.close();
-		Scanner sc = new Scanner(System.in);
+		System.out.println("SaveReplay" + System.currentTimeMillis());
+		
 		ans = sc.nextLine();
 		int parse =  parse(ans) ;
 		while(parse == 0) {
