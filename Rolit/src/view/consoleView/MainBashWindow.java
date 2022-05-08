@@ -66,6 +66,7 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				nextWindow = new NewGameWindow();
 				repeatMenu = nextWindow.open();
 				ctr.createGame((JSONObject) nextWindow.get());
+				this.initGame();
 			}				
 			// Se ha seleccionado cargar un juego antiguo
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
@@ -75,6 +76,8 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				if (game != null) {
 					ctr.createGame(game);	
 				}
+				this.initGame();
+
 			}
 			// Se ha seleccionado borrar un juego
 			else if (DELETE_GAME.equals(OPTIONS[option - 1])) {
@@ -91,14 +94,19 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				}
 			}			
 		} while (repeatMenu);
+	
+		return true;
+	}
+
+	
+	private void initGame() {
 		ctr.startGame();
 		ctr.addObserver(this);
 		ConsoleWindow gameWindow = new PlayWindow(this.ctr);
 		new SaveReplayWindow(ctr);
 		gameWindow.open();
-		return true;
 	}
-
+	
 	@Override
 	public void onTurnPlayed(GameState state) {}
 
