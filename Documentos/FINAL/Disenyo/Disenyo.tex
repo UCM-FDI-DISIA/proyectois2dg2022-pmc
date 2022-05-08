@@ -1014,7 +1014,7 @@ En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes
 
 Por último las sucesivas refactorizaciones pugnadas desde otras partes del código (para, por ejemplo soportar la IA) precisan de un debug extensivo en el modo Red. Este debug es satisfactorio.
 
-(INSERTAR DIAGRAMAS DE SECUENCIA UML)
+Los nuevos diagramas de secuencia, así como los comentarios acerca de las implementaciones de las nuevas funcionalidades se describen en el séptimo Sprint, pues en aquél se refinan ligeramente estas.
 
 \end{sprint}
 \begin{sprint}[7]
@@ -1023,8 +1023,147 @@ En cuanto a la red, si bien está conclusa llegados a este Sprint, el debug real
 
 Por último, se procede a crear y solventar algunas issues relativas a la experiencia de usuario jugando en red, conllevando una serie de modificaciones que hacen más intuitiva las instrucciones para realizar la conexión.
 
-Los diagramas UML finales son los siguientes:
+Procedemos a comentar cómo se implementó el modo por equipos en red.
 
+Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
+
+Dentro del método waitForPlayers que, recordemos, ejecuta un bucle de número de vueltas número de jugadores realizando las conexiones, cuando se finaliza la ejecución del bucle (es decir, cuando todos los jugadores están conectados y sus informaciones almacenadas en los atributos de Server), llama después a completeGameConfigAndSendToClients(), encargado de rellenar el gameConfig; una vez completo, se envía a los clientes.
+
+La diferencia con anteriores sprints es que ahora el servidor, antes de completar el gameConfigJSON con la información relativa a los jugadores, comprueba en gameConfigJSON si el modo escogido es por equipos.
+
+\begin{lstlisting}[frame=single, language=Java]
+//...Bucle que realiza las conexiones con los clientes
+	
+if (gameConfigJSON.get("type").equals("GameTeams")) {
+ for (int i = 0; i < clients.size(); ++i) {
+  clients.get(i).getFirst()
+  .notifyClientToChooseTeam(gameConfigJSON);
+ }
+			
+ waitForAllPlayersToChooseTeam();
+			
+ completeGameConfigTeams();
+			
+}
+	
+complateGameConfigPlayers();
+	
+//... actualizar los clientes con el nuevo gameConfigJSON
+\end{lstlisting}
+
+De ser así, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al gameConfigJSON; posteriormente, como en la implementación de sprints anteriores, procede a completarse el gameConfigJSON con la información de los jugadores.
+
+Primero, como observamos, se llama al método notifyClientToChooseTeam de todos los Client; este, por medio de ServerClientThread envía el gameConfigJSON, con el campo "chooseTeam" como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
+
+Cada cliente en su respectivo ClientController recibe esta información. Observa la naturaleza de la notificación; como esta es chooseTeam, procede a abrir un diálogo ChooseTeamFromServerDialog para escoger uno de los equipos ofrecidos desde el servidor. Nótese que la información de los equipos viene proporcionada en el gameConfigJSON enviado desde el servidor.
+
+Una vez todos los clientes han sido notificados, se llama a waitForAllPlayersToChooseTeam(). Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
+
+Su implementación es la siguiente:
+
+\begin{lstlisting}[frame=single, language=Java]
+public synchronized void waitForAllPlayersToChooseTeam() {
+ while ((mapClientTeam.size() != expectedPlayers)) {
+  try {
+   wait(500);
+  } catch (InterruptedException e) {
+   e.printStackTrace();
+  }
+ }
+}
+\end{lstlisting}
+
+Como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de ServerClient - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
+
+¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un JSONObject con el nombre del equipo elegido en el campo "team". Antes de enviarlo, pone en el JSON un campo "notification" con el valor "chooseTeam"; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
+
+El servidor recibe un JSON con la notificación chooseTeam; en receiveFromClient (Server) observa que al ser la notificación "chooseTeam", debe añadir una nueva entrada al mapa ServerClient - Nombre del equipo escogido.
+
+Como hemos comentado, una vez todos los equipos han sido escogidos, se sigue completando el gameConfig; ahora se sigue el mismo hilo de ejecución especificado en los anteriores sprints; se rellena el gameConfigJSON con la información de los jugadores y posteriormente se pasa el JSON a todos los clientes para que actualicen sus vistas para mostrar el juego por primera vez.
+
+En cuanto al nuevo sistema de notificaciones, son los thread de servidor y cliente los que añaden la notificación al json a enviar; para saber qué notificación enviar, las clases en contacto con los thread (ServerClient desde el servidor, Client desde el cliente) llaman al método especifico que pondrá la notificación requerida para después enviársela al cliente/servidor.
+\begin{lstlisting}[frame=single, language=Java]
+//ServerClientThread.java
+
+public void sendToClient(JSONObject json) {
+ String msg = json.toString();
+ if(msg != null) 
+  output.println(msg);
+}
+
+public void sendUpdateGraphicsToClient(JSONObject json){
+ json.put("notification", "updateGraphics");
+ sendToClient(json);
+}
+
+public void sendChooseTeamToClient(JSONObject
+gameConfigJSON) {
+ gameConfigJSON.put("notification", "chooseTeam");
+ sendToClient(gameConfigJSON);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single, language=Java]
+//ClientController.java
+
+public void sendToServer(JSONObject report) {
+ String msg = report.toString();
+ out.println(msg);
+}
+
+public void sendChosenTeamToServer(JSONObject
+selectedTeamJSON) {
+ selectedTeamJSON.put("notification", "chooseTeam");
+ sendToServer(selectedTeamJSON);	
+}
+
+public void sendPlayerInfoToServer(JSONObject report) {
+ report.put("notification", "playerInfo");
+ sendToServer(report);
+}
+	
+public void sendGameToServer(JSONObject report) {
+ report.put("notification", "updateGraphics");
+ sendToServer(report);
+}
+\end{lstlisting}
+
+De esta forma, se tienen en cuenta las notificaciones a la hora de procesar los mensajes enviados:
+
+\begin{lstlisting}[frame=single, language=Java]
+//ClientController.java
+
+if (newGameJSON.getString("notification")
+.equals("updateGraphics"))
+ clientRolit.updateGameFromServer(newGameJSON);
+else if (newGameJSON.getString("notification")
+.equals("chooseTeam"))
+ clientRolit.chooseTeamFromServer(newGameJSON);
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single, language=Java]
+//Server.java
+
+String notification = json.getString("notification");
+		
+if (notification.equals("chooseTeam")) {
+ mapClientTeam.put(client, json.getString("team"));
+}
+else if (notification.equals("updateGraphics")) {
+//...llamar a actualizar las vistas de todos los clientes...
+else if (notification.equals("playerInfo")){
+ Player p = new Player(json);
+ incomingPlayers.add(p);	
+}
+\end{lstlisting}
+
+Cambios de importancia para comparar los UML del Sprint 5 con los del Sprint 7 son los siguientes:
+
+--En construcción--
+
+Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado final de la redes.
+
+--En construcción--
 \end{sprint}
 
 \end{document}

@@ -42,14 +42,13 @@ public class ClientController extends Thread{
 			while(true){				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
 				
-				JSONObject JSONJuegoNuevo = new JSONObject(msgFromServer);
+				JSONObject newGameJSON = new JSONObject(msgFromServer);
 				
-				if (JSONJuegoNuevo.getString("notification").equals("updateGraphics"))
-					clientRolit.updateGameFromServer(JSONJuegoNuevo);
-				else if (JSONJuegoNuevo.getString("notification").equals("chooseTeam"))
-					clientRolit.chooseTeamFromServer(JSONJuegoNuevo);
+				if (newGameJSON.getString("notification").equals("updateGraphics"))
+					clientRolit.updateGameFromServer(newGameJSON);
+				else if (newGameJSON.getString("notification").equals("chooseTeam"))
+					clientRolit.chooseTeamFromServer(newGameJSON);
 				
-				System.out.println("Actualizado cliente " + clientRolit.getPlayer());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,16 +70,13 @@ public class ClientController extends Thread{
 	public void sendToServer(JSONObject report) {
 		String msg = report.toString();
 		out.println(msg);
-		
 	}
-
 
 	public void sendChosenTeamToServer(JSONObject selectedTeamJSON) {
 		selectedTeamJSON.put("notification", "chooseTeam");
 		sendToServer(selectedTeamJSON);
 		
 	}
-
 
 	public void sendPlayerInfoToServer(JSONObject report) {
 		report.put("notification", "playerInfo");

@@ -75,31 +75,42 @@ public class Server {
 		sv.updateNumPlayers();
 		
 		
-	}
-	
-	if (gameConfigJSON.get("type").equals("GameTeams")) {
-		for (int i = 0; i < clients.size(); ++i) {
-			clients.get(i).getFirst().notifyClientToChooseTeam(gameConfigJSON);
 		}
 		
-		waitForAllPlayersToChooseTeam();
-		
-		completeGameConfigTeams();
-		
+		completeGameConfigAndSendToClients();
+	
 	}
 	
+	private void completeGameConfigAndSendToClients() {
+		
+		if (gameConfigJSON.get("type").equals("GameTeams")) {
+			for (int i = 0; i < clients.size(); ++i) {
+				clients.get(i).getFirst().notifyClientToChooseTeam(gameConfigJSON);
+			}
+			
+			waitForAllPlayersToChooseTeam();
+			
+			completeGameConfigTeams();
+			
+		}
 	
-	JSONArray playersJSONArray = getPlayersJSONArray();
+		complateGameConfigPlayers();
 	
-	this.gameConfigJSON.put("players", playersJSONArray);
-	this.gameConfigJSON.put("turn", clients.get(0).getSecond().getColor().toString());
 	
-	for (int i = 0; i < clients.size(); ++i) {
-		clients.get(i).getFirst().updateGraphics(gameConfigJSON);
+		for (int i = 0; i < clients.size(); ++i) {
+			clients.get(i).getFirst().updateGraphics(gameConfigJSON);
+		}
+		
 	}
 
+	private void complateGameConfigPlayers() {
+		JSONArray playersJSONArray = getPlayersJSONArray();
+		
+		this.gameConfigJSON.put("players", playersJSONArray);
+		this.gameConfigJSON.put("turn", clients.get(0).getSecond().getColor().toString());
+		
 	}
-	
+
 	private JSONArray getPlayersJSONArray() {
 		JSONArray playersJSONArray = new JSONArray();
 		
@@ -172,15 +183,12 @@ public class Server {
 
 
 	public synchronized void waitForAllPlayersToChooseTeam() {
-		
 		while ((mapClientTeam.size() != expectedPlayers)) {
 			try {
 				wait(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
 		}
 	}
 	

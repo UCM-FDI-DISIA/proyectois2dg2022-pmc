@@ -43,7 +43,6 @@ public class ServerClientThread extends Thread {
 		String msg = json.toString();
 		if(msg != null) 
 			output.println(msg);
-		
 	}
 
 	public void sendUpdateGraphicsToClient(JSONObject json){
@@ -51,12 +50,9 @@ public class ServerClientThread extends Thread {
 		sendToClient(json);
 	}
 
-
-
 	public void sendChooseTeamToClient(JSONObject gameConfigJSON) {
 		gameConfigJSON.put("notification", "chooseTeam");
 		sendToClient(gameConfigJSON);
-		
 	}
 
 }
