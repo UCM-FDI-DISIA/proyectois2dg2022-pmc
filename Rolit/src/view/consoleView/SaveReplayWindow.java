@@ -10,6 +10,13 @@ import model.replay.GameState;
 import model.replay.Replay;
 import view.RolitObserver;
 
+/**
+ * This class displays the necessary information in order to save a replay, it also
+ * gathers users intentions
+ * It implements ConsoleWindow
+ * @author PMC
+ *
+ */
 public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	private final static String SAVE_QUESTION = "Do you want to save the replay of this game? (y/n)";
 	private final static String SUCCESS_MSG = "Replay saved successfully!";
@@ -19,6 +26,10 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	private Scanner sc = new Scanner(System.in);
 	private Replay replay;
 	
+	/**
+	 * Constructor
+	 * @param ctr Controller 
+	 */
 	SaveReplayWindow(Controller ctr){
 		ctr.addObserver(this);
 	}
@@ -54,7 +65,11 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		return false;
 	}
 	
-	//Returns a positive number if the ans is yes, negative number  if ans is no or a 0 if ans is not valid
+	/**
+	 * It parses the answer of the user
+	 * @param ans Answer of the user
+	 * @return A positive number if the ans is yes, negative number  if ans is no or a 0 if ans is not valid
+	 */
 	private int parse(String ans) {
 		for (int i = 0; i < yesArray.length; i++) {
 			if(yesArray[i].equals(ans.toLowerCase()))

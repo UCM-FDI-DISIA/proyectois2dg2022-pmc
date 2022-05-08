@@ -10,12 +10,23 @@ import model.replay.Replay;
 import utils.StringUtils;
 import view.RolitObserver;
 
+/**
+ * This class displays the necessary information in order play a Rolit game, 
+ * it also gathers users intentions 
+ * It implements ConsoleWindow
+ * @author PMC
+ *
+ */
 public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
 	private volatile boolean close;
 	private Controller ctr;
 	private GameState state;
 
+	/**
+	 * Constructor
+	 * @param ctr Controller
+	 */
 	PlayWindow(Controller ctr) {
 		this.ctr = ctr;
 		ctr.addObserver(this);

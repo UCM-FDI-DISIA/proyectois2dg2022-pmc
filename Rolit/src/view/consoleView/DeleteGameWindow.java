@@ -5,7 +5,9 @@ import java.util.List;
 import model.SaveLoadManager;
 
 /**
- * This class is used to
+ * This class displays the necessary information in order to delete a saved game, it also
+ * gathers users intentions
+ * It implements ConsoleWindow
  * @author PMC
  *
  */

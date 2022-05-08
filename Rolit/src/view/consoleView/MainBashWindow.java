@@ -10,6 +10,12 @@ import model.replay.GameState;
 import model.replay.Replay;
 import view.RolitObserver;
 
+/**
+ * Main console window, it is in charge of managing which window is opened at any given moment 
+ * It implements ConsoleWindow and RolitObserver
+ * @author PMC
+ *
+ */
 public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	// Hay que hacer una clase contenedora de todas estas constantes
 	private final static String NEW_GAME = "New Game";
@@ -27,10 +33,18 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	
 	private Controller ctr;
 	
+	/**
+	 * Constructor
+	 * @param ctr Controller
+	 */
 	public MainBashWindow(Controller ctr) {
 		this.ctr = ctr;		
 	}
 	
+	/**
+	 * It shows all the available options in Rolit (new game, load game, delete game, replay game)
+	 * @return The chosen option
+	 */
 	private int menu() {
 		int option;
 		boolean repeat = true;

@@ -5,6 +5,13 @@ import org.json.JSONArray;
 import model.logic.Color;
 import model.strategy.Strategy;
 
+/**
+ * This class displays the necessary information in order to create a new classic game, 
+ * it also gathers users intentions 
+ * It extends NewGameWindow
+ * @author PMC
+ *
+ */
 public class NewGameClassicWindow extends NewGameWindow {
 	private static final String TYPE = "GameClassic";
 	
