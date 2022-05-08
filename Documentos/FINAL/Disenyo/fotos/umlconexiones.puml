@@ -1,0 +1,72 @@
+@startuml
+box Server
+participant ServerUser
+participant ServerView
+participant Server
+participant ServerClient
+participant ServerClientThread
+participant ServerClientThreadRun
+participant WaitPlayerThread
+ServerUser -> ServerView : startButton actionPerformed
+activate ServerView
+ServerView -> Server : start(port)
+activate Server
+Server -> ServerSocket : new(port)
+activate ServerSocket
+ServerSocket --> Server
+deactivate ServerSocket
+Server -> Server : waitForPlayers()
+activate Server
+Server -> WaitPlayerThread : new(serverSocket, socket, ServerClient, this)
+activate WaitPlayerThread
+WaitPlayerThread --> Server
+deactivate WaitPlayerThread
+Server -> WaitPlayerThread : start()
+activate WaitPlayerThread
+WaitPlayerThread -> ServerSocket : accept()
+activate ServerSocket
+end box
+
+
+box Client
+participant SocketClient
+participant ClientController
+participant ClientControllerRun
+participant Client
+participant MainWindow
+participant JoinServerDialog
+participant ClientUser
+ClientUser -> JoinServerDialog
+activate JoinServerDialog
+JoinServerDialog -> MainWindow : connect button
+deactivate JoinServerDialog
+activate MainWindow
+MainWindow -> Client : empezarPartida(ip, port)
+activate Client
+Client -> ClientController : new ClientController(this, ip, port)
+activate ClientController
+ClientController -> SocketClient : new Socket(ipAddress, port)
+activate SocketClient
+SocketClient -> ServerSocket : connect
+ServerSocket --> WaitPlayerThread : connection made
+WaitPlayerThread --> ClientController
+ClientController --> Client
+Client -> ClientControllerRun : start()
+activate ClientControllerRun
+WaitPlayerThread -> ServerClient : setUpServer
+activate ServerClient
+ServerClient -> ServerClientThread : new(server, socket, this)
+activate ServerClientThread
+ServerClientThread --> ServerClient
+ServerClient -> ServerClientThreadRun : start()
+activate ServerClientThreadRun
+ServerClient --> WaitPlayerThread
+WaitPlayerThread --> Server
+deactivate WaitPlayerThread
+deactivate Server
+end box
+
+deactivate SocketClient
+deactivate ServerSocket
+return
+@enduml

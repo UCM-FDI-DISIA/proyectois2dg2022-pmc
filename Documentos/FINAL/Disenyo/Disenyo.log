@@ -1,95 +1,119 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  8 MAY 2022 13:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  8 MAY 2022 16:22
 entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
 **./Disenyo.tex
 (Disenyo.tex
-LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-01-09> xparse <2020-03-03>
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-04-29>
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count177
-\c@section=\count178
-\c@subsection=\count179
-\c@subsubsection=\count180
-\c@paragraph=\count181
-\c@subparagraph=\count182
-\c@figure=\count183
-\c@table=\count184
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks15
+\KV@toks@=\toks16
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 105.
+Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen139
 \Gin@req@width=\dimen140
 )
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/ntheorem\ntheorem.sty
+(C:\Users\sergi\AppData\Roaming\MiKTeX\tex/latex/ntheorem\ntheorem.sty
 Style `ntheorem', Version 1.33 <2011/08/15>
 Package: ntheorem 2011/08/15 1.33
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\theorem@style=\toks16
-\theorem@@style=\toks17
-\theorembodyfont=\toks18
-\theoremnumbering=\toks19
+\theorem@style=\toks17
+\theorem@@style=\toks18
+\theorembodyfont=\toks19
+\theoremnumbering=\toks20
 \theorempreskipamount=\skip49
 \theorempostskipamount=\skip50
 \theoremframepreskipamount=\skip51
 \theoremframepostskipamount=\skip52
 \theoreminframepreskipamount=\skip53
 \theoreminframepostskipamount=\skip54
-\theorem@preskip=\toks20
-\theorem@postskip=\toks21
-\theorem@framepreskip=\toks22
-\theorem@framepostskip=\toks23
-\theorem@inframepreskip=\toks24
-\theorem@inframepostskip=\toks25
+\theorem@preskip=\toks21
+\theorem@postskip=\toks22
+\theorem@framepreskip=\toks23
+\theorem@framepostskip=\toks24
+\theorem@inframepreskip=\toks25
+\theorem@inframepostskip=\toks26
 \theoremindent=\dimen141
 \theorem@indent=\dimen142
 \theoremrightindent=\dimen143
 \theorem@rightindent=\dimen144
-\theoremheaderfont=\toks26
-\theoremseparator=\toks27
-\theoremprework=\toks28
-\theorempostwork=\toks29
-\theoremsymbol=\toks30
-\qedsymbol=\toks31
-\theoremkeyword=\toks32
-\qedsymbol=\toks33
+\theoremheaderfont=\toks27
+\theoremseparator=\toks28
+\theoremprework=\toks29
+\theorempostwork=\toks30
+\theoremsymbol=\toks31
+\qedsymbol=\toks32
+\theoremkeyword=\toks33
+\qedsymbol=\toks34
 \thm@topsep=\skip55
 \thm@topsepadd=\skip56
 )
-\c@sprint=\count185
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count193
+\lst@gtempboxa=\box50
+\lst@token=\toks35
+\lst@length=\count194
+\lst@currlwidth=\dimen145
+\lst@column=\count195
+\lst@pos=\count196
+\lst@lostspace=\dimen146
+\lst@width=\dimen147
+\lst@newlines=\count197
+\lst@lineno=\count198
+\lst@maxwidth=\dimen148
 
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
-File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count186
-\l__pdf_internal_box=\box47
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count199
+\lst@skipnumbers=\count266
+\lst@framebox=\box51
+)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+\c@sprint=\count267
+
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count268
+\l__pdf_internal_box=\box52
 ) (Disenyo.aux)
 \openout1 = `Disenyo.aux'.
 
@@ -107,28 +131,29 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
-
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
-ii
+ (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count187
-\scratchdimen=\dimen145
-\scratchbox=\box48
-\nofMPsegments=\count188
-\nofMParguments=\count189
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count190
-\MPscratchDim=\dimen146
-\MPnumerator=\count191
-\makeMPintoPDFobject=\count192
-\everyMPtoPDFconversion=\toks35
-)
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
-ase.sty
+\scratchcounter=\count269
+\scratchdimen=\dimen149
+\scratchbox=\box53
+\nofMPsegments=\count270
+\nofMParguments=\count271
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count272
+\MPscratchDim=\dimen150
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
+\everyMPtoPDFconversion=\toks37
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-)
+
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+\c@lstlisting=\count275
+
 Overfull \hbox (3.87558pt too wide) in paragraph at lines 44--45
 \OT1/cmr/m/n/10 La clase Game re-sponde a eje-cu-ciones del Place-CubeCom-mand,
  colo-cando nuevos
@@ -136,13 +161,13 @@ Overfull \hbox (3.87558pt too wide) in paragraph at lines 44--45
 
 [1
 
-{C:/Users/leona/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
+{C:/Users/sergi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 106.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 106.
- [3]
-[4]
+
+[3] [4]
 <./fotos//yellowCube.png, id=17, 62.196pt x 61.977pt>
 File: ./fotos//yellowCube.png Graphic file (type png)
 <use ./fotos//yellowCube.png>
@@ -424,8 +449,8 @@ Package pdftex.def Info: ./fotos//user-feedback.png  used on input line 408.
  [18 <./fotos//delete-dialog-sprint6.png> <./fotos//server-setup-sprint-6.png> 
 <./fotos//server-feedback.png> <./fotos//join-server-sprint-6.png>]
 Overfull \hbox (14.15564pt too wide) in paragraph at lines 411--411
-[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
-s
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-ter^^S^^Ps
+ticas
  []
 
 [19 <./fotos//user-feedback.png>]
@@ -441,14 +466,14 @@ Overfull \hbox (104.80437pt too wide) in paragraph at lines 451--452
 
 [20]
 Overfull \hbox (2.86171pt too wide) in paragraph at lines 462--463
-[]\OT1/cmr/m/n/10 Debido a lo ex-haus-tivos que re-sul-tan es-tos calculos (y 
-tras com-pro-bacion emprica
+[]\OT1/cmr/m/n/10 Debido a lo ex-haus-tivos que re-sul-tan es-tos c^^Salculos (
+y tras com-pro-baci^^Son emp^^S^^Prica
  []
 
 
 Overfull \hbox (3.95888pt too wide) in paragraph at lines 464--465
-[]\OT1/cmr/m/n/10 Ahora, antes de la ex-pli-cacion mas tecnica, ob-serve-mos
- que la es-trate-gia GreedyS-
+[]\OT1/cmr/m/n/10 Ahora, antes de la ex-pli-caci^^Son m^^Sas t^^Secnica, ob-ser
+ve-mos que la es-trate-gia GreedyS-
  []
 
 [21 <./fotos//minimaxExample.jpg>]
@@ -488,8 +513,8 @@ Overfull \vbox (78.84784pt too high) has occurred while \output is active []
 
 [25 <./fotos//Minimax.calculateNextMove()-Sprint6.png (PNG copy)>]
 Overfull \hbox (14.15564pt too wide) in paragraph at lines 518--518
-[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-terstica
-s
+[]\OT1/cmr/bx/n/12 Como usuario quiero que Rolit in-tro-duzca car-ac-ter^^S^^Ps
+ticas
  []
 
 <./fotos//save-load-manager-sprint1.png, id=139, 219.82124pt x 166.6225pt>
@@ -598,29 +623,169 @@ File: ./fotos//exit-sprint2.png Graphic file (type png)
 <use ./fotos//exit-sprint2.png>
 Package pdftex.def Info: ./fotos//exit-sprint2.png  used on input line 680.
 (pdftex.def)             Requested size: 178.66705pt x 109.40848pt.
+ [34 <./fotos//addState-replay-sprint-6.png> <./fotos//exit-sprint2.png>]
+<./fotos//redCentralizada.png, id=188, 319.1925pt x 201.00093pt>
+File: ./fotos//redCentralizada.png Graphic file (type png)
+<use ./fotos//redCentralizada.png>
+Package pdftex.def Info: ./fotos//redCentralizada.png  used on input line 722.
+(pdftex.def)             Requested size: 319.19171pt x 201.00043pt.
+ [35]
+(C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) [36 <./fotos//redCentralizada.png>]
+Overfull \hbox (7.50066pt too wide) in paragraph at lines 778--779
+\OT1/cmr/m/n/10 servi-dor, el cliente k env^^S^^Pa un men-saje msg por medio de
+l m^^Setodo out.println(msg).
+ []
+
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 7
+88.
+(C:\Program Files\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 788.
+ [37] [38]
+<./fotos//UMLClasesRedSprint5.png, id=205, 1510.64375pt x 1178.4025pt>
+File: ./fotos//UMLClasesRedSprint5.png Graphic file (type png)
+<use ./fotos//UMLClasesRedSprint5.png>
+Package pdftex.def Info: ./fotos//UMLClasesRedSprint5.png  used on input line 8
+20.
+(pdftex.def)             Requested size: 377.66002pt x 294.5999pt.
+
+Overfull \hbox (32.66002pt too wide) in paragraph at lines 820--821
+ [] 
+ []
+
+<./fotos//Server-sprint5.png, id=206, 604.50844pt x 606.01407pt>
+File: ./fotos//Server-sprint5.png Graphic file (type png)
+<use ./fotos//Server-sprint5.png>
+Package pdftex.def Info: ./fotos//Server-sprint5.png  used on input line 830.
+(pdftex.def)             Requested size: 181.35393pt x 181.80562pt.
+[39 <./fotos//UMLClasesRedSprint5.png (PNG copy)>]
+<./fotos//ServerClient-sprint5.png, id=210, 371.88937pt x 364.36125pt>
+File: ./fotos//ServerClient-sprint5.png Graphic file (type png)
+<use ./fotos//ServerClient-sprint5.png>
+Package pdftex.def Info: ./fotos//ServerClient-sprint5.png  used on input line 
+842.
+(pdftex.def)             Requested size: 111.56766pt x 109.3092pt.
+<./fotos//ServerClientThread-sprint5.png, id=211, 502.87875pt x 398.99063pt>
+File: ./fotos//ServerClientThread-sprint5.png Graphic file (type png)
+<use ./fotos//ServerClientThread-sprint5.png>
+Package pdftex.def Info: ./fotos//ServerClientThread-sprint5.png  used on input
+ line 848.
+(pdftex.def)             Requested size: 150.86478pt x 119.6981pt.
+ [40 <./fotos//Server-sprint5.png> <./fotos//ServerClient-sprint5.png>]
+<./fotos//WaitPlayerThread-sprint5.png, id=217, 614.295pt x 297.36093pt>
+File: ./fotos//WaitPlayerThread-sprint5.png Graphic file (type png)
+<use ./fotos//WaitPlayerThread-sprint5.png>
+Package pdftex.def Info: ./fotos//WaitPlayerThread-sprint5.png  used on input l
+ine 863.
+(pdftex.def)             Requested size: 184.28992pt x 89.20895pt.
+
+Overfull \hbox (2.61165pt too wide) in paragraph at lines 870--871
+\OT1/cmr/m/n/10 es porque el m^^Setodo sin-cronizado wait-For-Play-ers de Serve
+r recoge peri^^Sodicamente
+ []
+
+[41 <./fotos//ServerClientThread-sprint5.png> <./fotos//WaitPlayerThread-sprint
+5.png>]
+<./fotos//Client-sprint5.png, id=223, 581.92406pt x 517.18219pt>
+File: ./fotos//Client-sprint5.png Graphic file (type png)
+<use ./fotos//Client-sprint5.png>
+Package pdftex.def Info: ./fotos//Client-sprint5.png  used on input line 877.
+(pdftex.def)             Requested size: 174.57855pt x 155.15585pt.
+<./fotos//ClientController-sprint5.png, id=224, 459.21562pt x 519.44063pt>
+File: ./fotos//ClientController-sprint5.png Graphic file (type png)
+<use ./fotos//ClientController-sprint5.png>
+Package pdftex.def Info: ./fotos//ClientController-sprint5.png  used on input l
+ine 891.
+(pdftex.def)             Requested size: 137.76575pt x 155.83339pt.
+ [42 <./fotos//Client-sprint5.png>]
+Overfull \hbox (14.22289pt too wide) in paragraph at lines 896--897
+\OT1/cmr/m/n/10 send-ToServer env^^S^^Pa la in-for-maci^^Son di-rec-ta-mente al
+ servi-dor por medio de out.println
+ []
+
+<./fotos//umlconexiones.png, id=229, 2204.235pt x 751.80875pt>
+File: ./fotos//umlconexiones.png Graphic file (type png)
+<use ./fotos//umlconexiones.png>
+Package pdftex.def Info: ./fotos//umlconexiones.png  used on input line 901.
+(pdftex.def)             Requested size: 440.83919pt x 150.35909pt.
+
+Overfull \hbox (95.83919pt too wide) in paragraph at lines 901--902
+ [] 
+ []
+
+[43 <./fotos//ClientController-sprint5.png> <./fotos//umlconexiones.png (PNG co
+py)>]
+<./fotos//empezarPartidaUml.png, id=235, 2126.94624pt x 725.71124pt>
+File: ./fotos//empezarPartidaUml.png Graphic file (type png)
+<use ./fotos//empezarPartidaUml.png>
+Package pdftex.def Info: ./fotos//empezarPartidaUml.png  used on input line 923
+.
+(pdftex.def)             Requested size: 425.38171pt x 145.13968pt.
+
+Overfull \hbox (80.38171pt too wide) in paragraph at lines 923--924
+ [] 
+ []
+
+[44 <./fotos//empezarPartidaUml.png (PNG copy)>]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 9
+52.
+
+(C:\Program Files\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 952.
+ [45]
+<./fotos//juegoTipicoUml.png, id=242, 1978.39125pt x 760.8425pt>
+File: ./fotos//juegoTipicoUml.png Graphic file (type png)
+<use ./fotos//juegoTipicoUml.png>
+Package pdftex.def Info: ./fotos//juegoTipicoUml.png  used on input line 962.
+(pdftex.def)             Requested size: 395.67125pt x 152.1658pt.
+
+Overfull \hbox (50.67125pt too wide) in paragraph at lines 962--963
+ [] 
+ []
+
+[46 <./fotos//juegoTipicoUml.png (PNG copy)>]
+<./fotos//UMLClasesRedSprint6.png, id=246, 1655.18375pt x 1214.5375pt>
+File: ./fotos//UMLClasesRedSprint6.png Graphic file (type png)
+<use ./fotos//UMLClasesRedSprint6.png>
+Package pdftex.def Info: ./fotos//UMLClasesRedSprint6.png  used on input line 1
+010.
+(pdftex.def)             Requested size: 413.79492pt x 303.63364pt.
+
+Overfull \hbox (93.79495pt too wide) in paragraph at lines 1010--1011
+ [] 
+ []
+
+[47 <./fotos//UMLClasesRedSprint6.png (PNG copy)>]
 \tf@thm=\write3
 \openout3 = `Disenyo.thm'.
 
- [34 <./fotos//addState-replay-sprint-6.png> <./fotos//exit-sprint2.png>] (Dise
-nyo.aux) ) 
+ [48] (Disenyo.aux) ) 
 Here is how much of TeX's memory you used:
- 1865 strings out of 479618
- 34181 string characters out of 2865026
- 300903 words of memory out of 3000000
- 19018 multiletter control sequences out of 15000+200000
- 405629 words of font info for 34 fonts, out of 3000000 for 9000
+ 3984 strings out of 478619
+ 69253 string characters out of 2853061
+ 562164 words of memory out of 3000000
+ 22076 multiletter control sequences out of 15000+600000
+ 471835 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,5n,74p,1102b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\leona\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
-600\tcrm1000.pk><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmbx10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/leona/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/leona/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Disenyo.pdf (34 pages, 805211 bytes).
+ 55i,6n,62p,1111b,1690s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\sergi\AppData\Local\MiKTeX\fonts/pk/ljfour/jkna
+ppen/ec/dpi600\tcti1000.pk> <C:\Users\sergi\AppData\Local\MiKTeX\fonts/pk/ljfou
+r/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+bx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Disenyo.pdf (48 pages, 2643697 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
+ 290 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 271 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 331 words of extra memory for PDF output out of 10000 (max. 10000000)
 
