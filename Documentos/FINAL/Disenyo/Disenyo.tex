@@ -2,6 +2,8 @@
 \usepackage{graphicx}
 \usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
 \usepackage{listings}
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
 \theoremstyle{break}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{}
@@ -15,7 +17,7 @@
 \theorempostwork{\vspace{0.2cm}}
     \newtheorem*{sprint}{Sprint}
     
-\setlength{\parindent}{0cm}
+\setlength{\parindent}{12pt}
 
 \begin{document}
 \graphicspath{{./fotos/}}
@@ -515,175 +517,7 @@ Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritm
 
 \end{sprint}
 
-\subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
-\subsubsection{Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}
-\begin{sprint}[1]
-Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \textit{SaveLoadManager}.
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{save-load-manager-sprint1.png}
-\end{center}
-
-Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \textit{Game}.
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{load-sprint1.png}
-
-Cargar partida
-\end{center}
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{save-game-sprint1.png}
-
-Guardar partida
-\end{center}
-\end{sprint}
-
-\begin{sprint}[2]
-En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel de \textit{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \textit{Saveable} que debía implementar \textit{Game} para poder ser guardada y cargada de en un fichero.
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{saveable-sprint2.png}
-\end{center}
-
-\end{sprint}
-
-\begin{sprint}[3]
-Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \textit{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \textit{Saveable} restringía los métodos de \textit{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
-
-La adquisición de nuevos conocimientos nos permitió tomar una decisión de diseño que marcaría el desarrollo de la aplicación de aquí en adelante. Desde este sprint toda la comunicación con el exterior se realizaría mediante JSONObjects.
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{reportable.png}
-\end{center}
-
-De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \textit{report()}, que devuelve una serialización del objeto en formato JSON. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
-
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{save-load-manager-sprint3.png}
-\end{center}
-
-Esto supuso una refactorización completa del \textit{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
-
-\end{sprint}
-
-\begin{sprint}[4]
-Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \textit{SaveLoadManager} para poder mantener esta funcionalidad.
-\end{sprint}
-
-\begin{sprint}[6]
-La similaridad entre los métodos para guardar partidas y \textit{replays} en el \textit{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
-\end{sprint}
-
-\subsubsection{Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}
-\begin{sprint}[2]
-La refactorización llevada a cabo en el SaveLoadManager incluyó la libre elección del nombre del fichero que contiene la partida guardada, así como su ruta.
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{save-load-manager-sprint2.png}
-\end{center}
-
-\end{sprint}
-
-\subsubsection{Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}
-\begin{sprint}[3]
-Durante el sprint 3 comenzó el desarrollo de esta funcionalidad, que de ahora en adelante denominaremos como \textit{replays}. Para su implementación, se planteó abstraer la clase Game mediante estados que representen cada uno de los momentos que atraviesa el juego a lo largo de una partida. Así, mediante un conjunto de estados es posible replicar una partida al completo.
-
-Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \textit{Game} en el momento deseado.
-
-Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \textit{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
-
-De esta manera surge la interfaz \textit{Replayable}, que extiende de la interfaz \textit{Reportable} y que contiene dos métodos: \textit{toString()}, para facilitar la visualización en la vista de consola, y \textit{report()}, para poder almacenar los estados en formato JSON.
-
-\begin{center}
-\includegraphics[scale=0.5]{replayable-reportable-sprint-3.png}
-\end{center}
-
-Una vez ideada esta interfaz, ya es posible definir la clase \textit{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
-
-\begin{center}
-\includegraphics[scale=0.5]{state-sprint-3.png}
-\end{center}
-
-El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \textit{Replay}. Esta clase contiene una lista de \textit{State} que se completa durante una partida.
-
-\begin{center}
-\includegraphics[scale=0.6]{addState-replay-sprint-3.png}
-
-Generación de lista de estados
-\end{center}
-
-Cuando la partida acaba o el usuario hace que acabe (mediante el uso del comando exit), se pregunta si desea que se guarde la repetición y se procede según su respuesta.
-
-\begin{center}
-\includegraphics[scale=0.6]{saveReplay-sprint3.png}
-
-Guardado de Replay
-\end{center}
-
-Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \textit{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
-
-La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \textit{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \textit{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
-
-\begin{center}
-\includegraphics[scale=0.7]{consola-replay-sprint-3.png}
-\end{center}
-
-Con estas repeticiones de partidas funcionales dimos por completada esta tarea en el Sprint 3.
-\end{sprint}
-
-\begin{sprint}[4]
-
-Este sprint se caracterizó por la implementación de una GUI funcional, lo que conlleva la adaptación de las \textit{replays} a este nuevo formato. Decidimos que la comunicación entre modelo y vista se llevara a cabo mediante el uso del patrón observador, lo cual supuso un reto inicial para las repeticiones de partidas.
-
-Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \textit{Game} no interviene en el proceso, pues es la clase \textit{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \textit{Replay} es también un modelo que debe ser observado.
-
-\begin{center}
-\includegraphics[scale=0.5]{rolit-observer-sprint4.png}
-\end{center}
-
-Para implementar los observadores se creó la interfaz \textit{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \textit{Replay} y \textit{State}.
-
-\begin{center}
-\includegraphics[scale=0.5]{replay-state-sprint-4.png}
-\end{center}
-
-\end{sprint}
-
-\begin{sprint}[5]
-La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \textit{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
-\end{sprint}
-
-\begin{sprint}[6]
-El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \textit{Replay}.
-
-Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \textit{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
-\begin{center}
-\includegraphics[scale=0.5]{addState-replay-sprint-6.png}
-\end{center}
-
-\end{sprint}
-
-\subsubsection{Como usuario, me gustaría poder salir del juego en cualquier momento}
-\begin{sprint}[2]
-Con la introducción de los comandos vino acompañado el comando exit, que puede ser ejecutado en cualquier momento durante la partida para detener la ejecución del juego.
-
-\begin{center}
-\includegraphics[scale=0.5]{exit-sprint2.png}
-\end{center}
-
-En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en ... %FIXME Poner donde esté explicada la evolución de los comandos y una referencia a esa seccion
-\end{sprint}
-
-\subsubsection{Como usuario, me gustaría jugar a Rolit pensando en las posibilidades que brinda el multijugador (Red)}
+\subsubsection{Como usuario, me gustaría que se pudiera jugar en red.}
 \begin{sprint}[5]
 En cuanto a la tarea de añadir un modo de juego en red, se concibe, planea e implementa la funcionalidad de red casi por completo, consigue llegar a una versión funcional de juego en red en GameClassic. Al final del Sprint, los objetivos alcanzados son los siguientes:
 
@@ -1164,6 +998,174 @@ Cambios de importancia para comparar los UML del Sprint 5 con los del Sprint 7 s
 Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado final de la redes.
 
 --En construcción--
+\end{sprint}
+
+\subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
+\subsubsection{Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}
+\begin{sprint}[1]
+Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \textit{SaveLoadManager}.
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{save-load-manager-sprint1.png}
+\end{center}
+
+Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \textit{Game}.
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{load-sprint1.png}
+
+Cargar partida
+\end{center}
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{save-game-sprint1.png}
+
+Guardar partida
+\end{center}
+\end{sprint}
+
+\begin{sprint}[2]
+En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel de \textit{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \textit{Saveable} que debía implementar \textit{Game} para poder ser guardada y cargada de en un fichero.
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{saveable-sprint2.png}
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[3]
+Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \textit{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \textit{Saveable} restringía los métodos de \textit{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
+
+La adquisición de nuevos conocimientos nos permitió tomar una decisión de diseño que marcaría el desarrollo de la aplicación de aquí en adelante. Desde este sprint toda la comunicación con el exterior se realizaría mediante JSONObjects.
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{reportable.png}
+\end{center}
+
+De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \textit{report()}, que devuelve una serialización del objeto en formato JSON. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
+
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{save-load-manager-sprint3.png}
+\end{center}
+
+Esto supuso una refactorización completa del \textit{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
+
+\end{sprint}
+
+\begin{sprint}[4]
+Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \textit{SaveLoadManager} para poder mantener esta funcionalidad.
+\end{sprint}
+
+\begin{sprint}[6]
+La similaridad entre los métodos para guardar partidas y \textit{replays} en el \textit{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
+\end{sprint}
+
+\subsubsection{Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}
+\begin{sprint}[2]
+La refactorización llevada a cabo en el SaveLoadManager incluyó la libre elección del nombre del fichero que contiene la partida guardada, así como su ruta.
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{save-load-manager-sprint2.png}
+\end{center}
+
+\end{sprint}
+
+\subsubsection{Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}
+\begin{sprint}[3]
+Durante el sprint 3 comenzó el desarrollo de esta funcionalidad, que de ahora en adelante denominaremos como \textit{replays}. Para su implementación, se planteó abstraer la clase Game mediante estados que representen cada uno de los momentos que atraviesa el juego a lo largo de una partida. Así, mediante un conjunto de estados es posible replicar una partida al completo.
+
+Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \textit{Game} en el momento deseado.
+
+Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \textit{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
+
+De esta manera surge la interfaz \textit{Replayable}, que extiende de la interfaz \textit{Reportable} y que contiene dos métodos: \textit{toString()}, para facilitar la visualización en la vista de consola, y \textit{report()}, para poder almacenar los estados en formato JSON.
+
+\begin{center}
+\includegraphics[scale=0.5]{replayable-reportable-sprint-3.png}
+\end{center}
+
+Una vez ideada esta interfaz, ya es posible definir la clase \textit{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
+
+\begin{center}
+\includegraphics[scale=0.5]{state-sprint-3.png}
+\end{center}
+
+El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \textit{Replay}. Esta clase contiene una lista de \textit{State} que se completa durante una partida.
+
+\begin{center}
+\includegraphics[scale=0.6]{addState-replay-sprint-3.png}
+
+Generación de lista de estados
+\end{center}
+
+Cuando la partida acaba o el usuario hace que acabe (mediante el uso del comando exit), se pregunta si desea que se guarde la repetición y se procede según su respuesta.
+
+\begin{center}
+\includegraphics[scale=0.6]{saveReplay-sprint3.png}
+
+Guardado de Replay
+\end{center}
+
+Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \textit{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
+
+La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \textit{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \textit{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
+
+\begin{center}
+\includegraphics[scale=0.7]{consola-replay-sprint-3.png}
+\end{center}
+
+Con estas repeticiones de partidas funcionales dimos por completada esta tarea en el Sprint 3.
+\end{sprint}
+
+\begin{sprint}[4]
+
+Este sprint se caracterizó por la implementación de una GUI funcional, lo que conlleva la adaptación de las \textit{replays} a este nuevo formato. Decidimos que la comunicación entre modelo y vista se llevara a cabo mediante el uso del patrón observador, lo cual supuso un reto inicial para las repeticiones de partidas.
+
+Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \textit{Game} no interviene en el proceso, pues es la clase \textit{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \textit{Replay} es también un modelo que debe ser observado.
+
+\begin{center}
+\includegraphics[scale=0.5]{rolit-observer-sprint4.png}
+\end{center}
+
+Para implementar los observadores se creó la interfaz \textit{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \textit{Replay} y \textit{State}.
+
+\begin{center}
+\includegraphics[scale=0.5]{replay-state-sprint-4.png}
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[5]
+La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \textit{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
+\end{sprint}
+
+\begin{sprint}[6]
+El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \textit{Replay}.
+
+Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \textit{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
+\begin{center}
+\includegraphics[scale=0.5]{addState-replay-sprint-6.png}
+\end{center}
+
+\end{sprint}
+
+\subsubsection{Como usuario, me gustaría poder salir del juego en cualquier momento}
+\begin{sprint}[2]
+Con la introducción de los comandos vino acompañado el comando exit, que puede ser ejecutado en cualquier momento durante la partida para detener la ejecución del juego.
+
+\begin{center}
+\includegraphics[scale=0.5]{exit-sprint2.png}
+\end{center}
+
+En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en ... %FIXME Poner donde esté explicada la evolución de los comandos y una referencia a esa seccion
 \end{sprint}
 
 \end{document}

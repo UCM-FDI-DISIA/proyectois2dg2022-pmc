@@ -131,18 +131,15 @@ public class Server {
 			mapClientTeam.put(client, json.getString("team"));
 				
 		}
-		else if (notification.equals("updateGraphics")) { //estamos ante un juego
-
+		else if (notification.equals("updateGraphics")) {
 			for (int i = 0; i < clients.size(); ++i) {
 				if (client != clients.get(i).getFirst())
 					clients.get(i).getFirst().updateGraphics(json);
 			}
-			
 		}
-		else if (notification.equals("playerInfo")){ //informacion de un player nuevo
+		else if (notification.equals("playerInfo")){
 			Player p = new Player(json);
-			incomingPlayers.add(p);
-			
+			incomingPlayers.add(p);	
 		}		
 	}
 
