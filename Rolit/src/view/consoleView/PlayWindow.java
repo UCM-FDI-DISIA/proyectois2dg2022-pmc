@@ -1,7 +1,5 @@
 package view.consoleView;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import controller.Controller;

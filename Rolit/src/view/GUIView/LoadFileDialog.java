@@ -23,6 +23,11 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitRadioButton;
 
+/**
+ * This class is a Swing JDialog in which the user
+ * can load saved games
+ * @author PMC
+ */
 public class LoadFileDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -42,13 +47,21 @@ public class LoadFileDialog extends JDialog {
 	private JButton loadButton;
 	private File file;
 	
+	/**
+	 * Constructor
+	 * @param parent The frame of the caller
+	 * @param savedGamesPathList List of all saved games
+	 */
 	public LoadFileDialog(Frame parent, List<String> savedGamesPathList) {
 		super(parent, true);
 		this.savedFilesPathList = savedGamesPathList;
 		initGUI();
 	}
 	
-	public void initGUI () {
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
+	public void initGUI() {
 		
 		this.setLocation(50, 50);
 		this.setSize(700, 200);
@@ -154,12 +167,20 @@ public class LoadFileDialog extends JDialog {
 		this.pack();
 	}
 	
+	/**
+	 * This method opens the dialog
+	 * @return The status (1-success, 0-failure)
+	 */
 	int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}
 	
+	/**
+	 * Getter of the selected file
+	 * @return The selected file
+	 */
 	public File getFile() {
 		return file;
 	}

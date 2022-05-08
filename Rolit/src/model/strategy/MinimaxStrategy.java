@@ -6,6 +6,12 @@ import model.logic.Color;
 import model.replay.GameState;
 import utils.Pair;
 
+/**
+ * This class represents the Minimax strategy for the artificial intelligences.
+ * This strategy calculates the next move for the player aplying the concept of the Minimax algorithm.
+ * @author PMC
+ *
+ */
 public class MinimaxStrategy extends Strategy {
 
 	public static final String NAME = "MINIMAX";
@@ -16,6 +22,10 @@ public class MinimaxStrategy extends Strategy {
 	protected int original_depth;
 	private boolean maximize;
 	
+	/**
+	 * Default constructor
+	 * @param color Color of the owner player
+	 */
 	public MinimaxStrategy(Color color) {
 		this.color = color;
 		this.original_depth = MAX_DEPTH;
@@ -32,6 +42,7 @@ public class MinimaxStrategy extends Strategy {
 		else return null;
 	}
 	
+	@Override
 	public int simulate(Color currentColor, int depth, int alpha, int beta) {
 		this.maximize = (color.equals(currentColor));
 		int size = simplifiedBoard.getSize();

@@ -23,6 +23,11 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitCheckBox;
 import view.GUIView.RolitComponents.RolitPanel;
 
+/**
+ * This class is a Swing JDialog in which the user can delete
+ * saved games
+ * @author PMC
+ */
 public class DeleteGameDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -41,11 +46,18 @@ public class DeleteGameDialog extends JDialog {
 	private JButton cancelButton;
 	private JButton okButton;
 
+	/**
+	 * Constructor
+	 * @param parent The frame of the caller
+	 */
 	public DeleteGameDialog(Frame parent) {
 		super(parent, true);
 		initGUI();
 	}
 
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
 	public void initGUI() {
 
 		this.setLocation(50, 50);
@@ -131,12 +143,20 @@ public class DeleteGameDialog extends JDialog {
 
 	}
 
+	/**
+	 * This method opens the dialog
+	 * @return The status (1-success, 0-failure)
+	 */
 	int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}
 
+	/**
+	 * This method updates and shows the list of saved games,
+	 * retrieved from SaveLoadManager
+	 */
 	public void updateAndShowListGamesPanel() {
 
 		savedGamesPathList = SaveLoadManager.getListOfSavedGames();

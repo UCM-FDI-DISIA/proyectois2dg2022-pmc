@@ -23,6 +23,7 @@ public class Client {
 	
 	/**
 	 * Constructor
+	 * @param mW The instance of the MainWindow
 	 */
 	public Client(MainWindow mW) {		
 		mainWindow = mW;		
@@ -49,8 +50,9 @@ public class Client {
 	/**
 	 * This method is used to start the client thread that allows
 	 * the exchange of information between server and the current client
-	 * @param ip String that represents the ip in which the server is operating
-	 * @param port Integer that represents the port in which the ip of the server is operating
+	 * @param ip String that represents the IP in which the server is operating
+	 * @param port Integer that represents the port in which the IP of the server is operating
+	 * @throws Exception Exception if the match could not be started
 	 */
 	public void startMatch(String ip, int port) throws Exception {
 		clientController = new ClientController(this, ip, port);

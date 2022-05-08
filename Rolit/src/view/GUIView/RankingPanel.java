@@ -20,6 +20,10 @@ import javax.swing.JPanel;
 import model.logic.Rival;
 import view.GUIView.RolitComponents.RolitPanel;
 
+/**
+ * This RolitPanel shows the ranking when the game is finished 
+ * @author PMC
+ */
 public class RankingPanel extends RolitPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -46,12 +50,19 @@ public class RankingPanel extends RolitPanel {
 	private static final int SCORE_SIZE = 15;
 	
 	
+	/**
+	 * Constructor
+	 * @param rivals List of rivals (teams or players)
+	 */
 	public RankingPanel(List<? extends Rival> rivals) {
 		Collections.sort(rivals);
 		if (rivals.size() == 2) initGUI(rivals.get(0).getName(), rivals.get(0).getScore(), rivals.get(1).getName(), rivals.get(1).getScore(), null, -1);
 		else initGUI(rivals.get(0).getName(), rivals.get(0).getScore(), rivals.get(1).getName(), rivals.get(1).getScore(), rivals.get(2).getName(), rivals.get(2).getScore());
 	}
 	
+	/**
+	 * This method creates and shows all the components relative to this panel
+	 */
 	private void initGUI(String name1, int score1, String name2, int score2, String name3, int score3) {
 		this.setLayout(new BorderLayout());
 		this.setAlignmentX(CENTER_ALIGNMENT);
@@ -165,6 +176,10 @@ public class RankingPanel extends RolitPanel {
 //		}
 	}
 	
+	/**
+	 * Class that extends JLabel, adapted to the particular design
+	 * of the GUI for this game
+	 */
 	private class RolitLabel extends JLabel {
 
 		private static final long serialVersionUID = 1L;
