@@ -28,7 +28,7 @@ public class ServerClient {
 	 * communicate across the accepted socket
 	 * @param socket Socket that has been accepted by server
 	 * @param server The server
-	 * @throws IOException completar
+	 * @throws IOException Signals that an I/O exception of some sort has occurred
 	 */
 	public void setUpServerClientConnection(Socket socket, Server server) throws IOException {
 		this.thread = new ServerClientThread(server, socket, this);

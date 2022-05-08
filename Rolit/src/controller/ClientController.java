@@ -30,7 +30,7 @@ public class ClientController extends Thread{
 	 * @param clientRolit Instance of the client associated
 	 * @param ipAddress String of the IP address chosen to connect
 	 * @param port Integer of the port in which that IP address from server hypothetically operates  
-	 * @throws Exception completar
+	 * @throws Exception Exception that shows that a connection had not been possible
 	 */
 	public ClientController(Client clientRolit, String ipAddress, int port) throws Exception {
 		this.clientRolit = clientRolit;

@@ -25,7 +25,7 @@ public class ServerClientThread extends Thread {
 	 * @param server Server
 	 * @param socket Socket that holds the connection already made by the server and the specific client
 	 * @param serverClient The instance of the ServerClient associated with this thread
-	 * @throws IOException completar
+	 * @throws IOException Signals that an I/O exception of some sort has occurred
 	 */
 	public ServerClientThread(Server server, Socket socket, ServerClient serverClient) throws IOException {
 		this.server = server;
