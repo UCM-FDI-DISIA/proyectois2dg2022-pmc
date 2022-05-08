@@ -13,6 +13,11 @@ import org.json.JSONObject;
 
 import model.logic.Reportable;
 
+/**
+ * This class is in charge of Replaying a game
+ * @author PMC
+ *
+ */
 public class Replay implements Reportable {
 
 	private static final String PROMPT = "> ";
@@ -33,6 +38,9 @@ public class Replay implements Reportable {
 	private int currentState;
 	private boolean print;
 	
+	/**
+	 * Constructor
+	 */
 	public Replay() {
 		this.input = new Scanner(System.in);
 		this.states = new ArrayList<GameState>();
@@ -41,15 +49,21 @@ public class Replay implements Reportable {
 		this.print = true;
 	}
 	
+	/**
+	 * This method adds an state to the list of states
+	 * @param state GameState to add
+	 */
 	public void addState(GameState state) {
 		states.add(state);
 	}
 	
-	public void startReplay() {
+	/**
+	 *This method starts a console replay
+	 */
+	public void startConsoleReplay() {
 		boolean replaying = true;
 		while(replaying) {
 			if(print)
-				// FIXME esto no debería estar aquí
 				System.out.println(this);
 			System.out.print(PROMPT);
 			String in = input.nextLine();
@@ -57,6 +71,10 @@ public class Replay implements Reportable {
 		}
 	}
 	
+	/**
+	 * This method goes back one state. If the state is already the initial it does nothing
+	 * @return true if the current state changed and false otherwise
+	 */
 	public boolean previousState() {
 		if(currentState > 0) {
 			currentState--;
@@ -71,6 +89,10 @@ public class Replay implements Reportable {
 			
 	}
 	
+	/**
+	 * This method goes forward one state. If the state is already the initial it does nothing
+	 * @return true if the current state changed and false otherwise
+	 */
 	public boolean nextState() {
 		if(currentState + 1 < states.size()) {
 			currentState++;
@@ -86,6 +108,11 @@ public class Replay implements Reportable {
 			
 	}
 	
+	/**
+	 * In console mode, this method executes an action
+	 * @param in Action to execute
+	 * @return true if the replay is not finished and false otherwise
+	 */
 	private boolean execute(String in) {
 		boolean replaying = true;
 		print = false;
@@ -107,7 +134,31 @@ public class Replay implements Reportable {
 		}
 		return replaying;
 	}
+	
+	/**
+	 * It returns the shape name of the current state
+	 * @return The shape name of the current state
+	 */
+	public String getShape() {
+		return states.get(currentState).getShape();
+	}
 
+	/**
+	 * It returns the number of states
+	 * @return The number of states
+	 */
+	public int getNumStates() {
+		return states.size();
+	}
+
+	/**
+	 * It returns the current state
+	 * @return The current states
+	 */
+	public GameState getCurrentState() {
+		return states.get(currentState);
+	}
+	
 	public JSONObject report() {
 		JSONObject jo = new JSONObject();
 		JSONArray ja = new JSONArray();
@@ -121,12 +172,6 @@ public class Replay implements Reportable {
 		return jo;
 	}
 	
-	public String getShape() {
-		return states.get(currentState).getShape();
-	}
-	
-
-	
 	@Override
 	public String toString() {
 		StringBuilder bf = new StringBuilder();
@@ -137,33 +182,40 @@ public class Replay implements Reportable {
 
 	}
 
+	/**
+	 * It adds a ReplayObserver to the list of observers
+	 * @param o Observer to add
+	 */
 	public void addObserver(ReplayObserver o) {
 		observers.add(o);
 	}
 	
+	/**
+	 * It notifies onReplayLeftButton() to every observer
+	 */
 	public void onReplayLeftButton() {
 		for(ReplayObserver o : observers) {
 			o.onReplayLeftButton();
 		}
 	}
 
+	/**
+	 * It notifies onReplayRightButton() to every observer
+	 */
 	public void onReplayRightButton() {
 		for(ReplayObserver o : observers) {
 			o.onReplayRightButton();
 		}
 	}
 	
+	/**
+	 * It notifies onReplayStatusChange() to every observer
+	 * @param msg Message to show
+	 */
 	public void onChangeStatusBar(String msg) {
 		for(ReplayObserver o : observers) {
 			o.onReplayStatusChange(msg);
 		}
 	}
 
-	public int getNumStates() {
-		return states.size();
-	}
-
-	public GameState getCurrentState() {
-		return states.get(currentState);
-	}
 }

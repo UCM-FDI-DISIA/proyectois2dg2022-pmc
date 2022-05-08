@@ -30,7 +30,7 @@ public class Controller {
 	}
 	
 	public void startReplay(Replay r) {
-		r.startReplay();
+		r.startConsoleReplay();
 	}
 	
 	public void addObserver(RolitObserver o) {

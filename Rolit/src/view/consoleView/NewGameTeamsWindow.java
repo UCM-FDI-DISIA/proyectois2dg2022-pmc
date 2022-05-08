@@ -6,6 +6,14 @@ import org.json.JSONObject;
 import model.logic.Color;
 import model.strategy.Strategy;
 
+
+/**
+ * This class displays the necessary information in order to create a new teams game, 
+ * it also gathers users intentions 
+ * It extends NewGameWindow
+ * @author PMC
+ *
+ */
 public class NewGameTeamsWindow extends NewGameWindow {
 	private static final String TYPE = "GameTeams";
 	private static final int MAX_TEAMS = 2;

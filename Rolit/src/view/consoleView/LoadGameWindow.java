@@ -5,6 +5,13 @@ import org.json.JSONObject;
 
 import model.SaveLoadManager;
 
+/**
+ * This class displays the necessary information in order to load a saved game, it also
+ * gathers users intentions
+ * It implements ConsoleWindow
+ * @author PMC
+ *
+ */
 public class LoadGameWindow implements ConsoleWindow {
 	private static final String LIST_MSG = "List of saved replays: ";
 	private static final String CHOOSE_NUMBER_MSG = "Choose a number";

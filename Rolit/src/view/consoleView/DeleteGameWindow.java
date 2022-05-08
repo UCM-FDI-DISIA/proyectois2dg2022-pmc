@@ -4,6 +4,13 @@ import java.util.List;
 
 import model.SaveLoadManager;
 
+/**
+ * This class displays the necessary information in order to delete a saved game, it also
+ * gathers users intentions
+ * It implements ConsoleWindow
+ * @author PMC
+ *
+ */
 public class DeleteGameWindow implements ConsoleWindow {
 	private static final String CHOOSE_NUMBER_MSG = "Choose a number";
 	private static final String INVALID_OPTION = "Invalid option. Try again.";

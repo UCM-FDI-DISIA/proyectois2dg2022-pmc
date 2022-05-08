@@ -19,7 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingWorker;
 import org.json.JSONObject;
 
 import controller.Controller;
@@ -34,7 +33,11 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.createGame.CreateGameDialog;
 import view.GUIView.createGame.CreateGameWithPlayersDialog;
 
-// FIXME creo que no tiene mucho sentido que esta clase sea observadora
+/**
+ * This class represents the main window in which Rolit is played
+ * in GUI Mode
+ * @author PMC
+ */
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
 	private static final long serialVersionUID = 1L;
@@ -56,7 +59,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
 	private JLabel optionMessage;
-	private JPanel tablero;
+	private JPanel boardPanel;
 	private ControlPanel controlPanel;
 	private JPanel statusBar;
 	
@@ -64,6 +67,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	
 	private volatile boolean onlineGameStarted = false;	
 	
+	/**
+	 * Constructor
+	 * @param ctrl The controller
+	 */
 	public MainWindow(Controller ctrl) {
 		super("Rolit");		
 		this.clientRolit = new Client(this);		
@@ -72,6 +79,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		initGUI();
 	}
 	
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
 	private void initGUI() {
 		//Icono de la ventana
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
@@ -154,13 +164,16 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * This method, overridden from ActionListener, manages all the options when clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		switch(e.getActionCommand()) {
 		case "NG":
 			CreateGameDialog dialogNew = new CreateGameWithPlayersDialog(MainWindow.this, ctrl);
-			int status1 = dialogNew.open();		
-			if (status1 == 1) { // se ha presionado OK
+			int statusng = dialogNew.open();		
+			if (statusng == 1) { // se ha presionado OK
 				this.state = dialogNew.getState();
 				ctrl.createGame(dialogNew.createJSONObjectGame());
 				this.initGame();
@@ -170,8 +183,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			break;
 		case "LG":
 			LoadFileDialog dialogLoad = new LoadFileDialog(MainWindow.this, SaveLoadManager.getListOfSavedGames());
-			int status2 = dialogLoad.open();
-			if (status2 == 1) {
+			int statuslg = dialogLoad.open();
+			if (statuslg == 1) {
 				File file = dialogLoad.getFile();
 				state = ctrl.loadGame(file.getPath());
 				initGame();
@@ -185,9 +198,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			break;
 		case "LR":
 			LoadFileDialog dialogLoadReplay = new LoadFileDialog(MainWindow.this, SaveLoadManager.getListOfSavedReplays());
-			int status3 = dialogLoadReplay.open();
+			int statuslr = dialogLoadReplay.open();
 			
-			if (status3 == 1) {
+			if (statuslr == 1) {
 				File file = dialogLoadReplay.getFile();
 				replay = SaveLoadManager.loadReplay(file.getPath());
 				initReplay();
@@ -207,7 +220,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			if(statusjs == 1) {
 				ctrl.setOnlineMode(true);
 				try {
-					clientRolit.empezarPartida(jsd.getIp(), jsd.getPort());
+					clientRolit.startMatch(jsd.getIp(), jsd.getPort());
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(jsd, "Connection failed.", "Error", JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
@@ -219,6 +232,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 	}
 	
+	/**
+	 * This method creates and shows all the components relative to the game
+	 */
 	private void initGame() {		
 		ctrl.addObserver(this);
 		// Por si acaso, para que siempre se limpie pantalla
@@ -233,12 +249,12 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 		//centerPanel.add(gamePanel);
 		
-		tablero = new BoardGUI(ctrl);
+		boardPanel = new BoardGUI(ctrl);
 		
 		TurnAndRankingBar turnAndRankingBar = new TurnAndRankingBar(ctrl, state);
 		
 		gamePanel.add(turnAndRankingBar, BorderLayout.PAGE_START);
-		gamePanel.add(tablero, BorderLayout.CENTER);
+		gamePanel.add(boardPanel, BorderLayout.CENTER);
 		
 		controlPanel = new ControlPanel(ctrl);
 		statusBar = new StatusBar(ctrl);
@@ -254,6 +270,9 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 	}
 	
+	/**
+	 * This method creates and shows all the components relative to the replay
+	 */
 	private void initReplay() {
 
 		this.remove(welcomePanel);
@@ -265,11 +284,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 			
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 				
-		tablero = new BoardGUI(replay);		
+		boardPanel = new BoardGUI(replay);		
 		TurnAndRankingBar trbar = new TurnAndRankingBar(replay);
 
 		gamePanel.add(trbar, BorderLayout.PAGE_START);
-		gamePanel.add(tablero, BorderLayout.CENTER);
+		gamePanel.add(boardPanel, BorderLayout.CENTER);
 
 		this.setContentPane(mainPanel);
 		mainPanel.add(new ControlPanel(replay), BorderLayout.PAGE_START);
@@ -283,11 +302,18 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * onError method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onError(String err) {
-		
 	}
 
+	/**
+	 * onTurnPlayed method overridden (RolitObserver interface).
+	 * Particularly, the game state is updated and the whole GUI
+	 * is repainted
+	 */
 	@Override
 	public void onTurnPlayed(GameState state) {
 		this.state = state;
@@ -295,10 +321,19 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.repaint();
 	}
 
+	/**
+	 * Getter of the game report from the GameState
+	 * @return The report of the game
+	 */
 	public JSONObject getGameReport() {
 		return state.report().getJSONObject("game");
 	}
 
+	/**
+	 * This method is used to update the GUI as well as the controller
+	 * with the JSONObject report of the game that has been sent by the server from another client
+	 * @param JSONnewState JSONObject that represents the report of the game sent by server
+	 */
 	public void updateGameFromServer(JSONObject JSONnewState) {
 		if(!onlineGameStarted) {
 			onlineGameStarted = true;
@@ -309,9 +344,14 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		ctrl.updateGameFromServer(JSONnewState);
 	}
 
+	/**
+	 * onGameFinished method overridden (RolitObserver interface).
+	 * Particularly, when the game is finished, this method erases unnecessary JComponents
+	 * and shows the ranking panel.
+	 */
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		gamePanel.remove(tablero);
+		gamePanel.remove(boardPanel);
 		RankingPanel r_panel = new RankingPanel(rivals);
 		gamePanel.add(r_panel);
 		this.remove(controlPanel);
@@ -319,31 +359,33 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.revalidate();
 	}
 
+	/**
+	 * onRegister method overridden (RolitObserver interface)
+	 * Particularly, the state attribute is updated with the new one
+	 */
 	@Override
 	public void onRegister(GameState state) {
 		this.state = state;
 	}
 
+	/**
+	 * onGameFinished method overridden (RolitObserver interface)
+	 * Particularly, when the game is finished, this method erases unnecessary JComponents
+	 * and shows the ranking panel.
+	 */
 	@Override
 	public void onGameStatusChange(GameState state) {
 		
 	}
-	
-	public class WaitWorker extends SwingWorker<Void, Void> {
 
-		@Override
-		protected Void doInBackground() {
-			try {
-				wait(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-	}
-
-	public void chooseTeamFromServer(JSONObject JSONJuegoNuevo) {
-		ChooseTeamFromServerDialog ctfsd = new ChooseTeamFromServerDialog(this, JSONJuegoNuevo);
+	/**
+	 * This method is used to create a ChooseTeamFromServerDialog that allows the client
+	 * to choose a team between the teams stored in newGameJSON
+	 * @param newGameJSON Part of the game JSON that should be completed by client
+	 * with the team chosen before returning it to server
+	 */
+	public void chooseTeamFromServer(JSONObject newGameJSON) {
+		ChooseTeamFromServerDialog ctfsd = new ChooseTeamFromServerDialog(this, newGameJSON);
 		int statusjs = ctfsd.open();
 		if(statusjs == 1) {
 			clientRolit.sendChosenTeamToServer(ctfsd.getSelectedTeamJSON());
@@ -351,13 +393,22 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		}
 	}
 
-	
+	/**
+	 * This method is used to resize an ImageIcon to the desired size
+	 * @param icon ImageIcon to be resized
+	 * @param resizedWidth The final width that the icon must have
+	 * @param resizedHeight The final height that the icon must have
+	 */
 	private Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
 	    Image img = icon.getImage();  
 	    Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);  
 	    return new ImageIcon(resizedImage);
 	}
 
+	/**
+	 * onGameExited method overridden (RolitObserver interface).
+	 * Particularly, when the game is exited, initGUI is called
+	 */
 	@Override
 	public void onGameExited(Replay replay) {
 		this.initGUI();

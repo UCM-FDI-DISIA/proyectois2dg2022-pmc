@@ -13,6 +13,11 @@ import model.builders.GameTeamsBuilder;
 import model.replay.GameState;
 import utils.Pair;
 
+/**
+ * This dialog allows to configure a game, without having to specify the players' name and color
+ * @author PMC
+ *
+ */
 public class CreateGameDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -26,12 +31,20 @@ public class CreateGameDialog extends JDialog {
 
 	protected JPanel mainPanel;
 
+	/**
+	 * Contructor
+	 * @param parent Parent component
+	 * @param ctrl Game Controller
+	 */
 	public CreateGameDialog(Frame parent, Controller ctrl) {
 		super(parent, true);
 		this.ctrl = ctrl;
 		initGUI();
 	}
 
+	/**
+	 * It initializates the GUI
+	 */
 	public void initGUI() {
 
 		this.setLocation(50, 50);
@@ -58,12 +71,20 @@ public class CreateGameDialog extends JDialog {
 		this.pack();
 	}
 
+	/**
+	 * It opens the dialog
+	 * @return Dialog status
+	 */
 	public int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}
 
+	/**
+	 * It gets the information from the dialog an generates a JSONObject with the Game information (according to the report)
+	 * @return JSONObject with the Game information (according to the report)
+	 */
 	public JSONObject createJSONObjectGame() {
 		JSONObject o = new JSONObject();
 		o.put("type", gameConfig.getGameMode());
@@ -96,17 +117,29 @@ public class CreateGameDialog extends JDialog {
 		return o;
 	}
 
-	void update(int numberPlayers, boolean isGameMode) {
-		teamsPanel.update(isGameMode);
+	/**
+	 * This method shows or hides the team panel depending on the selected option
+	 * @param numberPlayers Number of players
+	 * @param isTeamMode true if it is TeamMode
+	 */
+	void update(int numberPlayers, boolean isTeamMode) {
+		teamsPanel.update(isTeamMode);
 		mainPanel.repaint();
 
 		this.pack();
 	}
 
+	/**
+	 * It returns the generated state
+	 * @return The generated GameState
+	 */
 	public GameState getState() {
 		return this.state;
 	}
 
+	/**
+	 * It exits the dialog
+	 */
 	void exit() {
 		this.status = 0;
 		this.setVisible(false);

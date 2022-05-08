@@ -14,6 +14,6 @@ public class ExitCommand extends Command {
 	
 	@Override
 	public void execute(Game game) throws Exception {
-		game.setExit();
+		game.exit();
 	}
 }

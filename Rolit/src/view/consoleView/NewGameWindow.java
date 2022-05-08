@@ -9,6 +9,13 @@ import model.logic.Color;
 import model.logic.Shape;
 import model.strategy.Strategy;
 
+/**
+ * This class displays the necessary information in order to create a new game, it also
+ * gathers users intentions 
+ * It implements ConsoleWindow
+ * @author PMC
+ *
+ */
 public class NewGameWindow implements ConsoleWindow {
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
 	private static final String ERROR_MODES_MSG = "Game mode must be on of these:";
@@ -62,6 +69,11 @@ public class NewGameWindow implements ConsoleWindow {
 		return false;
 	}
 	
+	/**
+	 * It checks whether the game as a parameter is equal to any of the available game modes
+	 * @param type Type of the game
+	 * @return The appropriate GameBuilder if the parameter is equal to any of the available modes or null otherwise
+	 */
 	private NewGameWindow parse(String type) {
 		for (NewGameWindow g : everyGameWindows) {
 			if (g.match(type))
@@ -70,6 +82,11 @@ public class NewGameWindow implements ConsoleWindow {
 		return null;
 	}
 	
+	/**
+	 * It checks whether the game as a parameter is equal to any of the available game modes
+	 * @param type Type of the game
+	 * @return true If the parameter is equal to any of the available modes or false otherwise
+	 */
 	protected boolean match(String type) {
 		return NewGameWindow.TYPE.equals(type);
 	}
@@ -79,6 +96,14 @@ public class NewGameWindow implements ConsoleWindow {
 		return NewGameWindow.json;
 	}
 	
+	/**
+	 * It validates that the player that we are trying to create has appropriate data
+	 * @param players JSONArray that contains the players
+	 * @param name Name of the player we are trying to create
+	 * @param color Color of the player we are trying to create
+	 * @param strat Strategy of the player we are trying to create in case it is an artificial intelligence 
+	 * @return JSONObject of the player in case that it has appropriate data, it throws an exception otherwise
+	 */
 	protected final JSONObject validatePlayer(JSONArray players, String name, Color color, String strat) {
 		JSONObject jPlayer = new JSONObject();
 		if (color == null)
@@ -98,6 +123,11 @@ public class NewGameWindow implements ConsoleWindow {
 		return jPlayer;
 	}
 	
+	/**
+	 * It shows the availableColors, i.e. those that have not been previously selected
+	 * @param players JSONArray that contains the players
+	 * @return
+	 */
 	protected final String availableColors(JSONArray players) {
 		StringBuilder str = new StringBuilder();
 		boolean valid;

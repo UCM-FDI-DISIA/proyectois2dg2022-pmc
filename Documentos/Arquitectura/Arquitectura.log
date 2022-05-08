@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  5 MAY 2022 20:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  7 MAY 2022 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -59,7 +59,7 @@ LaTeX Warning: No \author given.
 
 {C:/Users/sergi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
 [3]
-Overfull \hbox (1.02792pt too wide) in paragraph at lines 158--159
+Overfull \hbox (1.02792pt too wide) in paragraph at lines 166--167
 []\OT1/cmr/bx/n/10 CreateTeamsPanel\OT1/cmr/m/n/10 : Panel Swing (GUI) en-car-g
 ado de ges-tionar los equipos
  []
@@ -79,7 +79,7 @@ msfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/c
 mbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
 /Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
 s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on Arquitectura.pdf (5 pages, 85844 bytes).
+Output written on Arquitectura.pdf (5 pages, 88231 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
