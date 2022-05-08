@@ -25,13 +25,11 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	
 	@Override
 	public Object get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean open() {
-		// TODO Auto-generated method stub
 		String ans;
 		this.clear();
 		System.out.println(String.format("%s %n", SAVE_QUESTION));

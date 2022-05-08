@@ -5,20 +5,23 @@ import org.json.JSONObject;
 import model.logic.Game;
 
 /**
- * Clase encargada de crear el juego
+ * This class is in charge of creating the game
  * @author PMC
  *
  */
 public abstract class GameBuilder {
+	/**
+	 * Constructor
+	 */
 	private static GameBuilder[] builders = {
 		new GameClassicBuilder(),
 		new GameTeamsBuilder()
 	};
 	
 
-	/**
-	 * Genera una cadena de caracteres por medio de un stringBuilder con todos los tipos de juegos, en este caso GameClassic y GameTeams
-	 * @return devuelve dicha cadena de caracteres 
+	/** 
+	 * Generates a string by means of a stringBuilder with all the game types, in this case GameClassic y GameTeams 
+	 * @return Returns that string
 	 */
 	public static String availableModes() {
 		StringBuilder str = new StringBuilder();
@@ -30,18 +33,18 @@ public abstract class GameBuilder {
 	}
 	
 	/**
-	 * Comprueba que el tipo de juego que se le pasa por parámetro coincide con uno de los disponibles, por medio del uso del método parse
-	 * @param type es una cadena de caracteres que indican un tipo de juego
-	 * @return devuelve true si type es uno de los tipos de juego disponibles y false en caso contrario
+	 * It checks whether the game as a parameter is equal to any of the available modes
+	 * @param type Type of the game 
+	 * @return True if the parameter is equal to any of the available modes or false otherwise
 	 */
 	public static boolean isAvailableMode(String type) {
 		return GameBuilder.parse(type) != null;
 	}
 	
 	/**
-	 * Comprueba que el tipo de juego que se le pasa por parámetro coincide con uno de los disponibles
-	 * @param type es una cadena de caracteres que indican un tipo de juego
-	 * @return devuelve el correspondiente builder de dicho tipo de juego si type es uno de los tipos de juego disponibles y null en caso contrario
+	 * It checks whether the game as a parameter is equal to any of the available modes
+	 * @param type Type of the game
+	 * @return The appropriate GameBuilder if the parameter is equal to any of the available modes or null otherwise
 	 */
 	private static GameBuilder parse(String type) {
 		for (GameBuilder g : builders) {
@@ -52,10 +55,9 @@ public abstract class GameBuilder {
 	}
 
 	/**
-	 * Por medio de un JSONObject se crea un nuevo game, en caso de que el tipo de juego que contiene este JSONObject
-	 * no sea uno de los disponibles (nos lo dirá el método parse) se lanza una excepción, en otro caso, generaremos el juego.
-	 * @param o JSONObject que contiene la información del juego que se quiere crear
-	 * @return devuelve el juego ya generado
+	 * It creates the appropriate new Game
+	 * @param o JSONObject that contains the information of the game that we are trying to create
+	 * @return An already created game
 	 */
 	public static Game createGame(JSONObject o) {
 		String type = o.getString("type");
@@ -67,8 +69,24 @@ public abstract class GameBuilder {
 			return gameGen.GenerateGame(o);		
 	}
 	
+	/**
+	 * It checks whether the game as a parameter is equal to any of the available modes
+	 * @param type Type of the game
+	 * @return true If the parameter is equal to any of the available modes or false otherwise
+	 */
 	protected abstract boolean match(String type);
+	
+	/**
+	 * It Is in charge of creating the game
+	 * @param o JSONObject that contains the information of the game that we are trying to create
+	 * @return An already created game
+	 */
 	protected abstract Game GenerateGame(JSONObject o);
+	
+	/**
+	 * It returns the type of the class that we are trying to create
+	 * @return An string with the type type of the class that we are trying to create
+	 */
 	protected abstract String getName();
 	
 }

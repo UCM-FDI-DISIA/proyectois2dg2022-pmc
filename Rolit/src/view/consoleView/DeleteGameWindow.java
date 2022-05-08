@@ -4,6 +4,11 @@ import java.util.List;
 
 import model.SaveLoadManager;
 
+/**
+ * This class is used to
+ * @author PMC
+ *
+ */
 public class DeleteGameWindow implements ConsoleWindow {
 	private static final String CHOOSE_NUMBER_MSG = "Choose a number";
 	private static final String INVALID_OPTION = "Invalid option. Try again.";

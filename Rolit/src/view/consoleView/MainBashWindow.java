@@ -50,7 +50,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public Object get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
