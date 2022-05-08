@@ -14,8 +14,13 @@
 \theoremprework{\vspace{0.2cm}}
 \theorempostwork{\vspace{0.2cm}}
     \newtheorem*{sprint}{Sprint}
+    
+\setlength{\parindent}{0cm}
+
 \begin{document}
 \graphicspath{{./fotos/}}
+
+
 \section{Diseño y evolución de las clases principales del Modelo}
 \subsection{Diseño del tablero}
 Toda la lógica que implementa el concepto del tablero queda reflejada a lo largo de todo el proyecto en la clase Board.
@@ -117,7 +122,7 @@ aaaaa
 
 \textbf{GUI}
 
-En este sprint se desarrolló una primera versión de la interfaz gráfica, lo cual involucra a un gran número de clases y métodos. Iniciemos un recorrido por cada ventana explicando las clases involucradas y su funcionamiento.
+En este sprint se desarrolló una primera versión de la interfaz gráfica, lo cual involucra a un gran número de clases y métodos. Iniciemos un recorrido por cada uno de los componentes visuales explicando su finalidad
 
 \underline{CeldaGUI}
 \begin{center}
@@ -188,7 +193,12 @@ Aparece también debajo un botón de carga de ficheros que abre un  \textit{JFil
 
 En esta pantalla se muestra la lista de partidas guardadas y un botón para confirmar el borrado. Con esto, si se selecciona una de las partidas guardadas y se presiona el botón inferior, la lista se elimina de la lista de partidas guardadas.
 
-Si se ha decidido jugar a una partida o cargar una replay, el panel principal de la \textit{MainWindow} será reemplazado por un panel que contiene, de arriba a abajo, un ControlPanel, una TurnAndRankingBar, un BoardGUI y una StatusBar.
+\underline{StatusBar}
+\begin{center}
+\includegraphics[scale=0.8]{status-bar-sprint3.png}
+\end{center}
+
+La \textit{StatusBar} es un \textit{JPanel} que se encarga de mostrar información relevante durante la partida, como mensajes de error o de confimación, otorgándole al usuario un feedback adecuado.
 
 \underline{MainWindow}
 \begin{center}
@@ -197,20 +207,206 @@ Si se ha decidido jugar a una partida o cargar una replay, el panel principal de
 
 Inicialmente la ventana principal comienza con una pantalla en la que se muestran cuatro opciones a elegir por el usuario: \textit{Create new game, Load game, Delete game, Load replay}.
 
+Si se ha decidido jugar a una partida o cargar una replay, el panel principal de la \textit{MainWindow} será reemplazado por un panel que contiene, de arriba a abajo, un ControlPanel, una TurnAndRankingBar, un BoardGUI y una StatusBar.
+
 \begin{center}
 \includegraphics[scale=0.9]{game-sprint3.png}
-
+%FIXME CENTRAR
 Jugar una partida
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.9]{replay-sprint3.png}
+%FIXME CENTRAR
+Reproducir una \textit{replay}
+\end{center}
 
-Reproducir una replay
+\underline{Funcionamiento interno}
+
+Una vez visualizadas todas las pantallas es el momento de hablar su funcionamiento interno. Al introducir la GUI decidimos aplicar el patrón MVC, de manera que los futuros cambios en el modelo produzcan modificaciones mínimas en la vista y controlador y viceversa. Para más información sobre el Modelo-Vista-Controlador puede hacer click aquí. %FIXME AÑADIR REFERENCIA AL MVC
+
+Para la comunicación de las vistas con los modelos se decidió utilizar el patrón observador, así son los propios modelos los que comunican a las vistas cuando deben actualizarse.
+
+La implementación de este patrón se llevó a cabo mediante tres interfaces: Observable, diseñada para los modelos; RolitObserver, pensada para los observadores de la clase \textit{Game}; y ReplayObserver, que utilizan los observadores de la clase \textit{Replay}.
+
+\begin{center}
+\includegraphics[scale=0.43]{observadores-sprint4.png}
+\end{center}
+
+
+En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través de los \textit{ActionListeners} de los botones, que ejecutan el comando que corresponda.
+
+\end{sprint}
+
+\begin{sprint}[5]
+\textbf{Console - JUANDI}
+
+aaaaa
+
+\textbf{GUI}
+
+\underline{MainWindow}
+
+La incorporación de la funcionalidad para jugar en red trajo consigo  la necesidad de añadir nuevos botones al menú principal para poder acceder a ella.
+
+\begin{center}
+\includegraphics[scale=0.6]{menu-sprint5.png}
+\end{center}
+
+\underline{CreateGameDialog}
+
+\begin{center}
+\includegraphics[scale=0.8]{create-game-sprint5.png}
+\end{center}
+
+Al configurar la partida de un servidor no es posible introducir la información de los jugadores, pues es cada uno individualmente quien decide su nombre y color desde su ordenador.
+
+Por este motivo, se añadió un atributo al constructor de \textit{CreateGameDialog} que permite ocultar el panel que contiene los componentes para introducir los datos de los jugadores.
+
+\underline{CreateServerDialog}
+\begin{center}
+\includegraphics[scale=0.8]{create-server-sprint5.png}
+\end{center}
+
+Para poder crear el servidor el usuario debe elegir en qué puerto hostearlo, para ello se creó este \textit{JDialog}, que abre el servidor una vez se pulsa el botón ``Start Server".
+
+En esta versión del juego, la poca experiencia con el manejo de hilos del equipo de desarrollo provocó que esta ventana se quedase pillada hasta que todos los participantes se unieran al servidor.
+
+\underline{JoinServerDialog}
+\begin{center}
+\includegraphics[scale=0.8]{join-server-sprint5.png}
+\end{center}
+
+Como ya se ha mencionado anteriormente, es cada usuario al unirse al servidor quien decide su nombre y su color. La clase \textit{JoinServerDialog} es la encargada de ello, además de recoger la IP y el puerto del servidor al que se quiere acceder.
+
+\underline{Funcionamiento interno}
+
+En el sprint anterior nuestra única intención era hacer una interfaz gráfica funcional, y ese objetivo fue alcanzado exitosamente. Sin embargo, la GUI accedía directamente a todos los métodos que necesitase de la clase \textit{Game}, algo que no es correcto desde el punto de vista de la programación orientada objetos.
+
+Para solventar este problema planteamos inicialmente el uso de objetos transferencia que restringiesen los métodos de las clases que eran necesarias para visualizar el juego.
+
+Finalmente, esta idea fue rechazada en favor de reutilizar el código ya existente. Así, se decidió que la información se transmitiese mediante la clase \textit{State} creada originalmente para reproducir las \textit{replays}, pues al fin y al cabo, un estado representa una serialización del juego y contiene toda la información necesaria.
+
+\begin{center}
+\includegraphics[scale=0.5]{board-gui-evol.png}
+
+Evolución de la clase \textit{BoardGUI}. Sprint 4 (izq) y Sprint 5 (der)
+\end{center}
+
+Por consiguiente, todas las instancias de clases relacionadas con el modelo de \textit{Game} fueron eliminadas y reemplazadas por estados y JSONObjects. Para ello fue necesario añadir nuevos métodos a la clase \textit{State}.
+
+\begin{center}
+\includegraphics[scale=0.5]{state-sprint5.png}
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[6]
+\textbf{Console - JUANDI}
+
+aaaaa
+
+\textbf{GUI}
+
+En este sprint la GUI fue refactorizada por completo, cambiando tanto visualmente, como a nivel de funcionamiento interno en algunas clases para hacer el código más manejable.
+
+\underline{Creación de RolitComponents}
+
+Hasta este momento el proyecto utilizada los componentes visuales de Java poder defecto, dando lugar a una interfaz gráfica funcional, pero con carencias visuales.
+
+Para el estilo de los componentes, se optó por una interfaz minimalista basada en el color blanco y en el azul que aparece en el logo del juego Rolit, al que se denominó \textit{BLUE\_ROLIT}.
+
+Los \textit{RolitComponents}, como la clase \textit{RolitButton} o \textit{RolitTextArea}, además de homogeneizar el entorno visual facilitan los cambios de estilo en un futuro.
+
+Veamos el resultado gráfico tras la aplicación de estos componentes, sumado a re-estructuraciones en los Layouts y la inclusión de nuevas imágenes e iconos
+
+\underline{MainWindow}
+\begin{center}
+\includegraphics[scale=1]{menu-sprint-6.png}
+
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1]{partida-sprint-6.png}
+
+Jugar una partida
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1]{replay-sprint-6.png}
+
+Reproducir una \textit{replay}
+\end{center}
+
+\underline{CreateGame package}
+
+En sprints anteriores había una clase encargada de crear y gestionar todos los componentes visuales necesarios para crear un juego nuevo, resultando en una clase demasiado compleja.
+
+Por ello, la antigua clase \textit{CreateGameDialog}, fue dividida en otras más pequeñas. Dando lugar a:
+
+\begin{itemize}
+\item \textit{PlayerDataPanel}: panel que contiene los componentes necesarios para obtener la información de un jugador.
+\begin{center}
+\includegraphics[scale=1]{player-data-panel.png}
+\end{center}
+\item \textit{TeamDataPanel}: panel que contiene los componentes necesarios para obtener la información de un equipo.
+\begin{center}
+\includegraphics[scale=1]{team-data-panel.png}
+\end{center}
+\item \textit{CreatePlayersPanel}: conjunto de \textit{PlayerDataPanel}.
+\item \textit{CreateTeamsPanel}: conjunto de \textit{TeamDataPanel}.
+\item \textit{GameConfigurationPanel}: panel encargado de obtener la configuración básica del juego: modo de juego, forma, numero de jugadores...
+\begin{center}
+\includegraphics[scale=0.75]{game-config-panel.png}
+\end{center}
+\item \textit{CreateGameDialog}: ventana de diálogo que contiene un \textit{GameConfigurationPanel} y un \textit{CreateTeamsPanel}.
+\begin{center}
+\includegraphics[scale=0.8]{create-game-sprint6.png}
+\end{center}
+\item \textit{CreateGameWithPlayersDialog}: extiende a \textit{CreateGameDialog}, añadiendo un \textit{CreatePlayersPanel}.
+\begin{center}
+\includegraphics[scale=0.75]{create-game-players-sprint6.png}
+\end{center}
+\end{itemize}
+
+
+\underline{LoadFileDialog}
+\begin{center}
+\includegraphics[scale=1]{load-game-sprint-6.png}
+\end{center}
+
+Las clases \textit{LoadGameDialog} y \textit{LoadReplayDialog} fueron abstraidas en \textit{LoadFileDialog}, que permite cargar tanto partidas como \textit{replays}, dependiendo del botón que se pulse.
+
+\underline{DeleteGameDialog}
+\begin{center}
+\includegraphics[scale=1]{delete-dialog-sprint6.png}
+\end{center}
+
+\underline{CreateServerDialog}
+
+\begin{center}
+\includegraphics[scale=1]{server-setup-sprint-6.png}
+\end{center}
+
+Además, una vez creado el servidor, el usuario que está hosteandolo recibe feedback de cuanta gente se ha unido.
+
+\begin{center}
+\includegraphics[scale=1]{server-feedback.png}
 \end{center}
 
 
 \end{sprint}
+
+\underline{JoinServerDialog}
+\begin{center}
+\includegraphics[scale=1]{join-server-sprint-6.png}
+\end{center}
+
+Los usuarios también reciben feedback del servidor, mostrándose una venta que les invita a esperar a los demás.
+
+\begin{center}
+\includegraphics[scale=0.85]{user-feedback.png}
+\end{center}
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 

@@ -10,7 +10,6 @@ import view.consoleView.ConsoleWindow;
 import view.consoleView.MainBashWindow;
 
 public class Rolit {
-	
 	private static final String TITLE = "		ROLIT";
 	private static final String VERSION = "Sprint Week 7";
 	private static final String CHOOSE_MODE = "Choose mode: ";
@@ -67,7 +66,4 @@ public class Rolit {
 			view.open();
 		}
 	}
-	
-	
-
 }
