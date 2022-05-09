@@ -3,6 +3,11 @@ package model.commands;
 import model.SaveLoadManager;
 import model.logic.Game;
 
+/**
+ * This class represents a command to save the game
+ * @author PMC
+ *
+ */
 public class SaveCommand extends Command {	
 	private static final String NAME = "save";
 	private static final String DETAILS = "[s]ave";
@@ -12,11 +17,18 @@ public class SaveCommand extends Command {
 	private static final String ERROR_SAVE_MSG = "Failed to save the file";
 	private String filename;
 	
+	/**
+	 * Constructor
+	 */
 	public SaveCommand() {
 		super(NAME, DETAILS, SHORTCUT, HELP);
 		filename = null;
 	}
 	
+	/**
+	 * Constructor
+	 * @param filename the name of the file in which the game is saved
+	 */
 	public SaveCommand(String filename) {
 		this();
 		this.filename = filename;

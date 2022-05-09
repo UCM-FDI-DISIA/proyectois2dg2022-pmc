@@ -3,6 +3,11 @@ package model.commands;
 import model.logic.Cube;
 import model.logic.Game;
 
+/**
+ * This class represents a command to place a cube in a position
+ * @author PMC
+ *
+ */
 public class PlaceCubeCommand extends Command {
 	private static final String NAME = "place_cube";
 	private static final String DETAILS = "[p]lace_cube <x> <y>";
@@ -12,10 +17,18 @@ public class PlaceCubeCommand extends Command {
 	private int x;
 	private int y;
 	
+	/**
+	 * Constructor
+	 */
 	public PlaceCubeCommand() {
 		super(NAME, DETAILS, SHORTCUT, HELP);
 	}
 	
+	/**
+	 * Consturctor
+	 * @param x x coordinate of the cube
+	 * @param y y coordinate of the cube
+	 */
 	public PlaceCubeCommand(int x, int y) {
 		this();
 		this.x = x;
