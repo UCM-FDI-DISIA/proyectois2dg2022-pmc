@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  6 MAY 2022 13:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  7 MAY 2022 23:35
 entering extended mode
 **"./Trabajos individuales.tex"
 ("Trabajos individuales.tex"
@@ -329,35 +329,36 @@ LaTeX Info: Redefining \nameref on input line 4.
 
 {C:/Users/jdbar/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
 [4] [5] [6] [7] [8] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 142.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 142.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
  ("Trabajos individuales.aux"
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 142.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
 Package rerunfilecheck Info: File `"Trabajos individuales".out' has not changed
 .
 (rerunfilecheck)             Checksum: 0BD913AE131EF46367E8225ECF1415B3;393.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 142.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
  ) 
 Here is how much of TeX's memory you used:
- 6425 strings out of 480790
- 99979 string characters out of 2897301
+ 6427 strings out of 480790
+ 100000 string characters out of 2897301
  387083 words of memory out of 3000000
- 22335 multiletter control sequences out of 15000+200000
- 534290 words of font info for 31 fonts, out of 3000000 for 9000
+ 22336 multiletter control sequences out of 15000+200000
+ 534637 words of font info for 32 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,4n,45p,549b,543s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jdbar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmr12.pfb>
-Output written on "Trabajos individuales.pdf" (10 pages, 52235 bytes).
+ic/amsfonts/cm/cmr12.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmti12.pfb>
+Output written on "Trabajos individuales.pdf" (10 pages, 63783 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  17 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

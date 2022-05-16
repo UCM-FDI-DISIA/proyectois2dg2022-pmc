@@ -123,11 +123,30 @@
 \section{Juan Diego Barrado Daganzo}
 \subsection*{Código}
 \begin{itemize}
+
+\item Desarrollo de la lógica interna de Game en las fases iniciales del proyecto, creación de la clase Player e integración de la misma sobre el modelo.
+
+\item Desarrollo del mecanismo de cambio de puntuaciones a través de los Cube, que permitía encapsular mucho mejor la puntuación de cada jugador.
+
+\item Diseño de las responsabilidades conceptuales de los integrantes del modelo, es decir, asignar las capacidades y dependencias del Board, Game, Player... tanto a nivel de código como a nivel de concepto, lo que unificó lo que se esperaba de cada clase e hizo más fácil la integración de funcionalidades posteriores.
+
 \item Creación y diseño de la clase builder y de la refactorización del juego a través de factorías.
+
 \item Encapsulación del modelo en la clase abstracta de Game, definición de las responsabilidades de cada una de las clases hijas (GameClassic y GameTeams) e implementación de las mismas.
-\item Adaptación del Modelo-Vista-Controlador a través de la generación de un hilo propio para el modelo
+
+\item Adaptación del Modelo-Vista-Controlador a través de la generación de un hilo propio para el modelo que permitía una mejor integración de los jugadores automáticos. Creación de la cola de prioridad de Cube para poder utilizar el modo red y los jugadores automáticos de forma simultánea.
+
+\item Creación de la vista de consola y generación de la interfaz \textit{ConsoleWindow} para mantener un criterio uniforme a modo de ``componentes'' tal y como se hace en Swing, lo que simplificó la independencia del modelo y la vista por su similitud con las ventanas de Swing.
+
+\item Depurado de la interfaz de RolitObserver y de los métodos de notificación a observadores.
+
+\item Depurado de la red para integrar los jugadores automáticos.
 \end{itemize}
 \subsection*{Documentación}
+\begin{itemize}
+\item Rediseñado de los reports iniciales.
+\item Creación del formato de los documentos de desarrollo (los utilizados durante los sprint por el equipo de desarrollo, no los que se incluyen en la entrega) para informar a todos los participantes de la implementación final que se dió al diseño planeado de forma general.
+\end{itemize}
 
 \section{Virginia Chacón Pérez}
 \subsection*{Código}
@@ -135,6 +154,9 @@
 \item 
 \end{itemize}
 \subsection*{Documentación}
+\begin{itemize}
+\item 
+\end{itemize}
 
 
 
