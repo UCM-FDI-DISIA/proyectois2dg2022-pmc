@@ -12,6 +12,11 @@ import javax.swing.UIManager;
 
 import model.logic.Shape;
 
+/**
+ * This class is a Renderer Swing that designs the ComboBox that shows
+ * the various shapes of the board that the user can choose
+ * @author PMC
+ */
 
 public class BoardRenderer extends DefaultListCellRenderer {
 
@@ -23,6 +28,10 @@ public class BoardRenderer extends DefaultListCellRenderer {
     
     private final int SIDE_LENGTH = 16;
 
+    /**
+     * Constructor. Its mission is to load all the icons of shapes
+     * and storing them
+     */
     public BoardRenderer() {
         for (Shape s : Shape.values()) {
         	ImageIcon originalImgIcon = new ImageIcon(s.getPath());
@@ -33,6 +42,11 @@ public class BoardRenderer extends DefaultListCellRenderer {
         }
     }
 
+    /**
+     * This method is used to look for the desired characteristics that the
+     * item of the ComboBox should show
+     * @return The specific item of the ComboBox
+     */
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                                                   boolean isSelected, boolean cellHasFocus) {

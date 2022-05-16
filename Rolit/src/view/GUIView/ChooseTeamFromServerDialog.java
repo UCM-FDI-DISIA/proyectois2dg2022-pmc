@@ -22,6 +22,13 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitRadioButton;
 
+/**
+ * This class is a JDialog shown if the client has connected
+ * to a server that has created a GameTeams game. Its mission
+ * is to show and get the team in which the client desires to play
+ * @author PMC
+ */
+
 public class ChooseTeamFromServerDialog extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
@@ -33,6 +40,12 @@ public class ChooseTeamFromServerDialog extends JDialog {
 	private ButtonGroup G;
 	private int status = 0;
 	
+	/**
+	 * Constructor
+	 * @param parent The frame of the caller
+	 * @param gameConfig JSONObject which contains the info of the incomplete game
+	 * created from server, particularly the information relative to teams
+	 */
 	public ChooseTeamFromServerDialog(Frame parent, JSONObject gameConfig) {
 		super(parent, true);
 		this.gameConfig = gameConfig;
@@ -40,6 +53,10 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		initGUI();
 	}
 	
+	/**
+	 * This method creates a ArrayList of teams given the JSONObject gameConfig
+	 * given at the constructor
+	 */
 	private void buildTeamsList() {
 		JSONArray teamsArray = gameConfig.getJSONArray("teams");
 		for (int i = 0; i < teamsArray.length(); ++i) {
@@ -47,6 +64,9 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
 	public void initGUI() {
 		
 		this.setLocation(50, 50);
@@ -106,12 +126,20 @@ public class ChooseTeamFromServerDialog extends JDialog {
 	}
 	
 
+	/**
+	 * This method opens the dialog
+	 * @return The status (1-success, 0-failure)
+	 */
 	int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}
 	
+	/**
+	 * This method gives a JSON of the selected team
+	 * @return The JSON of the team that has been selected
+	 */
 	public JSONObject getSelectedTeamJSON() {
 		JSONObject o = new JSONObject();
 		String selectedTeam = null;
@@ -127,7 +155,17 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		
 	}
 	
-	
+	/**
+	 * This method adds a JComponent in a specified JPanel
+	 * @param thePanel Panel in which the component is to be added
+	 * @param comp The JComponent to be added
+	 * @param xPos The horizontal component of the position in which the component is to be added
+	 * @param yPos The vertical component of the position in which the component is to be added
+	 * @param compWidth The width of the component to be added
+	 * @param compHeight The height of the component to be added
+	 * @param place Where in the display area should the component be added
+	 * @param stretch Integer that determines whether to resize the component, and if so, how. 
+	 */
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();

@@ -1,0 +1,68 @@
+@startuml
+box Server
+activate Server
+activate ServerClientThreadRun
+activate WaitPlayerThread
+participant ServerUser
+participant Server
+participant ServerClient
+participant ServerClientThread
+participant ServerClientThreadRun
+participant WaitPlayerThread
+ServerUser -> Server : (Server started)
+end box
+
+box Client
+activate ClientControllerRun
+participant ClientControllerRun
+participant ClientController
+participant Client
+participant MainWindow
+participant Controller
+participant ClientUser
+ClientUser -> MainWindow
+activate MainWindow
+MainWindow -> Client : join(playerName, playerColor)
+activate Client
+Client -> ClientController : sendToServer(player.report())
+deactivate Client
+activate ClientController
+ClientController -> ServerClientThreadRun : sendToServer(report)
+deactivate ClientController
+ServerClientThreadRun -> Server : receiveFromClient(report, serverClient)
+Server -> Server : addPlayer(p)
+WaitPlayerThread --> Server
+deactivate WaitPlayerThread
+Server -> Server : Complete first game JSON
+Server -> ServerClient : updateGraphics(json)
+deactivate Server
+activate ServerClient
+ServerClient -> ServerClientThread : updateGraphics(json)
+deactivate ServerClient
+activate ServerClientThread
+ServerClientThread -> ClientControllerRun : print(json.toString())
+ClientControllerRun -> Client : updateGameFromServer(JSONJuegoNuevo)
+activate Client
+Client -> MainWindow : updateGameFromServer(JSONnewState)
+deactivate Client
+activate MainWindow
+
+alt First online play
+MainWindow -> Controller : createGame(JSONnewState)
+activate Controller
+Controller --> MainWindow : State
+deactivate Controller
+MainWindow -> MainWindow : initGame()
+
+end
+
+MainWindow -> Controller : updateGameFromServer(JSONnewState)
+activate Controller
+
+deactivate MainWindow
+deactivate ServerClientThread
+deactivate ServerClient
+end box
+
+return
+@enduml

@@ -10,6 +10,12 @@ import model.replay.GameState;
 import model.replay.Replay;
 import view.RolitObserver;
 
+/**
+ * Main console window, it is in charge of managing which window is opened at any given moment 
+ * It implements ConsoleWindow and RolitObserver
+ * @author PMC
+ *
+ */
 public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	// Hay que hacer una clase contenedora de todas estas constantes
 	private final static String NEW_GAME = "New Game";
@@ -27,10 +33,18 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	
 	private Controller ctr;
 	
+	/**
+	 * Constructor
+	 * @param ctr Controller
+	 */
 	public MainBashWindow(Controller ctr) {
 		this.ctr = ctr;		
 	}
 	
+	/**
+	 * It shows all the available options in Rolit (new game, load game, delete game, replay game)
+	 * @return The chosen option
+	 */
 	private int menu() {
 		int option;
 		boolean repeat = true;
@@ -50,7 +64,6 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public Object get() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -66,6 +79,7 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				nextWindow = new NewGameWindow();
 				repeatMenu = nextWindow.open();
 				ctr.createGame((JSONObject) nextWindow.get());
+				this.initGame();
 			}				
 			// Se ha seleccionado cargar un juego antiguo
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
@@ -75,6 +89,8 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				if (game != null) {
 					ctr.createGame(game);	
 				}
+				this.initGame();
+
 			}
 			// Se ha seleccionado borrar un juego
 			else if (DELETE_GAME.equals(OPTIONS[option - 1])) {
@@ -91,14 +107,19 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				}
 			}			
 		} while (repeatMenu);
+	
+		return true;
+	}
+
+	
+	private void initGame() {
 		ctr.startGame();
 		ctr.addObserver(this);
 		ConsoleWindow gameWindow = new PlayWindow(this.ctr);
 		new SaveReplayWindow(ctr);
 		gameWindow.open();
-		return true;
 	}
-
+	
 	@Override
 	public void onTurnPlayed(GameState state) {}
 

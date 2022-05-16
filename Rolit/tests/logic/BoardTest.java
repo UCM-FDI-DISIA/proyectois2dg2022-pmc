@@ -27,7 +27,6 @@ public class BoardTest {
 		assertThrows(IllegalArgumentException.class, () -> b.addCubeInPos(c3));
 		assertThrows(IllegalArgumentException.class, () -> b.addCubeInPos(c4));
 		assertEquals(c, b.getCubeInPos(5, 5));
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -37,7 +36,6 @@ public class BoardTest {
 		Cube c = new Cube(6, 5, p1);
 		b.addCubeInPos(c);
 		assertFalse(b.isBoardFull());
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -63,7 +61,6 @@ public class BoardTest {
 		assertEquals(Color.BLUE, c1.getColor());
 		assertEquals(Color.BLUE, c2.getColor());
 		assertEquals(Color.BLUE, c3.getColor());
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -84,7 +81,6 @@ public class BoardTest {
 		assertThrows(IllegalArgumentException.class, () -> b.addCubeInPos(c3));
 		b.update(c4);
 		assertEquals(Color.BEIGE, c1.getColor());
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -110,7 +106,6 @@ public class BoardTest {
 		
 		String s = "{\"shape\":\"CL\",\"cubes\":[{\"color\":\"L\",\"pos\":[3,4]},{\"color\":\"L\",\"pos\":[4,4]},{\"color\":\"L\",\"pos\":[5,4]},{\"color\":\"L\",\"pos\":[6,4]},{\"color\":\"L\",\"pos\":[7,4]}]}";
 		assertTrue (new JSONObject(s).similar(b.report()));
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -134,6 +129,5 @@ public class BoardTest {
 
 		String s = "{\"shape\":\"SM\",\"cubes\":[{\"color\":\"L\",\"pos\":[3,4]},{\"color\":\"L\",\"pos\":[4,4]},{\"color\":\"L\",\"pos\":[5,4]},{\"color\":\"L\",\"pos\":[6,4]}]}";
 		assertTrue (new JSONObject(s).similar(b.report()));
-		b.clearOrderedCubeList();
 	}
 }

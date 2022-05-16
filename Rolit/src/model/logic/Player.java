@@ -1,24 +1,57 @@
 package model.logic;
 
 import org.json.JSONObject;
-
 import model.replay.GameState;
 import model.strategy.Strategy;
 import utils.Pair;
 
+/**
+ * This class represents a Rolit player
+ * @author PMC
+ *
+ */
 public class Player implements Reportable, Rival {
+	/**
+	 * List of players
+	 */
 	private static Player[] playerList = new Player[Color.size()];
-	private Color color;
-	private int score;
-	private String name;
-	private Strategy strategy;
-	public static final String TYPE = "Player";
 	
-	// constructor habitual de un player por defecto
+	/**
+	 * Player color
+	 */
+	private Color color;
+	
+	/**
+	 * Player score
+	 */
+	private int score;
+	
+	/**
+	 * Player name
+	 */
+	private String name;
+	
+	/**
+	 * Player strategy (null for real players)
+	 */
+	private Strategy strategy;
+	
+
+	/**
+	 * Constructor for player with no strategy
+	 * @param c Player color
+	 * @param name Player name
+	 */
 	public Player(Color c, String name) {
 		this(c, name, null);
 	}	
-
+	
+	/**
+	 * Constructor for player with strategy
+	 * @param c Player color
+	 * @param name Player name
+	 * @param strat Player strategy
+	 */
 	public Player(Color c, String name, Strategy strat) {
 		this.color = c;
 		this.score = 0;
@@ -27,6 +60,29 @@ public class Player implements Reportable, Rival {
 		this.strategy = strat;
 	}
 	
+	/**
+	 * Constructor: build player from JSONObject
+	 * @param json Player report
+	 */
+	public Player(JSONObject json) {
+		this(Color.valueOfIgnoreCase(json.getString("color").charAt(0)), json.getString("name"));
+	}
+	
+	/**
+	 * Contructor: build player from JSONObject with an strategy
+	 * @param json Player report
+	 * @param s Player strategy
+	 */
+	public Player(JSONObject json, Strategy s) {
+		this(json);
+		this.strategy = s;
+	}
+	
+	/**
+	 * If the player has a strategy, it is executed
+	 * @param state Current GameState
+	 * @return Coordinates to place cube, if the player has no strategy it returns null
+	 */
 	public Pair<Integer, Integer> play(GameState state) {
 		if(this.strategy != null) {
 			try {
@@ -46,23 +102,20 @@ public class Player implements Reportable, Rival {
 		return null;
 	}
 	
-	public Player(JSONObject json) {
-		this(Color.valueOfIgnoreCase(json.getString("color").charAt(0)), json.getString("name"));
-	}
-	
-	public Player(JSONObject json, Strategy s) {
-		this(json);
-		this.strategy = s;
-	}
-
+	/**
+	 * It returns the player color
+	 * @return Player color
+	 */
 	public Color getColor() {
 		return this.color;
 	}
 	
-	public int getScore() {
-		return this.score;
-	}
 
+
+	/**
+	 * It adds an score to a rival
+	 * @param score Score to add (it can be negative)
+	 */
 	public void addScore(int score) {
 		this.score += score;
 	}
@@ -71,6 +124,16 @@ public class Player implements Reportable, Rival {
 		return this.name;
 	}
 	
+
+	public int getScore() {
+		return this.score;
+	}
+	
+	/**
+	 * This method returns the player with color c
+	 * @param c Player color
+	 * @return Player with color c
+	 */
 	public static Player getPlayer(Color c) {
 		return Player.playerList[c.ordinal()];
 	}

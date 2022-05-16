@@ -1,0 +1,68 @@
+@startuml
+
+box Client
+participant ClientUser
+participant CeldaGUI
+participant Controller
+participant MainWindow
+participant Client
+participant ClientController
+participant ClientControllerRun
+activate ClientControllerRun
+activate MainWindow
+activate ServerClientThreadRun
+
+ClientUser -> CeldaGUI : click
+activate CeldaGUI
+CeldaGUI -> Controller : executeCommand()
+deactivate CeldaGUI
+activate Controller
+Controller -> Client : updateGameToServer()
+deactivate Controller
+activate Client
+Client -> ClientController : updateGameToServer()
+deactivate Client
+activate ClientController
+ClientController -> ClientController : sendToServer(report)
+activate ClientController
+ClientController -> ServerClientThreadRun
+deactivate ClientController
+deactivate ClientController
+deactivate Client
+end box
+
+box Server
+
+participant ServerClientThreadRun
+participant ServerClientThread
+participant ServerClient
+participant ServerUser
+participant Server
+
+ServerClientThreadRun -> Server : receiveFromClient(report, serverClient)
+activate Server
+Server -> ServerClient : updateGraphics(json)
+deactivate Server
+activate ServerClient
+ServerClient -> ServerClientThread : updateGraphics(json)
+deactivate ServerClient
+activate ServerClientThread
+ServerClientThread -> ClientControllerRun : print(json.toString())
+deactivate ServerClientThread
+ClientControllerRun -> Client : updateGameFromServer(JSONJuegoNuevo)
+activate Client
+Client -> MainWindow : updateGameFromServer(JSONnewState)
+deactivate Client
+
+alt First online play
+
+MainWindow -> MainWindow : initGame()
+activate MainWindow
+deactivate MainWindow
+end
+
+MainWindow -> Controller : updateGameFromServer(JSONnewState)
+activate Controller
+end box
+
+@enduml

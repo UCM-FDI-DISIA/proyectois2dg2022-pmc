@@ -3,12 +3,20 @@ package model.commands;
 import model.logic.Game;
 import model.rolitexceptions.HelpException;
 
+/**
+ * This class represents a command to show some help for the game
+ * @author PMC
+ *
+ */
 public class HelpCommand extends Command {	
 	private static final String NAME = "help";
 	private static final String DETAILS = "[h]elp";
 	private static final String SHORTCUT = "h";
 	private static final String HELP = "show this help";
 	
+	/**
+	 * Constructor
+	 */
 	public HelpCommand() {
 		super(NAME, DETAILS, SHORTCUT, HELP);
 	}

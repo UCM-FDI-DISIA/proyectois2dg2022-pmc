@@ -25,6 +25,11 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 
+/**
+ * This class is a Swing JDialog in which the user
+ * can save the replay of the game
+ * @author PMC
+ */
 public class SaveReplayDialog extends JDialog implements RolitObserver{
 
 	private static final long serialVersionUID = 1L;
@@ -35,13 +40,20 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	private JButton yesButton;
 	private JButton noButton;
 	
+	/**
+	 * Constructor
+	 * @param parent The frame of the caller
+	 * @param ctrl The controller
+	 */
 	public SaveReplayDialog(Frame parent, Controller ctrl) {
 		super(parent, true);
 		ctrl.addObserver(this);
 		this.setLocationRelativeTo(null);
 	}
 	
-	
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
 	private void initGUI() {
 		this.setTitle("Save Replay");
 		
@@ -88,12 +100,20 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 		this.setLocationRelativeTo(null);
 	}
 
+	/**
+	 * onTurnPlayed method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onTurnPlayed(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * onGameFinished method overridden (RolitObserver interface)
+	 * Particularly, it updates the replay, waits one second so that the ranking
+	 * can be correctly shown, and calls initGUI
+	 */
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
 		// TODO Auto-generated method stub
@@ -108,6 +128,9 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 
 	}
 
+	/**
+	 * onGameExited method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onGameExited(Replay replay) {
 		this.replay = replay;
@@ -117,25 +140,44 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 		
 	}
 
+	/**
+	 * onRegister method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onRegister(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * onError method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onError(String err) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * onGameStatusChange method overridden (RolitObserver interface)
+	 */
 	@Override
 	public void onGameStatusChange(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
+	/**
+	 * This method adds a JComponent in a specified JPanel
+	 * @param thePanel Panel in which the component is to be added
+	 * @param comp The JComponent to be added
+	 * @param xPos The horizontal component of the position in which the component is to be added
+	 * @param yPos The vertical component of the position in which the component is to be added
+	 * @param compWidth The width of the component to be added
+	 * @param compHeight The height of the component to be added
+	 * @param place Where in the display area should the component be added
+	 * @param stretch Integer that determines whether to resize the component, and if so, how. 
+	 */
 	private void addComp(JPanel thePanel, JComponent comp, int xPos, int yPos, int compWidth, int compHeight, int place, int stretch){
 
 		GridBagConstraints gridConstraints = new GridBagConstraints();

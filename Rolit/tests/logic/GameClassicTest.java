@@ -41,7 +41,6 @@ public class GameClassicTest {
 		game.addCubeToQueue(new Cube(3,6, null));
 		game.play();
 		assertEquals(b.getCubeInPos(3, 6).getColor(), Color.YELLOW);
-		b.clearOrderedCubeList();
 	}
 	
 	//comprobamos que el report final es el esperado
@@ -65,7 +64,6 @@ public class GameClassicTest {
 		game.play();
 		String s = "{\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";
 		assertTrue (new JSONObject(s).similar(game.report()));
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -91,7 +89,6 @@ public class GameClassicTest {
 		game.addCubeToQueue(new Cube(5,5, null));
 		game.play();
 		assertEquals(b.getCubeInPos(5, 5).getColor(), Color.PURPLE);
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -114,7 +111,6 @@ public class GameClassicTest {
 		game.play();
 		String s = "{\"players\":[{\"score\":1,\"color\":\"P\",\"name\":\"Maria jose\"},{\"score\":2,\"color\":\"L\",\"name\":\"paco\"},{\"score\":0,\"color\":\"R\",\"name\":\"lucia la de cuenca\"}],\"turn\":\"R\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"L\",\"pos\":[5,7]},{\"color\":\"P\",\"pos\":[5,6]},{\"color\":\"L\",\"pos\":[5,8]}]}}"; 
 		assertTrue (new JSONObject(s).similar(game.report()));
-		b1.clearOrderedCubeList();
 	}
 	
 	@Test
