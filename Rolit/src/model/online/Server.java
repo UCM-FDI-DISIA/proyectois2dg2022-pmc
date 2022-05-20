@@ -78,7 +78,9 @@ public class Server {
 	}
 
 	/**
-	 * This method creates all the connections expected from the number of players.
+	 * This method creates all the connections expected from the number of players,
+	 * completes the game JSON which the additional information sent by clients,
+	 * and send to each client a finally completed game JSON
 	 * @throws IOException Signals that an I/O exception of some sort has occurred
 	 */
 	private void waitForPlayers() throws IOException {
