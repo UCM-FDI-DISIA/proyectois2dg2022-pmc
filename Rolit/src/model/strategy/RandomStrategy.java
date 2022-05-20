@@ -6,6 +6,12 @@ import model.logic.Color;
 import model.replay.GameState;
 import utils.Pair;
 
+/**
+ * This class represents the Random strategy for the artificial intelligences.
+ * This strategy generates a random valid position for the player to play next.
+ * @author PMC
+ *
+ */
 public class RandomStrategy extends Strategy {
 
 	public static final String NAME = "RANDOM";
@@ -13,6 +19,9 @@ public class RandomStrategy extends Strategy {
 	
 	private Random random;
 	
+	/**
+	 * Default constructor
+	 */
 	public RandomStrategy() {
 		this.random = new Random();
 	}

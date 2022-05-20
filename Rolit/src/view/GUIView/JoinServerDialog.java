@@ -26,7 +26,10 @@ import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextArea;
 import view.GUIView.RolitComponents.RolitTextField;
 
-
+/**
+ * This class is a Swing JDialog in which the user can join a server
+ * @author PMC
+ */
 public class JoinServerDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -45,13 +48,19 @@ public class JoinServerDialog extends JDialog {
 	private JTextArea nameTextArea;
 	private JComboBox<Color> colorComboBox;
 	
-	
+	/**
+	 * Constructor
+	 * @param parent The frame of the caller
+	 */
 	public JoinServerDialog(Frame parent) {
 		super(parent, true);
 		initGUI();
 		
 	}
 	
+	/**
+	 * This method creates and shows all the components relative to this dialog
+	 */
 	@SuppressWarnings("serial")
 	private void initGUI() {
 		this.setTitle("Join Server");
@@ -153,32 +162,60 @@ public class JoinServerDialog extends JDialog {
 		thePanel.add(comp, gridConstraints);
 	}
 	
+	/**
+	 * This method opens the dialog
+	 * @return The status (1-success, 0-failure)
+	 */
 	int open() {
 		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}
 	
+	/**
+	 * This method uses a JOptionPane that shows an error
+	 * @param error Error to show
+	 */
 	public void displayError(String error) {
 		JOptionPane.showMessageDialog(JoinServerDialog.this, error, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Getter of the IP introduced by the user
+	 * @return IP introduced by the user
+	 */
 	public String getIp() {
 		return ip;
 	}
 
+	/**
+	 * Getter of the port introduced by the user
+	 * @return Port introduced by the user
+	 */
 	public int getPort() {
 		return port;
 	}
 
+	/**
+	 * Getter of the player color introduced by the user
+	 * @return Player color introduced by the user
+	 */
 	public Color getPlayerColor() {
 		return (Color) colorComboBox.getSelectedItem();
 	}
 	
+	/**
+	 * Getter of the player name introduced by the user
+	 * @return Player name introduced by the user
+	 */
 	public String getPlayerName() {
 		return (String) nameTextArea.getText();
 	}
 
+	/**
+	 * This methods redesigns the dialog notifying that the client
+	 * needs to wait until all the expected players are connected to the server.
+	 */
 	public void showWaitingDialog() {
 		connectPanel.removeAll();
 		
@@ -194,6 +231,10 @@ public class JoinServerDialog extends JDialog {
 		
 	}
 
+	/**
+	 * This methods closes the JDialog, particularly at the
+	 * point when the JDialog shows the waiting for players message
+	 */
 	public void closeWaitingDialog() {
 		JoinServerDialog.this.setVisible(false);
 		
