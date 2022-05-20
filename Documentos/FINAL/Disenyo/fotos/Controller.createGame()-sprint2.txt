@@ -1,0 +1,37 @@
+#Controller.createGame-sprint2()
+
+@startuml
+participant Actor
+Actor -> Controller : createGame
+activate Controller
+Controller -> Controller : chooseBoard
+activate Controller
+Controller --> Board : new
+Controller --> Controller
+deactivate Controller
+Controller --> Game : new
+Controller -> Controller : numPlayers
+activate Controller
+Controller --> Controller : numPlayers
+deactivate Controller
+Controller -> Controller : chooseColor
+activate Controller
+loop numPlayers
+Controller -> Game : tryToAddPlayer
+activate Game
+Game -> Color : valueOfIgnoreCase
+activate Color
+Color --> Game
+deactivate Color
+Game -> Player : getPlayer
+activate Player
+Player --> Game
+deactivate Player
+Game --> Player : new
+Game --> Controller
+deactivate Game
+end loop
+Controller --> Controller
+deactivate Controller
+return
+@enduml

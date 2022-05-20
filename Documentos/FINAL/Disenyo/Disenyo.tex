@@ -1168,4 +1168,83 @@ Con la introducción de los comandos vino acompañado el comando exit, que puede
 En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en ... %FIXME Poner donde esté explicada la evolución de los comandos y una referencia a esa seccion
 \end{sprint}
 
+\subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
+
+\begin{sprint}[1]
+En este primer Sprint el número de jugadores es fijo. Este número se guarda como atributo de la clase \texttt{Rolit}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit-sprint1.png} 
+\end{center}
+
+Para la creación de estos jugadores, los colores también están fijados, siendo estos amarillo, rojo, verde y azul, asignados a los jugadores en ese orden. Por tanto, en este momento, de cara a la creación de los jugadores (y de la partida en general) la entrada se limita a leer el nombre de los jugadores, que se hace directamente en el método main de \texttt{Rolit}.
+
+El flujo de creación de los jugadores actualmente se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit.main()-sprint1.png} 
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[2]
+En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
+
+En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
+
+\begin{center}
+\includegraphics[scale=0.85]{Controller-sprint2.png} 
+\end{center}
+
+El flujo de dicha creación es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
+\end{center}
+\end{sprint}
+
+\subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
+
+\begin{sprint}[1]
+En este primer Sprint el número de jugadores es fijo. Este número se guarda como atributo de la clase \texttt{Rolit}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit-sprint1.png} 
+\end{center}
+
+Para la creación de estos jugadores, los colores también están fijados, siendo estos amarillo, rojo, verde y azul, asignados a los jugadores en ese orden. Por tanto, en este momento, de cara a la creación de los jugadores (y de la partida en general) la entrada se limita a leer el nombre de los jugadores, que se hace directamente en el método main de \texttt{Rolit}.
+
+El flujo de creación de los jugadores actualmente se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit.main()-sprint1.png} 
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[2]
+En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
+
+En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
+
+\begin{center}
+\includegraphics[scale=1]{Controller-sprint2.png} 
+\end{center}
+
+El flujo de dicha creación es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
+\end{center}
+
+Aparte, dentro del bucle con \texttt{tryToAddPlayer} vemos que se da la opción al jugador de elegir color. Los colores disponibles son: Amarillo, rojo, verde, azul, naranja, rosa, morado, negro, marrón y beige.
+
+Para conseguir esto, la representación interna de los colores se hace a través de la clase enumerada \texttt{Color}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.9]{Color-sprint2.png} 
+\end{center}
+
+\end{sprint}
+
 \end{document}
