@@ -416,14 +416,13 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 \begin{sprint}[5]
 Este fue el Sprint en el que se empezaron a desarrollar las distintas estrategias de las inteligencias artificiales. Se planearon tres, recogidas en las siguiente clases, todas herederas de la clase abstracta Strategy: RandomStrategy, GreedyStrategy y MinimaxStrategy.
 
-La idea de la estrategia es que, cuando le toque jugar a una inteligencia artificial, la estrategia se encarge de calcular
-su siguiente movimiento y este se ejecutase inmediatamente después de su cálculo.
+La idea de la estrategia es que, cuando le toque jugar a una inteligencia artificial, la estrategia se encarge de calcular su siguiente movimiento y este se ejecutase inmediatamente después de su cálculo.
 
-Para encapsular está lógica se creo la clase abstracta Strategy, para que cada estrategia en particular fuera una clase
-heredera de esta.
+Para hacer esto, hemos hecho uso del \textbf{patrón estrategia}. Este patrón permite mantener un conjunto de algoritmos para la resolución de una tarea de distintas formas, de forma que se pueda dinámicamente elegir un algoritmo u otro en tiempo de ejecución. La explicación de como se ha llevado a cabo el patrón se explica a continuación.
 
-Se han desarrollado tres estrategias, que suponen tres niveles de dificultad distintos, 
-y la lógica de estas está recogida en las siguientes clases: RandomStrategy, GreedyStrategy y MinimaxStrategy.
+Para encapsular está lógica se creo la clase abstracta Strategy, para que cada estrategia en particular fuera una clase heredera de esta.
+
+Se han desarrollado tres estrategias, que suponen tres niveles de dificultad distintos, y la lógica de estas está recogida en las siguientes clases: RandomStrategy, GreedyStrategy y MinimaxStrategy.
 
 \textbf{RandomStrategy}:
 La idea es que se genere una posición cualquiera en el tablero, siempre y cuando esta sea válida. Esta es la posición que la inteligencia artificial jugará.
