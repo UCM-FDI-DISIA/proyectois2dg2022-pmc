@@ -1,0 +1,21 @@
+#Rolit.main()-sprint1
+
+@startuml
+participant Actor
+Actor -> Rolit : main
+activate Rolit
+Rolit -> Rolit : version
+activate Rolit
+Rolit --> Rolit
+deactivate Rolit
+Rolit -> Rolit : namePlayers
+activate Rolit
+Rolit -> Color : toString
+activate Color
+Color --> Rolit
+deactivate Color
+Rolit --> Player : new
+Rolit --> Rolit
+deactivate Rolit
+return
+@enduml

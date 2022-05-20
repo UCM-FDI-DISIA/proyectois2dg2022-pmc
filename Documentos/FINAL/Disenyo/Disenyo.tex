@@ -115,8 +115,75 @@ El desconocimiento del patrón de arquitectura \textit{Modelo-Vista-Controlador}
 
 \subsection{Diseño del servidor}
 
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
+
+\subsubsection{Sprint 6}
+
+Este Sprint se caracteriza por la introducción del modo de equipo GameTeams en Red.
+
+\begin{itemize}
+
+\item ServerView
+
+En vez de llamar a server.start, se invoca un SwingWorker, llamado ServerWorker, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
+
+\item Server
+
+Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
+
+En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
+
+Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
+
+Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el JSON del GameConfig.
+
+\item ServerClient
+
+Añadido notifyClientToChooseTeam; indica al ServerClientThread que debe informar al cliente que debe escoger equipo.
+
+\item ServerClientThread
+
+Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (updateGraphics, chooseTeam respectivamente).
+
+\end{itemize}
+
+\subsubsection{Sprint 7}
+
+\begin{itemize}
+
+\item WaitPlayerThread
+
+Pasa a llamarse, con fines aclaratorios, ServerWaitPlayerThread.
+
+\item Server
+
+Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
+
+\end{itemize}
+
 \subsection{Diseño de los clientes}
 
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
+
+\subsubsection{Sprint 6}
+
+\begin{itemize}
+
+\item ClientController
+
+Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
+
+Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
+
+\item Client
+
+Client incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de ClientController a MainWindow y viceversa respectivamente.
+
+\end{itemize}
 
 \section{Diseño y evolución de las Historias de Usuario}
 
@@ -537,14 +604,13 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 \begin{sprint}[5]
 Este fue el Sprint en el que se empezaron a desarrollar las distintas estrategias de las inteligencias artificiales. Se planearon tres, recogidas en las siguiente clases, todas herederas de la clase abstracta Strategy: RandomStrategy, GreedyStrategy y MinimaxStrategy.
 
-La idea de la estrategia es que, cuando le toque jugar a una inteligencia artificial, la estrategia se encarge de calcular
-su siguiente movimiento y este se ejecutase inmediatamente después de su cálculo.
+La idea de la estrategia es que, cuando le toque jugar a una inteligencia artificial, la estrategia se encarge de calcular su siguiente movimiento y este se ejecutase inmediatamente después de su cálculo.
 
-Para encapsular está lógica se creo la clase abstracta Strategy, para que cada estrategia en particular fuera una clase
-heredera de esta.
+Para hacer esto, hemos hecho uso del \textbf{patrón estrategia}. Este patrón permite mantener un conjunto de algoritmos para la resolución de una tarea de distintas formas, de forma que se pueda dinámicamente elegir un algoritmo u otro en tiempo de ejecución. La explicación de como se ha llevado a cabo el patrón se explica a continuación.
 
-Se han desarrollado tres estrategias, que suponen tres niveles de dificultad distintos, 
-y la lógica de estas está recogida en las siguientes clases: RandomStrategy, GreedyStrategy y MinimaxStrategy.
+Para encapsular está lógica se creo la clase abstracta Strategy, para que cada estrategia en particular fuera una clase heredera de esta.
+
+Se han desarrollado tres estrategias, que suponen tres niveles de dificultad distintos, y la lógica de estas está recogida en las siguientes clases: RandomStrategy, GreedyStrategy y MinimaxStrategy.
 
 \textbf{RandomStrategy}:
 La idea es que se genere una posición cualquiera en el tablero, siempre y cuando esta sea válida. Esta es la posición que la inteligencia artificial jugará.
@@ -772,7 +838,7 @@ El cliente se encuentra en una situación parecida. ¿Qué ocurre si recibe una 
 Una vez el modelo de red ha sido completamente explicado, procedemos a detallar los detalles de implementación relativos al juego en específico. Es preciso introducir el diagrama de clases relativo a este Sprint.
 
 \begin{center}
-\includegraphics[scale=0.25]{UMLClasesRedSprint5.png} 
+\includegraphics[scale=0.45]{UMLClasesRedSprint5.png} 
 \end{center}
 
 Empezamos a detallar la estructura del servidor.
@@ -853,10 +919,10 @@ Como hemos anticipado, ClientController extiende de Thread, y en su método run(
 Una vez especificadas todas las clases, describiremos el hilo típico de la ejecución para comprender cómo operan estas y en el orden en el que lo hacen.
 
 \begin{center}
-\includegraphics[scale=0.2]{umlconexiones.png}
+\includegraphics[scale=0.4]{umlconexiones.png}
 \end{center}
 
-Observamos que al pulsar el botón de Start Server en el diálogo de abrir un servidor, se llama crea Server pasándole como parámetro un JSON (gameConfigJSON) correspondiente a una configuración del juego básica especificada desde la GUI, que el servidor rellenará añadiendo los jugadores pertinentes.
+Observamos que al pulsar el botón de Start Server en el diálogo de abrir un servidor, se llama a crear una instancia Server pasándole como parámetro un JSON (gameConfigJSON) correspondiente a una configuración del juego básica especificada desde la GUI, que el servidor rellenará añadiendo los jugadores pertinentes.
 En el constructor de Server se almacena este atributo JSON y se llama al método start(port) que crea el ServerSocket. Posteriormente, llamada al método waitForPlayers para realizar las conexiones oportunas.
 Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su ServerClient y Client asociados, y se crea el thread WaitPlayerThread y se llama a start(). El WaitPlayerThread, en su método run() llamado desde start(), espera en el método de serverSocket.accept() que se conecte un cliente.
 
@@ -875,7 +941,7 @@ Si la conexión no se ha realizado bien, se generan las excepciones oportunas qu
 El thread WaitPlayerThread procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al Player (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de incomingPlayers de forma síncrona mientras WaitPlayerThread espera. El mecanismo pormenorizado es el siguiente:
 
 \begin{center}
-\includegraphics[scale=0.2]{empezarPartidaUml.png}
+\includegraphics[scale=0.4]{empezarPartidaUml.png}
 \end{center}
 
 \begin{enumerate}
@@ -898,23 +964,14 @@ Una vez todos los jugadores se han conectados y las dos listas completadas, se s
 
 El cliente recibe esta configuración del juego en su thread, se llama al método updateGameFromServer de Client, quien a su vez llama a updateGameFromServer de MainWindow.
 
-En este último método, si es la primera jugada, se llama crea el juego en el controlador, y después se llama a initGame() para inicializar las componentes visuales relativas al juego.
-En cualquier caso, se llama después al método updateGameFromServer de Controller para actualizar el juego tal y como ordena el JSON pasado como parámetro.
+En este último método, si es la primera jugada, se llama a crear el juego en el controlador, y después se llama a initGame() para inicializar las componentes visuales relativas al juego.
 
-Los mecanismos de este método son crear un nuevo juego a partir del nuevo JSON estado del juego, pasar los observadores del Game antiguo al nuevo, y adjudicar al atributo Game de Controller este nuevo juego.
-
-\begin{lstlisting}[frame=single, language=Java]
-public void updateGameFromServer(JSONObject o) {
-  Game newGame = GameBuilder.createGame(o);
-  newGame.updateGameFromServer(game.getObserverList());
-  game = newGame;
-}
-\end{lstlisting}
+En cualquier caso, se llama después al método updateGameFromServer de Controller para actualizar el juego tal y como ordena el JSON pasado como parámetro. Los mecanismos de este método son crear un nuevo juego a partir del nuevo JSON estado del juego, pasar los observadores del Game antiguo al nuevo, y adjudicar al atributo Game de Controller este nuevo juego.
 
 Falta por especificar cómo se produce una jugada en el modo online y cómo evitar que los clientes jueguen cuando no es su turno.
 
 \begin{center}
-\includegraphics[scale=0.2]{juegoTipicoUml.png}
+\includegraphics[scale=0.4]{juegoTipicoUml.png}
 \end{center}
 
 Se pulsa una celda en el tablero y se pide al controlador que ejecute el comando de poner cubo en la posición pedida, como de costumbre. En caso de que se juegue el modo online, se comprueba si el jugador está legitimado para jugar (es decir, es su turno). Para ello, se comprueba que el jugador turno del juego es el mismo que el jugador del cliente (recordemos que Client tiene el atributo Player del jugador al que corresponde).
@@ -922,20 +979,6 @@ Se pulsa una celda en el tablero y se pide al controlador que ejecute el comando
 De verificarse estas dos condiciones, se ejecuta el comando y se envía el nuevo estado del juego al servidor, quien enviará este nuevo estado al resto de clientes.
 
 De no jugarse el modo online, se ejecuta el comando como de costumbre.
-
-\begin{lstlisting}[frame=single, language=Java]
-if (onlineMode) {
-			
- if (game.getCurrentPlayer().getColor()
- .equals(clientRolit.getPlayer().getColor())) {
-   command.execute(game);
-   clientRolit.updateGameToServer();
- }
-			
-}
-else
- command.execute(game);
-\end{lstlisting}
 
 Nótese que este último diagrama de secuencia se representa a Client como entidad abstracta emisora y receptora, realmente un Client sería emisor y el resto de Client serían receptores.
 \end{sprint}
@@ -962,7 +1005,7 @@ En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes
 \item Simplificación y refactorización del código de Red.
 
 \begin{center}
-\includegraphics[scale=0.25]{UMLClasesRedSprint6.png} 
+\includegraphics[scale=0.45]{UMLClasesRedSprint6.png} 
 \end{center}
 
 \end{itemize}
@@ -986,26 +1029,6 @@ Dentro del método waitForPlayers que, recordemos, ejecuta un bucle de número d
 
 La diferencia con anteriores sprints es que ahora el servidor, antes de completar el gameConfigJSON con la información relativa a los jugadores, comprueba en gameConfigJSON si el modo escogido es por equipos.
 
-\begin{lstlisting}[frame=single, language=Java]
-//...Bucle que realiza las conexiones con los clientes
-	
-if (gameConfigJSON.get("type").equals("GameTeams")) {
- for (int i = 0; i < clients.size(); ++i) {
-  clients.get(i).getFirst()
-  .notifyClientToChooseTeam(gameConfigJSON);
- }
-			
- waitForAllPlayersToChooseTeam();
-			
- completeGameConfigTeams();
-			
-}
-	
-complateGameConfigPlayers();
-	
-//... actualizar los clientes con el nuevo gameConfigJSON
-\end{lstlisting}
-
 De ser así, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al gameConfigJSON; posteriormente, como en la implementación de sprints anteriores, procede a completarse el gameConfigJSON con la información de los jugadores.
 
 Primero, como observamos, se llama al método notifyClientToChooseTeam de todos los Client; este, por medio de ServerClientThread envía el gameConfigJSON, con el campo "chooseTeam" como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
@@ -1014,21 +1037,7 @@ Cada cliente en su respectivo ClientController recibe esta información. Observa
 
 Una vez todos los clientes han sido notificados, se llama a waitForAllPlayersToChooseTeam(). Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
 
-Su implementación es la siguiente:
-
-\begin{lstlisting}[frame=single, language=Java]
-public synchronized void waitForAllPlayersToChooseTeam() {
- while ((mapClientTeam.size() != expectedPlayers)) {
-  try {
-   wait(500);
-  } catch (InterruptedException e) {
-   e.printStackTrace();
-  }
- }
-}
-\end{lstlisting}
-
-Como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de ServerClient - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
+Además, como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de ServerClient - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
 
 ¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un JSONObject con el nombre del equipo elegido en el campo "team". Antes de enviarlo, pone en el JSON un campo "notification" con el valor "chooseTeam"; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
 
@@ -1036,89 +1045,53 @@ El servidor recibe un JSON con la notificación chooseTeam; en receiveFromClient
 
 Como hemos comentado, una vez todos los equipos han sido escogidos, se sigue completando el gameConfig; ahora se sigue el mismo hilo de ejecución especificado en los anteriores sprints; se rellena el gameConfigJSON con la información de los jugadores y posteriormente se pasa el JSON a todos los clientes para que actualicen sus vistas para mostrar el juego por primera vez.
 
-En cuanto al nuevo sistema de notificaciones, son los thread de servidor y cliente los que añaden la notificación al json a enviar; para saber qué notificación enviar, las clases en contacto con los thread (ServerClient desde el servidor, Client desde el cliente) llaman al método especifico que pondrá la notificación requerida para después enviársela al cliente/servidor.
-\begin{lstlisting}[frame=single, language=Java]
-//ServerClientThread.java
-
-public void sendToClient(JSONObject json) {
- String msg = json.toString();
- if(msg != null) 
-  output.println(msg);
-}
-
-public void sendUpdateGraphicsToClient(JSONObject json){
- json.put("notification", "updateGraphics");
- sendToClient(json);
-}
-
-public void sendChooseTeamToClient(JSONObject
-gameConfigJSON) {
- gameConfigJSON.put("notification", "chooseTeam");
- sendToClient(gameConfigJSON);
-}
-\end{lstlisting}
-
-\begin{lstlisting}[frame=single, language=Java]
-//ClientController.java
-
-public void sendToServer(JSONObject report) {
- String msg = report.toString();
- out.println(msg);
-}
-
-public void sendChosenTeamToServer(JSONObject
-selectedTeamJSON) {
- selectedTeamJSON.put("notification", "chooseTeam");
- sendToServer(selectedTeamJSON);	
-}
-
-public void sendPlayerInfoToServer(JSONObject report) {
- report.put("notification", "playerInfo");
- sendToServer(report);
-}
-	
-public void sendGameToServer(JSONObject report) {
- report.put("notification", "updateGraphics");
- sendToServer(report);
-}
-\end{lstlisting}
-
-De esta forma, se tienen en cuenta las notificaciones a la hora de procesar los mensajes enviados:
-
-\begin{lstlisting}[frame=single, language=Java]
-//ClientController.java
-
-if (newGameJSON.getString("notification")
-.equals("updateGraphics"))
- clientRolit.updateGameFromServer(newGameJSON);
-else if (newGameJSON.getString("notification")
-.equals("chooseTeam"))
- clientRolit.chooseTeamFromServer(newGameJSON);
-}
-\end{lstlisting}
-\begin{lstlisting}[frame=single, language=Java]
-//Server.java
-
-String notification = json.getString("notification");
-		
-if (notification.equals("chooseTeam")) {
- mapClientTeam.put(client, json.getString("team"));
-}
-else if (notification.equals("updateGraphics")) {
-//...llamar a actualizar las vistas de todos los clientes...
-else if (notification.equals("playerInfo")){
- Player p = new Player(json);
- incomingPlayers.add(p);	
-}
-\end{lstlisting}
+En cuanto al nuevo sistema de notificaciones, son los thread de servidor y cliente los que añaden la notificación al json a enviar; para saber qué notificación enviar, las clases en contacto con los thread (ServerClient desde el servidor, Client desde el cliente) llaman al método especifico que pondrá la notificación requerida para después enviársela al cliente/servidor. De esta forma, se tienen en cuenta las notificaciones a la hora de procesar los mensajes enviados.
 
 Cambios de importancia para comparar los UML del Sprint 5 con los del Sprint 7 son los siguientes:
 
---En construcción--
+\begin{center}
+\includegraphics[scale=0.3]{Client-evol.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{ClientController-evol.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{ServerClient-evol.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{ServerClientThread-evol.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{server-evol.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{WaitPlayerThread-evol.png} 
+\end{center}
 
 Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado final de la redes.
 
---En construcción--
+\begin{center}
+\includegraphics[scale=0.45]{UMLClasesRedSprint7.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{umlconexionessprint7.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.3]{empezarPartidaUmlSprint7.png}
+\end{center}
+
+
+\begin{center}
+\includegraphics[scale=0.4]{juegoTipicoUmlSprint7.png}
+\end{center}
+
 \end{sprint}
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
@@ -1287,6 +1260,85 @@ Con la introducción de los comandos vino acompañado el comando exit, que puede
 \end{center}
 
 En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en ... %FIXME Poner donde esté explicada la evolución de los comandos y una referencia a esa seccion
+\end{sprint}
+
+\subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
+
+\begin{sprint}[1]
+En este primer Sprint el número de jugadores es fijo. Este número se guarda como atributo de la clase \texttt{Rolit}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit-sprint1.png} 
+\end{center}
+
+Para la creación de estos jugadores, los colores también están fijados, siendo estos amarillo, rojo, verde y azul, asignados a los jugadores en ese orden. Por tanto, en este momento, de cara a la creación de los jugadores (y de la partida en general) la entrada se limita a leer el nombre de los jugadores, que se hace directamente en el método main de \texttt{Rolit}.
+
+El flujo de creación de los jugadores actualmente se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit.main()-sprint1.png} 
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[2]
+En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
+
+En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
+
+\begin{center}
+\includegraphics[scale=0.85]{Controller-sprint2.png} 
+\end{center}
+
+El flujo de dicha creación es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
+\end{center}
+\end{sprint}
+
+\subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
+
+\begin{sprint}[1]
+En este primer Sprint el número de jugadores es fijo. Este número se guarda como atributo de la clase \texttt{Rolit}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit-sprint1.png} 
+\end{center}
+
+Para la creación de estos jugadores, los colores también están fijados, siendo estos amarillo, rojo, verde y azul, asignados a los jugadores en ese orden. Por tanto, en este momento, de cara a la creación de los jugadores (y de la partida en general) la entrada se limita a leer el nombre de los jugadores, que se hace directamente en el método main de \texttt{Rolit}.
+
+El flujo de creación de los jugadores actualmente se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.85]{Rolit.main()-sprint1.png} 
+\end{center}
+
+\end{sprint}
+
+\begin{sprint}[2]
+En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
+
+En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
+
+\begin{center}
+\includegraphics[scale=1]{Controller-sprint2.png} 
+\end{center}
+
+El flujo de dicha creación es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
+\end{center}
+
+Aparte, dentro del bucle con \texttt{tryToAddPlayer} vemos que se da la opción al jugador de elegir color. Los colores disponibles son: Amarillo, rojo, verde, azul, naranja, rosa, morado, negro, marrón y beige.
+
+Para conseguir esto, la representación interna de los colores se hace a través de la clase enumerada \texttt{Color}, cuyo estado en este momento es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.9]{Color-sprint2.png} 
+\end{center}
+
 \end{sprint}
 
 \end{document}

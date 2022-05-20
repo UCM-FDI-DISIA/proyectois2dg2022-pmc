@@ -258,7 +258,6 @@ public class Board implements Reportable {
 		return x >= 0 && x < size && y >= 0 && y < size && shapeMatrix[x][y];
 	}
 	
-
 	/**
 	 * This method verifies if a position is valid to place a cube
 	 * @param x x coordinate

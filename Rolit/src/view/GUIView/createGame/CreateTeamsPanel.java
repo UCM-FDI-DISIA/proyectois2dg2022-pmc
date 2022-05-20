@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 import view.GUIView.RolitComponents.RolitPanel;
 
+/**
+ * This panel contains TeamDataPanels displayed vertically
+ * @author PMC
+ *
+ */
 public class CreateTeamsPanel extends RolitPanel {
 	private static final long serialVersionUID = 1L;
 	
@@ -17,6 +22,9 @@ public class CreateTeamsPanel extends RolitPanel {
 	
 	List<TeamDataPanel> listTeamPanels;
 	
+	/**
+	 * Constructor
+	 */
 	CreateTeamsPanel(){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setAlignmentX(CENTER_ALIGNMENT);
@@ -31,6 +39,10 @@ public class CreateTeamsPanel extends RolitPanel {
 		this.setVisible(false);
 	}
 	
+	/**
+	 * It shows/hides the panel if the game mode is GameTeams or not.
+	 * @param isTeamMode  true if playing GameTeams and false otherwise
+	 */
 	void update(boolean isTeamMode){
 		if(isTeamMode)
 			this.setVisible(true);
@@ -38,15 +50,27 @@ public class CreateTeamsPanel extends RolitPanel {
 			this.setVisible(false);
 	}
 	
+	/**
+	 * Returns the number of teams
+	 * @return The number of teams
+	 */
 	int numTeams() {
 		return INITIAL_NUMBER_TEAMS;
 	}
 	
-	//This JSONObject doesn't contain the playerList
+	/**
+	 * It returns the report of a team in JSONObject format. IMPORTANT: it doesn't contain the playerList.
+	 * @param team Team number
+	 * @return The report of a team in JSONObject format. IMPORTANT: it doesn't contain the playerList.
+	 */
 	JSONObject getTeamReport(int team) {
 		return listTeamPanels.get(team).getTeamReport();
 	}
 	
+	/**
+	 * This function returns the text in the name fields
+	 * @return A set containing the text in the name fields
+	 */
 	public HashSet<String> getTeamNames(){
 		HashSet<String> teamNames = new HashSet<String>();
 		for(int i = 0; i < listTeamPanels.size(); i++) {
