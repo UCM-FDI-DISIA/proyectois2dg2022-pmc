@@ -1,4 +1,4 @@
-0package logic;
+package logic;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,6 +111,7 @@ public class GameClassicTest {
 		game.play();
 		String s = "{\"players\":[{\"score\":1,\"color\":\"P\",\"name\":\"Maria jose\"},{\"score\":2,\"color\":\"L\",\"name\":\"paco\"},{\"score\":0,\"color\":\"R\",\"name\":\"lucia la de cuenca\"}],\"turn\":\"R\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"L\",\"pos\":[5,7]},{\"color\":\"P\",\"pos\":[5,6]},{\"color\":\"L\",\"pos\":[5,8]}]}}"; 
 		assertTrue (new JSONObject(s).similar(game.report()));
+<<<<<<< HEAD
 	}
 	
 	@Test
@@ -164,5 +165,7 @@ public class GameClassicTest {
 		String s = "{\"players\":[{\"score\":2,\"color\":\"G\",\"name\":\"uwu uwu\"},{\"score\":1,\"color\":\"O\",\"name\":\"prueba 3 prueba 3\"},{\"score\":0,\"color\":\"W\",\"name\":\"paquito el chocolatero\"}],\"turn\":\"O\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"DM\",\"cubes\":[{\"color\":\"O\",\"pos\":[8,9]},{\"color\":\"G\",\"pos\":[8,8]},{\"color\":\"G\",\"pos\":[8,7]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));
 		b.clearOrderedCubeList();
+=======
+>>>>>>> javadoc
 	}
 }
