@@ -95,8 +95,75 @@ Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Playe
 
 \subsection{Diseño del servidor}
 
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
+
+\subsubsection{Sprint 6}
+
+Este Sprint se caracteriza por la introducción del modo de equipo GameTeams en Red.
+
+\begin{itemize}
+
+\item ServerView
+
+En vez de llamar a server.start, se invoca un SwingWorker, llamado ServerWorker, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
+
+\item Server
+
+Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
+
+En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
+
+Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
+
+Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el JSON del GameConfig.
+
+\item ServerClient
+
+Añadido notifyClientToChooseTeam; indica al ServerClientThread que debe informar al cliente que debe escoger equipo.
+
+\item ServerClientThread
+
+Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (updateGraphics, chooseTeam respectivamente).
+
+\end{itemize}
+
+\subsubsection{Sprint 7}
+
+\begin{itemize}
+
+\item WaitPlayerThread
+
+Pasa a llamarse, con fines aclaratorios, ServerWaitPlayerThread.
+
+\item Server
+
+Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
+
+\end{itemize}
+
 \subsection{Diseño de los clientes}
 
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
+
+\subsubsection{Sprint 6}
+
+\begin{itemize}
+
+\item ClientController
+
+Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
+
+Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
+
+\item Client
+
+Client incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de ClientController a MainWindow y viceversa respectivamente.
+
+\end{itemize}
 
 \section{Diseño y evolución de las Historias de Usuario}
 
