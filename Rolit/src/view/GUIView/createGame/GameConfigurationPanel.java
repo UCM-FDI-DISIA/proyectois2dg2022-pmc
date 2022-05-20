@@ -23,6 +23,11 @@ import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;
 
+/**
+ * This panel contains the fields to set up a game: game mode, shape and number of players
+ * @author PMC
+ *
+ */
 public class GameConfigurationPanel extends RolitPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +43,9 @@ public class GameConfigurationPanel extends RolitPanel {
 	private JButton okButton;
 	private boolean isGameMode;
 	
+	/**
+	 * It initializes the GUI
+	 */
 	private void initGUI() {
 		this.setLayout(new FlowLayout());
 		this.setMinimumSize(new Dimension(700, 20));
@@ -77,7 +85,11 @@ public class GameConfigurationPanel extends RolitPanel {
 		this.add(okButton);
 		this.add(cancelButton);
 	}
-	
+
+	/**
+	 * Constructor
+	 * @param cgdialog The associated createGameDialog
+	 */
 	GameConfigurationPanel(CreateGameDialog cgdialog){
 		initGUI();
 		
@@ -128,30 +140,43 @@ public class GameConfigurationPanel extends RolitPanel {
 		});
 	}
 	
+	/**
+	 * Shows/Hides the team configuration (number of teams spinner)
+	 * @param isGameMode true if playing GameTeams and false otherwise
+	 */
 	void update(boolean isGameMode) {
 		numberOfTeamsLabel.setVisible(isGameMode);
 		teamsSpinner.setVisible(isGameMode);
 	}
 
-	
+	/**
+	 * This function returns true if playing GameTeams and false otherwise
+	 * @return true if playing GameTeams and false otherwise
+	 */
 	public String getGameMode() {
 		return (String) gameModeCombo.getSelectedItem();
 	}
 	
-
+	/**
+	 * It returns the chosen boardShape
+	 * @return The chosen boardShape
+	 */
 	public Shape getBoardShape() {
 		return (Shape) shapesCombo.getSelectedItem();
 	}
 	
-
+	/**
+	 * It returns the selected number of players
+	 * @return The selected number of players
+	 */
 	public int getNumPlayers() {
 		return (int) playersSpinner.getValue();
 	}
 	
-	public int getPlayerSpinnerValue() {
-		return (int)playersSpinner.getValue();
-	}
-	
+	/**
+	 * It returns the selected number of teams
+	 * @return The selected number of teams
+	 */
 	public int getTeamsSpinnerValue() {
 		return (int)teamsSpinner.getValue();
 	}

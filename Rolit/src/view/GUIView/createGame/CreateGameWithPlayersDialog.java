@@ -11,6 +11,11 @@ import model.builders.GameTeamsBuilder;
 import model.logic.Color;
 import utils.Pair;
 
+/**
+ * This dialog allows to configure a game, including fields for the players' name and color
+ * @author PMC
+ *
+ */
 public class CreateGameWithPlayersDialog extends CreateGameDialog {
 
 	CreatePlayersPanel playersPanel;
@@ -74,12 +79,12 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 
 		Pair<Boolean, String> pair;
 
-		if (playerNames.size() < gameConfig.getPlayerSpinnerValue()) // e.d hay un elemento repetido
+		if (playerNames.size() < gameConfig.getNumPlayers()) // e.d hay un elemento repetido
 		{
 			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated name.");
 			return pair;
 		}
-		if (playerColors.size() < gameConfig.getPlayerSpinnerValue()) // e.d hay un elemento repetido
+		if (playerColors.size() < gameConfig.getNumPlayers()) // e.d hay un elemento repetido
 		{
 			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated color.");
 			return pair;

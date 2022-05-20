@@ -22,6 +22,11 @@ import view.GUIView.RolitComponents.RolitComboBox;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextArea;
 
+/**
+ * This panel contains all the fields that are necessary to build a player
+ * @author PMC
+ *
+ */
 public class PlayerDataPanel extends RolitPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +48,11 @@ public class PlayerDataPanel extends RolitPanel {
 
 	private static final int MAX_TEXT_LENGTH = 15;
 
+	/**
+	 * Constructor
+	 * @param number Player's position in the enumeration
+	 * @param isTeamMode true if playing GameTeams and false otherwise
+	 */
 	@SuppressWarnings("serial")
 	PlayerDataPanel(int number, boolean isTeamMode) {
 		this.setLayout(new FlowLayout());
@@ -114,18 +124,34 @@ public class PlayerDataPanel extends RolitPanel {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * It returns the text in the field name
+	 * @return The text in the field name
+	 */
 	public String getPlayerName() {
 		return this.nameTextArea.getText();
 	}
 	
+	/**
+	 * If the player is an IA, it returns the strategy
+	 * @return If the player is an IA, it returns the strategy
+	 */
 	public Strategy getPlayerStrategy() {
 		return (Strategy) AICombo.getSelectedItem();
 	}
 	
+	/**
+	 * This function returns the chosen color for the player
+	 * @return The chosen color for the player
+	 */
 	public Color getPlayerColor() {
 		return (Color) colorCombo.getSelectedItem();
 	}
 
+	/**
+	 * It shows/hides the team configuration the player
+	 * @param isTeamMode true if playing GameTeams and false otherwise
+	 */
 	public void updateMode(boolean isTeamMode) {
 		this.isTeamMode = isTeamMode;
 		if(isTeamMode) {
@@ -139,6 +165,11 @@ public class PlayerDataPanel extends RolitPanel {
 		}
 	}
 	
+	/**
+	 * This method returns true if the player belongs to the team number teamNumber and false otherwise
+	 * @param teamNumber Team number
+	 * @return true if the player belongs to the team number teamNumber and false otherwise
+	 */
 	public boolean isAtTeam(int teamNumber) {
 		if(isTeamMode) {
 			return teamNumber == (int) teamCombo.getSelectedIndex();
@@ -146,6 +177,10 @@ public class PlayerDataPanel extends RolitPanel {
 		return false;
 	}
 	
+	/**
+	 * This function generates a JSONObject containing the player configuration
+	 * @return A JSONObject containing the player configuration
+	 */
 	public JSONObject getPlayerReport() {
 		JSONObject player = new JSONObject();
 		player.put("name", getPlayerName());
