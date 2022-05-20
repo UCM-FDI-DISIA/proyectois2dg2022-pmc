@@ -1,7 +1,6 @@
 package model.commands;
 
 import model.logic.Game;
-import model.rolitexceptions.HelpException;
 
 /**
  * This class represents a command to show some help for the game
@@ -27,6 +26,6 @@ public class HelpCommand extends Command {
 		for(Command c : AVAILABLE_COMMANDS) {
 			buffer.append(String.format("%n%s", c.infoForHelp()));
 		}
-		throw new HelpException(buffer.toString());		
+		throw new Exception(buffer.toString());		
 	}
 }
