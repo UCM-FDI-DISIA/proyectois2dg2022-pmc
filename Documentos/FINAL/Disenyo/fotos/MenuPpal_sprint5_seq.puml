@@ -1,0 +1,63 @@
+@startuml
+participant Rolit
+Rolit -> MainBashWindow : open
+activate MainBashWindow
+MainBashWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> MainBashWindow
+deactivate ConsoleWindow
+MainBashWindow -> MainBashWindow : menu
+activate MainBashWindow
+deactivate MainBashWindow
+
+loop repeatMenu
+
+alt newGame
+MainBashWindow -> NewGameWindow : open
+activate NewGameWindow
+NewGameWindow --> MainBashWindow
+deactivate NewGameWindow
+MainBashWindow -> NewGameWindow : get
+activate NewGameWindow
+NewGameWindow --> MainBashWindow
+deactivate NewGameWindow
+MainBashWindow -> Controller : createGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+end
+
+alt loadGame
+MainBashWindow -> LoadGameWindow : open
+activate LoadGameWindow
+LoadGameWindow --> MainBashWindow
+deactivate LoadGameWindow
+MainBashWindow -> LoadGameWindow : get
+activate LoadGameWindow
+LoadGameWindow --> MainBashWindow
+deactivate LoadGameWindow
+MainBashWindow -> Controller : createGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+end
+
+alt deleteGame
+MainBashWindow -> DeleteGameWindow : open
+activate DeleteGameWindow
+DeleteGameWindow --> MainBashWindow
+deactivate DeleteGameWindow
+end
+
+alt replayGame
+MainBashWindow -> SaveLoadManager : loadReplay
+activate SaveLoadManager
+SaveLoadManager --> MainBashWindow
+deactivate SaveLoadManager
+MainBashWindow -> Controller : startReplay
+activate Controller
+end
+
+end
+
+@enduml

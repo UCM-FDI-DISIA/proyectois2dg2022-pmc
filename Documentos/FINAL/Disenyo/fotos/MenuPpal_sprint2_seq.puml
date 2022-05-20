@@ -1,0 +1,39 @@
+@startuml
+participant Rolit
+Rolit -> Controller : run
+activate Controller
+Controller -> Controller : menu
+activate Controller
+deactivate Controller
+Controller -> Controller : createGame
+activate Controller
+Controller -> Controller : chooseBoard
+activate Controller
+deactivate Controller
+create Game
+Controller -> Game : new
+activate Game
+Game --> Controller
+deactivate Game
+Controller -> Controller : numPlayers
+activate Controller
+deactivate Controller
+Controller -> Controller : chooseColor
+activate Controller
+Controller -> Game : tryToAddPlayer
+activate Game
+Game --> Controller
+deactivate Game
+deactivate Controller
+deactivate Controller
+Controller -> Controller : createPrinter
+activate Controller
+deactivate Controller
+Controller -> Controller : play
+activate Controller
+loop !finish
+Controller -> Controller : printGame
+end
+deactivate Controller
+return
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+participant Rolit
+Rolit -> Controller : run
+activate Controller
+Controller -> Controller : mode
+activate Controller
+deactivate Controller
+
+alt mode == Console
+Controller -> Controller : menu
+activate Controller
+deactivate Controller
+Controller -> GameBuilder : createGame
+activate GameBuilder
+GameBuilder -> GameBuilder : ask
+activate GameBuilder
+deactivate GameBuilder
+GameBuilder -> GameBuilder : createGame
+activate GameBuilder
+deactivate GameBuilder
+GameBuilder --> Controller
+deactivate GameBuilder
+end
+return
+@enduml

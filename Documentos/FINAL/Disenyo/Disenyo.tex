@@ -19,6 +19,25 @@
     
 \setlength{\parindent}{12pt}
 
+\usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
+    \definecolor{comentarios}{RGB}{186,196,200}
+    \definecolor{words}{RGB}{87,35,100}
+
+\lstset{
+    language=Java,
+    basicstyle=\scriptsize\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{comentarios},
+    keywordstyle=\color{words}
+}
+
 \begin{document}
 \graphicspath{{./fotos/}}
 
@@ -85,6 +104,7 @@ Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Playe
 
 
 \section{Diseño de la Vista de Consola}
+El desconocimiento del patrón de arquitectura \textit{Modelo-Vista-Controlador} hizo que, hasta la creación de la GUI, el juego se imprimiese por consola sin tener una definición concreta de quién y cómo podía escribir en la misma. Esto hizo que al introducir dicho patrón realmente surgiese la necesidad de reunir todos esos métodos y acciones del modelo que imprimían por pantalla bajo un mismo conjunto de clases que hicieran las veces de ``componentes'' tal y como posee Swing en Java.
 
 \subsection{Diseño del menú principal y pantallas pre-juego}
 
@@ -105,25 +125,96 @@ Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Playe
 \subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
 
 \subsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
-\begin{sprint}[1 JUANDI]
+En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepctiva con el resultado final.
 
+Sin embargo, poseen gran importancia los sprint 4 y 5, pues son en los que se incluye por primera vez una vista gráfica que no sea la de consola y porque por primera vez se formaliza una entrada salida controlada y a través de clases especializadas que son usadas a modo de componentes gráficos, pero para la consola.
+
+\begin{sprint}[1]
+Al comienzo del proyecto, el juego comenzaba (tras la generación de los objetos correspondientes) con la llamada al método \texttt{run()} del \texttt{Controller}. Este método contenía en su interior el propio menú en forma de sentencias de código:
+\begin{lstlisting}
+public void run() {
+
+		System.out.println();
+		System.out.println("Que desea?");
+		System.out.println();
+		for (int i = 0; i < arrayOpciones.length; ++i)
+			System.out.println((i+1) + ". " + arrayOpciones[i]);
+		
+		int respuesta = 1;
+		boolean repeat = true;
+		...
+\end{lstlisting}
+y también la parte de impresión del tablero y de las jugadas conforme avanzaba el juego:
+\begin{lstlisting}
+while(!game.isFinished()) {
+			String command;
+			int posx, posy;
+			boolean valido = false;
+			
+			printGame();
+			
+			while (!valido) {
+				System.out.println(printer.showTurn());
+				System.out.println("Introduce un comando:");
+				System.out.println("c : Poner un cubo");
+				System.out.println("s : Guardar partida");
+				command = input.next();
+				if ("c".equals(command)) {
+					System.out.println("Introduce la posicion x: ");
+					posx = input.nextInt();
+					System.out.println("Introduce la posicion y: ");
+					posy = input.nextInt();
+					valido = game.play(posx, posy);
+				}					
+				else if("s".equals(command))
+					saveLoadManager.saveGame();
+				else
+					System.out.println("Invalid Command");										
+			}
+			
+		}
+\end{lstlisting}
+Tal y como se ve, principalmente la función más importante de impresión es la función \texttt{void printGame()} que se encarga de imprimir el estado del juego tras cada jugada. Fundamentalmente, el desconocimiento del patrón Modelo-Vista-Controlador hizo que las instrucciones de uso del jugador o los diferentes menús de carga y guardado se hicieran en el propio método que se encargaba de hacer cada cosa, dificultando el poder hacer un diagrama de secuencia de cómo se imprime el menú o cómo se piden acciones.
 \end{sprint}
 
-\begin{sprint}[2 JUANDI]
+\begin{sprint}[2]
+En base a la experiencia en proyectos anteriores, durante este sprint se consolidó la clase \texttt{Controller} como la encargada de todos los procesos externos a los bucles del propio juego, es decir, se encargaba determinar el número de jugadores, el tipo de tablero, creación de los elementos del \texttt{Game}... Por tanto, el menú principal estaba en la clase \texttt{Controller}, concretamente la funcionalidad la encapsulaba la función \texttt{int menu()} que interactuaba con otros métodos privados de la clase para que el usuario pudiese decidir el resto de cosas.
 
+\begin{center}
+\includegraphics[scale=0.5]{MenuPpal_sprint2_seq}
+\end{center}
 \end{sprint}
 
-\begin{sprint}[3 JUANDI]
+Para formalizar esta primera aproximación a una encapsulación formal de cada una de las pantallas a métodos o clases concretas y especializadas, se generan las siguientes constantes en la clase \texttt{Controller} para tener unificados los mensajes que se envían:
+\begin{lstlisting}
+private static final String PROMPT = "Command > ";
+	private static final String NAME_PLAYERS = "Name the players: ";
+	private static final String INITIAL_MESSAGE = "Choose an option:";
+	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
+	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players...";
+	private static final String ERROR_PLAYERS_MSG = "Number of players must be...";
+	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
+	private static final String BOARD_ERROR = "Board size must be a number between...";
+	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
+\end{lstlisting}
 
+\begin{sprint}[3]
+El equipo de desarrollo observó que la clase \texttt{Controller} estaba perdiendo cohesión al asumir muchas responsabilidades que ciertamente no eran de un controlador. Para ello, se creó la clase \texttt{GameGenerator} como una antesala de lo que sería el patrón factoría. De este modo, el menú principal queda encapsulado en la función \texttt{int menu()} de la clase \texttt{Controller}, pero las pantallas donde se deciden el número de jugadores, el tipo de tablero, ... quedan como métodos privados de la nueva clase \texttt{GameGenerator} que es la encargada de saber crear el juego.
+\begin{center}
+\includegraphics[scale=0.55]{MenuPpal_sprint3_seq}
+\end{center}
+En este caso, la función que imprime cada iteración del juego sigue siendo \texttt{printGame()} en \texttt{Controller} y aquellas que se encargan imprimir los mensajes de guardado y carga, así como de errores, siguen diseminadas por las respectivas clases que utilizan dichos métodos como sentencias \texttt{System.out.println("...")}, pues aún no se ha implementado el Modelo-Vista-Controllador.
 \end{sprint}
 
 \begin{sprint}[4]
-\textbf{Console - JUANDI}
+\subsubsection{Console}
+En este sprint, fundamentalmente se aplica el patrón Builder y Factorías a la situación del sprint anterior. En este caso, el menú principal sigue en el método \texttt{int menu()} de la clase \texttt{Controller} y los métodos que antes estaban en \texttt{GameGenerator} y se encargaban de pedir el número de jugadores, forma del tablero, ... por consola ahora forman parte del método \texttt{ask()} de las factorías (que por dentro saben que preguntar en cada caso).
+\begin{center}
+\includegraphics[scale=0.55]{MenuPpal_sprint4_seq}
+\end{center}
+A pesar de que se ha incluido el \textit{Modelo-Vista-Controlador} como patrón de arquitectura, la diferencia fundamental entre tener un nuevo hilo en \textit{Swing} y seguir en el mismo hilo que \textit{Main} ha hecho que no se haya formalizado una vista al uso para la parte de consola y que el código para ciertas excepciones y mensajes siga perdido por los lugares donde se producen dichas incidencias.
 
-aaaaa
-
-\textbf{GUI}
-
+\subsubsection{GUI}
 En este sprint se desarrolló una primera versión de la interfaz gráfica, lo cual involucra a un gran número de clases y métodos. Iniciemos un recorrido por cada uno de los componentes visuales explicando su finalidad
 
 \underline{CeldaGUI}
@@ -136,7 +227,7 @@ Esta clase representa cada una de las posiciones del tablero y puede ser vacía 
 
 \underline{BoardGUI}
 \begin{center}
-\includegraphics[scale=0.8]{board-gui-cubos-sprint3.png}
+\includegraphics[scale=0.3]{board-gui-cubos-sprint3.png}
 \end{center}
 
 La clase \textit{BoardGUI} extiende de \textit{JPanel} y es la encargada de visualizar el tablero de la partida. Se puede apreciar que el tablero está formado por un conjunto de \textit{CeldaGUI}.
@@ -241,12 +332,43 @@ En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través
 \end{sprint}
 
 \begin{sprint}[5]
-\textbf{Console - JUANDI}
+\subsubsection{Console}
+En el sprint 5, la evidencia de las limitaciones que tiene tener la consola tan poco definida en comparación con la programación de componentes de \textit{Swing} y la implementación de un hilo a parte para el modelo hacen posible que se cree una serie de clases a modo de ``componentes'' para formalizar de una vez la vista del modo consola:
+\begin{center}
+\includegraphics[scale=0.55, angle=90]{DiagramaClasesConsola}
+\end{center}
+Tal y como se ve en el diagrama de clases, hemos creado una interfaz \texttt{ConsoleWindow} que será la abstracción que represente un ``componente de la consola''. Todas las posibles ventanas del juego extenderán de dicha interfaz y el método \texttt{bool open()} será el que indicará que el componente se muestra y empieza a funcionar. Además, cabe destacar que hacerlo de esta manera permite que las clases que representan a las ventanas en la consola ahora puedan ser observadores, por lo que cubrimos mucho mejor el \textit{MVC} y además nos permite simplificar el comportamiento del modelo al ser unificado para cualquier vista la forma de notificar los cambios.
 
-aaaaa
+Con todo esto conseguimos que al iniciar el juego en la clase \texttt{Rolit} y seleccionar el modo de vista deseado, se escoja qué componente (la \texttt{MainWindow} de \textit{Swing} o la \texttt{MainBashWindow} de la consola) se abrirá para empezar la vista. Esto permite que a nivel de vistas solo trabajemos con abstracciones de las clases que conforman cada ventana, por tanto, agregar nuevas ventanas en la consola se reduce a crear una nueva clase que encapsule lo que se espera de la nueva ventana. De este modo, el menú principal de elección sobre un nuevo juego, cargar uno antiguo, etc. queda como:
+\begin{center}
+\includegraphics[scale=0.40]{MenuPpal_sprint5_seq}
+\end{center}
+Y el funcionamiento interno de cada una de las ventanas puede verse de la siguiente manera:
+\begin{itemize}
+\item \underline{NewGameWindow}: está implementada utilizando el patrón factoría (puesto que son clases íntimamente ligadas a los \texttt{Builder} ya que son las ventanas donde se crea el juego) y heredan la funcionalidad que tenían los métodos \texttt{void ask()} de los \texttt{Builder}.
+\begin{center}
+\includegraphics[scale=0.40, angle=90]{NewGameWindow_sprint5_seq}
+\end{center}
 
-\textbf{GUI}
+\item \underline{LoadGameWindow}: es una clase de ventana que principalmente hace las llamadas adecuadas a \texttt{SaveLoadManager} que el la clase \textit{Experta} en el manejo de flujo de ficheros de carga y guardado.
+\begin{center}
+\includegraphics[scale=0.5]{LoadGameWindow_sprint5_seq}
+\end{center}
 
+\item \underline{DeleteGameWindow}: es una clase de ventana que de nuevo se encarga de gestionar las llamadas correspondientes a \texttt{SaveLoadManager} para borrar uno de los juegos cargados.
+\begin{center}
+\includegraphics[scale=0.5]{DeleteGameWindow_sprint5_seq}
+\end{center}
+\end{itemize}
+
+La clase que principalmente soporta la ventana de consola una vez se va a comenzar a jugar es la clase \texttt{PlayWindow} que se mantiene abierta hasta que el juego notifique que ha terminado. En dicha ventana se generan a través de la entrada por teclado, los comandos que posteriormente cambiarán el estado del modelo y está implementada de forma que sea un observador, tanto para percibir los cambios que ocurren este y mostrarlos adecuadamente como para reaccionar en consecuencia mostrando cosas según el tipo de juego que tengamos (aunque ella solo maneja la abstracción de un \texttt{Game} cualquiera):
+\begin{center}
+\includegraphics[scale=0.5]{PlayWindow_sprint5_seq}
+\end{center}
+
+
+
+\subsubsection{GUI}
 \underline{MainWindow}
 
 La incorporación de la funcionalidad para jugar en red trajo consigo  la necesidad de añadir nuevos botones al menú principal para poder acceder a ella.
@@ -304,11 +426,10 @@ Por consiguiente, todas las instancias de clases relacionadas con el modelo de \
 \end{sprint}
 
 \begin{sprint}[6]
-\textbf{Console - JUANDI}
+\subsubsection{Console}
+Los componentes a modo de ventanas de la consola no sufrieron más cambios más allá del sprint 5, únicamente se corrigieron errores en los \texttt{input.nextLine()} de la lectura puesto que fallaba al no consumir saltos de línea abandonados en el buffer.
 
-aaaaa
-
-\textbf{GUI}
+\subsubsection{Console}
 
 En este sprint la GUI fue refactorizada por completo, cambiando tanto visualmente, como a nivel de funcionamiento interno en algunas clases para hacer el código más manejable.
 

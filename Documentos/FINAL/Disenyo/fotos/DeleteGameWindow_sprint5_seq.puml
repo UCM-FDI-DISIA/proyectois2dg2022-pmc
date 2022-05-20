@@ -1,0 +1,21 @@
+@startuml
+participant Actor
+Actor -> DeleteGameWindow : open
+activate DeleteGameWindow
+DeleteGameWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> DeleteGameWindow
+deactivate ConsoleWindow
+DeleteGameWindow -> SaveLoadManager : showSavedGames
+activate SaveLoadManager
+SaveLoadManager --> DeleteGameWindow
+deactivate SaveLoadManager
+DeleteGameWindow -> SaveLoadManager : removeGame
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : removeGame
+activate SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> DeleteGameWindow
+deactivate SaveLoadManager
+return
+@enduml

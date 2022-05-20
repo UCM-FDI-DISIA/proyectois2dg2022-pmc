@@ -1,0 +1,40 @@
+@startuml
+participant Rolit
+Rolit -> Controller : run
+activate Controller
+Controller -> Controller : menu
+activate Controller
+deactivate Controller
+Controller -> GameGenerator : createGame
+activate GameGenerator
+GameGenerator -> GameGenerator : chooseBoard
+activate GameGenerator
+create Board
+GameGenerator -> Board : new
+activate Board
+Board --> GameGenerator
+deactivate Board
+deactivate GameGenerator
+create Game
+GameGenerator -> Game : new
+activate Game
+Game --> GameGenerator
+deactivate Game
+GameGenerator -> GameGenerator : numPlayers
+activate GameGenerator
+deactivate GameGenerator
+GameGenerator -> GameGenerator : chooseColor
+activate GameGenerator
+GameGenerator -> Game : availableColors
+activate Game
+Game --> GameGenerator
+deactivate Game
+GameGenerator -> Game : tryToAddPlayer
+activate Game
+Game --> GameGenerator
+deactivate Game
+deactivate GameGenerator
+GameGenerator --> Controller
+deactivate GameGenerator
+return
+@enduml

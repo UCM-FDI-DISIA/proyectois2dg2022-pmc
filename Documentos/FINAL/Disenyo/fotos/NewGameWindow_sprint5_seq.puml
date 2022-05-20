@@ -1,0 +1,58 @@
+@startuml
+participant Rolit
+Rolit -> NewGameWindow : open
+activate NewGameWindow
+NewGameWindow -> GameBuilder : isAvailableMode
+activate GameBuilder
+GameBuilder --> NewGameWindow
+deactivate GameBuilder
+NewGameWindow -> Shape : availableShapes
+activate Shape
+Shape --> NewGameWindow
+deactivate Shape
+create Board
+NewGameWindow -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> NewGameWindow
+deactivate Board
+NewGameWindow -> NewGameWindow : parse
+activate NewGameWindow
+deactivate NewGameWindow
+
+alt Classic Mode
+NewGameWindow -> NewGameClassicWindow : open
+activate NewGameClassicWindow
+NewGameClassicWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> NewGameClassicWindow
+deactivate ConsoleWindow
+NewGameClassicWindow -> NewGameClassicWindow : availableColors
+activate NewGameClassicWindow
+deactivate NewGameClassicWindow
+NewGameClassicWindow -> NewGameClassicWindow : validatePlayer
+activate NewGameClassicWindow
+deactivate NewGameClassicWindow
+return
+end
+
+alt Teams Mode
+NewGameWindow -> NewGameTeamsWindow : open
+activate NewGameTeamsWindow
+NewGameTeamsWindow -> NewGameTeamsWindow : availableColors
+activate NewGameTeamsWindow
+deactivate NewGameTeamsWindow
+NewGameTeamsWindow -> NewGameTeamsWindow : chooseTeam
+activate NewGameTeamsWindow
+deactivate NewGameTeamsWindow
+NewGameTeamsWindow -> NewGameTeamsWindow : validatePlayer
+activate NewGameTeamsWindow
+deactivate NewGameTeamsWindow
+return
+end
+
+return
+@enduml

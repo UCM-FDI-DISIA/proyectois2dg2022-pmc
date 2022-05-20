@@ -1,0 +1,32 @@
+@startuml
+participant Actor
+Actor -> PlayWindow : open
+activate PlayWindow
+PlayWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> PlayWindow
+deactivate ConsoleWindow
+PlayWindow -> Controller : executeCommand
+activate Controller
+Controller -> Command : execute
+activate Command
+Command --> Controller
+deactivate Command
+alt online Mode
+Controller -> Client : updateGameToServer
+activate Client
+Client -> ClientController : updateGameToServer
+activate ClientController
+ClientController --> Client
+deactivate ClientController
+Client --> Controller
+deactivate Client
+end
+Controller -> Replay : addState
+activate Replay
+Replay --> Controller
+deactivate Replay
+Controller --> PlayWindow
+deactivate Controller
+return
+@enduml
