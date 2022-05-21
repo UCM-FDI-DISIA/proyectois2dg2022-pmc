@@ -1,4 +1,4 @@
-\babel@toc {spanish}{}\relax 
+\babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}LA METODOLOGÍA SCRUM}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}ESTRUCTURA Y FUNCIONAMIENTO}{6}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Product Owner}{6}{subsection.1.1.1}%

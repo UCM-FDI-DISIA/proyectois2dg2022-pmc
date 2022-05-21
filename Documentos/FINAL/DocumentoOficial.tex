@@ -1,0 +1,43 @@
+\documentclass[12pt,a4paper,openright]{book}
+\title{\Huge ROLIT}
+\date{\today}
+\author{Grupo PMC}
+\pagestyle{plain}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\setlength{\parskip}{0.25cm} %edicion de espaciado
+\setlength{\parindent}{0cm} %edicion de sangría
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = blue
+}
+\usepackage{graphicx}
+\usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
+\usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
+\usepackage{listings}
+\usepackage{subfiles}
+\usepackage{ulem}
+\usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+\usepackage{import}
+
+\newcommand{\defaultformat}{
+	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge ##1}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{##1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
+}
+
+    
+\begin{document}
+\defaultformat
+\maketitle
+\tableofcontents
+\part{SCRUM}
+\subfile{./Scrum/SCRUM.tex}
+\part{DISEÑO}
+\subfile{./Disenyo/Disenyo.tex}
+\end{document}

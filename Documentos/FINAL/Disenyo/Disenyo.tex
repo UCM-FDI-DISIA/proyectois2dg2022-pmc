@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,openright]{book}
+\documentclass[../DocumentoOficial.tex]{subfiles}
 \title{\Huge DISEÑO}
 \date{\today}
 \author{Grupo PMC}
@@ -18,34 +18,17 @@
 \usepackage[explicit]{titlesec} %Formato de capitulos y secciones
 \usepackage{hyperref} %Hipervínculos y referencias
 
-\hypersetup{
-	colorlinks = true,
-	linkcolor = blue
-}
-
-\newcommand{\defaultformat}{
-	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge \uppercase{##1}}[\titlerule]
-    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{##1}
-    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
-    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
-}
-
-\theoremstyle{break}
-\theoremheaderfont{\normalfont\bfseries}
-\theorembodyfont{}
-\theoremseparator{\vspace{0.2cm}}
-\theorempreskip{\topsep}
-\theorempostskip{\topsep}
-\theoremindent0cm
-\theoremnumbering{arabic}
-\theoremsymbol{}
-\theoremprework{\vspace{0.2cm}}
-\theorempostwork{\vspace{0.2cm}}
-    \newtheorem*{sprint}{Sprint}
-    
 \usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
-    \definecolor{comentarios}{RGB}{186,196,200}
-    \definecolor{words}{RGB}{87,35,100}
+
+\begin{document}
+\defaultformat
+\definecolor{comentarios}{RGB}{186,196,200}
+\definecolor{words}{RGB}{87,35,100}
+\maketitle
+\graphicspath{{./fotos/}}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+%%\tableofcontents
 
 \lstset{
     language=Java,
@@ -62,12 +45,18 @@
     keywordstyle=\color{words}
 }
 
-\begin{document}
-\defaultformat
-\maketitle
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{3}
-\tableofcontents
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{}
+\theoremseparator{\vspace{0.2cm}}
+\theorempreskip{\topsep}
+\theorempostskip{\topsep}
+\theoremindent0cm
+\theoremnumbering{arabic}
+\theoremsymbol{}
+\theoremprework{\vspace{0.2cm}}
+\theorempostwork{\vspace{0.2cm}}
+    \newtheorem*{sprint}{Sprint}
 
 \chapter{Diseño y evolución de las Historias de Usuario}
 
