@@ -1199,6 +1199,123 @@ En este Sprint los comandos no cambian nada de su implementación ya que los cam
 En este Sprint cambia la implementación del método execute() del comando \texttt{PlaceCubeCommand} y pasa a delegar la responsabilidad de poner un cubo en el tablero a \texttt{Game}, llamando a un método de esta clase, que se encargará de crear un nuevo cubo y asociar este cubo con el jugador correspondiente.
 \end{sprint}
 
+\chapter{Tests de JUnits}
+\section{Paquete Builders}
+\subsection{GameClassicBuilderTest}
+\underline{test\_1()}
+
+Se crea un \texttt{GameClassic} por medio de un \texttt{inputJSon} y se comprueba que el report de dicho game es igual al JSON inicial.
+
+\underline{test\_2()}
+
+Probamos a meter una \texttt{Shape} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_3()}
+
+Probamos a meter un tipo que no es \texttt{GameClassic} y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_4()}
+
+Probamos a meter un \texttt{Color} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_5()}
+
+Probamos a meter una pos \texttt{x} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_6()}
+
+Probamos a meter una clave que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\subsection{GameTeamsBuilderTest}
+\underline{test\_1()}
+
+Se crea un \texttt{GameTeams} por medio de un \texttt{inputJSon} y se comprueba que el report de dicho game es igual al JSON inicial.
+
+\underline{test\_2()}
+
+Probamos a meter una coordenada de un \texttt{Cube} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_3()}
+
+Probamos a meter un tipo que no es \texttt{GameTeams} y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_4()}
+
+Probamos a meter un \texttt{Color} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_5()}
+
+Probamos a meter una clave que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\underline{test\_6()}
+
+Probamos a meter una \texttt{Shape} que está mal y comprobamos que se lanza adecuadamente la excepción.
+
+\section{Paquete IA}
+\subsection{IATest}
+\underline{IA\_test1()}
+
+Se crea un juego con un \texttt{Player} que es una persona y un \texttt{Player} que es una inteligencia artificial, justo le toca poner el último \texttt{Cube} al \texttt{Player}. Comprobamos que no salta excepción, es decir, que la IA no intenta colocar un un \texttt{Cube} cuando el \texttt{Board} ya está lleno.
+
+\underline{IA\_test2()}
+
+Se crea un juego con un \texttt{Player} que es una persona y dos \texttt{Player} que son inteligencias artificiales, ambas \texttt{Minimax}. Quedan dos huecos en el \texttt{Board}, el próximo turno es de la persona y el último de una de las IAs. Comprobamos que la última IA no intenta poner un \texttt{Cube} cuando el \texttt{Board} ya está lleno, ya que si esto sucediese saltaría una excepción.
+
+\underline{IA\_test3()}
+
+Se crea un juego con tres \texttt{Player} que son inteligencias artificiales, una \texttt{Minimax}, otra \texttt{Random} y la última \texttt{Greedy}. Las ponemos a jugar solas y comprobamos que no se produce ningún error, es decir, no se lanza ninguna excepción.
+
+\section{Paquete Logic}
+\subsection{GameClassicTest}
+\underline{play\_test()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no está libre y el segundo una posición que no tiene ninguna adyacente ocupada. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\underline{play\_test2()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no tiene ninguna adyacente ocupada y el segundo una que no pertenece al \texttt{Board}. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report2()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\underline{play\_test3()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no está libre y el segundo una que no pertenece al \texttt{Board}. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report3()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\subsection{GameTeamsTest}
+\underline{play\_test()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no está libre y el segundo una posición que no existe. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\underline{play\_test2()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no está libre y el segundo una posición que no tiene ninguna posición adyacente ocupada. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report2()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\underline{play\_test3()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Tratamos de poner algunos \texttt{Cube} en posiciones incorrectas y comprobamos que salte una excepción. El primer \texttt{Cube} tratará de ocupar una posición que no está libre y el segundo una posición que no existe en el \texttt{Board}. Por último trata de posicionar un \texttt{Cube} correctamente, comprobamos que el \texttt{Color} esperado y el del \texttt{Cube} de dicha posición coinciden.
+
+\underline{test\_report3()}
+
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
 \chapter{Diseño final}
 
 \section{Paquete model}
