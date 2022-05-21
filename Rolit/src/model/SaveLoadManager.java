@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
@@ -34,16 +35,18 @@ public class SaveLoadManager {
 	private static final String SUCCESS_DELETE_MSG = "Game deleted successfully";
 	private static final String ERROR_DELETE = "Failed to delete the file";
 	private static List<String> names;
+	private static List<String> namesWithDefaultName;
+
 	
 	public static boolean saveGame(Reportable game) {
 		return saveGame(game, DEFAULT_GAME_FILENAME);
 	}
 	
 	public static boolean saveGame(Reportable game, String filename) {
-		filename += ".json";
+		if(!filename.endsWith(".json")) filename += ".json";
 		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			save_file.write(game.report().toString());
-			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);			
+			if(!filename.equals(DEFAULT_GAME_FILENAME)) addToListOfSavedFiles(filename, DEFAULT_GAME_FILENAME, INDEX_GAME_FILENAME);			
 			return true;
 			
 		} catch (IOException error_file) {			
@@ -53,7 +56,7 @@ public class SaveLoadManager {
 	
 	public static JSONObject loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
-			addToListOfSavedFiles(filename, INDEX_GAME_FILENAME);
+			addToListOfSavedFiles(filename, DEFAULT_GAME_FILENAME, INDEX_GAME_FILENAME);
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;
 		} catch (IOException error_file) {
@@ -65,6 +68,9 @@ public class SaveLoadManager {
 
 	// FIXME esto es chapuza
 	public static JSONObject loadGame(int option) throws Exception {
+		if(option == 1)
+			return loadGame(DEFAULT_GAME_FILENAME);
+
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -80,7 +86,8 @@ public class SaveLoadManager {
 	public static void saveReplay(String filename, Reportable replay) {
 		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			save_file.write(replay.report().toString());
-			addToListOfSavedFiles(filename, INDEX_REPLAY_FILENAME);			
+			if(!filename.endsWith(".json")) filename += ".json";
+			if(!filename.equals(DEFAULT_REPLAY_FILENAME)) addToListOfSavedFiles(filename, DEFAULT_REPLAY_FILENAME, INDEX_REPLAY_FILENAME);			
 		} catch (IOException error_file) {
 			error_file.printStackTrace();
 		}
@@ -107,6 +114,9 @@ public class SaveLoadManager {
 	}
 	
 	public static Replay loadReplay(int option) throws Exception {
+		if(option == 1)
+			return loadReplay(DEFAULT_REPLAY_FILENAME);
+
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -152,7 +162,7 @@ public class SaveLoadManager {
 
 	
 	
-	public static void loadAndUpdateListOfSavedFiles(String path) throws IOException {		
+	public static void loadAndUpdateListOfSavedFiles(String path, String defaultFile) throws IOException {		
 		//Comprobamos si la lista está desactualizada, y los archivos
 		//no encontrados se borran de la lista.
 		names = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
@@ -165,34 +175,34 @@ public class SaveLoadManager {
 			}
 				
 		}		
-		saveListOfSavedGamesToFile(path);
+		saveListOfSavedGamesToFile(path, defaultFile);
 	}
 	
 	public static boolean removeGame(String filename) {
-		return removeFile(filename, INDEX_GAME_FILENAME);
+		return removeFile(filename, INDEX_GAME_FILENAME, DEFAULT_GAME_FILENAME);
 	}
 	
-	public static boolean removeFile(String filename, String path) {
+	public static boolean removeFile(String filename, String path, String defaultFile) {
 		File fileToDelete = new File(filename);
 		boolean exito = fileToDelete.delete();
 		if (exito)
 		{
 			if (names == null) {
 				try {
-					loadAndUpdateListOfSavedFiles(path);
+					loadAndUpdateListOfSavedFiles(path, defaultFile);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			names.remove(filename);
-			saveListOfSavedGamesToFile(path);
+			saveListOfSavedGamesToFile(path, defaultFile);
 		}
 		return exito;
 		
 	}
 	public static void removeGame(int option) throws Exception {
-		loadAndUpdateListOfSavedFiles(INDEX_GAME_FILENAME);
+		loadAndUpdateListOfSavedFiles(INDEX_GAME_FILENAME, DEFAULT_GAME_FILENAME);
 		option--;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
@@ -203,24 +213,26 @@ public class SaveLoadManager {
 			System.out.println(ERROR_DELETE);
 	}
 	
-	private static void saveListOfSavedGamesToFile(String path) {
+	private static void saveListOfSavedGamesToFile(String path, String defaultFile) {
 		try (BufferedWriter pointer = new BufferedWriter(new FileWriter(path))) {
 			for (int i = 0; i < names.size(); ++i) {
-				pointer.write(names.get(i));
-				if (i != names.size() - 1)
-					pointer.write(String.format("%n"));
+				if(!names.get(i).equals(defaultFile)) {
+					pointer.write(names.get(i));
+					if (i != names.size() - 1)
+						pointer.write(String.format("%n"));	
+				}
 			}
 		} catch (IOException error_file) {
 			System.out.println(ERROR_SAVE_DEFAULT);
 		}
 	}
 
-	private static void addToListOfSavedFiles(String filename, String path) {
+	private static void addToListOfSavedFiles(String filename, String defaultFile, String path) {
 		try {
-			loadAndUpdateListOfSavedFiles(path);
+			loadAndUpdateListOfSavedFiles(path, defaultFile);
 			if (!names.contains(filename))
 				names.add(filename);
-			saveListOfSavedGamesToFile(path);
+			saveListOfSavedGamesToFile(path, defaultFile);
 
 		} catch (IOException error_file) {
 			System.out.println(ERROR_SAVE_DEFAULT);
@@ -230,13 +242,15 @@ public class SaveLoadManager {
 	
 	private static List<String> getListOfSavedFiles(String path, String defaultFile) {
 		try {
-			loadAndUpdateListOfSavedFiles(path);
+			loadAndUpdateListOfSavedFiles(path, defaultFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		names.add(defaultFile);
-		return Collections.unmodifiableList(names);
+		namesWithDefaultName = new ArrayList<String>();
+		namesWithDefaultName.add(defaultFile);
+		namesWithDefaultName.addAll(names);
+		return Collections.unmodifiableList(namesWithDefaultName);
 	}
 	
 	public static List<String> getListOfSavedGames() {

@@ -128,9 +128,8 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 	 * onGameFinished method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		// TODO Auto-generated method stub
-		
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
+		onTurnPlayed(state);
 	}
 
 	/**

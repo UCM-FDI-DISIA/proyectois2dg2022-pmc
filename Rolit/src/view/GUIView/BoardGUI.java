@@ -240,7 +240,8 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	 * onGameFinished method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
+		onTurnPlayed(state);
 	}
 
 	/**

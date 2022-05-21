@@ -46,8 +46,6 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 		System.out.println(String.format("%s %n", SAVE_QUESTION));
 		//int prueba = input.nextInt();
 		//input.close();
-		System.out.println("SaveReplay" + System.currentTimeMillis());
-		
 		ans = sc.nextLine();
 		int parse =  parse(ans) ;
 		while(parse == 0) {
@@ -89,7 +87,7 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
 		this.replay = replay;
 		this.open();
 	}
