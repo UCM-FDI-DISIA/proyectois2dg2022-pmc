@@ -1,9 +1,29 @@
-\documentclass{article}
+\documentclass[12pt,a4paper,openright]{book}
+\title{\Huge DISEÑO}
+\date{\today}
+\author{Grupo PMC}
+\pagestyle{plain}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\setlength{\parskip}{0.25cm} %edicion de espaciado
+\setlength{\parindent}{0cm} %edicion de sangría
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
 \usepackage{graphicx}
+\graphicspath{{./fotos/}}
 \usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
 \usepackage{listings}
-\setlength{\parskip}{\baselineskip}%
-\setlength{\parindent}{0pt}%
+\usepackage{ulem}
+\usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+
+\newcommand{\defaultformat}{
+	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge \uppercase{##1}}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{##1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
+}
+
 \theoremstyle{break}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{}
@@ -17,8 +37,6 @@
 \theorempostwork{\vspace{0.2cm}}
     \newtheorem*{sprint}{Sprint}
     
-\setlength{\parindent}{12pt}
-
 \usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
     \definecolor{comentarios}{RGB}{186,196,200}
     \definecolor{words}{RGB}{87,35,100}
@@ -39,9 +57,13 @@
 }
 
 \begin{document}
-\graphicspath{{./fotos/}}
+\defaultformat
+\maketitle
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\tableofcontents
 
-\section{Diseño y evolución de las Historias de Usuario}
+\chapter{Diseño y evolución de las Historias de Usuario}
 
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
 
@@ -250,7 +272,6 @@ La implementación de este patrón se llevó a cabo mediante tres interfaces: Ob
 \begin{center}
 \includegraphics[scale=0.43]{observadores-sprint4.png}
 \end{center}
-
 
 En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través de los \textit{ActionListeners} de los botones, que ejecutan el comando que corresponda.
 
@@ -1217,7 +1238,7 @@ Para conseguir esto, la representación interna de los colores se hace a través
 
 \end{sprint}
 
-\section{Diseño y evolución de otros aspectos del proyecto}
+\chapter{Diseño y evolución de otros aspectos del proyecto}
 
 \subsection{Builders}
 Hasta que el proyecto no aumentó lo suficiente de tamaño y hasta que no se estudiaron los patrones adecuados, la necesidad de tener unas clases específicas especializadas en la creación de ciertos objetos no tuvo relevancia en el proyecto (pues no surgió la necesidad o no teníamos los conocimientos para cubrirla).
@@ -1261,7 +1282,7 @@ Para este sprint los Builder simplemente cambian la forma instanciar el tipo \te
 
 \subsection{Commands}
 
-\section{Diseño final}
+\chapter{Diseño final}
 
 \subsection{Paquete model}
 \subsubsection{Builders}
@@ -1409,7 +1430,7 @@ Ejemplo de la \texttt{StatusBar} mostrando un mensaje
 
 
 \newpage
-\section{Anexo I: Reports}
+\chapter{Anexo I: Reports}
 \subsection*{Cube}
 
 \begin{lstlisting}[frame=single, language=Java]
