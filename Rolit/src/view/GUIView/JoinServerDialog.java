@@ -131,7 +131,13 @@ public class JoinServerDialog extends JDialog {
 		});
 		addComp(connectPanel, connect, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);		
 		add(connectPanel);
-		pack();		
+		
+		pack();
+		
+		//To center the component
+		int x = (getParent().getWidth() - this.getWidth()) / 2;
+		setLocation(getParent().getX() + x, getParent().getY() + 50);
+		
 	}
 	
 	/**
@@ -167,7 +173,6 @@ public class JoinServerDialog extends JDialog {
 	 * @return The status (1-success, 0-failure)
 	 */
 	int open() {
-		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}

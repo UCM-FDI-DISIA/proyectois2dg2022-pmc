@@ -22,6 +22,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 	private volatile boolean close;
 	private Controller ctr;
 	private GameState state;
+	private volatile boolean waitingForUpdate = false;
 
 	/**
 	 * Constructor
@@ -40,64 +41,60 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 			//Evaluación perezosa: si no se ha acabado el juego, se espera a que haya cosas en el input
 			//En cuanto el juego se acaba, no se ejecuta input.hasNext(). Esto nos interesa porque
 			//input.hasNext "monopoliza" el uso de System.in. Por tanto, SaveReplay ahora puede
-			//acceder al System.in y llegar a tiempo a recibir la y/n.
-			System.out.println("PlayWindow" + System.currentTimeMillis());
-			
-			while (!this.close && !input.hasNext()) {
-				System.out.println("PlayWindow" + System.currentTimeMillis());
-			}
-			
-			if (!this.close) {
+			//acceder al System.in y llegar a tiempo a recibir la y/n.			
+//			while (!this.close && !input.hasNext()) {
+//			}			
+			if (!this.close && !this.waitingForUpdate) {
 				String s = input.nextLine();
 				try {
+					this.waitingForUpdate = true;
 					String[] args = s.trim().split(" ");
 					Command command = Command.getCommand(args);
-					ctr.executeCommand(command);
+					ctr.executeCommand(command);					
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
-					System.out.println();
+					System.out.print(PROMPT);
+					this.waitingForUpdate = false;
 				}
-			}
-			else {
-				System.out.println("PlayWindow" + System.currentTimeMillis());
 				
-			}
-				
-				
+			}				
 		}
-			
-
 		return true;
 	}
 
 	@Override
 	public void onTurnPlayed(GameState state) {
 		this.state = state;
+		this.waitingForUpdate = false;
 		System.out.println(state.toString());
 		System.out.print(PROMPT); // Se pone el PROMPT aquí porque si no sale antes del estado porque el game
 									// tarda en mandar la notificación
 	}
 
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
+		this.state = state;
+		System.out.println(state.toString());
+		
+		try {
+			Thread.sleep(1000); // Esperamos para que de tiempo a ver el tablero
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
 		Collections.sort(rivals);
 		this.close = true;
-		System.out.println("Cerrado en: " + System.currentTimeMillis());
-//		String s = "\n";
-//		InputStream targetStream = new ByteArrayInputStream(s.getBytes());
-//		System.setIn(targetStream);
 		this.clear();
 		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);
 		for (int i = 0; i < rivals.size(); i++)
 			System.out.println(
 					String.format("%d. %s: %s points", i + 1, rivals.get(i).getName(), rivals.get(i).getScore()));
+		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 	}
 
@@ -110,15 +107,18 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public void onError(String err) {
+		this.waitingForUpdate = false;
 		System.out.println(err);
 		System.out.println(this.state.toString());
+		System.out.print(PROMPT);
 	}
 
 	@Override
 	public void onGameStatusChange(GameState status) {
+		this.waitingForUpdate = false;
 		this.state = status;
 		System.out.println(status.toString());
-		System.out.print(PROMPT);
+		System.out.print(PROMPT);		
 	}
 
 	@Override

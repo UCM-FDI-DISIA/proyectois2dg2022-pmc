@@ -1,9 +1,29 @@
-\documentclass{article}
+\documentclass[12pt,a4paper,openright]{book}
+\title{\Huge DISEÑO}
+\date{\today}
+\author{Grupo PMC}
+\pagestyle{plain}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\setlength{\parskip}{0.25cm} %edicion de espaciado
+\setlength{\parindent}{0cm} %edicion de sangría
+\clubpenalty=10000 %líneas viudas NO
+\widowpenalty=10000 %líneas viudas NO
+
 \usepackage{graphicx}
+\graphicspath{{./fotos/}}
 \usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
 \usepackage{listings}
-\setlength{\parskip}{\baselineskip}%
-\setlength{\parindent}{0pt}%
+\usepackage{ulem}
+\usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+
+\newcommand{\defaultformat}{
+	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge \uppercase{##1}}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0pt}{##1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0pt}{\uline{##1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0pt}{##1}
+}
+
 \theoremstyle{break}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{}
@@ -17,177 +37,128 @@
 \theorempostwork{\vspace{0.2cm}}
     \newtheorem*{sprint}{Sprint}
     
-\setlength{\parindent}{12pt}
+\usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
+    \definecolor{comentarios}{RGB}{186,196,200}
+    \definecolor{words}{RGB}{87,35,100}
+
+\lstset{
+    language=Java,
+    basicstyle=\scriptsize\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{comentarios},
+    keywordstyle=\color{words}
+}
 
 \begin{document}
-\graphicspath{{./fotos/}}
+\defaultformat
+\maketitle
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\tableofcontents
 
-
-\section{Diseño y evolución de las clases principales del Modelo}
-\subsection{Diseño del tablero}
-Toda la lógica que implementa el concepto del tablero queda reflejada a lo largo de todo el proyecto en la clase Board.
-\subsubsection{Sprint 1}
-La clase Board es un simple contenedor de cubos, organizados en forma de matriz.
-No tiene interacción con otros objetos del modelo.
-\subsubsection{Sprint 2}
-Ahora la clase Board tiene la funcionalidad de actualizarse a sí mismo una vez se coloca un nuevo cubo, funcionalidad que antes estaba delegada a la clase Game.
-\subsubsection{Sprint 3}
-A partir de este Sprint los tableros tienen forma (es decir, la forma no es necesariamente siempre cuadrada) y tamaño elegido por los usuarios. A parte, Board tiene una representación en forma de String y de JSONObject, a través de los métodos toString() y report().
-\subsubsection{Sprint 5}
-Ahora, aparte de guardarse los cubos del tablero en forma de matriz, se guardan en forma de lista por ser una representación de los datos muy conveniente en distintas partes del proyecto, entre otras, para la red.
-
-\subsection{Diseño de los colores}
-
-\subsection{Diseño de los cubos}
-
-\subsection{Diseño del juego}
-La clase fundamental del juego es la clase Game, la clase principal del modelo.
-\subsubsection{Sprint 1}
-La clase Game responde a ejecuciones del PlaceCubeCommand, colocando nuevos cubos en las casillas seleccionadas, actualizando el tablero, manejando los turnos de los jugadores y actualizando sus puntos.
-\subsubsection{Sprint 2}
-A partir de este momento, Game no se encarga de actualizar el tablero y las puntuaciones de los jugadores, sino de únicamente pasarle al tablero los cubos nuevos que tiene que insertar. El tablero, a partir de ese cubo, se actualiza a sí mismo, y los cambios de cubos actualizan las puntuaciones de los jugadores.
-\subsubsection{Sprint 3}
-Game tiene su propia representación en forma de String y de JSONObjet, a través de los métodos toString() y report().
-\subsubsection{Sprint 4}
-A partir de este sprint, Game pasa a ser una clase abstracta y se pasa a tener dos modos de juego, el clásico (jugadores individuales) y el modo por equipos, que son implementados por las clases herederas de Game: GameClassic y GameTeams.
-También se implementa el patrón MVC, por lo que Game (modelo) pasa a tener una lista de observadores y métodos para el envío de notificaciones a estos.
-\subsubsection{Sprint 5}
-Game se adapta con ciertos cambios y nuevos métodos para soportar el juego en línea.
-\subsubsection{Sprint 6}
-En este momento Game sufre su mayor refactorización. Esta clase pasa a extender de la clase Thread, de forma que ya no funciona ejecutando comandos en el mismo momento de su creación, sino que estos de ponen en espera y Game, que está en todo momento funcionando y comprobando si hay nuevas peticiones puestas en espera, las ejecuta cuando puede. Esto nos permite evitar problemas de desbordamiento con el cálculo de jugadas por parte de las inteligencias artificiales, aparte de permitir el funcionamiento esperado de la vista sin comprometer su rendimiento.
-Aparte, Game deja de llevar a cabo el manejo de turnos y se delega esa responsabilidad a la clase TurnManager, que es invocada tras cada jugada para que ejecute (si procede) el siguiente turno.
-
-\subsection{Diseño de los jugadores}
-
-\subsection{Diseño de los equipos}
-
-\subsection{Diseño del gestor de turnos}
-
-\subsection{Diseño de los estados del juego}
-
-\subsection{Diseño de las replays}
-
-\subsection{Diseño de las Inteligencias Artificiales}
-\subsubsection{Sprint 5}
-Las estrategias son externas al modelo. El cómputo de movimientos a través de estas estrategias de hace a partir de la vista, a través de la clase PlayerView, que representa al Player en la vista y se encarga de ejecutar sus acciones. Por razones de encapsulación, las estrategias no tienen acceso al modelo y realizan sus cálculos a través de GameStates.
-\subsubsection{Sprint 6}
-Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Players controlados por la máquina. Como en este punto el manejo de turnos se lleva a cabo por la clase TurnManager y el modelo funciona en su propia hebra, la clase PlayerView desaparece del proyecto y son los propios players quienes ejecutan las estrategias, que a nivel abstracto resulta mucho más intuitivo. Por la hebra del modelo, cuando las estrategias terminan de calcular el siguiente movimiento, este no se ejecuta en ese mismo instante, sino que se deja en espera en el modelo hasta que este pueda ejecutarlo.
-
-
-\section{Diseño del Controlador}
-
-
-\section{Diseño de la Vista de GUI}
-
-\subsection{Diseño del menú principal y pantallas pre-juego}
-
-\subsection{Diseño de la pantalla de juego}
-
-
-\section{Diseño de la Vista de Consola}
-
-\subsection{Diseño del menú principal y pantallas pre-juego}
-
-\subsection{Diseño de la pantalla de juego}
-
-
-\section{Diseño de la red}
-
-\subsection{Diseño del servidor}
-
-\subsubsection{Sprint 5}
-
-Se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
-
-\subsubsection{Sprint 6}
-
-Este Sprint se caracteriza por la introducción del modo de equipo GameTeams en Red.
-
-\begin{itemize}
-
-\item ServerView
-
-En vez de llamar a server.start, se invoca un SwingWorker, llamado ServerWorker, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
-
-\item Server
-
-Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
-
-En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
-
-Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
-
-Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el JSON del GameConfig.
-
-\item ServerClient
-
-Añadido notifyClientToChooseTeam; indica al ServerClientThread que debe informar al cliente que debe escoger equipo.
-
-\item ServerClientThread
-
-Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (updateGraphics, chooseTeam respectivamente).
-
-\end{itemize}
-
-\subsubsection{Sprint 7}
-
-\begin{itemize}
-
-\item WaitPlayerThread
-
-Pasa a llamarse, con fines aclaratorios, ServerWaitPlayerThread.
-
-\item Server
-
-Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
-
-\end{itemize}
-
-\subsection{Diseño de los clientes}
-
-\subsubsection{Sprint 5}
-
-Se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
-
-\subsubsection{Sprint 6}
-
-\begin{itemize}
-
-\item ClientController
-
-Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
-
-Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
-
-\item Client
-
-Client incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de ClientController a MainWindow y viceversa respectivamente.
-
-\end{itemize}
-
-\section{Diseño y evolución de las Historias de Usuario}
+\chapter{Diseño y evolución de las Historias de Usuario}
 
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
 
 \subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
 
-\subsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
-\begin{sprint}[1 JUANDI]
+\subsubsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
+En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepctiva con el resultado final.
 
+Sin embargo, poseen gran importancia los sprint 4 y 5, pues son en los que se incluye por primera vez una vista gráfica que no sea la de consola y porque por primera vez se formaliza una entrada salida controlada y a través de clases especializadas que son usadas a modo de componentes gráficos, pero para la consola.
+
+\begin{sprint}[1]
+Al comienzo del proyecto, el juego comenzaba (tras la generación de los objetos correspondientes) con la llamada al método \texttt{run()} del \texttt{Controller}. Este método contenía en su interior el propio menú en forma de sentencias de código:
+\begin{lstlisting}
+public void run() {
+
+		System.out.println();
+		System.out.println("Que desea?");
+		System.out.println();
+		for (int i = 0; i < arrayOpciones.length; ++i)
+			System.out.println((i+1) + ". " + arrayOpciones[i]);
+		
+		int respuesta = 1;
+		boolean repeat = true;
+		...
+\end{lstlisting}
+y también la parte de impresión del tablero y de las jugadas conforme avanzaba el juego:
+\begin{lstlisting}
+while(!game.isFinished()) {
+			String command;
+			int posx, posy;
+			boolean valido = false;
+			
+			printGame();
+			
+			while (!valido) {
+				System.out.println(printer.showTurn());
+				System.out.println("Introduce un comando:");
+				System.out.println("c : Poner un cubo");
+				System.out.println("s : Guardar partida");
+				command = input.next();
+				if ("c".equals(command)) {
+					System.out.println("Introduce la posicion x: ");
+					posx = input.nextInt();
+					System.out.println("Introduce la posicion y: ");
+					posy = input.nextInt();
+					valido = game.play(posx, posy);
+				}					
+				else if("s".equals(command))
+					saveLoadManager.saveGame();
+				else
+					System.out.println("Invalid Command");										
+			}
+			
+		}
+\end{lstlisting}
+Tal y como se ve, principalmente la función más importante de impresión es la función \texttt{void printGame()} que se encargaba simplemente de hacer una llamada al método \texttt{String toString()} de la clase \texttt{GamePrinter} que era la experta en representación por pantalla de todo lo relativo al juego. Fundamentalmente, el desconocimiento del patrón Modelo-Vista-Controlador hizo que las instrucciones de uso del jugador o los diferentes menús de carga y guardado se hicieran en el propio método que se encargaba de hacer cada cosa, dificultando el poder hacer un diagrama de secuencia de cómo se imprime el menú o cómo se piden acciones.
 \end{sprint}
 
-\begin{sprint}[2 JUANDI]
+\begin{sprint}[2]
+En base a la experiencia en proyectos anteriores, durante este sprint se consolidó la clase \texttt{Controller} como la encargada de todos los procesos externos a los bucles del propio juego, es decir, se encargaba determinar el número de jugadores, el tipo de tablero, creación de los elementos del \texttt{Game}... Por tanto, el menú principal estaba en la clase \texttt{Controller}, concretamente la funcionalidad la encapsulaba la función \texttt{int menu()} que interactuaba con otros métodos privados de la clase para que el usuario pudiese decidir el resto de cosas y la funcionalidad de mostrar el juego seguía estando representada en la clase \texttt{GamePrinter} con el método \texttt{toString()}.
 
+\begin{center}
+\includegraphics[scale=0.5]{MenuPpal_sprint2_seq}
+\end{center}
 \end{sprint}
 
-\begin{sprint}[3 JUANDI]
+Para formalizar esta primera aproximación a una encapsulación formal de cada una de las pantallas a métodos o clases concretas y especializadas, se generan las siguientes constantes en la clase \texttt{Controller} para tener unificados los mensajes que se envían:
+\begin{lstlisting}
+private static final String PROMPT = "Command > ";
+	private static final String NAME_PLAYERS = "Name the players: ";
+	private static final String INITIAL_MESSAGE = "Choose an option:";
+	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
+	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players...";
+	private static final String ERROR_PLAYERS_MSG = "Number of players must be...";
+	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
+	private static final String BOARD_ERROR = "Board size must be a number between...";
+	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
+\end{lstlisting}
 
+\begin{sprint}[3]
+El equipo de desarrollo observó que la clase \texttt{Controller} estaba perdiendo cohesión al asumir muchas responsabilidades que ciertamente no eran de un controlador. Para ello, se creó la clase \texttt{GameGenerator} como una antesala de lo que sería el patrón factoría. De este modo, el menú principal queda encapsulado en la función \texttt{int menu()} de la clase \texttt{Controller}, pero las pantallas donde se deciden el número de jugadores, el tipo de tablero, ... quedan como métodos privados de la nueva clase \texttt{GameGenerator} que es la encargada de saber crear el juego.
+\begin{center}
+\includegraphics[scale=0.55]{MenuPpal_sprint3_seq}
+\end{center}
+En este caso, la función que imprime cada iteración del juego sigue siendo \texttt{printGame()} en \texttt{Controller} y aquellas que se encargan imprimir los mensajes de guardado y carga, así como de errores, siguen diseminadas por las respectivas clases que utilizan dichos métodos como sentencias \texttt{System.out.println("...")}, pues aún no se ha implementado el Modelo-Vista-Controllador.
 \end{sprint}
 
 \begin{sprint}[4]
-\textbf{Console - JUANDI}
+\textbf{Console}
 
-aaaaa
+En este sprint, fundamentalmente se aplica el patrón Builder y Factorías a la situación del sprint anterior. En este caso, el menú principal sigue en el método \texttt{int menu()} de la clase \texttt{Controller} y los métodos que antes estaban en \texttt{GameGenerator} y se encargaban de pedir el número de jugadores, forma del tablero, ... por consola ahora forman parte del método \texttt{ask()} de las factorías (que por dentro saben que preguntar en cada caso).
+\begin{center}
+\includegraphics[scale=0.55]{MenuPpal_sprint4_seq}
+\end{center}
+A pesar de que se ha incluido el \textit{Modelo-Vista-Controlador} como patrón de arquitectura, la diferencia fundamental entre tener un nuevo hilo en \textit{Swing} y seguir en el mismo hilo que \textit{Main} ha hecho que no se haya formalizado una vista al uso para la parte de consola y que el código para ciertas excepciones y mensajes siga perdido por los lugares donde se producen dichas incidencias.
 
 \textbf{GUI}
 
@@ -203,7 +174,7 @@ Esta clase representa cada una de las posiciones del tablero y puede ser vacía 
 
 \underline{BoardGUI}
 \begin{center}
-\includegraphics[scale=0.8]{board-gui-cubos-sprint3.png}
+\includegraphics[scale=0.3]{board-gui-cubos-sprint3.png}
 \end{center}
 
 La clase \textit{BoardGUI} extiende de \textit{JPanel} y es la encargada de visualizar el tablero de la partida. Se puede apreciar que el tablero está formado por un conjunto de \textit{CeldaGUI}.
@@ -302,15 +273,45 @@ La implementación de este patrón se llevó a cabo mediante tres interfaces: Ob
 \includegraphics[scale=0.43]{observadores-sprint4.png}
 \end{center}
 
-
 En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través de los \textit{ActionListeners} de los botones, que ejecutan el comando que corresponda.
 
 \end{sprint}
 
 \begin{sprint}[5]
-\textbf{Console - JUANDI}
+\textbf{Console}
 
-aaaaa
+En el sprint 5, la evidencia de las limitaciones que tiene tener la consola tan poco definida en comparación con la programación de componentes de \textit{Swing} y la implementación de un hilo a parte para el modelo hacen posible que se cree una serie de clases a modo de ``componentes'' para formalizar de una vez la vista del modo consola:
+\begin{center}
+\includegraphics[scale=0.55, angle=90]{DiagramaClasesConsola}
+\end{center}
+Tal y como se ve en el diagrama de clases, hemos creado una interfaz \texttt{ConsoleWindow} que será la abstracción que represente un ``componente de la consola''. Todas las posibles ventanas del juego extenderán de dicha interfaz y el método \texttt{bool open()} será el que indicará que el componente se muestra y empieza a funcionar. Además, cabe destacar que hacerlo de esta manera permite que las clases que representan a las ventanas en la consola ahora puedan ser observadores, por lo que cubrimos mucho mejor el \textit{MVC} y además nos permite simplificar el comportamiento del modelo al ser unificado para cualquier vista la forma de notificar los cambios.
+
+Con todo esto conseguimos que al iniciar el juego en la clase \texttt{Rolit} y seleccionar el modo de vista deseado, se escoja qué componente (la \texttt{MainWindow} de \textit{Swing} o la \texttt{MainBashWindow} de la consola) se abrirá para empezar la vista. Esto permite que a nivel de vistas solo trabajemos con abstracciones de las clases que conforman cada ventana, por tanto, agregar nuevas ventanas en la consola se reduce a crear una nueva clase que encapsule lo que se espera de la nueva ventana. De este modo, el menú principal de elección sobre un nuevo juego, cargar uno antiguo, etc. queda como:
+\begin{center}
+\includegraphics[scale=0.40]{MenuPpal_sprint5_seq}
+\end{center}
+Y el funcionamiento interno de cada una de las ventanas puede verse de la siguiente manera:
+\begin{itemize}
+\item \underline{NewGameWindow}: está implementada utilizando el patrón factoría (puesto que son clases íntimamente ligadas a los \texttt{Builder} ya que son las ventanas donde se crea el juego) y heredan la funcionalidad que tenían los métodos \texttt{void ask()} de los \texttt{Builder}.
+\begin{center}
+\includegraphics[scale=0.40, angle=90]{NewGameWindow_sprint5_seq}
+\end{center}
+
+\item \underline{LoadGameWindow}: es una clase de ventana que principalmente hace las llamadas adecuadas a \texttt{SaveLoadManager} que el la clase \textit{Experta} en el manejo de flujo de ficheros de carga y guardado.
+\begin{center}
+\includegraphics[scale=0.5]{LoadGameWindow_sprint5_seq}
+\end{center}
+
+\item \underline{DeleteGameWindow}: es una clase de ventana que de nuevo se encarga de gestionar las llamadas correspondientes a \texttt{SaveLoadManager} para borrar uno de los juegos cargados.
+\begin{center}
+\includegraphics[scale=0.5]{DeleteGameWindow_sprint5_seq}
+\end{center}
+\end{itemize}
+
+La clase que principalmente soporta la ventana de consola una vez se va a comenzar a jugar es la clase \texttt{PlayWindow} que se mantiene abierta hasta que el juego notifique que ha terminado. En dicha ventana se generan a través de la entrada por teclado, los comandos que posteriormente cambiarán el estado del modelo y está implementada de forma que sea un observador, tanto para percibir los cambios que ocurren este y mostrarlos adecuadamente como para reaccionar en consecuencia mostrando cosas según el tipo de juego que tengamos (aunque ella solo maneja la abstracción de un \texttt{Game} cualquiera):
+\begin{center}
+\includegraphics[scale=0.5]{PlayWindow_sprint5_seq}
+\end{center}
 
 \textbf{GUI}
 
@@ -371,9 +372,9 @@ Por consiguiente, todas las instancias de clases relacionadas con el modelo de \
 \end{sprint}
 
 \begin{sprint}[6]
-\textbf{Console - JUANDI}
+\textbf{Console}
 
-aaaaa
+Los componentes a modo de ventanas de la consola no sufrieron más cambios más allá del sprint 5, únicamente se corrigieron errores en los \texttt{input.nextLine()} de la lectura puesto que fallaba al no consumir saltos de línea abandonados en el buffer.
 
 \textbf{GUI}
 
@@ -476,6 +477,7 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 \begin{center}
 \includegraphics[scale=0.85]{user-feedback.png}
 \end{center}
+
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 
@@ -585,7 +587,13 @@ Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritm
 
 \subsubsection{Como usuario, me gustaría que se pudiera jugar en red.}
 \begin{sprint}[5]
-En cuanto a la tarea de añadir un modo de juego en red, se concibe, planea e implementa la funcionalidad de red casi por completo, consigue llegar a una versión funcional de juego en red en GameClassic. Al final del Sprint, los objetivos alcanzados son los siguientes:
+En cuanto a la tarea de añadir un modo de juego en red, se concibe, planea e implementa la funcionalidad de red casi por completo, consigue llegar a una versión funcional de juego en red en GameClassic.
+
+En cuanto al servidor, se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
+
+En cuanto al cliente, se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
+
+Al final del Sprint, los objetivos alcanzados son los siguientes:
 
 \begin{itemize}
 \item Determinar si el servidor, o por el contrario el cliente, debería poseer el modelo. Optamos por la segunda opción.
@@ -616,251 +624,41 @@ Aun así, otros de los objetivos propuestos no son implementados por falta de ti
 \item Implementar el juego en red en GameTeams.
 \end{itemize}
 
-Fundamentalmente, la conexión en red se basa en una estructura en el que los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor. El servidor procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos. Nótese que el cliente sólo tiene contacto con el servidor, y el servidor tiene contacto con todos los clientes. Es, por tanto, un modelo de red centralizado, con nodo central el servidor.
+Presentamos los diagramas UML de este Sprint.
 
-\begin{center}
-\includegraphics[scale=1]{redCentralizada.png} 
-\end{center}
-
-Para implementar esta funcionalidad de red en Java operamos según el modelo ServerSocket-Socket. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de ServerSocket pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo Socket por medio de llamar al método accept() de ServerSocket. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
-
-\begin{lstlisting}[frame=single, language=Java]
-//Perspectiva del servidor
-
-ServerSocket serverSocket = new ServerSocket(port);
-Socket socketCliente1 = serverSocket.accept();
-...
-...
-...
-Socket socketClienteN = serverSocket.accept();
-
-\end{lstlisting}
-
-
-Este método accept() se queda "bloqueado" o en espera, hasta que un cliente se conecta por medio de la creación de un Socket desde su aplicación de la siguiente manera:
-
-\begin{lstlisting}[frame=single, language=Java]
-//Perspectiva del cliente
-
-Socket socket = new Socket(ip, port);
-
-\end{lstlisting}
-
-donde ip es la dirección IP donde opera el servidor (ya sea local, o pública con el puerto especificado abierto para permitir conexiones desde fuera de su red), y port el puerto donde esta opera.
-
-Una vez que las creaciones del Socket de servidor y cliente han sido creadas de forma satisfactoria, la conexión ha sido realizada con éxito. Por tanto, podemos proceder al envío de mensajes entre cliente-servidor y viceversa.
-
-Para ello, Java nos ofrece realizar este cambio de información por medio de pares de instancias BufferedReader-PrintWriter, llamémosle in e out respectivamente. Estas instancias leen y reciben String, respectivamente. Nuestro modelo procederá a enviar JSONObject pasados a formatos String, que después al ser recibidos como Strings se volverán a construir en JSONObject por medio de la constructora de JSONObject que admite como parámetro un String.
-
-Cada servidor posee un número de parejas in-out equivalente al número de clientes conectados, y cada cliente posee una pareja.
-
-\begin{lstlisting}[frame=single, language=Java]
-//Perspectiva del servidor
-BufferedReader inCliente1 =  new BufferedReader(new
-InputStreamReader(socketCliente1.getInputStream()));
-...
-...
-...
-PrintWriter outClienteN =  new PrintWriter(
-socketClienteN.getOutputStream(), true);
-\end{lstlisting}
-
-\begin{lstlisting}[frame=single, language=Java]
-//Perspectiva del cliente
-BufferedReader in =  new BufferedReader(new
-InputStreamReader(socket.getInputStream()));
-
-PrintWriter out =  new PrintWriter(
-socket.getOutputStream(), true);
-\end{lstlisting}
-
-
-De esta forma, cada vez que se pretende enviar un mensaje desde el cliente al servidor, el cliente k envía un mensaje msg por medio del método out.println(msg). Este mensaje es recogido desde el servidor por el método inClienteK.readline(). Asimismo, si el servidor pretende enviar un mensaje al cliente k, este debe llamar a outK.println(msg). El cliente k recoge el mensaje desde in.readline(). En resumen:
-
-\begin{lstlisting}[frame=single, language=Java]
-
-	//Envio de mensaje ClienteK Servidor
-
-
-//Perspectiva del cliente k
-out.println(msg);
-
---->
-
-//Perspectiva del servidor
-String msg = inClienteK.readline();
-
-
-
-	//Envio de mensaje Servidor-ClienteK
-
-
-//Perspectiva del servidor
-outK.println(msg);
-
--->
-
-//Perspectiva del cliente k
-String msg = in.readline();
-\end{lstlisting}
-
-Sin embargo, surgen una serie de problemas con respecto a este modelo. El servidor debería recibir de manera independiente, paralela y en cualquier momento los peticiones de cada cliente, de lo contrario habría que definir un orden completamente arbitrario de llegada de mensajes según cliente. Si bien esto pudiera hacerse para realizar juegos por turnos en el que un mensaje enviado por un cliente al que no le corresponde el turno no sea procesado por el servidor, otras funcionalidades serían imposibles de implementar.
-
-Por ejemplo, podría ocurrir que en el modo por equipos, dos clientes se conecten. Reciben ambos del servidor una lista de equipos en la que pueden conectarse. Se ve que es absurdo imponer un orden de quién envía la información del equipo elegido, pues esta es imposible de anticipar. Puede darse que el primer cliente que se conecte sea el segundo que especifique en qué equipo quiere conectarse.
-
-En suma, nos interesa que la llegada de mensajes no deba ser regida por un orden definido y arbitrario. Para ello, nos interesa utilizar una herramienta de la programación concurrente y paralela, los hilos; en el caso de Java, proporcionados por la clase Thread.
-
-De esta manera, si el servidor tiene un hilo por cada cliente, podrá recibir mensajes de forma paralela. Así, ningún mensaje enviado desde un cliente es perdido; todos llegan al servidor con independencia de cuándo se emitan desde el cliente. Desde la perspectiva del servidor, este es el cometido de la clase ServerClientThread implementada en el proyecto, que extiende de Thread. En su método run, recibe mensajes con el método readLine() anteriormente descrito \textbf{de forma periódica y constantemente (en un while), hasta que se haya decidido cerrar el juego}. Posteriormente, se envía este mensaje al método receiveFromClient, synchronized (pretendemos ejecutar múltiples procesamientos que de forma secuencial para evitar errores imprevistos), que pertenece a la clase Server, que de forma sincronizada procesa este mensaje.
-
-El cliente se encuentra en una situación parecida. ¿Qué ocurre si recibe una información del servidor, la procesa y mientras se da este procesamiento, recibe otro mensaje del servidor? Necesitará el cliente, por tanto, dos hilos: un hilo que se dedique a recoger mensajes, y otro hilo que se dedique a procesarlos. De esta forma, ninguna información emitida desde el servidor es perdida.
-
-Una vez el modelo de red ha sido completamente explicado, procedemos a detallar los detalles de implementación relativos al juego en específico. Es preciso introducir el diagrama de clases relativo a este Sprint.
+El UML de clases es el siguiente:
 
 \begin{center}
 \includegraphics[scale=0.45]{UMLClasesRedSprint5.png} 
 \end{center}
 
-Empezamos a detallar la estructura del servidor.
-
-ServerView, especificado en el apartado de diseño correspondiente, tiene el papel de pasar la información pertinente para el funcionamiento de la clase Server.
-
-Partimos de la clase Server, clase que gestiona los clientes desde la perspectiva del servidor y que procesa los mensajes emitidos desde los clientes.
-
-\begin{center}
-\includegraphics[scale=0.3]{Server-sprint5.png} 
-\end{center}
-
-Como hemos anticipado, Server debe poseer un único ServerSocket a través del cual se abre el servidor. Posee el atributo expectedPlayers recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de WaitPlayerThread creados, clase que pasaremos a comentar después.
-
-Asimismo, Server posee dos listas: una correspondiente a pares Player-Socket, de modo que a cada jugador se le asocia el Socket a través del cuál puede comunicarse con el cliente en específico que juega bajo su identidad; y otra correspondiente a pares Player-ServerClient, donde a cada jugador se le asocia el ServerClient específico. Pasaremos a describir posteriormente qué es la clase ServerClient.
-En resumen, tenemos asociaciones biunívocas jugador-cliente las cuales aprovecharemos para el envío y la recepción de mensajes.
-
-
-El ServerClient constituye una representación de un cliente en específico desde la perspectiva del servidor. 
-
-\begin{center}
-\includegraphics[scale=0.3]{ServerClient-sprint5.png} 
-\end{center}
-
-Lo fundamental de la clase ServerClient es que posee el thread encargado de la recepción directa de mensajes desde el cliente en específico; es decir, posee una única instancia de clase ServerClientThread, anteriormente mencionada.
-
-\begin{center}
-\includegraphics[scale=0.3]{ServerClientThread-sprint5.png} 
-\end{center}
-
-ServerClient posee una referencia a su ServerClientThread y viceversa. Esto es porque:
+Presentamos los diagramas de secuencia de este Sprint.
 
 \begin{itemize}
-\item ServerClient posee a ServerClientThread porque el servidor, al enviar mensajes al cliente, pasa el mensaje por ServerClient (recordemos la lista Player-ServerClient) quien pasa a enviárselo a a ServerClientThread.
-\item ServerClientThread posee a ServerClient porque al recibir mensajes desde el cliente, ServerClientThread envía el mensaje a Server para procesarlo. En esta función server.receiveFromClient, se necesitan dos parámetros: el mensaje, y el ServerClient asociado. Es por esto que para este segundo parámetro, ServerClientThread necesite una referencia de ServerClient.
+
+\item Cómo se realizan las conexiones
+
+\begin{center}
+\includegraphics[scale=0.45]{umlconexiones.png} 
+\end{center}
+
+\item Cómo se inicia una partida
+
+\begin{center}
+\includegraphics[scale=0.45]{empezarPartidaUml.png} 
+\end{center}
+
+\item Cómo se envía y recibe una jugada
+
+\begin{center}
+\includegraphics[scale=0.45]{juegoTipicoUml.png} 
+\end{center}
+
 \end{itemize}
 
-Como vemos, la finalidad es encapsular el código de forma que Server no conozca de ServerClientThread sino solo de ServerClient.
-
-WaitPlayerThread, por otra parte, es un hilo encargado de ir recibiendo los jugadores.
-
-\begin{center}
-\includegraphics[scale=0.3]{WaitPlayerThread-sprint5.png} 
-\end{center}
-
-Se crean un número "expectedPlayers" (atributo de Server) de instancias de esta clase, cada una de ellas con un ServerClient asociado (por tanto, ServerClient es atributo de WaitPlayerThread). En su método run se encarga de ejecutar el método serverSocket.accept() que especificamos anteriormente. En cuanto se acepta la conexión, se procede a llamar al método setUpServer de ServerClient para que este cree su ServerClientThread.
-
-La necesidad de hacer esto de forma paralela justifica la creación del hilo WaitPlayerThread. Para evitar problemas de concurrencia, en esta clase los atributos Server y ServerClient son volátiles para que todos los hilos WaitPlayerThread conozcan en tiempo real el estado de Server y ServerClient.
-
-En particular, Server debe ser volatile pues debe ir actualizando su lista de Player-Socket en tiempo real y de forma organizada de a fin de evitar bugs. Esto es porque el método sincronizado waitForPlayers de Server recoge periódicamente el número de conexiones aceptadas. En cuanto estas conexiones igualan el número de conexiones aceptadas, el método deja de ejecutarse y se procede a las gestiones que tiene que realizar el servidor una vez todos los usuarios esperados se han conectado.
-
-Una vez detallados los cometidos de todas las clases que posee el servidor, pasamos a detallar las del cliente.
-
-El punto de partida es la clase Client, que será un intermediario entre su thread de recepción de mensajes y la GUI.
-
-\begin{center}
-\includegraphics[scale=0.3]{Client-sprint5.png} 
-\end{center}
-
-Como Client es un intermediario, MainWindow precisa una referencia de Client y Client una de MainWindow; es decir, la comunicación es bidireccional. La razón de esto es:
-
-\begin{itemize}
-\item Al hacerse una jugada en el modelo, como se ha especificado, necesitamos pasar el nuevo estado del juego al servidor para que este, a su vez, se la pase al resto de clientes. Por tanto, MainWindow pasa el estado del juego a su Client. MainWindow, a su vez, obtiene este estado del juego desde el controlador. Todos estos pasos de información se realizan a través de los métodos updateGameToServer que poseen estas clases.
-
-\item Al recibirse un nuevo estado del juego desde el servidor, Client recibe esta información desde su thread. Necesita a MainWindow para que este, a su vez, envíe el nuevo estado del juego al controlador con el fin de actualizar el modelo al nuevo juego requerido. Todos estos pasos de información se realizan a través de los métodos updateGameFromServer que poseen estas clases.
-\end{itemize}
-
-Finalmente, pasamos a describir ClientController, el thread de Client.
-
-\begin{center}
-\includegraphics[scale=0.3]{ClientController-sprint5.png} 
-\end{center}
-
-Nuevamente la comunicación entre Client y ClientController es bidireccional: para enviar información al servidor, Client notifica a ClientController; para recibir información del servidor, ClientController notifica a Client.
-
-Como hemos anticipado, ClientController extiende de Thread, y en su método run() recibe información del servidor que procede a enviar al cliente. El método sendToServer envía la información directamente al servidor por medio de out.println como hemos descrito.
-
-Una vez especificadas todas las clases, describiremos el hilo típico de la ejecución para comprender cómo operan estas y en el orden en el que lo hacen.
-
-\begin{center}
-\includegraphics[scale=0.4]{umlconexiones.png}
-\end{center}
-
-Observamos que al pulsar el botón de Start Server en el diálogo de abrir un servidor, se llama a crear una instancia Server pasándole como parámetro un JSON (gameConfigJSON) correspondiente a una configuración del juego básica especificada desde la GUI, que el servidor rellenará añadiendo los jugadores pertinentes.
-En el constructor de Server se almacena este atributo JSON y se llama al método start(port) que crea el ServerSocket. Posteriormente, llamada al método waitForPlayers para realizar las conexiones oportunas.
-Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su ServerClient y Client asociados, y se crea el thread WaitPlayerThread y se llama a start(). El WaitPlayerThread, en su método run() llamado desde start(), espera en el método de serverSocket.accept() que se conecte un cliente.
-
-Un cliente, por medio de JoinServerDialog, se conecta al servidor desde la IP y puerto requeridos. Pasa por el MainWindow quien a su vez llega al cliente (Client) con el método empezarPartida, en base a las relaciones ya descritas. El cliente crea su thread ClientController. En la constructora de ClientController se realiza la conexión al servidor mediante la creación del Socket.
-
-En cuanto esta se realiza con éxito, ocurren dos procesos de forma paralela:
-
-\begin{itemize}
-\item En el servidor, el método serverSocket.accept() es ejecutado con éxito. Se procede a llamar al método setUpServer del ServerClient específico asociado a esta conexión; se crea después un thread ServerClientThread el cual crea los BufferedReader y PrintWriter oportunos, y ServerClient procede a llamar al run() de este thread (representado en la lifeline ServerClientThreadRun)
-
-\item En el cliente, una vez se ha creado el Socket con éxito en la constructora de ClientController, se crean los BufferedReader y PrintWriter oportunos. Se termina la constructora, y acto seguido Client llama al start de ClientController para que empiece a recibir mensajes en su método run().
-\end{itemize}
-
-Si la conexión no se ha realizado bien, se generan las excepciones oportunas que cierran las ventanas de tanto cliente como servidor.
-
-El thread WaitPlayerThread procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al Player (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de incomingPlayers de forma síncrona mientras WaitPlayerThread espera. El mecanismo pormenorizado es el siguiente:
-
-\begin{center}
-\includegraphics[scale=0.4]{empezarPartidaUml.png}
-\end{center}
-
-\begin{enumerate}
-\item Tras ejecutarse el hilo ClientController, el método empezarPartida de Client se finaliza. MainWindow procede a ejecutar el método join de Client, pasándole como argumentos el nombre y color escogidos.
-\item Client pide al thread ClientController que envíe al servidor esta información.
-\item ClientController envía la información por medio del método sendToServer
-\item El ServerClientThread específico asociado al cliente que envía esta información recibe en su método run el mensaje. Procede a llamar al método asíncrono receiveFromClient de Server.
-\item receiveFromClient distingue, observando el JSONObject enviado, si se trata de información de actualización de juego o información respecto a un nuevo jugador añadido. En el caso que nos ocupa, es esta segunda opción; receiveFromClient procede a crear una instancia de Player y añadirla a incomingPlayers (ArrayList de Player).
-\end{enumerate}
-
-Todo este proceso tarda (bastante) menos del segundo que espera WaitPlayerThread; se deja un segundo de cortesía para dar un amplio margen a los equipos más lentos.
-
-El método run() de WaitPlayerThread se finaliza y se ejecuta desde waitForPlayers (Server) el método join para que concluya el thread.
-
-Dado la información obtenida de Socket, ServerClient y Player (este último con incomingPlayers, cuyo último elemento añadido es el Player correspondiente al cliente), se rellenan las dos listas Player-Socket y ServerClient-Player de Server con una nueva posición.
-
-Todo esto es una única vuelta del bucle de waitForPlayers. Como hemos comentado, se ejecutarían un número de vueltas equivalente al número de jugadores esperados.
-
-Una vez todos los jugadores se han conectados y las dos listas completadas, se sale del bucle y waitForPlayers procede a crear rellenar el incompleto gameConfigJSON que fue pasado con anterioridad por el constructor de Server; ahora es el momento correcto para hacerlo pues ya se conoce la información de todos los players. Se rellenan los campos pertinentes previamente incompletos de gameConfigJSON; posteriormente, se envía este primer estado del juego a todos los clientes por medio del método updateGraphics.
-
-El cliente recibe esta configuración del juego en su thread, se llama al método updateGameFromServer de Client, quien a su vez llama a updateGameFromServer de MainWindow.
-
-En este último método, si es la primera jugada, se llama a crear el juego en el controlador, y después se llama a initGame() para inicializar las componentes visuales relativas al juego.
-
-En cualquier caso, se llama después al método updateGameFromServer de Controller para actualizar el juego tal y como ordena el JSON pasado como parámetro. Los mecanismos de este método son crear un nuevo juego a partir del nuevo JSON estado del juego, pasar los observadores del Game antiguo al nuevo, y adjudicar al atributo Game de Controller este nuevo juego.
-
-Falta por especificar cómo se produce una jugada en el modo online y cómo evitar que los clientes jueguen cuando no es su turno.
-
-\begin{center}
-\includegraphics[scale=0.4]{juegoTipicoUml.png}
-\end{center}
-
-Se pulsa una celda en el tablero y se pide al controlador que ejecute el comando de poner cubo en la posición pedida, como de costumbre. En caso de que se juegue el modo online, se comprueba si el jugador está legitimado para jugar (es decir, es su turno). Para ello, se comprueba que el jugador turno del juego es el mismo que el jugador del cliente (recordemos que Client tiene el atributo Player del jugador al que corresponde).
-
-De verificarse estas dos condiciones, se ejecuta el comando y se envía el nuevo estado del juego al servidor, quien enviará este nuevo estado al resto de clientes.
-
-De no jugarse el modo online, se ejecuta el comando como de costumbre.
-
-Nótese que este último diagrama de secuencia se representa a Client como entidad abstracta emisora y receptora, realmente un Client sería emisor y el resto de Client serían receptores.
 \end{sprint}
+
+
 
 \begin{sprint}[6]
 En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes en el Sprint 5. Las características implementadas son:
@@ -875,11 +673,11 @@ En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes
 \end{itemize}
 
 
-\item Perfeccionamiento de la estructura y relaciones de las comunicaciones cliente-servidor y viceversa, incluyendo mecanismos como un campo en el JSON mensaje que especifica qué tipo de notificación constituye el mensaje enviado.
+\item Perfeccionamiento de la estructura y relaciones de las comunicaciones cliente-servidor y viceversa, incluyendo mecanismos como un campo en el \texttt{JSON} mensaje que especifica qué tipo de notificación constituye el mensaje enviado.
 
 \item Adaptación de los diálogos GUI de red al nuevo diseño de la interfaz gráfica introducido en este Sprint.
 
-\item Se introduce un ServerWorker que soluciona un bug complejo que afectaba a los threads de Red y Swing.
+\item Se introduce un \texttt{ServerWorker} que soluciona un bug complejo que afectaba a los threads de Red y Swing.
 
 \item Simplificación y refactorización del código de Red.
 
@@ -893,6 +691,50 @@ Por último las sucesivas refactorizaciones pugnadas desde otras partes del cód
 
 Los nuevos diagramas de secuencia, así como los comentarios acerca de las implementaciones de las nuevas funcionalidades se describen en el séptimo Sprint, pues en aquél se refinan ligeramente estas.
 
+Las clases cambiadas, desde la perspectiva del servidor, son las siguientes:
+
+\begin{itemize}
+
+\item ServerView
+
+En vez de llamar a server.start, se invoca un \texttt{SwingWorker}, llamado \texttt{ServerWorker}, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
+
+\item \texttt{Server}
+
+Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
+
+En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
+
+Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
+
+Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el \texttt{JSON} del GameConfig.
+
+\item \texttt{ServerClient}
+
+Añadido notifyClientToChooseTeam; indica al \texttt{ServerClientThread} que debe informar al cliente que debe escoger equipo.
+
+\item \texttt{ServerClientThread}
+
+Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación (updateGraphics, chooseTeam respectivamente).
+
+\end{itemize}
+
+Las clases cambiadas, desde la perspectiva del cliente, son las siguientes:
+
+\begin{itemize}
+
+\item \texttt{ClientController}
+
+Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
+
+Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
+
+\item \texttt{Client}
+
+\texttt{Client} incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de \texttt{ClientController} a MainWindow y viceversa respectivamente.
+
+\end{itemize}
+
 \end{sprint}
 \begin{sprint}[7]
 
@@ -900,90 +742,73 @@ En cuanto a la red, si bien está conclusa llegados a este Sprint, el debug real
 
 Por último, se procede a crear y solventar algunas issues relativas a la experiencia de usuario jugando en red, conllevando una serie de modificaciones que hacen más intuitiva las instrucciones para realizar la conexión.
 
-Procedemos a comentar cómo se implementó el modo por equipos en red.
+En cuanto a la perspectiva del servidor, se modifican las siguientes clases:
 
-Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
+\begin{itemize}
 
-Dentro del método waitForPlayers que, recordemos, ejecuta un bucle de número de vueltas número de jugadores realizando las conexiones, cuando se finaliza la ejecución del bucle (es decir, cuando todos los jugadores están conectados y sus informaciones almacenadas en los atributos de Server), llama después a completeGameConfigAndSendToClients(), encargado de rellenar el gameConfig; una vez completo, se envía a los clientes.
+\item \texttt{WaitPlayerThread}
 
-La diferencia con anteriores sprints es que ahora el servidor, antes de completar el gameConfigJSON con la información relativa a los jugadores, comprueba en gameConfigJSON si el modo escogido es por equipos.
+Pasa a llamarse, con fines aclaratorios, \texttt{ServerWaitPlayerThread}.
 
-De ser así, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al gameConfigJSON; posteriormente, como en la implementación de sprints anteriores, procede a completarse el gameConfigJSON con la información de los jugadores.
+\item \texttt{Server}
 
-Primero, como observamos, se llama al método notifyClientToChooseTeam de todos los Client; este, por medio de ServerClientThread envía el gameConfigJSON, con el campo "chooseTeam" como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
+Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
 
-Cada cliente en su respectivo ClientController recibe esta información. Observa la naturaleza de la notificación; como esta es chooseTeam, procede a abrir un diálogo ChooseTeamFromServerDialog para escoger uno de los equipos ofrecidos desde el servidor. Nótese que la información de los equipos viene proporcionada en el gameConfigJSON enviado desde el servidor.
+\end{itemize}
 
-Una vez todos los clientes han sido notificados, se llama a waitForAllPlayersToChooseTeam(). Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
-
-Además, como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de ServerClient - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
-
-¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un JSONObject con el nombre del equipo elegido en el campo "team". Antes de enviarlo, pone en el JSON un campo "notification" con el valor "chooseTeam"; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
-
-El servidor recibe un JSON con la notificación chooseTeam; en receiveFromClient (Server) observa que al ser la notificación "chooseTeam", debe añadir una nueva entrada al mapa ServerClient - Nombre del equipo escogido.
-
-Como hemos comentado, una vez todos los equipos han sido escogidos, se sigue completando el gameConfig; ahora se sigue el mismo hilo de ejecución especificado en los anteriores sprints; se rellena el gameConfigJSON con la información de los jugadores y posteriormente se pasa el JSON a todos los clientes para que actualicen sus vistas para mostrar el juego por primera vez.
-
-En cuanto al nuevo sistema de notificaciones, son los thread de servidor y cliente los que añaden la notificación al json a enviar; para saber qué notificación enviar, las clases en contacto con los thread (ServerClient desde el servidor, Client desde el cliente) llaman al método especifico que pondrá la notificación requerida para después enviársela al cliente/servidor. De esta forma, se tienen en cuenta las notificaciones a la hora de procesar los mensajes enviados.
-
-Cambios de importancia para comparar los UML del Sprint 5 con los del Sprint 7 son los siguientes:
+Cambios de importancia para comparar los UML del Sprint 5 con los del Sprint 7 (final) son los siguientes:
 
 \begin{center}
-\includegraphics[scale=0.3]{Client-evol.png} 
+\includegraphics[scale=0.3]{Client-evol.png}
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.3]{ClientController-evol.png} 
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.3]{ServerClient-evol.png} 
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.3]{ServerClientThread-evol.png} 
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.3]{server-evol.png} 
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.3]{WaitPlayerThread-evol.png} 
+
+Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
-Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado final de la redes.
-
-\begin{center}
-\includegraphics[scale=0.45]{UMLClasesRedSprint7.png} 
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.3]{umlconexionessprint7.png}
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.3]{empezarPartidaUmlSprint7.png}
-\end{center}
-
-
-\begin{center}
-\includegraphics[scale=0.4]{juegoTipicoUmlSprint7.png}
-\end{center}
+El estado final del juego, especificando el UML y el diseño últimos, se encuentra en el apartado de Diseño final.
 
 \end{sprint}
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
 \subsubsection{Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}
 \begin{sprint}[1]
-Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \textit{SaveLoadManager}.
+Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \texttt{SaveLoadManager}.
 
 \begin{center}
 \centering
 \includegraphics[scale=0.5]{save-load-manager-sprint1.png}
 \end{center}
 
-Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \textit{Game}.
+Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \texttt{Game}.
 
 \begin{center}
 \centering
@@ -1001,7 +826,7 @@ Guardar partida
 \end{sprint}
 
 \begin{sprint}[2]
-En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel de \textit{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \textit{Saveable} que debía implementar \textit{Game} para poder ser guardada y cargada de en un fichero.
+En la versión anterior del \texttt{SaveLoadManager}, la clase trabajaba a nivel de \texttt{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \texttt{Saveable} que debía implementar \texttt{Game} para poder ser guardada y cargada de en un fichero.
 
 \begin{center}
 \centering
@@ -1011,7 +836,7 @@ En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel
 \end{sprint}
 
 \begin{sprint}[3]
-Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \textit{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \textit{Saveable} restringía los métodos de \textit{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
+Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \texttt{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \texttt{Saveable} restringía los métodos de \texttt{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
 
 La adquisición de nuevos conocimientos nos permitió tomar una decisión de diseño que marcaría el desarrollo de la aplicación de aquí en adelante. Desde este sprint toda la comunicación con el exterior se realizaría mediante JSONObjects.
 
@@ -1020,7 +845,7 @@ La adquisición de nuevos conocimientos nos permitió tomar una decisión de dis
 \includegraphics[scale=0.5]{reportable.png}
 \end{center}
 
-De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \textit{report()}, que devuelve una serialización del objeto en formato JSON. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
+De esta forma, la interfaz \texttt{Saveable} fue reemplazada por \texttt{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \texttt{report()}, que devuelve una serialización del objeto en formato \texttt{JSON}. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
 
 
 \begin{center}
@@ -1028,16 +853,16 @@ De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reporta
 \includegraphics[scale=0.5]{save-load-manager-sprint3.png}
 \end{center}
 
-Esto supuso una refactorización completa del \textit{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
+Esto supuso una refactorización completa del \texttt{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
 
 \end{sprint}
 
 \begin{sprint}[4]
-Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \textit{SaveLoadManager} para poder mantener esta funcionalidad.
+Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \texttt{SaveLoadManager} para poder mantener esta funcionalidad.
 \end{sprint}
 
 \begin{sprint}[6]
-La similaridad entre los métodos para guardar partidas y \textit{replays} en el \textit{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
+La similaridad entre los métodos para guardar partidas y \textit{replays} en el \texttt{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
 \end{sprint}
 
 \subsubsection{Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}
@@ -1055,23 +880,23 @@ La refactorización llevada a cabo en el SaveLoadManager incluyó la libre elecc
 \begin{sprint}[3]
 Durante el sprint 3 comenzó el desarrollo de esta funcionalidad, que de ahora en adelante denominaremos como \textit{replays}. Para su implementación, se planteó abstraer la clase Game mediante estados que representen cada uno de los momentos que atraviesa el juego a lo largo de una partida. Así, mediante un conjunto de estados es posible replicar una partida al completo.
 
-Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \textit{Game} en el momento deseado.
+Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \texttt{Game} en el momento deseado.
 
-Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \textit{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
+Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \texttt{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
 
-De esta manera surge la interfaz \textit{Replayable}, que extiende de la interfaz \textit{Reportable} y que contiene dos métodos: \textit{toString()}, para facilitar la visualización en la vista de consola, y \textit{report()}, para poder almacenar los estados en formato JSON.
+De esta manera surge la interfaz \texttt{Replayable}, que extiende de la interfaz \texttt{Reportable} y que contiene dos métodos: \texttt{toString()}, para facilitar la visualización en la vista de consola, y \texttt{report()}, para poder almacenar los estados en formato \texttt{JSON}.
 
 \begin{center}
 \includegraphics[scale=0.5]{replayable-reportable-sprint-3.png}
 \end{center}
 
-Una vez ideada esta interfaz, ya es posible definir la clase \textit{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
+Una vez ideada esta interfaz, ya es posible definir la clase \texttt{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
 
 \begin{center}
 \includegraphics[scale=0.5]{state-sprint-3.png}
 \end{center}
 
-El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \textit{Replay}. Esta clase contiene una lista de \textit{State} que se completa durante una partida.
+El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \texttt{Replay}. Esta clase contiene una lista de \texttt{State} que se completa durante una partida.
 
 \begin{center}
 \includegraphics[scale=0.6]{addState-replay-sprint-3.png}
@@ -1087,9 +912,9 @@ Cuando la partida acaba o el usuario hace que acabe (mediante el uso del comando
 Guardado de Replay
 \end{center}
 
-Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \textit{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
+Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \texttt{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
 
-La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \textit{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \textit{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
+La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \texttt{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \texttt{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
 
 \begin{center}
 \includegraphics[scale=0.7]{consola-replay-sprint-3.png}
@@ -1102,13 +927,13 @@ Con estas repeticiones de partidas funcionales dimos por completada esta tarea e
 
 Este sprint se caracterizó por la implementación de una GUI funcional, lo que conlleva la adaptación de las \textit{replays} a este nuevo formato. Decidimos que la comunicación entre modelo y vista se llevara a cabo mediante el uso del patrón observador, lo cual supuso un reto inicial para las repeticiones de partidas.
 
-Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \textit{Game} no interviene en el proceso, pues es la clase \textit{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \textit{Replay} es también un modelo que debe ser observado.
+Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \texttt{Game} no interviene en el proceso, pues es la clase \texttt{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \texttt{Replay} es también un modelo que debe ser observado.
 
 \begin{center}
 \includegraphics[scale=0.5]{rolit-observer-sprint4.png}
 \end{center}
 
-Para implementar los observadores se creó la interfaz \textit{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \textit{Replay} y \textit{State}.
+Para implementar los observadores se creó la interfaz \texttt{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \texttt{Replay} y \texttt{State}.
 
 \begin{center}
 \includegraphics[scale=0.5]{replay-state-sprint-4.png}
@@ -1117,13 +942,13 @@ Para implementar los observadores se creó la interfaz \textit{ReplayObserver} q
 \end{sprint}
 
 \begin{sprint}[5]
-La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \textit{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
+La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \texttt{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
 \end{sprint}
 
 \begin{sprint}[6]
-El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \textit{Replay}.
+El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \texttt{Replay}.
 
-Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \textit{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
+Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \texttt{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
 \begin{center}
 \includegraphics[scale=0.5]{addState-replay-sprint-6.png}
 \end{center}
@@ -1220,4 +1045,891 @@ Para conseguir esto, la representación interna de los colores se hace a través
 
 \end{sprint}
 
+\chapter{Diseño y evolución de otros aspectos del proyecto}
+
+\subsection{Builders}
+Hasta que el proyecto no aumentó lo suficiente de tamaño y hasta que no se estudiaron los patrones adecuados, la necesidad de tener unas clases específicas especializadas en la creación de ciertos objetos no tuvo relevancia en el proyecto (pues no surgió la necesidad o no teníamos los conocimientos para cubrirla).
+
+\begin{sprint}[3]
+El aumento de tamaño del \texttt{Game} y, con mucha más relevancia, la complejidad de la creación del mismo que estaba adquiriendo dicha clase hizo que fuese necesario encapsular la lógica de creación de este objeto más allá de un simple constructor, pues no era responsabilidad del controlador o las clases que iniciaran el juego de traducir los datos que el usuario quería del mismo a una instancia concreta de \texttt{Game}, pero tampoco podíamos hacer una cantidad ingente de constructores para cada posible situación de juego.
+
+En base a esta necesidad, y con vistas a que en el futuro iba a haber más tipos de \texttt{Game} a los que jugar, se crea por primera vez la clase \texttt{GameGenerator}. Esta clase, debido a la falta de una implementación del \textit{Modelo-Vista-Controlador} útil y funcional, se encarga no sólo de traducir los datos que el usuario introduce por pantalla para generar el juego sino de preguntar directamente por consola cuáles son las características del juego que se va generar.
+
+\begin{center}
+\includegraphics[scale=0.5]{Builders_sprint3_seq}
+\end{center}
+
+Es decir, esta clase constituye una aproximación al patrón de Factorías, pues ahora \texttt{Controller} solo debe encargarse de pedirle a la factoría que genere el juego y después hacer su verdadera función: controlar los eventos del juego.
+\end{sprint}
+
+\begin{sprint}[4]
+La aparición de nuevos tipos de \texttt{Game} complica, más si cabe, la creación de los mismos para comenzar la partida. Ya no sólo el usuario debe introducir características que desea del juego sino que tiene que introducir cosas distintas en función del tipo de juego que desee jugar. Esta nueva funcionalidad complica mucho las cosas porque, tal y como estába implementado en el sprint anterior, tendríamos que saber generar una factoría distinta para cada tipo de juego y que dicha factoría generase el juego.
+
+Es en este punto donde implementamos los patrones de \textit{Abstract Factory} y \textit{Builder}. Generamos un nuevo paquete y unas nuevas clases que van a sustituir a la clase \texttt{GameGenerator} del sprint anterior y que principalmente van a tener dos familias de métodos: un grupo de métodos para \textbf{preguntar} y recopilar la información que el usuario teclee sobre el juego y otra familia para \textbf{construir} el juego una vez se tiene la información.
+
+$$DIAGRAMA DE CLASES DE LOS BUILDER SPRINT 4$$
+
+La clase principal y la cual es la encargada de la generación de los \texttt{Game} como tipo abstracto es la clase \texttt{GameBuilder}. Dicha clase pregunta \textbf{los elementos globales a cualquier juego} por pantalla a través del método \texttt{ask()} y después indica al constructor concreto del juego concreto que se quiere jugar que pregunte lo que considere necesario sobre su juego a través de su método \texttt{whatIneed()}. Todo este proceso genera un conglomerado de datos \textbf{en forma de \texttt{JSONObject}} que se utiliza como receta para el método de construcción del juego. Dicho método funciona exactamente igual a los procesos anteriores: la factoría general \textbf{GameBuilder} construye a partir del \texttt{JSONObject} todo lo que un juego genérico tendría y después indica al Builder concreto que termine de construir el juego con el mismo \texttt{JSONObject}.
+
+\begin{center}
+\includegraphics[scale=0.5]{Builders_sprint4_seq}
+\includegraphics[scale=0.5]{Builders2_sprint4_seq}
+\end{center}
+
+La parte de preguntar podría omitirse y tener un método general de crear el juego recibiendo un \texttt{JSONObject} y otro sin \texttt{JSONObject}, sin embargo el cuello de botella de sólo poder llamar al método \texttt{Game createGame()} de \texttt{GameBuilder} es una característica fundamental del diseño que se va a tomar posteriormente. En este caso, los Builder preguntaban porque aún no había una interfaz gráfica de consola en condiciones que pudiese encargarse de un manejo adecuado de entrada salida, pero con la decisión anterior el mensaje es tajante: todo aquel que desee generar un juego debe pasarle la información bien estructurada a las factorías. Y este detalle es fundamental, pues permite que la forma de obtener la información no sea relevante, es decir, la información del juego puede ser recopilada desde un fichero de carga, por consola, por GUI o por red y que el método para crear el juego siempre sea el mismo, pues sólo se necesita saber la información en formato \texttt{JSONObject}.
+\end{sprint}
+
+\begin{sprint}[5]
+La aparición de una interfaz de consola adecuada posibilitó que los métodos \texttt{JSONObject ask()} y \texttt{void WhatIneed(JSONObject o)} salieran de las factorias y se incorporaran a la vista de consola correspondiente. De este modo, ahora simplemente los Builder mantienen su funcionalidad de contener la lógica de creación del juego a partir del saco de datos que suponen los \texttt{JSONObject} de cada juego.
+\end{sprint}
+
+\begin{sprint}[6]
+Para este sprint los Builder simplemente cambian la forma instanciar el tipo \texttt{\texttt{Player}} que se añade al \texttt{Game} porque cambia su estructura interna (ahora tenemos estrategias para jugadores automáticos y forman parte de la estructura interna del \texttt{\texttt{Player}}).
+\end{sprint}
+
+\subsection{Commands}
+
+\chapter{Diseño final}
+
+\section{Paquete model}
+\subsection{Builders}
+Este paquete agrupa las clases cuya responsabilidad es saber construir un objeto del tipo \texttt{Game} a través de un conglomerado de información. Para unificar dicha funcionalidad se han tomado las siguiente decisiones:
+\begin{itemize}
+\item La factoría abstracta que genera el \texttt{Game} es una clase abstracta de la que extienden las factorías concretas que saben generar cada tipo de \texttt{Game}.
+
+\item La factoría abstracta tiene un listado de todas las posibles factorías concretas que hay, de modo que cuando se le pide crear un objeto \texttt{Game} ella internamente llama a la factoría correspondiente para que complete la creación en los detalles específicos.
+
+\item Precisamente por el hecho anterior y por tener un lugar concreto donde crear el juego (puesto que el \texttt{Game} se crea tras iniciar la aplicación, ya que en las pantallas sucesivas se puede decidir crear un juego nuevo o en el modo red no se puede crear el juego hasta tener los datos de todos los jugadores), el método para generar \texttt{Game} es un método estático que puede ser llamada desde los lugares donde se requiere una creación de \texttt{Game}, puesto que la responsabilidad de la factoría es dado un conjunto de datos, generar el \texttt{Game} correspondiente.
+
+\item El formato para la información de construcción del juego es \texttt{JSONObject} y es necesario que se pase a la factoría para tener un proceso unificado de creación del juego. Que las clases que pueden crear un \texttt{Game} tengan que saber cómo generar el \texttt{JSONObject} no rompe la encapsulación, pues si poseen la habilidad para crear un \texttt{Game} están íntimamente ligadas a la estructura del mismo (puesto que tienen que pedir al usuario los datos para crearlo) y, por tanto, los cambios en ella deben afectar a los métodos donde construyan dicho \texttt{JSONObject}.
+\end{itemize}
+
+Observadas las anteriores decisiones de diseño, se presenta el conjunto de clases implicadas en la construcción del juego siguiendo el patrón de \textit{Abstract Factory} y \textit{Builder}:
+
+$$DIAGRAMA DE CLASES BUILDERS FINAL$$
+
+La clase principal es \texttt{GameBuilder} cuyo método principal para la creación es \texttt{public static Game createGame(JSONObject o)}. Dicho método se encarga recoger el tipo de juego que se desea generar del \texttt{JSONObject} y parsear el Builder concreto que sabe construir dicho juego. Una vez lo encuentra se pasa la responsabilidad de crearlo al mismo llamando al método de los Builder \texttt{Game GenerateGame(JSONObject o)}. Es decir, la interacción a la hora de crear un \texttt{Game} sería:
+\begin{center}
+\includegraphics[scale=0.55]{Builders_final_seq}
+\end{center}
+
+Esta clase posee una serie de métodos protegidos que utilizan sus hijas, los Builders específicos, que sirven para verificar en tiempo de construcción del juego que la información recibida va siendo consistente y válida (los jugadores tienen nombres distintos, colores distintos, escogemos colores válidos...).
+
+\subsubsection{GameClassicBuilder y GameTeamsBuilder}
+Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lógica de construcción de los \texttt{GameClassic} y los \texttt{GameTeams}. El flujo de ejecución es idéntico para ambas, se llama al método \texttt{Game GenerateGame(JSONObject o)} que devuelve el juego listo para empezar la ejeución, aunque la forma de construir el juego sí es distinta:
+
+\begin{center}
+\includegraphics[scale=0.45]{GameClassicBuilder_final_seq}
+\includegraphics[scale=0.45]{GameTeamsBuilder_final_seq}
+\end{center}
+
+
+
+\subsubsection{GameBuilder}
+\subsection{Commands}
+\subsection{Logic}
+\subsection{Online}
+
+Fundamentalmente, la conexión en red se basa en una estructura en el que los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor. El servidor procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos. Nótese que el cliente sólo tiene contacto con el servidor, y el servidor tiene contacto con todos los clientes. Es, por tanto, un modelo de red centralizado, con nodo central el servidor.
+
+\begin{center}
+\includegraphics[scale=1]{redCentralizada.png} 
+\end{center}
+
+Para implementar esta funcionalidad de red en Java operamos según el modelo \texttt{ServerSocket}-\texttt{Socket}. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de \texttt{ServerSocket} pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo\texttt{Socket} por medio de llamar al método accept() de \texttt{ServerSocket}. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
+
+\begin{lstlisting}[frame=single, language=Java]
+//Perspectiva del servidor
+
+\texttt{ServerSocket} serverSocket = new \texttt{ServerSocket}(port);
+\texttt{Socket} socketCliente1 = serverSocket.accept();
+...
+...
+...
+\texttt{Socket} socketClienteN = serverSocket.accept();
+
+\end{lstlisting}
+
+
+Este método accept() se queda "bloqueado" o en espera, hasta que un cliente se conecta por medio de la creación de un \texttt{Socket} desde su aplicación de la siguiente manera:
+
+\begin{lstlisting}[frame=single, language=Java]
+//Perspectiva del cliente
+
+\texttt{Socket} socket = new \texttt{Socket}(ip, port);
+
+\end{lstlisting}
+
+donde ip es la dirección IP donde opera el servidor (ya sea local, o pública con el puerto especificado abierto para permitir conexiones desde fuera de su red), y port el puerto donde esta opera.
+
+Una vez que las creaciones del \texttt{Socket} de servidor y cliente han sido creadas de forma satisfactoria, la conexión ha sido realizada con éxito. Por tanto, podemos proceder al envío de mensajes entre cliente-servidor y viceversa.
+
+Para ello, Java nos ofrece realizar este cambio de información por medio de pares de instancias BufferedReader-PrintWriter, llamémosle in e out respectivamente. Estas instancias leen y reciben String, respectivamente. Nuestro modelo procederá a enviar JSONObject pasados a formatos String, que después al ser recibidos como Strings se volverán a construir en JSONObject por medio de la constructora de JSONObject que admite como parámetro un String.
+
+Cada servidor posee un número de parejas in-out equivalente al número de clientes conectados, y cada cliente posee una pareja.
+
+\begin{lstlisting}[frame=single, language=Java]
+//Perspectiva del servidor
+BufferedReader inCliente1 =  new BufferedReader(new
+InputStreamReader(socketCliente1.getInputStream()));
+...
+...
+...
+PrintWriter outClienteN =  new PrintWriter(
+socketClienteN.getOutputStream(), true);
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single, language=Java]
+//Perspectiva del cliente
+BufferedReader in =  new BufferedReader(new
+InputStreamReader(socket.getInputStream()));
+
+PrintWriter out =  new PrintWriter(
+socket.getOutputStream(), true);
+\end{lstlisting}
+
+
+De esta forma, cada vez que se pretende enviar un mensaje desde el cliente al servidor, el cliente k envía un mensaje msg por medio del método out.println(msg). Este mensaje es recogido desde el servidor por el método inClienteK.readline(). Asimismo, si el servidor pretende enviar un mensaje al cliente k, este debe llamar a outK.println(msg). El cliente k recoge el mensaje desde in.readline(). En resumen:
+
+\begin{lstlisting}[frame=single, language=Java]
+
+	//Envio de mensaje ClienteK Servidor
+
+
+//Perspectiva del cliente k
+out.println(msg);
+
+--->
+
+//Perspectiva del servidor
+String msg = inClienteK.readline();
+
+
+
+	//Envio de mensaje Servidor-ClienteK
+
+
+//Perspectiva del servidor
+outK.println(msg);
+
+-->
+
+//Perspectiva del cliente k
+String msg = in.readline();
+\end{lstlisting}
+
+Sin embargo, surgen una serie de problemas con respecto a este modelo. El servidor debería recibir de manera independiente, paralela y en cualquier momento los peticiones de cada cliente, de lo contrario habría que definir un orden completamente arbitrario de llegada de mensajes según cliente. Si bien esto pudiera hacerse para realizar juegos por turnos en el que un mensaje enviado por un cliente al que no le corresponde el turno no sea procesado por el servidor, otras funcionalidades serían imposibles de implementar.
+
+Por ejemplo, podría ocurrir que en el modo por equipos, dos clientes se conecten. Reciben ambos del servidor una lista de equipos en la que pueden conectarse. Se ve que es absurdo imponer un orden de quién envía la información del equipo elegido, pues esta es imposible de anticipar. Puede darse que el primer cliente que se conecte sea el segundo que especifique en qué equipo quiere conectarse.
+
+En suma, nos interesa que la llegada de mensajes no deba ser regida por un orden definido y arbitrario. Para ello, nos interesa utilizar una herramienta de la programación concurrente y paralela, los hilos; en el caso de Java, proporcionados por la clase \texttt{Thread}.
+
+De esta manera, si el servidor tiene un hilo por cada cliente, podrá recibir mensajes de forma paralela. Así, ningún mensaje enviado desde un cliente es perdido; todos llegan al servidor con independencia de cuándo se emitan desde el cliente. Desde la perspectiva del servidor, este es el cometido de la clase \texttt{ServerClientThread} implementada en el proyecto, que extiende de \texttt{Thread}. En su método run, recibe mensajes con el método readLine() anteriormente descrito \textbf{de forma periódica y constantemente (en un while), hasta que se haya decidido cerrar el juego}. Posteriormente, se envía este mensaje al método receiveFromClient, synchronized (pretendemos ejecutar múltiples procesamientos que de forma secuencial para evitar errores imprevistos), que pertenece a la clase \texttt{Server}, que de forma sincronizada procesa este mensaje atendiendo al tipo de mensaje enviado (comprueba el campo notification del \texttt{JSON}, que puede albergar "playerInfo", "chooseTeam", "updateGraphics").
+
+El cliente se encuentra en una situación parecida. ¿Qué ocurre si recibe una información del servidor, la procesa y mientras se da este procesamiento, recibe otro mensaje del servidor? Necesitará el cliente, por tanto, dos hilos: un hilo que se dedique a recoger mensajes, y otro hilo que se dedique a procesarlos. De esta forma, ninguna información emitida desde el servidor es perdida.
+
+Una vez el modelo de red ha sido completamente explicado, procedemos a detallar los detalles de implementación relativos al juego en específico.
+
+\begin{center}
+\includegraphics[scale=0.45]{UMLClasesRedSprint7.png} 
+\end{center}
+
+Empezamos a detallar la estructura del servidor.
+
+ServerView, especificado en el apartado de diseño correspondiente, tiene el papel de pasar la información pertinente para el funcionamiento de la clase \texttt{Server}.
+
+Partimos de la clase \texttt{Server}, clase que gestiona los clientes desde la perspectiva del servidor y que procesa los mensajes emitidos desde los clientes.
+
+\newpage
+
+\underline{Server}
+
+\begin{center}
+\includegraphics[scale=0.3]{Server-sprint7.png} 
+\end{center}
+
+Como hemos anticipado, \texttt{Server} debe poseer un único \texttt{ServerSocket} a través del cual se abre el servidor. Posee el atributo expectedPlayers recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de \texttt{ServerWaitPlayerThread} creados, clase que pasaremos a comentar después.
+
+Asimismo, \texttt{Server} posee dos listas: una correspondiente a pares \texttt{Player}-\texttt{Socket}, de modo que a cada jugador se le asocia el \texttt{Socket} a través del cuál puede comunicarse con el cliente en específico que juega bajo su identidad; y otra correspondiente a pares \texttt{Player}-\texttt{ServerClient}, donde a cada jugador se le asocia el \texttt{ServerClient} específico. Pasaremos a describir posteriormente qué es la clase \texttt{ServerClient}.
+En resumen, tenemos asociaciones biunívocas jugador-cliente las cuales aprovecharemos para el envío y la recepción de mensajes.
+
+\newpage
+
+\underline{ServerClient}
+
+\begin{center}
+\includegraphics[scale=0.3]{ServerClient-sprint7.png} 
+\end{center}
+
+El \texttt{ServerClient} constituye una representación de un cliente en específico desde la perspectiva del servidor. 
+
+Lo fundamental de la clase \texttt{ServerClient} es que posee el thread encargado de la recepción directa de mensajes desde el cliente en específico; es decir, posee una única instancia de clase \texttt{ServerClientThread}, anteriormente mencionada.
+
+\newpage
+
+\underline{ServerClientThread}
+
+\begin{center}
+\includegraphics[scale=0.3]{ServerClientThread-sprint7.png} 
+\end{center}
+
+\texttt{ServerClient} posee una referencia a su \texttt{ServerClientThread} y viceversa. Esto es porque:
+
+\begin{itemize}
+\item \texttt{ServerClient} posee a \texttt{ServerClientThread} porque el servidor, al enviar mensajes al cliente, pasa el mensaje por \texttt{ServerClient} (recordemos la lista \texttt{Player}-\texttt{ServerClient}) quien pasa a enviárselo a a \texttt{ServerClientThread}.
+\item \texttt{ServerClientThread} posee a \texttt{ServerClient} porque al recibir mensajes desde el cliente, \texttt{ServerClientThread} envía el mensaje a \texttt{Server} para procesarlo. En esta función server.receiveFromClient, se necesitan dos parámetros: el mensaje, y el \texttt{ServerClient} asociado. Es por esto que para este segundo parámetro, \texttt{ServerClientThread} necesite una referencia de \texttt{ServerClient}.
+\end{itemize}
+
+Como vemos, la finalidad es encapsular el código de forma que \texttt{Server} no conozca de \texttt{ServerClientThread} sino solo de \texttt{ServerClient}.
+
+
+\newpage
+
+\underline{ServerWaitPlayerThread}
+
+\begin{center}
+\includegraphics[scale=0.3]{WaitPlayerThread-sprint7.png} 
+\end{center}
+
+\texttt{ServerWaitPlayerThread}, por otra parte, es un hilo encargado de ir recibiendo los jugadores.
+
+Se crean un número "expectedPlayers" (atributo de \texttt{Server}) de instancias de esta clase, cada una de ellas con un \texttt{ServerClient} asociado (por tanto, \texttt{ServerClient} es atributo de \texttt{ServerWaitPlayerThread}). En su método run se encarga de ejecutar el método serverSocket.accept() que especificamos anteriormente. En cuanto se acepta la conexión, se procede a llamar al método setUpServer de \texttt{ServerClient} para que este cree su \texttt{ServerClientThread}.
+
+La necesidad de hacer esto de forma paralela justifica la creación del hilo \texttt{ServerWaitPlayerThread}. Para evitar problemas de concurrencia, en esta clase los atributos \texttt{Server} y \texttt{ServerClient} son volátiles para que todos los hilos \texttt{ServerWaitPlayerThread} conozcan en tiempo real el estado de \texttt{Server} y \texttt{ServerClient}.
+
+En particular, \texttt{Server} debe ser volatile pues debe ir actualizando su lista de \texttt{Player}-\texttt{Socket} en tiempo real y de forma organizada de a fin de evitar bugs. Esto es porque el método sincronizado waitForPlayers de \texttt{Server} recoge periódicamente el número de conexiones aceptadas. En cuanto estas conexiones igualan el número de conexiones aceptadas, el método deja de ejecutarse y se procede a las gestiones que tiene que realizar el servidor una vez todos los usuarios esperados se han conectado.
+
+Una vez detallados los cometidos de todas las clases que posee el servidor, pasamos a detallar las del cliente.
+
+El punto de partida es la clase \texttt{Client}, que será un intermediario entre su thread de recepción de mensajes y la GUI.
+
+\newpage
+
+\underline{Client}
+
+\begin{center}
+\includegraphics[scale=0.3]{Client-sprint7.png} 
+\end{center}
+
+Como \texttt{Client} es un intermediario entre el thread de recepción de mensajes y la GUI, MainWindow precisa una referencia de \texttt{Client} y \texttt{Client} una de MainWindow; es decir, la comunicación es bidireccional. La razón de esto es:
+
+\begin{itemize}
+\item Al hacerse una jugada en el modelo, como se ha especificado, necesitamos pasar el nuevo estado del juego al servidor para que este, a su vez, se la pase al resto de clientes. Por tanto, MainWindow pasa el estado del juego a su \texttt{Client}. MainWindow, a su vez, obtiene este estado del juego desde el controlador. Todos estos pasos de información se realizan a través de los métodos updateGameToServer que poseen estas clases.
+
+\item Al recibirse un nuevo estado del juego desde el servidor, \texttt{Client} recibe esta información desde su thread. Necesita a MainWindow para que este, a su vez, envíe el nuevo estado del juego al controlador con el fin de actualizar el modelo al nuevo juego requerido. Todos estos pasos de información se realizan a través de los métodos updateGameFromServer que poseen estas clases.
+\end{itemize}
+
+Finalmente, pasamos a describir \texttt{ClientController}, el thread de \texttt{Client}.
+
+\newpage
+
+\underline{ClientController}
+
+\begin{center}
+\includegraphics[scale=0.3]{ClientController-sprint7.png} 
+\end{center}
+
+Nuevamente la comunicación entre \texttt{Client} y \texttt{ClientController} es bidireccional: para enviar información al servidor, \texttt{Client} notifica a \texttt{ClientController}; para recibir información del servidor, \texttt{ClientController} notifica a \texttt{Client}.
+
+Como hemos anticipado, \texttt{ClientController} extiende de \texttt{Thread}, y en su método run() recibe información del servidor que procede a enviar al cliente. El método sendToServer envía la información directamente al servidor por medio de out.println como hemos descrito; este método es llamado por una serie de métodos -sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer-, los cuales introducen el campo notification en el \texttt{JSON}, con el valor chooseTeam, playerInfo y updateGraphics respectivamente. El objetivo es que el servidor pueda distinguir la naturaleza del mensaje enviado y hacer su tratamiento específico en base a ello.
+
+Una vez especificadas todas las clases, describiremos el hilo típico de la ejecución para comprender cómo operan estas y en el orden en el que lo hacen.
+
+\begin{center}
+\includegraphics[scale=0.4]{umlconexionessprint7.png}
+\end{center}
+
+Cuando se pulsa a crear un servidor, el usuario rellena un CreateGameDialog para especificar una configuración del juego básica especificada. Una vez especificada, se crea el objeto \texttt{Server}, que tendrá en su atributo gameConfig dicha información. Finalmente, en este constructor se abre el diálogo de crear un servidor; el usuario host del servidor debe especificar el puerto en el que el servidor debe operar. Finalmente, se pulsa el botón Start \texttt{Server}.
+
+Observamos que al pulsar el botón de Start \texttt{Server} en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un thread, el del servidor, de forma concurrente al de Swing -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método start(port) de \texttt{Server}, que crea el \texttt{ServerSocket} y  posteriormente, llama al método waitForPlayers para realizar las conexiones oportunas.
+
+Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su \texttt{ServerClient} y \texttt{Client} asociados, y se crea el thread \texttt{ServerWaitPlayerThread} y se llama a start(). El \texttt{ServerWaitPlayerThread}, en su método run() llamado desde start(), espera en el método de serverSocket.accept() que se conecte un cliente.
+
+Un cliente, por medio de JoinServerDialog, se conecta al servidor desde la IP y puerto requeridos. Pasa por el MainWindow quien a su vez llega al cliente (\texttt{Client}) con el método empezarPartida, en base a las relaciones ya descritas. El cliente crea su thread \texttt{ClientController}. En la constructora de \texttt{ClientController} se realiza la conexión al servidor mediante la creación del \texttt{Socket}.
+
+En cuanto esta se realiza con éxito, ocurren dos procesos de forma paralela:
+
+\begin{itemize}
+\item En el servidor, el método serverSocket.accept() es ejecutado con éxito. Se procede a llamar al método setUpServer del \texttt{ServerClient} específico asociado a esta conexión; se crea después un thread \texttt{ServerClientThread} el cual crea los BufferedReader y PrintWriter oportunos, y \texttt{ServerClient} procede a llamar al run() de este thread (representado en la lifeline ServerClientThreadRun)
+
+\item En el cliente, una vez se ha creado el \texttt{Socket} con éxito en la constructora de \texttt{ClientController}, se crean los BufferedReader y PrintWriter oportunos. Se termina la constructora, y acto seguido \texttt{Client} llama al start de \texttt{ClientController} para que empiece a recibir mensajes en su método run().
+\end{itemize}
+
+Si la conexión no se ha realizado bien, se generan las excepciones oportunas que cierran las ventanas de tanto cliente como servidor.
+
+El thread \texttt{ServerWaitPlayerThread} procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al \texttt{Player} (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de incomingPlayers de forma síncrona mientras \texttt{ServerWaitPlayerThread} espera. El mecanismo pormenorizado es el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.4]{empezarPartidaUmlSprint7.png}
+\end{center}
+
+\begin{enumerate}
+\item Tras ejecutarse el hilo \texttt{ClientController}, el método empezarPartida de \texttt{Client} se finaliza. MainWindow procede a ejecutar el método join de \texttt{Client}, pasándole como argumentos el nombre y color escogidos.
+\item \texttt{Client} pide al thread \texttt{ClientController} que envíe al servidor esta información.
+\item \texttt{ClientController} envía la información por medio del método sendToServer, adjuntándole previamente en el \texttt{JSON} la notificación playerInfo para que el servidor conozca la naturaleza de esta información (proporcionar la información del jugador cliente)
+\item El \texttt{ServerClientThread} específico asociado al cliente que envía esta información recibe en su método run el mensaje. Procede a llamar al método asíncrono receiveFromClient de \texttt{Server}.
+\item receiveFromClient distingue, observando el JSONObject enviado, si se trata de información de actualización de juego, información respecto a un nuevo jugador añadido, o información sobre el equipo escogido observando el campo notificación del \texttt{JSON}. En el caso que nos ocupa, es esta segunda opción; receiveFromClient procede a crear una instancia de \texttt{Player} y añadirla a incomingPlayers (ArrayList de \texttt{Player}).
+\end{enumerate}
+
+Todo este proceso tarda (bastante) menos del segundo que espera \texttt{ServerWaitPlayerThread}; se deja un segundo de cortesía para dar un amplio margen a los equipos más lentos.
+
+El método run() de \texttt{ServerWaitPlayerThread} se finaliza y se ejecuta desde waitForPlayers (\texttt{Server}) el método join para que concluya el thread.
+
+Dado la información obtenida de \texttt{Socket}, \texttt{ServerClient} y \texttt{Player} (este último con incomingPlayers, cuyo último elemento añadido es el \texttt{Player} correspondiente al cliente), se rellenan las dos listas \texttt{Player}-\texttt{Socket} y \texttt{ServerClient}-\texttt{Player} de \texttt{Server} con una nueva posición.
+
+Todo esto es una única vuelta del bucle de waitForPlayers. Como hemos comentado, se ejecutarían un número de vueltas equivalente al número de jugadores esperados.
+
+Una vez todos los jugadores se han conectados y las dos listas completadas, se sale del bucle y el método waitForPlayers llama después a completeGameConfigAndSendToClients(), encargado de rellenar el gameConfig. Este último método primero tiene que verificar si se ha escogido el modo por equipos, mirando en el gameConfig. De ser así, se hace una operación adicional antes de proseguir.
+
+\subsubsection{Modo por equipos}
+
+En caso de que se haya especificado el modo por equipos, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al gameConfigJSON; posteriormente, como en la implementación de sprints anteriores, procede a completarse el gameConfigJSON con la información de los jugadores.
+
+Primero, como observamos, se llama al método notifyClientToChooseTeam de todos los \texttt{Client}; este, por medio de \texttt{ServerClientThread} envía el gameConfigJSON, con el campo "chooseTeam" como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
+
+Cada cliente en su respectivo \texttt{ClientController} recibe esta información. Observa la naturaleza de la notificación; como esta es chooseTeam, procede a abrir un diálogo ChooseTeamFromServerDialog para escoger uno de los equipos ofrecidos desde el servidor. Nótese que la información de los equipos viene proporcionada en el gameConfigJSON enviado desde el servidor.
+
+Una vez todos los clientes han sido notificados, se llama a waitForAllPlayersToChooseTeam(). Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
+
+Además, como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de \texttt{ServerClient} - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
+
+¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un JSONObject con el nombre del equipo elegido en el campo "team". Antes de enviarlo, pone en el \texttt{JSON} un campo "notification" con el valor "chooseTeam"; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
+
+El servidor recibe un \texttt{JSON} con la notificación chooseTeam; en receiveFromClient (\texttt{Server}) observa que al ser la notificación "chooseTeam", debe añadir una nueva entrada al mapa \texttt{ServerClient} - Nombre del equipo escogido.
+
+Como hemos comentado, una vez todos los equipos han sido escogidos, se sigue completando el gameConfig; ahora se sigue el mismo hilo de ejecución especificado en los anteriores sprints; se rellena el gameConfigJSON con la información de los jugadores y posteriormente se pasa el \texttt{JSON} a todos los clientes para que actualicen sus vistas para mostrar el juego por primera vez.
+
+
+
+Ahora, independientemente de que se haya escogido el modo por equipos o no, se procede a crear rellenar el incompleto gameConfigJSON que fue pasado con anterioridad por el constructor de \texttt{Server}; ahora es el momento correcto para hacerlo pues ya se conoce la información de todos los players. Se rellenan los campos pertinentes previamente incompletos de gameConfigJSON; posteriormente, se envía este primer estado del juego a todos los clientes por medio del método updateGraphics. 
+
+El cliente recibe esta configuración del juego en su thread, se llama al método updateGameFromServer de \texttt{Client}, quien a su vez llama a updateGameFromServer de MainWindow.
+
+En este último método, si es la primera jugada, se llama a crear el juego en el controlador, y después se llama a initGame() para inicializar las componentes visuales relativas al juego.
+
+En cualquier caso, se llama después al método updateGameFromServer de Controller para actualizar el juego tal y como ordena el \texttt{JSON} pasado como parámetro. Los mecanismos de este método son crear un nuevo juego a partir del nuevo \texttt{JSON} estado del juego, pasar los observadores del Game antiguo al nuevo, y adjudicar al atributo Game de Controller este nuevo juego.
+
+Falta por especificar cómo se produce una jugada en el modo online y cómo evitar que los clientes jueguen cuando no es su turno.
+
+\begin{center}
+\includegraphics[scale=0.4]{juegoTipicoUmlSprint7.png}
+\end{center}
+
+Se pulsa una celda en el tablero y se pide al controlador que ejecute el comando de poner cubo en la posición pedida, como de costumbre. En caso de que se juegue el modo online, se comprueba si el jugador está legitimado para jugar (es decir, es su turno). Para ello, se comprueba que el jugador turno del juego es el mismo que el jugador del cliente (recordemos que \texttt{Client} tiene el atributo \texttt{Player} del jugador al que corresponde).
+
+De verificarse estas dos condiciones, se ejecuta el comando y se envía el nuevo estado del juego al servidor, quien enviará este nuevo estado al resto de clientes.
+
+De no jugarse el modo online, se ejecuta el comando como de costumbre.
+
+Nótese que este último diagrama de secuencia se representa a \texttt{Client} como entidad abstracta emisora y receptora, realmente un \texttt{Client} sería emisor y el resto de \texttt{Client} serían receptores.
+
+Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
+
+\subsection{Replay}
+\subsection{Strategy}
+
+\section{Paquete Controller}
+
+\section{Paquete View}
+\subsection{ConsoleWindow}
+La interfaz de consola que hemos creado ha tratado de ser una copia de la lógica de componentes a modo de ventanas de \textit{Swing}. La implementación de dicha lógica de forma similar ha permitido que apenas haya diferencias ni discrepancias en lo que la notificación eventos y de errores supone a cada vista. En general, ha permitido que al pensar todo en términos de las mismas precondiciones supuestas para la vista que iba a estar en la ejecución las funcionalidades que metíamos en una de las vistas era muy fácilmente extensible a la otra.
+
+Para lograr este objetivo, se ha definido la interfaz \texttt{ConsoleWindow} que serán los objetos que se manejen en la vista de consola como homólogos de los \texttt{JFrame} de \textit{Swing}. Dicha interfaz nos permite poder abrir una ventana, recoger un dato de ella, y limpiar la consola. Además de esta forma unificamos el flujo de salida para todos los componentes de la vista de consola, pues todos tienen como flujo de salida el \texttt{Scanner input} definido como variable estática de la interfaz. Una vez hecho esto, se ha definido una clase concreta para cada tipo de ventana de forma que añadir nuevas ventanas simplemente se traduce en añadir nuevas clases.
+
+$$DIAGRAMA DE CLASES VISTA DE CONSOLA$$
+
+\subsubsection{MainBashWindow}
+Es la ventana principal del juego y la que se encarga de gestionar que ventanas abrir o cerrar en función de la interacción del usuario. Actúa a modo de \texttt{MainWindow} tal y como está en la GUI. Al llamar al método \texttt{bool open()} de dicha ventana se nos muestra un menú recogido en la función privada \texttt{int menu()} que nos pide indicar cuál es la acción que queremos realizar de las siguientes: new game, load game, delete game, replay game.
+
+\begin{center}
+\includegraphics[scale=0.5]{MainBashWindow_final_seq}
+\end{center}
+
+Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
+
+\newpage
+
+\subsection{GUIView}
+
+\underline{Paquete RolitComponents}
+\begin{center}
+\includegraphics[scale=0.5]{RolitComponents.png} 
+\end{center}
+
+El paquete \texttt{RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. La definición de componentes propios aporta uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
+
+Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
+
+\newpage
+\underline{Paquete CreateGame}
+\begin{center}
+\includegraphics[scale=0.38]{CreateGamePaq.png} 
+\end{center}
+
+Esta agrupación de clases son las encargadas de visualizar y recopilar los datos necesarios para crear una partida, adaptándose a las necesidades y requerimientos del usuario. Así, tenemos dos tipos de cuadros de diálogo para pedirle al usuario la configuración de su partida.
+
+En ocasiones, el usuario optará por jugar una partida en red. La persona que hostea el servidor tan solo puede elegir las propiedades del juego, pues es cada jugador al unirse al servidor quién decide su nombre y color. En estos casos, la responsabilidad para reunir los ajustes del juego recae sobre la clase \texttt{CreateGameDialog}.
+
+Sin embargo, cuando se juega en local, los jugadores deben introducir sus datos antes de iniciar la partida, de ahí la existencia de \texttt{CreateGameWithPlayersDialog}, que extiende a \texttt{CreateGameDialog} e incluye un panel en la parte inferior para añadir los jugadores. Dicho panel se trata de un \texttt{CreatePlayersPanel}, que es un conjunto de \texttt{PlayerDataPanel} dispuestos verticalmente.
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-sprint6.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-players-sprint6.png}
+
+\texttt{CreateGameDialog} (arriba) vs \texttt{CreateGameWithPlayersDialog} (abajo)
+\end{center}
+
+Nótese que en el caso del cuadro de diálogo con jugadores, el número de participantes se decide mediante un \texttt{JSpinner} contenido en \texttt{CreateGameWithPlayersDialog}, pero el numero de paneles con la información de los jugadores se gestiona en \texttt{CreatePlayersPanel}. Para poder actualizar el número de \texttt{PlayerDataPanel} en tiempo de ejecución se utilizan los métodos \texttt{update()}.
+\begin{center}
+\includegraphics[scale=0.41]{updateGameConfig.png}
+\end{center}
+
+De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
+\newpage
+
+\underline{CellGUI}
+\begin{center}
+\includegraphics[scale=0.65]{cellgui.png}
+\end{center}
+
+Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
+
+\begin{center}
+\includegraphics[scale=0.65]{blueCube.png}
+\includegraphics[scale=0.65]{orangeCube.png}
+\includegraphics[scale=0.65]{beigeCube.png}
+\includegraphics[scale=0.65]{blackCube.png}
+\includegraphics[scale=0.65]{brownCube.png}
+\includegraphics[scale=0.65]{greenCube.png}
+\includegraphics[scale=0.65]{pinkCube.png}
+\includegraphics[scale=0.65]{purpleCube.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{redCube.png}
+\includegraphics[scale=0.65]{yellowCube.png}
+\includegraphics[scale=0.65]{emptyCell.png}
+
+Todas las posibles representaciones gráficas de \texttt{CellGUI}
+\end{center}
+
+\newpage
+\subsubsection{GUIView}
+\underline{Paquete RolitComponents}
+\begin{center}
+\includegraphics[scale=0.5]{RolitComponents.png} 
+\end{center}
+
+El paquete \texttt{RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. La definición de componentes propios aporta uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
+
+Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
+
+\newpage
+\underline{Paquete CreateGame}
+\begin{center}
+\includegraphics[scale=0.38]{CreateGamePaq.png} 
+\end{center}
+
+Esta agrupación de clases son las encargadas de visualizar y recopilar los datos necesarios para crear una partida, adaptándose a las necesidades y requerimientos del usuario. Así, tenemos dos tipos de cuadros de diálogo para pedirle al usuario la configuración de su partida.
+
+En ocasiones, el usuario optará por jugar una partida en red. La persona que hostea el servidor tan solo puede elegir las propiedades del juego, pues es cada jugador al unirse al servidor quién decide su nombre y color. En estos casos, la responsabilidad para reunir los ajustes del juego recae sobre la clase \texttt{CreateGameDialog}.
+
+Sin embargo, cuando se juega en local, los jugadores deben introducir sus datos antes de iniciar la partida, de ahí la existencia de \texttt{CreateGameWithPlayersDialog}, que extiende a \texttt{CreateGameDialog} e incluye un panel en la parte inferior para añadir los jugadores. Dicho panel se trata de un \texttt{CreatePlayersPanel}, que es un conjunto de \texttt{PlayerDataPanel} dispuestos verticalmente.
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-sprint6.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-players-sprint6.png}
+
+\texttt{CreateGameDialog} (arriba) vs \texttt{CreateGameWithPlayersDialog} (abajo)
+\end{center}
+
+Nótese que en el caso del cuadro de diálogo con jugadores, el número de participantes se decide mediante un \texttt{JSpinner} contenido en \texttt{CreateGameWithPlayersDialog}, pero el numero de paneles con la información de los jugadores se gestiona en \texttt{CreatePlayersPanel}. Para poder actualizar el número de \texttt{PlayerDataPanel} en tiempo de ejecución se utilizan los métodos \texttt{update()}.
+\begin{center}
+\includegraphics[scale=0.41]{updateGameConfig.png}
+\end{center}
+
+De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
+\newpage
+
+
+\underline{BoardRenderer y ColorRenderer}
+\begin{center}
+\includegraphics[scale=0.6]{renderers.png}
+\end{center}
+
+Estas clases se encargan de renderizar correctamente los \texttt{RolitComboBox} que se utilizan en las clases de \texttt{CreateGameDialog} y \texttt{CreateGameWithPlayersDialog}. Más concretamente, la labor de estas clases es que se muestre un el icono de la forma del tablero o del color del jugador junto a su nombre asociado.
+
+\begin{center}
+\includegraphics[scale=1]{shapecombo.png}
+\includegraphics[scale=1]{colorcombo.png}
+
+Resultado visual del uso de los renderers
+\end{center}
+
+\newpage
+
+\underline{CellGUI}
+\begin{center}
+\includegraphics[scale=0.65]{cellgui.png}
+\end{center}
+
+Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
+
+\begin{center}
+\includegraphics[scale=0.65]{blueCube.png}
+\includegraphics[scale=0.65]{orangeCube.png}
+\includegraphics[scale=0.65]{beigeCube.png}
+\includegraphics[scale=0.65]{blackCube.png}
+\includegraphics[scale=0.65]{brownCube.png}
+\includegraphics[scale=0.65]{greenCube.png}
+\includegraphics[scale=0.65]{pinkCube.png}
+\includegraphics[scale=0.65]{purpleCube.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{redCube.png}
+\includegraphics[scale=0.65]{yellowCube.png}
+\includegraphics[scale=0.65]{emptyCell.png}
+
+Todas las posibles representaciones gráficas de \texttt{CellGUI}
+\end{center}
+
+\newpage
+
+\underline{BoardGUI}
+\begin{center}
+\includegraphics[scale=0.55]{boardgui-cellgui.png}
+\end{center}
+
+\texttt{BoardGUI} es la clase encargada de representar el tablero visualmente y consta de un conjunto de \texttt{CellGUI} dispuestos en forma de cuadrado, aunque su tamaño dependerá de la forma que eliga el usuario.
+
+Para poder mostrar dicha forma gráficamente, se deshabilitan ciertas celdas de manera estratégica para obtener la apariencia deseada. Además, el tamaño de las celdas se adapta al tablero para evitar problemas con las dimensiones de la ventana.
+
+La comunicación con los modelos se lleva a cabo a través del \textit{Patrón Observador}. De esta manera, nótese que en el diagrama se muestran métodos asociados a las \textit{replays} y otros a las partidas que permiten la correcta actualización del tablero durante la ejecución del programa.
+
+\begin{center}
+\includegraphics[scale=0.8]{boardgui.png}
+
+Representación gráfica de \texttt{BoardGUI} con forma diamante y tamaño mediano
+\end{center}
+
+\newpage
+
+\underline{ControlPanel}
+\begin{center}
+\includegraphics[scale=0.65]{controlpaneluml.png}
+\end{center}
+
+Esta clase representa una barra con herramientas básicas que se pueden utilizar durante una partida o una repetición. En el caso de las partidas contiene un botón para poder guardarla, mientras que durante las \textit{replays} permite avanzar o retroceder en las jugadas.
+\begin{center}
+\includegraphics[scale=0.65]{controlpanel-partida.png}
+\includegraphics[scale=0.65]{controlpanel-replay.png}
+
+\texttt{ControlPanel} durante una partida (arriba) vs durante una \textit{replay} (abajo)
+\end{center}
+
+\newpage
+
+\underline{TurnAndRankingBar}
+\begin{center}
+\includegraphics[scale=0.60]{turnranking-uml.png}
+\end{center}
+
+Tal y como su nombre sugiere, esta clase es un \texttt{RolitPanel} que se encarga de mostrar el turno y el ranking en cada instante de una partida o repetición. La información se obtiene del \texttt{GameState} que notifica el modelo cuando se ha jugado un turno.
+
+
+\begin{center}
+\includegraphics[scale=0.8]{turnranking-pic.png}
+
+Representación gráfica de \texttt{TurnAndRankingBar} durante una partida
+\end{center}
+
+\newpage
+\underline{StatusBar}
+\begin{center}
+\includegraphics[scale=0.60]{statusbar-uml.png}
+\end{center}
+
+La \texttt{StatusBar} es responsable de comunicar información relevante al usuario durante la ejecución del programa. Así, el modelo notifica a esta clase con un mensaje y esta se encarga de visualizarlo.
+
+\begin{center}
+\includegraphics[scale=0.80]{statusbar-pic.png}
+
+Ejemplo de la \texttt{StatusBar} mostrando un mensaje
+\end{center}
+
+\newpage
+
+\underline{RankingPanel}
+
+\begin{center}
+\includegraphics[scale=0.55]{rankingpanel.png}
+\end{center}
+
+Cuando finaliza un juego, la clase \texttt{RankingPanel} muestra en pantalla una clasificación con los tres jugadores que obtuvieron la mejor puntuación durante la partida. En aquellos juegos donde solo haya dos jugadores, siempre se mostrarán en el ranking.
+
+Además, el \texttt{RankingPanel} cuenta con la peculiaridad de tener un componente interno, la clase \texttt{RolitLabel}. En este caso se optó por trabajar con este componente de manera privada porque es el único lugar de todo el código donde se utiliza.
+
+\begin{center}
+\includegraphics[scale=0.7]{ranking-2players.png}
+
+Ranking para dos jugadores
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.7]{ranking-3players.png}
+
+Ranking para más de dos jugadores
+\end{center}
+
+\newpage
+
+\underline{LoadFileDialog}
+\begin{center}
+\includegraphics[scale=0.6]{loaddialoguml.png}
+\end{center}
+
+\texttt{LoadFileDialog} es un cuadro de diálogo que permite cargar una partida o una \textit{replay} ya guardada. Esta adaptabilidad se consigue pasándole a la clase a través del constructor una lista con los archivos disponibles, independientemente de su contenido.
+
+Además, esta clase abre la posibilidad de cargar archivos que no están en la lista (porque no se generaron en el ordenador donde se ejecuta el programa) mediante un \texttt{JFileChooser}.
+
+\begin{center}
+\includegraphics[scale=1]{load-game-sprint-6.png}
+
+Representación visual de \texttt{LoadFileDialog}
+\end{center}
+
+\newpage
+
+\underline{DeleteDialog}
+\begin{center}
+\includegraphics[scale=0.6]{deletedialog.png}
+\end{center}
+
+Esta clase es un cuadro de diálogo que permite al usuario eliminar los juegos que ya ha guardado. Para ello, cuenta con una lista de \texttt{JCheckBox}, donde cada uno representa un juego guardado. Al seleccionar alguna partida y hacer click en ``Delete", se borra dicho archivo tanto de la lista interna del juego como del ordenador.
+
+\begin{center}
+\includegraphics[scale=1]{delete-dialog-sprint6.png}
+
+Representación visual de \texttt{DeleteDialog}
+
+\end{center}
+
+\newpage
+
+\underline{SaveReplayDialog}
+
+\begin{center}
+\includegraphics[scale=0.6]{savereplaydialo.png}
+\end{center}
+
+Esta clase se trata de una ventana emergente que tiene la responsabilidad de preguntarle al jugador al finalizar la partida si desea guardar su repetición. Si la respuesta es afirmativa, abre un \texttt{JFileChooser} para que el usuario elija su ruta.
+
+\begin{center}
+\includegraphics[scale=1]{savereplaydialog-pic.png}
+
+Representación visual de \texttt{SaveReplayDialog}
+\end{center}
+
+\newpage
+
+\underline{JoinServerDialog}
+
+\begin{center}
+\includegraphics[scale=0.6]{join-server-uml.png}
+\end{center}
+
+La clase \texttt{JoinServerDialog} extiende de \texttt{JDialog} y se encarga de recopilar la información necesaria del usuario para que pueda unirse a un servidor. Esto es, los datos del jugador y los del servidor.
+
+\begin{center}
+\includegraphics[scale=1]{join-server-sprint-6.png}
+
+Representación visual de \texttt{JoinServerDialog}
+
+\end{center}
+
+\newpage
+
+\underline{ServerView}
+\begin{center}
+\includegraphics[scale=0.55]{serverviewuml.png}
+\end{center}
+
+Sergio escribe aquí el funcionamiento.
+
+\begin{center}
+\includegraphics[scale=1]{serversetup.png}
+
+Representación gráfica de \texttt{ServerView} antes de crear el servidor
+
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1]{waitingserver.png}
+
+Representación gráfica de \texttt{ServerView} una vez creado el servidor
+\end{center}
+
+\newpage
+
+\underline{MainWindow}
+\begin{center}
+\includegraphics[scale=0.55]{mainwindowuml.png}
+\end{center}
+
+La \texttt{MainWindow} es la ventana principal del programa, que inicialmente permite al usuario decidir entre las opciones que brinda Rolit: crear una partida, cargar una replay, crear un servidor... Una vez seleccionada alguna de las alternativas, la ventana se actualiza combinando todos los elementos explicados anteriormente, de manera ordenada, para poder dar lugar a los requerimientos del usuario.
+
+\begin{center}
+\includegraphics[scale=1]{menu-sprint-6.png}
+
+Apariencia inicial de la \texttt{MainWindow}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.9]{partida-sprint-6.png}
+
+\texttt{MainWindow} durante una partida
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.9]{replay-sprint-6.png}
+
+\texttt{MainWindow} durante una \textit{replay}
+\end{center}
+
+
+\chapter{Anexo I: Reports}
+\subsection*{Cube}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "color" = String,
+ "pos" = [int x, int y]
+}
+\end{lstlisting}
+
+\subsection*{Board}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "shape" : String,
+ "cubes": [{"color": String, "pos": [int x, int y]},
+ 	  ...
+ 	  ,{"color": String, "pos": [int x, int y]}]
+
+}
+\end{lstlisting}
+
+\subsection*{Player}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "name" = String,
+ "score" = int,
+ "color" = String
+}
+\end{lstlisting}
+
+\subsection*{Team}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "name" = String,
+ "score" = int,
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}]
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection*{GameClassic}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "type" = "GameClassic",
+ "board" = {
+  "shape" : String,
+  "cubes": [{"color": String, "pos": [int x, int y]},
+  	  ...
+  	  ,{"color": String, "pos": [int x, int y]}]
+ },
+ 
+ "players" = [{"name" = String,"score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "turn" = String	
+}
+\end{lstlisting}
+
+\subsection*{GameTeams}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "type" = "GameTeams",
+ "board" = {
+  "shape" : String,
+  "cubes": [{"color": String, "pos": [int x, int y]},
+  	  ...
+  	  ,{"color": String, "pos": [int x, int y]}]
+ },
+ 
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "teams" = [{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
+ 	     ...
+ 	     ,{"name" = String, "score" = int, "color" = String}]},
+ 	     
+ 	     ...
+ 	     
+ 	    ,{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
+ 	     ...
+ 	     ,{"name" = String, "score" = int, "color" = String}]}
+	   }],
+	   
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "turn" = String	
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection*{State}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "command" = String,
+ "game" = game.report() //consultar arriba
+}
+\end{lstlisting}
+
+\subsection*{Replay}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "states" = [{"command" = String,
+ 	     "game" = game.report(), //consultar arriba
+ 	     ...
+ 	     ,{"command" = String,
+ 	     "game" = game.report()}] //consultar arriba
+}
+\end{lstlisting}
+
+\chapter{POSIBLES MEJORAS}
+El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.
+
+\subsubsection{Builders}
+Realmente el diseño de estas clases es bueno en cuanto tener un proceso unificado y extensible a través de la creación de nuevos Builder específicos para generar nuevos tipos de juegos. Sin embargo, la ejecución en la implementación podría haber sido mejor dejando la clase \texttt{GameBuilder} tal y como está (exceptuando el quitar los métodos protegidos a los que acceden los Builder concretos) implementando el patrón \textit{Abstract Factory} y haber hecho una nueva clase abstracta llamada \texttt{Builder} que fuera la clase padre de todos los Builder en específico. De este modo, encapsulamos todos los métodos privados de la clase \texttt{GameBuilder} como \texttt{AvailableColors()} y la responsabilidad de saber construir juegos en este grupo de clases y dejamos que la clase factoría general simplemente sea una experta en identificar si los modos de juego que se piden son válidos, si la información que llega no es inválida, etc.
+
 \end{document}
+

@@ -1,4 +1,4 @@
-package model.online;
+package view.GUIView;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
+import model.online.Server;
 import view.GUIView.RolitComponents.RolitButton;
 import view.GUIView.RolitComponents.RolitPanel;
 import view.GUIView.RolitComponents.RolitTextField;
@@ -49,12 +50,11 @@ public class ServerView extends JFrame {
 		this.server = server;
 		setSize(420,420);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		thePanel = new RolitPanel();
 		thePanel.setLayout(new GridBagLayout());
 
-		ipLabel = new JLabel("Server IP: " + "your IPv4 (check ipconfig/ifconfig)");
+		ipLabel = new JLabel("Server IP: " + "your IPv4");
 		addComp(thePanel, ipLabel, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		portLabel = new JLabel("Insert desired host port (9001-65500): ");
@@ -92,7 +92,7 @@ public class ServerView extends JFrame {
 				ServerView.this.revalidate();
 				ServerView.this.repaint();
 				thePanel.setVisible(true);
-				
+				setDefaultCloseOperation(EXIT_ON_CLOSE);
 				new ServerWorker().execute();
 				
 				
@@ -112,6 +112,7 @@ public class ServerView extends JFrame {
 
 		add(thePanel);
 		pack();
+		setLocation(620, 250);
 		setVisible(true);
 		
 	}

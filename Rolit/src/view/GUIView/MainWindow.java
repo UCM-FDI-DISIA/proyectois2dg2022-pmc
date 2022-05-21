@@ -236,7 +236,6 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	 * This method creates and shows all the components relative to the game
 	 */
 	private void initGame() {		
-		ctrl.addObserver(this);
 		// Por si acaso, para que siempre se limpie pantalla
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
@@ -267,6 +266,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
+		ctrl.addObserver(this);
+
 		
 	}
 	
@@ -350,7 +351,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	 * and shows the ranking panel.
 	 */
 	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
+	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
+		onTurnPlayed(state);
+		
+		try {
+			Thread.sleep(1000); //Wait 1 sec to see the last cube
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		gamePanel.remove(boardPanel);
 		RankingPanel r_panel = new RankingPanel(rivals);
 		gamePanel.add(r_panel);

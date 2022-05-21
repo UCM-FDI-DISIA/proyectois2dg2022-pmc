@@ -53,12 +53,6 @@ public class GameClassic extends Game {
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished) {
-				onTurnPlayed();
-				try {
-					Thread.sleep(500); // añadimos tiempo de espera para que se coloque ultimo cubo
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 				this.onGameFinished();
 			}
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
@@ -107,7 +101,7 @@ public class GameClassic extends Game {
 	@Override
 	protected void onGameFinished() {
 		for (RolitObserver o : this.observers)
-			o.onGameFinished(this.players, "Players", replay);		
+			o.onGameFinished(this.players, "Players", replay, state);		
 	}
 	
 }

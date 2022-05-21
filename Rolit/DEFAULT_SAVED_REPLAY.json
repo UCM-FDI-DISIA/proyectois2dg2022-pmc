@@ -1,1 +1,1 @@
-{"states":[]}
+{"states":[{"game":{"players":[{"score":1,"color":"Y","name":"Jose"},{"score":1,"color":"R","name":"pedro"}],"turn":"R","type":"GameClassic","board":{"shape":"SS","cubes":[{"color":"Y","pos":[4,4]}]}},"command":"p 4 4"},{"game":{"players":[{"score":1,"color":"Y","name":"Jose"},{"score":1,"color":"R","name":"pedro"}],"turn":"Y","type":"GameClassic","board":{"shape":"SS","cubes":[{"color":"Y","pos":[4,4]},{"color":"R","pos":[4,5]}]}},"command":"p 4 5"}]}

@@ -1,4 +1,4 @@
-package view.consoleView;
+	package view.consoleView;
 
 import java.util.Scanner;
 

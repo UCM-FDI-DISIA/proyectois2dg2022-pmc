@@ -1,1 +1,1 @@
-{"players":[{"score":1,"color":"E","name":"Dani"},{"score":0,"color":"W","name":"Juandi"}],"turn":"W","type":"GameClassic","board":{"shape":"SS","cubes":[{"color":"E","pos":[1,1]}]}}
+{"players":[{"score":1,"color":"Y","name":"Jose"},{"score":0,"color":"R","name":"pedro"}],"turn":"R","type":"GameClassic","board":{"shape":"SS","cubes":[{"color":"Y","pos":[4,4]}]}}

@@ -20,7 +20,7 @@ public interface RolitObserver {
 	 * @param rival Type of rivals: teams, players, ...
 	 * @param replay Replay of the finished game
 	 */
-	void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay);
+	void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state);
 	
 	/**
 	 * It notifies the observers that a player exit the game

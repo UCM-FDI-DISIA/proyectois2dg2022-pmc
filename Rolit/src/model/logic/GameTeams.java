@@ -62,12 +62,6 @@ public class GameTeams extends Game {
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished) {
-				onTurnPlayed();
-				try {
-					Thread.sleep(500); // añadimos tiempo de espera para que se coloque ultimo cubo
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 				this.onGameFinished();
 			}
 			
@@ -124,7 +118,7 @@ public class GameTeams extends Game {
 	@Override
 	protected void onGameFinished() {
 		for (RolitObserver o : this.observers)
-			o.onGameFinished(this.players, "Players", replay);		
+			o.onGameFinished(this.players, "Players", replay, state);		
 	}
 
 }
