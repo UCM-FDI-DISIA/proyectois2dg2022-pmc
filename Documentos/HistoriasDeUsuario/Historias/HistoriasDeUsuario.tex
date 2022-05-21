@@ -35,15 +35,14 @@ Esta historia de usuario conlleva implementar las siguientes normas en el juego:
 \item Consta de un tablero cuadrado de 8x8 casillas
 \item Consta de hasta 4 jugadores con colores asignados: amarillo, rojo, verde y azul.
 \item Las piezas del juego son cubos redondos de colores que se introducen en las casillas del tablero.
-\item Gana el jugador que más bolas de su color tenga sobre el tablero cuando este se llena completamente.
-\item El juego acaba cuando el tablero se llena completamente
-\item Se decide al azar quien coloca el primer cubo.
 \item Solo se puede colocar un cubo redondo en una casilla vacía adyacente a una ya ocupada, excepto el primer cubo que se coloca en la posición que se desee.
 \item Un cubo se dice atrapado, cuando se encuentra en la línea que une un cubo recién puesto con otro del mismo color.
-\item Cuando se coloca un cubo, se cambian de color todos los cubos atrapados en las direcciones válidas.
 \item Las direcciones válidas son las líneas rectas dadas por alguna de las casillas adyacentes.
+\item Cuando se coloca un cubo, se cambian de color todos los cubos atrapados en las direcciones válidas.
 \item En cada turno un jugador pone un único cubo y se pasa turno al siguiente jugador después de haber cambiado de color los posibles cubos atrapados.
-\item El orden de turnos es la secuencia: amarillo, rojo, verde, azul.\end{itemize}
+\item El juego acaba cuando el tablero se llena completamente.
+\item Gana el jugador que más bolas de su color tenga sobre el tablero cuando se termina el juego.
+\end{itemize}
 
 \subsubsection{... con una interfaz agradable}
 \textbf{Frase descriptiva}: tener una interfaz gráfica que permita al usuario interactuar con el juego de manera sencilla e intuitiva.
