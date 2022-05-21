@@ -235,6 +235,66 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Diseño final}{85}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+<<<<<<< HEAD
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Paquete model}{81}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Builders}{81}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1.1}GameClassicBuilder y GameTeamsBuilder}{82}{subsubsection.4.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1.2}GameBuilder}{84}{subsubsection.4.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Commands}{84}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2.1}ExitCommand}{84}{subsubsection.4.1.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2.2}HelpCommand}{85}{subsubsection.4.1.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2.3}PlaceCubeCommand}{86}{subsubsection.4.1.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2.4}SaveCommand}{87}{subsubsection.4.1.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Logic}{88}{subsection.4.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.1}Color}{89}{subsubsection.4.1.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.2}Cube}{90}{subsubsection.4.1.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.3}Shape}{92}{subsubsection.4.1.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.4}Board}{93}{subsubsection.4.1.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.5}Rival}{95}{subsubsection.4.1.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.6}Player}{96}{subsubsection.4.1.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.7}Team}{98}{subsubsection.4.1.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.8}TurnManager}{100}{subsubsection.4.1.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Online}{101}{subsection.4.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.4.1}Modo por equipos}{114}{subsubsection.4.1.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Replay}{118}{subsection.4.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.5.1}Replay}{120}{subsubsection.4.1.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.5.2}GameState}{121}{subsubsection.4.1.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}Strategy}{122}{subsection.4.1.6}\protected@file@percent }
+\newlabel{subsec:Strategy}{{4.1.6}{122}{Strategy}{subsection.4.1.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.1}Strategy}{123}{subsubsection.4.1.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.2}RandomStrategy}{124}{subsubsection.4.1.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.3}MinimaxStrategy}{125}{subsubsection.4.1.6.3}\protected@file@percent }
+\newlabel{subsubsec:MinimaxStrategy}{{4.1.6.3}{125}{MinimaxStrategy}{subsubsection.4.1.6.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.4}GreedyStrategy}{127}{subsubsection.4.1.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.5}SimplifiedBoard}{128}{subsubsection.4.1.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Paquete Controller}{132}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Paquete View}{132}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}ConsoleWindow}{132}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.1}MainBashWindow}{132}{subsubsection.4.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}GUIView}{135}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2.1}GUIView}{139}{subsubsection.4.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Anexo I: Reports}{159}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoI}{{5}{159}{Anexo I: Reports}{chapter.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Anexo II: Lista de todas las clases}{163}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{169}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIII}{{7}{169}{Anexo III: Estrategia Minimax adaptada a Rolit}{chapter.7}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{171}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIV}{{8}{171}{Anexo IV: Poda Alfa-Beta}{chapter.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}POSIBLES MEJORAS}{173}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.0.0.1}Builders}{173}{subsubsection.9.0.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.0.0.2}Replay}{173}{subsubsection.9.0.0.2}\protected@file@percent }
+\gdef \@abspage@last{173}
+=======
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Paquete model}{85}{section.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Builders}{85}{subsection.4.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1.1}GameClassicBuilder y GameTeamsBuilder}{86}{subsubsection.4.1.1.1}\protected@file@percent }
@@ -304,3 +364,4 @@
 \gdef \@abspage@last{171}
 >>>>>>> 32d15f04f4231f150396748a454a1c3da7fe3342
 >>>>>>> 4b578512f984c7f9ed865cfaa42a26cc33a31536
+>>>>>>> d79d98a173ea3544ddc5a73dc5854e2e4f68a8d2
