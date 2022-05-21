@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import model.logic.Player;
 import utils.Pair;
+import view.GUIView.ServerView;
 
 /**
  * This class is in charge of creating the server connection, get
