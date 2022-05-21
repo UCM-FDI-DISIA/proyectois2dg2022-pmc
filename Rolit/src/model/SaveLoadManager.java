@@ -72,7 +72,7 @@ public class SaveLoadManager {
 	/**
 	 * This method loads the game from the path filename
 	 * @param filename File's path
-	 * @return true if the game was loaded successfully and false otherwise
+	 * @return Game at filename in JSONObject format
 	 */
 	public static JSONObject loadGame(String filename) {
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
@@ -89,15 +89,16 @@ public class SaveLoadManager {
 	/**
 	 * It loads the game at index option from the list of saved games
 	 * @param option Index of the game to load
-	 * @return true if the game was loaded successfully and false otherwise
+	 * @return Game at option in JSONObject format
+	 * @throws IllegalArgumentException thrown if option is out of bounds
 	 */
-	public static JSONObject loadGame(int option) throws Exception {
+	public static JSONObject loadGame(int option) throws IllegalArgumentException {
 		if(option == 1)
 			return loadGame(DEFAULT_GAME_FILENAME);
 
 		option -= 2;
 		if (option < 0 || option >= names.size())
-			throw new Exception();
+			throw new IllegalArgumentException();
 		else {
 			return loadGame(names.get(option));
 		}
@@ -106,7 +107,6 @@ public class SaveLoadManager {
 	/**
 	 * This method saves a replay in the default file
 	 * @param replay Replay report
-	 * @return true if the replay was saved successfully and false otherwise
 	 */
 	public static void saveReplay(Reportable replay) {
 		SaveLoadManager.saveReplay(DEFAULT_REPLAY_FILENAME, replay);
@@ -116,7 +116,6 @@ public class SaveLoadManager {
 	 * This method saves a replay in the path filename
 	 * @param replay Replay report
 	 * @param filename File's path
-	 * @return true if the replay was saved successfully and false otherwise
 	 */
 	public static void saveReplay(String filename, Reportable replay) {
 		if(!filename.endsWith(".json")) filename += ".json";
@@ -131,8 +130,8 @@ public class SaveLoadManager {
 	/**
 	 * This function loads a replay from the path filename
 	 * @param filename File's path
-	 * @return true if the replay was loaded successfully and false otherwise
-	 */
+	 * @return Replay at filename
+ 	 */
 	public static Replay loadReplay(String filename) {
 		Replay replay = null;
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
@@ -154,17 +153,18 @@ public class SaveLoadManager {
 	}
 	
 	/**
-	 * It loads the game at index option from the list of saved games
+	 * It loads the replay at index option from the list of saved replays
 	 * @param option Index of the game to load
-	 * @return true if the game was loaded successfully and false otherwise
+	 * @return Replay at index option
+	 * @throws IllegalArgumentException thrown if option is out of bounds
 	 */
-	public static Replay loadReplay(int option) throws Exception {
+	public static Replay loadReplay(int option) throws IllegalArgumentException {
 		if(option == 1)
 			return loadReplay(DEFAULT_REPLAY_FILENAME);
 
 		option -= 2;
 		if (option < 0 || option >= names.size())
-			throw new Exception();
+			throw new IllegalArgumentException();
 		else {
 			return loadReplay(names.get(option));
 		}
@@ -279,7 +279,6 @@ public class SaveLoadManager {
 	/**
 	 * It removes the game at index option from the list of saved games
 	 * @param option Index of the game to load
-	 * @return true if the game was deleted successfully and false otherwise
 	 * @throws IOException Could not delete the game, maybe option was out of bounds
 	 */
 	public static void removeGame(int option) throws IOException {
