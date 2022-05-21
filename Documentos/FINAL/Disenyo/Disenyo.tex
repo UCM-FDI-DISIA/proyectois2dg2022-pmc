@@ -16,6 +16,14 @@
 \usepackage{listings}
 \usepackage{ulem}
 \usepackage[explicit]{titlesec} %Formato de capitulos y secciones
+\usepackage{hyperref} %Hipervínculos y referencias
+
+\hypersetup{
+	colorlinks = true,
+	linkcolor = blue
+}
+
+\urlstyle{same}
 
 \newcommand{\defaultformat}{
 	\titleformat{\chapter}[display]{\centering\normalfont\huge\bfseries}{}{0pt}{\Huge \uppercase{##1}}[\titlerule]
@@ -494,6 +502,7 @@ Ranking para dos jugadores
 Ranking para más de dos jugadores
 \end{center}
 
+\newpage
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 
@@ -517,89 +526,34 @@ Lógicamente, la tendencia general las inteligencias artificiales que aplican es
 Esta estrategia tiene por intención analizar el tablero en busca de la posición que le garantiza al jugador el máximo número de puntos en este mismo turno. Esta estrategia lleva a jugadas mucho mejores y elaboradas, pero sigue sin ser la mejor, así que representa el nivel de dificultad medio.
 
 \textbf{MinimaxStrategy}:
+Esta estrategia realiza el cálculo de la posición en la que jugar el siguiente turno a través de una adaptación a Rolit del algoritmo Minimax. Este algoritmo se explica en el \hyperref[ch:AnexoII]{Anexo II}. Este es un algoritmo con un nivel de sofisticación considerablemente mayor que los de las anteriores estrategias y por ello (y tras comprobación en base a la simulación de numerosas partidas) este algoritmo representa el nivel de dificultad alto. Se dan más detalles de la implementación en la subsección  \hyperref[subsubsec:MinimaxStrategy]{MinimaxStrategy}.
 
-Antes de explicar la implementación de esta estrategia en el caso de Rolit, debemos explicar primero en qué consiste la estrategia Minimax en teoría de juegos:
+Para hacer el cómputo de todas las simulaciones, usar como representación la que nos proporciona la clase \texttt{Board} resulta inviable, por lo que se ha creado una nueva clase a modo de representación puramente funcional del tablero orientada a las simulaciones, llamada \texttt{SimplifiedBoard}.
 
-\textbf{Estrategia Minimax en teoría de juegos}: 
-
-En teoría de juegos, el Minimax busca minimizar la pérdida esperada. La aproximación que se toma es asumir que el oponente va a tomar las decisiones que más te perjudiquen. De esta manera, al encontrar la decisión que menor pérdida suponga, el resultado real será siempre igual o mejor al calculado, de forma que el cálculo es fiable.
-
-La mejor forma de explicar esto es a través de un ejemplo:
-
-Imaginemos que estamos en un juego de dos jugadores, uno contra el otro, basado en turnos, en el cual ambos jugadores conocen en todo momento el estado actual de la partida en su totalidad. Un buen ejemplo de esto es el ajedrez. Supongamos pues que juegas con las piezas blancas, y tu adversario juega con las piezas negras. En cada uno de tus movimientos vas a jugar el movimiento que consideres que más te favorece. Por el otro lado, bajo nuestra aproximación, suponemos que el otro jugador va a jugar el movimiento que más te perjudique. Podemos hacer una representación de esto en forma de árbol:
-
-Imaginemos que cada nodo contiene un número que representa el estado actual de la partida (para esto hace falta tener un criterio de valoración del estado actual de la partida, en el cual no entraremos en detalle en el caso del ajedrez, pero más adelante sí en el caso del Rolit), y cada arista representa un movimiento jugado, por el cuál se desciende en el árbol de un estado de la partida al siguiente. En cuanto a la valoración de los estados del juego, si el número de un nodo es positivo va ganando el jugador blanco (a mayor mejor); si el número es negativo, va ganando el jugador negro (a menor peor). Como el juego va por turnos, si un nivel del árbol se corresponde con el turno de un jugador, el siguiente nivel se corresponde con el siguiente jugador. De esta forma, volviendo al ejemplo propuesto, si desde un nodo se conoce el valor de todos sus descendientes pueden pasar dos cosas: si es el turno del jugador blanco, tomará la decisión que le lleve al mayor valor; si es el turno del jugador negro, tomará la decisión que le lleve al menor valor. 
-
-Se ilustra el funcionamiento del algoritmo en la siguiente imagen: 
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{minimaxExample.jpg}
-\end{center}
-%%FIXME Centrar
-
-En el caso del ajedrez (y de la mayoría de juegos por turnos, como Rolit) hay siempre muchos posibles movimientos a jugar. De esta forma, en el árbol de decisión, de cada nodo salen muchos descendientes, resultando en un algoritmo con coste aproximadamente exponencial en el promedio de jugadas disponibles. Esto hace que la búsqueda del mejor posible movimiento se convierta en un problema intratable en no demasiados niveles de profundidad de búsqueda. Por tanto, surge la obligación de limitar la profundidad hasta la que se quiere hacer la búsqueda.
-
-Volviendo ahora al Rolit, no estamos en un juego de dos jugadores (o al menos no necesariamente).
-Afortunadamente, en este juego el criterio de valoración de jugadas es fácil: La mejor jugada es la que te lleve a acabar con el mayor número de puntos.
-
-Ahora, como hay más de dos jugadores, para conseguir un cálculo de puntos fiable, el cálculo se lleva a cabo considerando que el jugador propietario de la estrategia quiere hacer aquella jugada que más puntos le otorgue a la larga, mientras que el resto de jugadores en sus turnos hacen la jugada que más puntos le quite al jugador propietario. De esta forma se calculan puntos para el jugador propietario situándonos en la situación más desfavorable posible, de forma que todo aquello que se calcule va a derivar siempre en un resultado igual o mejor al calculado, de forma que los resultados de los cálculos son fiables.
-
-Debido a lo exhaustivos que resultan estos cálculos (y tras comprobación empírica simulando numerosas partidas) la estrategia MinimaxStrategy representa el nivel difícil de las inteligencias artificiales.
-
-Ahora, antes de la explicación más técnica, observemos que la estrategia GreedyStrategy se puede implementar aplicando una MinimaxStrategy en la que solo se explora un nivel de profundidad, puesto que en este nivel se busca la jugada que más puntos garantice, y no se sigue buscando más allá. Por tanto, a nivel de clases, la clase GreedyStrategy es heredera de MinimaxStrategy, y el atributo de profundidad máxima pasa a valer 0.
-
-Pasamos ahora a explicar la implementación de estas estrategias:
-
-Para la simulación de movimientos pensamos originalmente en usar la clase Board para colocar cubos y evaluar resultados, pero no tardamos en darnos cuenta de que esto era inviable, puesto que los métodos de Board tienen una comunicación con otras clases que no deseeamos para esto, puesto que nosotros simplemente queremos hacer simulaciones, y no cambios reales.
-
-Es por esto que fue necesario crear otra representación del tablero puramente funcional y adaptada a la simulación de movimientos, de donde surgió la siguiente clase:
-
-\textbf{SimplifiedBoard}:
-
-Esta clase consta de una matriz en la que almacena el color de los cubos del tablero real. Para disminuir costes y evitar tener que hacer copias del tablero tras cada movimiento simulado, se lleva una pila con los cambios que se realizan al simular un movimiento, de forma que cuando se quiere dejar el tablero en el estado previo a la simulación para realizar otra simulación, en vez de realizar una copia se revierten los cambios aplicados, lo cual resulta mucho menos costoso.
-
-En SimplifiedBoard también se almacenan los puntos de los distintos jugadores, puesto que la idea es consultar los puntos después de simular cada movimiento.
-
-Ahora, para calcular el mejor movimiento para ejecutar, en la clase de la estrategia se realiza un bucle en el que se recorren todas las posiciones del tablero, consultando si cada posición es válida o no, y en caso de dar con una posición válida, se simula ese movimiento.
-
-Dentro de la simulación, en SimplfiedBoard, si la profunidad a explorar es mayor que 0, antes de revertir los cambios se vuelve a realizar el bucle de las posiciones, pero simulando esta vez para el siguiente jugador, y así hasta que la profundidad a explorar es 0. Hay que tener en cuenta que el jugador propietario de la estrategia busca maximizar sus puntos, mientras que el resto de jugadores buscan minimizarlos. Por tanto, en los bucles de recorrido de posiciones, la estrategia es conocedora de para qué jugador esta simulando el siguiente movimiento, de forma que si está simulando para el jugador propietario devolverá el resultado más favorable, y si está simulando para cualquier otro jugador devolverá el resultado más perjudicial posible para el propietario. De esta forma, se podrá conocer el resultado final realista de cada jugada posible, y así elegir la mejor jugada para el jugador propietario.
+Se pueden ver detalles de la implementación de estas clases en la subsección \hyperref[subsec:Strategy]{Strategy}.
 
 El cómputo del movimiento a jugar a través de la estrategia Minimax, llevado a cabo en el método calculateNextMove(), se ilustra en el siguiente diagrama:
 
 \begin{center}
 \centering
-\includegraphics[scale=0.5]{Minimax.calculateNextMove()-Sprint5.png}
+\includegraphics[scale=0.45]{MinimaxStrategy.calculateNextMove()-sprint5.png}
 \end{center}
 
 \end{sprint}
 
 \begin{sprint}[6]
-Por motivos de eficiencia de MinimaxStrategy, se ha implementado de forma complementaria la poda alfa-beta, que se explica a continuación:
-
-\textbf{Poda alfa-beta}:
-La poda alfa-beta es una mejora del algoritmo Minimax. Se mantienen dos valores, alfa y beta, que representan respectivamente la puntuación mínima que se llevará el jugador maximizador y la puntuación máxima que se asegura el jugador minimizados. Inicialmente, alfa es $-\infty$ y beta es $\infty$. 
-
-Siempre que la puntuación máxima que se asegura al jugador que minimiza se vuelve menor que la puntuación mínima que se asegura el jugador que maximiza se puede parar de explorar por la rama actual. De forma análoga, se podan ramas en el caso contrario.
-
-La mejor forma de visualizar esta poda es a través de una ilustración:
-
-\begin{center}
-\centering
-\includegraphics[scale=0.5]{poda alfa-beta.png}
-\end{center}
-%%FIXME Hacer más grande
-
-Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
+Por motivos de eficiencia de los cálculos de \texttt{MinimaxStrategy}, se ha implementado de forma complementaria la poda Alfa-Beta. Los detalles acerca de este concepto se explican en el \hyperref[ch:AnexoIII]{Anexo III}.
 
 Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritmo mejorado queda reflejado en el siguiente diagrama:
 
 \begin{center}
 \centering
-\includegraphics[scale=0.5]{Minimax.calculateNextMove()-Sprint6.png}
+\includegraphics[scale=0.5]{MinimaxStrategy.calculateNextMove()-sprint6.png}
 \end{center}
 
 \end{sprint}
+
+\newpage
 
 \subsubsection{Como usuario, me gustaría que se pudiera jugar en red.}
 \begin{sprint}[5]
@@ -991,6 +945,8 @@ Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado 
 
 \end{sprint}
 
+\newpage
+
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
 \subsubsection{Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}
 \begin{sprint}[1]
@@ -1320,10 +1276,284 @@ Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lóg
 
 \subsubsection{GameBuilder}
 \subsection{Commands}
+
+\newpage
+
 \subsection{Logic}
+
+\begin{center}
+\includegraphics[scale=0.27]{Logic-sprint7.png}
+\end{center}
+
+Este paquete agrupa la lógica principal encargada del funcionamiento de los elementos que componen el juego.
+
+\subsubsection{Color}
+
+\begin{center}
+\includegraphics[scale=0.75]{Color-sprint7.png}
+\end{center}
+
+La clase \texttt{Color} es la que recoge la lógica necesaria para los colores de los cubos. Vemos en la imagen que los colores disponibles en el juego son: Amarillo, rojo, verde, azul, naranja, rosa, morado, negro, marrón y beige.
+
+De cara a la representación de los colores los dos atributos más relevantes de la clase son \texttt{shortcut}, para su representación por consola, y \texttt{path}, ruta con la imagen para su representación por interfaz gráfica.
+
+\newpage
+
+\subsubsection{Cube}
+
+La lógica referente a los cubos se recoge en la clase \texttt{Cube}.
+Vemos a continuación el estado final de la clase en cuestión:
+
+\begin{center}
+\includegraphics[scale=0.9]{Cube-sprint7.png} 
+\end{center}
+
+Los atributos necesarios son los siguientes:
+\begin{itemize}
+\item x: Coordenada x en el tablero.
+\item y: Coordenada y en el tablero.
+\item player: Jugador al que pertenece el cubo.
+\item value: Cantidad de puntos que otorga al jugador la posesión del cubo.
+\end{itemize}
+
+Como vemos, esta clase no tiene ningún atributo de tipo \texttt{Color}. Esto es porque el color del cubo es el color del jugador al cual está asociado (player). Por tanto, cuando el tablero se actualiza, a nivel de representación interna, los cubos no cambian de color, sino de jugador asociado. Esto se hace con el método changeOwner(), a través del cual se decrementa la puntuación del antiguo jugador asociado y se incrementa la del nuevo.
+
+Este funcionamiento se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.75]{Cube.changeOwner()-sprint7.png} 
+\end{center}
+
+\newpage
+
+\subsubsection{Shape}
+
+La lógica interna de las formas de tableros se recoger en la clase Shape, clase enumerada que tiene como valores todas las posibles formas (esto incluye los diferentes tamaños). La siguiente ilustración muestra el estado final de la clase:
+
+\begin{center}
+\includegraphics[scale=0.75]{Shape-sprint7.png} 
+\end{center}
+
+Las posibles formas son las siguientes:
+\begin{itemize}
+\item SS: Small Square
+\item SM: Medium Square
+\item SL: Large Square
+\item CS: Small Circle
+\item CM: Medium Circle
+\item CL: Large Circle
+\item DS: Small Diamond
+\item DM: Medium Diamond
+\item DL: Large Diamond
+\end{itemize}
+
+Cada una de estas formas tiene asociada el nombre de un archivo, en el cual se recoge toda la información relevante acerca de cada forma (véanse el tamaño y la representación de las casillas válidas).
+
+\newpage
+
+\subsubsection{Board}
+
+La parte fundamental de la lógica que encapsula el concepto del tablero se recoge en la clase Board.
+
+Se puede pensar en la clase \texttt{Board} como el contenedor de cubos para el juego. Esta clase implementa la interfaz \texttt{Reportable}, puesto que es de gran interés tener una representación de esta clase en forma de JSONObject.
+
+El estado final de la clase se ve en la siguiente imagen:
+
+\begin{center}
+\includegraphics[scale=0.75]{Board-final.png} 
+\end{center}
+
+Para conseguir que esta clase cumpla con la idea de su creación, hace de contenedor de cubos a través de varias representaciones.
+
+Vemos en la imagen que tenemos un atributo llamado \texttt{matrix}. Esta es la representación fundamental de los cubos en el tablero. Consiste en guardar en cada posición el cubo que la ocupa, o un valor nulo en caso de no estar ocupada. Es la representación más intuitiva y de mayor uso.
+
+Otra representación útil de los cubos es en forma de lista ordenada por el momento de creación de los cubos, para lo que tenemos el atributo \texttt{orderedCubeList}. Esta es una representación fundamental para el funcionamiento del juego en red.
+
+Como contenedor de los cubos del juego, \texttt{Board} tiene una responsabilidad fundamental, y esa es la de actualizarse conforme se añaden cubos en el juego. Para esto tenemos el método \texttt{update(Cube)}, cuyo parámetro de entrada es el cubo que ha sido añadido. Para actualizarse, al colocar el nuevo cubo se hace un recorrido en todas las direcciones, comprobando qué cubos han de ser cambiados de color.
+
+El funcionamiento de este método se recoge en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.75]{Board.update()-sprint7.png} 
+\end{center}
+
+Como el tablero puede tener distintas formas, vemos la existencia del constructor \texttt{Board(Shape)}, que crea un tablero vacío con las restricciones impuestas por la forma que recibe como parámetro.
+
+\newpage
+
+\subsubsection{Rival}
+
+\begin{center}
+\includegraphics[scale=0.75]{Rival-sprint7.png} 
+\end{center}
+
+La interfaz \texttt{Rival} sirve para recoger comportamientos comunes entre los equipos y jugadores individuales, de cara a sus representaciones de forma abstracta y uniforme.
+
+\newpage
+
+\subsubsection{Player}
+
+\begin{center}
+\includegraphics[scale=0.75]{Player-sprint7.png} 
+\end{center}
+
+Esta es la clase que recoge la lógica necesaria para el funcionamiento de los jugadores. Vemos que tiene un atributo de tipo \texttt{Strategy}, el cual, en caso de no ser nulo, indica que el jugador es una inteligencia artificial, y su comportamiento está definido por dicha estrategia.
+
+El método fundamental para el funcionamiento de los jugadores y sus turnos es el método \texttt{play(GameState)}. Si el jugador es una inteligencia artificial, este método será el encargado de hacer el cómputo de la posición en la que colocará un cubo. Por el contrario, si el jugador es real (no es una inteligencia artificial) este método no hará nada, puesto que la ejecución de su turno se llevará a cabo cuando el usuario en cuestión introduzca los datos necesarios.
+
+El funcionamiento de este método queda reflejado en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.75]{Player.play()-sprint7.png} 
+\end{center}
+
+\newpage
+
+\subsubsection{Team}
+
+\begin{center}
+\includegraphics[scale=0.75]{Team-sprint7.png} 
+\end{center}
+
+La clase \texttt{Team} recoge la lógica encargada del funcionamiento de los equipos en el modo de juego por equipos. Su función se resume en hacer de contenedor de los jugadores.
+
+El método principal de esta clase de cara a mantener datos coherentes es el método \texttt{update()}, en el cual recalcula la puntuación del equipo a partir de sus integrantes.
+
+Vemos este comportamiento en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.75]{Team.update()-sprint7.png} 
+\end{center}
+
+\newpage
+
+\subsubsection{TurnManager}
+
+\begin{center}
+\includegraphics[scale=0.75]{TurnManager-sprint7.png} 
+\end{center}
+
+La clase \texttt{TurnManager} hace de gestor de turnos. Tras cada turno avisa al siguiente jugador para que ejecute su turno, y en caso de recibir las coordenadas correspondientes al siguiente movimiento, crea la nueva instancia de \texttt{Cube} para que sea manejada por el juego.
+
+Esto queda reflejado en el siguiente diagrama del método \texttt{nextMove()}:
+
+\begin{center}
+\includegraphics[scale=0.75]{TurnManager.nextTurn()-sprint7.png} 
+\end{center}
+
+\newpage
+
 \subsection{Online}
 \subsection{Replay}
+\newpage
 \subsection{Strategy}
+
+\label{subsec:Strategy}
+
+\begin{center}
+\includegraphics[scale=0.75]{Strategy-sprint7.png} 
+\end{center}
+
+\newpage
+
+\subsubsection{Strategy}
+
+Para las estrategias de las inteligencias artificiales se emplea el \textbf{patrón estrategia}.
+
+Las estrategias disponibles son las siguientes:
+
+\begin{itemize}
+\item RandomStrategy: Estrategia donde el jugador elige una posición aleatoria del tablero para colocar un cubo (estrategia de nivel fácil).
+\item GreedyStrategy: Estrategia en la cual el jugador busca la posición que maximice sus puntos en el turno actual (estrategia de nivel medio).
+\item MinimaxStrategy: Estrategia basada en el algoritmo Minimax y la poda Alfa-Beta (estrategia de nivel alto, explicaciones detalladas en los anexos \hyperref[ch:AnexoII]{Anexo II} y \hyperref[ch:AnexoIII]{Anexo III}) 
+\end{itemize}
+
+Como se ve en los parámetros de diversas funciones, todas las clases de este paquete obtienen la información necesaria a través de instancias de la clase \texttt{GameState}, de forma que se preserva la encapsulación en todo momento.
+
+\newpage
+
+\subsubsection{RandomStrategy}
+
+\begin{center}
+\includegraphics[scale=0.75]{RandomStrategy-sprint7.png} 
+\end{center}
+
+El método principal de esta clase es \texttt{calculateNextMove()}, en el cual se inicia la simulación con el método \texttt{simulate()}. En este, se generan aleatoriamente posiciones hasta que se da con una posición válida acorde al estado actual del tablero. En el momento en que se da con una posición válida se devuelve esa posición como resultado de la simulación.
+
+Este funcionamiento se ve en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.75]{RandomStrategy.calculateNextMove()-sprint7.png} 
+\end{center}
+
+\newpage
+
+\subsubsection{MinimaxStrategy}
+
+\begin{center}
+\includegraphics[scale=0.75]{MinimaxStrategy-sprint7.png} 
+\end{center}
+
+\label{subsubsec:MinimaxStrategy}
+Para entender el propósito y funcionamiento de esta clase, es importante leer antes los anexos \hyperref[ch:AnexoII]{Anexo II} y \hyperref[ch:AnexoIII]{Anexo III}.
+
+Cada instancia de la clase \texttt{MinimaxStrategy} está asociada a un jugador (el propietario) para el cual intenta maximizar la puntuación al hacer simulaciones.
+
+El método fundamental de esta clase es \texttt{calculateNextMove()}. En este método se inicia la simulación, con el método \texttt{simulate()}, en el que se hacen recorridos sobre las casillas del tablero, haciendo simulaciones de movimientos en ellas hasta una profundidad de búsqueda determinada y valorando los resultados según si el turno que está siendo simulado es del jugador propietario de la estrategia o de otro. Aparte, se evalúan los resultados tras cada simulación para comprobar si seguir o no con las simulaciones acorde a la poda Alfa-Beta.
+
+El funcionamiento de este método se refleja en el siguiente diagrama:
+
+\begin{center}
+\includegraphics[scale=0.5]{MinimaxStrategy.calculateNextMove()-sprint6.png} 
+\end{center}
+
+El único caso en el que no se aplica el mismo criterio de cálculo es si el movimiento a simular es el primero de la partida, en cuyo caso se genera una posición aleatoria.
+
+\newpage
+
+\subsubsection{GreedyStrategy}
+
+\begin{center}
+\includegraphics[scale=0.75]{GreedyStrategy-sprint7.png} 
+\end{center}
+
+Dada la clase \texttt{MinimaxStrategy}, el funcionamiento de la clase \texttt{GreedyStrategy} se limita al definido por la clase anterior, pero fijando la profundidad máxima de simulación a 1. Esto funciona dado que en el método \texttt{calculateNextMove} se empieza simulando un movimiento para el jugador propietario, y dado que la puntuación de este es la que se busca maximizar, al limitar la simulación a un único nivel de profundidad de búsqueda, el resultado de la búsqueda es la posición que garantiza más puntos al jugador en el turno actual.
+
+\newpage
+
+\subsubsection{SimplifiedBoard}
+
+\begin{center}
+\includegraphics[scale=0.75]{SimplifiedBoard-sprint7.png} 
+\end{center}
+
+\texttt{SimplifiedBoard} surge por la necesidad de una representación puramente funcional del tablero para hacer simulaciones en los cálculos de las estrategias.
+
+Esta clase consta de una matriz en la que almacena el color de los cubos del tablero real. Para disminuir costes y evitar tener que hacer copias del tablero tras cada movimiento simulado, se lleva una pila con los cambios que se realizan al simular un movimiento, de forma que cuando se quiere dejar el tablero en el estado previo a la simulación para realizar otra simulación, en vez de realizar una copia se revierten los cambios aplicados, lo cual resulta mucho menos costoso.
+
+En \texttt{SimplifiedBoard} también se almacenan los puntos de los distintos jugadores, puesto que la idea es consultar los puntos después de simular cada movimiento.
+
+Ahora, para calcular el mejor movimiento para ejecutar, en la clase de la estrategia se realiza un bucle en el que se recorren todas las posiciones del tablero, consultando si cada posición es válida o no, y en caso de dar con una posición válida, se simula ese movimiento.
+
+Dentro de la simulación, en \texttt{SimplfiedBoard}, si la profunidad a explorar es mayor que 0, antes de revertir los cambios se vuelve a realizar el bucle de las posiciones, pero simulando esta vez para el siguiente jugador, y así hasta que la profundidad a explorar es 0. Hay que tener en cuenta que el jugador propietario de la estrategia busca maximizar sus puntos, mientras que el resto de jugadores buscan minimizarlos. Por tanto, en los bucles de recorrido de posiciones, la estrategia es conocedora de para qué jugador esta simulando el siguiente movimiento, de forma que si está simulando para el jugador propietario devolverá el resultado más favorable, y si está simulando para cualquier otro jugador devolverá el resultado más perjudicial posible para el propietario. De esta forma, se podrá conocer el resultado final realista de cada jugada posible, y así elegir la mejor jugada para el jugador propietario.
+
+La simulación en general se hace en el método \texttt{simulateMove()}, en el cual se llama al método \texttt{applyChanges()} para aplicar los cambios resultantes de colocar un nuevo cubo, y a \texttt{revertChanges()} para revertirlos una vez se han hecho todos los cálculos resultantes de la simulación actual.
+
+Mostramos el funcionamiento de los métodos mencionados en los siguientes diagramas:
+
+\begin{center}
+\includegraphics[scale=0.75]{SimplifiedBoard.simulateMove()-sprint7.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.75]{SimplifiedBoard.applyChanges()-sprint7.png} 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.75]{SimplifiedBoard.revertChanges()-sprint7.png} 
+\end{center}
+
+\newpage
 
 \section{Paquete Controller}
 
@@ -1597,6 +1827,47 @@ Ejemplo de la \texttt{StatusBar} mostrando un mensaje
  	     "game" = game.report() //consultar arriba}]}
 }
 \end{lstlisting}
+
+\chapter{Anexo II: Estrategia Minimax adaptada a Rolit}
+\label{ch:AnexoII}
+
+En teoría de juegos, el Minimax busca minimizar la pérdida esperada. La aproximación que se toma es asumir que el oponente va a tomar las decisiones que más te perjudiquen. De esta manera, al encontrar la decisión que menor pérdida suponga, el resultado real será siempre igual o mejor al calculado, de forma que el cálculo es fiable.
+
+La mejor forma de explicar esto es a través de un ejemplo:
+
+Imaginemos que estamos en un juego de dos jugadores, uno contra el otro, basado en turnos, en el cual ambos jugadores conocen en todo momento el estado actual de la partida en su totalidad. Un buen ejemplo de esto es el ajedrez. Supongamos pues que juegas con las piezas blancas, y tu adversario juega con las piezas negras. En cada uno de tus movimientos vas a jugar el movimiento que consideres que más te favorece. Por el otro lado, bajo nuestra aproximación, suponemos que el otro jugador va a jugar el movimiento que más te perjudique. Podemos hacer una representación de esto en forma de árbol:
+
+Imaginemos que cada nodo contiene un número que representa el estado actual de la partida (para esto hace falta tener un criterio de valoración del estado actual de la partida, en el cual no entraremos en detalle en el caso del ajedrez, pero más adelante sí en el caso del Rolit), y cada arista representa un movimiento jugado, por el cuál se desciende en el árbol de un estado de la partida al siguiente. En cuanto a la valoración de los estados del juego, si el número de un nodo es positivo va ganando el jugador blanco (a mayor mejor); si el número es negativo, va ganando el jugador negro (a menor peor). Como el juego va por turnos, si un nivel del árbol se corresponde con el turno de un jugador, el siguiente nivel se corresponde con el siguiente jugador. De esta forma, volviendo al ejemplo propuesto, si desde un nodo se conoce el valor de todos sus descendientes pueden pasar dos cosas: si es el turno del jugador blanco, tomará la decisión que le lleve al mayor valor; si es el turno del jugador negro, tomará la decisión que le lleve al menor valor. 
+
+Se ilustra el funcionamiento del algoritmo en la siguiente imagen: 
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{minimaxExample.jpg}
+\end{center}
+%%FIXME Centrar
+
+En el caso del ajedrez (y de la mayoría de juegos por turnos, como Rolit) hay siempre muchos posibles movimientos a jugar. De esta forma, en el árbol de decisión, de cada nodo salen muchos descendientes, resultando en un algoritmo con coste aproximadamente exponencial en el promedio de jugadas disponibles. Esto hace que la búsqueda del mejor posible movimiento se convierta en un problema intratable en no demasiados niveles de profundidad de búsqueda. Por tanto, surge la obligación de limitar la profundidad hasta la que se quiere hacer la búsqueda.
+
+Volviendo ahora al Rolit, no estamos en un juego de dos jugadores (o al menos no necesariamente). Afortunadamente, en este juego el criterio de valoración de jugadas es fácil: La mejor jugada es la que te lleve a acabar con el mayor número de puntos.
+
+Ahora, como hay más de dos jugadores, para conseguir un cálculo de puntos fiable, el cálculo se lleva a cabo considerando que el jugador propietario de la estrategia quiere hacer aquella jugada que más puntos le otorgue a la larga, mientras que el resto de jugadores en sus turnos hacen la jugada que más puntos le quite al jugador propietario. De esta forma se calculan puntos para el jugador propietario situándonos en la situación más desfavorable posible, de forma que todo aquello que se calcule va a derivar siempre en un resultado igual o mejor al calculado, de forma que los resultados de los cálculos son fiables.
+
+\chapter{Anexo III: Poda Alfa-Beta}
+\label{ch:AnexoIII}
+La poda Alfa-Beta es una mejora del algoritmo Minimax. Se mantienen dos valores, alfa y beta, que representan respectivamente la puntuación mínima que se llevará el jugador maximizador y la puntuación máxima que se asegura el jugador minimizados. Inicialmente, alfa es $-\infty$ y beta es $\infty$. 
+
+Siempre que la puntuación máxima que se asegura al jugador que minimiza se vuelve menor que la puntuación mínima que se asegura el jugador que maximiza se puede parar de explorar por la rama actual. De forma análoga, se podan ramas en el caso contrario.
+
+La mejor forma de visualizar esta poda es a través de una ilustración:
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{poda alfa-beta.png}
+\end{center}
+%%FIXME Hacer más grande
+
+Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
 
 \chapter{POSIBLES MEJORAS}
 El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.

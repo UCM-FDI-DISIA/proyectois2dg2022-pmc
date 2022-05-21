@@ -1,0 +1,18 @@
+#SimplifiedBoard.revertChanges()-sprint7
+
+@startuml
+participant Actor
+Actor -> SimplifiedBoard : revertChanges
+activate SimplifiedBoard
+loop Change c : changesStack
+SimplifiedBoard -> SimplifiedBoard : revertChange(c)
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+end loop
+SimplifiedBoard -> SimplifiedBoard : updatePlayerScores
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+return
+@enduml

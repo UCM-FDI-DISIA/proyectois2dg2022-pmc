@@ -1,0 +1,19 @@
+#RandomStrategy.calculateNextMove()-sprint7
+
+@startuml
+participant Actor
+Actor -> RandomStrategy : calculateNextMove
+activate RandomStrategy
+RandomStrategy --> SimplifiedBoard : new
+loop validPosition == false
+RandomStrategy -> RandomStrategy : generateRandomPosition
+activate RandomStrategy
+RandomStrategy --> RandomStrategy : p
+deactivate RandomStrategy
+RandomStrategy -> SimplifiedBoard : tryToAddCube
+activate SimplifiedBoard
+SimplifiedBoard --> RandomStrategy : validPosition
+deactivate SimplifiedBoard
+end loop
+return p
+@enduml

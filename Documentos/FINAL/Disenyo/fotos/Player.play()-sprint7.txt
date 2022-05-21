@@ -1,0 +1,14 @@
+#Player.play()-sprint7
+
+@startuml
+participant Actor
+Actor -> Player : play
+activate Player
+alt strategy != null
+Player -> Strategy : calculateNextMove
+activate Strategy
+Strategy --> Player : coordinates
+deactivate Strategy
+end alt
+return coordinates
+@enduml

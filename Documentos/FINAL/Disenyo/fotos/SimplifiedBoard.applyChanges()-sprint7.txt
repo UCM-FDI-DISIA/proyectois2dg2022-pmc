@@ -1,0 +1,38 @@
+#SimplifiedBoard.applyChanges()-sprint7
+
+@startuml
+participant Actor
+Actor -> SimplifiedBoard : applyChanges
+activate SimplifiedBoard
+loop checks every direction
+loop Position p : currentDirection
+SimplifiedBoard -> SimplifiedBoard : isPositionInRange(p)
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard : inRange
+deactivate SimplifiedBoard
+alt inRange == true
+SimplifiedBoard -> SimplifiedBoard : getCubeInPos
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard : c
+deactivate SimplifiedBoard
+alt c.color == newCube.color
+loop Cube c : currentDirection
+SimplifiedBoard -> Cube : changeOwner
+activate Cube
+Cube --> SimplifiedBoard
+deactivate Cube
+end loop
+end alt
+end alt
+end loop
+end loop
+SimplifiedBoard -> SimplifiedBoard : updatePlayerScores
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+SimplifiedBoard -> SimplifiedBoard : stackNewChanges
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+return
+@enduml

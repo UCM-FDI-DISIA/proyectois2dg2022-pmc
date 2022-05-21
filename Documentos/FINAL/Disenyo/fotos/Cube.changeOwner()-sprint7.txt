@@ -1,0 +1,21 @@
+#Cube.changeOwner()-sprint7
+
+@startuml
+skin rose
+participant Actor
+Actor -> Cube : changeOwner
+activate Cube
+Cube -> Player : addScore(-value)
+activate Player
+Player --> Cube
+deactivate Player
+Cube -> Player : getPlayer
+activate Player
+Player --> Cube
+deactivate Player
+Cube -> Player : addScore(value)
+activate Player
+Player --> Cube
+deactivate Player
+return
+@enduml
