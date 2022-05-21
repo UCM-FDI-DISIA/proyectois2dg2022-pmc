@@ -121,33 +121,33 @@ El método \texttt{play()} comprueba en primer lugar que la posición en la que 
 \includegraphics[scale=0.55]{play-game.png}
 \end{center}
 Como bien se puede observar en el diagrama de secuencias inferior, el método
-\texttt{update()} de Game  es el encargado de cambiar de color todos los cubos que quedan atrapados en las direcciones válidas, así como de actualizar el atributo \texttt{finished} si la partida haya acabado, en otro caso avanza el turno para que cada jugador solo colocar un cubo en cada turno.
+\texttt{update()} de Game  es el encargado de cambiar de color todos los cubos que quedan atrapados en las direcciones válidas, así como de actualizar el atributo \texttt{finished} si la partida ha acabado, en otro caso avanza el turno para que cada jugador solo colocar un \texttt{Cube} en cada turno.
 \begin{center}
 \includegraphics[scale=0.5]{updateGameS1.png}
 \end{center}
 
 \end{sprint}
-
+\newpage
 
 \begin{sprint}[2]
-
+Diagrama de clases:
 \begin{center}
 \includegraphics[scale=0.4]{diagramaclasesS2.png}
 \end{center}
 
-En esta segunda versión de Rolit, esta historia de usuario a penas sufre modificaciones, no obstante, la forma de implementarlas es algo distinta. Para poder apreciarlo mejor conviene comparar el diagrama de clases de este Sprint con el del Sprint anterior. Entre los cambios podemos destacar:
+En esta segunda versión de Rolit esta historia de usuario a penas sufre modificaciones, no obstante, la forma de implementarlas es algo distinta. Para poder apreciarlo mejor conviene comparar el diagrama de clases de este Sprint con el del Sprint anterior. Entre los cambios podemos destacar:
 \begin{itemize}
 \item \texttt{Game} ya no posee el mapa \texttt{Color}, \texttt{Player}.
 \item \texttt{Player} tiene una lista de los \texttt{Player}.
 \item \texttt{Cube} ya no tiene un atributo \texttt{Color}, ahora tiene un atributo \texttt{Player}
-\item El tablero es un cuadrado de tamaño variable (entre 8 y 15), así como el número de jugadores también lo es (entre 2 y 10), por ello habrá 10 \texttt{Color} posibles. Para poder hacer un juego a gusto del cliente el \texttt{Controller} es el encargado de comunicarse con él, por medio de funciones como \texttt{ChooseColor()} o \texttt{ChooseBoard()}. 
+\item El tablero es un cuadrado de tamaño variable (entre 8 y 15), así como el número de jugadores también lo es (entre 2 y 10), por ello habrá 10 \texttt{Color} posibles. Para poder hacer un juego a gusto del cliente el \texttt{Controller} se encarga de comunicarse con él por medio de funciones como \texttt{ChooseColor()} o \texttt{ChooseBoard()}. 
 \item Los cubos siguen siendo representados por letras significativas para cada \texttt{Color}.
 \item el \texttt{main()} de \texttt{Rolit} tiene como única funcionalidad la creación del \texttt{Controller} y una llamada a su método \texttt{run()}.
 \item Ahora el método \texttt{run()} es el encargado de crear el juego según desee el usuario y el bucle principal del juego estará en el método \texttt{play()}, un método nuevo que sería un intermediario entre \texttt{run()} de \texttt{Controller} y \texttt{play()} de Game, al que accedemos desde el \texttt{execute()} del comando \texttt{PlaceCube}.
 \begin{center}
 \includegraphics[scale=0.5]{playS2.png}
 \end{center}
-Como podemos apreciar en la imagen superior, ahora es \texttt{play()} el encargado de gestionar cuando termina el juego, así como de mostrar el ranking final del juego, que al igual que el anterior Sprint vendrá determinado por el \texttt{score} de los \texttt{Player}. Al añadir el comando \texttt{Exit} el bucle de \texttt{play()} de \texttt{Controller} podría terminar y que el juego no haya terminado, por eso es necesario hacer la comprobación al saltar de turno.
+Como podemos apreciar en la imagen superior, ahora es \texttt{play()} el encargado de gestionar cuando termina el juego, así como de mostrar el ranking final del juego, que al igual que el anterior Sprint vendrá determinado por el \texttt{score} de los \texttt{Player}. Al añadir el comando \texttt{Exit} el bucle de \texttt{play()} de \texttt{Controller} podría salir del bucle y que el juego no haya terminado, por eso es necesario hacer la comprobación al saltar de turno.
 
 \item la función \texttt{play()}de \texttt{Game} es muy parecida a la del Sprint 1, no obstante, al pasar el método \texttt{update()} de la clase \texttt{Game} a la clase \texttt{Board} debemos actualizar el atributo \texttt{finished} y pasar de turno en el método \texttt{play()} de \texttt{Game}. 
 \begin{center}
