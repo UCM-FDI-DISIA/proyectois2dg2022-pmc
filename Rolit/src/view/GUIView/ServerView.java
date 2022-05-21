@@ -50,7 +50,6 @@ public class ServerView extends JFrame {
 		this.server = server;
 		setSize(420,420);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		thePanel = new RolitPanel();
 		thePanel.setLayout(new GridBagLayout());
@@ -93,7 +92,7 @@ public class ServerView extends JFrame {
 				ServerView.this.revalidate();
 				ServerView.this.repaint();
 				thePanel.setVisible(true);
-				
+				setDefaultCloseOperation(EXIT_ON_CLOSE);
 				new ServerWorker().execute();
 				
 				
@@ -113,6 +112,7 @@ public class ServerView extends JFrame {
 
 		add(thePanel);
 		pack();
+		setLocation(620, 250);
 		setVisible(true);
 		
 	}

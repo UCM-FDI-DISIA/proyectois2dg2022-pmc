@@ -65,6 +65,114 @@
 
 \chapter{Diseño y evolución de las Historias de Usuario}
 
+\subsection{Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}
+
+\begin{sprint}[1]
+
+\begin{center}
+\includegraphics[scale=0.3]{logicS1.png}
+\end{center}
+Esta es la versión más básica de Rolit.
+
+El tablero es un cuadrado 8x8. Esto se hace por medio de una constante llamada \texttt{boardSize}, dentro de la clase \texttt{Rolit} y cuyo valor era trivialmente 8. 
+
+Hay una cantidad invariable de 4 jugadores cuyos colores son: amarillo, rojo, verde y azul. El enumerado \texttt{Color} facilita la gestión de dicha tarea, ya que cada cubo y cada jugador tienen asignado un \texttt{Color}, como bien muestra el diagrama de clases. 
+
+Aunque la intención final es que los cubos sean redondos, en esta versión de Rolit decidimos no implementarlo aún. Por ello el tablero se muestra gracias a \texttt{GamePrinter} como una matriz 8x8 en la que los cubos están representados por la letra inicial del color, tal y como se muestra en la imagen inferior.
+\begin{center}
+\includegraphics[scale=0.8]{Board.png}
+\end{center}
+
+Los jugadores están almacenados en una lista de \texttt{Player} y en un mapa de \texttt{Color, Player} en la clase \texttt{Game}. Esto es necesario para el funcionamiento del método \texttt{update(Cube)}, que es el encargado de llevar a cabo las siguientes tareas:
+\begin{itemize}
+\item Solo se puede colocar un cubo en una casilla vacía adyacente a una ya ocupada (ver imagen inferior), excepto el primer cubo que se pone donde se desee.
+\begin{center}
+\includegraphics[scale=0.8]{pos-no-validaS1.png}
+\end{center}
+
+\item Cuando se coloca un cubo, se cambian de color todos los que quedan atrapados en las direcciones válidas. Un cubo se dice atrapado cuando se encuentra en la línea que une un cubo recién puesto con otro del mismo color y las direcciones válidas son las líneas rectas dadas por alguna de las casillas adyacentes.
+\begin{center}
+\includegraphics[scale=0.8]{atrapadaaaaaaaas.png}
+\end{center}
+
+\item En cada turno un jugador pone un único cubo y se pasa de turno al siguiente jugador después de haber cambiado de color a los posibles cubos atrapados.
+
+\item El juego acaba cuando el tablero se llena completamente.
+\end{itemize} 
+
+Para poder entender el método \texttt{update(Cube)} de una forma más simple hay que contextualizarlo primero. El \texttt{main()} está dentro de la clase \texttt{Rolit} y es el encargado de instanciar \texttt{Controller, Game y Board}, así como de crear la lista de \texttt{Player}.
+\begin{center}
+\includegraphics[scale=0.28]{mainS1.png}
+\end{center}
+
+Por otro lado el método \texttt{run()} se encarga de gestionar la ejecución global del juego, el cual será ejecutado hasta que haya terminado, es decir, cuando el tablero se esté completamente lleno. Esto se gestiona por medio de un bucle cuya condición es \texttt{!game.isFinished()}, esta función actúa como un getter del atributo privado \texttt{finished} de la clase \texttt{Game}, como bien se puede apreciar en el diagrama de clases. Por último, se mostrará un ranking, por medio de \texttt{GamePrinter} a través del método \texttt{showRanking()}, que muestra una lista de los jugadores ordenados según su atributo \texttt{score}, es decir, ganará el jugador con más puntos.
+\begin{center}
+\includegraphics[scale=0.28]{controller-runS1.png}
+\end{center}
+
+El método \texttt{play()} comprueba en primer lugar que la posición en la que se quiere colocar el cubo es válida. En caso afirmativo se crea un \texttt{Cube} y se llama al método \texttt{update()}, al que queríamos llegar desde un comienzo y podríamos considerar núcleo de la lógica de Rolit.
+\begin{center}
+\includegraphics[scale=0.35]{play-game.png}
+\end{center}
+
+Como bien se puede observar en el diagrama de secuencias inferior, el método
+\texttt{update()} de Game  es el encargado de cambiar de color todos los cubos que quedan atrapados en las direcciones válidas, así como de actualizar el atributo \texttt{finished} si la partida haya acabado, en otro caso avanza el turno para que cada jugador solo colocar un cubo en cada turno.
+\begin{center}
+\includegraphics[scale=0.35]{updateGameS1.png}
+\end{center}
+
+\end{sprint}
+
+
+\begin{sprint}[2]
+
+\begin{center}
+\includegraphics[scale=0.3]{diagramaclasesS2.png}
+\end{center}
+
+En esta segunda versión de Rolit, esta historia de usuario a penas sufre modificaciones, no obstante, la forma de implementarlas es algo distinta. Para poder apreciarlo mejor conviene comparar el diagrama de clases de este Sprint con el del Sprint anterior. Entre los cambios podemos destacar:
+\begin{itemize}
+\item \texttt{Game} ya no posee el mapa \texttt{Color}, \texttt{Player}.
+\item \texttt{Player} tiene una lista de los \texttt{Player}.
+\item \texttt{Cube} ya no tiene un atributo \texttt{Color}, ahora tiene un atributo \texttt{Player}
+\item El tablero es un cuadrado de tamaño variable (entre 8 y 15), así como el número de jugadores también lo es (entre 2 y 10), por ello habrá 10 \texttt{Color} posibles. Para poder hacer un juego a gusto del cliente el \texttt{Controller} es el encargado de comunicarse con él, por medio de funciones como \texttt{ChooseColor()} o \texttt{ChooseBoard()}. 
+\item Los cubos siguen siendo representados por letras significativas para cada \texttt{Color}.
+\item el \texttt{main()} de \texttt{Rolit} tiene como única funcionalidad la creación del \texttt{Controller} y una llamada a su método \texttt{run()}.
+\item Ahora el método \texttt{run()} es el encargado de crear el juego según desee el usuario y el bucle principal del juego estará en el método \texttt{play()}, un método nuevo que sería un intermediario entre \texttt{run()} de \texttt{Controller} y \texttt{play()} de Game, al que accedemos desde el \texttt{execute()} del comando \texttt{PlaceCube}.
+\begin{center}
+\includegraphics[scale=0.35]{playS2.png}
+\end{center}
+Como podemos apreciar en la imagen superior, ahora es \texttt{play()} el encargado de gestionar cuando termina el juego, así como de mostrar el ranking final del juego, que al igual que el anterior Sprint vendrá determinado por el \texttt{score} de los \texttt{Player}. Al añadir el comando \texttt{Exit} el bucle de \texttt{play()} de \texttt{Controller} podría terminar y que el juego no haya terminado, por eso es necesario hacer la comprobación al saltar de turno.
+
+\item la función \texttt{play()}de \texttt{Game} es muy parecida a la del Sprint 1, no obstante, al pasar el método \texttt{update()} de la clase \texttt{Game} a la clase \texttt{Board} debemos actualizar el atributo \texttt{finished} y pasar de turno en el método \texttt{play()} de \texttt{Game}. 
+\begin{center}
+\includegraphics[scale=0.35]{playgameS2.png}
+\end{center}
+
+\item Tal y como se mencionó anteriormente el método \texttt{update()} pasó a estar en \texttt{Board} y en este caso su única funcionalidad es cambiar de color todos los cubos que quedan atrapados en las direcciones válidas. Esta será la versión final del método para todos los Sprints siguientes.
+//TODO METERLE LA FOTO DEL DELGAU
+\end{itemize} 
+\end{sprint}
+
+\begin{sprint}[3]
+
+\begin{center}
+\includegraphics[scale=0.3]{diagramaclasesS3.png}
+\end{center}
+
+En esta tercera versión no hay apenas cambios, todo se gestiona de la misma manera salvo el \texttt{Board}. Ahora existen 9 tipos de tablero, hay tres formas y tres tamaños (grande, mediano, pequeño) para cada forma (rombo, círculo, cuadrado). Esto es posible gracias a métodos como \texttt{getShapeSize()} o \texttt{loadShape()} de la clase \texttt{SaveLoadManager}. 
+
+\end{sprint}
+
+\begin{sprint}[4]
+
+A partir de este Sprint los cubos pasan a ser redondos y del \texttt{Color} que representan y se van introduciendo en las casillas del tablero.
+\begin{center}
+\includegraphics[scale=0.5]{cubos-redondos.png}
+\end{center}
+
+\end{sprint}
+
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
 
 \subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}

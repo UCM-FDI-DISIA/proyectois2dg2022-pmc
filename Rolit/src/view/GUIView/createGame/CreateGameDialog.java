@@ -47,9 +47,6 @@ public class CreateGameDialog extends JDialog {
 	 */
 	public void initGUI() {
 
-		this.setLocation(50, 50);
-		this.setSize(700, 200);
-
 		setTitle("Create Game");
 		setVisible(false);
 
@@ -68,6 +65,10 @@ public class CreateGameDialog extends JDialog {
 		setContentPane(mainPanel);
 		setMinimumSize(new Dimension(725, 80));
 
+		//To center the component
+		int x = (getParent().getWidth() - this.getWidth()) / 2;
+		setLocation(getParent().getX() + x, getParent().getY() + 50);
+
 		this.pack();
 	}
 
@@ -76,7 +77,6 @@ public class CreateGameDialog extends JDialog {
 	 * @return Dialog status
 	 */
 	public int open() {
-		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}

@@ -63,9 +63,6 @@ public class LoadFileDialog extends JDialog {
 	 */
 	public void initGUI() {
 		
-		this.setLocation(50, 50);
-		this.setSize(700, 200);
-		
 		setTitle("Load File");
 		setVisible(false);
 		
@@ -165,6 +162,10 @@ public class LoadFileDialog extends JDialog {
 		setMinimumSize(new Dimension(100, 100));
 		
 		this.pack();
+		
+		//To center the component
+		int x = (getParent().getWidth() - this.getWidth()) / 2;
+		setLocation(getParent().getX() + x, getParent().getY() + 50);
 	}
 	
 	/**
@@ -172,7 +173,6 @@ public class LoadFileDialog extends JDialog {
 	 * @return The status (1-success, 0-failure)
 	 */
 	int open() {
-		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}

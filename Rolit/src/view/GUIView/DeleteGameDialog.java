@@ -60,9 +60,6 @@ public class DeleteGameDialog extends JDialog {
 	 */
 	public void initGUI() {
 
-		this.setLocation(50, 50);
-		this.setSize(700, 200);
-
 		setTitle("Delete Game");
 		setVisible(false);
 
@@ -131,8 +128,6 @@ public class DeleteGameDialog extends JDialog {
 
 		addComp(mainPanel, okCancelPanel, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 
-
-
 		if (savedGamesPathList.isEmpty())
 			okButton.setVisible(false);
 
@@ -140,6 +135,10 @@ public class DeleteGameDialog extends JDialog {
 		setMinimumSize(new Dimension(100, 100));
 
 		this.pack();
+		
+		//To center the component
+		int x = (getParent().getWidth() - this.getWidth()) / 2;
+		setLocation(getParent().getX() + x, getParent().getY() + 50);
 
 	}
 
@@ -148,7 +147,6 @@ public class DeleteGameDialog extends JDialog {
 	 * @return The status (1-success, 0-failure)
 	 */
 	int open() {
-		setLocation(getParent().getLocation().x + 10, getParent().getLocation().y + 10);
 		setVisible(true);
 		return status;
 	}

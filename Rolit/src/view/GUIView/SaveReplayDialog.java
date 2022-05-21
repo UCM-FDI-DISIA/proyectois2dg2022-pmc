@@ -95,9 +95,12 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 		
 		this.add(panel);
 		
+		//To center the component
+		int x = (getParent().getWidth() - this.getWidth()) / 2;
+		setLocation(getParent().getX() + x, getParent().getY() + 300);
+		
 		this.pack();
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 	}
 
 	/**
