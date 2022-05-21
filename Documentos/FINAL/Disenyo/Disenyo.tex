@@ -2687,8 +2687,6 @@ La mejor forma de visualizar esta poda es a través de una ilustración:
 
 Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
 
-\end{document}
-
 \chapter{POSIBLES MEJORAS}
 El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.
 
@@ -2697,3 +2695,6 @@ Realmente el diseño de estas clases es bueno en cuanto tener un proceso unifica
 
 \subsubsection{Replay}
 La comunicación de la clase \texttt{Replay} con la GUI se realiza de manera adecuada mediante el uso del Patrón \textit{Observador}. Sin embargo, no existe comunicación con la vista de consola, pues es la propia clase la que se encarga de imprimirse. Inicialmente se llevó a cabo esta implementación porque no existía una vista de consola, pero cuando fue incluida en el proyecto, no se adaptaron las \textit{replays}, convirtiéndose en una deuda técnica que ha llegado hasta el día de hoy. La clase es completamente funcional, pero desde el punto de vista de la POO, la clase \texttt{Replay} no debería de tener esta responsabilidad.
+
+
+\end{document}
