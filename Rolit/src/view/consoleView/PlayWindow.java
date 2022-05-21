@@ -41,11 +41,9 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 			//Evaluación perezosa: si no se ha acabado el juego, se espera a que haya cosas en el input
 			//En cuanto el juego se acaba, no se ejecuta input.hasNext(). Esto nos interesa porque
 			//input.hasNext "monopoliza" el uso de System.in. Por tanto, SaveReplay ahora puede
-			//acceder al System.in y llegar a tiempo a recibir la y/n.
-			
+			//acceder al System.in y llegar a tiempo a recibir la y/n.			
 //			while (!this.close && !input.hasNext()) {
-//			}
-			
+//			}			
 			if (!this.close && !this.waitingForUpdate) {
 				String s = input.nextLine();
 				try {
@@ -55,14 +53,12 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 					this.waitingForUpdate = true;
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
-					System.out.println();
+					System.out.print(PROMPT);
+					this.waitingForUpdate = false;
 				}
-			}
 				
-				
+			}				
 		}
-			
-
 		return true;
 	}
 
