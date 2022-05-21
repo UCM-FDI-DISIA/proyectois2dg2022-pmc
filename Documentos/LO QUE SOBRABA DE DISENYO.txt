@@ -1,0 +1,142 @@
+\section{Diseño y evolución de las clases principales del Modelo}
+\subsection{Diseño del tablero}
+Toda la lógica que implementa el concepto del tablero queda reflejada a lo largo de todo el proyecto en la clase Board.
+\subsubsection{Sprint 1}
+La clase Board es un simple contenedor de cubos, organizados en forma de matriz.
+No tiene interacción con otros objetos del modelo.
+\subsubsection{Sprint 2}
+Ahora la clase Board tiene la funcionalidad de actualizarse a sí mismo una vez se coloca un nuevo cubo, funcionalidad que antes estaba delegada a la clase Game.
+\subsubsection{Sprint 3}
+A partir de este Sprint los tableros tienen forma (es decir, la forma no es necesariamente siempre cuadrada) y tamaño elegido por los usuarios. A parte, Board tiene una representación en forma de String y de JSONObject, a través de los métodos toString() y report().
+\subsubsection{Sprint 5}
+Ahora, aparte de guardarse los cubos del tablero en forma de matriz, se guardan en forma de lista por ser una representación de los datos muy conveniente en distintas partes del proyecto, entre otras, para la red.
+
+\subsection{Diseño de los colores}
+
+\subsection{Diseño de los cubos}
+
+\subsection{Diseño del juego}
+La clase fundamental del juego es la clase Game, la clase principal del modelo.
+\subsubsection{Sprint 1}
+La clase Game responde a ejecuciones del PlaceCubeCommand, colocando nuevos cubos en las casillas seleccionadas, actualizando el tablero, manejando los turnos de los jugadores y actualizando sus puntos.
+\subsubsection{Sprint 2}
+A partir de este momento, Game no se encarga de actualizar el tablero y las puntuaciones de los jugadores, sino de únicamente pasarle al tablero los cubos nuevos que tiene que insertar. El tablero, a partir de ese cubo, se actualiza a sí mismo, y los cambios de cubos actualizan las puntuaciones de los jugadores.
+\subsubsection{Sprint 3}
+Game tiene su propia representación en forma de String y de JSONObjet, a través de los métodos toString() y report().
+\subsubsection{Sprint 4}
+A partir de este sprint, Game pasa a ser una clase abstracta y se pasa a tener dos modos de juego, el clásico (jugadores individuales) y el modo por equipos, que son implementados por las clases herederas de Game: GameClassic y GameTeams.
+También se implementa el patrón MVC, por lo que Game (modelo) pasa a tener una lista de observadores y métodos para el envío de notificaciones a estos.
+\subsubsection{Sprint 5}
+Game se adapta con ciertos cambios y nuevos métodos para soportar el juego en línea.
+\subsubsection{Sprint 6}
+En este momento Game sufre su mayor refactorización. Esta clase pasa a extender de la clase Thread, de forma que ya no funciona ejecutando comandos en el mismo momento de su creación, sino que estos de ponen en espera y Game, que está en todo momento funcionando y comprobando si hay nuevas peticiones puestas en espera, las ejecuta cuando puede. Esto nos permite evitar problemas de desbordamiento con el cálculo de jugadas por parte de las inteligencias artificiales, aparte de permitir el funcionamiento esperado de la vista sin comprometer su rendimiento.
+Aparte, Game deja de llevar a cabo el manejo de turnos y se delega esa responsabilidad a la clase TurnManager, que es invocada tras cada jugada para que ejecute (si procede) el siguiente turno.
+
+\subsection{Diseño de los jugadores}
+
+\subsection{Diseño de los equipos}
+
+\subsection{Diseño del gestor de turnos}
+
+\subsection{Diseño de los estados del juego}
+
+\subsection{Diseño de las replays}
+
+\subsection{Diseño de las Inteligencias Artificiales}
+\subsubsection{Sprint 5}
+Las estrategias son externas al modelo. El cómputo de movimientos a través de estas estrategias de hace a partir de la vista, a través de la clase PlayerView, que representa al Player en la vista y se encarga de ejecutar sus acciones. Por razones de encapsulación, las estrategias no tienen acceso al modelo y realizan sus cálculos a través de GameStates.
+\subsubsection{Sprint 6}
+Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Players controlados por la máquina. Como en este punto el manejo de turnos se lleva a cabo por la clase TurnManager y el modelo funciona en su propia hebra, la clase PlayerView desaparece del proyecto y son los propios players quienes ejecutan las estrategias, que a nivel abstracto resulta mucho más intuitivo. Por la hebra del modelo, cuando las estrategias terminan de calcular el siguiente movimiento, este no se ejecuta en ese mismo instante, sino que se deja en espera en el modelo hasta que este pueda ejecutarlo.
+
+
+\section{Diseño del Controlador}
+
+
+\section{Diseño de la Vista de GUI}
+
+\subsection{Diseño del menú principal y pantallas pre-juego}
+
+\subsection{Diseño de la pantalla de juego}
+
+
+\section{Diseño de la Vista de Consola}
+El desconocimiento del patrón de arquitectura \textit{Modelo-Vista-Controlador} hizo que, hasta la creación de la GUI, el juego se imprimiese por consola sin tener una definición concreta de quién y cómo podía escribir en la misma. Esto hizo que al introducir dicho patrón realmente surgiese la necesidad de reunir todos esos métodos y acciones del modelo que imprimían por pantalla bajo un mismo conjunto de clases que hicieran las veces de ``componentes'' tal y como posee Swing en Java.
+
+\subsection{Diseño del menú principal y pantallas pre-juego}
+
+\subsection{Diseño de la pantalla de juego}
+
+
+\section{Diseño de la red}
+
+\subsection{Diseño del servidor}
+
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
+
+\subsubsection{Sprint 6}
+
+Este Sprint se caracteriza por la introducción del modo de equipo GameTeams en Red.
+
+\begin{itemize}
+
+\item ServerView
+
+En vez de llamar a server.start, se invoca un SwingWorker, llamado ServerWorker, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
+
+\item Server
+
+Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
+
+En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
+
+Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
+
+Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el JSON del GameConfig.
+
+\item ServerClient
+
+Añadido notifyClientToChooseTeam; indica al ServerClientThread que debe informar al cliente que debe escoger equipo.
+
+\item ServerClientThread
+
+Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (updateGraphics, chooseTeam respectivamente).
+
+\end{itemize}
+
+\subsubsection{Sprint 7}
+
+\begin{itemize}
+
+\item WaitPlayerThread
+
+Pasa a llamarse, con fines aclaratorios, ServerWaitPlayerThread.
+
+\item Server
+
+Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
+
+\end{itemize}
+
+\subsection{Diseño de los clientes}
+
+\subsubsection{Sprint 5}
+
+Se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
+
+\subsubsection{Sprint 6}
+
+\begin{itemize}
+
+\item ClientController
+
+Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
+
+Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
+
+\item Client
+
+Client incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de ClientController a MainWindow y viceversa respectivamente.
+
+\end{itemize}

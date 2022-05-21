@@ -119,7 +119,6 @@ public class GameTeamsTest {
 		game.addCubeToQueue(new Cube(12,14, null));
 		game.play();
 		assertEquals(b.getCubeInPos(12, 14).getColor(), Color.PURPLE);
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -157,7 +156,6 @@ public class GameTeamsTest {
 		game.play();
 		String s = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":3,\"color\":\"P\",\"name\":\"pepita la de los palotes\"},{\"score\":0,\"color\":\"G\",\"name\":\"paco paco paco eh mi paco\"}],\"name\":\"los locos del barrio\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"B\",\"name\":\"hellou kittaso\"},{\"score\":0,\"color\":\"R\",\"name\":\"hellou kittasa\"}],\"name\":\"pura calle modo diablo\"}],\"players\":[{\"score\":3,\"color\":\"P\",\"name\":\"pepita la de los palotes\"},{\"score\":0,\"color\":\"G\",\"name\":\"paco paco paco eh mi paco\"}],\"turn\":\"G\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"DL\",\"cubes\":[{\"color\":\"P\",\"pos\":[12,13]},{\"color\":\"P\",\"pos\":[12,12]},{\"color\":\"P\",\"pos\":[12,14]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -194,7 +192,6 @@ public class GameTeamsTest {
 		game.addCubeToQueue(new Cube(3,14, null));
 		game.play();
 		assertEquals(b.getCubeInPos(3, 14).getColor(), Color.BLUE);
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -232,6 +229,5 @@ public class GameTeamsTest {
 		game.play();
 		String s = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":3,\"color\":\"L\",\"name\":\"kelokeeee\"},{\"score\":0,\"color\":\"O\",\"name\":\"no se que mas poner\"},{\"score\":0,\"color\":\"B\",\"name\":\"socorro\"}],\"name\":\"equipo perdedor\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"tengo mieo\"}],\"name\":\"beti beti\"}],\"players\":[{\"score\":3,\"color\":\"L\",\"name\":\"kelokeeee\"},{\"score\":0,\"color\":\"O\",\"name\":\"no se que mas poner\"}],\"turn\":\"O\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SL\",\"cubes\":[{\"color\":\"L\",\"pos\":[3,13]},{\"color\":\"L\",\"pos\":[3,12]},{\"color\":\"L\",\"pos\":[3,14]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));
-		b.clearOrderedCubeList();
 	}
 }

@@ -1,4 +1,4 @@
-0package logic;
+package logic;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -136,7 +136,6 @@ public class GameClassicTest {
 		game.addCubeToQueue(new Cube(8,7, null));
 		game.play();
 		assertEquals(b.getCubeInPos(8, 7).getColor(), Color.GREEN);
-		b.clearOrderedCubeList();
 	}
 	
 	@Test
@@ -163,6 +162,5 @@ public class GameClassicTest {
 		game.play();
 		String s = "{\"players\":[{\"score\":2,\"color\":\"G\",\"name\":\"uwu uwu\"},{\"score\":1,\"color\":\"O\",\"name\":\"prueba 3 prueba 3\"},{\"score\":0,\"color\":\"W\",\"name\":\"paquito el chocolatero\"}],\"turn\":\"O\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"DM\",\"cubes\":[{\"color\":\"O\",\"pos\":[8,9]},{\"color\":\"G\",\"pos\":[8,8]},{\"color\":\"G\",\"pos\":[8,7]}]}}";
 		assertTrue (new JSONObject(s).similar(game.report()));
-		b.clearOrderedCubeList();
 	}
 }

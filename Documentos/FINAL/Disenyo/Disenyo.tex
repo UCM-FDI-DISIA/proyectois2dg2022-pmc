@@ -41,150 +41,6 @@
 \begin{document}
 \graphicspath{{./fotos/}}
 
-
-\section{Diseño y evolución de las clases principales del Modelo}
-\subsection{Diseño del tablero}
-Toda la lógica que implementa el concepto del tablero queda reflejada a lo largo de todo el proyecto en la clase Board.
-\subsubsection{Sprint 1}
-La clase Board es un simple contenedor de cubos, organizados en forma de matriz.
-No tiene interacción con otros objetos del modelo.
-\subsubsection{Sprint 2}
-Ahora la clase Board tiene la funcionalidad de actualizarse a sí mismo una vez se coloca un nuevo cubo, funcionalidad que antes estaba delegada a la clase Game.
-\subsubsection{Sprint 3}
-A partir de este Sprint los tableros tienen forma (es decir, la forma no es necesariamente siempre cuadrada) y tamaño elegido por los usuarios. A parte, Board tiene una representación en forma de String y de JSONObject, a través de los métodos toString() y report().
-\subsubsection{Sprint 5}
-Ahora, aparte de guardarse los cubos del tablero en forma de matriz, se guardan en forma de lista por ser una representación de los datos muy conveniente en distintas partes del proyecto, entre otras, para la red.
-
-\subsection{Diseño de los colores}
-
-\subsection{Diseño de los cubos}
-
-\subsection{Diseño del juego}
-La clase fundamental del juego es la clase Game, la clase principal del modelo.
-\subsubsection{Sprint 1}
-La clase Game responde a ejecuciones del PlaceCubeCommand, colocando nuevos cubos en las casillas seleccionadas, actualizando el tablero, manejando los turnos de los jugadores y actualizando sus puntos.
-\subsubsection{Sprint 2}
-A partir de este momento, Game no se encarga de actualizar el tablero y las puntuaciones de los jugadores, sino de únicamente pasarle al tablero los cubos nuevos que tiene que insertar. El tablero, a partir de ese cubo, se actualiza a sí mismo, y los cambios de cubos actualizan las puntuaciones de los jugadores.
-\subsubsection{Sprint 3}
-Game tiene su propia representación en forma de String y de JSONObjet, a través de los métodos toString() y report().
-\subsubsection{Sprint 4}
-A partir de este sprint, Game pasa a ser una clase abstracta y se pasa a tener dos modos de juego, el clásico (jugadores individuales) y el modo por equipos, que son implementados por las clases herederas de Game: GameClassic y GameTeams.
-También se implementa el patrón MVC, por lo que Game (modelo) pasa a tener una lista de observadores y métodos para el envío de notificaciones a estos.
-\subsubsection{Sprint 5}
-Game se adapta con ciertos cambios y nuevos métodos para soportar el juego en línea.
-\subsubsection{Sprint 6}
-En este momento Game sufre su mayor refactorización. Esta clase pasa a extender de la clase Thread, de forma que ya no funciona ejecutando comandos en el mismo momento de su creación, sino que estos de ponen en espera y Game, que está en todo momento funcionando y comprobando si hay nuevas peticiones puestas en espera, las ejecuta cuando puede. Esto nos permite evitar problemas de desbordamiento con el cálculo de jugadas por parte de las inteligencias artificiales, aparte de permitir el funcionamiento esperado de la vista sin comprometer su rendimiento.
-Aparte, Game deja de llevar a cabo el manejo de turnos y se delega esa responsabilidad a la clase TurnManager, que es invocada tras cada jugada para que ejecute (si procede) el siguiente turno.
-
-\subsection{Diseño de los jugadores}
-
-\subsection{Diseño de los equipos}
-
-\subsection{Diseño del gestor de turnos}
-
-\subsection{Diseño de los estados del juego}
-
-\subsection{Diseño de las replays}
-
-\subsection{Diseño de las Inteligencias Artificiales}
-\subsubsection{Sprint 5}
-Las estrategias son externas al modelo. El cómputo de movimientos a través de estas estrategias de hace a partir de la vista, a través de la clase PlayerView, que representa al Player en la vista y se encarga de ejecutar sus acciones. Por razones de encapsulación, las estrategias no tienen acceso al modelo y realizan sus cálculos a través de GameStates.
-\subsubsection{Sprint 6}
-Las estrategias ahora forman parte del modelo, siendo atributo de aquellos Players controlados por la máquina. Como en este punto el manejo de turnos se lleva a cabo por la clase TurnManager y el modelo funciona en su propia hebra, la clase PlayerView desaparece del proyecto y son los propios players quienes ejecutan las estrategias, que a nivel abstracto resulta mucho más intuitivo. Por la hebra del modelo, cuando las estrategias terminan de calcular el siguiente movimiento, este no se ejecuta en ese mismo instante, sino que se deja en espera en el modelo hasta que este pueda ejecutarlo.
-
-
-\section{Diseño del Controlador}
-
-
-\section{Diseño de la Vista de GUI}
-
-\subsection{Diseño del menú principal y pantallas pre-juego}
-
-\subsection{Diseño de la pantalla de juego}
-
-
-\section{Diseño de la Vista de Consola}
-El desconocimiento del patrón de arquitectura \textit{Modelo-Vista-Controlador} hizo que, hasta la creación de la GUI, el juego se imprimiese por consola sin tener una definición concreta de quién y cómo podía escribir en la misma. Esto hizo que al introducir dicho patrón realmente surgiese la necesidad de reunir todos esos métodos y acciones del modelo que imprimían por pantalla bajo un mismo conjunto de clases que hicieran las veces de ``componentes'' tal y como posee Swing en Java.
-
-\subsection{Diseño del menú principal y pantallas pre-juego}
-
-\subsection{Diseño de la pantalla de juego}
-
-
-\section{Diseño de la red}
-
-\subsection{Diseño del servidor}
-
-\subsubsection{Sprint 5}
-
-Se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
-
-\subsubsection{Sprint 6}
-
-Este Sprint se caracteriza por la introducción del modo de equipo GameTeams en Red.
-
-\begin{itemize}
-
-\item ServerView
-
-En vez de llamar a server.start, se invoca un SwingWorker, llamado ServerWorker, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
-
-\item Server
-
-Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
-
-En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
-
-Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
-
-Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el JSON del GameConfig.
-
-\item ServerClient
-
-Añadido notifyClientToChooseTeam; indica al ServerClientThread que debe informar al cliente que debe escoger equipo.
-
-\item ServerClientThread
-
-Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (updateGraphics, chooseTeam respectivamente).
-
-\end{itemize}
-
-\subsubsection{Sprint 7}
-
-\begin{itemize}
-
-\item WaitPlayerThread
-
-Pasa a llamarse, con fines aclaratorios, ServerWaitPlayerThread.
-
-\item Server
-
-Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
-
-\end{itemize}
-
-\subsection{Diseño de los clientes}
-
-\subsubsection{Sprint 5}
-
-Se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
-
-\subsubsection{Sprint 6}
-
-\begin{itemize}
-
-\item ClientController
-
-Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
-
-Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el JSON, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
-
-\item Client
-
-Client incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de ClientController a MainWindow y viceversa respectivamente.
-
-\end{itemize}
-
 \section{Diseño y evolución de las Historias de Usuario}
 
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
@@ -496,7 +352,7 @@ Por consiguiente, todas las instancias de clases relacionadas con el modelo de \
 \subsubsection{Console}
 Los componentes a modo de ventanas de la consola no sufrieron más cambios más allá del sprint 5, únicamente se corrigieron errores en los \texttt{input.nextLine()} de la lectura puesto que fallaba al no consumir saltos de línea abandonados en el buffer.
 
-\subsubsection{Console}
+\subsubsection{GUI}
 
 En este sprint la GUI fue refactorizada por completo, cambiando tanto visualmente, como a nivel de funcionamiento interno en algunas clases para hacer el código más manejable.
 
@@ -597,6 +453,23 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 \begin{center}
 \includegraphics[scale=0.85]{user-feedback.png}
 \end{center}
+
+\underline{Ranking}
+
+Además, en este sprint se incluyó en la GUI un ranking final donde se muestran los tres primeros puestos. En caso de que solo haya dos jugadores solo se mostrarán esos dos.
+
+\begin{center}
+\includegraphics[scale=0.85]{ranking-2players.png}
+
+Ranking para dos jugadores
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.85]{ranking-3players.png}
+
+Ranking para más de dos jugadores
+\end{center}
+
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 
@@ -1097,14 +970,14 @@ Procedemos a actualizar los UML mostrados en el Sprint 5 para mostrar el estado 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}
 \subsubsection{Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}
 \begin{sprint}[1]
-Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \textit{SaveLoadManager}.
+Desde el primer sprint tuvimos clara la necesidad de tener una clase que se encargase de gestionar la comunicación del programa con el exterior para cargar y guardar partidas, el \texttt{SaveLoadManager}.
 
 \begin{center}
 \centering
 \includegraphics[scale=0.5]{save-load-manager-sprint1.png}
 \end{center}
 
-Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \textit{Game}.
+Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funciones para cargar y guardar un \texttt{Game}.
 
 \begin{center}
 \centering
@@ -1122,7 +995,7 @@ Guardar partida
 \end{sprint}
 
 \begin{sprint}[2]
-En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel de \textit{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \textit{Saveable} que debía implementar \textit{Game} para poder ser guardada y cargada de en un fichero.
+En la versión anterior del \texttt{SaveLoadManager}, la clase trabajaba a nivel de \texttt{Game}, lo cual no tenía mucho sentido desde el punto de vista de la programación orientada objetos, pues no es necesario acceder a todos sus métodos. Por esta razón, se creo una interfaz \texttt{Saveable} que debía implementar \texttt{Game} para poder ser guardada y cargada de en un fichero.
 
 \begin{center}
 \centering
@@ -1132,7 +1005,7 @@ En la versión anterior del \textit{SaveLoadManager}, la clase trabajaba a nivel
 \end{sprint}
 
 \begin{sprint}[3]
-Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \textit{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \textit{Saveable} restringía los métodos de \textit{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
+Aunque el sprint 2 supuso un cambio positivo, seguía sin ser lo que buscábamos para el \texttt{SaveLoadManager} en nuestro proyecto. Si bien es cierto que la interfaz \texttt{Saveable} restringía los métodos de \texttt{Game}, era una interfaz muy concreta y que solo se podía implementar en dicha clase.
 
 La adquisición de nuevos conocimientos nos permitió tomar una decisión de diseño que marcaría el desarrollo de la aplicación de aquí en adelante. Desde este sprint toda la comunicación con el exterior se realizaría mediante JSONObjects.
 
@@ -1141,7 +1014,7 @@ La adquisición de nuevos conocimientos nos permitió tomar una decisión de dis
 \includegraphics[scale=0.5]{reportable.png}
 \end{center}
 
-De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \textit{report()}, que devuelve una serialización del objeto en formato JSON. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
+De esta forma, la interfaz \texttt{Saveable} fue reemplazada por \texttt{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \texttt{report()}, que devuelve una serialización del objeto en formato JSON. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
 
 
 \begin{center}
@@ -1149,16 +1022,16 @@ De esta forma, la interfaz \textit{Saveable} fue reemplazada por \textit{Reporta
 \includegraphics[scale=0.5]{save-load-manager-sprint3.png}
 \end{center}
 
-Esto supuso una refactorización completa del \textit{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
+Esto supuso una refactorización completa del \texttt{SaveLoadManager} y, aunque se mantuvo la esencia de los métodos que contenía fueron, todos fueron reimplementados completamente.
 
 \end{sprint}
 
 \begin{sprint}[4]
-Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \textit{SaveLoadManager} para poder mantener esta funcionalidad.
+Las introducción de formas para los tableros obligó a cambiar los reports y a implementar algunos métodos extras en el \texttt{SaveLoadManager} para poder mantener esta funcionalidad.
 \end{sprint}
 
 \begin{sprint}[6]
-La similaridad entre los métodos para guardar partidas y \textit{replays} en el \textit{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
+La similaridad entre los métodos para guardar partidas y \textit{replays} en el \texttt{SaveLoadManager} dio lugar a una pequeña generalización de los métodos privados que permitiese reutilizarlos para guardar cualquier tipo de archivo.
 \end{sprint}
 
 \subsubsection{Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}
@@ -1176,23 +1049,23 @@ La refactorización llevada a cabo en el SaveLoadManager incluyó la libre elecc
 \begin{sprint}[3]
 Durante el sprint 3 comenzó el desarrollo de esta funcionalidad, que de ahora en adelante denominaremos como \textit{replays}. Para su implementación, se planteó abstraer la clase Game mediante estados que representen cada uno de los momentos que atraviesa el juego a lo largo de una partida. Así, mediante un conjunto de estados es posible replicar una partida al completo.
 
-Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \textit{Game} en el momento deseado.
+Inicialmente se planteó que los estados almacenaran únicamente el cubo que se añade en su turno, pero esta idea fue descartada debido a que la colocación de un cubo puede llegar a afectar a cualquier parte del tablero, teniendo que incluir la lógica correspondiente para calcular los cambios. Por ello, se decidió que cada estado guardase una copia de \texttt{Game} en el momento deseado.
 
-Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \textit{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
+Sin embargo, durante una \textit{replay} no se debería de poder alterar el juego, haciendo que carezca de sentido que los estados tengan acceso a  los métodos de la clase \texttt{Game}, pues el único objetivo es mostrar una información inmodificable al usuario.
 
-De esta manera surge la interfaz \textit{Replayable}, que extiende de la interfaz \textit{Reportable} y que contiene dos métodos: \textit{toString()}, para facilitar la visualización en la vista de consola, y \textit{report()}, para poder almacenar los estados en formato JSON.
+De esta manera surge la interfaz \texttt{Replayable}, que extiende de la interfaz \texttt{Reportable} y que contiene dos métodos: \texttt{toString()}, para facilitar la visualización en la vista de consola, y \texttt{report()}, para poder almacenar los estados en formato JSON.
 
 \begin{center}
 \includegraphics[scale=0.5]{replayable-reportable-sprint-3.png}
 \end{center}
 
-Una vez ideada esta interfaz, ya es posible definir la clase \textit{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
+Una vez ideada esta interfaz, ya es posible definir la clase \texttt{State}, que representa los estados que hemos estados describiendo hasta ahora y que, además, cuenta con el comando que la generó.
 
 \begin{center}
 \includegraphics[scale=0.5]{state-sprint-3.png}
 \end{center}
 
-El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \textit{Replay}. Esta clase contiene una lista de \textit{State} que se completa durante una partida.
+El siguiente paso fue la creación de una clase contenedora de los estados, con la responsabilidad añadida de saber gestionarlos, la clase \texttt{Replay}. Esta clase contiene una lista de \texttt{State} que se completa durante una partida.
 
 \begin{center}
 \includegraphics[scale=0.6]{addState-replay-sprint-3.png}
@@ -1208,9 +1081,9 @@ Cuando la partida acaba o el usuario hace que acabe (mediante el uso del comando
 Guardado de Replay
 \end{center}
 
-Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \textit{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
+Finalizada la generación de las \textit{replays} era el momento de hacer que pudieran cargarse y ser interpretadas para su correcta visualización. Como ya mencionamos anteriormente, la clase \texttt{Replay} es la encargada de gestionar los estados y, por ello, la que contendrá esta lógica.
 
-La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \textit{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \textit{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
+La función para cargar una \textit{replay} es análoga a la utilizada para guardarla y es gestionada por el \texttt{SaveLoadManager}. La ejecución de una repetición comienza llamando al método \texttt{startReplay()}, la clase comienza a visualizar el primer estado de su lista y entra en un bucle que permite recorrerla mediante el uso de los símbolos ``+" y ``-".
 
 \begin{center}
 \includegraphics[scale=0.7]{consola-replay-sprint-3.png}
@@ -1223,13 +1096,13 @@ Con estas repeticiones de partidas funcionales dimos por completada esta tarea e
 
 Este sprint se caracterizó por la implementación de una GUI funcional, lo que conlleva la adaptación de las \textit{replays} a este nuevo formato. Decidimos que la comunicación entre modelo y vista se llevara a cabo mediante el uso del patrón observador, lo cual supuso un reto inicial para las repeticiones de partidas.
 
-Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \textit{Game} no interviene en el proceso, pues es la clase \textit{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \textit{Replay} es también un modelo que debe ser observado.
+Basta detenerse a pensar unos minutos para darse cuenta que, cuando cargamos, procesamos y visualizamos una \textit{replay} desde un fichero, la clase \texttt{Game} no interviene en el proceso, pues es la clase \texttt{Replay} la encargada de gestionar toda la lógica de las repeticiones. Por tanto, la clase \texttt{Replay} es también un modelo que debe ser observado.
 
 \begin{center}
 \includegraphics[scale=0.5]{rolit-observer-sprint4.png}
 \end{center}
 
-Para implementar los observadores se creó la interfaz \textit{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \textit{Replay} y \textit{State}.
+Para implementar los observadores se creó la interfaz \texttt{ReplayObserver} que tiene métodos para notificar cuando se avanza a la izquieda, a la derecha y para mostrar mensajes en la barra de estado. Además, se añadieron algunos getters necesarios a las clases \texttt{Replay} y \texttt{State}.
 
 \begin{center}
 \includegraphics[scale=0.5]{replay-state-sprint-4.png}
@@ -1238,13 +1111,13 @@ Para implementar los observadores se creó la interfaz \textit{ReplayObserver} q
 \end{sprint}
 
 \begin{sprint}[5]
-La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \textit{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
+La GUI sufrió una refactorización, siendo necesario para ello la creación nuevos getters. Además, la refactorización  de la clase \texttt{Controller} trajo consigo problemas con las \textit{replays} que no serían solucionados en este sprint por falta de tiempo.
 \end{sprint}
 
 \begin{sprint}[6]
-El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \textit{Replay}.
+El cambio de paradigma en el funcionamiento mediante la introducción de su propio hilo y el nuevo controlador del sprint anterior hicieron que fuese necesario modificar cómo se guardan los estados en la clase \texttt{Replay}.
 
-Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \textit{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
+Además, la necesidad de notificar a la vista con el Replay para que sea guardada en caso de que así lo desee el usuario, tiene como consecuencia que la clase \texttt{Game} sea la encargada de generar sus propias repeticiones. Este proceso puede verse reflejado en el siguiente diagrama de secuencias.
 \begin{center}
 \includegraphics[scale=0.5]{addState-replay-sprint-6.png}
 \end{center}
@@ -1341,4 +1214,279 @@ Para conseguir esto, la representación interna de los colores se hace a través
 
 \end{sprint}
 
+\section{Diseño y evolución de otros aspectos del proyecto}
+
+\subsection{Builders}
+
+\subsection{Commands}
+
+\section{Diseño final}
+
+\subsection{Paquete model}
+\subsubsection{Builders}
+\subsubsection{Commands}
+\subsubsection{Logic}
+\subsubsection{Online}
+\subsubsection{Replay}
+\subsubsection{Strategy}
+
+\subsection{Paquete Controller}
+
+\subsection{Paquete View}
+\subsubsection{ConsoleWindow}
+
+\newpage
+\subsubsection{GUIView}
+\underline{Paquete RolitComponents}
+\begin{center}
+\includegraphics[scale=0.5]{RolitComponents.png} 
+\end{center}
+
+El paquete \texttt{RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. La definición de componentes propios aporta uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
+
+Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
+
+\newpage
+\underline{Paquete CreateGame}
+\begin{center}
+\includegraphics[scale=0.38]{CreateGamePaq.png} 
+\end{center}
+
+Esta agrupación de clases son las encargadas de visualizar y recopilar los datos necesarios para crear una partida, adaptándose a las necesidades y requerimientos del usuario. Así, tenemos dos tipos de cuadros de diálogo para pedirle al usuario la configuración de su partida.
+
+En ocasiones, el usuario optará por jugar una partida en red. La persona que hostea el servidor tan solo puede elegir las propiedades del juego, pues es cada jugador al unirse al servidor quién decide su nombre y color. En estos casos, la responsabilidad para reunir los ajustes del juego recae sobre la clase \texttt{CreateGameDialog}.
+
+Sin embargo, cuando se juega en local, los jugadores deben introducir sus datos antes de iniciar la partida, de ahí la existencia de \texttt{CreateGameWithPlayersDialog}, que extiende a \texttt{CreateGameDialog} e incluye un panel en la parte inferior para añadir los jugadores. Dicho panel se trata de un \texttt{CreatePlayersPanel}, que es un conjunto de \texttt{PlayerDataPanel} dispuestos verticalmente.
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-sprint6.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-players-sprint6.png}
+
+\texttt{CreateGameDialog} (arriba) vs \texttt{CreateGameWithPlayersDialog} (abajo)
+\end{center}
+
+Nótese que en el caso del cuadro de diálogo con jugadores, el número de participantes se decide mediante un \texttt{JSpinner} contenido en \texttt{CreateGameWithPlayersDialog}, pero el numero de paneles con la información de los jugadores se gestiona en \texttt{CreatePlayersPanel}. Para poder actualizar el número de \texttt{PlayerDataPanel} en tiempo de ejecución se utilizan los métodos \texttt{update()}.
+\begin{center}
+\includegraphics[scale=0.41]{updateGameConfig.png}
+\end{center}
+
+De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
+\newpage
+
+\underline{CellGUI}
+\begin{center}
+\includegraphics[scale=0.65]{cellgui.png}
+\end{center}
+
+Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
+
+\begin{center}
+\includegraphics[scale=0.65]{blueCube.png}
+\includegraphics[scale=0.65]{orangeCube.png}
+\includegraphics[scale=0.65]{beigeCube.png}
+\includegraphics[scale=0.65]{blackCube.png}
+\includegraphics[scale=0.65]{brownCube.png}
+\includegraphics[scale=0.65]{greenCube.png}
+\includegraphics[scale=0.65]{pinkCube.png}
+\includegraphics[scale=0.65]{purpleCube.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{redCube.png}
+\includegraphics[scale=0.65]{yellowCube.png}
+\includegraphics[scale=0.65]{emptyCell.png}
+
+Todas las posibles representaciones gráficas de \texttt{CellGUI}
+\end{center}
+
+\newpage
+
+\underline{BoardGUI}
+\begin{center}
+\includegraphics[scale=0.55]{boardgui-cellgui.png}
+\end{center}
+
+\texttt{BoardGUI} es la clase encargada de representar el tablero visualmente y consta de un conjunto de \texttt{CellGUI} dispuestos en forma de cuadrado, aunque su tamaño dependerá de la forma que eliga el usuario.
+
+Para poder mostrar dicha forma gráficamente, se deshabilitan ciertas celdas de manera estratégica para obtener la apariencia deseada. Además, el tamaño de las celdas se adapta al tablero para evitar problemas con las dimensiones de la ventana.
+
+La comunicación con los modelos se lleva a cabo a través del \textit{Patrón Observador}. De esta manera, nótese que en el diagrama se muestran métodos asociados a las \textit{replays} y otros a las partidas que permiten la correcta actualización del tablero durante la ejecución del programa.
+
+\begin{center}
+\includegraphics[scale=0.8]{boardgui.png}
+
+Representación gráfica de \texttt{BoardGUI} con forma diamante y tamaño mediano
+\end{center}
+
+\newpage
+
+\underline{ControlPanel}
+\begin{center}
+\includegraphics[scale=0.65]{controlpaneluml.png}
+\end{center}
+
+Esta clase representa una barra con herramientas básicas que se pueden utilizar durante una partida o una repetición. En el caso de las partidas contiene un botón para poder guardarla, mientras que durante las \textit{replays} permite avanzar o retroceder en las jugadas.
+\begin{center}
+\includegraphics[scale=0.65]{controlpanel-partida.png}
+\includegraphics[scale=0.65]{controlpanel-replay.png}
+
+\texttt{ControlPanel} durante una partida (arriba) vs durante una \textit{replay} (abajo)
+\end{center}
+
+\newpage
+
+\underline{TurnAndRankingBar}
+\begin{center}
+\includegraphics[scale=0.60]{turnranking-uml.png}
+\end{center}
+
+Tal y como su nombre sugiere, esta clase es un \texttt{RolitPanel} que se encarga de mostrar el turno y el ranking en cada instante de una partida o repetición.
+
+
+\begin{center}
+\includegraphics[scale=0.8]{turnranking-pic.png}
+
+Representación gráfica de \texttt{TurnAndRankingBar} durante una partida
+\end{center}
+
+\newpage
+\underline{StatusBar}
+\begin{center}
+\includegraphics[scale=0.60]{statusbar-uml.png}
+\end{center}
+
+La \texttt{StatusBar} es responsable de comunicar información relevante al usuario durante la ejecución del programa. Así, el modelo notifica a esta clase con un mensaje y esta se encarga de visualizarlo.
+
+\begin{center}
+\includegraphics[scale=0.80]{statusbar-pic.png}
+
+Ejemplo de la \texttt{StatusBar} mostrando un mensaje
+\end{center}
+
+
+\newpage
+\section{Anexo I: Reports}
+\subsection*{Cube}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "color" = String,
+ "pos" = [int x, int y]
+}
+\end{lstlisting}
+
+\subsection*{Board}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "shape" : String,
+ "cubes": [{"color": String, "pos": [int x, int y]},
+ 	  ...
+ 	  ,{"color": String, "pos": [int x, int y]}]
+
+}
+\end{lstlisting}
+
+\subsection*{Player}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "name" = String,
+ "score" = int,
+ "color" = String
+}
+\end{lstlisting}
+
+\subsection*{Team}
+
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "name" = String,
+ "score" = int,
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}]
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection*{GameClassic}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "type" = "GameClassic",
+ "board" = {
+  "shape" : String,
+  "cubes": [{"color": String, "pos": [int x, int y]},
+  	  ...
+  	  ,{"color": String, "pos": [int x, int y]}]
+ },
+ 
+ "players" = [{"name" = String,"score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "turn" = String	
+}
+\end{lstlisting}
+
+\subsection*{GameTeams}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "type" = "GameTeams",
+ "board" = {
+  "shape" : String,
+  "cubes": [{"color": String, "pos": [int x, int y]},
+  	  ...
+  	  ,{"color": String, "pos": [int x, int y]}]
+ },
+ 
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "teams" = [{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
+ 	     ...
+ 	     ,{"name" = String, "score" = int, "color" = String}]},
+ 	     
+ 	     ...
+ 	     
+ 	    ,{"name" = String, "score" = int, "players" = 
+ 	     [{"name" = String, "score" = int, "color" = String},
+ 	     ...
+ 	     ,{"name" = String, "score" = int, "color" = String}]}
+	   }],
+	   
+ "players" = [{"name" = String, "score" = int, "color" = String},
+ 	  ...
+ 	  ,{"name" = String, "score" = int, "color" = String}],
+ 
+ "turn" = String	
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection*{State}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "command" = String,
+ "game" = game.report() //consultar arriba,
+}
+\end{lstlisting}
+
+\subsection*{Replay}
+\begin{lstlisting}[frame=single, language=Java]
+{
+ "states" = [{"command" = String,
+ 	     "game" = game.report() //consultar arriba},
+ 	     ...
+ 	     ,{"command" = String,
+ 	     "game" = game.report() //consultar arriba}]}
+}
+\end{lstlisting}
 \end{document}
+
