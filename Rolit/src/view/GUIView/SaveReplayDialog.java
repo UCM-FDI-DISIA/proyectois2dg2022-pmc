@@ -107,10 +107,7 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	 * onTurnPlayed method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onTurnPlayed(GameState state) {}
 
 	/**
 	 * onGameFinished method overridden (RolitObserver interface)
@@ -119,11 +116,9 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	 */
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
-		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(1000); //añadimos un tiempo de espera para que se vea bien el ranking
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.replay = replay;
@@ -138,37 +133,25 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	public void onGameExited(Replay replay) {
 		this.replay = replay;
 		initGUI();
-
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
 	 * onRegister method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onRegister(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onRegister(GameState state) {}
 
 	/**
 	 * onError method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onError(String err) {}
 
 	/**
 	 * onGameStatusChange method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onGameStatusChange(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onGameStatusChange(GameState state) {}
 
 	/**
 	 * This method adds a JComponent in a specified JPanel

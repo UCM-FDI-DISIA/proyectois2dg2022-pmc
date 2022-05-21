@@ -60,13 +60,11 @@ public class SaveLoadManager {
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;
 		} catch (IOException error_file) {
-			// FIXME esta excepcion no debería estar aqui
 			System.out.println(ERROR_LOAD);
 		}
 		return null;
 	}	
 
-	// FIXME esto es chapuza
 	public static JSONObject loadGame(int option) throws Exception {
 		if(option == 1)
 			return loadGame(DEFAULT_GAME_FILENAME);
@@ -191,7 +189,6 @@ public class SaveLoadManager {
 				try {
 					loadAndUpdateListOfSavedFiles(path, defaultFile);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

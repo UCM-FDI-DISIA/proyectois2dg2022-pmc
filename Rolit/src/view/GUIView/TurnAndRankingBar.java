@@ -163,19 +163,13 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	 * onError method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onError(String err) {}
 
 	/**
 	 * onGameStatusChange method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onGameStatusChange(GameState status) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onGameStatusChange(GameState status) {}
 
 	/**
 	 * onGameFinished method overridden (RolitObserver interface)
@@ -201,7 +195,6 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	 */
 	@Override
 	public void onReplayLeftButton() {
-		// TODO Auto-generated method stub
 		this.state = replay.getCurrentState();
 		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 	}
@@ -211,7 +204,6 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	 */
 	@Override
 	public void onReplayRightButton() {
-		// TODO Auto-generated method stub
 		this.state = replay.getCurrentState();
 		update(state.getTurnName(), Color.valueOfIgnoreCase(state.getTurnColorShortcut()));
 	}
@@ -220,9 +212,6 @@ public class TurnAndRankingBar extends RolitPanel implements RolitObserver, Repl
 	 * onReplayStatusChange method overridden (ReplayObserver interface)
 	 */
 	@Override
-	public void onReplayStatusChange(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onReplayStatusChange(String msg) {}
 
 }

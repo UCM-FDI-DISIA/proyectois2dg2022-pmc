@@ -74,7 +74,6 @@ public class NewGameTeamsWindow extends NewGameWindow {
 					System.out.println(e.getMessage());
 					added = false;
 				 }
-				 // FIXME posiblemente no sea la excepcion para cuando nos salimos del array
 				 catch (IndexOutOfBoundsException e) {
 					 System.out.println("Team index must be valid");
 					 added = false;

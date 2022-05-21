@@ -34,7 +34,6 @@ public class NewGameWindow implements ConsoleWindow {
 	
 	@Override
 	public boolean open() {
-		// FIXME todas las excepciones de meter cosas mal deberían ser excepciones
 		json = new JSONObject();
 		// elegimos el modo de juego concreto
 		System.out.println(AVAILABLE_MODES_MSG);

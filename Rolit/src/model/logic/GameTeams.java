@@ -62,32 +62,29 @@ public class GameTeams extends Game {
 			//Comprobamos si la partida termina con este turno
 			this.finished = board.isBoardFull();
 			if (this.finished) {
+				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
+				//Añadimos el estado actual a replay
+				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(), copyMe()));
+				
 				this.onGameFinished();
 			}
-			
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			else {
-				Cube nextCube = this.turnManager.nextTurn(this.state);//FIXME Se crea tambien en el onTurnPlayed
-				if(nextCube != null) this.addCubeToQueue(nextCube);
 				onTurnPlayed();
+				Cube nextCube = this.turnManager.nextTurn(this.state);
+				if(nextCube != null) this.addCubeToQueue(nextCube);
+				
+				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
+				//Añadimos el estado actual a replay
+				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
+				
 				this.executedTurn = true;
-			}
-			
-
-			
-			this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-			//Añadimos el estado actual a replay
-			replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
-			
+			}	
 		}
-		
-
-		
 	}
-
+	
 	@Override
 	public String toString() {
-		// TODO creo que se deber�a mostrar algo de la puntuaci�n de los equipos
 		StringBuilder bf = new StringBuilder();
 		bf.append("Turno: ");
 		bf.append(getCurrentPlayer().toString() + " from " + Team.getTeam(getCurrentPlayer())).toString();

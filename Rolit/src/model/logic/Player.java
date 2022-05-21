@@ -85,12 +85,6 @@ public class Player implements Reportable, Rival {
 	 */
 	public Pair<Integer, Integer> play(GameState state) {
 		if(this.strategy != null) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			Pair<Integer, Integer> coor = this.strategy.calculateNextMove(color, state);
 			try {
 				if(coor != null)

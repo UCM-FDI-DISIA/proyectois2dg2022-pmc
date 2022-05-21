@@ -18,7 +18,7 @@ public class MinimaxStrategy extends Strategy {
 	public static final String DIFFICULTY = "HARD";
 	
 	protected Pair<Integer, Integer> result;
-	public static final int MAX_DEPTH = 3;
+	public static final int MAX_DEPTH = 2;
 	protected int original_depth;
 	private boolean maximize;
 	
