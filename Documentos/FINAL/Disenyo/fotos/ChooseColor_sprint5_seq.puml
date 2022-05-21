@@ -1,0 +1,18 @@
+@startuml
+participant Actor
+Actor -> NewGameClassicWindow : open
+activate NewGameClassicWindow
+NewGameClassicWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> NewGameClassicWindow
+deactivate ConsoleWindow
+NewGameClassicWindow -> NewGameWindow : availableColors
+activate NewGameWindow
+NewGameWindow --> NewGameClassicWindow
+deactivate NewGameWindow
+NewGameClassicWindow -> NewGameWindow : validatePlayer
+activate NewGameWindow
+NewGameWindow --> NewGameClassicWindow
+deactivate NewGameWindow
+return
+@enduml

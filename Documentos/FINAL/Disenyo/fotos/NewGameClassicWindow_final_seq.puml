@@ -1,0 +1,26 @@
+@startuml
+participant Actor
+Actor -> NewGameClassicWindow : open
+activate NewGameClassicWindow
+NewGameClassicWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> NewGameClassicWindow
+deactivate ConsoleWindow
+NewGameClassicWindow -> NewGameWindow : availableColors
+activate NewGameWindow
+NewGameWindow --> NewGameClassicWindow
+deactivate NewGameWindow
+NewGameClassicWindow -> Strategy : availableStrategies
+activate Strategy
+Strategy --> NewGameClassicWindow
+deactivate Strategy
+NewGameClassicWindow -> NewGameWindow : validatePlayer
+activate NewGameWindow
+NewGameWindow -> Strategy : parse
+activate Strategy
+Strategy --> NewGameWindow
+deactivate Strategy
+NewGameWindow --> NewGameClassicWindow
+deactivate NewGameWindow
+return
+@enduml

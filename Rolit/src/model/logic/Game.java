@@ -70,7 +70,6 @@ public abstract class Game extends Thread implements Replayable {
 		this.board = new Board(game.board);		
 		this.exit = game.exit;
 		this.turnManager = new TurnManager(game.turnManager);
-		
 	}
 	
 	/**
@@ -108,9 +107,8 @@ public abstract class Game extends Thread implements Replayable {
 	 */
 	@Override
 	public void run() {
-		// FIXME en la depuración esto no llega a terminar nunca
 		Cube nextCube;
-		nextCube = this.turnManager.firstTurn(new GameState(copyMe()));//FIXME Se crea tambien en el onTurnPlayed
+		nextCube = this.turnManager.firstTurn(new GameState(copyMe()));
 		if(nextCube != null) this.addCubeToQueue(nextCube);
 		while (!this.finished && !this.exit && !Thread.interrupted()) {
 			try {
@@ -181,7 +179,7 @@ public abstract class Game extends Thread implements Replayable {
 					
 		gameJSONObject.put("players", playerJSONArray);
 		
-		gameJSONObject.put("turn", this.players.get(turnManager.getCurrentPlayerIndex()).getColor().toString());
+		gameJSONObject.put("turn", this.players.get(turnManager.getNextPlayerIndex()).getColor().toString());
 		
 		return gameJSONObject;
 	}

@@ -1,0 +1,14 @@
+@startuml
+participant Actor
+Actor -> GameClassicBuilder : whatINeed
+activate GameClassicBuilder
+GameClassicBuilder -> GameBuilder : availableColors
+activate GameBuilder
+GameBuilder --> GameClassicBuilder
+deactivate GameBuilder
+GameClassicBuilder -> GameBuilder : validatePlayer
+activate GameBuilder
+GameBuilder --> GameClassicBuilder
+deactivate GameBuilder
+return
+@enduml

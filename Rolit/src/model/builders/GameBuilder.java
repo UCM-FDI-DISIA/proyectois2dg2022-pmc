@@ -61,7 +61,6 @@ public abstract class GameBuilder {
 	public static Game createGame(JSONObject o) {
 		String type = o.getString("type");
 		GameBuilder gameGen = GameBuilder.parse(type);
-		// FIXME esto para la aplicaci�n
 		if (gameGen == null)
 			throw new IllegalArgumentException("The game mode mustnt be null");
 		else

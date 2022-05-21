@@ -45,7 +45,6 @@ public class NewGameClassicWindow extends NewGameWindow {
 						strat = input.nextLine();
 				 }
 				 try {
-					 // FIXME no se si al dar excepcion antes de hacer el put realmente no se hace put de nada
 					 jPlayers.put(this.validatePlayer(jPlayers, name.endsWith(" AI") ? name.substring(0, name.length() - 3) : name, color, strat));
 					 added = true;
 				 }				 

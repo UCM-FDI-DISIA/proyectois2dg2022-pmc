@@ -58,7 +58,6 @@ public class ClientController extends Thread{
 	 */
 	public void run(){
 		try {
-			// FIXME hay un while true
 			while(true){				
 				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
 				

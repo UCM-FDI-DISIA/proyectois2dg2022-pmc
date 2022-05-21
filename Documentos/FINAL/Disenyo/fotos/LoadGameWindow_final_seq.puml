@@ -1,0 +1,14 @@
+@startuml
+participant Actor
+Actor -> LoadGameWindow : open
+activate LoadGameWindow
+LoadGameWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> LoadGameWindow
+deactivate ConsoleWindow
+LoadGameWindow -> SaveLoadManager : loadGame
+activate SaveLoadManager
+SaveLoadManager --> LoadGameWindow
+deactivate SaveLoadManager
+return
+@enduml

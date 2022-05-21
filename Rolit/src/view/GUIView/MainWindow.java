@@ -281,7 +281,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		this.repaint();
 		
 		mainPanel = new JPanel(new BorderLayout());
-		this.setContentPane(mainPanel); //FIXME No s� yo si as� es como se hacen las cosas
+		this.setContentPane(mainPanel);
 			
 		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
 				

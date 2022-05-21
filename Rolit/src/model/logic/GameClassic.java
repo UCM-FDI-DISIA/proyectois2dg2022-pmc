@@ -60,6 +60,7 @@ public class GameClassic extends Game {
 			}
 			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
 			else {
+				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 				
@@ -67,10 +68,13 @@ public class GameClassic extends Game {
 				//Añadimos el estado actual a replay
 				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 				
-				onTurnPlayed();
 				this.executedTurn = true;
 			}
-			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}		
 	}
 	

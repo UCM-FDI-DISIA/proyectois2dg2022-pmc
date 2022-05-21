@@ -46,7 +46,7 @@ public class GameClassicBuilder extends GameBuilder {
 		}
 		
 		JSONObject boardJSONObject = o.getJSONObject("board");
-		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve
+		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape")));
 		
 		List<Cube> list_cubes = new ArrayList<Cube>();
 		JSONArray cubesJSONArray = boardJSONObject.getJSONArray("cubes");

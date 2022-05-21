@@ -222,19 +222,13 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	 * onGameStatusChange method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onGameStatusChange(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onGameStatusChange(GameState state) {}
 
 	/**
 	 * onReplayStatusChange method overridden (ReplayObserver interface)
 	 */
 	@Override
-	public void onReplayStatusChange(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onReplayStatusChange(String msg) {}
 
 	/**
 	 * onGameFinished method overridden (RolitObserver interface)
