@@ -68,4 +68,8 @@ public class TurnManager {
 		return this.currentPlayer;
 	}
 	
+	public int getNextPlayerIndex() {
+		return (this.currentPlayer + 1) % this.players.size();
+	}
+	
 }

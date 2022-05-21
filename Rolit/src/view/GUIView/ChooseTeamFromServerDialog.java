@@ -121,7 +121,6 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		
 		this.pack();
 		
-		//TODO Antes de pasar a crear el Game hay que crear los players
 		//Hay que pedir los nombres y colores para crearlos
 	}
 	

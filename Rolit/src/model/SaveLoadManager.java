@@ -80,7 +80,6 @@ public class SaveLoadManager {
 			JSONObject gameJSONObject = new JSONObject(new JSONTokener(save_file));
 			return gameJSONObject;
 		} catch (IOException error_file) {
-			// FIXME esta excepcion no debería estar aqui
 			System.out.println(ERROR_LOAD);
 		}
 		return null;

@@ -188,7 +188,7 @@ public class SimplifiedBoard {
 							this.changesStack.add(new Pair<Pair<Integer, Integer>, Color>(coords, color));
 							this.scores.set(color.ordinal(), this.scores.get(color.ordinal()) - 1);
 							this.scores.set(currentColor.ordinal(), this.scores.get(currentColor.ordinal()) + 1);
-							this.matrix[newX][newY] = currentColor;	//FIXME Antes ponía color (creo que está mal)
+							this.matrix[newX][newY] = currentColor;
 							numberOfChanges++;
 							newX += dirX;
 							newY += dirY;
