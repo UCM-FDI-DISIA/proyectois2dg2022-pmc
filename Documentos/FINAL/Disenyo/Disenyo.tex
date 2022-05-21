@@ -1197,6 +1197,38 @@ Para este sprint los Builder simplemente cambian la forma instanciar el tipo \te
 
 \subsection{Commands}
 
+La necesidad de tener un paquete de comandos con clases específicas especializadas en convertir los comandos en objetos surgió en el Sprint 2 y se mantuvo hasta el final del proyecto.
+
+\begin{sprint}[2]
+Del aumento del tamaño de la clase \texttt{Game} surgió la necesidad de crear un paquete con los comandos necesarios para mantener la encapsulación y conseguir que los comandos funcionasen como objetos independientes, todos ellos extendiendo a la clase abstracta \texttt{Command}. Se utiliza así el patrón de diseño \texttt{Command}.
+
+La clase abstracta \texttt{Command} tiene el constructor común a todas sus subclases (así como otros métodos), una lista con los comandos disponibles y un método execute() en el cual cada subclase implementará la ejecución del comando. En este Sprint se crean las subclases:
+
+\item \texttt{ExitCommand}: se utiliza para salir del juego
+
+\item \texttt{HelpCommand}: se utiliza para mostrar una lista de los comandos disponibles para el jugador
+
+\item \texttt{PlaceCubeCommand}: se utiliza para poner un cubo en una posición del tablero (teniendo en cuenta las posiciones disponibles)
+
+\item \texttt{SaveCommand}: se utiliza para guardar una partida.
+\end{sprint}
+
+\begin{sprint}[3]
+En este Sprint los comandos específicos no cambian nada de su implementación ya que los cambios hechos en el proyecto no afectan a este paquete. La clase abstracta \texttt{Command} comienza a implementar la interfaz \texttt{Replayable} y añade un método toString() y un método report() como resultado de la adición al proyecto de JSONObjects.
+\end{sprint}
+
+\begin{sprint}[4]
+En este Sprint los comandos no cambian nada de su implementación ya que los cambios hechos en el proyecto no afectan a este paquete.
+\end{sprint}
+
+\begin{sprint}[5]
+En este Sprint los comandos no cambian nada de su implementación ya que los cambios hechos en el proyecto no afectan a este paquete. El único mínimo cambio es la eliminación del mensaje de despedida por consola en el comando \texttt{ExitCommand} como resultado de la incorporación de la GUI.
+\end{sprint}
+
+\begin{sprint}[6]
+En este Sprint cambia la implementación del método execute() del comando \texttt{PlaceCubeCommand} y pasa a delegar la responsabilidad de poner un cubo en el tablero a \texttt{Game}, llamando a un método de esta clase, que se encargará de crear un nuevo cubo y asociar este cubo con el jugador correspondiente.
+\end{sprint}
+
 \chapter{Diseño final}
 
 \section{Paquete model}
@@ -2074,6 +2106,179 @@ Apariencia inicial de la \texttt{MainWindow}
  	     "game" = game.report()}] //consultar arriba
 }
 \end{lstlisting}
+
+\chapter{Anexo II: Lista de todas las clases}
+
+Las clases del proyecto con las siguientes:
+
+\textbf{GameBuilder}: Builder genérico de Game. Se encarga de generar GameClassic o GameTeams con sendas llamadas a GameClassicBuilder y GameTeamsBuilder.
+
+\textbf{GameClassicBuilder}: Builder de GameClassic.
+
+\textbf{GameTeamsBuilder}: Builder de GameTeams.
+
+\textbf{Client}: Clase intermediaria entre el ClientController y la vista.
+
+\textbf{Command}: Clase genérica de comando que parsea los comandos introducidos para poder llamas a las clases específicas que gestionan dichos comandos.
+
+\textbf{ExitCommand}: Clase que, dado el comando exit, termina el juego.
+
+\textbf{HelpCommand}: Clase que, dado el comando help, muestra los comandos disponibles a ejecutar.
+
+\textbf{PlaceCubeCommand}: Clase que, dado el comando de poner cubo, pide a Game que se coloque un cubo en la posición indicada.
+
+\textbf{SaveCommand}: Clase que, dado el comando save, llama a SaveLoadManager para que guarde la partida en el instante en el que se llama al comando.
+
+\textbf{Controller}: El controlados (en el sentido del MVC), intermediario de la vista y el modelo.
+
+\textbf{SaveLoadManager}: Clase encargada de la carga, guardado y borrado de partidas y replays.
+
+\textbf{Board}: Clase que define la estructura y lógica del tablero del juego.
+
+\textbf{Color}: Clase de enumerados con métodos auxiliares para la representación de los colores.
+
+\textbf{Cube}: Clase que representa un cubo, con su posición y jugador al que pertenece.
+
+\textbf{Game}: clase abstracta que representa una visión general del juego, que luego se particulariza en GameClassic y GameTeams. Es un modelo (en el sentido del MVC).
+
+\textbf{GameClassic}: Clase que implementa la lógica del juego en el modo Classic (jugadores individuales).
+
+\textbf{Gameteams}: Clase que implementa la lógica del juego en el modo Teams (jugadores por equipos).
+
+\textbf{Player}: Clase que representa a un jugador humano o IA y sus características (color, nombre, puntuación...).
+
+\textbf{Replayable}: Interfaz que extiende de Reportable y que incluye un método toString() con el fin de encapsular Game para generar estados, que son usados por multitud de clases.
+
+\textbf{Reportable}: Interfaz a través de la cual, implementada en clases, permite ejecutar un rport(), serialización del objeto en formato .json a través de unos estándares definidos.
+
+\textbf{Rival}: Interfaz que permite unificar si se juega contra un jugador o contra un equipo mediante el concepto de rival.
+
+\textbf{Shape}: Clase de enumerados con métodos auxiliares para la representación de las formas del tablero.
+
+\textbf{Team}: Clase que representa a un equipo con el modo de juego GameTeams.
+
+\textbf{TurnManager}: Clase que gestiona el paso de turnos.
+
+\textbf{GameState}: Clase que representa el estado del juego en un momento determinado.
+
+\textbf{Replay}: Clase a través de la cual se gestionan las replays, pudiendo por ejemplo avanzar y retroceder en las mismas.
+
+\textbf{Rolit}: Clase de punto de partida de la aplicación. En esta se muestra el me´nu principal y se decide si acceder al modo GUI o al modo consola.
+
+\textbf{HelpException}: Clase que representa la excepción ejecutada desde el comando HelpCommand.
+
+\textbf{Server}: Clase que gestiona los clientes desde la perspectiva del servidos y que procesa los mensajes emitidos desde los clientes.
+
+\textbf{ServerClient}: Clase que representa cada cliente desde la perspectiva del servidor.
+
+\textbf{ServerClientThread}: Clase que interactúa con el cliente enviando y recibiendo mensajes.
+
+\textbf{ServerView}: Clase que abre el diálogo a través del cuál el usuario pude abrir y detener un servidor.
+
+\textbf{WaitPlayerThread}: Thread a través del cual el servidor va recibiendo las coneixones entrantes de los distintos clientes que se van conectando.
+
+\textbf{GreedyStrategy} Estrategia IA consistente en una búsqueda superficial con el algoritmo Minimax.
+
+\textbf{MinimaxStrategy}: Estrategia IA consistente una búsqueda en profundidad con el algoritmo Minimax y la poda alfa-beta.
+
+\textbf{RandomStrategy}: Estrategia IA consistente en introducir un cubo de forma aleatoria siempre que este esté en una posición válida.
+
+
+\textbf{SimplifiedBoard}: Encapsulación del tablero a través del cual la IA decide sus movimientos.
+
+\textbf{Strategy}: Clase genérica estrategia IA de la cual heredan las estrategias específicas.
+
+\textbf{Pair}: Clase que representa un par, utilidad básica para varias partes del código.
+
+\textbf{StringUtils}: Clase que recopila distintas utilidades para trabajar con cadenas, básico para varias partes del código.
+
+\textbf{RolitObserver}: Interfaz que declara las notificaciones a través de las cuales se trabaja en el patrón observador implementado para la estructura modelo-vista-controlador para particularidades del juego.
+
+\textbf{ConsoleWindow}: Interfaz de ventana genérica para el modo consola
+
+\textbf{DeleteGameWindow}: Ventana para la consola a través de la cual se puede borrar un juego guardado.
+
+\textbf{LoadGameWindow}: Ventana para la consola a través de la cual se puede cargar un juego guardado.
+
+\textbf{LoadReplayWindow}: Ventana para la consola a través de la cual se puede cargar un replay.
+
+\textbf{MainBashWindow}: Ventana para la consola a través de la cual se muestra el menú principal.
+
+\textbf{NewGameClassicWindow}: Ventana para la consola a través de la cual se crea un nuevo juego con modo GameClassic.
+
+\textbf{NewGameTeamsWindow}: Ventana para la consola a través de la cual se crea un nuevo juego con modo GameTeams.
+
+\textbf{NewGameWindow}: Ventana para la consola a través de la cual se crea un nuevo juego.
+
+\textbf{PlayWindow}: Ventana para la consola a través de la cual se muestra el hilo de ejecución de una partida.
+
+\textbf{SaveReplayWindow}: Ventana para la consola a través de la cual se puede guardar la partida en el estado actual.
+
+\textbf{BoardGUI}: Clase que gestiona la representación del board en modo GUI
+
+\textbf{BoardRenderer}: Renderer Swing que diseña los ComboBox que muestran las distintas formas de tablero que el usuario puede escoger.
+
+\textbf{CeldaGUI}: Clase que representa una celda del tablero en modo GUI, responsabilizándose de su diseño y de recoger los clic del usuario.
+
+\textbf{ChooseTeamFromServerDialog}: Diálogo GUI que, desde el cliente, se escoge en qué equipo desea unirse el usuario a la hora de conectarse a una partida en red con modo GameTeams.
+
+\textbf{ColorRenderer}: Renderer Swing que diseña los ComboBox que muestran los distintos colores el usuario puede escoger.
+
+\textbf{ControlPanel}: Panel Swing que muestra, según el caso, guardar partidas y el avance y retroceso en los replays. Se coloca en la parte superior de la ventana de la aplicación.
+
+\textbf{DeleteGameDialog}: Diálogo GUI a través del cual el usuario puede eliminar partidas guardadas.
+
+\textbf{JoinServerDialog}: Diálogo GUI a través del cual el cliente puede conectarse a un servidor introduciendo los datos de este.
+
+\textbf{LoadFileDialog}: Diálogo GUI a través del cual el usuario puede cargar partidas guardadas.
+
+\textbf{MainWindow}: Ventana principal del modo GUI sobre la cuál se colocan todos los componentes y nacen todos los diálogos.
+
+\textbf{Observable}: Interfaz que declara el método de añadir observador para la implementación del patrón Observador.
+
+\textbf{RankingTableModel}: Tabla Swing (GUI) que muestra la tabla de las puntuaciones en tiempo real de los usuarios de una partida.
+
+\textbf{ReplayObserver}: Interfaz que declara las notificaciones a través de las cuales se trabaja en el patrón observador implementado para la estructura modelo-vista-controlador para particularidades del Replay.
+
+\textbf{SaveReplayDialog}: Diálogo GUI a través del cual el usuario puede guardar la repetición de una partida finalizada.
+
+\textbf{StatusBar}: Componente GUI situado en la parte inferior de la aplicación que muestra las notificaciones lanzadas por el modelo.
+
+\textbf{TurnAndRankingBar}: Panel Swing (GUI) que junta tanto el ranking como el turno del usuario actual en la partida.
+
+\textbf{CreateGameDialog}: Diálogo GUI a través del cual el usuario puede crear una partida.
+
+\textbf{CreateGameWithPlayersDialog}: Clase que se encarga de los jugadores dentro del CreateGameDialog (GUI).
+
+\textbf{CreatePlayersPanel}: Panel Swing (GUI) encargado de gestionar los jugadores introducidos en el CreateGameDialog.
+
+\textbf{CreateTeamsPanel}: Panel Swing (GUI) encargado de gestionar los equipos introducidos en el CreateGameDialog.
+
+\textbf{GameConfigurationPanel}: Panel Swing (GUI) que recoge la configuración de juego especificada en el CreateGameDialog.
+
+\textbf{PlayerDataPanel}: Panel Swing (GUI) que recoge los datos introducidos de jugadores especificados en el CreateGameDialog.
+
+\textbf{TeamDataPanel}: Panel Swing (GUI) que recoge los datos introducidos de equipos especificados en el CreateGameDialog.
+
+\textbf{RolitBorder}: Extensión de Border (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitButton}: Extensión de JButton (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitCheckBox}: Extensión de JCheckBox (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitComboBox}: Extensión de JComboBox (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitIconButton}: Extensión de JButton con icono (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitPanel}: Extensión de JPanel (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitRadioButton}: Extensión de JRadioButton (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitTextArea}: Extensión de JTextArea (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitTextField}: Extensión de JTextField (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
+
+\textbf{RolitToolBar}: Extensión de JToolBar (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
 
 \chapter{POSIBLES MEJORAS}
 El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.
