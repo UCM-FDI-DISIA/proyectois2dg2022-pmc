@@ -18,12 +18,12 @@ import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitToolBar;
 
 /**
- * This class is a Swing JPanel that shows, depending on the case, the button of save game and
+ * This class is a RolitPanel that shows, depending on the case, the button of save game and
  * the buttons that allow to go forward and backward in the replays. It is placed at the top
  * of the window of the application.
  * @author PMC
  */
-public class ControlPanel extends RolitToolBar implements ActionListener, RolitObserver, ReplayObserver {
+public class ControlPanel extends RolitToolBar implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -69,7 +69,6 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 		replayRightBtn.addActionListener(this);
 		this.add(replayRightBtn);
 
-		replay.addObserver(this);
 	}
 
 	/**
@@ -101,79 +100,5 @@ public class ControlPanel extends RolitToolBar implements ActionListener, RolitO
 		}
 	}
 
-	/**
-	 * onRegister method overridden (RolitObserver interface)
-	 */
-	@Override
-	public void onRegister(GameState status) {}
-
-	/**
-	 * onError method overridden (RolitObserver interface)
-	 */
-	@Override
-	public void onError(String err) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onReplayLeftButton method overridden (ReplayObserver interface)
-	 */
-	@Override
-	public void onReplayLeftButton() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onReplayRightButton method overridden (ReplayObserver interface)
-	 */
-	@Override
-	public void onReplayRightButton() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onGameStatusChange method overridden (RolitObserver interface)
-	 */
-	@Override
-	public void onGameStatusChange(GameState status) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onReplayStatusChange method overridden (ReplayObserver interface)
-	 */
-	@Override
-	public void onReplayStatusChange(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onTurnPlayed method overridden (RolitObserver interface)
-	 */
-	@Override
-	public void onTurnPlayed(GameState state) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onGameFinished method overridden (RolitObserver interface)
-	 */
-	@Override
-	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * onGameExited method overridden (ReplayObserver interface)
-	 */
-	@Override
-	public void onGameExited(Replay replay) {}
 
 }
