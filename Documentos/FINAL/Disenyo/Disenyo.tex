@@ -47,7 +47,7 @@
 
 \subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
 
-\subsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
+\subsubsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
 En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepctiva con el resultado final.
 
 Sin embargo, poseen gran importancia los sprint 4 y 5, pues son en los que se incluye por primera vez una vista gráfica que no sea la de consola y porque por primera vez se formaliza una entrada salida controlada y a través de clases especializadas que son usadas a modo de componentes gráficos, pero para la consola.
@@ -97,11 +97,11 @@ while(!game.isFinished()) {
 			
 		}
 \end{lstlisting}
-Tal y como se ve, principalmente la función más importante de impresión es la función \texttt{void printGame()} que se encarga de imprimir el estado del juego tras cada jugada. Fundamentalmente, el desconocimiento del patrón Modelo-Vista-Controlador hizo que las instrucciones de uso del jugador o los diferentes menús de carga y guardado se hicieran en el propio método que se encargaba de hacer cada cosa, dificultando el poder hacer un diagrama de secuencia de cómo se imprime el menú o cómo se piden acciones.
+Tal y como se ve, principalmente la función más importante de impresión es la función \texttt{void printGame()} que se encargaba simplemente de hacer una llamada al método \texttt{String toString()} de la clase \texttt{GamePrinter} que era la experta en representación por pantalla de todo lo relativo al juego. Fundamentalmente, el desconocimiento del patrón Modelo-Vista-Controlador hizo que las instrucciones de uso del jugador o los diferentes menús de carga y guardado se hicieran en el propio método que se encargaba de hacer cada cosa, dificultando el poder hacer un diagrama de secuencia de cómo se imprime el menú o cómo se piden acciones.
 \end{sprint}
 
 \begin{sprint}[2]
-En base a la experiencia en proyectos anteriores, durante este sprint se consolidó la clase \texttt{Controller} como la encargada de todos los procesos externos a los bucles del propio juego, es decir, se encargaba determinar el número de jugadores, el tipo de tablero, creación de los elementos del \texttt{Game}... Por tanto, el menú principal estaba en la clase \texttt{Controller}, concretamente la funcionalidad la encapsulaba la función \texttt{int menu()} que interactuaba con otros métodos privados de la clase para que el usuario pudiese decidir el resto de cosas.
+En base a la experiencia en proyectos anteriores, durante este sprint se consolidó la clase \texttt{Controller} como la encargada de todos los procesos externos a los bucles del propio juego, es decir, se encargaba determinar el número de jugadores, el tipo de tablero, creación de los elementos del \texttt{Game}... Por tanto, el menú principal estaba en la clase \texttt{Controller}, concretamente la funcionalidad la encapsulaba la función \texttt{int menu()} que interactuaba con otros métodos privados de la clase para que el usuario pudiese decidir el resto de cosas y la funcionalidad de mostrar el juego seguía estando representada en la clase \texttt{GamePrinter} con el método \texttt{toString()}.
 
 \begin{center}
 \includegraphics[scale=0.5]{MenuPpal_sprint2_seq}
@@ -130,14 +130,16 @@ En este caso, la función que imprime cada iteración del juego sigue siendo \te
 \end{sprint}
 
 \begin{sprint}[4]
-\subsubsection{Console}
+\textbf{Console}
+
 En este sprint, fundamentalmente se aplica el patrón Builder y Factorías a la situación del sprint anterior. En este caso, el menú principal sigue en el método \texttt{int menu()} de la clase \texttt{Controller} y los métodos que antes estaban en \texttt{GameGenerator} y se encargaban de pedir el número de jugadores, forma del tablero, ... por consola ahora forman parte del método \texttt{ask()} de las factorías (que por dentro saben que preguntar en cada caso).
 \begin{center}
 \includegraphics[scale=0.55]{MenuPpal_sprint4_seq}
 \end{center}
 A pesar de que se ha incluido el \textit{Modelo-Vista-Controlador} como patrón de arquitectura, la diferencia fundamental entre tener un nuevo hilo en \textit{Swing} y seguir en el mismo hilo que \textit{Main} ha hecho que no se haya formalizado una vista al uso para la parte de consola y que el código para ciertas excepciones y mensajes siga perdido por los lugares donde se producen dichas incidencias.
 
-\subsubsection{GUI}
+\textbf{GUI}
+
 En este sprint se desarrolló una primera versión de la interfaz gráfica, lo cual involucra a un gran número de clases y métodos. Iniciemos un recorrido por cada uno de los componentes visuales explicando su finalidad
 
 \underline{CeldaGUI}
@@ -255,7 +257,8 @@ En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través
 \end{sprint}
 
 \begin{sprint}[5]
-\subsubsection{Console}
+\textbf{Console}
+
 En el sprint 5, la evidencia de las limitaciones que tiene tener la consola tan poco definida en comparación con la programación de componentes de \textit{Swing} y la implementación de un hilo a parte para el modelo hacen posible que se cree una serie de clases a modo de ``componentes'' para formalizar de una vez la vista del modo consola:
 \begin{center}
 \includegraphics[scale=0.55, angle=90]{DiagramaClasesConsola}
@@ -289,9 +292,8 @@ La clase que principalmente soporta la ventana de consola una vez se va a comenz
 \includegraphics[scale=0.5]{PlayWindow_sprint5_seq}
 \end{center}
 
+\textbf{GUI}
 
-
-\subsubsection{GUI}
 \underline{MainWindow}
 
 La incorporación de la funcionalidad para jugar en red trajo consigo  la necesidad de añadir nuevos botones al menú principal para poder acceder a ella.
@@ -349,10 +351,11 @@ Por consiguiente, todas las instancias de clases relacionadas con el modelo de \
 \end{sprint}
 
 \begin{sprint}[6]
-\subsubsection{Console}
+\textbf{Console}
+
 Los componentes a modo de ventanas de la consola no sufrieron más cambios más allá del sprint 5, únicamente se corrigieron errores en los \texttt{input.nextLine()} de la lectura puesto que fallaba al no consumir saltos de línea abandonados en el buffer.
 
-\subsubsection{GUI}
+\textbf{GUI}
 
 En este sprint la GUI fue refactorizada por completo, cambiando tanto visualmente, como a nivel de funcionamiento interno en algunas clases para hacer el código más manejable.
 
@@ -1217,6 +1220,44 @@ Para conseguir esto, la representación interna de los colores se hace a través
 \section{Diseño y evolución de otros aspectos del proyecto}
 
 \subsection{Builders}
+Hasta que el proyecto no aumentó lo suficiente de tamaño y hasta que no se estudiaron los patrones adecuados, la necesidad de tener unas clases específicas especializadas en la creación de ciertos objetos no tuvo relevancia en el proyecto (pues no surgió la necesidad o no teníamos los conocimientos para cubrirla).
+
+\begin{sprint}[3]
+El aumento de tamaño del \texttt{Game} y, con mucha más relevancia, la complejidad de la creación del mismo que estaba adquiriendo dicha clase hizo que fuese necesario encapsular la lógica de creación de este objeto más allá de un simple constructor, pues no era responsabilidad del controlador o las clases que iniciaran el juego de traducir los datos que el usuario quería del mismo a una instancia concreta de \texttt{Game}, pero tampoco podíamos hacer una cantidad ingente de constructores para cada posible situación de juego.
+
+En base a esta necesidad, y con vistas a que en el futuro iba a haber más tipos de \texttt{Game} a los que jugar, se crea por primera vez la clase \texttt{GameGenerator}. Esta clase, debido a la falta de una implementación del \textit{Modelo-Vista-Controlador} útil y funcional, se encarga no sólo de traducir los datos que el usuario introduce por pantalla para generar el juego sino de preguntar directamente por consola cuáles son las características del juego que se va generar.
+
+\begin{center}
+\includegraphics[scale=0.5]{Builders_sprint3_seq}
+\end{center}
+
+Es decir, esta clase constituye una aproximación al patrón de Factorías, pues ahora \texttt{Controller} solo debe encargarse de pedirle a la factoría que genere el juego y después hacer su verdadera función: controlar los eventos del juego.
+\end{sprint}
+
+\begin{sprint}[4]
+La aparición de nuevos tipos de \texttt{Game} complica, más si cabe, la creación de los mismos para comenzar la partida. Ya no sólo el usuario debe introducir características que desea del juego sino que tiene que introducir cosas distintas en función del tipo de juego que desee jugar. Esta nueva funcionalidad complica mucho las cosas porque, tal y como estába implementado en el sprint anterior, tendríamos que saber generar una factoría distinta para cada tipo de juego y que dicha factoría generase el juego.
+
+Es en este punto donde implementamos los patrones de \textit{Abstract Factory} y \textit{Builder}. Generamos un nuevo paquete y unas nuevas clases que van a sustituir a la clase \texttt{GameGenerator} del sprint anterior y que principalmente van a tener dos familias de métodos: un grupo de métodos para \textbf{preguntar} y recopilar la información que el usuario teclee sobre el juego y otra familia para \textbf{construir} el juego una vez se tiene la información.
+
+$$DIAGRAMA DE CLASES DE LOS BUILDER SPRINT 4$$
+
+La clase principal y la cual es la encargada de la generación de los \texttt{Game} como tipo abstracto es la clase \texttt{GameBuilder}. Dicha clase pregunta \textbf{los elementos globales a cualquier juego} por pantalla a través del método \texttt{ask()} y después indica al constructor concreto del juego concreto que se quiere jugar que pregunte lo que considere necesario sobre su juego a través de su método \texttt{whatIneed()}. Todo este proceso genera un conglomerado de datos \textbf{en forma de \texttt{JSONObject}} que se utiliza como receta para el método de construcción del juego. Dicho método funciona exactamente igual a los procesos anteriores: la factoría general \textbf{GameBuilder} construye a partir del \texttt{JSONObject} todo lo que un juego genérico tendría y después indica al Builder concreto que termine de construir el juego con el mismo \texttt{JSONObject}.
+
+\begin{center}
+\includegraphics[scale=0.5]{Builders_sprint4_seq}
+\includegraphics[scale=0.5]{Builders2_sprint4_seq}
+\end{center}
+
+La parte de preguntar podría omitirse y tener un método general de crear el juego recibiendo un \texttt{JSONObject} y otro sin \texttt{JSONObject}, sin embargo el cuello de botella de sólo poder llamar al método \texttt{Game createGame()} de \texttt{GameBuilder} es una característica fundamental del diseño que se va a tomar posteriormente. En este caso, los Builder preguntaban porque aún no había una interfaz gráfica de consola en condiciones que pudiese encargarse de un manejo adecuado de entrada salida, pero con la decisión anterior el mensaje es tajante: todo aquel que desee generar un juego debe pasarle la información bien estructurada a las factorías. Y este detalle es fundamental, pues permite que la forma de obtener la información no sea relevante, es decir, la información del juego puede ser recopilada desde un fichero de carga, por consola, por GUI o por red y que el método para crear el juego siempre sea el mismo, pues sólo se necesita saber la información en formato \texttt{JSONObject}.
+\end{sprint}
+
+\begin{sprint}[5]
+La aparición de una interfaz de consola adecuada posibilitó que los métodos \texttt{JSONObject ask()} y \texttt{void WhatIneed(JSONObject o)} salieran de las factorias y se incorporaran a la vista de consola correspondiente. De este modo, ahora simplemente los Builder mantienen su funcionalidad de contener la lógica de creación del juego a partir del saco de datos que suponen los \texttt{JSONObject} de cada juego.
+\end{sprint}
+
+\begin{sprint}[6]
+Para este sprint los Builder simplemente cambian la forma instanciar el tipo \texttt{Player} que se añade al \texttt{Game} porque cambia su estructura interna (ahora tenemos estrategias para jugadores automáticos y forman parte de la estructura interna del \texttt{Player}).
+\end{sprint}
 
 \subsection{Commands}
 

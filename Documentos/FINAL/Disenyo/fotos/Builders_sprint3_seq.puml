@@ -1,0 +1,45 @@
+participant Controller
+Controller -> GameGenerator : createGame
+activate GameGenerator
+GameGenerator -> GameGenerator : chooseBoard
+activate GameGenerator
+GameGenerator -> Shape : availableShapes
+activate Shape
+Shape --> GameGenerator
+deactivate Shape
+create Board
+GameGenerator -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> GameGenerator
+deactivate Board
+deactivate GameGenerator
+create Game
+GameGenerator -> Game : new
+activate Game
+Game --> GameGenerator
+deactivate Game
+GameGenerator -> GameGenerator : numPlayers
+activate GameGenerator
+deactivate GameGenerator
+GameGenerator -> GameGenerator : chooseColor
+activate GameGenerator
+GameGenerator -> Game : availableColors
+activate Game
+Game --> GameGenerator
+deactivate Game
+GameGenerator -> Game : tryToAddPlayer
+activate Game
+create Player
+Game -> Player : new
+activate Player
+Player --> Game
+deactivate Player
+Game --> GameGenerator
+deactivate Game
+deactivate GameGenerator
+return
+@enduml

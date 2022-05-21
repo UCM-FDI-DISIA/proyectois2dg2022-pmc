@@ -1,0 +1,12 @@
+@startuml
+participant Controller
+Controller -> GameBuilder : createGame
+activate GameBuilder
+GameBuilder -> GameBuilder : parse
+activate GameBuilder
+deactivate GameBuilder
+GameBuilder -> GameBuilder : GenerateGame
+activate GameBuilder
+deactivate GameBuilder
+return
+@enduml

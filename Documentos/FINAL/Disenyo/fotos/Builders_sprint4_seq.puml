@@ -1,0 +1,28 @@
+@startuml
+participant Actor
+Actor -> GameBuilder : ask
+activate GameBuilder
+GameBuilder -> Shape : availableShapes
+activate Shape
+Shape --> GameBuilder
+deactivate Shape
+create Board
+GameBuilder -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> GameBuilder
+deactivate Board
+GameBuilder -> GameBuilder : parse
+activate GameBuilder
+GameBuilder -> GameBuilder : match
+activate GameBuilder
+deactivate GameBuilder
+deactivate GameBuilder
+GameBuilder -> GameBuilder : whatINeed
+activate GameBuilder
+deactivate GameBuilder
+return
+@enduml
