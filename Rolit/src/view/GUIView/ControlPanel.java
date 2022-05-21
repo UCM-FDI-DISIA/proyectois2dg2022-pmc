@@ -4,16 +4,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import controller.Controller;
 import model.commands.SaveCommand;
-import model.logic.Rival;
-import model.replay.GameState;
 import model.replay.Replay;
-import view.RolitObserver;
 import view.GUIView.RolitComponents.RolitIconButton;
 import view.GUIView.RolitComponents.RolitToolBar;
 
@@ -87,8 +83,6 @@ public class ControlPanel extends RolitToolBar implements ActionListener {
 					e1.printStackTrace();
 				}
 
-			} else {
-				//TODO Algo habrá que hacer
 			}
 		}
 		else if(e.getActionCommand().equals("Replay left")) {

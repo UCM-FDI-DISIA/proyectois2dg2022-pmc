@@ -86,9 +86,9 @@ public class Controller {
 					//No se hace nada para esperar a que el modelo haga lo que le haga falta
 				}
 				clientRolit.updateGameToServer();
-			}			
+			}
 		}
-		else {	//FIXME hay que asegurar que el turno sea del jugador actual
+		else {
 			c.execute(game);
 		}
 	}

@@ -53,10 +53,7 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 	 * onRegister method overridden (RolitObserver interface)
 	 */
 	@Override
-	public void onRegister(GameState status) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onRegister(GameState status) {}
 
 	/**
 	 * onError method overridden (RolitObserver interface)
@@ -102,19 +99,13 @@ public class StatusBar extends RolitPanel implements RolitObserver, ReplayObserv
 	 * onReplayLeftButton method overridden (ReplayObserver interface)
 	 */
 	@Override
-	public void onReplayLeftButton() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onReplayLeftButton() {}
 
 	/**
 	 * onReplayRightButton method overridden (ReplayObserver interface)
 	 */
 	@Override
-	public void onReplayRightButton() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onReplayRightButton() {}
 
 	/**
 	 * onTurnPlayed method overridden (RolitObserver interface)

@@ -49,6 +49,3 @@ public class IATest {
 			 
 		}
 }
-
-//en un momento random de la partida poner cubos y que no pete
-//

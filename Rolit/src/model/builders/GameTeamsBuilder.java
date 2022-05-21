@@ -43,12 +43,11 @@ public class GameTeamsBuilder extends GameBuilder {
 			if(playersJSONArray.getJSONObject(i).has("strategy")) {
 				s = Strategy.parse(c, playersJSONArray.getJSONObject(i).getString("strategy"));
 			}
-			// FIXME utilizar el constructor de players a partir de JSON introducido para la red
 			list_players.add(new Player(c, playersJSONArray.getJSONObject(i).getString("name"), s));
 		}
 
 		JSONObject boardJSONObject = o.getJSONObject("board");
-		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape"))); // FIXME asumo que el constructor de Board se ve	
+		Board board = new Board(Shape.valueOfIgnoreCase(boardJSONObject.getString("shape")));	
 		
 		JSONArray teamsJSONArray = o.getJSONArray("teams");
 		List<Team> list_teams = new ArrayList<Team>();

@@ -26,10 +26,9 @@ public abstract class GameBuilder {
 	public static String availableModes() {
 		StringBuilder str = new StringBuilder();
 		for (GameBuilder g : builders) {
-			str.append(" " + g.getName());
+			str.append(g.getName() + ", ");
 		}
-		str.append(": ");
-		return str.toString();
+		return str.toString().substring(0, str.length() - 2);
 	}
 	
 	/**
@@ -62,7 +61,6 @@ public abstract class GameBuilder {
 	public static Game createGame(JSONObject o) {
 		String type = o.getString("type");
 		GameBuilder gameGen = GameBuilder.parse(type);
-		// FIXME esto para la aplicaci�n
 		if (gameGen == null)
 			throw new IllegalArgumentException("The game mode mustnt be null");
 		else

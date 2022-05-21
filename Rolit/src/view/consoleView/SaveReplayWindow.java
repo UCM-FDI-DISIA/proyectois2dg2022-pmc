@@ -85,29 +85,29 @@ public class SaveReplayWindow implements ConsoleWindow, RolitObserver{
 	public void onTurnPlayed(GameState state) {
 		
 	}
-
+	
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
 		this.replay = replay;
 		this.open();
 	}
-
+	
 	@Override
 	public void onGameExited(Replay replay) {
 		this.replay = replay;
 		this.open();
 	}
-
+	
 	@Override
 	public void onRegister(GameState state) {
 		
 	}
-
+	
 	@Override
 	public void onError(String err) {
 		
 	}
-
+	
 	@Override
 	public void onGameStatusChange(GameState state) {
 		

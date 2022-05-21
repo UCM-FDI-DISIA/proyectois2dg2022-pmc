@@ -74,7 +74,7 @@ public abstract class Command implements Replayable {
 	/**
 	 * Method that gets a command given its information
 	 * @param commandWords information of the command
-	 * @throws IllegalArgument Exception thrown if the command given is unknown
+	 * @throws IllegalArgumentException thrown if the command given is unknown
 	 * @return Command found
 	 */
 	public static Command getCommand(String[] commandWords) { //Habria que hacer un bucle para ver con qu� comando coincide

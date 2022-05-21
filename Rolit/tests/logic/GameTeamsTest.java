@@ -113,7 +113,7 @@ public class GameTeamsTest {
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.PURPLE, lt);
 		game.addCubeToQueue(new Cube(12,13, null));
-		game.addCubeToQueue(new Cube(0,500, null));
+		game.addCubeToQueue(new Cube(8, 9, null));
 		assertThrows(IllegalArgumentException.class, () -> game.play());
 		assertThrows(IllegalArgumentException.class, () -> game.play());
 		game.addCubeToQueue(new Cube(12,14, null));
@@ -148,10 +148,6 @@ public class GameTeamsTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.PURPLE, lt);
-		game.addCubeToQueue(new Cube(12,13, null));
-		game.addCubeToQueue(new Cube(0,500, null));
-		assertThrows(IllegalArgumentException.class, () -> game.play());
-		assertThrows(IllegalArgumentException.class, () -> game.play());
 		game.addCubeToQueue(new Cube(12,14, null));
 		game.play();
 		String s = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":3,\"color\":\"P\",\"name\":\"pepita la de los palotes\"},{\"score\":0,\"color\":\"G\",\"name\":\"paco paco paco eh mi paco\"}],\"name\":\"los locos del barrio\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"B\",\"name\":\"hellou kittaso\"},{\"score\":0,\"color\":\"R\",\"name\":\"hellou kittasa\"}],\"name\":\"pura calle modo diablo\"}],\"players\":[{\"score\":3,\"color\":\"P\",\"name\":\"pepita la de los palotes\"},{\"score\":0,\"color\":\"G\",\"name\":\"paco paco paco eh mi paco\"}],\"turn\":\"G\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"DL\",\"cubes\":[{\"color\":\"P\",\"pos\":[12,13]},{\"color\":\"P\",\"pos\":[12,12]},{\"color\":\"P\",\"pos\":[12,14]}]}}";
@@ -185,10 +181,6 @@ public class GameTeamsTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameTeams(b, lc, lp, Color.BLUE, lt);
-		game.addCubeToQueue(new Cube(3,13, null));
-		game.addCubeToQueue(new Cube(-5,500, null));
-		assertThrows(IllegalArgumentException.class, () -> game.play());
-		assertThrows(IllegalArgumentException.class, () -> game.play());
 		game.addCubeToQueue(new Cube(3,14, null));
 		game.play();
 		assertEquals(b.getCubeInPos(3, 14).getColor(), Color.BLUE);
