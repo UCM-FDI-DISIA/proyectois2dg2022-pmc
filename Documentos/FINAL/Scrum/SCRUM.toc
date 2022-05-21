@@ -1,4 +1,4 @@
-\babel@toc {spanish}{}
+\babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1}LA METODOLOGÍA SCRUM}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}ESTRUCTURA Y FUNCIONAMIENTO}{6}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Product Owner}{6}{subsection.1.1.1}%
@@ -49,5 +49,5 @@
 \contentsline {section}{\numberline {4.2}Leonardo Macías Sánchez}{34}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Daniel González Arbelo}{36}{section.4.3}%
 \contentsline {section}{\numberline {4.4}María del Mar Ramiro Ortega}{38}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Juan Diego Barrado Daganzo}{40}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Virginia Chacón Pérez}{41}{section.4.6}%
+\contentsline {section}{\numberline {4.5}Juan Diego Barrado Daganzo}{39}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Virginia Chacón Pérez}{40}{section.4.6}%
