@@ -19,6 +19,7 @@ public interface RolitObserver {
 	 * @param rivals List of rivals
 	 * @param rival Type of rivals: teams, players, ...
 	 * @param replay Replay of the finished game
+	 * @param state Current state of the game
 	 */
 	void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state);
 	

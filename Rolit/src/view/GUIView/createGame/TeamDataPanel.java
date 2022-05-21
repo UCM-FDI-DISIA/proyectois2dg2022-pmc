@@ -62,7 +62,6 @@ public class TeamDataPanel extends RolitPanel {
 	
 	/**
 	 * It returns the report of a team in JSONObject format. IMPORTANT: it doesn't contain the playerList.
-	 * @param team Team number
 	 * @return The report of a team in JSONObject format. IMPORTANT: it doesn't contain the playerList.
 	 */
 	public JSONObject getTeamReport() {
