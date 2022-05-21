@@ -1359,6 +1359,48 @@ Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lóg
 \subsubsection{GameBuilder}
 \subsection{Commands}
 
+Este paquete agrupa las clases que se encargan de los comandos del juego a partir de una solicitud. Dicha solicitud es convertida en un objeto independiente que contiene toda la información sobre la misma, lo cual permite la separación de responsabilidades y la división del código en capas. Para ello se han tomado las siguientes decisiones:
+
+\begin{itemize}
+\item Existe una clase abstracta \texttt{Command} de la cual extienden todos los comandos específicos que saben crear cada comando concreto. Además, \texttt{Command} implementa a la interfaz \texttt{Replayable}.
+\item La clase \texttt{Command} contiene una lista de todos los comandos disponibles, de modo que cuando se pide crear un objeto \texttt{Command}, esta clase se encarga de llamar al comando concreto correspondiente para completar la creación con la información específica de este.
+\item Cada comando se identifica por un nombre, unos detalles, una abreviatura y un mensaje de ayuda (explicación de lo que hace el comando).
+\item Cada subclase de \texttt{Command} implementa su propio método \texttt{execute()}, en el que se ejecuta lo que hace cada uno de los comandos.
+\item Existen métodos comunes a todos los comandos: un método para parsear los argumentos del comando, otro para mostrar un mensaje de ayuda con el comando, o el report (común a todas las clases que implementan la interfaz Replayable).
+\end{itemize}
+
+Teniendo en cuenta lo anterior, se presenta el conjunto de subclases implicadas en la construcción de objetos comando, siguiendo el patrón de diseño \textit{Command}.
+
+\subsubsection{ExitCommand}
+
+Este comando sirve para salir del juego a través del método \texttt{exit()} de \texttt{Game}, el cual realiza las notificaciones correspondientes siguiendo el patrón \textit{Observer}.
+
+\begin{center}
+\includegraphics[scale=0.55]{ExitCommand_execute_final.png}
+\end{center}
+
+\newpage
+
+\subsubsection{HelpCommand}
+
+Este comando sirve para mostrar un mensaje de ayuda para que el jugador entienda para qué sirve cada comando.
+
+\newpage
+
+\subsubsection{PlaceCubeCommand}
+
+Este comando sirve para colocar un cubo en una posición del tablero añadiéndolo a la cola de cubos pendientes de colocar de la clase \texttt{Game} mediante el método \texttt{addCubeToQueue()}. Además, en esta clase se sobrescribe el método parse ya que se necesitan 2 argumentos (posición en x y en y) para colocar el cubo en el tablero.
+
+\newpage
+
+\subsubsection{SaveCommand}
+
+Este comando sirve para guardar una partida en un fichero a través del método \texttt{saveGame()} de la clase \texttt{SaveLoadManager}, distinguiendo los casos en los que se dispone de un nombre de fichero de los casos en los que no. Esta clase añade el juego a la lista de ficheros de partida guardados y también se encarga de notificar a las clases correspondientes siguiendo el patrón \textit{Observer}.
+
+\begin{center}
+\includegraphics[scale=0.40]{SaveCommand_execute_final.png}
+\end{center}
+
 \newpage
 
 \subsection{Logic}
