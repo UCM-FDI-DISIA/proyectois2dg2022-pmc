@@ -181,10 +181,44 @@ A partir de este Sprint los cubos pasan a ser redondos y del \texttt{Color} que 
 
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
 
-\subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
+\subsubsection{Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
+\begin{sprint}[2]
+En este momento, la creación del juego se realizaba a través del controlador y éste poseía los métodos necesarios para preguntar por las características concretas que se querían del mismo. De este modo, los métodos para elegir color se encontraban en la clase \texttt{Controller}, concretamente el responsable de escoger el nombre y el color de los jugadores era \texttt{void chooseColor(int numPlayers)}.
+
+\begin{center}
+\includegraphics[scale=0.5]{ChooseColor_sprint2_seq}
+\end{center}
+
+El funcionamiento era iterativo para cada jugador:
+\begin{itemize}
+\item Se consultaba al \texttt{Game} que colores seguían disponibles (puesto que él va sabiendo qué jugadores tiene añadidos)
+\item Se escoge el color y se intenta añadir el jugador con dicho color al juego, con resultado positivo o con una excepción de error.
+\end{itemize}
+\end{sprint}
+
+\begin{sprint}[3]
+Con la creación de la nueva clase \texttt{GameGenerator} que constituye una primera aproximación a las factorías, se han movido los métodos de los que hablábamos en el sprint anterior a esta nueva clase.
+\end{sprint}
+
+\begin{sprint}[4]
+Este caso es más complejo que los anteriores. En este sprint nos encontramos en un punto intermedio del proyecto en el que se han implementado los Builder y las factorías, pero no se ha llegado a una interfaz gráfica de consola adecuada siguiendo el \textit{Modelo-Vista-Controlador}.
+
+\begin{center}
+\includegraphics[scale=0.55]{ChooseColor_sprint4_seq}
+\end{center}
+
+Como todavía no se tiene una vista de consola adecuada, los Builder en este caso tienen una función llamada \texttt{void WhatINeed(JSONObject o)} que se encarga de preguntar al usuario lo necesario para terminar de construir el \texttt{Game}. El método que permite conocer los colores disponibles se sigue llamando \texttt{String availableColor()}, solo que ahora está situado en la clase \texttt{GameBuilder} y el método que me permitía intentar añadir un jugador al juego una vez elegido el color se llama ahora \texttt{bool validatePlayer()} y de nuevo se encuentra en \texttt{GameBuilder}. La diferencia fundamental es que en este caso no se añade el jugador al juego, sino que se añade al \texttt{JSONObject} del \texttt{Game} para que luego el Builder concreto lo construya adecuadamente.
+\end{sprint}
+
+\begin{sprint}[5]
+En este sprint el funcionamiento es básicamente el mismo que en el anterior, sin embargo, cambia la ubicación de los métodos pues se introdujo la interfaz de consola. En este caso, las funcionalidades de \texttt{WhatINeed()}, \texttt{availableColors()} y \texttt{validatePlayer()} han pasado a la clase que representa la ventana de creación de juego de la consola \texttt{NewGameWindow} dejando el funcionamiento general como:
+\begin{center}
+\includegraphics[scale=0.55]{ChooseColor_sprint5_seq}
+\end{center}
+\end{sprint}
 
 \subsubsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
-En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepctiva con el resultado final.
+En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepectiva con el resultado final.
 
 Sin embargo, poseen gran importancia los sprint 4 y 5, pues son en los que se incluye por primera vez una vista gráfica que no sea la de consola y porque por primera vez se formaliza una entrada salida controlada y a través de clases especializadas que son usadas a modo de componentes gráficos, pero para la consola.
 
@@ -1402,7 +1436,35 @@ Esto queda reflejado en el siguiente diagrama del método \texttt{nextMove()}:
 \includegraphics[scale=0.75]{TurnManager.nextTurn()-sprint7.png} 
 \end{center}
 
-\newpage
+\subsubsection{Game, GameClassic y GameTeams}
+La clase \texttt{Game} es la clase fundamental del modelo y es la encargada de representar el concepto del juego completo, es decir, de la misma manera que el \texttt{Board} representa el juego físico (tablero, cubos, etc.) el \texttt{Game} representa todo el juego en su totalidad (jugadores, puntos, tablero, normas, etc.).
+$$DIAGRAMA DE LA CLASE GAME$$
+En primer lugar, la decisión que se ha tomado en cuanto al modelo es que tenga su propio hilo, es decir, continuamente el \texttt{Game} está ejecutando el bucle de juego hasta que finaliza la partida. También es necesario saber para el funcionamiento del bucle de juego que la estructura de datos del juego es una cola, pues cualquiera que haga jugadas simplemente encola dicho cubo para que el modelo, cuando pueda, procese dicha jugada y sitúe los cubos en el orden en el que se han ido haciendo las jugadas.
+
+Principalmente la actividad del hilo de \texttt{Game} y de la funcionalidad de la clase reside en el método \texttt{void run()}. Tras ser creado en algún sitio, el modelo comienza la ejecución de su método \texttt{void run()} que pone en marcha un bucle de juego que no termina hasta que el juego finalice o se seleccione salir. Dentro de dicho bucle, llamamos a la función \texttt{void play()} abstracta y relativa a cada subclase de \texttt{Game} que encapsula toda la lógica de un turno en cada tipo de juego.
+\begin{center}
+\includegraphics[scale=0.5]{GameRun_final_seq}
+\end{center}
+
+La decisión de que el juego tenga su propio hilo viene de la implementación de las inteligencias artificiales en el proyecto. Por un lado, si todo el juego tiene que esperar a que la IA calcule el movimiento que desea la ejecución se ralentiza (mucho cuando se busca precisión en los movimientos). Pero por otro, y más importante, si no se tuviese el hilo, los jugadores automáticos colocarían un cubo y harían que la ejecución del juego siguiese sin esperar a que se notificara a todos los observadores que el juego ha cambiado. Por tanto, lo mejor es dejar que cada uno haga la jugada cuando se lo solicite y lo que mande sea una solicitud de poner un cubo. El modelo cuando pueda ejecutará dicha solicitud y pedirá al siguiente que mande solicitud si procede, etc.
+
+\begin{center}
+\includegraphics[scale=0.5]{GameClassicPlay_final_seq}
+\end{center} 
+
+La ejecución del juego clásico es sencilla:
+\begin{itemize}
+\item Desencolamos el primer cubo pendiente y tratamos de añadirlo al tablero.
+\item En caso de que el tablero esté completo termina el juego.
+\item En caso contrario, cambiamos de turno y en todos los casos notificamos los cambios.
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.45]{GameTeams_final_seq}
+\end{center}
+
+Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de juego) es que en el por equipos se actualizan las puntuaciones de los equipos tal colocar un nuevo grupo.
+
 
 \subsection{Online}
 
@@ -1871,7 +1933,45 @@ Es la ventana principal del juego y la que se encarga de gestionar que ventanas 
 
 Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
 
-\newpage
+\subsubsection{NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}
+La ventana \texttt{NewGameWindow} y sus hijas \texttt{NewGameClassicWindow} y \texttt{NewGameTeamsWindow} están íntimamente ligadas con los Builder, pues son clases que se dedican a crear los \texttt{JSONObject} que utilizan dichas clases para generar el juego.
+
+La ventana \texttt{NewGameWindow} ejecuta por pantalla todas las preguntas necesarias para poder crear un \texttt{Game} genérico. También tiene los métodos de \texttt{availableColors()} y de \texttt{validatePlayer()} que son llamados por sus hijas para comprobar si el jugador con el color introducido se puede agregar al \texttt{JSONObject}.
+
+\begin{center}
+\includegraphics[scale=0.5]{NewGameWindow_final_seq}
+\includegraphics[scale=0.5]{NewGameClassicWindow_final_seq}
+\end{center}
+
+\subsubsection{LoadGameWindow}
+La única funcionalidad de esta clase es presentar de forma amable la lista de juegos que se pueden cargar y hacer las llamadas correspondiente a la clase experta en guardado y carga desde ficheros que es \texttt{SaveLoadManager}.
+
+\begin{center}
+\includegraphics[scale=0.5]{LoadGameWindow_final_seq}
+\end{center}
+
+\subsubsection{DeleteGameWindow}
+Al igual que la clase \texttt{LoadGameWindow}, esta clase principalmente presenta de una forma amable el listado de los juego guardados disponible para ser cargado y permite eliminar uno haciendo las llamas adecuadas a la clase \texttt{SaveLoadManager}
+
+\begin{center}
+\includegraphics[scale=0.5]{DeleteGameWindow_final_seq}
+\end{center}
+
+\subsubsection{LoadReplayWindow}
+Es la clase homóloga a la clase \texttt{LoadGameWindow}, solo que su principal función es cargar una \texttt{Replay} en vez de un \texttt{Game} concreto:
+
+\begin{center}
+\includegraphics[scale=0.5]{LoadReplayWindow_final_seq}
+\end{center}
+
+\subsubsection{SaveReplayWindow}
+Del mismo modo que la clase \texttt{LoadReplayWindow} presentaba las posibles \texttt{Replay} para cargar, esta clase se encarga manejar la entrada/salida para poder guardar una \texttt{Replay}.
+
+\begin{center}
+\includegraphics[scale=0.5]{SaveReplayWindow_final_seq}
+\end{center}
+
+\subsubsection{PlayWindow}
 
 \subsection{GUIView}
 

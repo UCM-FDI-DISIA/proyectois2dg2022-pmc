@@ -1,0 +1,62 @@
+@startuml
+participant Actor
+Actor -> GameTeams : play
+activate GameTeams
+GameTeams -> Board : addCubeInPos
+activate Board
+Board -> Board : tryToAddCube
+activate Board
+Board --> Board
+deactivate Board
+Board --> GameTeams
+deactivate Board
+GameTeams -> Board : update
+activate Board
+Board -> Cube : changeOwner
+activate Cube
+Cube --> Board
+deactivate Cube
+Board --> GameTeams
+deactivate Board
+GameTeams -> Team : update
+activate Team
+Team --> GameTeams
+deactivate Team
+	alt finish
+	GameTeams -> RolitObserver : onGameFinished
+	activate RolitObserver
+	RolitObserver --> GameTeams
+	deactivate RolitObserver
+	end
+GameTeams -> TurnManager : nextTurn
+activate TurnManager
+TurnManager -> Player : play
+activate Player
+Player -> Strategy : calculateNextMove
+activate Strategy
+Strategy --> Player
+deactivate Strategy
+Player --> TurnManager
+deactivate Player
+TurnManager --> GameTeams
+deactivate TurnManager
+	alt cube!=null
+	GameTeams -> Game : addCubeToQueue
+	activate Game
+	Game --> GameTeams
+	deactivate Game
+	end
+GameTeams -> RolitObserver : onTurnPlayed
+activate RolitObserver
+RolitObserver --> GameTeams
+deactivate RolitObserver
+GameTeams -> GameTeams : copyMe
+activate GameTeams
+GameTeams --> GameTeams
+deactivate GameTeams
+GameTeams -> Replay : addState
+activate Replay
+Replay --> GameTeams
+deactivate Replay
+return
+@enduml

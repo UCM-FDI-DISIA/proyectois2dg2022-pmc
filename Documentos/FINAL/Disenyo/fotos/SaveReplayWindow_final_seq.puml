@@ -1,0 +1,14 @@
+@startuml
+participant Actor
+Actor -> SaveReplayWindow : open
+activate SaveReplayWindow
+SaveReplayWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> SaveReplayWindow
+deactivate ConsoleWindow
+SaveReplayWindow -> SaveLoadManager : saveReplay
+activate SaveLoadManager
+SaveLoadManager --> SaveReplayWindow
+deactivate SaveLoadManager
+return
+@enduml

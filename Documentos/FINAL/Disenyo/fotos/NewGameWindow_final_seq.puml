@@ -1,0 +1,27 @@
+@startuml
+participant Actor
+Actor -> NewGameWindow : open
+activate NewGameWindow
+NewGameWindow -> GameBuilder : isAvailableMode
+activate GameBuilder
+GameBuilder --> NewGameWindow
+deactivate GameBuilder
+create Board
+NewGameWindow -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> NewGameWindow
+deactivate Board
+NewGameWindow -> NewGameWindow : parse
+activate NewGameWindow
+NewGameWindow -> NewGameWindow : match
+activate NewGameWindow
+NewGameWindow --> NewGameWindow
+deactivate NewGameWindow
+NewGameWindow --> NewGameWindow
+deactivate NewGameWindow
+return
+@enduml
