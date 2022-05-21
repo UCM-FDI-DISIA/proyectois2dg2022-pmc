@@ -1426,6 +1426,46 @@ Nótese que este último diagrama de secuencia se representa a \texttt{Client} c
 Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
 
 \subsection{Replay}
+\begin{center}
+\includegraphics[scale=0.57]{mementoreplay.png}
+\end{center}
+
+El paquete \textit{replay} contiene a las principales clases involucradas en el funcionamiento de las repeticiones de partidas, que son \texttt{Replay} y \texttt{GameState}. No obstante, la clase \texttt{Game} juega un papel fundamental en la creación de una repetición.
+
+La implicación de \texttt{Game} en esta funcionalidad es una consecuencia directa de haber empleado una adaptación del patrón \textit{Memento} en su diseño.
+
+\begin{center}
+\includegraphics[scale=0.8]{patronmemento.png}
+
+Patrón \textit{Memento}
+\end{center}
+
+Así pues, la clase \texttt{Game} es el \textit{Originator}, \texttt{GameState} es el \textit{Memento} y \texttt{Replay} el \textit{CareTaker}. Para cada momento del juego, la clase \texttt{Game} genera un \texttt{GameState} y lo añade a la lista que contiene \texttt{Replay}.
+
+\begin{center}
+\includegraphics[scale=0.7]{addState-replay-sprint-6.png}
+\end{center}
+
+\subsubsection{Replay}
+La clase \texttt{Replay}, además de funcionar como contenedora de los \texttt{GameState}, es la responsable de navegar a través de ellos, convirtiéndose así en un modelo independiente de \texttt{Game} para reproducir repeticiones, pues cuando se inicia el programa \textit{Rolit}, o bien se juega una partida o se visualiza una \textit{replay}.
+
+Como todo modelo, debe comunicarse con la vista de alguna manera. En este caso se ha optado por utilizar el Patrón \textit{Observador}. Aquellas clases que necesiten recibir notificaciones de \texttt{Replay} tendrán que implementar la interfaz \texttt{ReplayObserver}.
+
+\begin{center}
+\includegraphics[scale=0.5]{rolit-observer-sprint4.png}
+\end{center}
+
+
+Si bien para la Interfaz Gráfica se utiliza este patrón, la clase autogestiona su vista de Consola, para ello cuenta con el método \texttt{startConsoleReplay()}.
+
+\begin{center}
+\includegraphics[scale=0.7]{vistareplay.png}
+\end{center}
+
+\subsubsection{GameState}
+
+La clase \texttt{GameState} representa un instante de \texttt{Game}. Esto se consigue mediante dos atributos. El primero de ellos se llama \texttt{game} y es del tipo \texttt{Replayable}. La interfaz \texttt{Replayable} cuenta con los métodos \texttt{toString()} y \texttt{report()}, mediante los cuales puede representarse un momento al completo, pues permiten imprimir un instante del juego en consola y tener acceso a la serialización del juego, respectivamente.
+
 \subsection{Strategy}
 
 \section{Paquete Controller}
@@ -1932,6 +1972,9 @@ El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realiz
 
 \subsubsection{Builders}
 Realmente el diseño de estas clases es bueno en cuanto tener un proceso unificado y extensible a través de la creación de nuevos Builder específicos para generar nuevos tipos de juegos. Sin embargo, la ejecución en la implementación podría haber sido mejor dejando la clase \texttt{GameBuilder} tal y como está (exceptuando el quitar los métodos protegidos a los que acceden los Builder concretos) implementando el patrón \textit{Abstract Factory} y haber hecho una nueva clase abstracta llamada \texttt{Builder} que fuera la clase padre de todos los Builder en específico. De este modo, encapsulamos todos los métodos privados de la clase \texttt{GameBuilder} como \texttt{AvailableColors()} y la responsabilidad de saber construir juegos en este grupo de clases y dejamos que la clase factoría general simplemente sea una experta en identificar si los modos de juego que se piden son válidos, si la información que llega no es inválida, etc.
+
+\subsubsection{Replay}
+La comunicación de la clase \texttt{Replay} con la GUI se realiza de manera adecuada mediante el uso del Patrón \textit{Observador}. Sin embargo, no existe comunicación con la vista de consola, pues es la propia clase la que se encarga de imprimirse. Inicialmente se llevó a cabo esta implementación porque no existía una vista de consola, pero cuando fue incluida en el proyecto, no se adaptaron las \textit{replays}, convirtiéndose en una deuda técnica que ha llegado hasta el día de hoy. La clase es completamente funcional, pero desde el punto de vista de la POO, la clase \texttt{Replay} no debería de tener esta responsabilidad.
 
 \end{document}
 

@@ -1,4 +1,4 @@
-\babel@toc {spanish}{}\relax 
+\babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{5}{}%
 \contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{5}{}%
 \contentsline {subsubsection}{\numberline {1.0.1.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{5}{}%
@@ -25,14 +25,17 @@
 \contentsline {subsection}{\numberline {3.1.3}Logic}{68}{}%
 \contentsline {subsection}{\numberline {3.1.4}Online}{68}{}%
 \contentsline {subsubsection}{\numberline {3.1.4.1}Modo por equipos}{81}{}%
-\contentsline {subsection}{\numberline {3.1.5}Replay}{85}{}%
-\contentsline {subsection}{\numberline {3.1.6}Strategy}{85}{}%
-\contentsline {section}{\numberline {3.2}Paquete Controller}{85}{}%
-\contentsline {section}{\numberline {3.3}Paquete View}{85}{}%
-\contentsline {subsection}{\numberline {3.3.1}ConsoleWindow}{85}{}%
-\contentsline {subsubsection}{\numberline {3.3.1.1}MainBashWindow}{86}{}%
-\contentsline {subsection}{\numberline {3.3.2}GUIView}{89}{}%
-\contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{93}{}%
-\contentsline {chapter}{\numberline {4}Anexo I: Reports}{113}{}%
-\contentsline {chapter}{\numberline {5}POSIBLES MEJORAS}{117}{}%
-\contentsline {subsubsection}{\numberline {5.0.0.1}Builders}{117}{}%
+\contentsline {subsection}{\numberline {3.1.5}Replay}{86}{}%
+\contentsline {subsubsection}{\numberline {3.1.5.1}Replay}{87}{}%
+\contentsline {subsubsection}{\numberline {3.1.5.2}GameState}{88}{}%
+\contentsline {subsection}{\numberline {3.1.6}Strategy}{89}{}%
+\contentsline {section}{\numberline {3.2}Paquete Controller}{89}{}%
+\contentsline {section}{\numberline {3.3}Paquete View}{89}{}%
+\contentsline {subsection}{\numberline {3.3.1}ConsoleWindow}{89}{}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}MainBashWindow}{89}{}%
+\contentsline {subsection}{\numberline {3.3.2}GUIView}{92}{}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{96}{}%
+\contentsline {chapter}{\numberline {4}Anexo I: Reports}{117}{}%
+\contentsline {chapter}{\numberline {5}POSIBLES MEJORAS}{121}{}%
+\contentsline {subsubsection}{\numberline {5.0.0.1}Builders}{121}{}%
+\contentsline {subsubsection}{\numberline {5.0.0.2}Replay}{121}{}%
