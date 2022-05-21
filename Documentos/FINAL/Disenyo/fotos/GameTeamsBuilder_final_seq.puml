@@ -1,0 +1,59 @@
+@startuml
+participant Actor
+Actor -> GameTeamsBuilder : GenerateGame
+activate GameTeamsBuilder
+GameTeamsBuilder -> Strategy : parse
+activate Strategy
+create RandomStrategy
+Strategy -> RandomStrategy : new
+activate RandomStrategy
+RandomStrategy --> Strategy
+deactivate RandomStrategy
+create GreedyStrategy
+Strategy -> GreedyStrategy : new
+activate GreedyStrategy
+create MinimaxStrategy
+GreedyStrategy -> MinimaxStrategy : new
+activate MinimaxStrategy
+MinimaxStrategy --> GreedyStrategy
+deactivate MinimaxStrategy
+GreedyStrategy --> Strategy
+deactivate GreedyStrategy
+create MinimaxStrategy
+Strategy -> MinimaxStrategy : new
+activate MinimaxStrategy
+MinimaxStrategy --> Strategy
+deactivate MinimaxStrategy
+Strategy --> GameTeamsBuilder
+deactivate Strategy
+create Player
+GameTeamsBuilder -> Player : new
+activate Player
+Player --> GameTeamsBuilder
+deactivate Player
+create Board
+GameTeamsBuilder -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> GameTeamsBuilder
+deactivate Board
+create Team
+GameTeamsBuilder -> Team : new
+activate Team
+Team --> GameTeamsBuilder
+deactivate Team
+create Cube
+GameTeamsBuilder -> Cube : new
+activate Cube
+Cube --> GameTeamsBuilder
+deactivate Cube
+create GameTeams
+GameTeamsBuilder -> GameTeams : new
+activate GameTeams
+GameTeams --> GameTeamsBuilder
+deactivate GameTeams
+return
+@enduml

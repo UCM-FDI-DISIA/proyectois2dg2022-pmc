@@ -1,0 +1,114 @@
+@startuml
+participant Rolit
+Rolit -> MainBashWindow : open
+activate MainBashWindow
+MainBashWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> MainBashWindow
+deactivate ConsoleWindow
+MainBashWindow -> MainBashWindow : menu
+activate MainBashWindow
+deactivate MainBashWindow
+
+loop repeatMenu
+
+alt newGame
+create NewGameWindow
+MainBashWindow -> NewGameWindow : new
+activate NewGameWindow
+NewGameWindow --> MainBashWindow
+deactivate NewGameWindow
+MainBashWindow -> NewGameWindow : open
+activate NewGameWindow
+NewGameWindow --> MainBashWindow
+deactivate NewGameWindow
+MainBashWindow -> NewGameWindow : get
+activate NewGameWindow 
+NewGameWindow --> MainBashWindow
+deactivate NewGameWindow
+MainBashWindow -> Controller : createGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+MainBashWindow -> Controller : startGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+create PlayWindow
+MainBashWindow -> PlayWindow : new
+activate PlayWindow
+PlayWindow --> MainBashWindow
+deactivate PlayWindow
+MainBashWindow -> PlayWindow : open
+activate PlayWindow
+PlayWindow --> MainBashWindow
+deactivate PlayWindow
+end
+
+alt loadGame
+create LoadGameWindow
+MainBashWindow -> LoadGameWindow : new
+activate LoadGameWindow
+LoadGameWindow --> MainBashWindow
+deactivate LoadGameWindow
+MainBashWindow -> LoadGameWindow : open
+activate LoadGameWindow
+LoadGameWindow --> MainBashWindow
+deactivate LoadGameWindow
+MainBashWindow -> LoadGameWindow : get
+activate LoadGameWindow
+LoadGameWindow --> MainBashWindow
+deactivate LoadGameWindow
+MainBashWindow -> Controller : createGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+MainBashWindow -> Controller : startGame
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+create PlayWindow
+MainBashWindow -> PlayWindow : new
+activate PlayWindow
+PlayWindow --> MainBashWindow
+deactivate PlayWindow
+MainBashWindow -> PlayWindow : open
+activate PlayWindow
+PlayWindow --> MainBashWindow
+deactivate PlayWindow
+end
+
+alt deleteGame
+create DeleteGameWindow
+MainBashWindow -> DeleteGameWindow : new
+activate DeleteGameWindow
+DeleteGameWindow --> MainBashWindow
+deactivate DeleteGameWindow
+MainBashWindow -> DeleteGameWindow : open
+activate DeleteGameWindow
+DeleteGameWindow --> MainBashWindow
+deactivate DeleteGameWindow
+end
+
+alt replayGame
+create ReplayGameWindow
+MainBashWindow -> ReplayGameWindow : new
+activate ReplayGameWindow
+ReplayGameWindow --> MainBashWindow
+deactivate ReplayGameWindow
+MainBashWindow -> ReplayGameWindow : open
+activate ReplayGameWindow
+ReplayGameWindow --> MainBashWindow
+deactivate ReplayGameWindow
+MainBashWindow -> ReplayGameWindow : get
+activate ReplayGameWindow
+ReplayGameWindow --> MainBashWindow
+deactivate ReplayGameWindow
+MainBashWindow -> Controller : startReplay
+activate Controller
+Controller --> MainBashWindow
+deactivate Controller
+end
+end
+return
+@enduml

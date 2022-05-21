@@ -1284,21 +1284,68 @@ Para este sprint los Builder simplemente cambian la forma instanciar el tipo \te
 
 \chapter{Diseño final}
 
-\subsection{Paquete model}
-\subsubsection{Builders}
-\subsubsection{Commands}
-\subsubsection{Logic}
-\subsubsection{Online}
-\subsubsection{Replay}
-\subsubsection{Strategy}
+\section{Paquete model}
+\subsection{Builders}
+Este paquete agrupa las clases cuya responsabilidad es saber construir un objeto del tipo \texttt{Game} a través de un conglomerado de información. Para unificar dicha funcionalidad se han tomado las siguiente decisiones:
+\begin{itemize}
+\item La factoría abstracta que genera el \texttt{Game} es una clase abstracta de la que extienden las factorías concretas que saben generar cada tipo de \texttt{Game}.
 
-\subsection{Paquete Controller}
+\item La factoría abstracta tiene un listado de todas las posibles factorías concretas que hay, de modo que cuando se le pide crear un objeto \texttt{Game} ella internamente llama a la factoría correspondiente para que complete la creación en los detalles específicos.
 
-\subsection{Paquete View}
-\subsubsection{ConsoleWindow}
+\item Precisamente por el hecho anterior y por tener un lugar concreto donde crear el juego (puesto que el \texttt{Game} se crea tras iniciar la aplicación, ya que en las pantallas sucesivas se puede decidir crear un juego nuevo o en el modo red no se puede crear el juego hasta tener los datos de todos los jugadores), el método para generar \texttt{Game} es un método estático que puede ser llamada desde los lugares donde se requiere una creación de \texttt{Game}, puesto que la responsabilidad de la factoría es dado un conjunto de datos, generar el \texttt{Game} correspondiente.
 
-\newpage
-\subsubsection{GUIView}
+\item El formato para la información de construcción del juego es \texttt{JSONObject} y es necesario que se pase a la factoría para tener un proceso unificado de creación del juego. Que las clases que pueden crear un \texttt{Game} tengan que saber cómo generar el \texttt{JSONObject} no rompe la encapsulación, pues si poseen la habilidad para crear un \texttt{Game} están íntimamente ligadas a la estructura del mismo (puesto que tienen que pedir al usuario los datos para crearlo) y, por tanto, los cambios en ella deben afectar a los métodos donde construyan dicho \texttt{JSONObject}.
+\end{itemize}
+
+Observadas las anteriores decisiones de diseño, se presenta el conjunto de clases implicadas en la construcción del juego siguiendo el patrón de \textit{Abstract Factory} y \textit{Builder}:
+
+$$DIAGRAMA DE CLASES BUILDERS FINAL$$
+
+La clase principal es \texttt{GameBuilder} cuyo método principal para la creación es \texttt{public static Game createGame(JSONObject o)}. Dicho método se encarga recoger el tipo de juego que se desea generar del \texttt{JSONObject} y parsear el Builder concreto que sabe construir dicho juego. Una vez lo encuentra se pasa la responsabilidad de crearlo al mismo llamando al método de los Builder \texttt{Game GenerateGame(JSONObject o)}. Es decir, la interacción a la hora de crear un \texttt{Game} sería:
+\begin{center}
+\includegraphics[scale=0.55]{Builders_final_seq}
+\end{center}
+
+Esta clase posee una serie de métodos protegidos que utilizan sus hijas, los Builders específicos, que sirven para verificar en tiempo de construcción del juego que la información recibida va siendo consistente y válida (los jugadores tienen nombres distintos, colores distintos, escogemos colores válidos...).
+
+\subsubsection{GameClassicBuilder y GameTeamsBuilder}
+Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lógica de construcción de los \texttt{GameClassic} y los \texttt{GameTeams}. El flujo de ejecución es idéntico para ambas, se llama al método \texttt{Game GenerateGame(JSONObject o)} que devuelve el juego listo para empezar la ejeución, aunque la forma de construir el juego sí es distinta:
+
+\begin{center}
+\includegraphics[scale=0.45]{GameClassicBuilder_final_seq}
+\includegraphics[scale=0.45]{GameTeamsBuilder_final_seq}
+\end{center}
+
+
+
+\subsubsection{GameBuilder}
+\subsection{Commands}
+\subsection{Logic}
+\subsection{Online}
+\subsection{Replay}
+\subsection{Strategy}
+
+\section{Paquete Controller}
+
+\section{Paquete View}
+\subsection{ConsoleWindow}
+La interfaz de consola que hemos creado ha tratado de ser una copia de la lógica de componentes a modo de ventanas de \textit{Swing}. La implementación de dicha lógica de forma similar ha permitido que apenas haya diferencias ni discrepancias en lo que la notificación eventos y de errores supone a cada vista. En general, ha permitido que al pensar todo en términos de las mismas precondiciones supuestas para la vista que iba a estar en la ejecución las funcionalidades que metíamos en una de las vistas era muy fácilmente extensible a la otra.
+
+Para lograr este objetivo, se ha definido la interfaz \texttt{ConsoleWindow} que serán los objetos que se manejen en la vista de consola como homólogos de los \texttt{JFrame} de \textit{Swing}. Dicha interfaz nos permite poder abrir una ventana, recoger un dato de ella, y limpiar la consola. Además de esta forma unificamos el flujo de salida para todos los componentes de la vista de consola, pues todos tienen como flujo de salida el \texttt{Scanner input} definido como variable estática de la interfaz. Una vez hecho esto, se ha definido una clase concreta para cada tipo de ventana de forma que añadir nuevas ventanas simplemente se traduce en añadir nuevas clases.
+
+$$DIAGRAMA DE CLASES VISTA DE CONSOLA$$
+
+\subsubsection{MainBashWindow}
+Es la ventana principal del juego y la que se encarga de gestionar que ventanas abrir o cerrar en función de la interacción del usuario. Actúa a modo de \texttt{MainWindow} tal y como está en la GUI. Al llamar al método \texttt{bool open()} de dicha ventana se nos muestra un menú recogido en la función privada \texttt{int menu()} que nos pide indicar cuál es la acción que queremos realizar de las siguientes: new game, load game, delete game, replay game.
+
+\begin{center}
+\includegraphics[scale=0.5]{MainBashWindow_final_seq}
+\end{center}
+
+Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
+
+\subsection{GUIView}
+
 \underline{Paquete RolitComponents}
 \begin{center}
 \includegraphics[scale=0.5]{RolitComponents.png} 
@@ -1550,5 +1597,12 @@ Ejemplo de la \texttt{StatusBar} mostrando un mensaje
  	     "game" = game.report() //consultar arriba}]}
 }
 \end{lstlisting}
+
+\chapter{POSIBLES MEJORAS}
+El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.
+
+\subsubsection{Builders}
+Realmente el diseño de estas clases es bueno en cuanto tener un proceso unificado y extensible a través de la creación de nuevos Builder específicos para generar nuevos tipos de juegos. Sin embargo, la ejecución en la implementación podría haber sido mejor dejando la clase \texttt{GameBuilder} tal y como está (exceptuando el quitar los métodos protegidos a los que acceden los Builder concretos) implementando el patrón \textit{Abstract Factory} y haber hecho una nueva clase abstracta llamada \texttt{Builder} que fuera la clase padre de todos los Builder en específico. De este modo, encapsulamos todos los métodos privados de la clase \texttt{GameBuilder} como \texttt{AvailableColors()} y la responsabilidad de saber construir juegos en este grupo de clases y dejamos que la clase factoría general simplemente sea una experta en identificar si los modos de juego que se piden son válidos, si la información que llega no es inválida, etc.
+
 \end{document}
 

@@ -1,0 +1,54 @@
+@startuml
+participant Actor
+Actor -> GameClassicBuilder : GenerateGame
+activate GameClassicBuilder
+GameClassicBuilder -> Strategy : parse
+activate Strategy
+create RandomStrategy
+Strategy -> RandomStrategy : new
+activate RandomStrategy
+RandomStrategy --> Strategy
+deactivate RandomStrategy
+create GreedyStrategy
+Strategy -> GreedyStrategy : new
+activate GreedyStrategy
+create MinimaxStrategy
+GreedyStrategy -> MinimaxStrategy : new
+activate MinimaxStrategy
+MinimaxStrategy --> GreedyStrategy
+deactivate MinimaxStrategy
+GreedyStrategy --> Strategy
+deactivate GreedyStrategy
+create MinimaxStrategy
+Strategy -> MinimaxStrategy : new
+activate MinimaxStrategy
+MinimaxStrategy --> Strategy
+deactivate MinimaxStrategy
+Strategy --> GameClassicBuilder
+deactivate Strategy
+create Player
+GameClassicBuilder -> Player : new
+activate Player
+Player --> GameClassicBuilder
+deactivate Player
+create Board
+GameClassicBuilder -> Board : new
+activate Board
+Board -> SaveLoadManager : loadShape
+activate SaveLoadManager
+SaveLoadManager --> Board
+deactivate SaveLoadManager
+Board --> GameClassicBuilder
+deactivate Board
+create Cube
+GameClassicBuilder -> Cube : new
+activate Cube
+Cube --> GameClassicBuilder
+deactivate Cube
+create GameClassic
+GameClassicBuilder -> GameClassic : new
+activate GameClassic
+GameClassic --> GameClassicBuilder
+deactivate GameClassic
+return
+@enduml

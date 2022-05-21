@@ -1,0 +1,18 @@
+@startuml
+participant Actor
+Actor -> GameBuilder : createGame
+activate GameBuilder
+GameBuilder -> GameBuilder : parse
+activate GameBuilder
+GameBuilder -> GameBuilder : match
+activate GameBuilder
+GameBuilder --> GameBuilder
+deactivate GameBuilder
+GameBuilder --> GameBuilder
+deactivate GameBuilder
+GameBuilder -> GameBuilder : GenerateGame
+activate GameBuilder
+GameBuilder --> GameBuilder
+deactivate GameBuilder
+return
+@enduml
