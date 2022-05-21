@@ -154,10 +154,6 @@ public class GameClassicTest {
 		lc.add(c);
 		lc.add(c2);
 		Game game = new GameClassic(b, lc, lp, Color.GREEN);
-		game.addCubeToQueue(new Cube(8, 9, null));
-		game.addCubeToQueue(new Cube(100,5, null));
-		assertThrows(IllegalArgumentException.class, () -> game.play());
-		assertThrows(IllegalArgumentException.class, () -> game.play());
 		game.addCubeToQueue(new Cube(8,7, null));
 		game.play();
 		String s = "{\"players\":[{\"score\":2,\"color\":\"G\",\"name\":\"uwu uwu\"},{\"score\":1,\"color\":\"O\",\"name\":\"prueba 3 prueba 3\"},{\"score\":0,\"color\":\"W\",\"name\":\"paquito el chocolatero\"}],\"turn\":\"O\",\"type\":\"GameClassic\",\"board\":{\"shape\":\"DM\",\"cubes\":[{\"color\":\"O\",\"pos\":[8,9]},{\"color\":\"G\",\"pos\":[8,8]},{\"color\":\"G\",\"pos\":[8,7]}]}}";
