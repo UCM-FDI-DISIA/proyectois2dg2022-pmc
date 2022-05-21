@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.8)  22 MAY 2022 01:35
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  22 MAY 2022 01:01
+>>>>>>> d7bc0e4d875e2942272a30a4f7e7c64ed295bad7
 entering extended mode
 **./SCRUM.tex
 (SCRUM.tex
@@ -369,21 +373,25 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 21.
 
 [9]
+<<<<<<< HEAD
 Underfull \vbox (badness 4024) has occurred while \output is active []
+=======
+Underfull \vbox (badness 1142) has occurred while \output is active []
+>>>>>>> d7bc0e4d875e2942272a30a4f7e7c64ed295bad7
 
  [10]
 [11] [12])
 (../../HistoriasDeUsuario/Modificaciones/../../HistoriasDeUsuario/Modificacione
-s/ModificacionesHistoriasDeUsuario.tex [13] [14]) [15] [16]
+s/ModificacionesHistoriasDeUsuario.tex [13] [14]) [15] [16
+
+]
 Cap\'{\i }tulo 3.
 
 (../../DocumentacionSprints/Sprint1/../../DocumentacionSprints/Sprint1/Document
 acionSprint1.tex
 Underfull \vbox (badness 7397) has occurred while \output is active []
 
- [17
-
-]
+ [17]
 [18])
 (../../DocumentacionSprints/Sprint2/../../DocumentacionSprints/Sprint2/Document
 acionSprint2.tex [19]
@@ -421,6 +429,7 @@ Package rerunfilecheck Info: File `SCRUM.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 116.
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  6687 strings out of 480790
  106316 string characters out of 2897301
  388420 words of memory out of 3000000
@@ -436,6 +445,23 @@ pe1/public/amsfonts/cm/cmr17.pfb><C:/Users/jdbar/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jdbar/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
 Output written on SCRUM.pdf (41 pages, 184972 bytes).
+=======
+ 9843 strings out of 478582
+ 162389 string characters out of 2845289
+ 474177 words of memory out of 3000000
+ 27798 multiletter control sequences out of 15000+600000
+ 475823 words of font info for 50 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 60i,6n,63p,742b,654s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\mar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm12
+00.pk><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmbx12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmr17.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on SCRUM.pdf (41 pages, 195590 bytes).
+>>>>>>> d7bc0e4d875e2942272a30a4f7e7c64ed295bad7
 PDF statistics:
  489 PDF objects out of 1000 (max. 8388607)
  95 named destinations out of 1000 (max. 500000)

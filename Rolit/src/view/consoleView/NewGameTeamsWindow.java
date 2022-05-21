@@ -59,7 +59,12 @@ public class NewGameTeamsWindow extends NewGameWindow {
 						name = name.substring(0, name.length() - 3);
 						System.out.println(CHOOSE_AI_DIFFICULTY_MSG);
 						System.out.print(Strategy.availableStrategies());
-						strat = input.nextLine();
+						do {
+						strat = input.nextLine().toUpperCase();
+						if(!validStrategy(strat)) {
+							System.out.println(STRATEGY_ERROR);
+						}
+						} while(!validStrategy(strat));
 				 }
 				 try {
 					 // validamos los datos del jugador
@@ -89,4 +94,6 @@ public class NewGameTeamsWindow extends NewGameWindow {
 		NewGameWindow.json.put("players", jPlayers);
 		return true;
 	}
+	
+
 }

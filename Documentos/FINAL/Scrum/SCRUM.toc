@@ -16,9 +16,9 @@
 \contentsline {subsection}{\numberline {2.2.1}Historias iniciales}{13}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Cambios Sprint 1}{14}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Cambios Sprint 2}{14}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Cambios Sprint 3}{15}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.4}Cambios Sprint 3}{14}{subsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.2.5}Cambios Sprint 4}{15}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}Cambios Sprint 5}{16}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.6}Cambios Sprint 5}{15}{subsection.2.2.6}%
 \contentsline {chapter}{\numberline {3}SPRINTS}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}SPRINT 1}{17}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Revisión del Sprint}{17}{subsection.3.1.1}%

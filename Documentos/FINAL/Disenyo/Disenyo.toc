@@ -21,6 +21,7 @@
 \contentsline {section}{\numberline {3.1}Paquete Builders}{77}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}GameClassicBuilderTest}{77}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}GameTeamsBuilderTest}{77}{subsection.3.1.2}%
+<<<<<<< HEAD
 \contentsline {section}{\numberline {3.2}Paquete IA}{78}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}IATest}{78}{subsection.3.2.1}%
 \contentsline {section}{\numberline {3.3}Paquete Logic}{79}{section.3.3}%
@@ -72,3 +73,71 @@
 \contentsline {chapter}{\numberline {9}POSIBLES MEJORAS}{175}{chapter.9}%
 \contentsline {subsubsection}{\numberline {9.0.0.1}Builders}{175}{subsubsection.9.0.0.1}%
 \contentsline {subsubsection}{\numberline {9.0.0.2}Replay}{175}{subsubsection.9.0.0.2}%
+=======
+\contentsline {section}{\numberline {3.2}Paquete Commands}{78}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}ExitCommandTest}{78}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}PlaceCubeCommandTest}{78}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}SaveCommandTest}{78}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Paquete IA}{79}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}IATest}{79}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Paquete Logic}{79}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}BoardTest}{79}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}CubeTest}{80}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}GameClassicTest}{80}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}GameTeamsTest}{81}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}PlayerTest}{82}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}TeamTest}{82}{subsection.3.4.6}%
+\contentsline {section}{\numberline {3.5}Paquete Replay}{83}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}ReplayTest}{83}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}StateTest}{83}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}Diseño final}{85}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Paquete model}{85}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Builders}{85}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}GameClassicBuilder y GameTeamsBuilder}{86}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}GameBuilder}{88}{subsubsection.4.1.1.2}%
+\contentsline {subsection}{\numberline {4.1.2}Commands}{88}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}ExitCommand}{88}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}HelpCommand}{89}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}PlaceCubeCommand}{90}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}SaveCommand}{91}{subsubsection.4.1.2.4}%
+\contentsline {subsection}{\numberline {4.1.3}Logic}{92}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}Color}{93}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}Cube}{94}{subsubsection.4.1.3.2}%
+\contentsline {subsubsection}{\numberline {4.1.3.3}Shape}{96}{subsubsection.4.1.3.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.4}Board}{97}{subsubsection.4.1.3.4}%
+\contentsline {subsubsection}{\numberline {4.1.3.5}Rival}{99}{subsubsection.4.1.3.5}%
+\contentsline {subsubsection}{\numberline {4.1.3.6}Player}{100}{subsubsection.4.1.3.6}%
+\contentsline {subsubsection}{\numberline {4.1.3.7}Team}{102}{subsubsection.4.1.3.7}%
+\contentsline {subsubsection}{\numberline {4.1.3.8}TurnManager}{104}{subsubsection.4.1.3.8}%
+\contentsline {subsubsection}{\numberline {4.1.3.9}Game, GameClassic y GameTeams}{104}{subsubsection.4.1.3.9}%
+\contentsline {subsection}{\numberline {4.1.4}Online}{107}{subsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.4.1}Modo por equipos}{121}{subsubsection.4.1.4.1}%
+\contentsline {subsection}{\numberline {4.1.5}Replay}{125}{subsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.5.1}Replay}{127}{subsubsection.4.1.5.1}%
+\contentsline {subsubsection}{\numberline {4.1.5.2}GameState}{128}{subsubsection.4.1.5.2}%
+\contentsline {subsection}{\numberline {4.1.6}Strategy}{129}{subsection.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.1.6.1}Strategy}{130}{subsubsection.4.1.6.1}%
+\contentsline {subsubsection}{\numberline {4.1.6.2}RandomStrategy}{131}{subsubsection.4.1.6.2}%
+\contentsline {subsubsection}{\numberline {4.1.6.3}MinimaxStrategy}{132}{subsubsection.4.1.6.3}%
+\contentsline {subsubsection}{\numberline {4.1.6.4}GreedyStrategy}{134}{subsubsection.4.1.6.4}%
+\contentsline {subsubsection}{\numberline {4.1.6.5}SimplifiedBoard}{135}{subsubsection.4.1.6.5}%
+\contentsline {section}{\numberline {4.2}Paquete Controller}{139}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Paquete View}{139}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}ConsoleWindow}{139}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}MainBashWindow}{139}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.2}NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}{141}{subsubsection.4.3.1.2}%
+\contentsline {subsubsection}{\numberline {4.3.1.3}LoadGameWindow}{141}{subsubsection.4.3.1.3}%
+\contentsline {subsubsection}{\numberline {4.3.1.4}DeleteGameWindow}{142}{subsubsection.4.3.1.4}%
+\contentsline {subsubsection}{\numberline {4.3.1.5}LoadReplayWindow}{142}{subsubsection.4.3.1.5}%
+\contentsline {subsubsection}{\numberline {4.3.1.6}SaveReplayWindow}{143}{subsubsection.4.3.1.6}%
+\contentsline {subsubsection}{\numberline {4.3.1.7}PlayWindow}{143}{subsubsection.4.3.1.7}%
+\contentsline {subsection}{\numberline {4.3.2}GUIView}{143}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}GUIView}{148}{subsubsection.4.3.2.1}%
+\contentsline {chapter}{\numberline {5}Anexo I: Reports}{169}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Anexo II: Lista de todas las clases}{173}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{179}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{181}{chapter.8}%
+\contentsline {chapter}{\numberline {9}POSIBLES MEJORAS}{183}{chapter.9}%
+\contentsline {subsubsection}{\numberline {9.0.0.1}Builders}{183}{subsubsection.9.0.0.1}%
+\contentsline {subsubsection}{\numberline {9.0.0.2}Replay}{183}{subsubsection.9.0.0.2}%
+>>>>>>> d7bc0e4d875e2942272a30a4f7e7c64ed295bad7

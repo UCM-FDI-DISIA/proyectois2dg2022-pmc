@@ -1,0 +1,90 @@
+@startuml
+participant Actor
+Actor -> SaveCommand : execute
+activate SaveCommand
+SaveCommand -> SaveLoadManager : saveGame
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : saveGame
+activate SaveLoadManager
+SaveLoadManager -> Reportable : report
+activate Reportable
+Reportable --> SaveLoadManager
+deactivate Reportable
+SaveLoadManager -> SaveLoadManager : addToListOfSavedFiles
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : loadAndUpdateListOfSavedFiles
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : saveListOfSavedGamesToFile
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : saveListOfSavedGamesToFile
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveCommand
+deactivate SaveLoadManager
+SaveCommand -> SaveLoadManager : saveGame
+activate SaveLoadManager
+SaveLoadManager -> Reportable : report
+activate Reportable
+Reportable --> SaveLoadManager
+deactivate Reportable
+SaveLoadManager -> SaveLoadManager : addToListOfSavedFiles
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : loadAndUpdateListOfSavedFiles
+activate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : saveListOfSavedGamesToFile
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager -> SaveLoadManager : saveListOfSavedGamesToFile
+activate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveLoadManager
+deactivate SaveLoadManager
+SaveLoadManager --> SaveCommand
+deactivate SaveLoadManager
+SaveCommand -> Game : onStatusChange
+activate Game
+Game -> Game : copyMe
+activate Game
+Game --> Game
+deactivate Game
+Game -> GameState : new
+activate GameState
+GameState --> Game
+deactivate GameState
+Game -> RolitObserver : onGameStatusChange
+activate RolitObserver
+RolitObserver --> Game
+deactivate RolitObserver
+Game --> SaveCommand
+deactivate Game
+SaveCommand -> Game : onStatusChange
+activate Game
+Game -> Game : copyMe
+activate Game
+Game --> Game
+deactivate Game
+Game -> GameState : new
+activate GameState
+GameState --> Game
+deactivate GameState
+Game -> RolitObserver : onGameStatusChange
+activate RolitObserver
+RolitObserver --> Game
+deactivate RolitObserver
+Game --> SaveCommand
+deactivate Game
+return
+@enduml
