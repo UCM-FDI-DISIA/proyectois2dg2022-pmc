@@ -478,22 +478,6 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 \includegraphics[scale=0.85]{user-feedback.png}
 \end{center}
 
-\underline{Ranking}
-
-Además, en este sprint se incluyó en la GUI un ranking final donde se muestran los tres primeros puestos. En caso de que solo haya dos jugadores solo se mostrarán esos dos.
-
-\begin{center}
-\includegraphics[scale=0.85]{ranking-2players.png}
-
-Ranking para dos jugadores
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.85]{ranking-3players.png}
-
-Ranking para más de dos jugadores
-\end{center}
-
 
 \subsection{Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}
 
@@ -1344,6 +1328,8 @@ Es la ventana principal del juego y la que se encarga de gestionar que ventanas 
 
 Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
 
+\newpage
+
 \subsection{GUIView}
 
 \underline{Paquete RolitComponents}
@@ -1383,6 +1369,90 @@ Nótese que en el caso del cuadro de diálogo con jugadores, el número de parti
 \end{center}
 
 De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
+\newpage
+
+\underline{CellGUI}
+\begin{center}
+\includegraphics[scale=0.65]{cellgui.png}
+\end{center}
+
+Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
+
+\begin{center}
+\includegraphics[scale=0.65]{blueCube.png}
+\includegraphics[scale=0.65]{orangeCube.png}
+\includegraphics[scale=0.65]{beigeCube.png}
+\includegraphics[scale=0.65]{blackCube.png}
+\includegraphics[scale=0.65]{brownCube.png}
+\includegraphics[scale=0.65]{greenCube.png}
+\includegraphics[scale=0.65]{pinkCube.png}
+\includegraphics[scale=0.65]{purpleCube.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{redCube.png}
+\includegraphics[scale=0.65]{yellowCube.png}
+\includegraphics[scale=0.65]{emptyCell.png}
+
+Todas las posibles representaciones gráficas de \texttt{CellGUI}
+\end{center}
+
+\newpage
+\subsubsection{GUIView}
+\underline{Paquete RolitComponents}
+\begin{center}
+\includegraphics[scale=0.5]{RolitComponents.png} 
+\end{center}
+
+El paquete \texttt{RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. La definición de componentes propios aporta uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
+
+Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
+
+\newpage
+\underline{Paquete CreateGame}
+\begin{center}
+\includegraphics[scale=0.38]{CreateGamePaq.png} 
+\end{center}
+
+Esta agrupación de clases son las encargadas de visualizar y recopilar los datos necesarios para crear una partida, adaptándose a las necesidades y requerimientos del usuario. Así, tenemos dos tipos de cuadros de diálogo para pedirle al usuario la configuración de su partida.
+
+En ocasiones, el usuario optará por jugar una partida en red. La persona que hostea el servidor tan solo puede elegir las propiedades del juego, pues es cada jugador al unirse al servidor quién decide su nombre y color. En estos casos, la responsabilidad para reunir los ajustes del juego recae sobre la clase \texttt{CreateGameDialog}.
+
+Sin embargo, cuando se juega en local, los jugadores deben introducir sus datos antes de iniciar la partida, de ahí la existencia de \texttt{CreateGameWithPlayersDialog}, que extiende a \texttt{CreateGameDialog} e incluye un panel en la parte inferior para añadir los jugadores. Dicho panel se trata de un \texttt{CreatePlayersPanel}, que es un conjunto de \texttt{PlayerDataPanel} dispuestos verticalmente.
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-sprint6.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.65]{create-game-players-sprint6.png}
+
+\texttt{CreateGameDialog} (arriba) vs \texttt{CreateGameWithPlayersDialog} (abajo)
+\end{center}
+
+Nótese que en el caso del cuadro de diálogo con jugadores, el número de participantes se decide mediante un \texttt{JSpinner} contenido en \texttt{CreateGameWithPlayersDialog}, pero el numero de paneles con la información de los jugadores se gestiona en \texttt{CreatePlayersPanel}. Para poder actualizar el número de \texttt{PlayerDataPanel} en tiempo de ejecución se utilizan los métodos \texttt{update()}.
+\begin{center}
+\includegraphics[scale=0.41]{updateGameConfig.png}
+\end{center}
+
+De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
+\newpage
+
+
+\underline{BoardRenderer y ColorRenderer}
+\begin{center}
+\includegraphics[scale=0.6]{renderers.png}
+\end{center}
+
+Estas clases se encargan de renderizar correctamente los \texttt{RolitComboBox} que se utilizan en las clases de \texttt{CreateGameDialog} y \texttt{CreateGameWithPlayersDialog}. Más concretamente, la labor de estas clases es que se muestre un el icono de la forma del tablero o del color del jugador junto a su nombre asociado.
+
+\begin{center}
+\includegraphics[scale=1]{shapecombo.png}
+\includegraphics[scale=1]{colorcombo.png}
+
+Resultado visual del uso de los renderers
+\end{center}
+
 \newpage
 
 \underline{CellGUI}
@@ -1452,7 +1522,7 @@ Esta clase representa una barra con herramientas básicas que se pueden utilizar
 \includegraphics[scale=0.60]{turnranking-uml.png}
 \end{center}
 
-Tal y como su nombre sugiere, esta clase es un \texttt{RolitPanel} que se encarga de mostrar el turno y el ranking en cada instante de una partida o repetición.
+Tal y como su nombre sugiere, esta clase es un \texttt{RolitPanel} que se encarga de mostrar el turno y el ranking en cada instante de una partida o repetición. La información se obtiene del \texttt{GameState} que notifica el modelo cuando se ha jugado un turno.
 
 
 \begin{center}
@@ -1475,8 +1545,146 @@ La \texttt{StatusBar} es responsable de comunicar información relevante al usua
 Ejemplo de la \texttt{StatusBar} mostrando un mensaje
 \end{center}
 
+\newpage
+
+\underline{RankingPanel}
+
+\begin{center}
+\includegraphics[scale=0.55]{rankingpanel.png}
+\end{center}
+
+Cuando finaliza un juego, la clase \texttt{RankingPanel} muestra en pantalla una clasificación con los tres jugadores que obtuvieron la mejor puntuación durante la partida. En aquellos juegos donde solo haya dos jugadores, siempre se mostrarán en el ranking.
+
+Además, el \texttt{RankingPanel} cuenta con la peculiaridad de tener un componente interno, la clase \texttt{RolitLabel}. En este caso se optó por trabajar con este componente de manera privada porque es el único lugar de todo el código donde se utiliza.
+
+\begin{center}
+\includegraphics[scale=0.7]{ranking-2players.png}
+
+Ranking para dos jugadores
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.7]{ranking-3players.png}
+
+Ranking para más de dos jugadores
+\end{center}
 
 \newpage
+
+\underline{LoadFileDialog}
+\begin{center}
+\includegraphics[scale=0.6]{loaddialoguml.png}
+\end{center}
+
+\texttt{LoadFileDialog} es un cuadro de diálogo que permite cargar una partida o una \textit{replay} ya guardada. Esta adaptabilidad se consigue pasándole a la clase a través del constructor una lista con los archivos disponibles, independientemente de su contenido.
+
+Además, esta clase abre la posibilidad de cargar archivos que no están en la lista (porque no se generaron en el ordenador donde se ejecuta el programa) mediante un \texttt{JFileChooser}.
+
+\begin{center}
+\includegraphics[scale=1]{load-game-sprint-6.png}
+
+Representación visual de \texttt{LoadFileDialog}
+\end{center}
+
+\newpage
+
+\underline{DeleteDialog}
+\begin{center}
+\includegraphics[scale=0.6]{deletedialog.png}
+\end{center}
+
+Esta clase es un cuadro de diálogo que permite al usuario eliminar los juegos que ya ha guardado. Para ello, cuenta con una lista de \texttt{JCheckBox}, donde cada uno representa un juego guardado. Al seleccionar alguna partida y hacer click en ``Delete", se borra dicho archivo tanto de la lista interna del juego como del ordenador.
+
+\begin{center}
+\includegraphics[scale=1]{delete-dialog-sprint6.png}
+
+Representación visual de \texttt{DeleteDialog}
+
+\end{center}
+
+\newpage
+
+\underline{SaveReplayDialog}
+
+\begin{center}
+\includegraphics[scale=0.6]{savereplaydialo.png}
+\end{center}
+
+Esta clase se trata de una ventana emergente que tiene la responsabilidad de preguntarle al jugador al finalizar la partida si desea guardar su repetición. Si la respuesta es afirmativa, abre un \texttt{JFileChooser} para que el usuario elija su ruta.
+
+\begin{center}
+\includegraphics[scale=1]{savereplaydialog-pic.png}
+
+Representación visual de \texttt{SaveReplayDialog}
+\end{center}
+
+\newpage
+
+\underline{JoinServerDialog}
+
+\begin{center}
+\includegraphics[scale=0.6]{join-server-uml.png}
+\end{center}
+
+La clase \texttt{JoinServerDialog} extiende de \texttt{JDialog} y se encarga de recopilar la información necesaria del usuario para que pueda unirse a un servidor. Esto es, los datos del jugador y los del servidor.
+
+\begin{center}
+\includegraphics[scale=1]{join-server-sprint-6.png}
+
+Representación visual de \texttt{JoinServerDialog}
+
+\end{center}
+
+\newpage
+
+\underline{ServerView}
+\begin{center}
+\includegraphics[scale=0.55]{serverviewuml.png}
+\end{center}
+
+Sergio escribe aquí el funcionamiento.
+
+\begin{center}
+\includegraphics[scale=1]{serversetup.png}
+
+Representación gráfica de \texttt{ServerView} antes de crear el servidor
+
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1]{waitingserver.png}
+
+Representación gráfica de \texttt{ServerView} una vez creado el servidor
+\end{center}
+
+\newpage
+
+\underline{MainWindow}
+\begin{center}
+\includegraphics[scale=0.55]{mainwindowuml.png}
+\end{center}
+
+La \texttt{MainWindow} es la ventana principal del programa, que inicialmente permite al usuario decidir entre las opciones que brinda Rolit: crear una partida, cargar una replay, crear un servidor... Una vez seleccionada alguna de las alternativas, la ventana se actualiza combinando todos los elementos explicados anteriormente, de manera ordenada, para poder dar lugar a los requerimientos del usuario.
+
+\begin{center}
+\includegraphics[scale=1]{menu-sprint-6.png}
+
+Apariencia inicial de la \texttt{MainWindow}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.9]{partida-sprint-6.png}
+
+\texttt{MainWindow} durante una partida
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.9]{replay-sprint-6.png}
+
+\texttt{MainWindow} durante una \textit{replay}
+\end{center}
+
+
 \chapter{Anexo I: Reports}
 \subsection*{Cube}
 
@@ -1583,7 +1791,7 @@ Ejemplo de la \texttt{StatusBar} mostrando un mensaje
 \begin{lstlisting}[frame=single, language=Java]
 {
  "command" = String,
- "game" = game.report() //consultar arriba,
+ "game" = game.report() //consultar arriba
 }
 \end{lstlisting}
 
@@ -1591,10 +1799,10 @@ Ejemplo de la \texttt{StatusBar} mostrando un mensaje
 \begin{lstlisting}[frame=single, language=Java]
 {
  "states" = [{"command" = String,
- 	     "game" = game.report() //consultar arriba},
+ 	     "game" = game.report(), //consultar arriba
  	     ...
  	     ,{"command" = String,
- 	     "game" = game.report() //consultar arriba}]}
+ 	     "game" = game.report()}] //consultar arriba
 }
 \end{lstlisting}
 
