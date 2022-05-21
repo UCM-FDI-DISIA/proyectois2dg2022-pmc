@@ -1,0 +1,268 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\babel@aux[2]{}
+\@nameuse{bbl@beforestart}
+\catcode `"\active 
+\catcode `<\active 
+\catcode `>\active 
+\@nameuse{es@quoting}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\babel@aux{spanish}{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{7}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}{7}{subsection.1.0.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{1}{1}}{7}{sprint.1}\protected@file@percent }
+<<<<<<< HEAD
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{2}{2}}{11}{sprint.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{3}{3}}{14}{sprint.3}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{4}{4}}{14}{sprint.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{15}{subsection.1.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{15}{subsubsection.1.0.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{15}{subsubsection.1.0.2.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{5}{1}}{15}{sprint.5}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{6}{2}}{16}{sprint.6}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{7}{3}}{17}{sprint.7}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{8}{4}}{18}{sprint.8}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{9}{5}}{24}{sprint.9}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{10}{6}}{31}{sprint.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{38}{subsection.1.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{38}{subsubsection.1.0.3.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{11}{5}}{38}{sprint.11}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{12}{6}}{39}{sprint.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{41}{subsubsection.1.0.3.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{13}{5}}{41}{sprint.13}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{14}{6}}{47}{sprint.14}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{15}{7}}{50}{sprint.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{53}{subsection.1.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{53}{subsubsection.1.0.4.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{16}{1}}{53}{sprint.16}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{17}{2}}{54}{sprint.17}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{18}{3}}{54}{sprint.18}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{19}{4}}{55}{sprint.19}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{20}{6}}{55}{sprint.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{55}{subsubsection.1.0.4.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{21}{2}}{55}{sprint.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{56}{subsubsection.1.0.4.3}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{22}{3}}{56}{sprint.22}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{23}{4}}{58}{sprint.23}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{24}{5}}{59}{sprint.24}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{25}{6}}{59}{sprint.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{60}{subsubsection.1.0.4.4}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{26}{2}}{60}{sprint.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{60}{subsection.1.0.5}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{27}{1}}{60}{sprint.27}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{28}{2}}{61}{sprint.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.6}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{63}{subsection.1.0.6}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{29}{1}}{63}{sprint.29}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{30}{2}}{64}{sprint.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Diseño y evolución de otros aspectos del proyecto}{69}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.1}Builders}{69}{subsection.2.0.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{31}{3}}{69}{sprint.31}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{32}{4}}{70}{sprint.32}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{33}{5}}{71}{sprint.33}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{34}{6}}{72}{sprint.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.2}Commands}{72}{subsection.2.0.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{35}{2}}{72}{sprint.35}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{36}{3}}{72}{sprint.36}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{37}{4}}{72}{sprint.37}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{38}{5}}{73}{sprint.38}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{39}{6}}{73}{sprint.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Diseño final}{75}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Paquete model}{75}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Builders}{75}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1.1}GameClassicBuilder y GameTeamsBuilder}{76}{subsubsection.3.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1.2}GameBuilder}{78}{subsubsection.3.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Commands}{78}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Logic}{79}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.1}Color}{80}{subsubsection.3.1.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.2}Cube}{81}{subsubsection.3.1.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.3}Shape}{83}{subsubsection.3.1.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.4}Board}{84}{subsubsection.3.1.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.5}Rival}{86}{subsubsection.3.1.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.6}Player}{87}{subsubsection.3.1.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.7}Team}{89}{subsubsection.3.1.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3.8}TurnManager}{91}{subsubsection.3.1.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Online}{92}{subsection.3.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.4.1}Modo por equipos}{105}{subsubsection.3.1.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Replay}{109}{subsection.3.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.5.1}Replay}{111}{subsubsection.3.1.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.5.2}GameState}{112}{subsubsection.3.1.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Strategy}{113}{subsection.3.1.6}\protected@file@percent }
+\newlabel{subsec:Strategy}{{3.1.6}{113}{Strategy}{subsection.3.1.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6.1}Strategy}{114}{subsubsection.3.1.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6.2}RandomStrategy}{115}{subsubsection.3.1.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6.3}MinimaxStrategy}{116}{subsubsection.3.1.6.3}\protected@file@percent }
+\newlabel{subsubsec:MinimaxStrategy}{{3.1.6.3}{116}{MinimaxStrategy}{subsubsection.3.1.6.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6.4}GreedyStrategy}{118}{subsubsection.3.1.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.6.5}SimplifiedBoard}{119}{subsubsection.3.1.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Paquete Controller}{123}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Paquete View}{123}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}ConsoleWindow}{123}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1.1}MainBashWindow}{123}{subsubsection.3.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}GUIView}{126}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{130}{subsubsection.3.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Anexo I: Reports}{151}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Anexo II: Lista de todas las clases}{155}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}POSIBLES MEJORAS}{161}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.0.0.1}Builders}{161}{subsubsection.6.0.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.0.0.2}Replay}{161}{subsubsection.6.0.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{163}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIII}{{7}{163}{Anexo III: Estrategia Minimax adaptada a Rolit}{chapter.7}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{165}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIV}{{8}{165}{Anexo IV: Poda Alfa-Beta}{chapter.8}{}}
+\gdef \@abspage@last{165}
+=======
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{2}{2}}{12}{sprint.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{3}{3}}{15}{sprint.3}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{4}{4}}{16}{sprint.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{17}{subsection.1.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{17}{subsubsection.1.0.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{17}{subsubsection.1.0.2.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{5}{1}}{17}{sprint.5}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{6}{2}}{18}{sprint.6}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{7}{3}}{19}{sprint.7}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{8}{4}}{20}{sprint.8}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{9}{5}}{26}{sprint.9}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{10}{6}}{33}{sprint.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{40}{subsection.1.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{40}{subsubsection.1.0.3.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{11}{5}}{40}{sprint.11}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{12}{6}}{41}{sprint.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{43}{subsubsection.1.0.3.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{13}{5}}{43}{sprint.13}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{14}{6}}{49}{sprint.14}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{15}{7}}{52}{sprint.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{55}{subsection.1.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{55}{subsubsection.1.0.4.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{16}{1}}{55}{sprint.16}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{17}{2}}{56}{sprint.17}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{18}{3}}{56}{sprint.18}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{19}{4}}{57}{sprint.19}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{20}{6}}{57}{sprint.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{57}{subsubsection.1.0.4.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{21}{2}}{57}{sprint.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{58}{subsubsection.1.0.4.3}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{22}{3}}{58}{sprint.22}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{23}{4}}{60}{sprint.23}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{24}{5}}{61}{sprint.24}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{25}{6}}{61}{sprint.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{62}{subsubsection.1.0.4.4}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{26}{2}}{62}{sprint.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{62}{subsection.1.0.5}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{27}{1}}{62}{sprint.27}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{28}{2}}{63}{sprint.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.0.6}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{65}{subsection.1.0.6}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{29}{1}}{65}{sprint.29}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{30}{2}}{66}{sprint.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Diseño y evolución de otros aspectos del proyecto}{71}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.1}Builders}{71}{subsection.2.0.1}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{31}{3}}{71}{sprint.31}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{32}{4}}{72}{sprint.32}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{33}{5}}{73}{sprint.33}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{34}{6}}{74}{sprint.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.2}Commands}{74}{subsection.2.0.2}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{35}{2}}{74}{sprint.35}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{36}{3}}{74}{sprint.36}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{37}{4}}{74}{sprint.37}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{38}{5}}{75}{sprint.38}\protected@file@percent }
+\@writefile{thm}{\contentsline {sprint}{{Sprint}{39}{6}}{75}{sprint.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Tests de JUnits}{77}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Paquete Builders}{77}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}GameClassicBuilderTest}{77}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}GameTeamsBuilderTest}{77}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Paquete IA}{78}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}IATest}{78}{subsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Paquete Logic}{79}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}GameClassicTest}{79}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}GameTeamsTest}{79}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Diseño final}{81}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Paquete model}{81}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Builders}{81}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1.1}GameClassicBuilder y GameTeamsBuilder}{82}{subsubsection.4.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1.2}GameBuilder}{84}{subsubsection.4.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Commands}{84}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Logic}{85}{subsection.4.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.1}Color}{86}{subsubsection.4.1.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.2}Cube}{87}{subsubsection.4.1.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.3}Shape}{89}{subsubsection.4.1.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.4}Board}{90}{subsubsection.4.1.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.5}Rival}{92}{subsubsection.4.1.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.6}Player}{93}{subsubsection.4.1.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.7}Team}{95}{subsubsection.4.1.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3.8}TurnManager}{97}{subsubsection.4.1.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Online}{98}{subsection.4.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.4.1}Modo por equipos}{111}{subsubsection.4.1.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Replay}{115}{subsection.4.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.5.1}Replay}{117}{subsubsection.4.1.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.5.2}GameState}{118}{subsubsection.4.1.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}Strategy}{119}{subsection.4.1.6}\protected@file@percent }
+\newlabel{subsec:Strategy}{{4.1.6}{119}{Strategy}{subsection.4.1.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.1}Strategy}{120}{subsubsection.4.1.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.2}RandomStrategy}{121}{subsubsection.4.1.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.3}MinimaxStrategy}{122}{subsubsection.4.1.6.3}\protected@file@percent }
+\newlabel{subsubsec:MinimaxStrategy}{{4.1.6.3}{122}{MinimaxStrategy}{subsubsection.4.1.6.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.4}GreedyStrategy}{124}{subsubsection.4.1.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.6.5}SimplifiedBoard}{125}{subsubsection.4.1.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Paquete Controller}{129}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Paquete View}{129}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}ConsoleWindow}{129}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.1}MainBashWindow}{129}{subsubsection.4.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}GUIView}{132}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2.1}GUIView}{136}{subsubsection.4.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Anexo I: Reports}{157}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Anexo II: Lista de todas las clases}{161}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{167}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIII}{{7}{167}{Anexo III: Estrategia Minimax adaptada a Rolit}{chapter.7}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{169}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:AnexoIV}{{8}{169}{Anexo IV: Poda Alfa-Beta}{chapter.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}POSIBLES MEJORAS}{171}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.0.0.1}Builders}{171}{subsubsection.9.0.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.0.0.2}Replay}{171}{subsubsection.9.0.0.2}\protected@file@percent }
+\gdef \@abspage@last{171}
+>>>>>>> 7dc5471782ca6f27e86cc83ae320e1fd1d31a71f
