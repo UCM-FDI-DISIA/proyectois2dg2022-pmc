@@ -71,7 +71,7 @@ public class SaveLoadManager {
 		if(option == 1)
 			return loadGame(DEFAULT_GAME_FILENAME);
 
-		option--;
+		option-=2;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
 		else {
@@ -84,9 +84,9 @@ public class SaveLoadManager {
 	}
 
 	public static void saveReplay(String filename, Reportable replay) {
+		if(!filename.endsWith(".json")) filename += ".json";
 		try (BufferedWriter save_file = new BufferedWriter(new FileWriter(filename))) {
 			save_file.write(replay.report().toString());
-			if(!filename.endsWith(".json")) filename += ".json";
 			if(!filename.equals(DEFAULT_REPLAY_FILENAME)) addToListOfSavedFiles(filename, DEFAULT_REPLAY_FILENAME, INDEX_REPLAY_FILENAME);			
 		} catch (IOException error_file) {
 			error_file.printStackTrace();
@@ -117,7 +117,7 @@ public class SaveLoadManager {
 		if(option == 1)
 			return loadReplay(DEFAULT_REPLAY_FILENAME);
 
-		option--;
+		option-=2;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
 		else {
@@ -244,7 +244,6 @@ public class SaveLoadManager {
 		try {
 			loadAndUpdateListOfSavedFiles(path, defaultFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		namesWithDefaultName = new ArrayList<String>();
