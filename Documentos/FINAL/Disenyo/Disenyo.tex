@@ -1255,6 +1255,28 @@ Probamos a meter una clave que está mal y comprobamos que se lanza adecuadament
 
 Probamos a meter una \texttt{Shape} que está mal y comprobamos que se lanza adecuadamente la excepción.
 
+
+\section{Paquete Commands}
+\subsection{ExitCommandTest}
+\underline{executeTest() y executeTest2()}
+
+Creamos un Board, dos Player y un Cube para cada Player. Creamos una lista con los cubos y otra con los Player. Creamos un GameClassic con la información necesaria y creamos un ExitCommand para después llamar a su método execute() y comprobar que el método exited() del Game devuelve true.
+
+\subsection{PlaceCubeCommandTest}
+\underline{parseTest()}
+
+Creamos un PlaceCubeCommand y comprobamos que funciona correctamente su método parse() viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
+
+\subsection{SaveCommandTest}
+\underline{parseTest()}
+
+Creamos un SaveCommand y comprobamos que funciona correctamente su método parse() viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
+
+\underline{exceptionTest()}
+
+Comprobamos que se lanza una excepción cuando se intenta llamar al método getCommand() con argumentos incorrectos.
+
+
 \section{Paquete IA}
 \subsection{IATest}
 \underline{IA\_test1()}
@@ -1270,6 +1292,37 @@ Se crea un juego con un \texttt{Player} que es una persona y dos \texttt{Player}
 Se crea un juego con tres \texttt{Player} que son inteligencias artificiales, una \texttt{Minimax}, otra \texttt{Random} y la última \texttt{Greedy}. Las ponemos a jugar solas y comprobamos que no se produce ningún error, es decir, no se lanza ninguna excepción.
 
 \section{Paquete Logic}
+\subsection{BoardTest}
+\underline{addCubeInPos()}
+
+Creamos un Board, un Player y cuatro Cube del Player creado. Se añaden dos de ellos en posiciones correctas y se comprueba que se lanzan excepciones al intentar colocarlos en posiciones inválidas del tablero, ya sea porque ya están ocupadas con otro Cube o porque las coordenadas x e y no son correctas. Finalmente, se comprueba si el Cube que se ha añadido en la posición correcta es el adecuado.
+
+\underline{Board\_full\_numCubes()}
+
+Creamos un Board, un Player y un Cube, añadimos el cubo al tablero y comprobamos que el método que comprueba si el tablero está lleno devuelve falso.
+
+\underline{Update\_test()}
+
+Se crea un Board y dos Player, se van creando y poniendo en el tablero objetos Cube y llamando al método update() de Board y finalmente se comprueba si el color del cubo al final del test es el que debería ser por las posiciones en las que se han ido colocando los mismos.
+
+\underline{Update\_test2()}
+
+Se crea un Board y dos Player, y se van creando y colocando en el tablero objetos Cube y llamando al método update() de Board. Finalmente, se comprueba si se lanza una excepción al intentar añadir un cubo en una posición no válida, así como si el color del cubo al final del test es el que debería.
+
+\underline{Test\_report() y test\_report2()}
+
+Creamos un Board, dos Player y varios Cube, los cuales se van colocando en el tablero y llamando al método update() de Board. Finalmente, se comprueba si el método report() de la clase Board devuelve el JSONObject esperado.
+
+\subsection{CubeTest}
+\underline{Change\_owner()}
+
+Creamos un Player y un Cube y tratamos de cambiar el ''propietario'' (realmente es el color) del cubo. Finalmente se comprueba si se ha cambiado correctamente.
+
+\underline{Test\_report()}
+
+Creamos un Player y un Cube. Finalmente, se comprueba si el método report() e la clase Cube devuelve el JSONObject esperado.
+
+
 \subsection{GameClassicTest}
 \underline{play\_test()}
 
@@ -1319,6 +1372,36 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsT
 \underline{test\_report3()}
 
 Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+
+\subsection{PlayerTest}
+\underline{Add\_score\_test()}
+
+Creamos dos Player y se llama al método addScore() de uno de ellos para sumarle 1 a su puntuación. Se comprueba si se ha realizado correctamente. Después, se crea un cubo del primer jugador y se le cambia el ''propietario'' al segundo. Finalmente se comprueba que las puntuaciones de ambos jugadores son las correctas.
+
+\underline{test\_report() y test\_report2()}
+
+Creamos dos Player y se le añade determinada puntuación al primero. Se comprueba que es correcta, se crea un cubo al primer jugador y se le cambia el “propietario” al segundo. Finalmente se comprueba que los métodos report() de ambos jugadores devuelven los JSONObject esperados.
+
+\subsection{TeamTest}
+\underline{Update\_test()}
+
+Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y añadimos puntuación a ambos jugadores por separado. Finalmente, se llama al método update() del Team creado y se comprueba que la puntuación del equipo es igual a la suma de las puntuaciones individuales de los jugadores.
+
+\underline{test\_report() y test\_report2()}
+
+Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y finalmente comprobamos que el método report() de Team devuelve el JSONObject esperado en cada caso.
+
+\section{Paquete Replay}
+\subsection{ReplayTest}
+\underline{Test\_1() y Test\_2()}
+
+Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState. Después, se crea un objeto Replay y se le añade el estado recién creado. Finalmente, se comprueba que el método report() de Replay devuelve el JSONObject esperado con la información correcta.
+
+\subsection{StateTest}
+\underline{Report\_test() y report\_test2()}
+
+Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState con el Game creado. Finalmente, se comprueba que el método report() de GameState devuelve el JSONObject esperado con la información correcta.
+
 
 \chapter{Diseño final}
 

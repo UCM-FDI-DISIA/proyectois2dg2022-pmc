@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  21 MAY 2022 23:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  22 MAY 2022 01:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,21 +369,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\\' on input line 21.
 
 [9]
-Underfull \vbox (badness 7133) has occurred while \output is active []
+Underfull \vbox (badness 1142) has occurred while \output is active []
 
  [10]
 [11] [12])
 (../../HistoriasDeUsuario/Modificaciones/../../HistoriasDeUsuario/Modificacione
-s/ModificacionesHistoriasDeUsuario.tex [13] [14]) [15] [16]
+s/ModificacionesHistoriasDeUsuario.tex [13] [14]) [15] [16
+
+]
 Cap\'{\i }tulo 3.
 
 (../../DocumentacionSprints/Sprint1/../../DocumentacionSprints/Sprint1/Document
 acionSprint1.tex
 Underfull \vbox (badness 7397) has occurred while \output is active []
 
- [17
-
-]
+ [17]
 [18])
 (../../DocumentacionSprints/Sprint2/../../DocumentacionSprints/Sprint2/Document
 acionSprint2.tex [19]
@@ -414,10 +414,10 @@ Package rerunfilecheck Info: File `SCRUM.out' has not changed.
 (rerunfilecheck)             Checksum: BA0D38CB605101503FB55F4F8AB866ED;9223.
  ) 
 Here is how much of TeX's memory you used:
- 9845 strings out of 478582
- 162412 string characters out of 2845289
+ 9843 strings out of 478582
+ 162389 string characters out of 2845289
  474177 words of memory out of 3000000
- 27800 multiletter control sequences out of 15000+600000
+ 27798 multiletter control sequences out of 15000+600000
  475823 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,6n,63p,742b,654s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -428,7 +428,7 @@ fonts/cm/cmr12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmr17.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/cm/cmr8.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmti12.pfb>
-Output written on SCRUM.pdf (41 pages, 194771 bytes).
+Output written on SCRUM.pdf (41 pages, 195590 bytes).
 PDF statistics:
  494 PDF objects out of 1000 (max. 8388607)
  95 named destinations out of 1000 (max. 500000)
