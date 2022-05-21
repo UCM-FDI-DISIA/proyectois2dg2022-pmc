@@ -107,10 +107,8 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				}
 			}			
 		} while (repeatMenu);
-	
 		return true;
 	}
-
 	
 	private void initGame() {
 		ctr.startGame();
@@ -122,21 +120,21 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 	
 	@Override
 	public void onTurnPlayed(GameState state) {}
-
+	
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {}
-		
+	
 	@Override
 	public void onGameExited(Replay replay) {
 		this.clear();
 	}
-
+	
 	@Override
 	public void onRegister(GameState state) {}
-
+	
 	@Override
 	public void onError(String err) {}
-
+	
 	@Override
 	public void onGameStatusChange(GameState state) {}
 }

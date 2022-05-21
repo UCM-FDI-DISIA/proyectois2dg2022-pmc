@@ -2,6 +2,9 @@ package view.consoleView;
 
 import java.util.Collections;
 import java.util.List;
+
+import org.json.JSONArray;
+
 import controller.Controller;
 import model.commands.Command;
 import model.logic.Rival;
@@ -22,8 +25,10 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 	private volatile boolean close;
 	private Controller ctr;
 	private GameState state;
-	private volatile boolean waitingForUpdate = false;
-
+	private volatile boolean waitingForUpdate = true;
+	private boolean firstPrint = true;
+	private boolean needsUpdates = false;
+	
 	/**
 	 * Constructor
 	 * @param ctr Controller
@@ -32,19 +37,12 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		this.ctr = ctr;
 		ctr.addObserver(this);
 	}
-
+	
 	@Override
 	public boolean open() {
 		this.clear();
-		while (!this.close) {
-			
-			//Evaluación perezosa: si no se ha acabado el juego, se espera a que haya cosas en el input
-			//En cuanto el juego se acaba, no se ejecuta input.hasNext(). Esto nos interesa porque
-			//input.hasNext "monopoliza" el uso de System.in. Por tanto, SaveReplay ahora puede
-			//acceder al System.in y llegar a tiempo a recibir la y/n.			
-//			while (!this.close && !input.hasNext()) {
-//			}			
-			if (!this.close && !this.waitingForUpdate) {
+		while (!this.close) {			
+			if (!this.close && !this.waitingForUpdate && this.needsUpdates) {
 				String s = input.nextLine();
 				try {
 					this.waitingForUpdate = true;
@@ -61,16 +59,15 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		}
 		return true;
 	}
-
+	
 	@Override
 	public void onTurnPlayed(GameState state) {
-		this.state = state;
 		this.waitingForUpdate = false;
+		this.state = state;
 		System.out.println(state.toString());
-		System.out.print(PROMPT); // Se pone el PROMPT aquí porque si no sale antes del estado porque el game
-									// tarda en mandar la notificación
+		System.out.print(PROMPT); // Se pone el PROMPT aquí porque si no sale antes del estado porque el game tarda en mandar la notificación
 	}
-
+	
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
 		this.state = state;
@@ -97,14 +94,25 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		}
 		
 	}
-
+	
 	@Override
 	public void onRegister(GameState states) {
 		this.state = states;
-		System.out.println(states.toString());
-		System.out.print(PROMPT);
+		if(this.firstPrint) {
+			this.firstPrint = false;
+			System.out.println(states.toString());
+			System.out.print(PROMPT);
+		}
+		JSONArray players = state.report().getJSONObject("game").getJSONArray("players");
+		for(int i = 0; i < players.length(); i++) {
+			if(!players.getJSONObject(i).has("strategy")) {
+				this.waitingForUpdate = true;
+				this.needsUpdates = true;
+				break;
+			}
+		}
 	}
-
+	
 	@Override
 	public void onError(String err) {
 		this.waitingForUpdate = false;
@@ -112,7 +120,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		System.out.println(this.state.toString());
 		System.out.print(PROMPT);
 	}
-
+	
 	@Override
 	public void onGameStatusChange(GameState status) {
 		this.waitingForUpdate = false;
@@ -120,12 +128,12 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		System.out.println(status.toString());
 		System.out.print(PROMPT);		
 	}
-
+	
 	@Override
 	public Object get() {
 		return null;
 	}
-
+	
 	@Override
 	public void onGameExited(Replay replay) {
 		this.close = true;

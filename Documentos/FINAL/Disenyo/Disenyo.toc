@@ -51,8 +51,5 @@
 \contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{130}{subsubsection.3.3.2.1}%
 \contentsline {chapter}{\numberline {4}Anexo I: Reports}{151}{chapter.4}%
 \contentsline {chapter}{\numberline {5}Anexo II: Lista de todas las clases}{155}{chapter.5}%
-\contentsline {chapter}{\numberline {6}POSIBLES MEJORAS}{161}{chapter.6}%
-\contentsline {subsubsection}{\numberline {6.0.0.1}Builders}{161}{subsubsection.6.0.0.1}%
-\contentsline {subsubsection}{\numberline {6.0.0.2}Replay}{161}{subsubsection.6.0.0.2}%
-\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{163}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{165}{chapter.8}%
+\contentsline {chapter}{\numberline {6}Anexo III: Estrategia Minimax adaptada a Rolit}{161}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Anexo IV: Poda Alfa-Beta}{163}{chapter.7}%
