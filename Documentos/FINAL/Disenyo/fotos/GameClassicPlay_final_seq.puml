@@ -1,0 +1,58 @@
+@startuml
+participant Actor
+Actor -> GameClassic : play
+activate GameClassic
+GameClassic -> Board : addCubeInPos
+activate Board
+Board -> Board : tryToAddCube
+activate Board
+Board --> Board
+deactivate Board
+Board --> GameClassic
+deactivate Board
+GameClassic -> Board : update
+activate Board
+Board -> Cube : changeOwner
+activate Cube
+Cube --> Board
+deactivate Cube
+Board --> GameClassic
+deactivate Board
+	alt finish
+	GameClassic -> RolitObserver : onGameFinished
+	activate RolitObserver
+	RolitObserver --> GameClassic
+	deactivate RolitObserver
+	end
+GameClassic -> TurnManager : nextTurn
+activate TurnManager
+TurnManager -> Player : play
+activate Player
+Player -> Strategy : calculateNextMove
+activate Strategy
+Strategy --> Player
+deactivate Strategy
+Player --> TurnManager
+deactivate Player
+TurnManager --> GameClassic
+deactivate TurnManager
+	alt cube!=null
+	GameClassic -> Game : addCubeToQueue
+	activate Game
+	Game --> GameClassic
+	deactivate Game
+	end
+GameClassic -> RolitObserver : onTurnPlayed
+activate RolitObserver
+RolitObserver --> GameClassic
+deactivate RolitObserver
+GameClassic -> GameClassic : copyMe
+activate GameClassic
+GameClassic --> GameClassic
+deactivate GameClassic
+GameClassic -> Replay : addState
+activate Replay
+Replay --> GameClassic
+deactivate Replay
+return
+@enduml

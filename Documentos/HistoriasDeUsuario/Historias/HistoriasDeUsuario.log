@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  22 MAY 2022 00:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  22 MAY 2022 00:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,20 +358,21 @@ Package rerunfilecheck Info: File `HistoriasDeUsuario.out' has not changed.
 (rerunfilecheck)             Checksum: 8DF1193B0AD5498123A1C3DEE1749ADD;715.
  ) 
 Here is how much of TeX's memory you used:
- 9798 strings out of 478582
- 157961 string characters out of 2845289
- 480654 words of memory out of 3000000
- 27883 multiletter control sequences out of 15000+600000
- 471225 words of font info for 35 fonts, out of 8000000 for 9000
+ 9800 strings out of 478582
+ 157982 string characters out of 2845289
+ 481654 words of memory out of 3000000
+ 27884 multiletter control sequences out of 15000+600000
+ 471572 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,6n,80p,491b,397s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 80i,6n,80p,491b,401s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\mar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm12
 00.pk><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr12.pfb>
-Output written on HistoriasDeUsuario.pdf (5 pages, 50910 bytes).
+fonts/cm/cmr12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmti12.pfb>
+Output written on HistoriasDeUsuario.pdf (5 pages, 67117 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
+ 62 PDF objects out of 1000 (max. 8388607)
  12 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,18 @@
+@startuml
+participant Actor
+Actor -> ExitCommand : execute
+activate ExitCommand
+ExitCommand -> Game : exit
+activate Game
+Game -> Game : onGameExited
+activate Game
+Game -> RolitObserver : onGameExited
+activate RolitObserver
+RolitObserver --> Game
+deactivate RolitObserver
+Game --> Game
+deactivate Game
+Game --> ExitCommand
+deactivate Game
+return
+@enduml

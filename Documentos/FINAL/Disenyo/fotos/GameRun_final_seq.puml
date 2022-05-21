@@ -1,0 +1,43 @@
+@startuml
+participant Actor
+Actor -> Game : run
+activate Game
+Game -> TurnManager : firstTurn
+activate TurnManager
+TurnManager -> Player : play
+activate Player
+Player -> Strategy : calculateNextMove
+activate Strategy
+Strategy --> Player
+deactivate Strategy
+Player --> TurnManager
+deactivate Player
+	alt !IA
+	create Cube
+	TurnManager -> Cube : new
+	activate Cube
+	Cube --> TurnManager
+	deactivate Cube
+	end
+TurnManager --> Game
+deactivate TurnManager
+	alt cube!=null
+	Game -> Game : addCubeToQueue
+	activate Game
+	deactivate Game
+	end
+	
+	loop !finish && !exit
+	Game -> Game : play
+	activate Game
+		alt error
+		Game -> RolitObserver : onError
+		activate RolitObserver
+		RolitObserver --> Game
+		deactivate RolitObserver
+		end
+	deactivate Game
+	Game --> Game
+	end
+return
+@enduml

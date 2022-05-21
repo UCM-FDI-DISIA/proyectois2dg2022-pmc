@@ -185,44 +185,10 @@ A partir de este Sprint los cubos pasan a ser redondos y del \texttt{Color} que 
 
 \subsection{Como usuario quiero poder jugar a Rolit con una interfaz agradable}
 
-\subsubsection{Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
-\begin{sprint}[2]
-En este momento, la creación del juego se realizaba a través del controlador y éste poseía los métodos necesarios para preguntar por las características concretas que se querían del mismo. De este modo, los métodos para elegir color se encontraban en la clase \texttt{Controller}, concretamente el responsable de escoger el nombre y el color de los jugadores era \texttt{void chooseColor(int numPlayers)}.
-
-\begin{center}
-\includegraphics[scale=0.5]{ChooseColor_sprint2_seq}
-\end{center}
-
-El funcionamiento era iterativo para cada jugador:
-\begin{itemize}
-\item Se consultaba al \texttt{Game} que colores seguían disponibles (puesto que él va sabiendo qué jugadores tiene añadidos)
-\item Se escoge el color y se intenta añadir el jugador con dicho color al juego, con resultado positivo o con una excepción de error.
-\end{itemize}
-\end{sprint}
-
-\begin{sprint}[3]
-Con la creación de la nueva clase \texttt{GameGenerator} que constituye una primera aproximación a las factorías, se han movido los métodos de los que hablábamos en el sprint anterior a esta nueva clase.
-\end{sprint}
-
-\begin{sprint}[4]
-Este caso es más complejo que los anteriores. En este sprint nos encontramos en un punto intermedio del proyecto en el que se han implementado los Builder y las factorías, pero no se ha llegado a una interfaz gráfica de consola adecuada siguiendo el \textit{Modelo-Vista-Controlador}.
-
-\begin{center}
-\includegraphics[scale=0.55]{ChooseColor_sprint4_seq}
-\end{center}
-
-Como todavía no se tiene una vista de consola adecuada, los Builder en este caso tienen una función llamada \texttt{void WhatINeed(JSONObject o)} que se encarga de preguntar al usuario lo necesario para terminar de construir el \texttt{Game}. El método que permite conocer los colores disponibles se sigue llamando \texttt{String availableColor()}, solo que ahora está situado en la clase \texttt{GameBuilder} y el método que me permitía intentar añadir un jugador al juego una vez elegido el color se llama ahora \texttt{bool validatePlayer()} y de nuevo se encuentra en \texttt{GameBuilder}. La diferencia fundamental es que en este caso no se añade el jugador al juego, sino que se añade al \texttt{JSONObject} del \texttt{Game} para que luego el Builder concreto lo construya adecuadamente.
-\end{sprint}
-
-\begin{sprint}[5]
-En este sprint el funcionamiento es básicamente el mismo que en el anterior, sin embargo, cambia la ubicación de los métodos pues se introdujo la interfaz de consola. En este caso, las funcionalidades de \texttt{WhatINeed()}, \texttt{availableColors()} y \texttt{validatePlayer()} han pasado a la clase que representa la ventana de creación de juego de la consola \texttt{NewGameWindow} dejando el funcionamiento general como:
-\begin{center}
-\includegraphics[scale=0.55]{ChooseColor_sprint5_seq}
-\end{center}
-\end{sprint}
+\subsubsection{JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}
 
 \subsubsection{Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}
-En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepectiva con el resultado final.
+En este apartado, los primeros sprint realmente no son relevantes para comprender cuál ha sido la evolución del proyecto con respecto a esta historia de usuario, pues el desconocimiento de técnicas como el patrón del \textit{Modelo-Vista-Controlador} y la poca experiencia con proyectos grandes hace que el soporte gráfico y la encapsulación de la entrada salida en los primeros sprint sea realmente pobre una vez visto en persepctiva con el resultado final.
 
 Sin embargo, poseen gran importancia los sprint 4 y 5, pues son en los que se incluye por primera vez una vista gráfica que no sea la de consola y porque por primera vez se formaliza una entrada salida controlada y a través de clases especializadas que son usadas a modo de componentes gráficos, pero para la consola.
 
@@ -961,7 +927,7 @@ La adquisición de nuevos conocimientos nos permitió tomar una decisión de dis
 \includegraphics[scale=0.5]{reportable.png}
 \end{center}
 
-De esta forma, la interfaz \texttt{Saveable} fue reemplazada por \texttt{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \texttt{report()}, que devuelve una serialización del objeto en formato \texttt{JSON}. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click \hyperref[ch:AnexoI]{aquí}.
+De esta forma, la interfaz \texttt{Saveable} fue reemplazada por \texttt{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \texttt{report()}, que devuelve una serialización del objeto en formato \texttt{JSON}. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click aquí. %FIXME poner referencia al documento de los reports
 
 
 \begin{center}
@@ -1289,28 +1255,6 @@ Probamos a meter una clave que está mal y comprobamos que se lanza adecuadament
 
 Probamos a meter una \texttt{Shape} que está mal y comprobamos que se lanza adecuadamente la excepción.
 
-
-\section{Paquete Commands}
-\subsection{ExitCommandTest}
-\underline{executeTest() y executeTest2()}
-
-Creamos un Board, dos Player y un Cube para cada Player. Creamos una lista con los cubos y otra con los Player. Creamos un GameClassic con la información necesaria y creamos un ExitCommand para después llamar a su método execute() y comprobar que el método exited() del Game devuelve true.
-
-\subsection{PlaceCubeCommandTest}
-\underline{parseTest()}
-
-Creamos un PlaceCubeCommand y comprobamos que funciona correctamente su método parse() viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
-
-\subsection{SaveCommandTest}
-\underline{parseTest()}
-
-Creamos un SaveCommand y comprobamos que funciona correctamente su método parse() viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
-
-\underline{exceptionTest()}
-
-Comprobamos que se lanza una excepción cuando se intenta llamar al método getCommand() con argumentos incorrectos.
-
-
 \section{Paquete IA}
 \subsection{IATest}
 \underline{IA\_test1()}
@@ -1326,37 +1270,6 @@ Se crea un juego con un \texttt{Player} que es una persona y dos \texttt{Player}
 Se crea un juego con tres \texttt{Player} que son inteligencias artificiales, una \texttt{Minimax}, otra \texttt{Random} y la última \texttt{Greedy}. Las ponemos a jugar solas y comprobamos que no se produce ningún error, es decir, no se lanza ninguna excepción.
 
 \section{Paquete Logic}
-\subsection{BoardTest}
-\underline{addCubeInPos()}
-
-Creamos un Board, un Player y cuatro Cube del Player creado. Se añaden dos de ellos en posiciones correctas y se comprueba que se lanzan excepciones al intentar colocarlos en posiciones inválidas del tablero, ya sea porque ya están ocupadas con otro Cube o porque las coordenadas x e y no son correctas. Finalmente, se comprueba si el Cube que se ha añadido en la posición correcta es el adecuado.
-
-\underline{Board\_full\_numCubes()}
-
-Creamos un Board, un Player y un Cube, añadimos el cubo al tablero y comprobamos que el método que comprueba si el tablero está lleno devuelve falso.
-
-\underline{Update\_test()}
-
-Se crea un Board y dos Player, se van creando y poniendo en el tablero objetos Cube y llamando al método update() de Board y finalmente se comprueba si el color del cubo al final del test es el que debería ser por las posiciones en las que se han ido colocando los mismos.
-
-\underline{Update\_test2()}
-
-Se crea un Board y dos Player, y se van creando y colocando en el tablero objetos Cube y llamando al método update() de Board. Finalmente, se comprueba si se lanza una excepción al intentar añadir un cubo en una posición no válida, así como si el color del cubo al final del test es el que debería.
-
-\underline{Test\_report() y test\_report2()}
-
-Creamos un Board, dos Player y varios Cube, los cuales se van colocando en el tablero y llamando al método update() de Board. Finalmente, se comprueba si el método report() de la clase Board devuelve el JSONObject esperado.
-
-\subsection{CubeTest}
-\underline{Change\_owner()}
-
-Creamos un Player y un Cube y tratamos de cambiar el ''propietario'' (realmente es el color) del cubo. Finalmente se comprueba si se ha cambiado correctamente.
-
-\underline{Test\_report()}
-
-Creamos un Player y un Cube. Finalmente, se comprueba si el método report() e la clase Cube devuelve el JSONObject esperado.
-
-
 \subsection{GameClassicTest}
 \underline{play\_test()}
 
@@ -1407,36 +1320,6 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsT
 
 Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
 
-\subsection{PlayerTest}
-\underline{Add\_score\_test()}
-
-Creamos dos Player y se llama al método addScore() de uno de ellos para sumarle 1 a su puntuación. Se comprueba si se ha realizado correctamente. Después, se crea un cubo del primer jugador y se le cambia el ''propietario'' al segundo. Finalmente se comprueba que las puntuaciones de ambos jugadores son las correctas.
-
-\underline{test\_report() y test\_report2()}
-
-Creamos dos Player y se le añade determinada puntuación al primero. Se comprueba que es correcta, se crea un cubo al primer jugador y se le cambia el “propietario” al segundo. Finalmente se comprueba que los métodos report() de ambos jugadores devuelven los JSONObject esperados.
-
-\subsection{TeamTest}
-\underline{Update\_test()}
-
-Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y añadimos puntuación a ambos jugadores por separado. Finalmente, se llama al método update() del Team creado y se comprueba que la puntuación del equipo es igual a la suma de las puntuaciones individuales de los jugadores.
-
-\underline{test\_report() y test\_report2()}
-
-Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y finalmente comprobamos que el método report() de Team devuelve el JSONObject esperado en cada caso.
-
-\section{Paquete Replay}
-\subsection{ReplayTest}
-\underline{Test\_1() y Test\_2()}
-
-Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState. Después, se crea un objeto Replay y se le añade el estado recién creado. Finalmente, se comprueba que el método report() de Replay devuelve el JSONObject esperado con la información correcta.
-
-\subsection{StateTest}
-\underline{Report\_test() y report\_test2()}
-
-Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState con el Game creado. Finalmente, se comprueba que el método report() de GameState devuelve el JSONObject esperado con la información correcta.
-
-
 \chapter{Diseño final}
 
 \section{Paquete model}
@@ -1475,48 +1358,6 @@ Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lóg
 
 \subsubsection{GameBuilder}
 \subsection{Commands}
-
-Este paquete agrupa las clases que se encargan de los comandos del juego a partir de una solicitud. Dicha solicitud es convertida en un objeto independiente que contiene toda la información sobre la misma, lo cual permite la separación de responsabilidades y la división del código en capas. Para ello se han tomado las siguientes decisiones:
-
-\begin{itemize}
-\item Existe una clase abstracta \texttt{Command} de la cual extienden todos los comandos específicos que saben crear cada comando concreto. Además, \texttt{Command} implementa a la interfaz \texttt{Replayable}.
-\item La clase \texttt{Command} contiene una lista de todos los comandos disponibles, de modo que cuando se pide crear un objeto \texttt{Command}, esta clase se encarga de llamar al comando concreto correspondiente para completar la creación con la información específica de este.
-\item Cada comando se identifica por un nombre, unos detalles, una abreviatura y un mensaje de ayuda (explicación de lo que hace el comando).
-\item Cada subclase de \texttt{Command} implementa su propio método \texttt{execute()}, en el que se ejecuta lo que hace cada uno de los comandos.
-\item Existen métodos comunes a todos los comandos: un método para parsear los argumentos del comando, otro para mostrar un mensaje de ayuda con el comando, o el report (común a todas las clases que implementan la interfaz Replayable).
-\end{itemize}
-
-Teniendo en cuenta lo anterior, se presenta el conjunto de subclases implicadas en la construcción de objetos comando, siguiendo el patrón de diseño \textit{Command}.
-
-\subsubsection{ExitCommand}
-
-Este comando sirve para salir del juego a través del método \texttt{exit()} de \texttt{Game}, el cual realiza las notificaciones correspondientes siguiendo el patrón \textit{Observer}.
-
-\begin{center}
-\includegraphics[scale=0.55]{ExitCommand_execute_final.png}
-\end{center}
-
-\newpage
-
-\subsubsection{HelpCommand}
-
-Este comando sirve para mostrar un mensaje de ayuda para que el jugador entienda para qué sirve cada comando.
-
-\newpage
-
-\subsubsection{PlaceCubeCommand}
-
-Este comando sirve para colocar un cubo en una posición del tablero añadiéndolo a la cola de cubos pendientes de colocar de la clase \texttt{Game} mediante el método \texttt{addCubeToQueue()}. Además, en esta clase se sobrescribe el método parse ya que se necesitan 2 argumentos (posición en x y en y) para colocar el cubo en el tablero.
-
-\newpage
-
-\subsubsection{SaveCommand}
-
-Este comando sirve para guardar una partida en un fichero a través del método \texttt{saveGame()} de la clase \texttt{SaveLoadManager}, distinguiendo los casos en los que se dispone de un nombre de fichero de los casos en los que no. Esta clase añade el juego a la lista de ficheros de partida guardados y también se encarga de notificar a las clases correspondientes siguiendo el patrón \textit{Observer}.
-
-\begin{center}
-\includegraphics[scale=0.40]{SaveCommand_execute_final.png}
-\end{center}
 
 \newpage
 
@@ -1682,35 +1523,7 @@ Esto queda reflejado en el siguiente diagrama del método \texttt{nextMove()}:
 \includegraphics[scale=0.75]{TurnManager.nextTurn()-sprint7.png} 
 \end{center}
 
-\subsubsection{Game, GameClassic y GameTeams}
-La clase \texttt{Game} es la clase fundamental del modelo y es la encargada de representar el concepto del juego completo, es decir, de la misma manera que el \texttt{Board} representa el juego físico (tablero, cubos, etc.) el \texttt{Game} representa todo el juego en su totalidad (jugadores, puntos, tablero, normas, etc.).
-$$DIAGRAMA DE LA CLASE GAME$$
-En primer lugar, la decisión que se ha tomado en cuanto al modelo es que tenga su propio hilo, es decir, continuamente el \texttt{Game} está ejecutando el bucle de juego hasta que finaliza la partida. También es necesario saber para el funcionamiento del bucle de juego que la estructura de datos del juego es una cola, pues cualquiera que haga jugadas simplemente encola dicho cubo para que el modelo, cuando pueda, procese dicha jugada y sitúe los cubos en el orden en el que se han ido haciendo las jugadas.
-
-Principalmente la actividad del hilo de \texttt{Game} y de la funcionalidad de la clase reside en el método \texttt{void run()}. Tras ser creado en algún sitio, el modelo comienza la ejecución de su método \texttt{void run()} que pone en marcha un bucle de juego que no termina hasta que el juego finalice o se seleccione salir. Dentro de dicho bucle, llamamos a la función \texttt{void play()} abstracta y relativa a cada subclase de \texttt{Game} que encapsula toda la lógica de un turno en cada tipo de juego.
-\begin{center}
-\includegraphics[scale=0.5]{GameRun_final_seq}
-\end{center}
-
-La decisión de que el juego tenga su propio hilo viene de la implementación de las inteligencias artificiales en el proyecto. Por un lado, si todo el juego tiene que esperar a que la IA calcule el movimiento que desea la ejecución se ralentiza (mucho cuando se busca precisión en los movimientos). Pero por otro, y más importante, si no se tuviese el hilo, los jugadores automáticos colocarían un cubo y harían que la ejecución del juego siguiese sin esperar a que se notificara a todos los observadores que el juego ha cambiado. Por tanto, lo mejor es dejar que cada uno haga la jugada cuando se lo solicite y lo que mande sea una solicitud de poner un cubo. El modelo cuando pueda ejecutará dicha solicitud y pedirá al siguiente que mande solicitud si procede, etc.
-
-\begin{center}
-\includegraphics[scale=0.5]{GameClassicPlay_final_seq}
-\end{center} 
-
-La ejecución del juego clásico es sencilla:
-\begin{itemize}
-\item Desencolamos el primer cubo pendiente y tratamos de añadirlo al tablero.
-\item En caso de que el tablero esté completo termina el juego.
-\item En caso contrario, cambiamos de turno y en todos los casos notificamos los cambios.
-\end{itemize}
-
-\begin{center}
-\includegraphics[scale=0.45]{GameTeams_final_seq}
-\end{center}
-
-Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de juego) es que en el por equipos se actualizan las puntuaciones de los equipos tal colocar un nuevo grupo.
-
+\newpage
 
 \subsection{Online}
 
@@ -2179,45 +1992,7 @@ Es la ventana principal del juego y la que se encarga de gestionar que ventanas 
 
 Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
 
-\subsubsection{NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}
-La ventana \texttt{NewGameWindow} y sus hijas \texttt{NewGameClassicWindow} y \texttt{NewGameTeamsWindow} están íntimamente ligadas con los Builder, pues son clases que se dedican a crear los \texttt{JSONObject} que utilizan dichas clases para generar el juego.
-
-La ventana \texttt{NewGameWindow} ejecuta por pantalla todas las preguntas necesarias para poder crear un \texttt{Game} genérico. También tiene los métodos de \texttt{availableColors()} y de \texttt{validatePlayer()} que son llamados por sus hijas para comprobar si el jugador con el color introducido se puede agregar al \texttt{JSONObject}.
-
-\begin{center}
-\includegraphics[scale=0.5]{NewGameWindow_final_seq}
-\includegraphics[scale=0.5]{NewGameClassicWindow_final_seq}
-\end{center}
-
-\subsubsection{LoadGameWindow}
-La única funcionalidad de esta clase es presentar de forma amable la lista de juegos que se pueden cargar y hacer las llamadas correspondiente a la clase experta en guardado y carga desde ficheros que es \texttt{SaveLoadManager}.
-
-\begin{center}
-\includegraphics[scale=0.5]{LoadGameWindow_final_seq}
-\end{center}
-
-\subsubsection{DeleteGameWindow}
-Al igual que la clase \texttt{LoadGameWindow}, esta clase principalmente presenta de una forma amable el listado de los juego guardados disponible para ser cargado y permite eliminar uno haciendo las llamas adecuadas a la clase \texttt{SaveLoadManager}
-
-\begin{center}
-\includegraphics[scale=0.5]{DeleteGameWindow_final_seq}
-\end{center}
-
-\subsubsection{LoadReplayWindow}
-Es la clase homóloga a la clase \texttt{LoadGameWindow}, solo que su principal función es cargar una \texttt{Replay} en vez de un \texttt{Game} concreto:
-
-\begin{center}
-\includegraphics[scale=0.5]{LoadReplayWindow_final_seq}
-\end{center}
-
-\subsubsection{SaveReplayWindow}
-Del mismo modo que la clase \texttt{LoadReplayWindow} presentaba las posibles \texttt{Replay} para cargar, esta clase se encarga manejar la entrada/salida para poder guardar una \texttt{Replay}.
-
-\begin{center}
-\includegraphics[scale=0.5]{SaveReplayWindow_final_seq}
-\end{center}
-
-\subsubsection{PlayWindow}
+\newpage
 
 \subsection{GUIView}
 
@@ -2577,7 +2352,6 @@ Apariencia inicial de la \texttt{MainWindow}
 
 
 \chapter{Anexo I: Reports}
-\label{ch:AnexoI}
 \subsection*{Cube}
 
 \begin{lstlisting}[frame=single, language=Java]
@@ -2921,5 +2695,49 @@ Realmente el diseño de estas clases es bueno en cuanto tener un proceso unifica
 
 \subsubsection{Replay}
 La comunicación de la clase \texttt{Replay} con la GUI se realiza de manera adecuada mediante el uso del Patrón \textit{Observador}. Sin embargo, no existe comunicación con la vista de consola, pues es la propia clase la que se encarga de imprimirse. Inicialmente se llevó a cabo esta implementación porque no existía una vista de consola, pero cuando fue incluida en el proyecto, no se adaptaron las \textit{replays}, convirtiéndose en una deuda técnica que ha llegado hasta el día de hoy. La clase es completamente funcional, pero desde el punto de vista de la POO, la clase \texttt{Replay} no debería de tener esta responsabilidad.
+
+<<<<<<< HEAD
+\chapter{Anexo III: Estrategia Minimax adaptada a Rolit}
+\label{ch:AnexoIII}
+
+En teoría de juegos, el Minimax busca minimizar la pérdida esperada. La aproximación que se toma es asumir que el oponente va a tomar las decisiones que más te perjudiquen. De esta manera, al encontrar la decisión que menor pérdida suponga, el resultado real será siempre igual o mejor al calculado, de forma que el cálculo es fiable.
+
+La mejor forma de explicar esto es a través de un ejemplo:
+
+Imaginemos que estamos en un juego de dos jugadores, uno contra el otro, basado en turnos, en el cual ambos jugadores conocen en todo momento el estado actual de la partida en su totalidad. Un buen ejemplo de esto es el ajedrez. Supongamos pues que juegas con las piezas blancas, y tu adversario juega con las piezas negras. En cada uno de tus movimientos vas a jugar el movimiento que consideres que más te favorece. Por el otro lado, bajo nuestra aproximación, suponemos que el otro jugador va a jugar el movimiento que más te perjudique. Podemos hacer una representación de esto en forma de árbol:
+
+Imaginemos que cada nodo contiene un número que representa el estado actual de la partida (para esto hace falta tener un criterio de valoración del estado actual de la partida, en el cual no entraremos en detalle en el caso del ajedrez, pero más adelante sí en el caso del Rolit), y cada arista representa un movimiento jugado, por el cuál se desciende en el árbol de un estado de la partida al siguiente. En cuanto a la valoración de los estados del juego, si el número de un nodo es positivo va ganando el jugador blanco (a mayor mejor); si el número es negativo, va ganando el jugador negro (a menor peor). Como el juego va por turnos, si un nivel del árbol se corresponde con el turno de un jugador, el siguiente nivel se corresponde con el siguiente jugador. De esta forma, volviendo al ejemplo propuesto, si desde un nodo se conoce el valor de todos sus descendientes pueden pasar dos cosas: si es el turno del jugador blanco, tomará la decisión que le lleve al mayor valor; si es el turno del jugador negro, tomará la decisión que le lleve al menor valor. 
+
+Se ilustra el funcionamiento del algoritmo en la siguiente imagen: 
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{minimaxExample.jpg}
+\end{center}
+%%FIXME Centrar
+
+En el caso del ajedrez (y de la mayoría de juegos por turnos, como Rolit) hay siempre muchos posibles movimientos a jugar. De esta forma, en el árbol de decisión, de cada nodo salen muchos descendientes, resultando en un algoritmo con coste aproximadamente exponencial en el promedio de jugadas disponibles. Esto hace que la búsqueda del mejor posible movimiento se convierta en un problema intratable en no demasiados niveles de profundidad de búsqueda. Por tanto, surge la obligación de limitar la profundidad hasta la que se quiere hacer la búsqueda.
+
+Volviendo ahora al Rolit, no estamos en un juego de dos jugadores (o al menos no necesariamente). Afortunadamente, en este juego el criterio de valoración de jugadas es fácil: La mejor jugada es la que te lleve a acabar con el mayor número de puntos.
+
+Ahora, como hay más de dos jugadores, para conseguir un cálculo de puntos fiable, el cálculo se lleva a cabo considerando que el jugador propietario de la estrategia quiere hacer aquella jugada que más puntos le otorgue a la larga, mientras que el resto de jugadores en sus turnos hacen la jugada que más puntos le quite al jugador propietario. De esta forma se calculan puntos para el jugador propietario situándonos en la situación más desfavorable posible, de forma que todo aquello que se calcule va a derivar siempre en un resultado igual o mejor al calculado, de forma que los resultados de los cálculos son fiables.
+
+\chapter{Anexo IV: Poda Alfa-Beta}
+\label{ch:AnexoIV}
+La poda Alfa-Beta es una mejora del algoritmo Minimax. Se mantienen dos valores, alfa y beta, que representan respectivamente la puntuación mínima que se llevará el jugador maximizador y la puntuación máxima que se asegura el jugador minimizados. Inicialmente, alfa es $-\infty$ y beta es $\infty$. 
+
+Siempre que la puntuación máxima que se asegura al jugador que minimiza se vuelve menor que la puntuación mínima que se asegura el jugador que maximiza se puede parar de explorar por la rama actual. De forma análoga, se podan ramas en el caso contrario.
+
+La mejor forma de visualizar esta poda es a través de una ilustración:
+
+\begin{center}
+\centering
+\includegraphics[scale=0.5]{poda alfa-beta.png}
+\end{center}
+%%FIXME Hacer más grande
+
+Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
+=======
+>>>>>>> 7dc5471782ca6f27e86cc83ae320e1fd1d31a71f
 
 \end{document}
