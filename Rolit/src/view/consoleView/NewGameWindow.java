@@ -18,9 +18,9 @@ import model.strategy.Strategy;
  */
 public class NewGameWindow implements ConsoleWindow {
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players [2 - " + Color.size() +"]";
-	private static final String ERROR_MODES_MSG = "Game mode must be on of these:";
+	private static final String ERROR_MODES_MSG = "Game mode must be on of these:" + GameBuilder.availableModes();
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be a number between 2 and " + Color.size() + " (inclusive)";
-	private static String AVAILABLE_MODES_MSG = "Choose game mode between" + GameBuilder.availableModes();
+	private static String AVAILABLE_MODES_MSG = "Choose game mode between " + GameBuilder.availableModes() + " (case sensitive)";
 	private static final String BOARD_MSG = "Choose a board shape. ";
 	private static final String BOARD_ERROR = "ERROR: Not found such shape. ";
 	protected static final String NAME_PLAYERS = "Name the players (if you want a player to be an AI, end the name with AI (i.e. Mark AI): ";

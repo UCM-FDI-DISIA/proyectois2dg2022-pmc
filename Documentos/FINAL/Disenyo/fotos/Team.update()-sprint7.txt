@@ -1,0 +1,13 @@
+#Team.update()-sprint7
+
+@startuml
+participant Actor
+Actor -> Team : update
+loop Player p : players
+Team -> Player : getScore
+activate Player
+Player --> Team : score
+deactivate Player
+end loop
+Team --> Actor
+@enduml

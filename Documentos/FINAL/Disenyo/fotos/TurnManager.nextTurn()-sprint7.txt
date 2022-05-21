@@ -1,0 +1,22 @@
+#TurnManager.nextTurn()-sprint7
+
+@startuml
+participant Actor
+Actor -> TurnManager : nextTurn
+activate TurnManager
+TurnManager -> TurnManager : advanceTurn
+activate TurnManager
+TurnManager --> TurnManager
+deactivate TurnManager
+TurnManager -> Player : play
+activate Player
+Player --> TurnManager : coordinates
+deactivate Player
+alt coordinates != null
+TurnManager -> Cube : new
+activate Cube
+Cube --> TurnManager : newCube
+deactivate Cube
+end alt
+return newCube
+@enduml

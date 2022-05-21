@@ -71,7 +71,7 @@ public class SaveLoadManager {
 		if(option == 1)
 			return loadGame(DEFAULT_GAME_FILENAME);
 
-		option-=2;
+		option -= 2;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
 		else {
@@ -117,7 +117,7 @@ public class SaveLoadManager {
 		if(option == 1)
 			return loadReplay(DEFAULT_REPLAY_FILENAME);
 
-		option-=2;
+		option -= 2;
 		if (option < 0 || option >= names.size())
 			throw new Exception();
 		else {

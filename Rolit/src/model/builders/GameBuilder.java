@@ -26,10 +26,9 @@ public abstract class GameBuilder {
 	public static String availableModes() {
 		StringBuilder str = new StringBuilder();
 		for (GameBuilder g : builders) {
-			str.append(" " + g.getName());
+			str.append(g.getName() + ", ");
 		}
-		str.append(": ");
-		return str.toString();
+		return str.toString().substring(0, str.length() - 2);
 	}
 	
 	/**

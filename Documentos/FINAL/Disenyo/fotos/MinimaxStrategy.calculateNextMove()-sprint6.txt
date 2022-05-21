@@ -1,13 +1,10 @@
-# Minimax.calculateNextMove()
+#MinimaxStrategy.calculateNextMove()-sprint6
 
 @startuml
 participant Actor
 Actor -> MinimaxStrategy : calculateNextMove(ownerColor, state)
 activate MinimaxStrategy
-MinimaxStrategy -> SimplifiedBoard : new(state, this)
-activate SimplifiedBoard
-SimplifiedBoard --> MinimaxStrategy
-deactivate SimplifiedBoard
+MinimaxStrategy --> SimplifiedBoard : new(state, this)
 MinimaxStrategy -> MinimaxStrategy : simulate(color, initialDepth, -infty, infty)
 activate MinimaxStrategy
 MinimaxStrategy -> SimplifiedBoard : getSimulatedScore
@@ -47,27 +44,31 @@ alt color == currentColor
 alt newScore > currentScore
 MinimaxStrategy -> MinimaxStrategy : updateResult
 activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 alt currentScore >= beta
 MinimaxStrategy -> MinimaxStrategy : stopSearching
 activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 else 
 alt newScore < currentScore
 MinimaxStrategy -> MinimaxStrategy : updateResult
 activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 alt currentScore <= alpha
 MinimaxStrategy -> MinimaxStrategy : stopSearching
 activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 end
 end loop
 MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
-return
+return coordinates
 @enduml

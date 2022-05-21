@@ -1,14 +1,11 @@
-# Minimax.calculateNextMove()
+#MinimaxStrategy.calculateNextMove()-sprint5
 
 @startuml
 participant Actor
 Actor -> MinimaxStrategy : calculateNextMove(ownerColor, state)
 activate MinimaxStrategy
-MinimaxStrategy -> SimplifiedBoard : new(state, this)
-activate SimplifiedBoard
-SimplifiedBoard --> MinimaxStrategy
-deactivate SimplifiedBoard
-MinimaxStrategy -> MinimaxStrategy : simulate(color, initialDepth, -infty, infty)
+MinimaxStrategy --> SimplifiedBoard : new(state, this)
+MinimaxStrategy -> MinimaxStrategy : simulate(color, initialDepth)
 activate MinimaxStrategy
 MinimaxStrategy -> SimplifiedBoard : getSimulatedScore
 activate SimplifiedBoard
@@ -18,9 +15,9 @@ deactivate SimplifiedBoard
 MinimaxStrategy -> SimplifiedBoard : tryToAddCube
 activate SimplifiedBoard
 SimplifiedBoard --> MinimaxStrategy : validPosition
-alt validPosition == true && keepSearching == true
+alt validPosition == true
 deactivate SimplifiedBoard
-MinimaxStrategy -> SimplifiedBoard : simulateMove(depth, alpha, beta)
+MinimaxStrategy -> SimplifiedBoard : simulateMove
 activate SimplifiedBoard
 SimplifiedBoard -> SimplifiedBoard : applyChanges
 activate SimplifiedBoard
@@ -31,7 +28,7 @@ activate SimplifiedBoard
 SimplifiedBoard --> SimplifiedBoard : newScore
 deactivate SimplifiedBoard
 alt depth > 0
-SimplifiedBoard -> MinimaxStrategy : simulate(nextColor, depth - 1, alpha, beta)
+SimplifiedBoard -> MinimaxStrategy : simulate(nextColor, depth - 1)
 activate MinimaxStrategy
 MinimaxStrategy --> SimplifiedBoard : newScore
 deactivate MinimaxStrategy
@@ -47,22 +44,14 @@ alt color == currentColor
 alt newScore > currentScore
 MinimaxStrategy -> MinimaxStrategy : updateResult
 activate MinimaxStrategy
-deactivate MinimaxStrategy
-end alt
-alt currentScore >= beta
-MinimaxStrategy -> MinimaxStrategy : stopSearching
-activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 else 
 alt newScore < currentScore
 MinimaxStrategy -> MinimaxStrategy : updateResult
 activate MinimaxStrategy
-deactivate MinimaxStrategy
-end alt
-alt currentScore <= alpha
-MinimaxStrategy -> MinimaxStrategy : stopSearching
-activate MinimaxStrategy
+MinimaxStrategy --> MinimaxStrategy
 deactivate MinimaxStrategy
 end alt
 end

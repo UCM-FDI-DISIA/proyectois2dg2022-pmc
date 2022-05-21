@@ -1,0 +1,30 @@
+#Board.update()-sprint7
+
+@startuml
+participant Actor
+Actor -> Board : update(newCube)
+activate Board
+loop checks every direction
+loop Position p : currentDirection
+Board -> Board : isPositionInRange(p)
+activate Board
+Board --> Board : inRange
+deactivate Board
+alt inRange == true
+Board -> Board : getCubeInPos
+activate Board
+Board --> Board : c
+deactivate Board
+alt c.color == newCube.color
+loop Cube c : currentDirection
+Board -> Cube : changeOwner
+activate Cube
+Cube --> Board
+deactivate Cube
+end loop
+end alt
+end alt
+end loop
+end loop
+return
+@enduml

@@ -1,42 +1,58 @@
-\babel@toc {spanish}{}
-\contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{5}{}%
-\contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}{5}{}%
-\contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{13}{}%
-\contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{13}{}%
-\contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{13}{}%
-\contentsline {subsection}{\numberline {1.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{34}{}%
-\contentsline {subsubsection}{\numberline {1.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{34}{}%
-\contentsline {subsubsection}{\numberline {1.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{41}{}%
-\contentsline {subsection}{\numberline {1.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{53}{}%
-\contentsline {subsubsection}{\numberline {1.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{53}{}%
-\contentsline {subsubsection}{\numberline {1.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{55}{}%
-\contentsline {subsubsection}{\numberline {1.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{56}{}%
-\contentsline {subsubsection}{\numberline {1.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{60}{}%
-\contentsline {subsection}{\numberline {1.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{60}{}%
-\contentsline {subsection}{\numberline {1.0.6}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{63}{}%
-\contentsline {chapter}{\numberline {2}Diseño y evolución de otros aspectos del proyecto}{69}{}%
-\contentsline {subsection}{\numberline {2.0.1}Builders}{69}{}%
-\contentsline {subsection}{\numberline {2.0.2}Commands}{72}{}%
-\contentsline {chapter}{\numberline {3}Diseño final}{73}{}%
-\contentsline {section}{\numberline {3.1}Paquete model}{73}{}%
-\contentsline {subsection}{\numberline {3.1.1}Builders}{73}{}%
-\contentsline {subsubsection}{\numberline {3.1.1.1}GameClassicBuilder y GameTeamsBuilder}{74}{}%
-\contentsline {subsubsection}{\numberline {3.1.1.2}GameBuilder}{76}{}%
-\contentsline {subsection}{\numberline {3.1.2}Commands}{76}{}%
-\contentsline {subsection}{\numberline {3.1.3}Logic}{76}{}%
-\contentsline {subsection}{\numberline {3.1.4}Online}{76}{}%
-\contentsline {subsubsection}{\numberline {3.1.4.1}Modo por equipos}{89}{}%
-\contentsline {subsection}{\numberline {3.1.5}Replay}{94}{}%
-\contentsline {subsubsection}{\numberline {3.1.5.1}Replay}{95}{}%
-\contentsline {subsubsection}{\numberline {3.1.5.2}GameState}{96}{}%
-\contentsline {subsection}{\numberline {3.1.6}Strategy}{97}{}%
-\contentsline {section}{\numberline {3.2}Paquete Controller}{97}{}%
-\contentsline {section}{\numberline {3.3}Paquete View}{97}{}%
-\contentsline {subsection}{\numberline {3.3.1}ConsoleWindow}{97}{}%
-\contentsline {subsubsection}{\numberline {3.3.1.1}MainBashWindow}{97}{}%
-\contentsline {subsection}{\numberline {3.3.2}GUIView}{100}{}%
-\contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{104}{}%
-\contentsline {chapter}{\numberline {4}Anexo I: Reports}{125}{}%
-\contentsline {chapter}{\numberline {5}POSIBLES MEJORAS}{129}{}%
-\contentsline {subsubsection}{\numberline {5.0.0.1}Builders}{129}{}%
-\contentsline {subsubsection}{\numberline {5.0.0.2}Replay}{129}{}%
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{7}{chapter.1}%
+\contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}{7}{subsection.1.0.1}%
+\contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{15}{subsection.1.0.2}%
+\contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{15}{subsubsection.1.0.2.1}%
+\contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{15}{subsubsection.1.0.2.2}%
+\contentsline {subsection}{\numberline {1.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{38}{subsection.1.0.3}%
+\contentsline {subsubsection}{\numberline {1.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{38}{subsubsection.1.0.3.1}%
+\contentsline {subsubsection}{\numberline {1.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{41}{subsubsection.1.0.3.2}%
+\contentsline {subsection}{\numberline {1.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{53}{subsection.1.0.4}%
+\contentsline {subsubsection}{\numberline {1.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{53}{subsubsection.1.0.4.1}%
+\contentsline {subsubsection}{\numberline {1.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{55}{subsubsection.1.0.4.2}%
+\contentsline {subsubsection}{\numberline {1.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{56}{subsubsection.1.0.4.3}%
+\contentsline {subsubsection}{\numberline {1.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{60}{subsubsection.1.0.4.4}%
+\contentsline {subsection}{\numberline {1.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{60}{subsection.1.0.5}%
+\contentsline {subsection}{\numberline {1.0.6}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{63}{subsection.1.0.6}%
+\contentsline {chapter}{\numberline {2}Diseño y evolución de otros aspectos del proyecto}{69}{chapter.2}%
+\contentsline {subsection}{\numberline {2.0.1}Builders}{69}{subsection.2.0.1}%
+\contentsline {subsection}{\numberline {2.0.2}Commands}{72}{subsection.2.0.2}%
+\contentsline {chapter}{\numberline {3}Diseño final}{75}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Paquete model}{75}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Builders}{75}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}GameClassicBuilder y GameTeamsBuilder}{76}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}GameBuilder}{78}{subsubsection.3.1.1.2}%
+\contentsline {subsection}{\numberline {3.1.2}Commands}{78}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Logic}{79}{subsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.1}Color}{80}{subsubsection.3.1.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.3.2}Cube}{81}{subsubsection.3.1.3.2}%
+\contentsline {subsubsection}{\numberline {3.1.3.3}Shape}{83}{subsubsection.3.1.3.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.4}Board}{84}{subsubsection.3.1.3.4}%
+\contentsline {subsubsection}{\numberline {3.1.3.5}Rival}{86}{subsubsection.3.1.3.5}%
+\contentsline {subsubsection}{\numberline {3.1.3.6}Player}{87}{subsubsection.3.1.3.6}%
+\contentsline {subsubsection}{\numberline {3.1.3.7}Team}{89}{subsubsection.3.1.3.7}%
+\contentsline {subsubsection}{\numberline {3.1.3.8}TurnManager}{91}{subsubsection.3.1.3.8}%
+\contentsline {subsection}{\numberline {3.1.4}Online}{92}{subsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.4.1}Modo por equipos}{105}{subsubsection.3.1.4.1}%
+\contentsline {subsection}{\numberline {3.1.5}Replay}{109}{subsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.5.1}Replay}{111}{subsubsection.3.1.5.1}%
+\contentsline {subsubsection}{\numberline {3.1.5.2}GameState}{112}{subsubsection.3.1.5.2}%
+\contentsline {subsection}{\numberline {3.1.6}Strategy}{113}{subsection.3.1.6}%
+\contentsline {subsubsection}{\numberline {3.1.6.1}Strategy}{114}{subsubsection.3.1.6.1}%
+\contentsline {subsubsection}{\numberline {3.1.6.2}RandomStrategy}{115}{subsubsection.3.1.6.2}%
+\contentsline {subsubsection}{\numberline {3.1.6.3}MinimaxStrategy}{116}{subsubsection.3.1.6.3}%
+\contentsline {subsubsection}{\numberline {3.1.6.4}GreedyStrategy}{118}{subsubsection.3.1.6.4}%
+\contentsline {subsubsection}{\numberline {3.1.6.5}SimplifiedBoard}{119}{subsubsection.3.1.6.5}%
+\contentsline {section}{\numberline {3.2}Paquete Controller}{123}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Paquete View}{123}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}ConsoleWindow}{123}{subsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}MainBashWindow}{123}{subsubsection.3.3.1.1}%
+\contentsline {subsection}{\numberline {3.3.2}GUIView}{126}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}GUIView}{130}{subsubsection.3.3.2.1}%
+\contentsline {chapter}{\numberline {4}Anexo I: Reports}{151}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Anexo II: Lista de todas las clases}{155}{chapter.5}%
+\contentsline {chapter}{\numberline {6}POSIBLES MEJORAS}{161}{chapter.6}%
+\contentsline {subsubsection}{\numberline {6.0.0.1}Builders}{161}{subsubsection.6.0.0.1}%
+\contentsline {subsubsection}{\numberline {6.0.0.2}Replay}{161}{subsubsection.6.0.0.2}%
+\contentsline {chapter}{\numberline {7}Anexo III: Estrategia Minimax adaptada a Rolit}{163}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Anexo IV: Poda Alfa-Beta}{165}{chapter.8}%

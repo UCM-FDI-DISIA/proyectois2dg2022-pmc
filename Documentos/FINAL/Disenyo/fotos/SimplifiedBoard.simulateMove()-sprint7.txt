@@ -1,0 +1,27 @@
+#SimplifiedBoard.simulateMove()-sprint7
+
+@startuml
+participant Actor
+Actor -> SimplifiedBoard : simulateMove(depth, alpha, beta)
+activate SimplifiedBoard
+SimplifiedBoard -> SimplifiedBoard : applyChanges
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+SimplifiedBoard -> SimplifiedBoard : updateNewScore
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard : newScore
+deactivate SimplifiedBoard
+alt depth > 0
+SimplifiedBoard -> MinimaxStrategy : simulate(nextColor, depth - 1, alpha, beta)
+activate MinimaxStrategy
+MinimaxStrategy --> SimplifiedBoard : newScore
+deactivate MinimaxStrategy
+end alt
+SimplifiedBoard -> SimplifiedBoard : revertChanges
+activate SimplifiedBoard
+SimplifiedBoard --> SimplifiedBoard
+deactivate SimplifiedBoard
+SimplifiedBoard --> Actor : newScore
+deactivate SimplifiedBoard
+@enduml

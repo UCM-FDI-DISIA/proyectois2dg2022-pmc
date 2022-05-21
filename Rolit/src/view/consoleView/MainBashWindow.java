@@ -85,11 +85,13 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new LoadGameWindow();
 				repeatMenu = nextWindow.open();
-				JSONObject game = (JSONObject) nextWindow.get();
-				if (game != null) {
-					ctr.createGame(game);	
+				if(!repeatMenu) {
+					JSONObject game = (JSONObject) nextWindow.get();
+					if (game != null) {
+						ctr.createGame(game);	
+					}
+					this.initGame();
 				}
-				this.initGame();
 
 			}
 			// Se ha seleccionado borrar un juego
