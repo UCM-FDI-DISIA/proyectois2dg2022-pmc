@@ -2,6 +2,7 @@
 \contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{7}{chapter.1}%
 \contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}{7}{subsection.1.0.1}%
 <<<<<<< HEAD
+<<<<<<< HEAD
 \contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{15}{subsection.1.0.2}%
 \contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{15}{subsubsection.1.0.2.1}%
 \contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{15}{subsubsection.1.0.2.2}%
@@ -55,6 +56,8 @@
 \contentsline {chapter}{\numberline {6}Anexo III: Estrategia Minimax adaptada a Rolit}{161}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Anexo IV: Poda Alfa-Beta}{163}{chapter.7}%
 =======
+=======
+>>>>>>> 272e28efe0ca2b3a8b6d2d12302331e6094df41f
 \contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{17}{subsection.1.0.2}%
 \contentsline {subsubsection}{\numberline {1.0.2.1}JUANDI - Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{17}{subsubsection.1.0.2.1}%
 \contentsline {subsubsection}{\numberline {1.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{17}{subsubsection.1.0.2.2}%
@@ -119,4 +122,7 @@
 \contentsline {subsubsection}{\numberline {7.0.0.2}Replay}{167}{subsubsection.7.0.0.2}%
 \contentsline {chapter}{\numberline {8}Anexo III: Estrategia Minimax adaptada a Rolit}{169}{chapter.8}%
 \contentsline {chapter}{\numberline {9}Anexo IV: Poda Alfa-Beta}{171}{chapter.9}%
+<<<<<<< HEAD
+>>>>>>> 272e28efe0ca2b3a8b6d2d12302331e6094df41f
+=======
 >>>>>>> 272e28efe0ca2b3a8b6d2d12302331e6094df41f
