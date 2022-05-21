@@ -47,10 +47,10 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 			if (!this.close && !this.waitingForUpdate) {
 				String s = input.nextLine();
 				try {
+					this.waitingForUpdate = true;
 					String[] args = s.trim().split(" ");
 					Command command = Command.getCommand(args);
-					ctr.executeCommand(command);
-					this.waitingForUpdate = true;
+					ctr.executeCommand(command);					
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					System.out.print(PROMPT);
@@ -107,15 +107,18 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 
 	@Override
 	public void onError(String err) {
+		this.waitingForUpdate = false;
 		System.out.println(err);
 		System.out.println(this.state.toString());
+		System.out.print(PROMPT);
 	}
 
 	@Override
 	public void onGameStatusChange(GameState status) {
+		this.waitingForUpdate = false;
 		this.state = status;
 		System.out.println(status.toString());
-		System.out.print(PROMPT);
+		System.out.print(PROMPT);		
 	}
 
 	@Override
