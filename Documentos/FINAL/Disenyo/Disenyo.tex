@@ -1339,9 +1339,9 @@ Una vez especificadas todas las clases, describiremos el hilo típico de la ejec
 \includegraphics[scale=0.4]{umlconexionessprint7.png}
 \end{center}
 
-Cuando se pulsa a crear un servidor, el usuario rellena un CreateGameDialog para especificar una configuración del juego básica especificada. Una vez especificada, se crea el objeto \texttt{Server}, que tendrá en su atributo gameConfig dicha información. Finalmente, en este constructor se abre el diálogo de crear un servidor; el usuario host del servidor debe especificar el puerto en el que el servidor debe operar. Finalmente, se pulsa el botón Start \texttt{Server}.
+Cuando se pulsa a crear un servidor, el usuario rellena un CreateGameDialog para especificar una configuración del juego básica especificada. Una vez especificada, se crea el objeto \texttt{Server}, que tendrá en su atributo gameConfig dicha información. Finalmente, en este constructor se abre el diálogo de crear un servidor; el usuario host del servidor debe especificar el puerto en el que el servidor debe operar. Finalmente, se pulsa el botón Start Server.
 
-Observamos que al pulsar el botón de Start \texttt{Server} en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un thread, el del servidor, de forma concurrente al de Swing -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método start(port) de \texttt{Server}, que crea el \texttt{ServerSocket} y  posteriormente, llama al método waitForPlayers para realizar las conexiones oportunas.
+Observamos que al pulsar el botón de Start Server en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un thread, el del servidor, de forma concurrente al de Swing -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método start(port) de \texttt{Server}, que crea el \texttt{ServerSocket} y  posteriormente, llama al método waitForPlayers para realizar las conexiones oportunas.
 
 Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su \texttt{ServerClient} y \texttt{Client} asociados, y se crea el thread \texttt{ServerWaitPlayerThread} y se llama a start(). El \texttt{ServerWaitPlayerThread}, en su método run() llamado desde start(), espera en el método de serverSocket.accept() que se conecte un cliente.
 
@@ -1761,7 +1761,9 @@ Representación visual de \texttt{JoinServerDialog}
 \includegraphics[scale=0.55]{serverviewuml.png}
 \end{center}
 
-Sergio escribe aquí el funcionamiento.
+La clase \texttt{ServerView} extiende de \texttt{JDialog} y su cometido es el de recoger el puerto en el que el usuario host desea que el servidor opere.
+
+Al botón de Start Server en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un thread, el del servidor, de forma concurrente al de Swing -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método start(port) de \texttt{Server} que se encarga de abrir el servidor.
 
 \begin{center}
 \includegraphics[scale=1]{serversetup.png}
