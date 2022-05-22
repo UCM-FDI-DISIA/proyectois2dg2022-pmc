@@ -23,10 +23,11 @@ public class NewGameWindow implements ConsoleWindow {
 	private static String AVAILABLE_MODES_MSG = "Choose game mode between " + GameBuilder.availableModes() + " (case sensitive)";
 	private static final String BOARD_MSG = "Choose a board shape. ";
 	private static final String BOARD_ERROR = "ERROR: Not found such shape. ";
+	protected static final String STRATEGY_ERROR= "ERROR: Not a valid strategy. ";
 	protected static final String NAME_PLAYERS = "Name the players (if you want a player to be an AI, end the name with AI (i.e. Mark AI): ";
 	protected static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 	protected static final String CHOOSE_AI_DIFFICULTY_MSG = "Choose the AI difficulty: ";
-	
+
 	private static final String TYPE = "Game";
 	private	static NewGameWindow[] everyGameWindows = { new NewGameClassicWindow(), new NewGameTeamsWindow() };
 	protected static int nPlayers;	
@@ -138,6 +139,20 @@ public class NewGameWindow implements ConsoleWindow {
 				str.append(String.format("%s: %s%n", c, c.name()));			
 		}
 		return str.toString();		
+	}
+	
+	/**
+	 * It checks whether a String matches an strategy
+	 * @param strat String to validate in UpperCase
+	 * @return true if strat matches an Strategy and false otherwise.
+	 */
+	protected boolean validStrategy(String strat) {
+		for (Strategy s : Strategy.strategies) {
+			if(s.toString().equals(strat)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

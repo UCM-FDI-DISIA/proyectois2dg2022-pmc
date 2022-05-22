@@ -42,7 +42,12 @@ public class NewGameClassicWindow extends NewGameWindow {
 				 if(name.endsWith(" AI")) {
 						System.out.println(CHOOSE_AI_DIFFICULTY_MSG);
 						System.out.print(Strategy.availableStrategies());
-						strat = input.nextLine();
+						do {
+						strat = input.nextLine().toUpperCase();
+						if(!validStrategy(strat)) {
+							System.out.println(STRATEGY_ERROR);
+						}
+						} while(!validStrategy(strat));
 				 }
 				 try {
 					 jPlayers.put(this.validatePlayer(jPlayers, name.endsWith(" AI") ? name.substring(0, name.length() - 3) : name, color, strat));

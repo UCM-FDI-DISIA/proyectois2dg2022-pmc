@@ -1,4 +1,4 @@
-\babel@toc {spanish}{}\relax 
+\babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}Diseño y evolución de las Historias de Usuario}{7}{chapter.1}%
 \contentsline {subsection}{\numberline {1.0.1}Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}{7}{subsection.1.0.1}%
 \contentsline {subsection}{\numberline {1.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{17}{subsection.1.0.2}%
