@@ -101,6 +101,8 @@ A continuación se desarrollará el contenido de cada parte del proyecto, repres
 
 Se ha dividido el código en 3 paquetes con el fin de seguir el patrón modelo-vista-controlador (MVC). De esa forma, separamos de forma encapsulada el modelo (encarga de la lógica del juego), el controlador (intermediario entre la vista y el modelo) y la vista (la parte de la aplicación que interactúa con el usuario).
 
+Haga click \href{run:./Disenyo/fotos/mvcuml.png}{aquí} para ver la distribución de estos paquetes.
+
 Con respecto al modelo, se usa el paquete model; con respecto al controlador, el modo consola y el controlador del cliente (online) usa el paquete Controller y el modo GUI aprovecha de la estructura controlador-vista proporcionada por Swing en los actionPerformed; por último, tenemos la vista en el paquete view, que a su vez se divide en subpaquetes para ofrecer distintas vistas según si se juega en consola o en GUI.
 
 De esta forma se implementa el patrón MVC de una forma eficiente, organizada y respetando la encapsulación en todo momento.

@@ -1,4 +1,4 @@
-\babel@toc {spanish}{}
+\babel@toc {spanish}{}\relax 
 \contentsline {part}{I\hspace {1em}SCRUM}{7}{part.1}%
 \contentsline {chapter}{\numberline {1}LA METODOLOGÍA SCRUM}{9}{chapter.1}%
 \contentsline {section}{\numberline {1.1}ESTRUCTURA Y FUNCIONAMIENTO}{10}{section.1.1}%
@@ -93,8 +93,8 @@
 \contentsline {subsection}{\numberline {8.4.4}GameTeamsTest}{129}{subsection.8.4.4}%
 \contentsline {subsection}{\numberline {8.4.5}PlayerTest}{130}{subsection.8.4.5}%
 \contentsline {subsection}{\numberline {8.4.6}TeamTest}{130}{subsection.8.4.6}%
-\contentsline {section}{\numberline {8.5}Paquete Replay}{130}{section.8.5}%
-\contentsline {subsection}{\numberline {8.5.1}ReplayTest}{130}{subsection.8.5.1}%
+\contentsline {section}{\numberline {8.5}Paquete Replay}{131}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}ReplayTest}{131}{subsection.8.5.1}%
 \contentsline {subsection}{\numberline {8.5.2}StateTest}{131}{subsection.8.5.2}%
 \contentsline {chapter}{\numberline {9}Diseño final}{133}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Paquete model}{133}{section.9.1}%
@@ -160,6 +160,8 @@
 \contentsline {subsubsection}{\numberline {9.3.2.13}JoinServerDialog}{199}{subsubsection.9.3.2.13}%
 \contentsline {subsubsection}{\numberline {9.3.2.14}ServerView}{200}{subsubsection.9.3.2.14}%
 \contentsline {subsubsection}{\numberline {9.3.2.15}MainWindow}{201}{subsubsection.9.3.2.15}%
+\contentsline {subsubsection}{\numberline {9.3.2.16}Tutorial}{203}{subsubsection.9.3.2.16}%
+\contentsline {subsubsection}{\numberline {9.3.2.17}Video}{204}{subsubsection.9.3.2.17}%
 \contentsline {chapter}{\numberline {A}Reports}{205}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {B}Listado de clases}{209}{appendix.Alph2}%
 \contentsline {chapter}{\numberline {C}Estrategia Minimax adaptada a Rolit}{215}{appendix.Alph3}%

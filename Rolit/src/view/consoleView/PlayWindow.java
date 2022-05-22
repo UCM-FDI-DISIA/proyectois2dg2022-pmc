@@ -21,7 +21,7 @@ import view.RolitObserver;
  *
  */
 public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
-	protected static final String MSG_REY = "QUIEN SERA EL REYYYYYY?????? :)";
+	protected static final String WINNER_MSG = "Final Ranking:";
 	private volatile boolean close;
 	private Controller ctr;
 	private GameState state;
@@ -82,7 +82,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		Collections.sort(rivals);
 		this.close = true;
 		this.clear();
-		System.out.println(StringUtils.LINE_SEPARATOR + MSG_REY + StringUtils.LINE_SEPARATOR);
+		System.out.println(StringUtils.LINE_SEPARATOR + WINNER_MSG + StringUtils.LINE_SEPARATOR);
 		for (int i = 0; i < rivals.size(); i++)
 			System.out.println(
 					String.format("%d. %s: %s points", i + 1, rivals.get(i).getName(), rivals.get(i).getScore()));
