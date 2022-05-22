@@ -858,7 +858,7 @@ Al final del Sprint, los objetivos alcanzados son los siguientes:
 \item \texttt{JoinServerDialog}
 \end{itemize}
 
-El diseño y evolución pormenorizados de estos diálogos se encuentran en el apartado de la historia de usuario dedicada a la interfaz.
+El diseño y evolución pormenorizados de estos diálogos se encuentran en el \hyperref[subsec:GUIView]{apartado de la historia de usuario dedicada a la interfaz}.
 
 \item Reutilización del código del diálogo de crear partida, adaptado a las circunstancias de red.
 
@@ -1048,7 +1048,7 @@ Sprint 5 (izquierda) vs Sprint 7 (derecha)
 Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
-El estado final del juego, especificando el UML y el diseño últimos, se encuentra en el apartado de \textit{Diseño final}.
+El estado final del juego, especificando el UML y el diseño últimos, se encuentra en el apartado de \hyperref[ch:DisenyoFinal]{Diseño final}.
 
 \end{sprint}
 
@@ -1217,7 +1217,7 @@ Con la introducción de los comandos vino acompañado el comando exit, que puede
 \includegraphics[scale=0.5]{exit-sprint2.png}
 \end{center}
 
-En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en \hyperref[ch:Commands]{Commands}.
+En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en \hyperref[subsec:Commands]{Commands}.
 \end{sprint}
 
 \subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
@@ -1312,7 +1312,7 @@ Para este sprint los Builder simplemente cambian la forma instanciar el tipo \te
 \end{sprint}
 
 \subsection{Commands}
-\label{ch:Commands}
+\label{subsec:Commands}
 
 La necesidad de tener un paquete de comandos con clases específicas especializadas en convertir los comandos en objetos surgió en el Sprint 2 y se mantuvo hasta el final del proyecto.
 
@@ -1604,6 +1604,7 @@ Creamos un \texttt{Board} y tres \texttt{Player} que se añaden a una lista de \
 
 
 \chapter{Diseño final}
+\label{ch:DisenyoFinal}
 
 \section{Paquete model}
 
@@ -2383,6 +2384,7 @@ Esta clase, que implementa \texttt{ConsoleWindow} y que se presenta en modo cons
 
 \newpage
 \subsection{GUIView}
+\label{subsec:GUIView}
 \subsubsection{Paquete RolitComponents}
 \begin{center}
 \includegraphics[scale=0.5]{RolitComponents.png} 
