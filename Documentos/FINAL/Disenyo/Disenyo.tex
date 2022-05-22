@@ -64,6 +64,169 @@
 \theorempostwork{\vspace{0.2cm}}
     \newtheorem*{sprint}{Sprint}
 
+\chapter{Arquitectura}
+
+El patrón de diseño principal en el proyecto es el \textbf{Modelo-Vista-Controlado}r; ideal para un juego de las características de \texttt{Rolit}.
+
+\begin{center}
+\includegraphics[scale=0.2]{mvc.png}
+\end{center}
+
+El funcionamiento básico, que pormenorizaremos a lo largo del documento, es el siguiente: las vistas recogen las peticiones del usuario (por ejemplo, poner un cubo), el cual procede a notificar al controlador, quien a su vez notifica al modelo para que ejecute las correspondientes acciones. El modelo a su vez, una vez finaliza la ejecución de esas peticiones, actualiza la vista por medio del \textbf{patrón observador}.
+
+\begin{center}
+\includegraphics[scale=0.5]{observer1.png}
+
+Diseño diagrama de clases UML
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.5]{observer2.png}
+
+Diseño diagrama de secuencia UML
+\end{center}
+
+Para implementar el patrón MVC, hemos organizado las clases del proyecto en tres paquetes principales: modelo, vista y controlador. En cada uno de los paquetes se han incluido subpaquetes correspondientes a distintas funcionalidades.
+
+\begin{center}
+\includegraphics[scale=0.4]{mvcumlsimple.png}
+
+Diseño diagrama de secuencia UML
+\end{center}
+
+El UML detallado sería el siguiente:
+
+\begin{center}
+\includegraphics[scale=0.125]{mvcuml.png}
+\end{center}
+
+A continuación se desarrollará el contenido de cada parte del proyecto, representado mediante paquetes.
+
+\subsection{Modelo-Vista-Controlador}
+
+Se ha dividido el código en 3 paquetes con el fin de seguir el patrón modelo-vista-controlador (MVC). De esa forma, separamos de forma encapsulada el modelo (encarga de la lógica del juego), el controlador (intermediario entre la vista y el modelo) y la vista (la parte de la aplicación que interactúa con el usuario).
+
+Con respecto al modelo, se usa el paquete model; con respecto al controlador, el modo consola y el controlador del cliente (online) usa el paquete Controller y el modo GUI aprovecha de la estructura controlador-vista proporcionada por Swing en los actionPerformed; por último, tenemos la vista en el paquete view, que a su vez se divide en subpaquetes para ofrecer distintas vistas según si se juega en consola o en GUI.
+
+De esta forma se implementa el patrón MVC de una forma eficiente, organizada y respetando la encapsulación en todo momento.
+
+\subsubsection{Modelo}
+
+El modelo contiene la lógica y los datos del juego; es el núcleo de \texttt{Rolit}.
+
+\begin{center}
+\includegraphics[scale=1.5]{modelpaquetes.png}
+
+Listado de subpaquetes del modelo
+\end{center}
+
+\begin{itemize}
+
+\item El paquete \textbf{model.builders} paquete agrupa las clases cuya responsabilidad es saber construir un objeto del tipo \texttt{Game} a través de un conglomerado de información.
+
+\item El paquete \textbf{model.commands} recoge los distintos comandos específicos por medio de los cuales el usuario puede interactuar con el modelo, según los requerimientos del \textbf{patrón Command}.
+
+\item El paquete \textbf{model.logic} agrupa la lógica principal encargada del funcionamiento de los elementos que componen el juego.
+
+\item El paquete \textbf{model.online} recoge los aspectos del juego en red relacionados con el modelo.
+
+\item El paquete \textbf{model.replay} contiene a las principales clases involucradas en el funcionamiento de las repeticiones de partidas.
+
+\item En el paquete \textbf{model.strategy} se recogen las distintas estrategias y clases auxiliares para la implementación de los usuarios IA, según los requerimientos del \textbf{patrón Strategy}.
+
+\end{itemize}
+
+La visión completa del modelo es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.2]{mvcmodeluml.png}
+
+Modelo completo
+\end{center}
+
+\subsubsection{Vista}
+
+La vista se encarga de elaborar adecuadamente cómo se visualiza el juego. En nuestro juego existen dos vistas: la de consola y la de GUI.
+
+Los paquetes que hemos empleado para ello son los siguientes:
+
+\begin{center}
+\includegraphics[scale=1.5]{viewpaquetes.png}
+
+Listado de subpaquetes de la vista
+\end{center}
+
+\begin{itemize}
+
+\item En el paquete \textbf{view.consoleView} se incluyen las clases relacionadas con la vista en el modo consola.
+
+\item El paquete \textbf{view.GUIView} contiene las clases relacionadas con la vista en el modo GUI.
+
+\item El paquete \textbf{view.GUIView.createGame}, subpaquete de \textbf{view.GUIView}, contiene las clases relacionadas con los diálogos de creación de partidas.
+
+\item El paquete \textbf{view.GUIView.RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. Estos componentes propios aportan uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
+
+\end{itemize}
+
+La visión completa de la vista es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.2]{mvcviewuml.png}
+
+Vista completa
+\end{center}
+
+\subsubsection{Controlador}
+
+El controlador supone el intermediario entre la vista y el modelo, notificando a ambos si es preciso que se actualicen en base a las interacciones realizadas para el juego o desde el juego.
+
+\begin{center}
+\includegraphics[scale=2]{controllerpaquetes.png}
+
+Paquete controller
+\end{center}
+
+En el paquete controller se pueden distinguir dos tipos de controladores:
+
+\begin{itemize}
+
+\item \texttt{\textbf{Controller}}: clase encargada de controlar la lógica del juego por medio de la creación y el arranque del mismo y de crear los comandos. Es el nexo entre el modelo y la vista GUI en pro del modelo-vista-controlador.
+
+\item \texttt{\textbf{ClientController}}: clase desde la perspectiva del cliente, única por cliente. Es el controlador envía y recoge información de y al servidor.
+
+\end{itemize}
+
+La visión completa del controlador es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.8]{mvccontrolleruml.png}
+
+Controlador completo
+\end{center}
+
+\subsection{Cliente-Servidor}
+
+Para implementar la funcionalidad de red en \texttt{Rolit}, hemos empleado el patrón cliente-servidor, adaptándolo a nuestras necesidades.
+
+En particular, nuestra conexión en red se basa en una estructura en el que \textbf{los clientes poseen el modelo}, realizan cambios en el mismo y lo notifican al servidor. El servidor procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos. Nótese que el cliente sólo tiene contacto con el servidor, y el servidor tiene contacto con todos los clientes. Es, por tanto, un \textbf{modelo de red centralizado}, con nodo central el servidor.
+
+\begin{center}
+\includegraphics[scale=0.8]{redCentralizada.png} 
+\end{center}
+
+Para poder implementar dicho patrón, tuvimos que completar el modelo, vista y controlador, introduciendo las siguientes clases:
+\begin{itemize}
+\item \textbf{Modelo}: paquete model.online. En particular, \texttt{Client}, \texttt{Server}, \texttt{ServerClient}, \texttt{ServerClientThread}, \texttt{ServerWaitPlayerThread}.
+\item \textbf{Vista}: \texttt{ChooseTeamFromServerDialog}, \texttt{JoinServerDialog}, \texttt{ServerView}
+\item \textbf{Controller}: \texttt{ClientController}.
+\end{itemize}
+Por tanto, la visión completa del juego online es la siguiente:
+
+\begin{center}
+\includegraphics[scale=0.4]{mvconlineuml.png} 
+\end{center}
+
+
 \chapter{Diseño y evolución de las Historias de Usuario}
 
 \subsection{Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}
@@ -1177,6 +1340,52 @@ La clase abstracta \texttt{Command} tiene el constructor común a todas sus subc
 \item \texttt{PlaceCubeCommand}: se utiliza para poner un cubo en una posición del tablero (teniendo en cuenta las posiciones disponibles)
 
 \item \texttt{SaveCommand}: se utiliza para guardar una partida.
+
+Los diagramas de secuencia UML que muestran procesos clave son los siguientes:
+
+\begin{center}
+\includegraphics[scale=0.5]{Command_getCommand.png}
+
+\texttt{getCommand}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{Command_parse.png}
+
+\texttt{parse}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{ExitCommand_execute.png}
+
+\texttt{ExitCommand.execute}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{HelpCommand_execute.png}
+
+\texttt{HelpCommand.execute}
+
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{PlaceCubeCommand_execute_sprint2.png}
+
+\texttt{PlaceCubeCommand.execute}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{PlaceCubeCommand_parse.png}
+
+\texttt{PlaceCubeCommand.parse}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{SaveCommand_parse.png}
+
+\texttt{SaveCommand.parse}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.5]{SaveCommand_execute2.png}
+
+\texttt{SaveCommand.execute}
+\end{center}
+
+
 \end{sprint}
 
 \begin{sprint}[3]
@@ -1193,6 +1402,12 @@ En este Sprint los comandos no cambian nada de su implementación ya que los cam
 
 \begin{sprint}[6]
 En este Sprint cambia la implementación del método execute() del comando \texttt{PlaceCubeCommand} y pasa a delegar la responsabilidad de poner un cubo en el tablero a \texttt{Game}, llamando a un método de esta clase, que se encargará de crear un nuevo cubo y asociar este cubo con el jugador correspondiente.
+
+\begin{center}
+\includegraphics[scale=0.5]{PlaceCubeCommand_execute_sprint6.png}
+
+\texttt{PlaceCubeCommand.execute}
+\end{center}
 \end{sprint}
 
     \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.25cm}{\uline{#1}}
@@ -1402,6 +1617,19 @@ Creamos un Board y tres Player que se añaden a una lista de Player. Se crean do
 \chapter{Diseño final}
 
 \section{Paquete model}
+
+\subsubsection{SaveLoadManager}
+
+Esta clase incluye un amplio abanico de métodos cuya finalidad es la carga, guardado y borrado de información desde archivos externos al mismo. En particular, implementa métodos que posibilitan:
+
+\begin{itemize}
+\item Obtener la lista de partidas y replays guardados
+\item Cargar partidas y replays guardados
+\item Guardar partidas y replays
+\item Borrar partidas y replays guardados
+\item Cargar las matrices definidas de \texttt{Shape}
+\end{itemize}
+
 \subsection{Builders}
 Este paquete agrupa las clases cuya responsabilidad es saber construir un objeto del tipo \texttt{Game} a través de un conglomerado de información. Para unificar dicha funcionalidad se han tomado las siguiente decisiones:
 \begin{itemize}
@@ -1668,11 +1896,7 @@ Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de
 
 \subsection{Online}
 
-Fundamentalmente, la conexión en red se basa en una estructura en el que los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor. El servidor procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos. Nótese que el cliente sólo tiene contacto con el servidor, y el servidor tiene contacto con todos los clientes. Es, por tanto, un modelo de red centralizado, con nodo central el servidor.
-
-\begin{center}
-\includegraphics[scale=1]{redCentralizada.png} 
-\end{center}
+Como explicamos en el apartado de Arquitectura, el juego en red se basa en el \textbf{modelo cliente-servidor}, donde los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor, el cual procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos.
 
 Para implementar esta funcionalidad de red en Java operamos según el modelo \texttt{ServerSocket}-\texttt{Socket}. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de \texttt{ServerSocket} pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo\texttt{Socket} por medio de llamar al método accept() de \texttt{ServerSocket}. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
 
@@ -2157,6 +2381,10 @@ Del mismo modo que la clase \texttt{LoadReplayWindow} presentaba las posibles \t
 
 \subsubsection{PlayWindow}
 
+Esta clase, que implementa \texttt{ConsoleWindow} y que se presenta en modo consola, muestra en pantalla el hilo de ejecución de una partida, y es el encargado de recoger las peticiones del usuario.
+\begin{center}
+\includegraphics[scale=0.5]{PlayWindow_open.png}
+\end{center}
 
 \newpage
 \subsection{GUIView}
@@ -2561,6 +2789,8 @@ Las clases del proyecto con las siguientes:
 
 \textbf{Client}: Clase intermediaria entre el ClientController y la vista.
 
+\textbf{ClientController}: clase desde la perspectiva del cliente. Es el controlador envía y recoge información de y al servidor. El controlador es único por cliente.
+
 \textbf{Command}: Clase genérica de comando que parsea los comandos introducidos para poder llamas a las clases específicas que gestionan dichos comandos.
 
 \textbf{ExitCommand}: Clase que, dado el comando exit, termina el juego.
@@ -2571,7 +2801,7 @@ Las clases del proyecto con las siguientes:
 
 \textbf{SaveCommand}: Clase que, dado el comando save, llama a SaveLoadManager para que guarde la partida en el instante en el que se llama al comando.
 
-\textbf{Controller}: El controlados (en el sentido del MVC), intermediario de la vista y el modelo.
+\textbf{Controller}: El controlador (en el sentido del MVC), intermediario de la vista y el modelo.
 
 \textbf{SaveLoadManager}: Clase encargada de la carga, guardado y borrado de partidas y replays.
 

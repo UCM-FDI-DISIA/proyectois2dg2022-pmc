@@ -1,0 +1,54 @@
+@startuml
+participant Actor
+Actor -> PlayWindow : open
+activate PlayWindow
+PlayWindow -> ConsoleWindow : clear
+activate ConsoleWindow
+ConsoleWindow --> PlayWindow
+deactivate ConsoleWindow
+PlayWindow -> Command : getCommand
+activate Command
+Command -> Command : parse
+activate Command
+Command --> Command
+deactivate Command
+Command --> PlayWindow
+deactivate Command
+PlayWindow -> Controller : executeCommand
+activate Controller
+Controller -> Game : getCurrentPlayer
+activate Game
+Game --> Controller
+deactivate Game
+Controller -> Player : getColor
+activate Player
+Player --> Controller
+deactivate Player
+Controller -> Client : getPlayer
+activate Client
+Client --> Controller
+deactivate Client
+Controller -> Player : getColor
+activate Player
+Player --> Controller
+deactivate Player
+Controller -> Command : execute
+activate Command
+Command --> Controller
+deactivate Command
+Controller -> Game : executedTurn
+activate Game
+Game --> Controller
+deactivate Game
+Controller -> Client : updateGameToServer
+activate Client
+Client --> Controller
+deactivate Client
+Controller -> Command : execute
+activate Command
+Command --> Controller
+deactivate Command
+Controller --> PlayWindow
+deactivate Controller
+return
+@enduml
