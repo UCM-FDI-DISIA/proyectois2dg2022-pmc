@@ -10,6 +10,7 @@
 \clubpenalty=10000 %líneas viudas NO
 \widowpenalty=10000 %líneas viudas NO
 
+\usepackage{appendix}
 \usepackage{graphicx}
 \graphicspath{{./fotos/}}
 \usepackage{ntheorem}[thmmarks]	% paquete de formateo de entornos matemáticos
@@ -17,11 +18,11 @@
 \usepackage{ulem}
 \usepackage[explicit]{titlesec} %Formato de capitulos y secciones
 \usepackage{hyperref} %Hipervínculos y referencias
-
 \usepackage[dvipsnames,usenames]{xcolor} %activar e incluir colores
+\usepackage{multicol}
+\setlength{\columnsep}{1cm}
 
 \begin{document}
-\defaultformat
 \definecolor{comentarios}{RGB}{186,196,200}
 \definecolor{words}{RGB}{87,35,100}
 \maketitle
@@ -45,6 +46,11 @@
     keywordstyle=\color{words}
 }
 
+\titleformat{\chapter}[block]{\normalfont\huge\bfseries}{\thechapter.}{0.5cm}{\Huge #1}[\titlerule]
+    \titleformat{\section}{\normalfont\Large\bfseries}{}{0cm}{#1}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{}{0cm}{\uline{#1}}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0cm}{#1}
+
 \theoremstyle{break}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{}
@@ -65,7 +71,7 @@
 \begin{sprint}[1]
 Diagrama de clases:
 \begin{center}
-\includegraphics[scale=0.29]{logicS1.png}
+\includegraphics[scale=0.30]{logicS1.png}
 \end{center}
 Esta es la versión más básica de Rolit.
 
@@ -97,12 +103,12 @@ Los jugadores están almacenados en una lista de \texttt{Player} y en un mapa de
 
 Para poder entender el método \texttt{update(Cube)} de una forma más simple hay que contextualizarlo primero. El \texttt{main()} está dentro de la clase \texttt{Rolit} y es el encargado de instanciar \texttt{Controller, Game y Board}, así como de crear la lista de \texttt{Player}.
 \begin{center}
-\includegraphics[scale=0.4]{mainS1.png}
+\includegraphics[scale=0.55]{mainS1.png}
 \end{center}
 
 Por otro lado el método \texttt{run()} se encarga de gestionar la ejecución global del juego, el cual será ejecutado hasta que haya terminado, es decir, cuando el tablero se esté completamente lleno. Esto se gestiona por medio de un bucle cuya condición es \texttt{!game.isFinished()}, esta función actúa como un getter del atributo privado \texttt{finished} de la clase \texttt{Game}, como bien se puede apreciar en el diagrama de clases. Por último, se mostrará un ranking, por medio de \texttt{GamePrinter} a través del método \texttt{showRanking()}, que muestra una lista de los jugadores ordenados según su atributo \texttt{score}, es decir, ganará el jugador con más puntos.
 \begin{center}
-\includegraphics[scale=0.45]{controller-runS1.png}
+\includegraphics[scale=0.55]{controller-runS1.png}
 \end{center}
 
 El método \texttt{play()} comprueba en primer lugar que la posición en la que se quiere colocar el cubo es válida. En caso afirmativo se crea un \texttt{Cube} y se llama al método \texttt{update()}, al que queríamos llegar desde un comienzo y podríamos considerar núcleo de la lógica de Rolit.
@@ -112,7 +118,7 @@ El método \texttt{play()} comprueba en primer lugar que la posición en la que 
 Como bien se puede observar en el diagrama de secuencias inferior, el método
 \texttt{update()} de Game  es el encargado de cambiar de color todos los cubos que quedan atrapados en las direcciones válidas, así como de actualizar el atributo \texttt{finished} si la partida ha acabado, en otro caso avanza el turno para que cada jugador solo colocar un \texttt{Cube} en cada turno.
 \begin{center}
-\includegraphics[scale=0.5]{updateGameS1.png}
+\includegraphics[scale=0.65]{updateGameS1.png}
 \end{center}
 
 \end{sprint}
@@ -121,7 +127,7 @@ Como bien se puede observar en el diagrama de secuencias inferior, el método
 \begin{sprint}[2]
 Diagrama de clases:
 \begin{center}
-\includegraphics[scale=0.4]{diagramaclasesS2.png}
+\includegraphics[scale=0.48]{diagramaclasesS2.png}
 \end{center}
 
 En esta segunda versión de Rolit esta historia de usuario a penas sufre modificaciones, no obstante, la forma de implementarlas es algo distinta. Para poder apreciarlo mejor conviene comparar el diagrama de clases de este Sprint con el del Sprint anterior. Entre los cambios podemos destacar:
@@ -134,18 +140,18 @@ En esta segunda versión de Rolit esta historia de usuario a penas sufre modific
 \item el \texttt{main()} de \texttt{Rolit} tiene como única funcionalidad la creación del \texttt{Controller} y una llamada a su método \texttt{run()}.
 \item Ahora el método \texttt{run()} es el encargado de crear el juego según desee el usuario y el bucle principal del juego estará en el método \texttt{play()}, un método nuevo que sería un intermediario entre \texttt{run()} de \texttt{Controller} y \texttt{play()} de Game, al que accedemos desde el \texttt{execute()} del comando \texttt{PlaceCube}.
 \begin{center}
-\includegraphics[scale=0.5]{playS2.png}
+\includegraphics[scale=0.55]{playS2.png}
 \end{center}
 Como podemos apreciar en la imagen superior, ahora es \texttt{play()} el encargado de gestionar cuando termina el juego, así como de mostrar el ranking final del juego, que al igual que el anterior Sprint vendrá determinado por el \texttt{score} de los \texttt{Player}. Al añadir el comando \texttt{Exit} el bucle de \texttt{play()} de \texttt{Controller} podría salir del bucle y que el juego no haya terminado, por eso es necesario hacer la comprobación al saltar de turno.
 
 \item la función \texttt{play()}de \texttt{Game} es muy parecida a la del Sprint 1, no obstante, al pasar el método \texttt{update()} de la clase \texttt{Game} a la clase \texttt{Board} debemos actualizar el atributo \texttt{finished} y pasar de turno en el método \texttt{play()} de \texttt{Game}. 
 \begin{center}
-\includegraphics[scale=0.5]{playgameS2.png}
+\includegraphics[scale=0.57]{playgameS2.png}
 \end{center}
 
 \item Tal y como se mencionó anteriormente el método \texttt{update()} pasó a estar en \texttt{Board} y en este caso su única funcionalidad es cambiar de color todos los cubos que quedan atrapados en las direcciones válidas. Esta será la versión final del método para todos los Sprints siguientes.
 \begin{center}
-\includegraphics[scale=0.5]{Board.update()-sprint7.png}
+\includegraphics[scale=0.65]{Board.update()-sprint7.png}
 \end{center}
 \end{itemize} 
 \end{sprint}
@@ -154,7 +160,7 @@ Como podemos apreciar en la imagen superior, ahora es \texttt{play()} el encarga
 \begin{sprint}[3]
 Diagrama de clases:
 \begin{center}
-\includegraphics[scale=0.35]{diagramaclasesS3.png}
+\includegraphics[scale=0.40]{diagramaclasesS3.png}
 \end{center}
 
 En esta tercera versión no hay apenas cambios, todo se gestiona de la misma manera salvo el \texttt{Board}. Ahora existen 9 tipos de tablero, hay tres formas y tres tamaños (grande, mediano, pequeño) para cada forma (rombo, círculo, cuadrado). Esto es posible gracias a métodos como \texttt{getShapeSize()} o \texttt{loadShape()} de la clase \texttt{SaveLoadManager}. 
@@ -166,7 +172,7 @@ En esta tercera versión no hay apenas cambios, todo se gestiona de la misma man
 
 A partir de este Sprint los cubos pasan a ser redondos y del \texttt{Color} que representan y se van introduciendo en las casillas del tablero.
 \begin{center}
-\includegraphics[scale=0.5]{cubos-redondos.png}
+\includegraphics[scale=0.85]{cubos-redondos.png}
 \end{center}
 
 \end{sprint}
@@ -267,7 +273,7 @@ Tal y como se ve, principalmente la función más importante de impresión es la
 En base a la experiencia en proyectos anteriores, durante este sprint se consolidó la clase \texttt{Controller} como la encargada de todos los procesos externos a los bucles del propio juego, es decir, se encargaba determinar el número de jugadores, el tipo de tablero, creación de los elementos del \texttt{Game}... Por tanto, el menú principal estaba en la clase \texttt{Controller}, concretamente la funcionalidad la encapsulaba la función \texttt{int menu()} que interactuaba con otros métodos privados de la clase para que el usuario pudiese decidir el resto de cosas y la funcionalidad de mostrar el juego seguía estando representada en la clase \texttt{GamePrinter} con el método \texttt{toString()}.
 
 \begin{center}
-\includegraphics[scale=0.5]{MenuPpal_sprint2_seq}
+\includegraphics[scale=0.55]{MenuPpal_sprint2_seq}
 \end{center}
 \end{sprint}
 
@@ -279,9 +285,9 @@ private static final String PROMPT = "Command > ";
 	private static final String CHOOSE_COLOR = "Choose a color shortcut: ";
 	private static final String NUMBER_PLAYERS_MSG = "Choose the number of players...";
 	private static final String ERROR_PLAYERS_MSG = "Number of players must be...";
-	private static final String BOARD_MSG = "Choose your board size [8 - "+ Board.MAX_SIZE + "]";
-	private static final String BOARD_ERROR = "Board size must be a number between...";
-	private static final String LOAD_MSG = "Type the name of the file (. to load default file): ";
+	private static final String BOARD_MSG = "Choose your board size [8 - ...";
+	private static final String BOARD_ERROR = "Board size must be a number between...");
+	private static final String LOAD_MSG = "Type the name of the file (. to load... ");
 \end{lstlisting}
 
 \begin{sprint}[3]
@@ -340,9 +346,6 @@ En el caso de las \textit{replays}, en el \textit{ControlPanel} aparecen dos fle
 
 Esta clase es un \textit{JPanel} se encarga de mostrar a los usuarios del turno del jugador actual, las puntuaciones de cada uno de los participantes y la modalidad de juego.
 
-\underline{StatusBar}
-
-
 \underline{CreateGameDialog}
 \begin{center}
 \includegraphics[scale=0.8]{create-game-sprint3.png}
@@ -360,7 +363,7 @@ Si el usuario presiona \textit{Cancel} se le lleva de vuelta a la pantalla princ
 
 \underline{LoadGameDialog}
 \begin{center}
-\includegraphics[scale=0.8]{load-dialog-sprint3.png}
+\includegraphics[scale=0.88]{load-dialog-sprint3.png}
 \end{center}
 
 En esta pantalla se muestra una lista con las partidas guardadas, de forma que si se elige una de estas partidas se cargará inmediatamente.
@@ -369,7 +372,7 @@ Aparece también debajo un botón de carga de ficheros que abre un  \textit{JFil
 
 \underline{DeleteGameDialog}
 \begin{center}
-\includegraphics[scale=0.8]{delete-dialog-sprint3.png}
+\includegraphics[scale=0.93]{delete-dialog-sprint3.png}
 \end{center}
 
 En esta pantalla se muestra la lista de partidas guardadas y un botón para confirmar el borrado. Con esto, si se selecciona una de las partidas guardadas y se presiona el botón inferior, la lista se elimina de la lista de partidas guardadas.
@@ -391,15 +394,10 @@ Inicialmente la ventana principal comienza con una pantalla en la que se muestra
 Si se ha decidido jugar a una partida o cargar una replay, el panel principal de la \textit{MainWindow} será reemplazado por un panel que contiene, de arriba a abajo, un ControlPanel, una TurnAndRankingBar, un BoardGUI y una StatusBar.
 
 \begin{center}
-\includegraphics[scale=0.9]{game-sprint3.png}
-%FIXME CENTRAR
-Jugar una partida
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.9]{replay-sprint3.png}
-%FIXME CENTRAR
-Reproducir una \textit{replay}
+\begin{multicols}{2}
+\includegraphics[scale=0.3]{game-sprint3.png}\\
+\includegraphics[scale=0.3]{replay-sprint3.png}
+\end{multicols}
 \end{center}
 
 \underline{Funcionamiento interno}
@@ -422,6 +420,8 @@ En el caso de la GUI, la comunicación con los modelos se lleva a cabo a través
 \textbf{Console}
 
 En el sprint 5, la evidencia de las limitaciones que tiene tener la consola tan poco definida en comparación con la programación de componentes de \textit{Swing} y la implementación de un hilo a parte para el modelo hacen posible que se cree una serie de clases a modo de ``componentes'' para formalizar de una vez la vista del modo consola:
+\newpage
+
 \begin{center}
 \includegraphics[scale=0.55, angle=90]{DiagramaClasesConsola}
 \end{center}
@@ -476,7 +476,7 @@ Por este motivo, se añadió un atributo al constructor de \textit{CreateGameDia
 
 \underline{CreateServerDialog}
 \begin{center}
-\includegraphics[scale=0.8]{create-server-sprint5.png}
+\includegraphics[scale=0.93]{create-server-sprint5.png}
 \end{center}
 
 Para poder crear el servidor el usuario debe elegir en qué puerto hostearlo, para ello se creó este \textit{JDialog}, que abre el servidor una vez se pulsa el botón ``Start Server".
@@ -499,9 +499,8 @@ Para solventar este problema planteamos inicialmente el uso de objetos transfere
 Finalmente, esta idea fue rechazada en favor de reutilizar el código ya existente. Así, se decidió que la información se transmitiese mediante la clase \textit{State} creada originalmente para reproducir las \textit{replays}, pues al fin y al cabo, un estado representa una serialización del juego y contiene toda la información necesaria.
 
 \begin{center}
-\includegraphics[scale=0.5]{board-gui-evol.png}
-
-Evolución de la clase \textit{BoardGUI}. Sprint 4 (izq) y Sprint 5 (der)
+\includegraphics[scale=0.47]{board-gui-evol.png}\\
+\footnotesize{Evolución de la clase \textit{BoardGUI}. Sprint 4 (izq) y Sprint 5 (der)}
 \end{center}
 
 Por consiguiente, todas las instancias de clases relacionadas con el modelo de \textit{Game} fueron eliminadas y reemplazadas por estados y JSONObjects. Para ello fue necesario añadir nuevos métodos a la clase \textit{State}.
@@ -624,13 +623,13 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 Además, en este sprint se incluyó en la GUI un ranking final donde se muestran los tres primeros puestos. En caso de que solo haya dos jugadores solo se mostrarán esos dos.
 
 \begin{center}
-\includegraphics[scale=0.85]{ranking-2players.png}
+\includegraphics[scale=0.75]{ranking-2players.png}
 
 Ranking para dos jugadores
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.85]{ranking-3players.png}
+\includegraphics[scale=0.75]{ranking-3players.png}
 
 Ranking para más de dos jugadores
 \end{center}
@@ -732,7 +731,7 @@ Presentamos los diagramas UML de este Sprint.
 El UML de clases es el siguiente:
 
 \begin{center}
-\includegraphics[scale=0.45]{UMLClasesRedSprint5.png} 
+\includegraphics[scale=0.52]{UMLClasesRedSprint5.png} 
 \end{center}
 
 Presentamos los diagramas de secuencia de este Sprint.
@@ -742,19 +741,19 @@ Presentamos los diagramas de secuencia de este Sprint.
 \item Cómo se realizan las conexiones
 
 \begin{center}
-\includegraphics[scale=0.45]{umlconexiones.png} 
+\includegraphics[scale=0.41]{umlconexiones.png} 
 \end{center}
 
 \item Cómo se inicia una partida
 
 \begin{center}
-\includegraphics[scale=0.45]{empezarPartidaUml.png} 
+\includegraphics[scale=0.42]{empezarPartidaUml.png} 
 \end{center}
 
 \item Cómo se envía y recibe una jugada
 
 \begin{center}
-\includegraphics[scale=0.45]{juegoTipicoUml.png} 
+\includegraphics[scale=0.42]{juegoTipicoUml.png} 
 \end{center}
 
 \end{itemize}
@@ -783,13 +782,15 @@ En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes
 \item Se introduce un \texttt{ServerWorker} que soluciona un bug complejo que afectaba a los threads de Red y Swing.
 
 \item Simplificación y refactorización del código de Red.
+\end{itemize}
+
+\newpage
 
 \begin{center}
 \includegraphics[scale=0.45]{UMLClasesRedSprint6.png} 
 \end{center}
 
-\end{itemize}
-
+\newpage
 Por último las sucesivas refactorizaciones pugnadas desde otras partes del código (para, por ejemplo soportar la IA) precisan de un debug extensivo en el modo Red. Este debug es satisfactorio.
 
 Los nuevos diagramas de secuencia, así como los comentarios acerca de las implementaciones de las nuevas funcionalidades se describen en el séptimo Sprint, pues en aquél se refinan ligeramente estas.
@@ -917,16 +918,14 @@ Como se observa, inicialmente era una clase muy sencilla, pues solo tenía funci
 
 \begin{center}
 \centering
-\includegraphics[scale=0.5]{load-sprint1.png}
-
-Cargar partida
+\includegraphics[scale=0.48]{load-sprint1.png}\\
+\footnotesize{Cargar partida}
 \end{center}
 
 \begin{center}
 \centering
-\includegraphics[scale=0.5]{save-game-sprint1.png}
-
-Guardar partida
+\includegraphics[scale=0.5]{save-game-sprint1.png}\\
+\footnotesize{Guardar partida}
 \end{center}
 \end{sprint}
 
@@ -952,7 +951,7 @@ La adquisición de nuevos conocimientos nos permitió tomar una decisión de dis
 
 De esta forma, la interfaz \texttt{Saveable} fue reemplazada por \texttt{Reportable}, que se podía implementar en cualquier clase del proyecto y que contaba con un único método \texttt{report()}, que devuelve una serialización del objeto en formato \texttt{JSON}. Además, se creo un documento en el que se especificaban todos los reports de cada clase. Puede accederse al documento actual de reports haciendo click \hyperref[ch:AnexoI]{aquí}.
 
-
+\newpage
 \begin{center}
 \centering
 \includegraphics[scale=0.5]{save-load-manager-sprint3.png}
@@ -1090,41 +1089,7 @@ El flujo de creación de los jugadores actualmente se refleja en el siguiente di
 
 \end{sprint}
 
-\begin{sprint}[2]
-En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
-
-En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
-
-\begin{center}
-\includegraphics[scale=0.85]{Controller-sprint2.png} 
-\end{center}
-
-El flujo de dicha creación es la siguiente:
-
-\begin{center}
-\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
-\end{center}
-\end{sprint}
-
-\subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
-
-\begin{sprint}[1]
-En este primer Sprint el número de jugadores es fijo. Este número se guarda como atributo de la clase \texttt{Rolit}, cuyo estado en este momento es el siguiente:
-
-\begin{center}
-\includegraphics[scale=0.85]{Rolit-sprint1.png} 
-\end{center}
-
-Para la creación de estos jugadores, los colores también están fijados, siendo estos amarillo, rojo, verde y azul, asignados a los jugadores en ese orden. Por tanto, en este momento, de cara a la creación de los jugadores (y de la partida en general) la entrada se limita a leer el nombre de los jugadores, que se hace directamente en el método main de \texttt{Rolit}.
-
-El flujo de creación de los jugadores actualmente se refleja en el siguiente diagrama:
-
-\begin{center}
-\includegraphics[scale=0.85]{Rolit.main()-sprint1.png} 
-\end{center}
-
-\end{sprint}
-
+\newpage
 \begin{sprint}[2]
 En este Sprint ya se da la opción al usuario de elegir el número de jugadores que van a participar en la partida. Aparte, ahora se delega la tarea de lectura de la entrada para la creación de la partida a la clase \texttt{Controller} en su método \texttt{createGame()}. 
 
@@ -1134,10 +1099,11 @@ En este momento, la clase \texttt{Controller} se haya en el siguiente estado:
 \includegraphics[scale=1]{Controller-sprint2.png} 
 \end{center}
 
+\newpage
 El flujo de dicha creación es la siguiente:
 
 \begin{center}
-\includegraphics[scale=0.5]{Controller.createGame()-sprint2.png} 
+\includegraphics[scale=0.45]{Controller.createGame()-sprint2.png} 
 \end{center}
 
 Aparte, dentro del bucle con \texttt{tryToAddPlayer} vemos que se da la opción al jugador de elegir color. Los colores disponibles son: Amarillo, rojo, verde, azul, naranja, rosa, morado, negro, marrón y beige.
@@ -1145,7 +1111,7 @@ Aparte, dentro del bucle con \texttt{tryToAddPlayer} vemos que se da la opción 
 Para conseguir esto, la representación interna de los colores se hace a través de la clase enumerada \texttt{Color}, cuyo estado en este momento es el siguiente:
 
 \begin{center}
-\includegraphics[scale=0.9]{Color-sprint2.png} 
+\includegraphics[scale=0.75]{Color-sprint2.png} 
 \end{center}
 
 \end{sprint}
@@ -1156,13 +1122,14 @@ Para conseguir esto, la representación interna de los colores se hace a través
 Hasta que el proyecto no aumentó lo suficiente de tamaño y hasta que no se estudiaron los patrones adecuados, la necesidad de tener unas clases específicas especializadas en la creación de ciertos objetos no tuvo relevancia en el proyecto (pues no surgió la necesidad o no teníamos los conocimientos para cubrirla).
 
 \begin{sprint}[3]
-El aumento de tamaño del \texttt{Game} y, con mucha más relevancia, la complejidad de la creación del mismo que estaba adquiriendo dicha clase hizo que fuese necesario encapsular la lógica de creación de este objeto más allá de un simple constructor, pues no era responsabilidad del controlador o las clases que iniciaran el juego de traducir los datos que el usuario quería del mismo a una instancia concreta de \texttt{Game}, pero tampoco podíamos hacer una cantidad ingente de constructores para cada posible situación de juego.
-
-En base a esta necesidad, y con vistas a que en el futuro iba a haber más tipos de \texttt{Game} a los que jugar, se crea por primera vez la clase \texttt{GameGenerator}. Esta clase, debido a la falta de una implementación del \textit{Modelo-Vista-Controlador} útil y funcional, se encarga no sólo de traducir los datos que el usuario introduce por pantalla para generar el juego sino de preguntar directamente por consola cuáles son las características del juego que se va generar.
-
+El flujo de creación del juego quedaría como:
 \begin{center}
 \includegraphics[scale=0.5]{Builders_sprint3_seq}
 \end{center}
+
+El aumento de tamaño del \texttt{Game} y, con mucha más relevancia, la complejidad de la creación del mismo que estaba adquiriendo dicha clase hizo que fuese necesario encapsular la lógica de creación de este objeto más allá de un simple constructor, pues no era responsabilidad del controlador o las clases que iniciaran el juego de traducir los datos que el usuario quería del mismo a una instancia concreta de \texttt{Game}, pero tampoco podíamos hacer una cantidad ingente de constructores para cada posible situación de juego.
+
+En base a esta necesidad, y con vistas a que en el futuro iba a haber más tipos de \texttt{Game} a los que jugar, se crea por primera vez la clase \texttt{GameGenerator}. Esta clase, debido a la falta de una implementación del \textit{Modelo-Vista-Controlador} útil y funcional, se encarga no sólo de traducir los datos que el usuario introduce por pantalla para generar el juego sino de preguntar directamente por consola cuáles son las características del juego que se va generar.
 
 Es decir, esta clase constituye una aproximación al patrón de Factorías, pues ahora \texttt{Controller} solo debe encargarse de pedirle a la factoría que genere el juego y después hacer su verdadera función: controlar los eventos del juego.
 \end{sprint}
@@ -1170,9 +1137,11 @@ Es decir, esta clase constituye una aproximación al patrón de Factorías, pues
 \begin{sprint}[4]
 La aparición de nuevos tipos de \texttt{Game} complica, más si cabe, la creación de los mismos para comenzar la partida. Ya no sólo el usuario debe introducir características que desea del juego sino que tiene que introducir cosas distintas en función del tipo de juego que desee jugar. Esta nueva funcionalidad complica mucho las cosas porque, tal y como estába implementado en el sprint anterior, tendríamos que saber generar una factoría distinta para cada tipo de juego y que dicha factoría generase el juego.
 
-Es en este punto donde implementamos los patrones de \textit{Abstract Factory} y \textit{Builder}. Generamos un nuevo paquete y unas nuevas clases que van a sustituir a la clase \texttt{GameGenerator} del sprint anterior y que principalmente van a tener dos familias de métodos: un grupo de métodos para \textbf{preguntar} y recopilar la información que el usuario teclee sobre el juego y otra familia para \textbf{construir} el juego una vez se tiene la información.
+\begin{center}
+\includegraphics[scale=0.47]{BuildersClassDiagram.png}
+\end{center}
 
-$$DIAGRAMA DE CLASES DE LOS BUILDER SPRINT 4$$
+Es en este punto donde implementamos los patrones de \textit{Abstract Factory} y \textit{Builder}. Generamos un nuevo paquete y unas nuevas clases que van a sustituir a la clase \texttt{GameGenerator} del sprint anterior y que principalmente van a tener dos familias de métodos: un grupo de métodos para \textbf{preguntar} y recopilar la información que el usuario teclee sobre el juego y otra familia para \textbf{construir} el juego una vez se tiene la información.
 
 La clase principal y la cual es la encargada de la generación de los \texttt{Game} como tipo abstracto es la clase \texttt{GameBuilder}. Dicha clase pregunta \textbf{los elementos globales a cualquier juego} por pantalla a través del método \texttt{ask()} y después indica al constructor concreto del juego concreto que se quiere jugar que pregunte lo que considere necesario sobre su juego a través de su método \texttt{whatIneed()}. Todo este proceso genera un conglomerado de datos \textbf{en forma de \texttt{JSONObject}} que se utiliza como receta para el método de construcción del juego. Dicho método funciona exactamente igual a los procesos anteriores: la factoría general \textbf{GameBuilder} construye a partir del \texttt{JSONObject} todo lo que un juego genérico tendría y después indica al Builder concreto que termine de construir el juego con el mismo \texttt{JSONObject}.
 
@@ -1225,6 +1194,10 @@ En este Sprint los comandos no cambian nada de su implementación ya que los cam
 \begin{sprint}[6]
 En este Sprint cambia la implementación del método execute() del comando \texttt{PlaceCubeCommand} y pasa a delegar la responsabilidad de poner un cubo en el tablero a \texttt{Game}, llamando a un método de esta clase, que se encargará de crear un nuevo cubo y asociar este cubo con el jugador correspondiente.
 \end{sprint}
+
+    \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.25cm}{\uline{#1}}
+    \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.15cm}{#1}
+    \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{}{0cm}{$\ast$ #1 $\ast$}
 
 \chapter{Tests de JUnits}
 \section{Paquete Builders}
@@ -1443,8 +1416,11 @@ Este paquete agrupa las clases cuya responsabilidad es saber construir un objeto
 
 Observadas las anteriores decisiones de diseño, se presenta el conjunto de clases implicadas en la construcción del juego siguiendo el patrón de \textit{Abstract Factory} y \textit{Builder}:
 
-$$DIAGRAMA DE CLASES BUILDERS FINAL$$
+\begin{center}
+\includegraphics[scale=0.7]{Builders_final_class.png}
+\end{center}
 
+\subsubsection{GameBuilder}
 La clase principal es \texttt{GameBuilder} cuyo método principal para la creación es \texttt{public static Game createGame(JSONObject o)}. Dicho método se encarga recoger el tipo de juego que se desea generar del \texttt{JSONObject} y parsear el Builder concreto que sabe construir dicho juego. Una vez lo encuentra se pasa la responsabilidad de crearlo al mismo llamando al método de los Builder \texttt{Game GenerateGame(JSONObject o)}. Es decir, la interacción a la hora de crear un \texttt{Game} sería:
 \begin{center}
 \includegraphics[scale=0.55]{Builders_final_seq}
@@ -1456,13 +1432,14 @@ Esta clase posee una serie de métodos protegidos que utilizan sus hijas, los Bu
 Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lógica de construcción de los \texttt{GameClassic} y los \texttt{GameTeams}. El flujo de ejecución es idéntico para ambas, se llama al método \texttt{Game GenerateGame(JSONObject o)} que devuelve el juego listo para empezar la ejeución, aunque la forma de construir el juego sí es distinta:
 
 \begin{center}
-\includegraphics[scale=0.45]{GameClassicBuilder_final_seq}
-\includegraphics[scale=0.45]{GameTeamsBuilder_final_seq}
+\includegraphics[scale=0.45, angle=90]{GameClassicBuilder_final_seq}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.45, angle=90]{GameTeamsBuilder_final_seq}
 \end{center}
 
+\newpage
 
-
-\subsubsection{GameBuilder}
 \subsection{Commands}
 
 Este paquete agrupa las clases que se encargan de los comandos del juego a partir de una solicitud. Dicha solicitud es convertida en un objeto independiente que contiene toda la información sobre la misma, lo cual permite la separación de responsabilidades y la división del código en capas. Para ello se han tomado las siguientes decisiones:
@@ -1485,26 +1462,22 @@ Este comando sirve para salir del juego a través del método \texttt{exit()} de
 \includegraphics[scale=0.55]{ExitCommand_execute_final.png}
 \end{center}
 
-\newpage
-
 \subsubsection{HelpCommand}
 
 Este comando sirve para mostrar un mensaje de ayuda para que el jugador entienda para qué sirve cada comando.
-
-\newpage
 
 \subsubsection{PlaceCubeCommand}
 
 Este comando sirve para colocar un cubo en una posición del tablero añadiéndolo a la cola de cubos pendientes de colocar de la clase \texttt{Game} mediante el método \texttt{addCubeToQueue()}. Además, en esta clase se sobrescribe el método parse ya que se necesitan 2 argumentos (posición en x y en y) para colocar el cubo en el tablero.
 
-\newpage
-
 \subsubsection{SaveCommand}
 
 Este comando sirve para guardar una partida en un fichero a través del método \texttt{saveGame()} de la clase \texttt{SaveLoadManager}, distinguiendo los casos en los que se dispone de un nombre de fichero de los casos en los que no. Esta clase añade el juego a la lista de ficheros de partida guardados y también se encarga de notificar a las clases correspondientes siguiendo el patrón \textit{Observer}.
 
+\newpage
+
 \begin{center}
-\includegraphics[scale=0.40]{SaveCommand_execute_final.png}
+\includegraphics[scale=0.50]{SaveCommand_execute_final.png}
 \end{center}
 
 \newpage
@@ -1520,14 +1493,12 @@ Este paquete agrupa la lógica principal encargada del funcionamiento de los ele
 \subsubsection{Color}
 
 \begin{center}
-\includegraphics[scale=0.75]{Color-sprint7.png}
+\includegraphics[scale=0.55]{Color-sprint7.png}
 \end{center}
 
 La clase \texttt{Color} es la que recoge la lógica necesaria para los colores de los cubos. Vemos en la imagen que los colores disponibles en el juego son: Amarillo, rojo, verde, azul, naranja, rosa, morado, negro, marrón y beige.
 
 De cara a la representación de los colores los dos atributos más relevantes de la clase son \texttt{shortcut}, para su representación por consola, y \texttt{path}, ruta con la imagen para su representación por interfaz gráfica.
-
-\newpage
 
 \subsubsection{Cube}
 
@@ -1535,7 +1506,7 @@ La lógica referente a los cubos se recoge en la clase \texttt{Cube}.
 Vemos a continuación el estado final de la clase en cuestión:
 
 \begin{center}
-\includegraphics[scale=0.9]{Cube-sprint7.png} 
+\includegraphics[scale=0.55]{Cube-sprint7.png} 
 \end{center}
 
 Los atributos necesarios son los siguientes:
@@ -1554,14 +1525,12 @@ Este funcionamiento se refleja en el siguiente diagrama:
 \includegraphics[scale=0.75]{Cube.changeOwner()-sprint7.png} 
 \end{center}
 
-\newpage
-
 \subsubsection{Shape}
 
 La lógica interna de las formas de tableros se recoger en la clase Shape, clase enumerada que tiene como valores todas las posibles formas (esto incluye los diferentes tamaños). La siguiente ilustración muestra el estado final de la clase:
 
 \begin{center}
-\includegraphics[scale=0.75]{Shape-sprint7.png} 
+\includegraphics[scale=0.55]{Shape-sprint7.png} 
 \end{center}
 
 Las posibles formas son las siguientes:
@@ -1578,8 +1547,6 @@ Las posibles formas son las siguientes:
 \end{itemize}
 
 Cada una de estas formas tiene asociada el nombre de un archivo, en el cual se recoge toda la información relevante acerca de cada forma (véanse el tamaño y la representación de las casillas válidas).
-
-\newpage
 
 \subsubsection{Board}
 
@@ -1609,8 +1576,6 @@ El funcionamiento de este método se recoge en el siguiente diagrama:
 
 Como el tablero puede tener distintas formas, vemos la existencia del constructor \texttt{Board(Shape)}, que crea un tablero vacío con las restricciones impuestas por la forma que recibe como parámetro.
 
-\newpage
-
 \subsubsection{Rival}
 
 \begin{center}
@@ -1618,8 +1583,6 @@ Como el tablero puede tener distintas formas, vemos la existencia del constructo
 \end{center}
 
 La interfaz \texttt{Rival} sirve para recoger comportamientos comunes entre los equipos y jugadores individuales, de cara a sus representaciones de forma abstracta y uniforme.
-
-\newpage
 
 \subsubsection{Player}
 
@@ -1637,12 +1600,10 @@ El funcionamiento de este método queda reflejado en el siguiente diagrama:
 \includegraphics[scale=0.75]{Player.play()-sprint7.png} 
 \end{center}
 
-\newpage
-
 \subsubsection{Team}
 
 \begin{center}
-\includegraphics[scale=0.75]{Team-sprint7.png} 
+\includegraphics[scale=0.57]{Team-sprint7.png} 
 \end{center}
 
 La clase \texttt{Team} recoge la lógica encargada del funcionamiento de los equipos en el modo de juego por equipos. Su función se resume en hacer de contenedor de los jugadores.
@@ -1654,8 +1615,6 @@ Vemos este comportamiento en el siguiente diagrama:
 \begin{center}
 \includegraphics[scale=0.75]{Team.update()-sprint7.png} 
 \end{center}
-
-\newpage
 
 \subsubsection{TurnManager}
 
@@ -1671,9 +1630,13 @@ Esto queda reflejado en el siguiente diagrama del método \texttt{nextMove()}:
 \includegraphics[scale=0.75]{TurnManager.nextTurn()-sprint7.png} 
 \end{center}
 
+\newpage
 \subsubsection{Game, GameClassic y GameTeams}
 La clase \texttt{Game} es la clase fundamental del modelo y es la encargada de representar el concepto del juego completo, es decir, de la misma manera que el \texttt{Board} representa el juego físico (tablero, cubos, etc.) el \texttt{Game} representa todo el juego en su totalidad (jugadores, puntos, tablero, normas, etc.).
-$$DIAGRAMA DE LA CLASE GAME$$
+
+\begin{center}
+\includegraphics[scale=0.5]{gamefinal.png}
+\end{center}
 En primer lugar, la decisión que se ha tomado en cuanto al modelo es que tenga su propio hilo, es decir, continuamente el \texttt{Game} está ejecutando el bucle de juego hasta que finaliza la partida. También es necesario saber para el funcionamiento del bucle de juego que la estructura de datos del juego es una cola, pues cualquiera que haga jugadas simplemente encola dicho cubo para que el modelo, cuando pueda, procese dicha jugada y sitúe los cubos en el orden en el que se han ido haciendo las jugadas.
 
 Principalmente la actividad del hilo de \texttt{Game} y de la funcionalidad de la clase reside en el método \texttt{void run()}. Tras ser creado en algún sitio, el modelo comienza la ejecución de su método \texttt{void run()} que pone en marcha un bucle de juego que no termina hasta que el juego finalice o se seleccione salir. Dentro de dicho bucle, llamamos a la función \texttt{void play()} abstracta y relativa a cada subclase de \texttt{Game} que encapsula toda la lógica de un turno en cada tipo de juego.
@@ -1684,7 +1647,7 @@ Principalmente la actividad del hilo de \texttt{Game} y de la funcionalidad de l
 La decisión de que el juego tenga su propio hilo viene de la implementación de las inteligencias artificiales en el proyecto. Por un lado, si todo el juego tiene que esperar a que la IA calcule el movimiento que desea la ejecución se ralentiza (mucho cuando se busca precisión en los movimientos). Pero por otro, y más importante, si no se tuviese el hilo, los jugadores automáticos colocarían un cubo y harían que la ejecución del juego siguiese sin esperar a que se notificara a todos los observadores que el juego ha cambiado. Por tanto, lo mejor es dejar que cada uno haga la jugada cuando se lo solicite y lo que mande sea una solicitud de poner un cubo. El modelo cuando pueda ejecutará dicha solicitud y pedirá al siguiente que mande solicitud si procede, etc.
 
 \begin{center}
-\includegraphics[scale=0.5]{GameClassicPlay_final_seq}
+\includegraphics[scale=0.45]{GameClassicPlay_final_seq}
 \end{center} 
 
 La ejecución del juego clásico es sencilla:
@@ -1693,13 +1656,15 @@ La ejecución del juego clásico es sencilla:
 \item En caso de que el tablero esté completo termina el juego.
 \item En caso contrario, cambiamos de turno y en todos los casos notificamos los cambios.
 \end{itemize}
+\newpage
 
 \begin{center}
-\includegraphics[scale=0.45]{GameTeams_final_seq}
+\includegraphics[scale=0.42]{GameTeams_final_seq}
 \end{center}
 
 Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de juego) es que en el por equipos se actualizan las puntuaciones de los equipos tal colocar un nuevo grupo.
 
+\newpage
 
 \subsection{Online}
 
@@ -1815,32 +1780,26 @@ Partimos de la clase \texttt{Server}, clase que gestiona los clientes desde la p
 
 \newpage
 
-\underline{Server}
+\subsubsection{Server}
+Como hemos anticipado, \texttt{Server} debe poseer un único \texttt{ServerSocket} a través del cual se abre el servidor. Posee el atributo expectedPlayers recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de \texttt{ServerWaitPlayerThread} creados, clase que pasaremos a comentar después.
 
 \begin{center}
-\includegraphics[scale=0.3]{Server-sprint7.png} 
+\includegraphics[scale=0.27]{Server-sprint7.png} 
 \end{center}
-
-Como hemos anticipado, \texttt{Server} debe poseer un único \texttt{ServerSocket} a través del cual se abre el servidor. Posee el atributo expectedPlayers recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de \texttt{ServerWaitPlayerThread} creados, clase que pasaremos a comentar después.
 
 Asimismo, \texttt{Server} posee dos listas: una correspondiente a pares \texttt{Player}-\texttt{Socket}, de modo que a cada jugador se le asocia el \texttt{Socket} a través del cuál puede comunicarse con el cliente en específico que juega bajo su identidad; y otra correspondiente a pares \texttt{Player}-\texttt{ServerClient}, donde a cada jugador se le asocia el \texttt{ServerClient} específico. Pasaremos a describir posteriormente qué es la clase \texttt{ServerClient}.
 En resumen, tenemos asociaciones biunívocas jugador-cliente las cuales aprovecharemos para el envío y la recepción de mensajes.
 
-\newpage
-
-\underline{ServerClient}
+\subsubsection{ServerClient}
+El \texttt{ServerClient} constituye una representación de un cliente en específico desde la perspectiva del servidor. 
 
 \begin{center}
 \includegraphics[scale=0.3]{ServerClient-sprint7.png} 
 \end{center}
 
-El \texttt{ServerClient} constituye una representación de un cliente en específico desde la perspectiva del servidor. 
-
 Lo fundamental de la clase \texttt{ServerClient} es que posee el thread encargado de la recepción directa de mensajes desde el cliente en específico; es decir, posee una única instancia de clase \texttt{ServerClientThread}, anteriormente mencionada.
 
-\newpage
-
-\underline{ServerClientThread}
+\subsubsection{ServerClientThread}
 
 \begin{center}
 \includegraphics[scale=0.3]{ServerClientThread-sprint7.png} 
@@ -1855,10 +1814,7 @@ Lo fundamental de la clase \texttt{ServerClient} es que posee el thread encargad
 
 Como vemos, la finalidad es encapsular el código de forma que \texttt{Server} no conozca de \texttt{ServerClientThread} sino solo de \texttt{ServerClient}.
 
-
-\newpage
-
-\underline{ServerWaitPlayerThread}
+\subsubsection{ServerWaitPlayerThread}
 
 \begin{center}
 \includegraphics[scale=0.3]{WaitPlayerThread-sprint7.png} 
@@ -1868,7 +1824,7 @@ Como vemos, la finalidad es encapsular el código de forma que \texttt{Server} n
 
 Se crean un número "expectedPlayers" (atributo de \texttt{Server}) de instancias de esta clase, cada una de ellas con un \texttt{ServerClient} asociado (por tanto, \texttt{ServerClient} es atributo de \texttt{ServerWaitPlayerThread}). En su método run se encarga de ejecutar el método serverSocket.accept() que especificamos anteriormente. En cuanto se acepta la conexión, se procede a llamar al método setUpServer de \texttt{ServerClient} para que este cree su \texttt{ServerClientThread}.
 
-La necesidad de hacer esto de forma paralela justifica la creación del hilo \texttt{ServerWaitPlayerThread}. Para evitar problemas de concurrencia, en esta clase los atributos \texttt{Server} y \texttt{ServerClient} son volátiles para que todos los hilos \texttt{ServerWaitPlayerThread} conozcan en tiempo real el estado de \texttt{Server} y \texttt{ServerClient}.
+La necesidad de realizar este proceso de forma paralela justifica en gran medida la creación del hilo \texttt{ServerWaitPlayerThread}. Para evitar problemas de concurrencia, en esta clase los atributos \texttt{Server} y \texttt{ServerClient} son volátiles para que todos los hilos \texttt{ServerWaitPlayerThread} conozcan en tiempo real el estado de \texttt{Server} y \texttt{ServerClient}.
 
 En particular, \texttt{Server} debe ser volatile pues debe ir actualizando su lista de \texttt{Player}-\texttt{Socket} en tiempo real y de forma organizada de a fin de evitar bugs. Esto es porque el método sincronizado waitForPlayers de \texttt{Server} recoge periódicamente el número de conexiones aceptadas. En cuanto estas conexiones igualan el número de conexiones aceptadas, el método deja de ejecutarse y se procede a las gestiones que tiene que realizar el servidor una vez todos los usuarios esperados se han conectado.
 
@@ -1876,15 +1832,12 @@ Una vez detallados los cometidos de todas las clases que posee el servidor, pasa
 
 El punto de partida es la clase \texttt{Client}, que será un intermediario entre su thread de recepción de mensajes y la GUI.
 
-\newpage
-
-\underline{Client}
+\subsubsection{Client}
+Como \texttt{Client} es un intermediario entre el thread de recepción de mensajes y la GUI, MainWindow precisa una referencia de \texttt{Client} y \texttt{Client} una de MainWindow; es decir, la comunicación es bidireccional. La razón de esto es:
 
 \begin{center}
 \includegraphics[scale=0.3]{Client-sprint7.png} 
 \end{center}
-
-Como \texttt{Client} es un intermediario entre el thread de recepción de mensajes y la GUI, MainWindow precisa una referencia de \texttt{Client} y \texttt{Client} una de MainWindow; es decir, la comunicación es bidireccional. La razón de esto es:
 
 \begin{itemize}
 \item Al hacerse una jugada en el modelo, como se ha especificado, necesitamos pasar el nuevo estado del juego al servidor para que este, a su vez, se la pase al resto de clientes. Por tanto, MainWindow pasa el estado del juego a su \texttt{Client}. MainWindow, a su vez, obtiene este estado del juego desde el controlador. Todos estos pasos de información se realizan a través de los métodos updateGameToServer que poseen estas clases.
@@ -1894,15 +1847,12 @@ Como \texttt{Client} es un intermediario entre el thread de recepción de mensaj
 
 Finalmente, pasamos a describir \texttt{ClientController}, el thread de \texttt{Client}.
 
-\newpage
-
-\underline{ClientController}
+\subsubsection{ClientController}
+Nuevamente la comunicación entre \texttt{Client} y \texttt{ClientController} es bidireccional: para enviar información al servidor, \texttt{Client} notifica a \texttt{ClientController}; para recibir información del servidor, \texttt{ClientController} notifica a \texttt{Client}.
 
 \begin{center}
-\includegraphics[scale=0.3]{ClientController-sprint7.png} 
+\includegraphics[scale=0.45]{ClientController-sprint7.png} 
 \end{center}
-
-Nuevamente la comunicación entre \texttt{Client} y \texttt{ClientController} es bidireccional: para enviar información al servidor, \texttt{Client} notifica a \texttt{ClientController}; para recibir información del servidor, \texttt{ClientController} notifica a \texttt{Client}.
 
 Como hemos anticipado, \texttt{ClientController} extiende de \texttt{Thread}, y en su método run() recibe información del servidor que procede a enviar al cliente. El método sendToServer envía la información directamente al servidor por medio de out.println como hemos descrito; este método es llamado por una serie de métodos -sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer-, los cuales introducen el campo notification en el \texttt{JSON}, con el valor chooseTeam, playerInfo y updateGraphics respectivamente. El objetivo es que el servidor pueda distinguir la naturaleza del mensaje enviado y hacer su tratamiento específico en base a ello.
 
@@ -1933,7 +1883,7 @@ Si la conexión no se ha realizado bien, se generan las excepciones oportunas qu
 El thread \texttt{ServerWaitPlayerThread} procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al \texttt{Player} (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de incomingPlayers de forma síncrona mientras \texttt{ServerWaitPlayerThread} espera. El mecanismo pormenorizado es el siguiente:
 
 \begin{center}
-\includegraphics[scale=0.4]{empezarPartidaUmlSprint7.png}
+\includegraphics[scale=0.37]{empezarPartidaUmlSprint7.png}
 \end{center}
 
 \begin{enumerate}
@@ -1998,8 +1948,8 @@ Nótese que este último diagrama de secuencia se representa a \texttt{Client} c
 
 Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
 
-\subsection{Replay}
 \newpage
+\subsection{Replay}
 \begin{center}
 \includegraphics[scale=0.57]{mementoreplay.png}
 \end{center}
@@ -2064,12 +2014,10 @@ Las estrategias disponibles son las siguientes:
 
 Como se ve en los parámetros de diversas funciones, todas las clases de este paquete obtienen la información necesaria a través de instancias de la clase \texttt{GameState}, de forma que se preserva la encapsulación en todo momento.
 
-\newpage
-
 \subsubsection{RandomStrategy}
 
 \begin{center}
-\includegraphics[scale=0.75]{RandomStrategy-sprint7.png} 
+\includegraphics[scale=0.80]{RandomStrategy-sprint7.png} 
 \end{center}
 
 El método principal de esta clase es \texttt{calculateNextMove()}, en el cual se inicia la simulación con el método \texttt{simulate()}. En este, se generan aleatoriamente posiciones hasta que se da con una posición válida acorde al estado actual del tablero. En el momento en que se da con una posición válida se devuelve esa posición como resultado de la simulación.
@@ -2079,8 +2027,6 @@ Este funcionamiento se ve en el siguiente diagrama:
 \begin{center}
 \includegraphics[scale=0.75]{RandomStrategy.calculateNextMove()-sprint7.png} 
 \end{center}
-
-\newpage
 
 \subsubsection{MinimaxStrategy}
 
@@ -2102,8 +2048,6 @@ El funcionamiento de este método se refleja en el siguiente diagrama:
 \end{center}
 
 El único caso en el que no se aplica el mismo criterio de cálculo es si el movimiento a simular es el primero de la partida, en cuyo caso se genera una posición aleatoria.
-
-\newpage
 
 \subsubsection{GreedyStrategy}
 
@@ -2136,15 +2080,16 @@ La simulación en general se hace en el método \texttt{simulateMove()}, en el c
 Mostramos el funcionamiento de los métodos mencionados en los siguientes diagramas:
 
 \begin{center}
-\includegraphics[scale=0.75]{SimplifiedBoard.simulateMove()-sprint7.png} 
+\includegraphics[scale=0.6]{SimplifiedBoard.simulateMove()-sprint7.png} 
+\end{center}
+\newpage
+
+\begin{center}
+\includegraphics[scale=0.65]{SimplifiedBoard.applyChanges()-sprint7.png} 
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.75]{SimplifiedBoard.applyChanges()-sprint7.png} 
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.75]{SimplifiedBoard.revertChanges()-sprint7.png} 
+\includegraphics[scale=0.7]{SimplifiedBoard.revertChanges()-sprint7.png} 
 \end{center}
 
 \newpage
@@ -2157,13 +2102,17 @@ La interfaz de consola que hemos creado ha tratado de ser una copia de la lógic
 
 Para lograr este objetivo, se ha definido la interfaz \texttt{ConsoleWindow} que serán los objetos que se manejen en la vista de consola como homólogos de los \texttt{JFrame} de \textit{Swing}. Dicha interfaz nos permite poder abrir una ventana, recoger un dato de ella, y limpiar la consola. Además de esta forma unificamos el flujo de salida para todos los componentes de la vista de consola, pues todos tienen como flujo de salida el \texttt{Scanner input} definido como variable estática de la interfaz. Una vez hecho esto, se ha definido una clase concreta para cada tipo de ventana de forma que añadir nuevas ventanas simplemente se traduce en añadir nuevas clases.
 
-$$DIAGRAMA DE CLASES VISTA DE CONSOLA$$
+\newpage
+
+\begin{center}
+\includegraphics[scale=0.25, angle=90]{ConsoleWindow_class.png}
+\end{center}
 
 \subsubsection{MainBashWindow}
 Es la ventana principal del juego y la que se encarga de gestionar que ventanas abrir o cerrar en función de la interacción del usuario. Actúa a modo de \texttt{MainWindow} tal y como está en la GUI. Al llamar al método \texttt{bool open()} de dicha ventana se nos muestra un menú recogido en la función privada \texttt{int menu()} que nos pide indicar cuál es la acción que queremos realizar de las siguientes: new game, load game, delete game, replay game.
 
 \begin{center}
-\includegraphics[scale=0.5]{MainBashWindow_final_seq}
+\includegraphics[scale=0.4]{MainBashWindow_final_seq}
 \end{center}
 
 Una vez elegida la opción del menú, esta ventana abre la siguiente ventana correspondiente a cada una de las opciones y en caso de ser un opción que sigue con una nueva partida, inicia la ventana de juego \texttt{PlayWindow}.
@@ -2208,9 +2157,10 @@ Del mismo modo que la clase \texttt{LoadReplayWindow} presentaba las posibles \t
 
 \subsubsection{PlayWindow}
 
+
+\newpage
 \subsection{GUIView}
-
-\underline{Paquete RolitComponents}
+\subsubsection{Paquete RolitComponents}
 \begin{center}
 \includegraphics[scale=0.5]{RolitComponents.png} 
 \end{center}
@@ -2220,7 +2170,7 @@ El paquete \texttt{RolitComponents} está formado por un conjunto de clase que e
 Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
 
 \newpage
-\underline{Paquete CreateGame}
+\subsubsection{Paquete CreateGame}
 \begin{center}
 \includegraphics[scale=0.38]{CreateGamePaq.png} 
 \end{center}
@@ -2247,79 +2197,12 @@ Nótese que en el caso del cuadro de diálogo con jugadores, el número de parti
 \end{center}
 
 De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
-\newpage
-
-\underline{CellGUI}
-\begin{center}
-\includegraphics[scale=0.65]{cellgui.png}
-\end{center}
-
-Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
-
-\begin{center}
-\includegraphics[scale=0.65]{blueCube.png}
-\includegraphics[scale=0.65]{orangeCube.png}
-\includegraphics[scale=0.65]{beigeCube.png}
-\includegraphics[scale=0.65]{blackCube.png}
-\includegraphics[scale=0.65]{brownCube.png}
-\includegraphics[scale=0.65]{greenCube.png}
-\includegraphics[scale=0.65]{pinkCube.png}
-\includegraphics[scale=0.65]{purpleCube.png}
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.65]{redCube.png}
-\includegraphics[scale=0.65]{yellowCube.png}
-\includegraphics[scale=0.65]{emptyCell.png}
-
-Todas las posibles representaciones gráficas de \texttt{CellGUI}
-\end{center}
 
 \newpage
-\subsubsection{GUIView}
-\underline{Paquete RolitComponents}
+
+\subsubsection{BoardRenderer y ColorRenderer}
 \begin{center}
-\includegraphics[scale=0.5]{RolitComponents.png} 
-\end{center}
-
-El paquete \texttt{RolitComponents} está formado por un conjunto de clase que extienden a los que Java proporciona por defecto. La definición de componentes propios aporta uniformidad visual al juego, evita la repetición de código para configurar los componentes y facilita la adaptabilidad a futuros cambios.
-
-Estos componentes siguen un mismo código visual basados en el color blanco y en el BlueRolit (\#004398). Además, algunos de ellos contienen tamaños predeterminados, aunque puede modificarse si es necesario. Este es el caso de \texttt{RolitButton}, que cuenta con varios constructores para aumentar su versatilidad.
-
-\newpage
-\underline{Paquete CreateGame}
-\begin{center}
-\includegraphics[scale=0.38]{CreateGamePaq.png} 
-\end{center}
-
-Esta agrupación de clases son las encargadas de visualizar y recopilar los datos necesarios para crear una partida, adaptándose a las necesidades y requerimientos del usuario. Así, tenemos dos tipos de cuadros de diálogo para pedirle al usuario la configuración de su partida.
-
-En ocasiones, el usuario optará por jugar una partida en red. La persona que hostea el servidor tan solo puede elegir las propiedades del juego, pues es cada jugador al unirse al servidor quién decide su nombre y color. En estos casos, la responsabilidad para reunir los ajustes del juego recae sobre la clase \texttt{CreateGameDialog}.
-
-Sin embargo, cuando se juega en local, los jugadores deben introducir sus datos antes de iniciar la partida, de ahí la existencia de \texttt{CreateGameWithPlayersDialog}, que extiende a \texttt{CreateGameDialog} e incluye un panel en la parte inferior para añadir los jugadores. Dicho panel se trata de un \texttt{CreatePlayersPanel}, que es un conjunto de \texttt{PlayerDataPanel} dispuestos verticalmente.
-
-\begin{center}
-\includegraphics[scale=0.65]{create-game-sprint6.png}
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.65]{create-game-players-sprint6.png}
-
-\texttt{CreateGameDialog} (arriba) vs \texttt{CreateGameWithPlayersDialog} (abajo)
-\end{center}
-
-Nótese que en el caso del cuadro de diálogo con jugadores, el número de participantes se decide mediante un \texttt{JSpinner} contenido en \texttt{CreateGameWithPlayersDialog}, pero el numero de paneles con la información de los jugadores se gestiona en \texttt{CreatePlayersPanel}. Para poder actualizar el número de \texttt{PlayerDataPanel} en tiempo de ejecución se utilizan los métodos \texttt{update()}.
-\begin{center}
-\includegraphics[scale=0.41]{updateGameConfig.png}
-\end{center}
-
-De forma análoga, ocurre con los equipos, pues el \texttt{CreateTeamsPanel} ha de mostrarse o no en pantalla dependiendo del modo de juego elegido en el \texttt{RolitComboBox}.
-\newpage
-
-
-\underline{BoardRenderer y ColorRenderer}
-\begin{center}
-\includegraphics[scale=0.6]{renderers.png}
+\includegraphics[scale=0.5]{renderers.png}
 \end{center}
 
 Estas clases se encargan de renderizar correctamente los \texttt{RolitComboBox} que se utilizan en las clases de \texttt{CreateGameDialog} y \texttt{CreateGameWithPlayersDialog}. Más concretamente, la labor de estas clases es que se muestre un el icono de la forma del tablero o del color del jugador junto a su nombre asociado.
@@ -2331,11 +2214,10 @@ Estas clases se encargan de renderizar correctamente los \texttt{RolitComboBox} 
 Resultado visual del uso de los renderers
 \end{center}
 
-\newpage
 
-\underline{CellGUI}
+\subsubsection{CellGUI}
 \begin{center}
-\includegraphics[scale=0.65]{cellgui.png}
+\includegraphics[scale=0.6]{cellgui.png}
 \end{center}
 
 Esta clase representa una casilla del tablero, la cual puede actualizarse para dejar de estar vacía y contener un cubo de cierto color. Así, el método más relevante de esta clase es \texttt{update(Color)}, que implementa dicha funcionalidad.
@@ -2359,9 +2241,7 @@ Esta clase representa una casilla del tablero, la cual puede actualizarse para d
 Todas las posibles representaciones gráficas de \texttt{CellGUI}
 \end{center}
 
-\newpage
-
-\underline{BoardGUI}
+\subsubsection{BoardGUI}
 \begin{center}
 \includegraphics[scale=0.55]{boardgui-cellgui.png}
 \end{center}
@@ -2378,9 +2258,7 @@ La comunicación con los modelos se lleva a cabo a través del \textit{Patrón O
 Representación gráfica de \texttt{BoardGUI} con forma diamante y tamaño mediano
 \end{center}
 
-\newpage
-
-\underline{ControlPanel}
+\subsubsection{ControlPanel}
 \begin{center}
 \includegraphics[scale=0.65]{controlpaneluml.png}
 \end{center}
@@ -2393,9 +2271,7 @@ Esta clase representa una barra con herramientas básicas que se pueden utilizar
 \texttt{ControlPanel} durante una partida (arriba) vs durante una \textit{replay} (abajo)
 \end{center}
 
-\newpage
-
-\underline{TurnAndRankingBar}
+\subsubsection{TurnAndRankingBar}
 \begin{center}
 \includegraphics[scale=0.60]{turnranking-uml.png}
 \end{center}
@@ -2410,7 +2286,7 @@ Representación gráfica de \texttt{TurnAndRankingBar} durante una partida
 \end{center}
 
 \newpage
-\underline{StatusBar}
+\subsubsection{StatusBar}
 \begin{center}
 \includegraphics[scale=0.60]{statusbar-uml.png}
 \end{center}
@@ -2423,9 +2299,7 @@ La \texttt{StatusBar} es responsable de comunicar información relevante al usua
 Ejemplo de la \texttt{StatusBar} mostrando un mensaje
 \end{center}
 
-\newpage
-
-\underline{RankingPanel}
+\subsubsection{RankingPanel}
 
 \begin{center}
 \includegraphics[scale=0.55]{rankingpanel.png}
@@ -2436,20 +2310,16 @@ Cuando finaliza un juego, la clase \texttt{RankingPanel} muestra en pantalla una
 Además, el \texttt{RankingPanel} cuenta con la peculiaridad de tener un componente interno, la clase \texttt{RolitLabel}. En este caso se optó por trabajar con este componente de manera privada porque es el único lugar de todo el código donde se utiliza.
 
 \begin{center}
-\includegraphics[scale=0.7]{ranking-2players.png}
-
-Ranking para dos jugadores
+\includegraphics[scale=0.6]{ranking-2players.png}\\
+\footnotesize{Ranking para dos jugadores}
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.7]{ranking-3players.png}
-
-Ranking para más de dos jugadores
+\includegraphics[scale=0.6]{ranking-3players.png}\\
+\footnotesize{Ranking para más de dos jugadores}
 \end{center}
 
-\newpage
-
-\underline{LoadFileDialog}
+\subsubsection{LoadFileDialog}
 \begin{center}
 \includegraphics[scale=0.6]{loaddialoguml.png}
 \end{center}
@@ -2466,7 +2336,7 @@ Representación visual de \texttt{LoadFileDialog}
 
 \newpage
 
-\underline{DeleteDialog}
+\subsubsection{DeleteDialog}
 \begin{center}
 \includegraphics[scale=0.6]{deletedialog.png}
 \end{center}
@@ -2482,8 +2352,7 @@ Representación visual de \texttt{DeleteDialog}
 
 \newpage
 
-\underline{SaveReplayDialog}
-
+\subsubsection{SaveReplayDialog}
 \begin{center}
 \includegraphics[scale=0.6]{savereplaydialo.png}
 \end{center}
@@ -2491,17 +2360,14 @@ Representación visual de \texttt{DeleteDialog}
 Esta clase se trata de una ventana emergente que tiene la responsabilidad de preguntarle al jugador al finalizar la partida si desea guardar su repetición. Si la respuesta es afirmativa, abre un \texttt{JFileChooser} para que el usuario elija su ruta.
 
 \begin{center}
-\includegraphics[scale=1]{savereplaydialog-pic.png}
-
-Representación visual de \texttt{SaveReplayDialog}
+\includegraphics[scale=1]{savereplaydialog-pic.png}\\
+\footnotesize{Representación visual de \texttt{SaveReplayDialog}}
 \end{center}
 
-\newpage
-
-\underline{JoinServerDialog}
+\subsubsection{JoinServerDialog}
 
 \begin{center}
-\includegraphics[scale=0.6]{join-server-uml.png}
+\includegraphics[scale=0.5]{join-server-uml.png}
 \end{center}
 
 La clase \texttt{JoinServerDialog} extiende de \texttt{JDialog} y se encarga de recopilar la información necesaria del usuario para que pueda unirse a un servidor. Esto es, los datos del jugador y los del servidor.
@@ -2513,9 +2379,7 @@ Representación visual de \texttt{JoinServerDialog}
 
 \end{center}
 
-\newpage
-
-\underline{ServerView}
+\subsubsection{ServerView}
 \begin{center}
 \includegraphics[scale=0.55]{serverviewuml.png}
 \end{center}
@@ -2537,36 +2401,33 @@ Representación gráfica de \texttt{ServerView} antes de crear el servidor
 Representación gráfica de \texttt{ServerView} una vez creado el servidor
 \end{center}
 
-\newpage
-
-\underline{MainWindow}
+\subsubsection{MainWindow}
 \begin{center}
 \includegraphics[scale=0.55]{mainwindowuml.png}
 \end{center}
 
 La \texttt{MainWindow} es la ventana principal del programa, que inicialmente permite al usuario decidir entre las opciones que brinda Rolit: crear una partida, cargar una replay, crear un servidor... Una vez seleccionada alguna de las alternativas, la ventana se actualiza combinando todos los elementos explicados anteriormente, de manera ordenada, para poder dar lugar a los requerimientos del usuario.
 
+%%FIXME
 \begin{center}
-\includegraphics[scale=1]{menu-sprint-6.png}
-
+\includegraphics[scale=1]{menu-sprint-6.png}\\
 Apariencia inicial de la \texttt{MainWindow}
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.9]{partida-sprint-6.png}
-
+\includegraphics[scale=0.7]{partida-sprint-6.png}\\
 \texttt{MainWindow} durante una partida
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.9]{replay-sprint-6.png}
-
+\includegraphics[scale=0.7]{replay-sprint-6.png}\\
 \texttt{MainWindow} durante una \textit{replay}
 \end{center}
 
+\appendix
 
-\chapter{Anexo I: Reports}
-\label{ch:AnexoI}
+\chapter{Reports}
+\label{ch:Anexo A}
 \subsection*{Cube}
 
 \begin{lstlisting}[frame=single, language=Java]
@@ -2688,7 +2549,7 @@ Apariencia inicial de la \texttt{MainWindow}
 }
 \end{lstlisting}
 
-\chapter{Anexo II: Lista de todas las clases}
+\chapter{Listado de clases}
 
 Las clases del proyecto con las siguientes:
 
@@ -2861,7 +2722,7 @@ Las clases del proyecto con las siguientes:
 
 \textbf{RolitToolBar}: Extensión de JToolBar (Swing, GUI) adaptada para el diseño particular decidido para la aplicación.
 
-\chapter{Anexo III: Estrategia Minimax adaptada a Rolit}
+\chapter{Estrategia Minimax adaptada a Rolit}
 \label{ch:AnexoIII}
 
 En teoría de juegos, el Minimax busca minimizar la pérdida esperada. La aproximación que se toma es asumir que el oponente va a tomar las decisiones que más te perjudiquen. De esta manera, al encontrar la decisión que menor pérdida suponga, el resultado real será siempre igual o mejor al calculado, de forma que el cálculo es fiable.
@@ -2875,8 +2736,7 @@ Imaginemos que cada nodo contiene un número que representa el estado actual de 
 Se ilustra el funcionamiento del algoritmo en la siguiente imagen: 
 
 \begin{center}
-\centering
-\includegraphics[scale=0.5]{minimaxExample.jpg}
+\includegraphics[scale=0.4]{minimaxExample.jpg}
 \end{center}
 %%FIXME Centrar
 
@@ -2886,7 +2746,7 @@ Volviendo ahora al Rolit, no estamos en un juego de dos jugadores (o al menos no
 
 Ahora, como hay más de dos jugadores, para conseguir un cálculo de puntos fiable, el cálculo se lleva a cabo considerando que el jugador propietario de la estrategia quiere hacer aquella jugada que más puntos le otorgue a la larga, mientras que el resto de jugadores en sus turnos hacen la jugada que más puntos le quite al jugador propietario. De esta forma se calculan puntos para el jugador propietario situándonos en la situación más desfavorable posible, de forma que todo aquello que se calcule va a derivar siempre en un resultado igual o mejor al calculado, de forma que los resultados de los cálculos son fiables.
 
-\chapter{Anexo IV: Poda Alfa-Beta}
+\chapter{Poda Alfa-Beta}
 \label{ch:AnexoIV}
 La poda Alfa-Beta es una mejora del algoritmo Minimax. Se mantienen dos valores, alfa y beta, que representan respectivamente la puntuación mínima que se llevará el jugador maximizador y la puntuación máxima que se asegura el jugador minimizados. Inicialmente, alfa es $-\infty$ y beta es $\infty$. 
 
@@ -2895,14 +2755,13 @@ Siempre que la puntuación máxima que se asegura al jugador que minimiza se vue
 La mejor forma de visualizar esta poda es a través de una ilustración:
 
 \begin{center}
-\centering
 \includegraphics[scale=0.5]{poda alfa-beta.png}
 \end{center}
 %%FIXME Hacer más grande
 
 Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
 
-\chapter{POSIBLES MEJORAS}
+\chapter{Aspectos mejorables del diseño}
 El equipo de desarrollo ha recopilado un conjunto de posibles mejoras que realizar al proyecto en caso de haber habido más sprints hábiles para poder hacer modificaciones y tras conocer con mayor exactitud cuáles son las ventajas de aplicar algunos patrones nuevos y otros ya utilizados pero de forma más efectiva.
 
 \subsubsection{Builders}
