@@ -119,7 +119,7 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	 */
 	public void initGUI() {
 		this.removeAll();
-		GridBagLayout gridbag = new GridBagLayout(); //Queremos que el tamaño del tablero sea fijo
+		GridBagLayout gridbag = new GridBagLayout(); //We want the board size to be fixed
 		this.setLayout(gridbag);
 		
 		for (int i = 0; i < nRows; i++) {
@@ -169,7 +169,8 @@ public class BoardGUI extends RolitPanel implements RolitObserver, ReplayObserve
 	public void onReplayLeftButton() {
 		if(lastCubeAdded != null) {
 			JSONArray posLast = lastCubeAdded.getJSONArray("pos");
-			cells[posLast.getInt(1)][posLast.getInt(0)].resetIcon();// Cuando vamos hacia atrás es necesario quitar los iconos que estuvieran de un estado posterior
+			cells[posLast.getInt(1)][posLast.getInt(0)].resetIcon(); //When we go backwards it is needed to remove the icons
+																	 //that would have been from a later state
 		}
 		
 		updateReplay();

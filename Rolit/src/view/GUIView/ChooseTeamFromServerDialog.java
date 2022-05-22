@@ -94,7 +94,7 @@ public class ChooseTeamFromServerDialog extends JDialog {
 			buttonsPanel.add(aux);
 			
 			if (i == 0)
-				aux.setSelected(true); //poner uno seleccionado por defecto
+				aux.setSelected(true); //put one selected by default
 		}
 		
 		addComp(mainPanel, buttonsPanel, 1, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
@@ -121,7 +121,7 @@ public class ChooseTeamFromServerDialog extends JDialog {
 		
 		this.pack();
 		
-		//Hay que pedir los nombres y colores para crearlos
+		//We have to request the names and the colors to create them
 	}
 	
 

@@ -118,62 +118,8 @@ public class RankingPanel extends RolitPanel {
 		addComp(mainPanel, place3Panel, 2, 1, 1, 3, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 	}
 	
-		
-		
-//		
-//		
-//		place2 = new RolitLabel("2nd place", PLACE_SIZE);
-//		place2.setForeground(SILVER);
-//		addComp(mainPanel, place2, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.name2 = new RolitLabel(name2, NAME_SIZE);
-//		addComp(mainPanel, this.name2, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.score2 = new RolitLabel(String.valueOf(score2), SCORE_SIZE);
-//		addComp(mainPanel, this.score2, 0, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		
-//		if (name3 != null) {
-//			place3 = new RolitLabel("3rd place", PLACE_SIZE);
-//			place3.setForeground(BRONZE);
-//			addComp(mainPanel, place3, 2, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//			this.name3 = new RolitLabel(name3, NAME_SIZE);
-//			addComp(mainPanel, this.name3, 2, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//			this.score3 = new RolitLabel(String.valueOf(score3), SCORE_SIZE);
-//			addComp(mainPanel, this.score3, 2, 5, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		}
-//		
 		this.add(mainPanel, BorderLayout.CENTER);
-//		
-		
-		
-		//		this.setLayout(new GridBagLayout());
-//		title = new RolitLabel("RANKING", RANKING_SIZE);
-//		if (name3 != null) addComp(this, title, 1, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		else addComp(this, title, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		
-//		place1 = new RolitLabel("1st place", PLACE_SIZE);
-//		place1.setForeground(GOLD);
-//		addComp(this, place1, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.name1 = new RolitLabel(name1, NAME_SIZE);
-//		addComp(this, this.name1, 1, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.score1 = new RolitLabel(String.valueOf(score1), SCORE_SIZE);
-//		addComp(this, this.score1, 1, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		
-//		place2 = new RolitLabel("2nd place", PLACE_SIZE);
-//		place2.setForeground(SILVER);
-//		addComp(this, place2, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.name2 = new RolitLabel(name2, NAME_SIZE);
-//		addComp(this, this.name2, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		this.score2 = new RolitLabel(String.valueOf(score2), SCORE_SIZE);
-//		addComp(this, this.score2, 0, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		
-//		if (name3 != null) {
-//			place3 = new RolitLabel("3rd place", PLACE_SIZE);
-//			place3.setForeground(BRONZE);
-//			addComp(this, place3, 2, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//			this.name3 = new RolitLabel(name3, NAME_SIZE);
-//			addComp(this, this.name3, 2, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//			this.score3 = new RolitLabel(String.valueOf(score3), SCORE_SIZE);
-//			addComp(this, this.score3, 2, 5, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
-//		}
+
 	}
 	
 	/**

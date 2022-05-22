@@ -22,7 +22,7 @@ import model.replay.Replay;
 public class CellGUI {
 
 	private boolean validButton;
-	private boolean filled; // Una vez se ponga un cubo no se podrá poner otro (manualmente)
+	private boolean filled; //Once a cube is put, it will not be possible to put another (manually)
 	private JButton button;
 	private String iconPath;
 	public static int SIDE_LENGTH;
@@ -116,10 +116,6 @@ public class CellGUI {
 
 		this.button.setIcon(resizedImgIcon);
 
-		// else this.filled = false; //Por si pudiera desocuparse una casilla en una
-		// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
-		// interactuar con el tablero
-
 		this.button.repaint();
 	}
 
@@ -159,10 +155,6 @@ public class CellGUI {
 			}
 
 			this.button.setIcon(icon);
-
-			// else this.filled = false; //Por si pudiera desocuparse una casilla en una
-			// replay, pero no estoy seguro de esto, porque en las replays no se debe poder
-			// interactuar con el tablero
 
 			this.button.repaint();
 			

@@ -117,7 +117,7 @@ public class SaveReplayDialog extends JDialog implements RolitObserver{
 	@Override
 	public void onGameFinished(List<? extends Rival> rivals, String rival, Replay replay, GameState state) {
 		try {
-			Thread.sleep(1000); //añadimos un tiempo de espera para que se vea bien el ranking
+			Thread.sleep(1000); //we add a wait time so that the ranking is correctly shown
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -43,7 +43,7 @@ public enum Color {
 	}
 	
 	/**
-	 * Given a color returns its complete name, not the sortcut
+	 * Given a color returns its complete name, not the shortcut
 	 * @return The color name
 	 */
 	public String toFullNameString() {

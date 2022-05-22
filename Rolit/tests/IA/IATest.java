@@ -10,7 +10,7 @@ import model.logic.Cube;
 import model.logic.Game;
 
 public class IATest {
-	//Un jugador normal y una ia, justo le toca poner el último cubo al jugador, comprobamos que no salta excepción
+	//A normal player and an AI. The normal player has the last turn and it has to put the last cube. We check that no exception is thrown
 	@Test
 	void IA_test1() {
 		 try {
@@ -22,7 +22,9 @@ public class IATest {
 		      fail("Should not have thrown any exception");
 		   }
 	}
-	//un jugador normal y dos IAS las dos minmax y que queden dos pos vacia, normal, ia y luego otra ia y ver que no peta
+	
+	//A normal player and two AIs (both of them MiniMax) and two boxes empty. Normal player, AI, and then the last
+	//AI. We see that an error does not occur.
 	@Test
 	void IA_test2() {
 		 try {
@@ -36,7 +38,8 @@ public class IATest {
 		 
 	}
 	
-	//tres ias, una random, otra minimax y otra greedy y ver que no peta
+	//Three AIs, one random, other MiniMax and other greedy, and we se that an
+	//error does not occur.
 		@Test
 		void IA_test3() {
 			 try {

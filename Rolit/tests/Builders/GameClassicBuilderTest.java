@@ -9,7 +9,7 @@ import model.builders.GameClassicBuilder;
 import model.logic.Game;
 
 public class GameClassicBuilderTest {
-	//GameClassic debería crearse bien y devolver el mismo report
+	//GameClassic should be created well and return the same report
 	@Test
 	void test_1() {
 		String inputJSon = "{\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";
@@ -17,35 +17,35 @@ public class GameClassicBuilderTest {
 		assertTrue(new JSONObject(inputJSon).similar(game.report()));
 	}
 	
-	//probamos a meter una shape que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to introduce an incorrect shape, we see that the exception is thrown correctly
 	@Test
 	void test_2() {
 		String inputJSon = "{\"board\":{\"shape\":\"kjdfifwe\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJSon)));
 	}
 	
-	// si el tipo no es un GameClassic debe saltar una excepción
+	//If the type is not a GameClassic, an exception should be thrown
 	@Test
 	void test_3() {
 		String inputJson = "{\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"blabla\"}";;
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
-	//probamos a meter un color que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to put an incorrect color, we see that the exception is thrown correctly
 	@Test
 	void test_4() {
 		String inputJSon = "{\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"zdef4en\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJSon)));
 	}
 	
-	//probamos a meter una pos x que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to put an incorrect x position, we see that the exception is thrown correctly
 	@Test
 	void test_5() {
 		String inputJSon = "{\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[5000,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";
 		assertThrows(Exception.class, () -> GameClassicBuilder.createGame(new JSONObject(inputJSon)));
 	}
 	
-	//probamos a meter una clave que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to put an incorrect key, we see that the exception is thrown correctly
 	@Test
 	void test_6() {
 		String inputJSon = "{\"ckex\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]},\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"},{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"turn\":\"W\",\"type\":\"GameClassic\"}";

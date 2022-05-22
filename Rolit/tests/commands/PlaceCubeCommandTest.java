@@ -7,7 +7,7 @@ import model.commands.PlaceCubeCommand;
 
 
 public class PlaceCubeCommandTest {
-	//prueba que se lance excepción adecuadamente en el comando de poner un cubo 
+	//It checks that an exception is thrown correctly in the Place Cube Command 
 	@Test
 	void parseTest() {
 		PlaceCubeCommand placeCube = new PlaceCubeCommand();

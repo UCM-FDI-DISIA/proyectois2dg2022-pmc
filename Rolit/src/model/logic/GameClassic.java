@@ -43,29 +43,29 @@ public class GameClassic extends Game {
 		if (!this.pendingCubes.isEmpty()) {
 			Cube c = this.pendingCubes.poll();
 			
-			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
+			// In case we can, we put the cube in the position and we update the board
 			Cube newCube = new Cube(c.getX(), c.getY(), players.get(turnManager.getCurrentPlayerIndex()));
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
 			
-			//Comprobamos si la partida termina con este turno
+			//We check if the game finishes in this turn
 			this.finished = board.isBoardFull();
 			if (this.finished) {
 				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-				//Añadimos el estado actual a replay
+				//We add the current state to the replay
 				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 				
 				this.onGameFinished();
 			}
-			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+			//We change the turn to the next player in the list if the match has not finished
 			else {
 				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 				
 				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-				//Añadimos el estado actual a replay
+				//We add the current state to the replay
 				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 				
 				this.executedTurn = true;

@@ -10,7 +10,8 @@ import model.logic.Cube;
 import model.logic.Player;
  
 public class PlayerTest {
-	//comprueba que se añada adecuadamente el score
+	
+	//We check that the score is added correctly
 	@Test
 	void add_score_test() {
 	Player p1= new Player(Color.BLACK, "dani");
@@ -26,7 +27,7 @@ public class PlayerTest {
 	assertEquals(1, p2.getScore());
 	}
 	
-	//prueba que el report final sea igual al deseado
+	//We check that the final report equals the expected one
 	@Test
 	void test_report() {
 		Player p1 = new Player(Color.PINK, "mar");
@@ -45,7 +46,7 @@ public class PlayerTest {
 		assertTrue (new JSONObject(s2).similar(p2.report()));
 	}
 	
-	//prueba que el report final sea igual al deseado
+	//We check that the final report equals the expected one
 	@Test
 	void test_report2() {
 		Player p1 = new Player(Color.BROWN, "hehehehhehehehhe");

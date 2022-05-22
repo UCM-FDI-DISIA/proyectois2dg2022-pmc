@@ -27,7 +27,7 @@ public class SimplifiedBoard {
 	private Color[][] matrix;
 	
 	/**
-	 * Bollean matrix that represents the shape of the board, defining which positions are in range and which positions are not
+	 * Boolean matrix that represents the shape of the board, defining which positions are in range and which positions are not
 	 */
 	private boolean[][] availablePositions;
 	
@@ -44,7 +44,7 @@ public class SimplifiedBoard {
 	
 	/**
 	 * Stack containing the number of changes that have been made to the board during the current step of the simulation
-	 * Used to know the ammount of changes that have to be reverted once the current simulation step is over
+	 * Used to know the amount of changes that have to be reverted once the current simulation step is over
 	 */
 	private Stack<Integer> numberOfChangesStack;
 	
@@ -54,7 +54,7 @@ public class SimplifiedBoard {
 	private GameState state;
 
 	/**
-	 * Strategy that owns the SimplifiedBoard instante and starts the simulation
+	 * Strategy that owns the SimplifiedBoard instant and starts the simulation
 	 */
 	private Strategy strat;
 	
@@ -112,7 +112,7 @@ public class SimplifiedBoard {
 	 * @param x First component of the coordinates
 	 * @param y Second component of the coordinates
 	 * @param color Color of the player whose move is being simulated
-	 * @param maxDepth Number of turns left to explore after the current mvoe is simulated
+	 * @param maxDepth Number of turns left to explore after the current move is simulated
 	 * @param alpha Alpha value for the alpha-beta prune method
 	 * @param beta Beta value for the alpha-beta prune method
 	 * @return The score that will be guaranteed to the player after playing the calculated move
@@ -148,10 +148,10 @@ public class SimplifiedBoard {
 	 * @param currentColor Color of the player whose move is being simulated
 	 */
 	private void applyChanges(int x, int y, Color currentColor) {
-		//El funcionamiento de este método es muy similar al método update() de Board, adaptado a las necesidades técnicas de esta clase
+		//This method is very similar to the update() method of Board, adapting it to the technical necessities of this class
 		int posX = x, posY = y;
 		int newX, newY;
-		int foundX = posX, foundY = posY; // Las inicializo porque si no Eclipse se queja
+		int foundX = posX, foundY = posY;
 		boolean found;
 		Color color;
 		int numberOfChanges = 0;

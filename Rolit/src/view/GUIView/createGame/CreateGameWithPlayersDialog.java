@@ -24,7 +24,7 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 		super(parent, ctrl);
 		
 		playersPanel = new CreatePlayersPanel(false);
-		mainPanel.add(playersPanel); // por defecto se muestra para elegir jugadores en el modo GameClassic
+		mainPanel.add(playersPanel); // by default it shows the players in the GameClassic mode
 		this.pack();
 	}
 
@@ -79,25 +79,25 @@ public class CreateGameWithPlayersDialog extends CreateGameDialog {
 
 		Pair<Boolean, String> pair;
 
-		if (playerNames.size() < gameConfig.getNumPlayers()) // e.d hay un elemento repetido
+		if (playerNames.size() < gameConfig.getNumPlayers()) // i.e there is a repeated element
 		{
 			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated name.");
 			return pair;
 		}
-		if (playerColors.size() < gameConfig.getNumPlayers()) // e.d hay un elemento repetido
+		if (playerColors.size() < gameConfig.getNumPlayers()) // i.e there is a repeated element
 		{
 			pair = new Pair<Boolean, String>(false, "ERROR: At least one player has a repeated color.");
 			return pair;
 		}
-		if (isTeamMode) { // e.d estamos en el modo por equipos
-			if (teamNames.size() < teamsPanel.numTeams()) // e.d hay un elemento repetido
+		if (isTeamMode) { // e.d we are in the GameTeams mode
+			if (teamNames.size() < teamsPanel.numTeams()) // i.e there is a repeated element
 			{
 				pair = new Pair<Boolean, String>(false, "ERROR: At least one team has a repeated name.");
 				return pair;
 			}
 
-			// comprobamos que en todos los equipos hay por
-			// lo menos un jugador
+			// We check that in every team there is
+			// at least one player
 
 			boolean encontrado = false;
 			for (int j = 0; j < teamsPanel.numTeams() && !encontrado; ++j) {

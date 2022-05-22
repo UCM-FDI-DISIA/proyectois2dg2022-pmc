@@ -10,7 +10,7 @@ import model.logic.Cube;
 import model.logic.Player;
  
 public class CubeTest {
-	//El nombre de la función que se está probando aparece en el nombre de cada test
+	//The name of the method that is being checked appears in the name of each test
 	
 	@Test
 	void change_owner() {

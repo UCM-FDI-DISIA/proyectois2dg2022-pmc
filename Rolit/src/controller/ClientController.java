@@ -59,7 +59,7 @@ public class ClientController extends Thread{
 	public void run(){
 		try {
 			while(true){				
-				String msgFromServer = in.readLine(); //se para en esta línea hasta que llega un mensaje
+				String msgFromServer = in.readLine(); //it stops in this line until a message is received
 				
 				JSONObject newGameJSON = new JSONObject(msgFromServer);
 				

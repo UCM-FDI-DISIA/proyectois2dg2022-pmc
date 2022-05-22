@@ -17,7 +17,7 @@ public abstract class Strategy {
 	protected SimplifiedBoard simplifiedBoard;
 	
 	/**
-	 * Color of the player that owns the stategy instance
+	 * Color of the player that owns the strategy instance
 	 */
 	protected Color color;
 	
@@ -40,7 +40,7 @@ public abstract class Strategy {
 	public abstract int simulate(Color currentColor, int depth, int alpha, int beta);
 	
 	/**
-	 * Array of the inheriter classes
+	 * Array of the inherited classes
 	 */
 	public static Strategy[] strategies = {
 		new RandomStrategy(),
@@ -63,7 +63,7 @@ public abstract class Strategy {
 	/**
 	 * Method that returns an instance of a Strategy subclass that matches the type
 	 * @param color Color of the player that will own the Strategy instance
-	 * @param type Type of Strategy that wants to be instanciated
+	 * @param type Type of Strategy that wants to be instantiated
 	 * @return Instance of a Strategy subclass that matches the type, null if there are no matches
 	 */
 	public static Strategy parse(Color color, String type) {

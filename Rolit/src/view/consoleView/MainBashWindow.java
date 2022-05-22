@@ -74,14 +74,14 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 			this.clear();
 			int option = this.menu();
 			ConsoleWindow nextWindow;
-			// Se ha seleccionado jugar a un juego nuevo
+			// If playing a new game has been selected
 			if (NEW_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new NewGameWindow();
 				repeatMenu = nextWindow.open();
 				ctr.createGame((JSONObject) nextWindow.get());
 				this.initGame();
 			}				
-			// Se ha seleccionado cargar un juego antiguo
+			// If loading a game has been selected
 			else if (LOAD_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new LoadGameWindow();
 				repeatMenu = nextWindow.open();
@@ -94,12 +94,12 @@ public class MainBashWindow implements ConsoleWindow, RolitObserver {
 				}
 
 			}
-			// Se ha seleccionado borrar un juego
+			// If deleting a game has been selected
 			else if (DELETE_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new DeleteGameWindow();
 				repeatMenu = nextWindow.open();
 			}
-			// Se ha seleccionado ver una repeticion
+			// If viewing a replay has been selected
 			else if(REPLAY_GAME.equals(OPTIONS[option - 1])) {
 				nextWindow = new LoadReplayWindow();
 				repeatMenu = nextWindow.open();

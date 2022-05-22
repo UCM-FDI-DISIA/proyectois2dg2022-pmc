@@ -62,8 +62,8 @@ public class GameConfigurationPanel extends RolitPanel {
 		playersSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 1));
 		
 		
-		teamsSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 0)); //step 0 para bloquear
-		//Bloqueamos el jspinner porque por ahora sólo pueden jugar dos equipos
+		teamsSpinner = new JSpinner(new SpinnerNumberModel(2, 2, 10, 0)); //step 0 to block
+		//We block the JSpinner because by now only two teams can play
 		((JSpinner.DefaultEditor) teamsSpinner.getEditor()).getTextField().setEditable(false);
 		teamsSpinner.setVisible(false);
 		

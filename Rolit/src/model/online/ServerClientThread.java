@@ -56,7 +56,7 @@ public class ServerClientThread extends Thread {
 
 	/**
 	 * This methods sends a given information from the server to the client
-	 * @param json Information that wants to be sent in the shape of a json
+	 * @param json Information that wants to be sent in the shape of a JSON
 	 */
 	public void sendToClient(JSONObject json) {
 		String msg = json.toString();

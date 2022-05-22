@@ -16,7 +16,7 @@ import model.logic.Player;
 import model.logic.Shape;
 
 public class ExitCommandTest {
-	//Prueba que el comando salir se ejecuta correctamente
+	//First test that checks that the exit command is executed correctly
 	@Test
 	void executeTest() throws Exception {
 		Shape shape = Shape.CL;
@@ -45,7 +45,7 @@ public class ExitCommandTest {
 		assertTrue(game.exited());
 	}
 	
-	// Segunda prueba de que el comando salir se ejecuta correctamente
+	//Second test that checks that the exit command is executed correctly
 	@Test
 	void executeTest2() throws Exception {
 		Shape shape = Shape.DM;

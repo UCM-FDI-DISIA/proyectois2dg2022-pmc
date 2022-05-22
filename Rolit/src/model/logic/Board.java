@@ -46,7 +46,7 @@ public class Board implements Reportable {
 		this.size = SaveLoadManager.getShapeSize(shape.getFilename());
 		this.numValidPos = 0;
 		
-		//cargamos la forma
+		//we load the shape
 		for (int i = 0; i < shapeMatrix.length; i++) {
 			for (int j = 0; j < shapeMatrix.length; j++) {
 				if(shapeMatrix[i][j]) {
@@ -55,7 +55,7 @@ public class Board implements Reportable {
 			}
 		}
 		
-		//inicializamos la matriz de cubos
+		//we initialize the matrix of cubes
 		for (int i = 0; i < size; i++) {
 			this.matrix.add(new ArrayList<Cube>(size));
 		}
@@ -157,54 +157,68 @@ public class Board implements Reportable {
 	public void update(Cube newCube) {
 		int posX = newCube.getX(), posY = newCube.getY();
 		int newX, newY;
-		int foundX = posX, foundY = posY; // Las inicializo porque si no Eclipse se queja
+		int foundX = posX, foundY = posY;
 		boolean found;
 		Cube currentCube;
 
-		// Hacemos dos bucles para indicar la direccion en la que vamos a buscar un cubo
-		// del color del jugador actual
-		// Estos dos bucles representan siempre 8 iteraciones, por lo que no implican
-		// que el coste del algoritmo sea cubico (es lineal)
+		/*
+		 * We use two loops to indicate the direction in which we are searching a cube,
+		 * which its color correspond to the color of the current player.
+		 * 
+		 * These two loops represents always eight iterations, so it doesn't imply
+		 * that the complexity of the algorithm is cubic (in fact, it is linear)
+		 * 
+		 * */
+
 		for (int dirX = -1; dirX <= 1; dirX++) {
 			for (int dirY = -1; dirY <= 1; dirY++) {
-				// Partiendo de la posicion actual (posX, posY), nos movemos en la direccion
-				// actual
-				// sumando a la posicion actual (dirX, dirY)
+				/*
+				 * We start from the actual position (posX, posY). We move in the current
+				 * direction adding to the current position (dirX, dirY).
+				 */
+
 				if (!(dirX == 0 && dirY == 0)) {
 					newX = posX + dirX;
 					newY = posY + dirY;
 					found = false;
 					boolean conected = true;
-					// Comprobamos la nueva casilla y el posible cubo que haya en ella
+					//We check the new square and the possible cube that is in it
 					while (isPositionInRange(newX, newY) && !found && conected) {
 						currentCube = getCubeInPos(newX, newY);
 						if (currentCube != null) {
-							// Si el cubo es del color del jugador actual dejamos de buscar, es hasta este
-							// hasta el que tenemos que llegar
+							/*
+							 * If the color of the cube corresponds to the color of the current player
+							 * we stop searching, for it is this cube that we have to reach
+							 * */
 							if (currentCube.getColor().equals(newCube.getColor())) {
 								found = true;
 								foundX = newX;
 								foundY = newY;
 							}
-							// Si el cubo es de otro color seguimos buscando
+							// If the cube is of another color, we keep searching
 							else {
 								newX += dirX;
 								newY += dirY;
 							}
 						} else {
-							conected = false; // Si hay alguna casilla vacia en esta direccion dejamos de buscar
+							conected = false; //If there is an empty square in this direction, we stop searching
 						}
 					}
-					// Si en la direccion dada por (dirX, dirY) hemos encontrado otro cubo del color
-					// del jugador actual
-					// ponemos cubos del color en cuestion en todas las casillas entre medias
+					
+					/*
+					 * If the current direction given by (dirX, dirY) we have found another cube
+					 * which its color corresponds to the current player, we put cubes of that color
+					 * in all the squares in between
+					 * 
+					 * */
 					if (found) {
 						newX = posX + dirX;
 						newY = posY + dirY;
 						while (!(newX == foundX && newY == foundY)) {
 							currentCube = getCubeInPos(newX, newY);
 
-							// Cambiamos de color el cubo en cuestion al color del jugador actual y actualizamos los puntos
+							//We change the color of the cube to the color of the actual player and
+							//we update the points
 							currentCube.changeOwner(newCube.getColor());
 							
 							newX += dirX;

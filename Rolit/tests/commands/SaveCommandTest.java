@@ -8,7 +8,7 @@ import model.commands.Command;
 import model.commands.SaveCommand;
 
 public class SaveCommandTest {
-	//prueba que el comando de guardar funcione adecuadamente
+	//We check that the save command works correctly
 	@Test
 	void parseTest() {
 		SaveCommand save = new SaveCommand();
@@ -16,7 +16,7 @@ public class SaveCommandTest {
 		assertThrows(IllegalArgumentException.class, () -> save.parse(s));
 	}
 
-	//Comprueba que se lance la excepción
+	//We check that the exception is thrown
 	@Test
 	void exceptionTest() {
 		String[] s = {"77","43"};

@@ -26,6 +26,7 @@ public class Tutorial {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				@SuppressWarnings("unused")
 				Video videoFrame = new Video(TUTORIAL_PATH, TUTORIAL_WINDOW_NAME);
 			}
 		});

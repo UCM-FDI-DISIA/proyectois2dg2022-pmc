@@ -32,9 +32,6 @@ public class RolitButton extends JButton {
 		this.setSize(d);
 		this.setOpaque(false);
         this.setFocusPainted(false);
-        //this.setForeground(BLUE_ROLIT);
-        
-       // Border blueLineBorder=  BorderFactory.createStrokeBorder(new BasicStroke());
         Border blueLineBorder=  BorderFactory.createLineBorder(BLUE_ROLIT, thickness);
         Border emptyBorder = BorderFactory.createEmptyBorder(this.getBorder().getBorderInsets(this).top, this.getBorder().getBorderInsets(this).left, this.getBorder().getBorderInsets(this).bottom, this.getBorder().getBorderInsets(this).right);
 	    this.setBorder(BorderFactory.createCompoundBorder( blueLineBorder, emptyBorder));

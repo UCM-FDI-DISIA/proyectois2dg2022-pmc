@@ -9,7 +9,7 @@ import model.builders.GameTeamsBuilder;
 import model.logic.Game;
 
 public class GameTeamsBuilderTest {
-	//GameTeams debería crearse bien y devolver el mismo report
+	//GameTeams should be created well and return the same report
 	@Test
 	void test_1() {
 		String inputJSon = "{\"teams\":[{\"score\":0,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
@@ -17,35 +17,35 @@ public class GameTeamsBuilderTest {
 		assertTrue(new JSONObject(inputJSon).similar(game.report()));
 	}
 	
-	//probamos a meter una coordenada de un cubo que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to introduce an incorrect cube coordinate, we see that the exception is thrown correctly
 	@Test
 	void test_2() {
 		String inputJson = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,-50]}]}}";
 		assertThrows(Exception.class, () -> GameTeamsBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
-	// si el tipo no es un GameTeams debe saltar una excepción
+	//If the type is not a GameTeams, an exception should be thrown
 	@Test
 	void test_3() {
 		String inputJson = "{\"teams\":[{\"score\":0,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"blabla\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";;
 		assertThrows(Exception.class, () -> GameTeamsBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
-	//probamos a meter un color que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to put an incorrect color, we see that the exception is thrown correctly
 	@Test
 	void test_4() {
 		String inputJson = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"SM\",\"cubes\":[{\"color\":\"zsuwbdweud\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
 		assertThrows(Exception.class, () -> GameTeamsBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
-	//probamos a meter una clave que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to put an incorrect key, we see that the exception is thrown correctly
 	@Test
 	void test_5() {
 		String inputJson = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"suab\":\"SM\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";
 		assertThrows(Exception.class, () -> GameTeamsBuilder.createGame(new JSONObject(inputJson)));
 	}
 	
-	//probamos a meter una forma que está mal, vemos que se lanza adecuadamente la excepción
+	//We try to introduce an incorrect shape, we see that the exception is thrown correctly
 	@Test
 	void test_6() {
 		String inputJson = "{\"teams\":[{\"score\":3,\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"name\":\"equipo1\"},{\"score\":0,\"players\":[{\"score\":0,\"color\":\"R\",\"name\":\"dani\"}],\"name\":\"equipo2\"}],\"players\":[{\"score\":2,\"color\":\"Y\",\"name\":\"Juandi\"},{\"score\":1,\"color\":\"W\",\"name\":\"Leo\"}],\"turn\":\"W\",\"type\":\"GameTeams\",\"board\":{\"shape\":\"danigmsi\",\"cubes\":[{\"color\":\"W\",\"pos\":[3,4]},{\"color\":\"Y\",\"pos\":[3,5]},{\"color\":\"Y\",\"pos\":[3,6]}]}}";

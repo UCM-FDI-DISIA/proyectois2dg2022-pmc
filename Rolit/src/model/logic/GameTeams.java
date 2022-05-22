@@ -44,38 +44,40 @@ public class GameTeams extends Game {
 		return new GameTeams(this);
 	}
 
-	// El juego funciona igual que la parte de gameClassic, el que maneja la nueva funcionalidad de los equipos es el propio player al modificar su equipo
+	//The game works the same as the GameClassic part. The one who manages the new functionality of the teams
+	//is the player itself when modifies its team
 	@Override
 	public void play() throws IllegalArgumentException {
 		while(!this.pendingCubes.isEmpty()) {
 			Cube c = this.pendingCubes.poll();
 			
-			// En caso de poderse, ponemos el cubo en la posicion y actualizamos el tablero
+			// In case we can, we put the cube in the position and we update the board
 			Cube newCube = new Cube(c.getX(), c.getY(), players.get(turnManager.getCurrentPlayerIndex()));
 			this.board.addCubeInPos(newCube);
 			
 			this.board.update(newCube);
-			// Tras actualizar las puntuaciones de cada jugador de forma correspondiente, entonces actualizamos la puntuaci�n del equipo
+			// After updating the score of each player in its corresponding way,
+			//we then update the team score
 			for (Team team : teams)
 				team.update();
 			
-			//Comprobamos si la partida termina con este turno
+			//We check if the game finishes in this turn
 			this.finished = board.isBoardFull();
 			if (this.finished) {
 				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-				//Añadimos el estado actual a replay
+				//We add the current state to the replay
 				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(), copyMe()));
 				
 				this.onGameFinished();
 			}
-			// Cambiamos el turno al siguiente jugador en la lista si la partida no ha terminado
+			//We change the turn to the next player in the list if the match has not finished
 			else {
 				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);
 				if(nextCube != null) this.addCubeToQueue(nextCube);
 				
 				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
-				//Añadimos el estado actual a replay
+				//We add the current state to the replay
 				replay.addState(new GameState("p " + newCube.getX() + " " + newCube.getY(),copyMe()));
 				
 				this.executedTurn = true;

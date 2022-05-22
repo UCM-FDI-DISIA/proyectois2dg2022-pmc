@@ -135,9 +135,9 @@ public class SaveLoadManager {
 		Replay replay = null;
 		try (BufferedReader save_file = new BufferedReader(new FileReader(filename))) {
 			replay = new Replay();
-			// Guardamos el .txt en un JSONObject
+			// We save the .txt in a JSONObject
 			JSONObject jo = new JSONObject(new JSONTokener(save_file));
-			// Cogemos el array de estados
+			// We get the states' array
 			JSONArray states = jo.getJSONArray("states");
 			for (int i = 0; i < states.length(); i++) {
 				JSONObject state = states.getJSONObject(i);
@@ -207,9 +207,9 @@ public class SaveLoadManager {
 					int temp = shape_file.read();
 					if (temp == 'X') array_pos[i][j] = true;
 					else array_pos[i][j] = false;
-					shape_file.read(); // lee el espacio
+					shape_file.read(); // reads "space"
 				}
-				shape_file.readLine(); // lee el intro
+				shape_file.readLine(); // reads "intro"
 			}
 			return array_pos;
 		} catch (IOException error_file) {
@@ -225,8 +225,8 @@ public class SaveLoadManager {
 	 * @throws IOException
 	 */
 	private static void loadAndUpdateListOfSavedFiles(String path, String defaultFile) throws IOException {		
-		//Comprobamos si la lista está desactualizada, y los archivos
-		//no encontrados se borran de la lista.
+		//We check if the list is outdated, and the non found
+		//files are erased from the list.
 		names = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
 		
 		for (int i = 0; i < names.size(); ++i) {

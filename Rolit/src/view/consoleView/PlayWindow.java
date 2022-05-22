@@ -65,7 +65,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		this.waitingForUpdate = false;
 		this.state = state;
 		System.out.println(state.toString());
-		System.out.print(PROMPT); // Se pone el PROMPT aquí porque si no sale antes del estado porque el game tarda en mandar la notificación
+		System.out.print(PROMPT); //We put the PROMPT here because if not, it exits before the state, in account of the delay of the game sending the notification
 	}
 	
 	@Override
@@ -74,7 +74,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		System.out.println(state.toString());
 		
 		try {
-			Thread.sleep(1000); // Esperamos para que de tiempo a ver el tablero
+			Thread.sleep(1000); //We wait so that we have enough time to watch the board
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}

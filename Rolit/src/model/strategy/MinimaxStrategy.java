@@ -8,7 +8,7 @@ import utils.Pair;
 
 /**
  * This class represents the Minimax strategy for the artificial intelligences.
- * This strategy calculates the next move for the player aplying the concept of the Minimax algorithm.
+ * This strategy calculates the next move for the player applying the concept of the Minimax algorithm.
  * @author PMC
  *
  */

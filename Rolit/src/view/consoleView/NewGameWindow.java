@@ -36,7 +36,7 @@ public class NewGameWindow implements ConsoleWindow {
 	@Override
 	public boolean open() {
 		json = new JSONObject();
-		// elegimos el modo de juego concreto
+		//We choose the specific game mode
 		System.out.println(AVAILABLE_MODES_MSG);
 		String type = input.nextLine();
 		while(!GameBuilder.isAvailableMode(type)) {
@@ -44,7 +44,7 @@ public class NewGameWindow implements ConsoleWindow {
 			type = input.nextLine();
 		}
 		json.put("type", type);
-		// Elegimos el numero de jugadores
+		//We choose the number of players
 		System.out.println(NUMBER_PLAYERS_MSG);
 		nPlayers = input.nextInt();
 		input.nextLine();
@@ -53,7 +53,7 @@ public class NewGameWindow implements ConsoleWindow {
 			nPlayers = input.nextInt();
 			input.nextLine();
 		}
-		// Elegimos el tablero concreto
+		//We choose the specific board
 		System.out.print(BOARD_MSG);
 		String board_shape;
 		do {

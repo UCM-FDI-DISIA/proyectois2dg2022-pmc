@@ -46,7 +46,7 @@ public class Video extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		this.pack();
-		this.setSize(new Dimension(1280, 708)); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+		this.setSize(new Dimension(1280, 708));
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -63,14 +63,14 @@ public class Video extends JFrame {
 			@Override
 			public void run() {
 				File file = new File(path);
-				MediaPlayer oracleVid = null;	//Para que eclipse no se queje
+				MediaPlayer oracleVid = null;
 				try {
-					oracleVid = new MediaPlayer (new Media(file.toURI().toString()));
+					oracleVid = new MediaPlayer(new Media(file.toURI().toString()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				jfxPanel.setScene(new Scene(new Group(new MediaView(oracleVid))));
-				oracleVid.setVolume(0.7); //Volumen
+				oracleVid.setVolume(0.7); //Volume
 				oracleVid.setCycleCount(MediaPlayer.INDEFINITE);
 				oracleVid.play();
 			}

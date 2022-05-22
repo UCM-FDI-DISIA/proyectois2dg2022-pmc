@@ -61,7 +61,8 @@ public class GameTeamsBuilder extends GameBuilder {
 					JSONObject playerTeam = playersTeamJSONArray.getJSONObject(j);
 					Color currentColor = Color.valueOfIgnoreCase(playerTeam.getString("color").charAt(0));
 					if(list_players.get(k).getColor().equals(currentColor)) {
-						list_playersTeam.add(list_players.get(k)); //Hay que coger los players ya creados, no crear copias
+						list_playersTeam.add(list_players.get(k)); //We need to take the players
+																   //that have been already created and not create copies
 						break;
 					}
 				}

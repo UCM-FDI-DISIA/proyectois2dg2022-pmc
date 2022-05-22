@@ -6,7 +6,7 @@ import utils.Pair;
 
 /**
  * This class represents the Greedy strategy for the artificial intelligences.
- * This strategy searchs for the inmediate next move that will grant the player the most points.
+ * This strategy searches for the immediate next move that will grant the player the most points.
  * @author PMC
  *
  */

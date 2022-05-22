@@ -91,7 +91,6 @@ public class JoinServerDialog extends JDialog {
 			colorComboBox.addItem(color);
 		}
 		
-		//addComp(connectPanel, playerPanel, 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, new JLabel("Name: "), 0, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, nameTextArea, 1, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);
 		addComp(connectPanel, new JLabel("Color: "), 2, 0, 1, 1, GridBagConstraints.EAST, GridBagConstraints.NONE);

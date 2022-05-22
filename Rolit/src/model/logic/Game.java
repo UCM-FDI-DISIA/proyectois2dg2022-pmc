@@ -196,7 +196,7 @@ public abstract class Game extends Thread implements Replayable {
 	/**
 	 * It notifies onTurnedPlayed() to every observer
 	 */
-	protected abstract void onTurnPlayed();	// Cada modo de juego debe tener su propia implementación
+	protected abstract void onTurnPlayed();	// Each game mode needs to have its own implementation
 	
 	/**
 	 * It notifies onGameFinished() to every observer

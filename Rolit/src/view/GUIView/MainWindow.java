@@ -84,10 +84,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	 * This method creates and shows all the components relative to this dialog
 	 */
 	private void initGUI() {
-		//Icono de la ventana
+		//Icon of the window
 		this.setIconImage(new ImageIcon(ICONS_PATH + "\\rolitIcon.png").getImage());
 		
-		//Panel de bienvenida
+		//Welcome Panel
 		welcomePanel = new JPanel();
 		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.Y_AXIS));
 		welcomePanel.setBackground(Color.WHITE);
@@ -98,39 +98,45 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		rolitLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		welcomePanel.add(rolitLogo);
 		
-		//Botones
+		//Buttons
 		
-		// Boton de juego nuevo
+		//Button of new game
 		createGameButton = new RolitButton("Create game");
 		createGameButton.setActionCommand(BUTTONS[0]);
 		createGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		createGameButton.addActionListener(this);
-		// Boton cargar juego
+		
+		//Button of load game
 		loadGameButton = new RolitButton("Load game");
 		loadGameButton.setActionCommand(BUTTONS[1]);
 		loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loadGameButton.addActionListener(this);
-		// Boton borrar juego
+		
+		//Button of delete game
 		deleteGameButton = new RolitButton("Delete game");
 		deleteGameButton.setActionCommand(BUTTONS[2]);
 		deleteGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		deleteGameButton.addActionListener(this);
-		// Boton cargar replay
+		
+		//Button of load replay
 		loadReplayButton = new RolitButton("Load replay");
 		loadReplayButton.setActionCommand(BUTTONS[3]);
 		loadReplayButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loadReplayButton.addActionListener(this);
-		// Boton cargar server
+		
+		//Button of creating server
 		createServerButton = new RolitButton("Create Server");
 		createServerButton.setActionCommand(BUTTONS[4]);
 		createServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		createServerButton.addActionListener(this);
-		// Boton unirse a server
+		
+		//Button of joining a server
 		joinServerButton = new RolitButton("Join Server");
 		joinServerButton.setActionCommand(BUTTONS[5]);
 		joinServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinServerButton.addActionListener(this);
-		// Boton para abrir el tutorial
+		
+		//Button to open the tutorial
 		tutorialButton = new RolitButton("Tutorial");
 		tutorialButton.setActionCommand(BUTTONS[6]);
 		tutorialButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -140,15 +146,15 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		optionMessage = new JLabel("Choose an option:");
 		optionMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		//Separador del final (para que haya un hueco entre el ultimo compente y el final del jframe)
+		//Separator at the end (so that there is a gap between the last component and the end of the JFrame)
 		Box.Filler glue = (Filler) Box.createVerticalGlue();
 	    glue.changeShape(glue.getMinimumSize(),  new Dimension(0, 10), glue.getMaximumSize());
 
 				
-		// Colocar los botones en el panel
+		// Putting the buttons in the panel
 	  
 		welcomePanel.add(optionMessage);
-		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5))); //hueco en blanco
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5))); //Gap
 		welcomePanel.add(createGameButton);
 		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
 		welcomePanel.add(loadGameButton);
@@ -180,7 +186,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		case "NG":
 			CreateGameDialog dialogNew = new CreateGameWithPlayersDialog(MainWindow.this, ctrl);
 			int statusng = dialogNew.open();		
-			if (statusng == 1) { // se ha presionado OK
+			if (statusng == 1) { // OK has been clicked
 				this.state = dialogNew.getState();
 				ctrl.createGame(dialogNew.createJSONObjectGame());
 				this.initGame();
@@ -247,7 +253,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	 * This method creates and shows all the components relative to the game
 	 */
 	private void initGame() {		
-		// Por si acaso, para que siempre se limpie pantalla
+		// Just in case so that the screen is always cleaned
 		if (welcomePanel != null)
 			this.remove(welcomePanel);
 		
@@ -256,8 +262,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel);
 	
-		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
-		//centerPanel.add(gamePanel);
+		gamePanel = new JPanel(new BorderLayout());	//It contains the turnBar (up) and the boardPanel (down)
 		
 		boardPanel = new BoardGUI(ctrl);
 		
@@ -274,7 +279,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel.add(statusBar, BorderLayout.PAGE_END);
 						
 		this.pack();
-		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //So that the score list does fit if the names are long enough
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 		ctrl.addObserver(this);
@@ -294,7 +299,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		mainPanel = new JPanel(new BorderLayout());
 		this.setContentPane(mainPanel);
 			
-		gamePanel = new JPanel(new BorderLayout());	//Contiene el turnBar (arriba) y el boardPanel (abajo)
+		gamePanel = new JPanel(new BorderLayout());	//It contains the turnBar (up) and the boardPanel (down)
 				
 		boardPanel = new BoardGUI(replay);		
 		TurnAndRankingBar trbar = new TurnAndRankingBar(replay);
@@ -309,7 +314,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		
 		this.repaint();
 		this.pack();
-		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+		this.setSize(new Dimension(this.getWidth() + 50, this.getHeight())); //So that the score list does fit if the names are long enough
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 	}
@@ -366,7 +371,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		onTurnPlayed(state);
 		
 		try {
-			Thread.sleep(1000); //Wait 1 sec to see the last cube
+			Thread.sleep(1000); //Wait 1 second to see the last cube
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

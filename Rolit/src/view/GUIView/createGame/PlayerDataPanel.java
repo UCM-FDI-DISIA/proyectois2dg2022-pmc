@@ -86,7 +86,7 @@ public class PlayerDataPanel extends RolitPanel {
 		teamCombo.addItem("Team 1");
 		teamCombo.addItem("Team 2");
 		
-		playerLabel = new JLabel(String.format("Player %d: ", number + 1));	//Label con el numero de jugador
+		playerLabel = new JLabel(String.format("Player %d: ", number + 1));	//Label with the player's number
 		nameLabel = new JLabel("Name: ");
 		colorLabel = new JLabel("Color: ");
 		teamLabel = new JLabel("Team: ");

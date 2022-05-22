@@ -17,7 +17,8 @@ import model.logic.Player;
 import model.logic.Shape;
 
 public class GameClassicTest {
-	//probamos principalmente la clase play, que es la principal.
+	
+	//We check mainly the play method
 	@Test
 	void play_test() {
 		Board b = new Board(Shape.SM);
@@ -43,7 +44,7 @@ public class GameClassicTest {
 		assertEquals(b.getCubeInPos(3, 6).getColor(), Color.YELLOW);
 	}
 	
-	//comprobamos que el report final es el esperado
+	//We check that the final report equals the expected one
 	@Test
 	void test_report() {
 		Board b = new Board(Shape.SM);

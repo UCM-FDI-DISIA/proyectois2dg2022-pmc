@@ -52,7 +52,7 @@ public class SaveCommand extends Command {
 	@Override
 	public Command parse(String[] words) {
 		if(matchCommandName(words[0])) {
-			if(words.length == 1) {} //Nada que hacer aqui, filename mantiene null como valor
+			if(words.length == 1) {} //Nothing to do here, filename maintains null as value
 			else if(words.length == 2) {
 				filename = words[1];
 			}

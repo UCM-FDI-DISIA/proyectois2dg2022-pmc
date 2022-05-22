@@ -36,7 +36,7 @@ public class NewGameClassicWindow extends NewGameWindow {
 			while (!added) {
 				 System.out.println(this.availableColors(jPlayers));
 				 System.out.print(CHOOSE_COLOR);
-				 char c = input.next().charAt(0); // HAGO QUE SEA UN STRING POR SI EL USUARIO INTRODUCE MAS DE UN CARACTER
+				 char c = input.next().charAt(0); //We make it a String in case the user introduces more than one character
 				 input.nextLine();
 				 Color color = Color.valueOfIgnoreCase(c);
 				 if(name.endsWith(" AI")) {

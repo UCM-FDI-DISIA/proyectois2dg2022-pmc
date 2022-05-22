@@ -37,7 +37,7 @@ public class PlaceCubeCommand extends Command {
 
 	@Override
 	public void execute(Game game) throws Exception {
-		//Simplemente añadimos un cubo y el game sabra agregarle el jugador que este jugando
+		//We simply add a cube; the game will know to add the player that is playing
 		game.addCubeToQueue(new Cube(this.x, this.y, null));
 	}
 	

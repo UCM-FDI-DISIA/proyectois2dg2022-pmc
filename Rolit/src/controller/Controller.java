@@ -83,7 +83,7 @@ public class Controller {
 			if (game.getCurrentPlayer().getColor().equals(clientRolit.getPlayer().getColor())) {
 				c.execute(game);
 				while(!game.executedTurn()) {
-					//No se hace nada para esperar a que el modelo haga lo que le haga falta
+					//Nothing is done so that the model does whatever it needs
 				}
 				clientRolit.updateGameToServer();
 			}

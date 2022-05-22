@@ -21,7 +21,7 @@ public class DeleteGameWindow implements ConsoleWindow {
 	public boolean open() {
 		this.clear();
 		List<String> savedGames = SaveLoadManager.getListOfSavedGames();
-		// En caso de que todo haya ido bien
+		// In case everything has gone well
 		for (int i = 0; i < savedGames.size(); i++)
 			System.out.println(String.format("%d. %s", i + 1, savedGames.get(i)));
 		boolean repeatChooseNumber;

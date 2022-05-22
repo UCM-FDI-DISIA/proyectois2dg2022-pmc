@@ -26,7 +26,7 @@ public class LoadGameWindow implements ConsoleWindow {
 		System.out.println(LIST_MSG);
 		List<String> savedGames = null;
 		savedGames = SaveLoadManager.getListOfSavedGames();
-		// En caso de que no haya habido problemas
+		// In case everything has gone well
 		for (int i = 0; i < savedGames.size(); i++)
 			System.out.println(String.format("%d. %s", i + 1, savedGames.get(i)));
 		boolean repeatChooseNumber;

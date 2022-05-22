@@ -13,7 +13,8 @@ import model.logic.Player;
 import model.logic.Team;
 
 public class TeamTest {
-	//comprueba que funcione bien la función update
+	
+	//We check that the update method works correctly
 	@Test
 	void update_test() {
 		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
@@ -27,7 +28,7 @@ public class TeamTest {
 		assertEquals(8, equipo1.getScore());
 	}
 	
-	//comprueba que el report final es igual al deseado
+	//We check that the final report equals the expected one
 	@Test
 	void test_report() {
 		Player p1 = new Player(Color.YELLOW, "Chacon Chacon");
@@ -39,7 +40,7 @@ public class TeamTest {
 		assertTrue (new JSONObject(s).similar(equipo1.report()));
 	}
 	
-	//comprueba que el report final es igual al deseado
+	//We check that the final report equals the expected one
 		@Test
 		void test_report2() {
 			Player p1 = new Player(Color.BROWN, "uwuuuuuuuu");
