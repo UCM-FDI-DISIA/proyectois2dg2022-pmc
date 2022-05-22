@@ -1886,6 +1886,8 @@ Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de
 
 \subsection{Online}
 
+Mencionamos y agradecemos especialmente a la aplicación de código abierto \href{https://github.com/OliverEkberg/Chess}{Chess, de Oliver Ekberg}, sobre el cual nos hemos inspirado a la hora de elaborar el boceto de la estructura del juego online.
+
 Como explicamos en el apartado de Arquitectura, el juego en red se basa en el \textbf{modelo cliente-servidor}, donde los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor, el cual procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos.
 
 Para implementar esta funcionalidad de red en Java operamos según el modelo \texttt{ServerSocket}-\texttt{Socket}. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de \texttt{ServerSocket} pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo\texttt{Socket} por medio de llamar al método \texttt{accept()} de \texttt{ServerSocket}. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
