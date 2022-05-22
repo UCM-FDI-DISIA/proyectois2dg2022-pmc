@@ -48,7 +48,7 @@ public class Video extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		this.pack();
-		this.setSize(new Dimension(1280, 708));
+		this.setSize(new Dimension(1440, 1080));
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
