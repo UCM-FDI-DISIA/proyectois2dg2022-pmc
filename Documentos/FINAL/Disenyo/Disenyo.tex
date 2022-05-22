@@ -852,9 +852,9 @@ Esta poda ha sido muy útil para reducir costes de cálculo, y el nuevo algoritm
 
 \subsubsection{Como usuario, me gustaría que se pudiera jugar en red.}
 \begin{sprint}[5]
-En cuanto a la tarea de añadir un modo de juego en red, se concibe, planea e implementa la funcionalidad de red casi por completo, consigue llegar a una versión funcional de juego en red en GameClassic.
+En cuanto a la tarea de añadir un modo de juego en red, se concibe, planea e implementa la funcionalidad de red casi por completo, consigue llegar a una versión funcional de juego en red en \texttt{GameClassic}.
 
-En cuanto al servidor, se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo ServerView interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
+En cuanto al servidor, se define y se mantiene en todos los sprints la característica de que el servidor no posee el modelo, si no que es un intemediario entre clientes (pasando información procedente de un cliente al resto de clientes, para que estos últimos actualicen sus modelos). El diálogo \texttt{ServerView} interactúa con el servidor a la hora de dejar al usuario especificar los detalles sobre los que el servidor operará (puerto).
 
 En cuanto al cliente, se define y se mantiene en todos los sprints la característica de que el cliente es el que posee el modelo, Cada vez que se hace una modificación en el modelo del cliente, se envía al servidor la información del juego; el servidor procede a actualizar la información del modelo del resto de clientes conectados.
 
@@ -867,26 +867,26 @@ Al final del Sprint, los objetivos alcanzados son los siguientes:
 
 \item Crear un número suficiente de diálogos en GUI que permitan la conexión en red. Entre ellos, se encuentran:
 \begin{itemize}
-\item ServerView
-\item JoinServerDialog
+\item \texttt{ServerView}
+\item \texttt{JoinServerDialog}
 \end{itemize}
 
 El diseño y evolución pormenorizados de estos diálogos se encuentran en el apartado de la historia de usuario dedicada a la interfaz.
 
-\item Reutilizamiento del código del diálogo de crear partida, adaptado a las circunstancias de red.
+\item Reutilización del código del diálogo de crear partida, adaptado a las circunstancias de red.
 
-\item Poder jugar a una partida GameClassic en red de forma satisfactoria.
+\item Poder jugar a una partida \texttt{GameClassic} en red de forma satisfactoria.
 
 \end{itemize}
 
 Aun así, otros de los objetivos propuestos no son implementados por falta de tiempo y de dependencia con otras de las partes del desarrollo no concluidos. Estos objetivos son:
 
 \begin{itemize}
-\item Crear más diálogos que aporten feedback para la conexión, tanto de la perspectiva del cliente como del servidor.
+\item Crear más diálogos que aporten \textit{feedback} para la conexión, tanto de la perspectiva del cliente como del servidor.
 
 \item Llegar a una versión completamente refactorizada y con métodos simplificados.
 
-\item Implementar el juego en red en GameTeams.
+\item Implementar el juego en red en \texttt{GameTeams}.
 \end{itemize}
 
 Presentamos los diagramas UML de este Sprint.
@@ -904,19 +904,19 @@ Presentamos los diagramas de secuencia de este Sprint.
 \item Cómo se realizan las conexiones
 
 \begin{center}
-\includegraphics[scale=0.41]{umlconexiones.png} 
+\includegraphics[scale=0.41]{conexionesUmlSprint5.png} 
 \end{center}
 
 \item Cómo se inicia una partida
 
 \begin{center}
-\includegraphics[scale=0.42]{empezarPartidaUml.png} 
+\includegraphics[scale=0.42]{empezarPartidaUmlSprint5.png} 
 \end{center}
 
 \item Cómo se envía y recibe una jugada
 
 \begin{center}
-\includegraphics[scale=0.42]{juegoTipicoUml.png} 
+\includegraphics[scale=0.42]{juegoTipicoUmlSprint5.png} 
 \end{center}
 
 \end{itemize}
@@ -929,12 +929,12 @@ Presentamos los diagramas de secuencia de este Sprint.
 En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes en el Sprint 5. Las características implementadas son:
 
 \begin{itemize}
-\item Implementación del modo red para GameTeams.
+\item Implementación del modo red para \texttt{GameTeams}.
 
-\item Creación de diálogos y de código auxiliar para soportar GameTeams.
+\item Creación de diálogos y de código auxiliar para soportar \texttt{GameTeams}.
 
 \begin{itemize}
-\item Una clase creada para tal efecto es ChooseTeamFromServerDialog.
+\item Una clase creada para tal efecto es \texttt{ChooseTeamFromServerDialog}.
 \end{itemize}
 
 
@@ -942,7 +942,7 @@ En cuanto a la red, se alcanzan los objetivos propuestos que quedaron pendientes
 
 \item Adaptación de los diálogos GUI de red al nuevo diseño de la interfaz gráfica introducido en este Sprint.
 
-\item Se introduce un \texttt{ServerWorker} que soluciona un bug complejo que afectaba a los threads de Red y Swing.
+\item Se introduce un \texttt{ServerWorker} que soluciona un \textit{bug} complejo que afectaba a los \textit{threads} de Red y Swing.
 
 \item Simplificación y refactorización del código de Red.
 \end{itemize}
@@ -962,27 +962,27 @@ Las clases cambiadas, desde la perspectiva del servidor, son las siguientes:
 
 \begin{itemize}
 
-\item ServerView
+\item \texttt{ServerView}
 
-En vez de llamar a server.start, se invoca un \texttt{SwingWorker}, llamado \texttt{ServerWorker}, que se encarga de llamar a server.start(); esto arregla un bug de solapamiento del thread del servidor y el de Swing.
+En vez de llamar a \texttt{server.start()}, se invoca un \texttt{SwingWorker}, llamado \texttt{ServerWorker}, que se encarga de llamar a \texttt{server.start()}; esto arregla un bug de solapamiento del \textit{thread} del servidor y el de Swing.
 
 \item \texttt{Server}
 
-Se modifica el método receiveFromClient para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
+Se modifica el método \texttt{receiveFromClient()} para que se pueda examinar el tipo de notificación (elegir equipo, actualizar gráficos, recibir información de jugador) y hacer así procesamientos distintos de la información recibida en cada caso.
 
-En el método waitForPlayers() se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
+En el método \texttt{waitForPlayers()} se distingue si se juega por equipos o no. Si se juega por equipos, una vez se realicen todas las conexiones de todos los usuarios esperados, se notifica a los mismos que deben coger un equipo, junto con la lista de equipos de los que pueden elegir.
 
-Cuando un jugador envia su equipo, se añade una entrada en el mapa mapClientTeam, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
+Cuando un jugador envia su equipo, se añade una entrada en el mapa \texttt{mapClientTeam}, nuevo atributo el cual adjudica a cada cliente, el equipo que ha escogido.
 
-Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método waitForAllPlayersToChooseTeam); una vez conseguido, se llama al nuevo método completeGameConfigTeams para rellenar el \texttt{JSON} del GameConfig.
+Se espera hasta que todos los jugadores envíen la elección de equipo (de ahí la introducción del nuevo método \texttt{waitForAllPlayersToChooseTeam()}); una vez conseguido, se llama al nuevo método \texttt{completeGameConfigTeams()} para rellenar el \texttt{JSON} del \texttt{gameConfig}.
 
 \item \texttt{ServerClient}
 
-Añadido notifyClientToChooseTeam; indica al \texttt{ServerClientThread} que debe informar al cliente que debe escoger equipo.
+Añadido \texttt{notifyClientToChooseTeam()}; indica al \texttt{ServerClientThread} que debe informar al cliente que debe escoger equipo.
 
 \item \texttt{ServerClientThread}
 
-Añadido sendUpdateGraphicsToClient y sendChooseTeamToClient, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación (updateGraphics, chooseTeam respectivamente).
+Añadido \texttt{sendUpdateGraphicsToClient()} y \texttt{sendChooseTeamToClient()}, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación (\texttt{updateGraphics}, \texttt{chooseTeam} respectivamente).
 
 \end{itemize}
 
@@ -992,13 +992,13 @@ Las clases cambiadas, desde la perspectiva del cliente, son las siguientes:
 
 \item \texttt{ClientController}
 
-Distingue, en su método run, de las notificaciones updateGraphics o chooseTeam; en función de eso, llama a updateGameFromServer o chooseTeamFromServer (de ClientRolit) respectivamente.
+Distingue, en su método \texttt{run()}, de las notificaciones \texttt{updateGraphics} o \texttt{chooseTeam}; en función de eso, llama a \texttt{updateGameFromServer} o \texttt{chooseTeamFromServer} (de \texttt{Client}) respectivamente.
 
-Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación (chooseTeam, playerInfo, updateGraphics respectivamente).
+Además, incorpora los métodos \texttt{sendChosenTeamToServer()}, \texttt{sendPlayerInfoToServer()}, \texttt{sendGameToServer()}, que se encargan de pasar el mensaje report del parámetro más un nuevo campo en el \texttt{JSON}, la notificación \texttt{(chooseTeam}, \texttt{playerInfo}, \texttt{updateGraphics} respectivamente).
 
 \item \texttt{Client}
 
-\texttt{Client} incorpora los métodos chooseTeamFromServer y sendChosenTeamToServer, ambos sirven de pasar el mensaje del parámetro de \texttt{ClientController} a MainWindow y viceversa respectivamente.
+\texttt{Client} incorpora los métodos\texttt{chooseTeamFromServer()} y \texttt{sendChosenTeamToServer()}, ambos sirven de pasar el mensaje del parámetro de \texttt{ClientController} a \texttt{MainWindow} y viceversa respectivamente.
 
 \end{itemize}
 
@@ -1007,7 +1007,7 @@ Además, incorpora los métodos sendChosenTeamToServer, sendPlayerInfoToServer, 
 
 En cuanto a la red, si bien está conclusa llegados a este Sprint, el debug realizado en otras zonas del código influyen directamente en la funcionalidad de Red. Se lleva a cabo un debug rápido pero extensivo para verificar que el modo de juego en red no ha sido afectado, llevándose a cabo con éxito.
 
-Por último, se procede a crear y solventar algunas issues relativas a la experiencia de usuario jugando en red, conllevando una serie de modificaciones que hacen más intuitiva las instrucciones para realizar la conexión.
+Por último, se procede a crear y solventar algunas \textit{issues} relativas a la experiencia de usuario jugando en red, conllevando una serie de modificaciones que hacen más intuitiva las instrucciones para realizar la conexión.
 
 En cuanto a la perspectiva del servidor, se modifican las siguientes clases:
 
@@ -1019,7 +1019,7 @@ Pasa a llamarse, con fines aclaratorios, \texttt{ServerWaitPlayerThread}.
 
 \item \texttt{Server}
 
-Refactorización del método waitForPlayers; se crea el método completeGameConfigSendToClients para este efecto.
+Refactorización del método \texttt{waitForPlayers()}; se crea el método \texttt{completeGameConfigSendToClients()} para este efecto.
 
 \end{itemize}
 
@@ -1061,7 +1061,7 @@ Sprint 5 (izquierda) vs Sprint 7 (derecha)
 Sprint 5 (izquierda) vs Sprint 7 (derecha)
 \end{center}
 
-El estado final del juego, especificando el UML y el diseño últimos, se encuentra en el apartado de Diseño final.
+El estado final del juego, especificando el UML y el diseño últimos, se encuentra en el apartado de \textit{Diseño final}.
 
 \end{sprint}
 
@@ -1898,7 +1898,7 @@ Tal y como se ve, la única diferencia notable (al menos para estos dos tipos de
 
 Como explicamos en el apartado de Arquitectura, el juego en red se basa en el \textbf{modelo cliente-servidor}, donde los clientes poseen el modelo, realizan cambios en el mismo y lo notifican al servidor, el cual procede a enviar al resto de clientes la información nueva según la cual deben actualizar sus modelos.
 
-Para implementar esta funcionalidad de red en Java operamos según el modelo \texttt{ServerSocket}-\texttt{Socket}. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de \texttt{ServerSocket} pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo\texttt{Socket} por medio de llamar al método accept() de \texttt{ServerSocket}. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
+Para implementar esta funcionalidad de red en Java operamos según el modelo \texttt{ServerSocket}-\texttt{Socket}. Primero, desde la perspectiva del usuario que abre el servidor, se debe crear una instancia de \texttt{ServerSocket} pasándole como parámetro en el constructor el puerto en el que localmente debe operar el servidor. Posteriormente, se crea un nuevo\texttt{Socket} por medio de llamar al método \texttt{accept()} de \texttt{ServerSocket}. De esta forma, tenemos un socket asociado a un cliente en específico. Para n clientes el servidor necesitará n sockets. Cada cliente solo necesita un socket, pues solo tiene conexión con el servidor y no con el resto de clientes.
 
 \begin{lstlisting}[frame=single, language=Java]
 //Perspectiva del servidor
@@ -1913,7 +1913,7 @@ Para implementar esta funcionalidad de red en Java operamos según el modelo \te
 \end{lstlisting}
 
 
-Este método accept() se queda "bloqueado" o en espera, hasta que un cliente se conecta por medio de la creación de un \texttt{Socket} desde su aplicación de la siguiente manera:
+Este método \texttt{accept()} se queda "bloqueado" o en espera, hasta que un cliente se conecta por medio de la creación de un \texttt{Socket} desde su aplicación de la siguiente manera:
 
 \begin{lstlisting}[frame=single, language=Java]
 //Perspectiva del cliente
@@ -1922,13 +1922,13 @@ Este método accept() se queda "bloqueado" o en espera, hasta que un cliente se 
 
 \end{lstlisting}
 
-donde ip es la dirección IP donde opera el servidor (ya sea local, o pública con el puerto especificado abierto para permitir conexiones desde fuera de su red), y port el puerto donde esta opera.
+donde \texttt{ip} es la dirección IP donde opera el servidor (ya sea local, o pública con el puerto especificado abierto para permitir conexiones desde fuera de su red), y \texttt{port} el puerto donde esta opera.
 
 Una vez que las creaciones del \texttt{Socket} de servidor y cliente han sido creadas de forma satisfactoria, la conexión ha sido realizada con éxito. Por tanto, podemos proceder al envío de mensajes entre cliente-servidor y viceversa.
 
-Para ello, Java nos ofrece realizar este cambio de información por medio de pares de instancias BufferedReader-PrintWriter, llamémosle in e out respectivamente. Estas instancias leen y reciben String, respectivamente. Nuestro modelo procederá a enviar JSONObject pasados a formatos String, que después al ser recibidos como Strings se volverán a construir en JSONObject por medio de la constructora de JSONObject que admite como parámetro un String.
+Para ello, Java nos ofrece realizar este cambio de información por medio de pares de instancias \texttt{BufferedReader}-\texttt{PrintWriter}, llamémosle \texttt{in} e \texttt{out} respectivamente. Estas instancias leen y reciben \texttt{String}, respectivamente. Nuestro modelo procederá a enviar \texttt{JSONObject} pasados a formatos \texttt{String}, que después al ser recibidos como \texttt{String} se volverán a construir en \texttt{JSONObject} por medio de la constructora de\texttt{JSONObject} que admite como parámetro un \texttt{String}.
 
-Cada servidor posee un número de parejas in-out equivalente al número de clientes conectados, y cada cliente posee una pareja.
+Cada servidor posee un número de parejas \texttt{in}-\texttt{out} equivalente al número de clientes conectados, y cada cliente posee una pareja.
 
 \begin{lstlisting}[frame=single, language=Java]
 //Perspectiva del servidor
@@ -1951,7 +1951,7 @@ socket.getOutputStream(), true);
 \end{lstlisting}
 
 
-De esta forma, cada vez que se pretende enviar un mensaje desde el cliente al servidor, el cliente k envía un mensaje msg por medio del método out.println(msg). Este mensaje es recogido desde el servidor por el método inClienteK.readline(). Asimismo, si el servidor pretende enviar un mensaje al cliente k, este debe llamar a outK.println(msg). El cliente k recoge el mensaje desde in.readline(). En resumen:
+De esta forma, cada vez que se pretende enviar un mensaje desde el cliente al servidor, el cliente k envía un mensaje \texttt{msg} por medio del método \texttt{out.println(msg)}. Este mensaje es recogido desde el servidor por el método \texttt{inClienteK.readline()}. Asimismo, si el servidor pretende enviar un mensaje al cliente k, este debe llamar a \texttt{outK.println(msg)}. El cliente k recoge el mensaje desde \texttt{in.readline()}. En resumen:
 
 \begin{lstlisting}[frame=single, language=Java]
 
@@ -1986,7 +1986,7 @@ Por ejemplo, podría ocurrir que en el modo por equipos, dos clientes se conecte
 
 En suma, nos interesa que la llegada de mensajes no deba ser regida por un orden definido y arbitrario. Para ello, nos interesa utilizar una herramienta de la programación concurrente y paralela, los hilos; en el caso de Java, proporcionados por la clase \texttt{Thread}.
 
-De esta manera, si el servidor tiene un hilo por cada cliente, podrá recibir mensajes de forma paralela. Así, ningún mensaje enviado desde un cliente es perdido; todos llegan al servidor con independencia de cuándo se emitan desde el cliente. Desde la perspectiva del servidor, este es el cometido de la clase \texttt{ServerClientThread} implementada en el proyecto, que extiende de \texttt{Thread}. En su método run, recibe mensajes con el método readLine() anteriormente descrito \textbf{de forma periódica y constantemente (en un while), hasta que se haya decidido cerrar el juego}. Posteriormente, se envía este mensaje al método receiveFromClient, synchronized (pretendemos ejecutar múltiples procesamientos que de forma secuencial para evitar errores imprevistos), que pertenece a la clase \texttt{Server}, que de forma sincronizada procesa este mensaje atendiendo al tipo de mensaje enviado (comprueba el campo notification del \texttt{JSON}, que puede albergar "playerInfo", "chooseTeam", "updateGraphics").
+De esta manera, si el servidor tiene un hilo por cada cliente, podrá recibir mensajes de forma paralela. Así, ningún mensaje enviado desde un cliente es perdido; todos llegan al servidor con independencia de cuándo se emitan desde el cliente. Desde la perspectiva del servidor, este es el cometido de la clase \texttt{ServerClientThread} implementada en el proyecto, que extiende de \texttt{Thread}. En su método \texttt{run()}, recibe mensajes con el método \texttt{readLine()} anteriormente descrito \textbf{de forma periódica y constantemente (en un \texttt{while}), hasta que se haya decidido cerrar el juego}. Posteriormente, se envía este mensaje al método \texttt{receiveFromClient()}, \texttt{synchronized} (pretendemos ejecutar múltiples procesamientos que de forma secuencial para evitar errores imprevistos), que pertenece a la clase \texttt{Server}, que de forma sincronizada procesa este mensaje atendiendo al tipo de mensaje enviado (comprueba el campo notification del \texttt{JSON}, que puede albergar "\texttt{playerInfo}", "\texttt{chooseTeam}", "\texttt{updateGraphics}").
 
 El cliente se encuentra en una situación parecida. ¿Qué ocurre si recibe una información del servidor, la procesa y mientras se da este procesamiento, recibe otro mensaje del servidor? Necesitará el cliente, por tanto, dos hilos: un hilo que se dedique a recoger mensajes, y otro hilo que se dedique a procesarlos. De esta forma, ninguna información emitida desde el servidor es perdida.
 
@@ -1998,14 +1998,14 @@ Una vez el modelo de red ha sido completamente explicado, procedemos a detallar 
 
 Empezamos a detallar la estructura del servidor.
 
-ServerView, especificado en el apartado de diseño correspondiente, tiene el papel de pasar la información pertinente para el funcionamiento de la clase \texttt{Server}.
+\texttt{ServerView}, especificado en el apartado de diseño correspondiente, tiene el papel de pasar la información pertinente para el funcionamiento de la clase \texttt{Server}.
 
 Partimos de la clase \texttt{Server}, clase que gestiona los clientes desde la perspectiva del servidor y que procesa los mensajes emitidos desde los clientes.
 
 \newpage
 
 \subsubsection{Server}
-Como hemos anticipado, \texttt{Server} debe poseer un único \texttt{ServerSocket} a través del cual se abre el servidor. Posee el atributo expectedPlayers recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de \texttt{ServerWaitPlayerThread} creados, clase que pasaremos a comentar después.
+Como hemos anticipado, \texttt{Server} debe poseer un único \texttt{ServerSocket} a través del cual se abre el servidor. Posee el atributo \texttt{expectedPlayers} recibido desde la GUI, en el que el usuario que ha abierto el servidor especifica qué número de jugadores se conectarán al servidor. Es de vital importancia conocer este dato, pues de ello dependerá el número de \texttt{ServerWaitPlayerThread} creados, clase que pasaremos a comentar después.
 
 \begin{center}
 \includegraphics[scale=0.27]{Server-sprint7.png} 
@@ -2021,7 +2021,7 @@ El \texttt{ServerClient} constituye una representación de un cliente en especí
 \includegraphics[scale=0.3]{ServerClient-sprint7.png} 
 \end{center}
 
-Lo fundamental de la clase \texttt{ServerClient} es que posee el thread encargado de la recepción directa de mensajes desde el cliente en específico; es decir, posee una única instancia de clase \texttt{ServerClientThread}, anteriormente mencionada.
+Lo fundamental de la clase \texttt{ServerClient} es que posee el \textit{thread} encargado de la recepción directa de mensajes desde el cliente en específico; es decir, posee una única instancia de clase \texttt{ServerClientThread}, anteriormente mencionada.
 
 \subsubsection{ServerClientThread}
 
@@ -2033,7 +2033,7 @@ Lo fundamental de la clase \texttt{ServerClient} es que posee el thread encargad
 
 \begin{itemize}
 \item \texttt{ServerClient} posee a \texttt{ServerClientThread} porque el servidor, al enviar mensajes al cliente, pasa el mensaje por \texttt{ServerClient} (recordemos la lista \texttt{Player}-\texttt{ServerClient}) quien pasa a enviárselo a a \texttt{ServerClientThread}.
-\item \texttt{ServerClientThread} posee a \texttt{ServerClient} porque al recibir mensajes desde el cliente, \texttt{ServerClientThread} envía el mensaje a \texttt{Server} para procesarlo. En esta función server.receiveFromClient, se necesitan dos parámetros: el mensaje, y el \texttt{ServerClient} asociado. Es por esto que para este segundo parámetro, \texttt{ServerClientThread} necesite una referencia de \texttt{ServerClient}.
+\item \texttt{ServerClientThread} posee a \texttt{ServerClient} porque al recibir mensajes desde el cliente, \texttt{ServerClientThread} envía el mensaje a \texttt{Server} para procesarlo. En esta función \texttt{server.receiveFromClient}, se necesitan dos parámetros: el mensaje, y el \texttt{ServerClient} asociado. Es por esto que para este segundo parámetro, \texttt{ServerClientThread} necesite una referencia de \texttt{ServerClient}.
 \end{itemize}
 
 Como vemos, la finalidad es encapsular el código de forma que \texttt{Server} no conozca de \texttt{ServerClientThread} sino solo de \texttt{ServerClient}.
@@ -2046,30 +2046,30 @@ Como vemos, la finalidad es encapsular el código de forma que \texttt{Server} n
 
 \texttt{ServerWaitPlayerThread}, por otra parte, es un hilo encargado de ir recibiendo los jugadores.
 
-Se crean un número "expectedPlayers" (atributo de \texttt{Server}) de instancias de esta clase, cada una de ellas con un \texttt{ServerClient} asociado (por tanto, \texttt{ServerClient} es atributo de \texttt{ServerWaitPlayerThread}). En su método run se encarga de ejecutar el método serverSocket.accept() que especificamos anteriormente. En cuanto se acepta la conexión, se procede a llamar al método setUpServer de \texttt{ServerClient} para que este cree su \texttt{ServerClientThread}.
+Se crean un número \texttt{expectedPlayers} (atributo de \texttt{Server}) de instancias de esta clase, cada una de ellas con un \texttt{ServerClient} asociado (por tanto, \texttt{ServerClient} es atributo de \texttt{ServerWaitPlayerThread}). En su método run se encarga de ejecutar el método \texttt{serverSocket.accept()} que especificamos anteriormente. En cuanto se acepta la conexión, se procede a llamar al método \texttt{setUpServer()} de \texttt{ServerClient} para que este cree su \texttt{ServerClientThread}.
 
 La necesidad de realizar este proceso de forma paralela justifica en gran medida la creación del hilo \texttt{ServerWaitPlayerThread}. Para evitar problemas de concurrencia, en esta clase los atributos \texttt{Server} y \texttt{ServerClient} son volátiles para que todos los hilos \texttt{ServerWaitPlayerThread} conozcan en tiempo real el estado de \texttt{Server} y \texttt{ServerClient}.
 
-En particular, \texttt{Server} debe ser volatile pues debe ir actualizando su lista de \texttt{Player}-\texttt{Socket} en tiempo real y de forma organizada de a fin de evitar bugs. Esto es porque el método sincronizado waitForPlayers de \texttt{Server} recoge periódicamente el número de conexiones aceptadas. En cuanto estas conexiones igualan el número de conexiones aceptadas, el método deja de ejecutarse y se procede a las gestiones que tiene que realizar el servidor una vez todos los usuarios esperados se han conectado.
+En particular, \texttt{Server} debe ser volatile pues debe ir actualizando su lista de \texttt{Player}-\texttt{Socket} en tiempo real y de forma organizada de a fin de evitar \textit{bugs}. Esto es porque el método sincronizado \texttt{waitForPlayers()} de \texttt{Server} recoge periódicamente el número de conexiones aceptadas. En cuanto estas conexiones igualan el número de conexiones aceptadas, el método deja de ejecutarse y se procede a las gestiones que tiene que realizar el servidor una vez todos los usuarios esperados se han conectado.
 
 Una vez detallados los cometidos de todas las clases que posee el servidor, pasamos a detallar las del cliente.
 
-El punto de partida es la clase \texttt{Client}, que será un intermediario entre su thread de recepción de mensajes y la GUI.
+El punto de partida es la clase \texttt{Client}, que será un intermediario entre su \textit{thread} de recepción de mensajes y la GUI.
 
 \subsubsection{Client}
-Como \texttt{Client} es un intermediario entre el thread de recepción de mensajes y la GUI, MainWindow precisa una referencia de \texttt{Client} y \texttt{Client} una de MainWindow; es decir, la comunicación es bidireccional. La razón de esto es:
+Como \texttt{Client} es un intermediario entre el \textit{thread} de recepción de mensajes y la GUI, \texttt{MainWindow} precisa una referencia de \texttt{Client} y \texttt{Client} una de \texttt{MainWindow}; es decir, la comunicación es bidireccional. La razón de esto es:
 
 \begin{center}
 \includegraphics[scale=0.3]{Client-sprint7.png} 
 \end{center}
 
 \begin{itemize}
-\item Al hacerse una jugada en el modelo, como se ha especificado, necesitamos pasar el nuevo estado del juego al servidor para que este, a su vez, se la pase al resto de clientes. Por tanto, MainWindow pasa el estado del juego a su \texttt{Client}. MainWindow, a su vez, obtiene este estado del juego desde el controlador. Todos estos pasos de información se realizan a través de los métodos updateGameToServer que poseen estas clases.
+\item Al hacerse una jugada en el modelo, como se ha especificado, necesitamos pasar el nuevo estado del juego al servidor para que este, a su vez, se la pase al resto de clientes. Por tanto, \texttt{MainWindow} pasa el estado del juego a su \texttt{Client}. \texttt{MainWindow}, a su vez, obtiene este estado del juego desde el controlador. Todos estos pasos de información se realizan a través de los métodos \texttt{updateGameToServer()} que poseen estas clases.
 
-\item Al recibirse un nuevo estado del juego desde el servidor, \texttt{Client} recibe esta información desde su thread. Necesita a MainWindow para que este, a su vez, envíe el nuevo estado del juego al controlador con el fin de actualizar el modelo al nuevo juego requerido. Todos estos pasos de información se realizan a través de los métodos updateGameFromServer que poseen estas clases.
+\item Al recibirse un nuevo estado del juego desde el servidor, \texttt{Client} recibe esta información desde su \textit{thread}. Necesita a \texttt{MainWindow} para que este, a su vez, envíe el nuevo estado del juego al controlador con el fin de actualizar el modelo al nuevo juego requerido. Todos estos pasos de información se realizan a través de los métodos \texttt{updateGameFromServer()} que poseen estas clases.
 \end{itemize}
 
-Finalmente, pasamos a describir \texttt{ClientController}, el thread de \texttt{Client}.
+Finalmente, pasamos a describir \texttt{ClientController}, el \textit{thread} de \texttt{Client}.
 
 \subsubsection{ClientController}
 Nuevamente la comunicación entre \texttt{Client} y \texttt{ClientController} es bidireccional: para enviar información al servidor, \texttt{Client} notifica a \texttt{ClientController}; para recibir información del servidor, \texttt{ClientController} notifica a \texttt{Client}.
@@ -2078,83 +2078,83 @@ Nuevamente la comunicación entre \texttt{Client} y \texttt{ClientController} es
 \includegraphics[scale=0.45]{ClientController-sprint7.png} 
 \end{center}
 
-Como hemos anticipado, \texttt{ClientController} extiende de \texttt{Thread}, y en su método run() recibe información del servidor que procede a enviar al cliente. El método sendToServer envía la información directamente al servidor por medio de out.println como hemos descrito; este método es llamado por una serie de métodos -sendChosenTeamToServer, sendPlayerInfoToServer, sendGameToServer-, los cuales introducen el campo notification en el \texttt{JSON}, con el valor chooseTeam, playerInfo y updateGraphics respectivamente. El objetivo es que el servidor pueda distinguir la naturaleza del mensaje enviado y hacer su tratamiento específico en base a ello.
+Como hemos anticipado, \texttt{ClientController} extiende de \texttt{Thread}, y en su método \texttt{run()} recibe información del servidor que procede a enviar al cliente. El método \texttt{sendToServer} envía la información directamente al servidor por medio de \texttt{out.println()} como hemos descrito; este método es llamado por una serie de métodos -\texttt{sendChosenTeamToServer}, \texttt{sendPlayerInfoToServer}, \texttt{sendGameToServer}-, los cuales introducen el campo \texttt{notification} en el \texttt{JSON}, con el valor \texttt{chooseTeam}, \texttt{playerInfo} y \texttt{updateGraphics} respectivamente. El objetivo es que el servidor pueda distinguir la naturaleza del mensaje enviado y hacer su tratamiento específico en base a ello.
 
 Una vez especificadas todas las clases, describiremos el hilo típico de la ejecución para comprender cómo operan estas y en el orden en el que lo hacen.
 
 \begin{center}
-\includegraphics[scale=0.4]{umlconexionessprint7.png}
+\includegraphics[scale=0.4]{conexionesUmlSprint7.png}
 \end{center}
 
-Cuando se pulsa a crear un servidor, el usuario rellena un CreateGameDialog para especificar una configuración del juego básica especificada. Una vez especificada, se crea el objeto \texttt{Server}, que tendrá en su atributo gameConfig dicha información. Finalmente, en este constructor se abre el diálogo de crear un servidor; el usuario host del servidor debe especificar el puerto en el que el servidor debe operar. Finalmente, se pulsa el botón Start Server.
+Cuando se pulsa a crear un servidor, el usuario rellena un \texttt{CreateGameDialog} para especificar una configuración del juego básica especificada. Una vez especificada, se crea el objeto \texttt{Server}, que tendrá en su atributo \texttt{gameConfig} dicha información. Finalmente, en este constructor se abre el diálogo de crear un servidor; el usuario \textit{host} del servidor debe especificar el puerto en el que el servidor debe operar. Finalmente, se pulsa el botón \texttt{Start Server}.
 
-Observamos que al pulsar el botón de Start Server en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un thread, el del servidor, de forma concurrente al de Swing -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método start(port) de \texttt{Server}, que crea el \texttt{ServerSocket} y  posteriormente, llama al método waitForPlayers para realizar las conexiones oportunas.
+Observamos que al pulsar el botón de \texttt{Start Server} en el diálogo de abrir un servidor, se crea un \texttt{ServerWorker}, que es un \texttt{SwingWorker} (encargado de correr un \textit{thread}, el del servidor, de forma concurrente al de \textit{Swing} -diálogo de abrir servidor). Dicho \texttt{ServerWorker} llama al método \texttt{start(port)} de \texttt{Server}, que crea el \texttt{ServerSocket} y posteriormente, llama al método \texttt{waitForPlayers()} para realizar las conexiones oportunas.
 
-Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su \texttt{ServerClient} y \texttt{Client} asociados, y se crea el thread \texttt{ServerWaitPlayerThread} y se llama a start(). El \texttt{ServerWaitPlayerThread}, en su método run() llamado desde start(), espera en el método de serverSocket.accept() que se conecte un cliente.
+Este método se compone de un bucle for que recorre un número de vueltas equivalente al del número de jugadores a conectarse esperados. por cada vuelta, se crea su \texttt{ServerClient} y \texttt{Client} asociados, y se crea el \textit{thread} \texttt{ServerWaitPlayerThread} y se llama a \texttt{start()}. El \texttt{ServerWaitPlayerThread}, en su método \texttt{run()} llamado desde \texttt{start()}, espera en el método de \texttt{serverSocket.accept()} que se conecte un cliente.
 
-Un cliente, por medio de JoinServerDialog, se conecta al servidor desde la IP y puerto requeridos. Pasa por el MainWindow quien a su vez llega al cliente (\texttt{Client}) con el método empezarPartida, en base a las relaciones ya descritas. El cliente crea su thread \texttt{ClientController}. En la constructora de \texttt{ClientController} se realiza la conexión al servidor mediante la creación del \texttt{Socket}.
+Un cliente, por medio de \texttt{JoinServerDialog}, se conecta al servidor desde la \texttt{IP} y puerto requeridos. Pasa por el \texttt{MainWindow} quien a su vez llega al cliente (\texttt{Client}) con el método \texttt{startMatch}, en base a las relaciones ya descritas. El cliente crea su thread \texttt{ClientController}. En la constructora de \texttt{ClientController} se realiza la conexión al servidor mediante la creación del \texttt{Socket}.
 
 En cuanto esta se realiza con éxito, ocurren dos procesos de forma paralela:
 
 \begin{itemize}
-\item En el servidor, el método serverSocket.accept() es ejecutado con éxito. Se procede a llamar al método setUpServer del \texttt{ServerClient} específico asociado a esta conexión; se crea después un thread \texttt{ServerClientThread} el cual crea los BufferedReader y PrintWriter oportunos, y \texttt{ServerClient} procede a llamar al run() de este thread (representado en la lifeline ServerClientThreadRun)
+\item En el servidor, el método \texttt{serverSocket.accept()} es ejecutado con éxito. Se procede a llamar al método \texttt{setUpServer()} del \texttt{ServerClient} específico asociado a esta conexión; se crea después un \textit{thread} \texttt{ServerClientThread} el cual crea los \texttt{BufferedReader} y \texttt{PrintWriter} oportunos, y \texttt{ServerClient} procede a llamar al \texttt{run()} de este \textit{thread} (representado en la lifeline ServerClientThreadRun)
 
-\item En el cliente, una vez se ha creado el \texttt{Socket} con éxito en la constructora de \texttt{ClientController}, se crean los BufferedReader y PrintWriter oportunos. Se termina la constructora, y acto seguido \texttt{Client} llama al start de \texttt{ClientController} para que empiece a recibir mensajes en su método run().
+\item En el cliente, una vez se ha creado el \texttt{Socket} con éxito en la constructora de \texttt{ClientController}, se crean los \texttt{BufferedReader} y \texttt{PrintWriter} oportunos. Se termina la constructora, y acto seguido \texttt{Client} llama al \texttt{start} de \texttt{ClientController} para que empiece a recibir mensajes en su método \texttt{run()}.
 \end{itemize}
 
 Si la conexión no se ha realizado bien, se generan las excepciones oportunas que cierran las ventanas de tanto cliente como servidor.
 
-El thread \texttt{ServerWaitPlayerThread} procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al \texttt{Player} (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de incomingPlayers de forma síncrona mientras \texttt{ServerWaitPlayerThread} espera. El mecanismo pormenorizado es el siguiente:
+El \textit{thread} \texttt{ServerWaitPlayerThread} procede a esperar un segundo antes de cerrarse. En este segundo, se espera que el cliente envíe al servidor la información relativa al \texttt{Player} (qué color y qué nombre ha escogido). Esta información pasa a registrarse en la lista de \texttt{incomingPlayers} de forma síncrona mientras \texttt{ServerWaitPlayerThread} espera. El mecanismo pormenorizado es el siguiente:
 
 \begin{center}
 \includegraphics[scale=0.37]{empezarPartidaUmlSprint7.png}
 \end{center}
 
 \begin{enumerate}
-\item Tras ejecutarse el hilo \texttt{ClientController}, el método empezarPartida de \texttt{Client} se finaliza. MainWindow procede a ejecutar el método join de \texttt{Client}, pasándole como argumentos el nombre y color escogidos.
+\item Tras ejecutarse el hilo \texttt{ClientController}, el método \texttt{startMatch} de \texttt{Client} se finaliza. \texttt{MainWindow} procede a ejecutar el método \texttt{join} de \texttt{Client}, pasándole como argumentos el nombre y color escogidos.
 \item \texttt{Client} pide al thread \texttt{ClientController} que envíe al servidor esta información.
-\item \texttt{ClientController} envía la información por medio del método sendToServer, adjuntándole previamente en el \texttt{JSON} la notificación playerInfo para que el servidor conozca la naturaleza de esta información (proporcionar la información del jugador cliente)
-\item El \texttt{ServerClientThread} específico asociado al cliente que envía esta información recibe en su método run el mensaje. Procede a llamar al método asíncrono receiveFromClient de \texttt{Server}.
-\item receiveFromClient distingue, observando el JSONObject enviado, si se trata de información de actualización de juego, información respecto a un nuevo jugador añadido, o información sobre el equipo escogido observando el campo notificación del \texttt{JSON}. En el caso que nos ocupa, es esta segunda opción; receiveFromClient procede a crear una instancia de \texttt{Player} y añadirla a incomingPlayers (ArrayList de \texttt{Player}).
+\item \texttt{ClientController} envía la información por medio del método \texttt{sendToServer}, adjuntándole previamente en el \texttt{JSON} la notificación \texttt{playerInfo} para que el servidor conozca la naturaleza de esta información (proporcionar la información del jugador cliente)
+\item El \texttt{ServerClientThread} específico asociado al cliente que envía esta información recibe en su método \texttt{run()} el mensaje. Procede a llamar al método asíncrono \texttt{receiveFromClient} de \texttt{Server}.
+\item receiveFromClient distingue, observando el \texttt{JSONObject} enviado, si se trata de información de actualización de juego, información respecto a un nuevo jugador añadido, o información sobre el equipo escogido observando el campo notificación del \texttt{JSON}. En el caso que nos ocupa, es esta segunda opción; \texttt{receiveFromClient()} procede a crear una instancia de \texttt{Player} y añadirla a \texttt{incomingPlayers} (\texttt{ArrayList} de \texttt{Player}).
 \end{enumerate}
 
 Todo este proceso tarda (bastante) menos del segundo que espera \texttt{ServerWaitPlayerThread}; se deja un segundo de cortesía para dar un amplio margen a los equipos más lentos.
 
-El método run() de \texttt{ServerWaitPlayerThread} se finaliza y se ejecuta desde waitForPlayers (\texttt{Server}) el método join para que concluya el thread.
+El método run() de \texttt{ServerWaitPlayerThread} se finaliza y se ejecuta desde waitForPlayers (\texttt{Server}) el método \texttt{join()} para que concluya el \textit{thread}.
 
-Dado la información obtenida de \texttt{Socket}, \texttt{ServerClient} y \texttt{Player} (este último con incomingPlayers, cuyo último elemento añadido es el \texttt{Player} correspondiente al cliente), se rellenan las dos listas \texttt{Player}-\texttt{Socket} y \texttt{ServerClient}-\texttt{Player} de \texttt{Server} con una nueva posición.
+Dado la información obtenida de \texttt{Socket}, \texttt{ServerClient} y \texttt{Player} (este último con \texttt{incomingPlayers}, cuyo último elemento añadido es el \texttt{Player} correspondiente al cliente), se rellenan las dos listas \texttt{Player}-\texttt{Socket} y \texttt{ServerClient}-\texttt{Player} de \texttt{Server} con una nueva posición.
 
-Todo esto es una única vuelta del bucle de waitForPlayers. Como hemos comentado, se ejecutarían un número de vueltas equivalente al número de jugadores esperados.
+Todo esto es una única vuelta del bucle de \texttt{waitForPlayers()}. Como hemos comentado, se ejecutarían un número de vueltas equivalente al número de jugadores esperados.
 
-Una vez todos los jugadores se han conectados y las dos listas completadas, se sale del bucle y el método waitForPlayers llama después a completeGameConfigAndSendToClients(), encargado de rellenar el gameConfig. Este último método primero tiene que verificar si se ha escogido el modo por equipos, mirando en el gameConfig. De ser así, se hace una operación adicional antes de proseguir.
+Una vez todos los jugadores se han conectados y las dos listas completadas, se sale del bucle y el método \texttt{waitForPlayers()} llama después a \texttt{completeGameConfigAndSendToClients()}, encargado de rellenar el \texttt{gameConfig}. Este último método primero tiene que verificar si se ha escogido el modo por equipos, mirando en el \texttt{gameConfig}. De ser así, se hace una operación adicional antes de proseguir.
 
 \subsubsection{Modo por equipos}
 
-En caso de que se haya especificado el modo por equipos, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al gameConfigJSON; posteriormente, como en la implementación de sprints anteriores, procede a completarse el gameConfigJSON con la información de los jugadores.
+En caso de que se haya especificado el modo por equipos, se procede a llamar a una serie de métodos cuyo fin es notificar a los usuarios para que escojan un equipo; una vez todos los usuarios han escogido equipo, se añade esta información al \texttt{gameConfigJSON}; posteriormente, como en la implementación de sprints anteriores, procede a completarse el \texttt{gameConfigJSON} con la información de los jugadores.
 
-Primero, como observamos, se llama al método notifyClientToChooseTeam de todos los \texttt{Client}; este, por medio de \texttt{ServerClientThread} envía el gameConfigJSON, con el campo "chooseTeam" como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
+Primero, como observamos, se llama al método \texttt{notifyClientToChooseTeam} de todos los \texttt{Client}; este, por medio de \texttt{ServerClientThread} envía el \texttt{gameConfigJSON}, con el campo \texttt{chooseTeam} como notificación (explicaremos posteriormente cómo funcionan las notificaciones), al cliente.
 
-Cada cliente en su respectivo \texttt{ClientController} recibe esta información. Observa la naturaleza de la notificación; como esta es chooseTeam, procede a abrir un diálogo ChooseTeamFromServerDialog para escoger uno de los equipos ofrecidos desde el servidor. Nótese que la información de los equipos viene proporcionada en el gameConfigJSON enviado desde el servidor.
+Cada cliente en su respectivo \texttt{ClientController} recibe esta información. Observa la naturaleza de la notificación; como esta es \texttt{chooseTeam}, procede a abrir un diálogo \texttt{ChooseTeamFromServerDialog} para escoger uno de los equipos ofrecidos desde el servidor. Nótese que la información de los equipos viene proporcionada en el \texttt{gameConfigJSON} enviado desde el servidor.
 
-Una vez todos los clientes han sido notificados, se llama a waitForAllPlayersToChooseTeam(). Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
+Una vez todos los clientes han sido notificados, se llama a \texttt{waitForAllPlayersToChooseTeam()}. Su cometido es el de detener el hilo de ejecución hasta que todos los jugadores han escogido equipo y el servidor conoce sus elecciones.
 
-Además, como puede verse, se ha introducido como nuevo atributo del servidor un HashMap de \texttt{ServerClient} - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de completeGameConfigAndSendToClients().
+Además, como puede verse, se ha introducido como nuevo atributo del servidor un \texttt{HashMap} de \texttt{ServerClient} - Nombre del equipo escogido. Este mapa se actualiza en tiempo real conforme los clientes envían al servidor su elección de equipo. Cada medio segundo se comprueba si todos los jugadores han elegido equipo; de ser así, finaliza el método y se sigue con la ejecución de \texttt{completeGameConfigAndSendToClients()}.
 
-¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un JSONObject con el nombre del equipo elegido en el campo "team". Antes de enviarlo, pone en el \texttt{JSON} un campo "notification" con el valor "chooseTeam"; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
+¿Cómo los clientes notifican al servidor su elección? Una vez un cliente elige equipo, manda al servidor un \texttt{JSONObject} con el nombre del equipo elegido en el campo \texttt{team}. Antes de enviarlo, pone en el \texttt{JSON} un campo \texttt{notification} con el valor \texttt{chooseTeam}; para que así el servidor pueda conocer las intenciones del envío de la información por parte del cliente (notificar que se ha escogido un equipo, y cuál).
 
-El servidor recibe un \texttt{JSON} con la notificación chooseTeam; en receiveFromClient (\texttt{Server}) observa que al ser la notificación "chooseTeam", debe añadir una nueva entrada al mapa \texttt{ServerClient} - Nombre del equipo escogido.
+El servidor recibe un \texttt{JSON} con la notificación \texttt{chooseTeam}; en \texttt{receiveFromClient} (\texttt{Server}) observa que al ser la notificación \texttt{chooseTeam}, debe añadir una nueva entrada al mapa \texttt{ServerClient} - Nombre del equipo escogido.
 
-Como hemos comentado, una vez todos los equipos han sido escogidos, se sigue completando el gameConfig; ahora se sigue el mismo hilo de ejecución especificado en los anteriores sprints; se rellena el gameConfigJSON con la información de los jugadores y posteriormente se pasa el \texttt{JSON} a todos los clientes para que actualicen sus vistas para mostrar el juego por primera vez.
+Una vez todos los equipos han sido escogidos, finaliza el método \texttt{waitForAllPlayersToChooseTeam()}. Se procede a llamar al método \texttt{completeGameConfigTeams()} para añadir al \texttt{gameConfigJSON} toda la información pertinente de los equipos, ahora que se posee toda.
 
 
 
-Ahora, independientemente de que se haya escogido el modo por equipos o no, se procede a crear rellenar el incompleto gameConfigJSON que fue pasado con anterioridad por el constructor de \texttt{Server}; ahora es el momento correcto para hacerlo pues ya se conoce la información de todos los players. Se rellenan los campos pertinentes previamente incompletos de gameConfigJSON; posteriormente, se envía este primer estado del juego a todos los clientes por medio del método updateGraphics. 
+Ahora, independientemente de que se haya escogido el modo por equipos o no, se procede a crear rellenar el incompleto \texttt{gameConfigJSON} que fue pasado con anterioridad por el constructor de \texttt{Server}; ahora es el momento correcto para hacerlo pues ya se conoce la información de todos los \texttt{Player}. Se rellenan los campos pertinentes previamente incompletos de \texttt{gameConfigJSON}; posteriormente, se envía este primer estado del juego a todos los clientes por medio del método \texttt{updateGraphics()}. 
 
-El cliente recibe esta configuración del juego en su thread, se llama al método updateGameFromServer de \texttt{Client}, quien a su vez llama a updateGameFromServer de MainWindow.
+El cliente recibe esta configuración del juego en su \textit{thread}, se llama al método \texttt{updateGameFromServer()} de \texttt{Client}, quien a su vez llama a \texttt{updateGameFromServer()} de \texttt{MainWindow}.
 
-En este último método, si es la primera jugada, se llama a crear el juego en el controlador, y después se llama a initGame() para inicializar las componentes visuales relativas al juego.
+En este último método, si es la primera jugada, se llama a crear el juego en el controlador, y después se llama a \texttt{initGame()} para inicializar las componentes visuales relativas al juego.
 
-En cualquier caso, se llama después al método updateGameFromServer de Controller para actualizar el juego tal y como ordena el \texttt{JSON} pasado como parámetro. Los mecanismos de este método son crear un nuevo juego a partir del nuevo \texttt{JSON} estado del juego, pasar los observadores del Game antiguo al nuevo, y adjudicar al atributo Game de Controller este nuevo juego.
+En cualquier caso, se llama después al método \texttt{updateGameFromServer()} de \texttt{Controller} para actualizar el juego tal y como ordena el \texttt{JSON} pasado como parámetro. Los mecanismos de este método son crear un nuevo juego a partir del nuevo \texttt{JSON} estado del juego, pasar los observadores del \texttt{Game} antiguo al nuevo, y adjudicar al atributo \texttt{Game} de \texttt{Controller} este nuevo juego.
 
 Falta por especificar cómo se produce una jugada en el modo online y cómo evitar que los clientes jueguen cuando no es su turno.
 
@@ -2170,7 +2170,7 @@ De no jugarse el modo online, se ejecuta el comando como de costumbre.
 
 Nótese que este último diagrama de secuencia se representa a \texttt{Client} como entidad abstracta emisora y receptora, realmente un \texttt{Client} sería emisor y el resto de \texttt{Client} serían receptores.
 
-Si se escoge el modo por equipos cuando se crea una partida, el gameConfigJSON pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificamos en el documento de reports.
+Si se escoge el modo por equipos cuando se crea una partida, el \texttt{gameConfigJSON} pasado como parámetro ahora adoptará la estructura de report de juego por equipos, tal y como especificaremos en el apartado de reports.
 
 \newpage
 \subsection{Replay}
