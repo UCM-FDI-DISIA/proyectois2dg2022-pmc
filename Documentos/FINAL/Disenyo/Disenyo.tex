@@ -65,6 +65,7 @@
     \newtheorem*{sprint}{Sprint}
 
 \chapter{Arquitectura}
+\label{ch:MVC}
 
 El patrón de diseño principal en el proyecto es el \textbf{Modelo-Vista-Controlado}r; ideal para un juego de las características de \texttt{Rolit}.
 
@@ -565,7 +566,7 @@ Si se ha decidido jugar a una partida o cargar una replay, el panel principal de
 
 \underline{Funcionamiento interno}
 
-Una vez visualizadas todas las pantallas es el momento de hablar su funcionamiento interno. Al introducir la GUI decidimos aplicar el patrón MVC, de manera que los futuros cambios en el modelo produzcan modificaciones mínimas en la vista y controlador y viceversa. Para más información sobre el Modelo-Vista-Controlador puede hacer click aquí. %FIXME AÑADIR REFERENCIA AL MVC
+Una vez visualizadas todas las pantallas es el momento de hablar su funcionamiento interno. Al introducir la GUI decidimos aplicar el patrón MVC, de manera que los futuros cambios en el modelo produzcan modificaciones mínimas en la vista y controlador y viceversa. Para más información sobre el Modelo-Vista-Controlador puede hacer click \hyperref[ch:MVC]{aquí}.
 
 Para la comunicación de las vistas con los modelos se decidió utilizar el patrón observador, así son los propios modelos los que comunican a las vistas cuando deben actualizarse.
 
@@ -697,7 +698,10 @@ Veamos el resultado gráfico tras la aplicación de estos componentes, sumado a 
 \begin{center}
 \includegraphics[scale=1]{menu-sprint-6.png}
 
+Menú Inicial
 \end{center}
+
+\newpage
 
 \begin{center}
 \includegraphics[scale=1]{partida-sprint-6.png}
@@ -779,22 +783,6 @@ Los usuarios también reciben feedback del servidor, mostrándose una venta que 
 
 \begin{center}
 \includegraphics[scale=0.85]{user-feedback.png}
-\end{center}
-
-\underline{Ranking}
-
-Además, en este sprint se incluyó en la GUI un ranking final donde se muestran los tres primeros puestos. En caso de que solo haya dos jugadores solo se mostrarán esos dos.
-
-\begin{center}
-\includegraphics[scale=0.75]{ranking-2players.png}
-
-Ranking para dos jugadores
-\end{center}
-
-\begin{center}
-\includegraphics[scale=0.75]{ranking-3players.png}
-
-Ranking para más de dos jugadores
 \end{center}
 
 \newpage
@@ -1230,7 +1218,7 @@ Con la introducción de los comandos vino acompañado el comando exit, que puede
 \includegraphics[scale=0.5]{exit-sprint2.png}
 \end{center}
 
-En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en ... %FIXME Poner donde esté explicada la evolución de los comandos y una referencia a esa seccion
+En sprints posteriores este diagrama dejará de ser válido debido a refactorizaciones en el controlador, aunque la clase ExitCommand ha permanecido invariante. Los cambios sufridos para este comando son análogos a los del resto, que pueden ser consultados en \hyperref[ch:Commands]{Commands}.
 \end{sprint}
 
 \subsection{Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}
@@ -1325,6 +1313,7 @@ Para este sprint los Builder simplemente cambian la forma instanciar el tipo \te
 \end{sprint}
 
 \subsection{Commands}
+\label{ch:Commands}
 
 La necesidad de tener un paquete de comandos con clases específicas especializadas en convertir los comandos en objetos surgió en el Sprint 2 y se mantuvo hasta el final del proyecto.
 
@@ -2640,9 +2629,8 @@ Representación gráfica de \texttt{ServerView} una vez creado el servidor
 
 La \texttt{MainWindow} es la ventana principal del programa, que inicialmente permite al usuario decidir entre las opciones que brinda Rolit: crear una partida, cargar una replay, crear un servidor... Una vez seleccionada alguna de las alternativas, la ventana se actualiza combinando todos los elementos explicados anteriormente, de manera ordenada, para poder dar lugar a los requerimientos del usuario.
 
-%%FIXME
 \begin{center}
-\includegraphics[scale=1]{menu-sprint-6.png}\\
+\includegraphics[scale=0.9]{mainwindowfinal.png}\\
 Apariencia inicial de la \texttt{MainWindow}
 \end{center}
 
@@ -2972,7 +2960,6 @@ Se ilustra el funcionamiento del algoritmo en la siguiente imagen:
 \begin{center}
 \includegraphics[scale=0.4]{minimaxExample.jpg}
 \end{center}
-%%FIXME Centrar
 
 En el caso del ajedrez (y de la mayoría de juegos por turnos, como Rolit) hay siempre muchos posibles movimientos a jugar. De esta forma, en el árbol de decisión, de cada nodo salen muchos descendientes, resultando en un algoritmo con coste aproximadamente exponencial en el promedio de jugadas disponibles. Esto hace que la búsqueda del mejor posible movimiento se convierta en un problema intratable en no demasiados niveles de profundidad de búsqueda. Por tanto, surge la obligación de limitar la profundidad hasta la que se quiere hacer la búsqueda.
 
@@ -2989,9 +2976,8 @@ Siempre que la puntuación máxima que se asegura al jugador que minimiza se vue
 La mejor forma de visualizar esta poda es a través de una ilustración:
 
 \begin{center}
-\includegraphics[scale=0.5]{poda alfa-beta.png}
+\includegraphics[scale=0.6]{poda alfa-beta.png}
 \end{center}
-%%FIXME Hacer más grande
 
 Como vemos en este ejemplo, si exploramos en el árbol de izquierda a derecha, una verz llegamos a la rama derecha vemos que el jugador minimizador encuentra una rama por la que logra llegar al valor 5. Como minimiza, se sabe que el valor de ese nodo va a ser, como mucho, 5. Al ver esto el jugador maximizador, teniendo en cuenta que en una rama anterior ha llegado al valor 6, sabe que no tiene que seguir explorando esa rama, porque de ninguna manera va a encontrar un valor mejor que 6, y por tanto, en esta situación, el mejor resultado es el que le brinda empezar explorando la rama del centro.
 
