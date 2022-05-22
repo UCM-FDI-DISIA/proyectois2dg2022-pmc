@@ -227,7 +227,6 @@ Por tanto, la visión completa del juego online es la siguiente:
 \includegraphics[scale=0.4]{mvconlineuml.png} 
 \end{center}
 
-
 \chapter{Diseño y evolución de las Historias de Usuario}
 
 \subsection{Como usuario quiero poder jugar a Rolit siguiendo un conjunto mínimo de normas}
@@ -2643,6 +2642,24 @@ Apariencia inicial de la \texttt{MainWindow}
 \includegraphics[scale=0.7]{replay-sprint-6.png}\\
 \texttt{MainWindow} durante una \textit{replay}
 \end{center}
+
+\subsubsection{Tutorial}
+
+\begin{center}
+\includegraphics[scale=0.9]{Tutorial-sprint7.png}\\
+\end{center}
+
+Esta clase contiene la funcionalidad de mostrar el tutorial de juego. Su método principal es el método \texttt{open()}, en el que se abre en otro hilo de ejecución el vídeo en cuestión.
+
+\newpage
+
+\subsubsection{Video}
+
+\begin{center}
+\includegraphics[scale=0.9]{Video-sprint7.png}\\
+\end{center}
+
+Esta clase es la que permite la ejecución de vídeos en una nueva ventana durante la ejecución del programa. Se usa únicamente para mostrar el tutorial. Tiene un atributo \texttt{path}, que es la ruta relativa del vídeo a reproducir.
 
 \appendix
 
