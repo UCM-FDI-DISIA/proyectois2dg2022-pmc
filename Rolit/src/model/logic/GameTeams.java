@@ -72,9 +72,9 @@ public class GameTeams extends Game {
 			}
 			//We change the turn to the next player in the list if the match has not finished
 			else {
-				onTurnPlayed();
 				Cube nextCube = this.turnManager.nextTurn(this.state);
 				if(nextCube != null) this.addCubeToQueue(nextCube);
+				onTurnPlayed();
 				
 				this.state = new GameState("p " + newCube.getX() + " " + newCube.getY(), this);
 				//We add the current state to the replay
