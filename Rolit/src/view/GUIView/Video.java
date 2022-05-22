@@ -41,7 +41,7 @@ public class Video extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		this.pack();
-		this.setSize(new Dimension(1920, 1080)); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
+		this.setSize(new Dimension(1280, 708)); //Para que no se salga la lista de puntuaciones si los nombres son demasiado largos
 		this.setMinimumSize(this.getSize());
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
