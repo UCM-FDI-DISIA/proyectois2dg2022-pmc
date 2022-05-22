@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.5)  22 MAY 2022 12:38
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  22 MAY 2022 12:11
+>>>>>>> 19da0c8b50c277a6f0125edc8f3343e447d3dc4c
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -345,7 +349,11 @@ Package: titlesec 2021/07/05 v2.14 Sectioning titles
 \titlewidthlast=\dimen168
 \titlewidthfirst=\dimen169
 )
+<<<<<<< HEAD
 (C:\Users\mar\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+=======
+(C:\Miktex\tex/latex/tools\multicol.sty
+>>>>>>> 19da0c8b50c277a6f0125edc8f3343e447d3dc4c
 Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
 \c@tracingmulticols=\count285
 \mult@box=\box56
@@ -2480,11 +2488,19 @@ Package pdftex.def Info: ./fotos//poda alfa-beta.png  used on input line 2997.
 Ap\'{e}ndice E.
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
+<<<<<<< HEAD
 (hyperref)                than one, level fixed on input line 3005.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 3008.
+=======
+(hyperref)                than one, level fixed on input line 3006.
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 3009.
+>>>>>>> 19da0c8b50c277a6f0125edc8f3343e447d3dc4c
 
 \tf@thm=\write4
 \openout4 = `Disenyo.thm'.
@@ -2507,6 +2523,7 @@ Here is how much of TeX's memory you used:
  476674 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,7n,80p,1145b,1836s stack positions out of 10000i,1000n,20000p,200000b,80000s
+<<<<<<< HEAD
  <C:\Users\mar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm12
 00.pk><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb><C:/Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
@@ -2523,6 +2540,19 @@ mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:
 /Users/mar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.p
 fb>
 Output written on Disenyo.pdf (173 pages, 8430135 bytes).
+=======
+ <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
+rm1200.pk><C:/Miktex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Miktex/fonts
+/type1/public/amsfonts/cm/cmr10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/c
+mr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Miktex/fonts/t
+ype1/public/amsfonts/cm/cmr6.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8
+.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type
+1/public/amsfonts/cm/cmti10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmti1
+2.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Miktex/fonts/typ
+e1/public/amsfonts/cm/cmtt12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt
+8.pfb>
+Output written on Disenyo.pdf (173 pages, 8429224 bytes).
+>>>>>>> 19da0c8b50c277a6f0125edc8f3343e447d3dc4c
 PDF statistics:
  1881 PDF objects out of 2073 (max. 8388607)
  530 named destinations out of 1000 (max. 500000)

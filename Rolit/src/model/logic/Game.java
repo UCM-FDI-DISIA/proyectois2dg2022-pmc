@@ -176,10 +176,10 @@ public abstract class Game extends Thread implements Replayable {
 		JSONArray playerJSONArray = new JSONArray();		 
 		for (int i = 0; i < players.size(); ++i)
 			playerJSONArray.put(players.get(i).report());
-					
+		
 		gameJSONObject.put("players", playerJSONArray);
 		
-		gameJSONObject.put("turn", this.players.get(turnManager.getNextPlayerIndex()).getColor().toString());
+		gameJSONObject.put("turn", this.players.get(turnManager.getCurrentPlayerIndex()).getColor().toString());
 		
 		return gameJSONObject;
 	}

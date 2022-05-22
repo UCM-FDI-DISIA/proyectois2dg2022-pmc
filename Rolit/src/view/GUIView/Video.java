@@ -22,9 +22,6 @@ import javafx.scene.media.MediaView;
  */
 public class Video extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private final JFXPanel jfxPanel = new JFXPanel();
@@ -32,6 +29,11 @@ public class Video extends JFrame {
 
 	private String path;
 
+	/**
+	 * Constructor
+	 * @param path Video path
+	 * @param title Video titlw
+	 */
 	public Video(String path, String title) {
 		this.path = path;
 		initComponents();
@@ -52,11 +54,17 @@ public class Video extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * This method initializes the components
+	 */
 	private void initComponents() {
 		jPanel = new JPanel();
 		this.setContentPane(jPanel);
 	}
 
+	/**
+	 * This method generates the video
+	 */
 	private void createScene() {
 		Platform.runLater(new Runnable() {
 
