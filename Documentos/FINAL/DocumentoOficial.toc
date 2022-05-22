@@ -54,9 +54,9 @@
 \contentsline {section}{\numberline {4.6}Virginia Chacón Pérez}{44}{section.4.6}%
 \contentsline {part}{II\hspace {1em}DISEÑO}{47}{part.2}%
 \contentsline {chapter}{\numberline {5}Arquitectura}{49}{chapter.5}%
-\contentsline {subsection}{\numberline {5.0.1}Modelo-Vista-Controlador}{52}{subsection.5.0.1}%
-\contentsline {subsubsection}{\numberline {5.0.1.1}Modelo}{52}{subsubsection.5.0.1.1}%
-\contentsline {subsubsection}{\numberline {5.0.1.2}Vista}{54}{subsubsection.5.0.1.2}%
+\contentsline {subsection}{\numberline {5.0.1}Modelo-Vista-Controlador}{50}{subsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.1.1}Modelo}{51}{subsubsection.5.0.1.1}%
+\contentsline {subsubsection}{\numberline {5.0.1.2}Vista}{53}{subsubsection.5.0.1.2}%
 \contentsline {subsubsection}{\numberline {5.0.1.3}Controlador}{55}{subsubsection.5.0.1.3}%
 \contentsline {subsection}{\numberline {5.0.2}Cliente-Servidor}{56}{subsection.5.0.2}%
 \contentsline {chapter}{\numberline {6}Diseño y evolución de las Historias de Usuario}{59}{chapter.6}%
@@ -64,15 +64,15 @@
 \contentsline {subsection}{\numberline {6.0.2}Como usuario quiero poder jugar a Rolit con una interfaz agradable}{70}{subsection.6.0.2}%
 \contentsline {subsubsection}{\numberline {6.0.2.1}Como usuario, me gustaría que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace más visual el juego.}{70}{subsubsection.6.0.2.1}%
 \contentsline {subsubsection}{\numberline {6.0.2.2}Como usuario, me gustaría que tenga una interfaz gráfica amable porque hace más fácil jugar.}{71}{subsubsection.6.0.2.2}%
-\contentsline {subsection}{\numberline {6.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{92}{subsection.6.0.3}%
-\contentsline {subsubsection}{\numberline {6.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{92}{subsubsection.6.0.3.1}%
-\contentsline {subsubsection}{\numberline {6.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{95}{subsubsection.6.0.3.2}%
-\contentsline {subsection}{\numberline {6.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{106}{subsection.6.0.4}%
-\contentsline {subsubsection}{\numberline {6.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{106}{subsubsection.6.0.4.1}%
-\contentsline {subsubsection}{\numberline {6.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{108}{subsubsection.6.0.4.2}%
-\contentsline {subsubsection}{\numberline {6.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{109}{subsubsection.6.0.4.3}%
-\contentsline {subsubsection}{\numberline {6.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{113}{subsubsection.6.0.4.4}%
-\contentsline {subsection}{\numberline {6.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{113}{subsection.6.0.5}%
+\contentsline {subsection}{\numberline {6.0.3}Como usuario quiero que Rolit introduzca características innovadoras pensando en las posibilidades que brinda el multijugador}{91}{subsection.6.0.3}%
+\contentsline {subsubsection}{\numberline {6.0.3.1}Como usuario, me gustaría que se pudiera jugar contra una inteligencia artificial, así como que ellas jugaran solas}{91}{subsubsection.6.0.3.1}%
+\contentsline {subsubsection}{\numberline {6.0.3.2}Como usuario, me gustaría que se pudiera jugar en red.}{94}{subsubsection.6.0.3.2}%
+\contentsline {subsection}{\numberline {6.0.4}Como usuario quiero que Rolit introduzca características innovadoras siendo intuitivo y cómodo de jugar}{105}{subsection.6.0.4}%
+\contentsline {subsubsection}{\numberline {6.0.4.1}Como usuario, me gustaría que se pudiese guardar y cargar partida para continuar más tarde porque permite poner en pausa el juego}{105}{subsubsection.6.0.4.1}%
+\contentsline {subsubsection}{\numberline {6.0.4.2}Como usuario, me gustaría poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{107}{subsubsection.6.0.4.2}%
+\contentsline {subsubsection}{\numberline {6.0.4.3}Como usuario, me gustaría que se pudiera guardar repeticiones de partida para poder revisarlas más tarde}{108}{subsubsection.6.0.4.3}%
+\contentsline {subsubsection}{\numberline {6.0.4.4}Como usuario, me gustaría poder salir del juego en cualquier momento}{112}{subsubsection.6.0.4.4}%
+\contentsline {subsection}{\numberline {6.0.5}Como usuario, me gustaría que el número de jugadores fuese variable porque así se adapta a diferentes grupos de personas}{112}{subsection.6.0.5}%
 \contentsline {chapter}{\numberline {7}Diseño y evolución de otros aspectos del proyecto}{117}{chapter.7}%
 \contentsline {subsection}{\numberline {7.0.1}Builders}{117}{subsection.7.0.1}%
 \contentsline {subsection}{\numberline {7.0.2}Commands}{120}{subsection.7.0.2}%
@@ -141,7 +141,7 @@
 \contentsline {subsubsection}{\numberline {9.3.1.2}NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}{184}{subsubsection.9.3.1.2}%
 \contentsline {subsubsection}{\numberline {9.3.1.3}LoadGameWindow}{185}{subsubsection.9.3.1.3}%
 \contentsline {subsubsection}{\numberline {9.3.1.4}DeleteGameWindow}{185}{subsubsection.9.3.1.4}%
-\contentsline {subsubsection}{\numberline {9.3.1.5}LoadReplayWindow}{185}{subsubsection.9.3.1.5}%
+\contentsline {subsubsection}{\numberline {9.3.1.5}LoadReplayWindow}{186}{subsubsection.9.3.1.5}%
 \contentsline {subsubsection}{\numberline {9.3.1.6}SaveReplayWindow}{186}{subsubsection.9.3.1.6}%
 \contentsline {subsubsection}{\numberline {9.3.1.7}PlayWindow}{186}{subsubsection.9.3.1.7}%
 \contentsline {subsection}{\numberline {9.3.2}GUIView}{188}{subsection.9.3.2}%
