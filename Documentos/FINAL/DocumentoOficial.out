@@ -52,91 +52,117 @@
 \BOOKMARK [1][-]{section.4.5}{Juan Diego Barrado Daganzo}{chapter.4}% 52
 \BOOKMARK [1][-]{section.4.6}{Virginia Chac\363n P\351rez}{chapter.4}% 53
 \BOOKMARK [-1][-]{part.2}{II DISE\321O}{}% 54
-\BOOKMARK [0][-]{chapter.5}{Dise\361o y evoluci\363n de las Historias de Usuario}{part.2}% 55
-\BOOKMARK [1][-]{subsection.5.0.1}{Como usuario quiero poder jugar a Rolit siguiendo un conjunto m\355nimo de normas}{chapter.5}% 56
-\BOOKMARK [2][-]{subsection.5.0.2}{Como usuario quiero poder jugar a Rolit con una interfaz agradable}{subsection.5.0.1}% 57
-\BOOKMARK [3][-]{subsubsection.5.0.2.1}{Como usuario, me gustar\355a que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace m\341s visual el juego.}{subsection.5.0.2}% 58
-\BOOKMARK [3][-]{subsubsection.5.0.2.2}{Como usuario, me gustar\355a que tenga una interfaz gr\341fica amable porque hace m\341s f\341cil jugar.}{subsection.5.0.2}% 59
-\BOOKMARK [2][-]{subsection.5.0.3}{Como usuario quiero que Rolit introduzca caracter\355sticas innovadoras pensando en las posibilidades que brinda el multijugador}{subsection.5.0.1}% 60
-\BOOKMARK [3][-]{subsubsection.5.0.3.1}{Como usuario, me gustar\355a que se pudiera jugar contra una inteligencia artificial, as\355 como que ellas jugaran solas}{subsection.5.0.3}% 61
-\BOOKMARK [3][-]{subsubsection.5.0.3.2}{Como usuario, me gustar\355a que se pudiera jugar en red.}{subsection.5.0.3}% 62
-\BOOKMARK [2][-]{subsection.5.0.4}{Como usuario quiero que Rolit introduzca caracter\355sticas innovadoras siendo intuitivo y c\363modo de jugar}{subsection.5.0.1}% 63
-\BOOKMARK [3][-]{subsubsection.5.0.4.1}{Como usuario, me gustar\355a que se pudiese guardar y cargar partida para continuar m\341s tarde porque permite poner en pausa el juego}{subsection.5.0.4}% 64
-\BOOKMARK [3][-]{subsubsection.5.0.4.2}{Como usuario, me gustar\355a poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{subsection.5.0.4}% 65
-\BOOKMARK [3][-]{subsubsection.5.0.4.3}{Como usuario, me gustar\355a que se pudiera guardar repeticiones de partida para poder revisarlas m\341s tarde}{subsection.5.0.4}% 66
-\BOOKMARK [3][-]{subsubsection.5.0.4.4}{Como usuario, me gustar\355a poder salir del juego en cualquier momento}{subsection.5.0.4}% 67
-\BOOKMARK [2][-]{subsection.5.0.5}{Como usuario, me gustar\355a que el n\372mero de jugadores fuese variable porque as\355 se adapta a diferentes grupos de personas}{subsection.5.0.1}% 68
-\BOOKMARK [2][-]{subsection.5.0.6}{Como usuario, me gustar\355a que el n\372mero de jugadores fuese variable porque as\355 se adapta a diferentes grupos de personas}{subsection.5.0.1}% 69
-\BOOKMARK [0][-]{chapter.6}{Dise\361o y evoluci\363n de otros aspectos del proyecto}{part.2}% 70
-\BOOKMARK [1][-]{subsection.6.0.1}{Builders}{chapter.6}% 71
-\BOOKMARK [2][-]{subsection.6.0.2}{Commands}{subsection.6.0.1}% 72
-\BOOKMARK [0][-]{chapter.7}{Tests de JUnits}{part.2}% 73
-\BOOKMARK [1][-]{section.7.1}{Paquete Builders}{chapter.7}% 74
-\BOOKMARK [2][-]{subsection.7.1.1}{GameClassicBuilderTest}{section.7.1}% 75
-\BOOKMARK [2][-]{subsection.7.1.2}{GameTeamsBuilderTest}{section.7.1}% 76
-\BOOKMARK [1][-]{section.7.2}{Paquete Commands}{chapter.7}% 77
-\BOOKMARK [2][-]{subsection.7.2.1}{ExitCommandTest}{section.7.2}% 78
-\BOOKMARK [2][-]{subsection.7.2.2}{PlaceCubeCommandTest}{section.7.2}% 79
-\BOOKMARK [2][-]{subsection.7.2.3}{SaveCommandTest}{section.7.2}% 80
-\BOOKMARK [1][-]{section.7.3}{Paquete IA}{chapter.7}% 81
-\BOOKMARK [2][-]{subsection.7.3.1}{IATest}{section.7.3}% 82
-\BOOKMARK [1][-]{section.7.4}{Paquete Logic}{chapter.7}% 83
-\BOOKMARK [2][-]{subsection.7.4.1}{BoardTest}{section.7.4}% 84
-\BOOKMARK [2][-]{subsection.7.4.2}{CubeTest}{section.7.4}% 85
-\BOOKMARK [2][-]{subsection.7.4.3}{GameClassicTest}{section.7.4}% 86
-\BOOKMARK [2][-]{subsection.7.4.4}{GameTeamsTest}{section.7.4}% 87
-\BOOKMARK [2][-]{subsection.7.4.5}{PlayerTest}{section.7.4}% 88
-\BOOKMARK [2][-]{subsection.7.4.6}{TeamTest}{section.7.4}% 89
-\BOOKMARK [1][-]{section.7.5}{Paquete Replay}{chapter.7}% 90
-\BOOKMARK [2][-]{subsection.7.5.1}{ReplayTest}{section.7.5}% 91
-\BOOKMARK [2][-]{subsection.7.5.2}{StateTest}{section.7.5}% 92
-\BOOKMARK [0][-]{chapter.8}{Dise\361o final}{part.2}% 93
-\BOOKMARK [1][-]{section.8.1}{Paquete model}{chapter.8}% 94
-\BOOKMARK [2][-]{subsection.8.1.1}{Builders}{section.8.1}% 95
-\BOOKMARK [3][-]{subsubsection.8.1.1.1}{GameClassicBuilder y GameTeamsBuilder}{subsection.8.1.1}% 96
-\BOOKMARK [3][-]{subsubsection.8.1.1.2}{GameBuilder}{subsection.8.1.1}% 97
-\BOOKMARK [2][-]{subsection.8.1.2}{Commands}{section.8.1}% 98
-\BOOKMARK [3][-]{subsubsection.8.1.2.1}{ExitCommand}{subsection.8.1.2}% 99
-\BOOKMARK [3][-]{subsubsection.8.1.2.2}{HelpCommand}{subsection.8.1.2}% 100
-\BOOKMARK [3][-]{subsubsection.8.1.2.3}{PlaceCubeCommand}{subsection.8.1.2}% 101
-\BOOKMARK [3][-]{subsubsection.8.1.2.4}{SaveCommand}{subsection.8.1.2}% 102
-\BOOKMARK [2][-]{subsection.8.1.3}{Logic}{section.8.1}% 103
-\BOOKMARK [3][-]{subsubsection.8.1.3.1}{Color}{subsection.8.1.3}% 104
-\BOOKMARK [3][-]{subsubsection.8.1.3.2}{Cube}{subsection.8.1.3}% 105
-\BOOKMARK [3][-]{subsubsection.8.1.3.3}{Shape}{subsection.8.1.3}% 106
-\BOOKMARK [3][-]{subsubsection.8.1.3.4}{Board}{subsection.8.1.3}% 107
-\BOOKMARK [3][-]{subsubsection.8.1.3.5}{Rival}{subsection.8.1.3}% 108
-\BOOKMARK [3][-]{subsubsection.8.1.3.6}{Player}{subsection.8.1.3}% 109
-\BOOKMARK [3][-]{subsubsection.8.1.3.7}{Team}{subsection.8.1.3}% 110
-\BOOKMARK [3][-]{subsubsection.8.1.3.8}{TurnManager}{subsection.8.1.3}% 111
-\BOOKMARK [3][-]{subsubsection.8.1.3.9}{Game, GameClassic y GameTeams}{subsection.8.1.3}% 112
-\BOOKMARK [2][-]{subsection.8.1.4}{Online}{section.8.1}% 113
-\BOOKMARK [3][-]{subsubsection.8.1.4.1}{Modo por equipos}{subsection.8.1.4}% 114
-\BOOKMARK [2][-]{subsection.8.1.5}{Replay}{section.8.1}% 115
-\BOOKMARK [3][-]{subsubsection.8.1.5.1}{Replay}{subsection.8.1.5}% 116
-\BOOKMARK [3][-]{subsubsection.8.1.5.2}{GameState}{subsection.8.1.5}% 117
-\BOOKMARK [2][-]{subsection.8.1.6}{Strategy}{section.8.1}% 118
-\BOOKMARK [3][-]{subsubsection.8.1.6.1}{Strategy}{subsection.8.1.6}% 119
-\BOOKMARK [3][-]{subsubsection.8.1.6.2}{RandomStrategy}{subsection.8.1.6}% 120
-\BOOKMARK [3][-]{subsubsection.8.1.6.3}{MinimaxStrategy}{subsection.8.1.6}% 121
-\BOOKMARK [3][-]{subsubsection.8.1.6.4}{GreedyStrategy}{subsection.8.1.6}% 122
-\BOOKMARK [3][-]{subsubsection.8.1.6.5}{SimplifiedBoard}{subsection.8.1.6}% 123
-\BOOKMARK [1][-]{section.8.2}{Paquete Controller}{chapter.8}% 124
-\BOOKMARK [1][-]{section.8.3}{Paquete View}{chapter.8}% 125
-\BOOKMARK [2][-]{subsection.8.3.1}{ConsoleWindow}{section.8.3}% 126
-\BOOKMARK [3][-]{subsubsection.8.3.1.1}{MainBashWindow}{subsection.8.3.1}% 127
-\BOOKMARK [3][-]{subsubsection.8.3.1.2}{NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}{subsection.8.3.1}% 128
-\BOOKMARK [3][-]{subsubsection.8.3.1.3}{LoadGameWindow}{subsection.8.3.1}% 129
-\BOOKMARK [3][-]{subsubsection.8.3.1.4}{DeleteGameWindow}{subsection.8.3.1}% 130
-\BOOKMARK [3][-]{subsubsection.8.3.1.5}{LoadReplayWindow}{subsection.8.3.1}% 131
-\BOOKMARK [3][-]{subsubsection.8.3.1.6}{SaveReplayWindow}{subsection.8.3.1}% 132
-\BOOKMARK [3][-]{subsubsection.8.3.1.7}{PlayWindow}{subsection.8.3.1}% 133
-\BOOKMARK [2][-]{subsection.8.3.2}{GUIView}{section.8.3}% 134
-\BOOKMARK [3][-]{subsubsection.8.3.2.1}{GUIView}{subsection.8.3.2}% 135
-\BOOKMARK [0][-]{appendix.Alph1}{Anexo I: Reports}{part.2}% 136
-\BOOKMARK [0][-]{appendix.Alph2}{Anexo II: Lista de todas las clases}{part.2}% 137
-\BOOKMARK [0][-]{appendix.Alph3}{Anexo III: Estrategia Minimax adaptada a Rolit}{part.2}% 138
-\BOOKMARK [0][-]{appendix.Alph4}{Anexo IV: Poda Alfa-Beta}{part.2}% 139
-\BOOKMARK [0][-]{appendix.Alph5}{POSIBLES MEJORAS}{part.2}% 140
-\BOOKMARK [1][-]{subsubsection.Alph5.0.0.1}{Builders}{appendix.Alph5}% 141
-\BOOKMARK [2][-]{subsubsection.Alph5.0.0.2}{Replay}{subsubsection.Alph5.0.0.1}% 142
+\BOOKMARK [0][-]{chapter.5}{Arquitectura}{part.2}% 55
+\BOOKMARK [1][-]{subsection.5.0.1}{Modelo-Vista-Controlador}{chapter.5}% 56
+\BOOKMARK [2][-]{subsubsection.5.0.1.1}{Modelo}{subsection.5.0.1}% 57
+\BOOKMARK [3][-]{subsubsection.5.0.1.2}{Vista}{subsubsection.5.0.1.1}% 58
+\BOOKMARK [3][-]{subsubsection.5.0.1.3}{Controlador}{subsubsection.5.0.1.1}% 59
+\BOOKMARK [2][-]{subsection.5.0.2}{Cliente-Servidor}{subsection.5.0.1}% 60
+\BOOKMARK [0][-]{chapter.6}{Dise\361o y evoluci\363n de las Historias de Usuario}{part.2}% 61
+\BOOKMARK [1][-]{subsection.6.0.1}{Como usuario quiero poder jugar a Rolit siguiendo un conjunto m\355nimo de normas}{chapter.6}% 62
+\BOOKMARK [2][-]{subsection.6.0.2}{Como usuario quiero poder jugar a Rolit con una interfaz agradable}{subsection.6.0.1}% 63
+\BOOKMARK [3][-]{subsubsection.6.0.2.1}{Como usuario, me gustar\355a que se pudiesen personalizar los colores con los que jugamos cada jugador porque hace m\341s visual el juego.}{subsection.6.0.2}% 64
+\BOOKMARK [3][-]{subsubsection.6.0.2.2}{Como usuario, me gustar\355a que tenga una interfaz gr\341fica amable porque hace m\341s f\341cil jugar.}{subsection.6.0.2}% 65
+\BOOKMARK [2][-]{subsection.6.0.3}{Como usuario quiero que Rolit introduzca caracter\355sticas innovadoras pensando en las posibilidades que brinda el multijugador}{subsection.6.0.1}% 66
+\BOOKMARK [3][-]{subsubsection.6.0.3.1}{Como usuario, me gustar\355a que se pudiera jugar contra una inteligencia artificial, as\355 como que ellas jugaran solas}{subsection.6.0.3}% 67
+\BOOKMARK [3][-]{subsubsection.6.0.3.2}{Como usuario, me gustar\355a que se pudiera jugar en red.}{subsection.6.0.3}% 68
+\BOOKMARK [2][-]{subsection.6.0.4}{Como usuario quiero que Rolit introduzca caracter\355sticas innovadoras siendo intuitivo y c\363modo de jugar}{subsection.6.0.1}% 69
+\BOOKMARK [3][-]{subsubsection.6.0.4.1}{Como usuario, me gustar\355a que se pudiese guardar y cargar partida para continuar m\341s tarde porque permite poner en pausa el juego}{subsection.6.0.4}% 70
+\BOOKMARK [3][-]{subsubsection.6.0.4.2}{Como usuario, me gustar\355a poder guardar y cargar distintas partidas, eligiendo el nombre del fichero donde se cargan/guardan}{subsection.6.0.4}% 71
+\BOOKMARK [3][-]{subsubsection.6.0.4.3}{Como usuario, me gustar\355a que se pudiera guardar repeticiones de partida para poder revisarlas m\341s tarde}{subsection.6.0.4}% 72
+\BOOKMARK [3][-]{subsubsection.6.0.4.4}{Como usuario, me gustar\355a poder salir del juego en cualquier momento}{subsection.6.0.4}% 73
+\BOOKMARK [2][-]{subsection.6.0.5}{Como usuario, me gustar\355a que el n\372mero de jugadores fuese variable porque as\355 se adapta a diferentes grupos de personas}{subsection.6.0.1}% 74
+\BOOKMARK [0][-]{chapter.7}{Dise\361o y evoluci\363n de otros aspectos del proyecto}{part.2}% 75
+\BOOKMARK [1][-]{subsection.7.0.1}{Builders}{chapter.7}% 76
+\BOOKMARK [2][-]{subsection.7.0.2}{Commands}{subsection.7.0.1}% 77
+\BOOKMARK [0][-]{chapter.8}{Tests de JUnits}{part.2}% 78
+\BOOKMARK [1][-]{section.8.1}{Paquete Builders}{chapter.8}% 79
+\BOOKMARK [2][-]{subsection.8.1.1}{GameClassicBuilderTest}{section.8.1}% 80
+\BOOKMARK [2][-]{subsection.8.1.2}{GameTeamsBuilderTest}{section.8.1}% 81
+\BOOKMARK [1][-]{section.8.2}{Paquete Commands}{chapter.8}% 82
+\BOOKMARK [2][-]{subsection.8.2.1}{ExitCommandTest}{section.8.2}% 83
+\BOOKMARK [2][-]{subsection.8.2.2}{PlaceCubeCommandTest}{section.8.2}% 84
+\BOOKMARK [2][-]{subsection.8.2.3}{SaveCommandTest}{section.8.2}% 85
+\BOOKMARK [1][-]{section.8.3}{Paquete IA}{chapter.8}% 86
+\BOOKMARK [2][-]{subsection.8.3.1}{IATest}{section.8.3}% 87
+\BOOKMARK [1][-]{section.8.4}{Paquete Logic}{chapter.8}% 88
+\BOOKMARK [2][-]{subsection.8.4.1}{BoardTest}{section.8.4}% 89
+\BOOKMARK [2][-]{subsection.8.4.2}{CubeTest}{section.8.4}% 90
+\BOOKMARK [2][-]{subsection.8.4.3}{GameClassicTest}{section.8.4}% 91
+\BOOKMARK [2][-]{subsection.8.4.4}{GameTeamsTest}{section.8.4}% 92
+\BOOKMARK [2][-]{subsection.8.4.5}{PlayerTest}{section.8.4}% 93
+\BOOKMARK [2][-]{subsection.8.4.6}{TeamTest}{section.8.4}% 94
+\BOOKMARK [1][-]{section.8.5}{Paquete Replay}{chapter.8}% 95
+\BOOKMARK [2][-]{subsection.8.5.1}{ReplayTest}{section.8.5}% 96
+\BOOKMARK [2][-]{subsection.8.5.2}{StateTest}{section.8.5}% 97
+\BOOKMARK [0][-]{chapter.9}{Dise\361o final}{part.2}% 98
+\BOOKMARK [1][-]{section.9.1}{Paquete model}{chapter.9}% 99
+\BOOKMARK [2][-]{subsubsection.9.1.0.1}{SaveLoadManager}{section.9.1}% 100
+\BOOKMARK [2][-]{subsection.9.1.1}{Builders}{section.9.1}% 101
+\BOOKMARK [3][-]{subsubsection.9.1.1.1}{GameBuilder}{subsection.9.1.1}% 102
+\BOOKMARK [3][-]{subsubsection.9.1.1.2}{GameClassicBuilder y GameTeamsBuilder}{subsection.9.1.1}% 103
+\BOOKMARK [2][-]{subsection.9.1.2}{Commands}{section.9.1}% 104
+\BOOKMARK [3][-]{subsubsection.9.1.2.1}{ExitCommand}{subsection.9.1.2}% 105
+\BOOKMARK [3][-]{subsubsection.9.1.2.2}{HelpCommand}{subsection.9.1.2}% 106
+\BOOKMARK [3][-]{subsubsection.9.1.2.3}{PlaceCubeCommand}{subsection.9.1.2}% 107
+\BOOKMARK [3][-]{subsubsection.9.1.2.4}{SaveCommand}{subsection.9.1.2}% 108
+\BOOKMARK [2][-]{subsection.9.1.3}{Logic}{section.9.1}% 109
+\BOOKMARK [3][-]{subsubsection.9.1.3.1}{Color}{subsection.9.1.3}% 110
+\BOOKMARK [3][-]{subsubsection.9.1.3.2}{Cube}{subsection.9.1.3}% 111
+\BOOKMARK [3][-]{subsubsection.9.1.3.3}{Shape}{subsection.9.1.3}% 112
+\BOOKMARK [3][-]{subsubsection.9.1.3.4}{Board}{subsection.9.1.3}% 113
+\BOOKMARK [3][-]{subsubsection.9.1.3.5}{Rival}{subsection.9.1.3}% 114
+\BOOKMARK [3][-]{subsubsection.9.1.3.6}{Player}{subsection.9.1.3}% 115
+\BOOKMARK [3][-]{subsubsection.9.1.3.7}{Team}{subsection.9.1.3}% 116
+\BOOKMARK [3][-]{subsubsection.9.1.3.8}{TurnManager}{subsection.9.1.3}% 117
+\BOOKMARK [3][-]{subsubsection.9.1.3.9}{Game, GameClassic y GameTeams}{subsection.9.1.3}% 118
+\BOOKMARK [2][-]{subsection.9.1.4}{Online}{section.9.1}% 119
+\BOOKMARK [3][-]{subsubsection.9.1.4.1}{Server}{subsection.9.1.4}% 120
+\BOOKMARK [3][-]{subsubsection.9.1.4.2}{ServerClient}{subsection.9.1.4}% 121
+\BOOKMARK [3][-]{subsubsection.9.1.4.3}{ServerClientThread}{subsection.9.1.4}% 122
+\BOOKMARK [3][-]{subsubsection.9.1.4.4}{ServerWaitPlayerThread}{subsection.9.1.4}% 123
+\BOOKMARK [3][-]{subsubsection.9.1.4.5}{Client}{subsection.9.1.4}% 124
+\BOOKMARK [3][-]{subsubsection.9.1.4.6}{ClientController}{subsection.9.1.4}% 125
+\BOOKMARK [3][-]{subsubsection.9.1.4.7}{Modo por equipos}{subsection.9.1.4}% 126
+\BOOKMARK [2][-]{subsection.9.1.5}{Replay}{section.9.1}% 127
+\BOOKMARK [3][-]{subsubsection.9.1.5.1}{Replay}{subsection.9.1.5}% 128
+\BOOKMARK [3][-]{subsubsection.9.1.5.2}{GameState}{subsection.9.1.5}% 129
+\BOOKMARK [2][-]{subsection.9.1.6}{Strategy}{section.9.1}% 130
+\BOOKMARK [3][-]{subsubsection.9.1.6.1}{Strategy}{subsection.9.1.6}% 131
+\BOOKMARK [3][-]{subsubsection.9.1.6.2}{RandomStrategy}{subsection.9.1.6}% 132
+\BOOKMARK [3][-]{subsubsection.9.1.6.3}{MinimaxStrategy}{subsection.9.1.6}% 133
+\BOOKMARK [3][-]{subsubsection.9.1.6.4}{GreedyStrategy}{subsection.9.1.6}% 134
+\BOOKMARK [3][-]{subsubsection.9.1.6.5}{SimplifiedBoard}{subsection.9.1.6}% 135
+\BOOKMARK [1][-]{section.9.2}{Paquete Controller}{chapter.9}% 136
+\BOOKMARK [1][-]{section.9.3}{Paquete View}{chapter.9}% 137
+\BOOKMARK [2][-]{subsection.9.3.1}{ConsoleWindow}{section.9.3}% 138
+\BOOKMARK [3][-]{subsubsection.9.3.1.1}{MainBashWindow}{subsection.9.3.1}% 139
+\BOOKMARK [3][-]{subsubsection.9.3.1.2}{NewGameWindow, NewGameClassicWindow y NewGameTeamsWindow}{subsection.9.3.1}% 140
+\BOOKMARK [3][-]{subsubsection.9.3.1.3}{LoadGameWindow}{subsection.9.3.1}% 141
+\BOOKMARK [3][-]{subsubsection.9.3.1.4}{DeleteGameWindow}{subsection.9.3.1}% 142
+\BOOKMARK [3][-]{subsubsection.9.3.1.5}{LoadReplayWindow}{subsection.9.3.1}% 143
+\BOOKMARK [3][-]{subsubsection.9.3.1.6}{SaveReplayWindow}{subsection.9.3.1}% 144
+\BOOKMARK [3][-]{subsubsection.9.3.1.7}{PlayWindow}{subsection.9.3.1}% 145
+\BOOKMARK [2][-]{subsection.9.3.2}{GUIView}{section.9.3}% 146
+\BOOKMARK [3][-]{subsubsection.9.3.2.1}{Paquete RolitComponents}{subsection.9.3.2}% 147
+\BOOKMARK [3][-]{subsubsection.9.3.2.2}{Paquete CreateGame}{subsection.9.3.2}% 148
+\BOOKMARK [3][-]{subsubsection.9.3.2.3}{BoardRenderer y ColorRenderer}{subsection.9.3.2}% 149
+\BOOKMARK [3][-]{subsubsection.9.3.2.4}{CellGUI}{subsection.9.3.2}% 150
+\BOOKMARK [3][-]{subsubsection.9.3.2.5}{BoardGUI}{subsection.9.3.2}% 151
+\BOOKMARK [3][-]{subsubsection.9.3.2.6}{ControlPanel}{subsection.9.3.2}% 152
+\BOOKMARK [3][-]{subsubsection.9.3.2.7}{TurnAndRankingBar}{subsection.9.3.2}% 153
+\BOOKMARK [3][-]{subsubsection.9.3.2.8}{StatusBar}{subsection.9.3.2}% 154
+\BOOKMARK [3][-]{subsubsection.9.3.2.9}{RankingPanel}{subsection.9.3.2}% 155
+\BOOKMARK [3][-]{subsubsection.9.3.2.10}{LoadFileDialog}{subsection.9.3.2}% 156
+\BOOKMARK [3][-]{subsubsection.9.3.2.11}{DeleteDialog}{subsection.9.3.2}% 157
+\BOOKMARK [3][-]{subsubsection.9.3.2.12}{SaveReplayDialog}{subsection.9.3.2}% 158
+\BOOKMARK [3][-]{subsubsection.9.3.2.13}{JoinServerDialog}{subsection.9.3.2}% 159
+\BOOKMARK [3][-]{subsubsection.9.3.2.14}{ServerView}{subsection.9.3.2}% 160
+\BOOKMARK [3][-]{subsubsection.9.3.2.15}{MainWindow}{subsection.9.3.2}% 161
+\BOOKMARK [0][-]{appendix.Alph1}{Reports}{part.2}% 162
+\BOOKMARK [0][-]{appendix.Alph2}{Listado de clases}{part.2}% 163
+\BOOKMARK [0][-]{appendix.Alph3}{Estrategia Minimax adaptada a Rolit}{part.2}% 164
+\BOOKMARK [0][-]{appendix.Alph4}{Poda Alfa-Beta}{part.2}% 165
+\BOOKMARK [0][-]{appendix.Alph5}{Aspectos mejorables del dise\361o}{part.2}% 166
+\BOOKMARK [1][-]{subsubsection.Alph5.0.0.1}{Builders}{appendix.Alph5}% 167
+\BOOKMARK [2][-]{subsubsection.Alph5.0.0.2}{Replay}{subsubsection.Alph5.0.0.1}% 168

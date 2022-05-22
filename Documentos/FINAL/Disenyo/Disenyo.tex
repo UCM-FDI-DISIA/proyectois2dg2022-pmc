@@ -94,12 +94,6 @@ Para implementar el patrón MVC, hemos organizado las clases del proyecto en tre
 Diseño diagrama de secuencia UML
 \end{center}
 
-El UML detallado sería el siguiente:
-
-\begin{center}
-\includegraphics[scale=0.125]{mvcuml.png}
-\end{center}
-
 A continuación se desarrollará el contenido de cada parte del proyecto, representado mediante paquetes.
 
 \subsection{Modelo-Vista-Controlador}
@@ -144,6 +138,8 @@ La visión completa del modelo es la siguiente:
 Modelo completo
 \end{center}
 
+\newpage
+
 \subsubsection{Vista}
 
 La vista se encarga de elaborar adecuadamente cómo se visualiza el juego. En nuestro juego existen dos vistas: la de consola y la de GUI.
@@ -176,6 +172,8 @@ La visión completa de la vista es la siguiente:
 Vista completa
 \end{center}
 
+\newpage
+
 \subsubsection{Controlador}
 
 El controlador supone el intermediario entre la vista y el modelo, notificando a ambos si es preciso que se actualicen en base a las interacciones realizadas para el juego o desde el juego.
@@ -203,6 +201,8 @@ La visión completa del controlador es la siguiente:
 
 Controlador completo
 \end{center}
+
+\newpage
 
 \subsection{Cliente-Servidor}
 
@@ -1659,6 +1659,8 @@ Esta clase posee una serie de métodos protegidos que utilizan sus hijas, los Bu
 \subsubsection{GameClassicBuilder y GameTeamsBuilder}
 Ambas son una subclase de \texttt{GameBuilder} y son las responsables de la lógica de construcción de los \texttt{GameClassic} y los \texttt{GameTeams}. El flujo de ejecución es idéntico para ambas, se llama al método \texttt{Game GenerateGame(JSONObject o)} que devuelve el juego listo para empezar la ejeución, aunque la forma de construir el juego sí es distinta:
 
+\newpage
+
 \begin{center}
 \includegraphics[scale=0.45, angle=90]{GameClassicBuilder_final_seq}
 \end{center}
@@ -2364,6 +2366,8 @@ Al igual que la clase \texttt{LoadGameWindow}, esta clase principalmente present
 \begin{center}
 \includegraphics[scale=0.5]{DeleteGameWindow_final_seq}
 \end{center}
+
+\newpage
 
 \subsubsection{LoadReplayWindow}
 Es la clase homóloga a la clase \texttt{LoadGameWindow}, solo que su principal función es cargar una \texttt{Replay} en vez de un \texttt{Game} concreto:
