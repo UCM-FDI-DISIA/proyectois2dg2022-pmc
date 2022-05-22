@@ -15,6 +15,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
+/**
+ * This class is responsible for reproducing videos.
+ * @author PMC
+ *
+ */
 public class Video extends JFrame {
 
 	/**
