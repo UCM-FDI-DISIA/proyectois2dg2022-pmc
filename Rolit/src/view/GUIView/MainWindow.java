@@ -41,7 +41,7 @@ import view.GUIView.createGame.CreateGameWithPlayersDialog;
 public class MainWindow extends JFrame implements RolitObserver, ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS" };
+	private static final String BUTTONS[] = { "NG", "LG", "DG", "LR", "CS", "JS", "T" };
 	private static final String ICONS_PATH = "resources\\icons\\";
 	
 	private Client clientRolit;
@@ -55,6 +55,7 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 	private JButton loadReplayButton;
 	private JButton createServerButton;
 	private JButton joinServerButton;
+	private JButton tutorialButton;
 	private JPanel mainPanel;
 	private JPanel gamePanel;
 	private JLabel rolitLogo;
@@ -129,6 +130,11 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		joinServerButton.setActionCommand(BUTTONS[5]);
 		joinServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinServerButton.addActionListener(this);
+		// Boton para abrir el tutorial
+		tutorialButton = new RolitButton("Tutorial");
+		tutorialButton.setActionCommand(BUTTONS[6]);
+		tutorialButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		tutorialButton.addActionListener(this);
 		
 		//Labels
 		optionMessage = new JLabel("Choose an option:");
@@ -155,7 +161,8 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
 		welcomePanel.add(joinServerButton);
 		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
-		
+		welcomePanel.add(tutorialButton);
+		welcomePanel.add(Box.createRigidArea(new Dimension(1, 5)));
 		
 	    welcomePanel.add(glue);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -228,6 +235,10 @@ public class MainWindow extends JFrame implements RolitObserver, ActionListener 
 				clientRolit.join(jsd.getPlayerName(), jsd.getPlayerColor());
 				jsd.showWaitingDialog();
 			}
+			break;
+		case "T":
+			Tutorial tutorial = new Tutorial();
+			tutorial.open();
 			break;
 		}
 	}
