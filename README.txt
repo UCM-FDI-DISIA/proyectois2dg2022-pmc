@@ -35,4 +35,3 @@ Proyecto desarollado por:
 - María del Mar Ramiro Ortega
 - Sergio Miguel García Jiménez
 - Daniel González Arbelo
-- 
