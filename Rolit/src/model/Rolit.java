@@ -19,7 +19,6 @@ public class Rolit {
 	private static final String INVALID_OPTION = "Invalid option. Try again.";
 	private static Scanner input = new Scanner(System.in);
 	
-	
 	public static void main(String[] args) {		
 		version();
 		System.out.println();
