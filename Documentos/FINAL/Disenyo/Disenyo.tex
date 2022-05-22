@@ -1459,7 +1459,7 @@ Probamos a meter una \texttt{Shape} que está mal y comprobamos que se lanza ade
 \subsection{ExitCommandTest}
 \underline{executeTest() y executeTest2()}
 
-Creamos un Board, dos Player y un Cube para cada Player. Creamos una lista con los cubos y otra con los Player. Creamos un GameClassic con la información necesaria y creamos un ExitCommand para después llamar a su método execute() y comprobar que el método exited() del Game devuelve true.
+Creamos un \texttt{Board}, dos \texttt{Player} y un \texttt{Cube} para cada \texttt{Player}. Creamos una lista con los \texttt{cubos} y otra con los \texttt{Player}. Creamos un \texttt{GameClassic} con la información necesaria y creamos un \texttt{ExitCommand} para después llamar a su método \texttt{execute()} y comprobar que el método \texttt{exited()} del \texttt{Game} devuelve \texttt{true}.
 
 \subsection{PlaceCubeCommandTest}
 \underline{parseTest()}
@@ -1469,11 +1469,11 @@ Creamos un PlaceCubeCommand y comprobamos que funciona correctamente su método 
 \subsection{SaveCommandTest}
 \underline{parseTest()}
 
-Creamos un SaveCommand y comprobamos que funciona correctamente su método parse() viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
+Creamos un \texttt{SaveCommand} y comprobamos que funciona correctamente su método \texttt{parse()} viendo que lanza una excepción cuando los argumentos que se le pasan no son correctos.
 
 \underline{exceptionTest()}
 
-Comprobamos que se lanza una excepción cuando se intenta llamar al método getCommand() con argumentos incorrectos.
+Comprobamos que se lanza una excepción cuando se intenta llamar al método \texttt{getCommand()} con argumentos incorrectos.
 
 
 \section{Paquete IA}
@@ -1494,32 +1494,32 @@ Se crea un juego con tres \texttt{Player} que son inteligencias artificiales, un
 \subsection{BoardTest}
 \underline{addCubeInPos()}
 
-Creamos un Board, un Player y cuatro Cube del Player creado. Se añaden dos de ellos en posiciones correctas y se comprueba que se lanzan excepciones al intentar colocarlos en posiciones inválidas del tablero, ya sea porque ya están ocupadas con otro Cube o porque las coordenadas x e y no son correctas. Finalmente, se comprueba si el Cube que se ha añadido en la posición correcta es el adecuado.
+Creamos un \texttt{Board}, un \texttt{Player} y cuatro \texttt{Cube} del \texttt{Player} creado. Se añaden dos de ellos en posiciones correctas y se comprueba que se lanzan excepciones al intentar colocarlos en posiciones inválidas del tablero, ya sea porque ya están ocupadas con otro \texttt{Cube} o porque las coordenadas \texttt{x} e \texttt{y} no son correctas. Finalmente, se comprueba si el \texttt{Cube} que se ha añadido en la posición correcta es el adecuado.
 
 \underline{Board\_full\_numCubes()}
 
-Creamos un Board, un Player y un Cube, añadimos el cubo al tablero y comprobamos que el método que comprueba si el tablero está lleno devuelve falso.
+Creamos un \texttt{Board}, un \texttt{Player} y un \texttt{Cube}, añadimos el \texttt{Cube} al \texttt{Board} y comprobamos que el método que comprueba si el \texttt{Board} está lleno devuelve \texttt{false}.
 
 \underline{Update\_test()}
 
-Se crea un Board y dos Player, se van creando y poniendo en el tablero objetos Cube y llamando al método update() de Board y finalmente se comprueba si el color del cubo al final del test es el que debería ser por las posiciones en las que se han ido colocando los mismos.
+Se crea un \texttt{Board} y dos \texttt{Player}, se van creando y poniendo en el \texttt{Board} objetos \texttt{Cube} y llamando al método \texttt{update()} de \texttt{Board} y finalmente se comprueba si el \texttt{Color} del \texttt{Cube} al final del test es el que debería ser por las posiciones en las que se han ido colocando los mismos.
 
 \underline{Update\_test2()}
 
-Se crea un Board y dos Player, y se van creando y colocando en el tablero objetos Cube y llamando al método update() de Board. Finalmente, se comprueba si se lanza una excepción al intentar añadir un cubo en una posición no válida, así como si el color del cubo al final del test es el que debería.
+Se crea un \texttt{Board} y dos \texttt{Player}, y se van creando y colocando en el tablero objetos \texttt{Cube} y llamando al método \texttt{update()} de \texttt{Board}. Finalmente, se comprueba si se lanza una excepción al intentar añadir un \texttt{Cube} en una posición no válida, así como si el \texttt{Color} del \texttt{Cube} al final del test es el que debería.
 
 \underline{Test\_report() y test\_report2()}
 
-Creamos un Board, dos Player y varios Cube, los cuales se van colocando en el tablero y llamando al método update() de Board. Finalmente, se comprueba si el método report() de la clase Board devuelve el JSONObject esperado.
+Creamos un \texttt{Board}, dos \texttt{Player} y varios \texttt{Cube}, los cuales se van colocando en el tablero y llamando al método \texttt{update()} de \texttt{Board}. Finalmente, se comprueba si el método \texttt{report()} de la clase \texttt{Board} devuelve el \texttt{JSONObject} esperado.
 
 \subsection{CubeTest}
 \underline{Change\_owner()}
 
-Creamos un Player y un Cube y tratamos de cambiar el ''propietario'' (realmente es el color) del cubo. Finalmente se comprueba si se ha cambiado correctamente.
+Creamos un \texttt{Player} y un \texttt{Cube} y tratamos de cambiar el ''propietario'' (realmente es el color) del \texttt{Cube}. Finalmente se comprueba si se ha cambiado correctamente.
 
 \underline{Test\_report()}
 
-Creamos un Player y un Cube. Finalmente, se comprueba si el método report() e la clase Cube devuelve el JSONObject esperado.
+Creamos un \texttt{Player} y un \texttt{Cube}. Finalmente, se comprueba si el método \texttt{report()} e la clase \texttt{Cube} devuelve el \texttt{JSONObject} esperado.
 
 
 \subsection{GameClassicTest}
@@ -1529,7 +1529,7 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassi
 
 \underline{test\_report()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \underline{play\_test2()}
 
@@ -1537,7 +1537,7 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassi
 
 \underline{test\_report2()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \underline{play\_test3()}
 
@@ -1545,7 +1545,7 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassi
 
 \underline{test\_report3()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameClassic}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \subsection{GameTeamsTest}
 \underline{play\_test()}
@@ -1554,7 +1554,7 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsT
 
 \underline{test\_report()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \underline{play\_test2()}
 
@@ -1562,7 +1562,7 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsT
 
 \underline{test\_report2()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \underline{play\_test3()}
 
@@ -1570,36 +1570,37 @@ Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsT
 
 \underline{test\_report3()}
 
-Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el JSON esperado.
+Creamos todos los objetos necesarios para poder instanciar un \texttt{GameTeamsTest}. Usamos el método \texttt{play()} para dar un poco de actividad y finalmente comprobamos que el método \texttt{report()} nos proporciona el \texttt{JSONObject} esperado.
 
 \subsection{PlayerTest}
 \underline{Add\_score\_test()}
 
-Creamos dos Player y se llama al método addScore() de uno de ellos para sumarle 1 a su puntuación. Se comprueba si se ha realizado correctamente. Después, se crea un cubo del primer jugador y se le cambia el ''propietario'' al segundo. Finalmente se comprueba que las puntuaciones de ambos jugadores son las correctas.
+Creamos dos \texttt{Player} y se llama al método \texttt{addScore()} de uno de ellos para sumarle 1 a su puntuación. Se comprueba si se ha realizado correctamente. Después, se crea un \texttt{Cube} del primer \texttt{Player} y se le cambia el ''propietario'' al segundo. Finalmente se comprueba que las puntuaciones de ambos \texttt{Player} son las correctas.
 
 \underline{test\_report() y test\_report2()}
 
-Creamos dos Player y se le añade determinada puntuación al primero. Se comprueba que es correcta, se crea un cubo al primer jugador y se le cambia el “propietario” al segundo. Finalmente se comprueba que los métodos report() de ambos jugadores devuelven los JSONObject esperados.
+Creamos dos \texttt{Player} y se le añade determinada puntuación al primero. Se comprueba que es correcta, se crea un \texttt{Cube} al primer \texttt{Player} y se le cambia el “propietario” al segundo. Finalmente se comprueba que los métodos \texttt{report()} de ambos \texttt{Player} devuelven los \texttt{JSONObject} esperados.
 
 \subsection{TeamTest}
 \underline{Update\_test()}
 
-Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y añadimos puntuación a ambos jugadores por separado. Finalmente, se llama al método update() del Team creado y se comprueba que la puntuación del equipo es igual a la suma de las puntuaciones individuales de los jugadores.
+Creamos dos \texttt{Player} y los añadimos a una lista de \texttt{Player}. Creamos un \texttt{Team} con esa lista y añadimos puntuación a ambos \texttt{Player} por separado. Finalmente, se llama al método \texttt{update()} del \texttt{Team} creado y se comprueba que la puntuación del \texttt{Team} es igual a la suma de las puntuaciones individuales de los \texttt{Player}.
 
 \underline{test\_report() y test\_report2()}
 
-Creamos dos Player y los añadimos a una lista de Player. Creamos un Team con esa lista y finalmente comprobamos que el método report() de Team devuelve el JSONObject esperado en cada caso.
+Creamos dos \texttt{Player} y los añadimos a una lista de \texttt{Player}. Creamos un \texttt{Team} con esa lista y finalmente comprobamos que el método \texttt{report()} de \texttt{Team} devuelve el \texttt{JSONObject} esperado en cada caso.
+\newpage
 
 \section{Paquete Replay}
 \subsection{ReplayTest}
 \underline{Test\_1() y Test\_2()}
 
-Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState. Después, se crea un objeto Replay y se le añade el estado recién creado. Finalmente, se comprueba que el método report() de Replay devuelve el JSONObject esperado con la información correcta.
+Creamos un \texttt{Board} y tres \texttt{Player} que se añaden a una lista de \texttt{Player}. Se crean dos \texttt{Cube} y se añaden a una lista de \texttt{Cube}. Se crea un \texttt{GameClassic} con la información necesaria y se añade un nuevo \texttt{Cube} a la cola de \texttt{Cube} pendientes de añadir al \texttt{Game}. Se llama al método \texttt{play()} de \texttt{Game} y se crea un \texttt{GameState}. Después, se crea un objeto \texttt{Replay} y se le añade el estado recién creado. Finalmente, se comprueba que el método \texttt{report()} de \texttt{Replay} devuelve el \texttt{JSONObject} esperado con la información correcta.
 
 \subsection{StateTest}
 \underline{Report\_test() y report\_test2()}
 
-Creamos un Board y tres Player que se añaden a una lista de Player. Se crean dos Cube y se añaden a una lista de Cube. Se crea un GameClassic con la información necesaria y se añade un nuevo cubo a la cola de cubos pendientes de añadir al game. Se llama al método play() de Game y se crea un GameState con el Game creado. Finalmente, se comprueba que el método report() de GameState devuelve el JSONObject esperado con la información correcta.
+Creamos un \texttt{Board} y tres \texttt{Player} que se añaden a una lista de \texttt{Player}. Se crean dos \texttt{Cube} y se añaden a una lista de \texttt{Cube}. Se crea un \texttt{GameClassic} con la información necesaria y se añade un nuevo \texttt{Cube} a la cola de \texttt{Cube} pendientes de añadir al \texttt{Game}. Se llama al método \texttt{play()} de \texttt{Game} y se crea un \texttt{GameState} con el \texttt{Game} creado. Finalmente, se comprueba que el método \texttt{report()} de \texttt{GameState} devuelve el \texttt{JSONObject} esperado con la información correcta.
 
 
 \chapter{Diseño final}
