@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  22 MAY 2022 12:01
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.1.12)  22 MAY 2022 11:33
->>>>>>> 2e4a65616196739abe3e4bb1f29e59ea9e853809
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.3.20)  22 MAY 2022 12:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -340,7 +336,6 @@ Package: titlesec 2021/07/05 v2.14 Sectioning titles
 \titlewidthlast=\dimen168
 \titlewidthfirst=\dimen169
 )
-<<<<<<< HEAD
 (C:\Miktex\tex/latex/tools\multicol.sty
 Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
 \c@tracingmulticols=\count285
@@ -351,19 +346,6 @@ Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
 \doublecol@number=\count288
 \multicoltolerance=\count289
 \multicolpretolerance=\count290
-=======
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/latex-tools\multicol.st
-y
-Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
-\c@tracingmulticols=\count277
-\mult@box=\box53
-\multicol@leftmargin=\dimen170
-\c@unbalance=\count278
-\c@collectmore=\count279
-\doublecol@number=\count280
-\multicoltolerance=\count281
-\multicolpretolerance=\count282
->>>>>>> 2e4a65616196739abe3e4bb1f29e59ea9e853809
 \full@width=\dimen171
 \page@free=\dimen172
 \premulticols=\dimen173
@@ -411,7 +393,6 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \@tempa=\box94
 \@tempa=\box95
 \@tempa=\box96
-<<<<<<< HEAD
 \@tempa=\box97
 \@tempa=\box98
 \c@minrows=\count291
@@ -429,23 +410,6 @@ Package: appendix 2020/02/08 v1.2c extra appendix facilities
 \c@@pps=\count295
 \c@@ppsavesec=\count296
 \c@@ppsaveapp=\count297
-=======
-\c@minrows=\count283
-\c@columnbadness=\count284
-\c@finalcolumnbadness=\count285
-\last@try=\dimen176
-\multicolovershoot=\dimen177
-\multicolundershoot=\dimen178
-\mult@nat@firstbox=\box97
-\colbreak@box=\box98
-\mc@col@check@num=\count286
-)))
-(C:\Users\leona\AppData\Local\Programs\MiKTeX\tex/latex/appendix\appendix.sty
-Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count287
-\c@@ppsavesec=\count288
-\c@@ppsaveapp=\count289
->>>>>>> 2e4a65616196739abe3e4bb1f29e59ea9e853809
 )
 (C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
@@ -2502,11 +2466,11 @@ Package pdftex.def Info: ./fotos//poda alfa-beta.png  used on input line 2996.
 Ap\'{e}ndice E.
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3004.
+(hyperref)                than one, level fixed on input line 3006.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3007.
+(hyperref)                than one, level fixed on input line 3009.
 
 \tf@thm=\write4
 \openout4 = `Disenyo.thm'.
@@ -2539,7 +2503,7 @@ ype1/public/amsfonts/cm/cmr6.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8
 2.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Miktex/fonts/typ
 e1/public/amsfonts/cm/cmtt12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt
 8.pfb>
-Output written on Disenyo.pdf (173 pages, 8429119 bytes).
+Output written on Disenyo.pdf (173 pages, 8429224 bytes).
 PDF statistics:
  1881 PDF objects out of 2073 (max. 8388607)
  530 named destinations out of 1000 (max. 500000)
