@@ -106,7 +106,7 @@ public class PlayWindow extends Thread implements ConsoleWindow, RolitObserver {
 		JSONArray players = state.report().getJSONObject("game").getJSONArray("players");
 		for(int i = 0; i < players.length(); i++) {
 			if(!players.getJSONObject(i).has("strategy")) {
-				this.waitingForUpdate = true;
+				this.waitingForUpdate = false;
 				this.needsUpdates = true;
 				break;
 			}
