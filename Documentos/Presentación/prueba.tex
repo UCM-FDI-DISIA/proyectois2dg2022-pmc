@@ -1,0 +1,173 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\title{Rolit}
+\author{PMC}
+\date{Ingenieria del Software II}
+\usepackage[spanish]{babel}
+\subtitle{Presentación}
+
+\usepackage{enumitem}
+
+%Para poder seguir los enum en otro frame
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+\resetcounteronoverlays{saveenumi}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+\frametitle{Índice}
+\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+\frametitle{SCRUM}
+En este tema, salvo que se especifique lo contrario, $I$ denotará un intervalo no trivial, esto es, con más de un punto.
+
+\begin{block}{Definición (derivada)}
+Sean $f:I\rightarrow\mathbb{R}$ una función y $c\in{I}$. Si existe el límite:
+\begin{center}
+$L = \displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c}$,
+\end{center}
+decimos que f es \textit{derivable} o \textit{diferenciable} en c y que L es la \textit{derivada de f en c}, para la que usaremos la notación $f'(c)$.
+Si $f$ es derivable en cada $c\in{I}$, decimos que f es derivable en $I$.
+\end{block}
+Observaciones:
+\begin{enumerate}
+\item De forma análoga se define la derivada de una función $f:A\rightarrow\mathbb{R}$ en un punto de acumulación $c$ de $A$, perteneciente a $A$.
+
+\seti
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{enumerate}
+\conti
+\item El \textit{cociente incremental} $\frac{f(x)-f(c)}{x-c}$ es la pendiente de la cuerda que une los puntos $\left(c,f(c)\right)$ y $\left(x, f(x)\right)$ de la gráfica de f. Cuando x tiende a c, las cuerdas "tienden a" la recta tangente a la gráfica de $f$ en $\left(c,f(c)\right)$.
+De hecho se define esta recta tangente como la recta de ecuación: $y = f(c) + f'(c)(x-c)$, si $f$ es derivable en $c$.
+\item Otras notaciones para la derivada de $f$ en $c$: $\frac{df}{dx}(c), Df(c),\frac{dy}{dx}(c)$
+\end{enumerate}
+
+\begin{block}{Definición}
+Si $f:I\rightarrow\mathbb{R}$ es una función derivable en $I$, se llama función derivada de f a la función $f':I\rightarrow\mathbb{R}$ que a cada $x\in{I}$ le asigna $f'(x)$.
+\end{block}
+
+\begin{exampleblock}{Ejemplos}
+
+\begin{enumerate}
+\item Sea $f:I\rightarrow\mathbb{R}$ dada por $f(x) = k$ con $k\in{\mathbb{R}}$ fijo. Para cada $c\in{\mathbb{R}},$
+\begin{center}
+$\displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c} = \displaystyle\lim_{x \to c}\frac{k-k}{x-c} = \displaystyle\lim_{x \to c}\frac{0}{x-c} = 0$
+\end{center}
+\seti
+\end{enumerate}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}
+\begin{exampleblock}{Ejemplos}
+\begin{center}
+$f$ es derivable en $\mathbb{R}$ y $f':\mathbb{R}\rightarrow\mathbb{R}$ es la función constante igual a 0.
+\end{center}
+\begin{enumerate}
+\conti
+\item Sea $f:\mathbb{R}\rightarrow\mathbb{R}$ dada por $f(x) = x$. Para cada $c\in{\mathbb{R}},$
+\begin{center}
+$\displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c} = \displaystyle\lim_{x \to c}\frac{x-c}{x-c} = \displaystyle\lim_{x \to c}1 = 1 = f'(c)$
+\end{center}
+Por tanto, $f$ es derivable en $\mathbb{R}$ y $f':\mathbb{R}\rightarrow\mathbb{R}$ es la función constante igual a 1.
+\item Sea $f:\mathbb{R}\rightarrow\mathbb{R}$ dada por $f(x) = \left|x\right|$. Veamos que no es derivable en 0.
+\begin{center}
+$\displaystyle\lim_{x \to 0^{+}}\frac{f(x)-f(0)}{x-0} = \displaystyle\lim_{x \to 0^{+}}\frac{\left|x\right|}{x} = \displaystyle\lim_{x \to 0^{+}}\frac{x}{x} = 1$
+\end{center}
+\begin{center}
+$\displaystyle\lim_{x \to 0^{-}}\frac{f(x)-f(0)}{x-0} = \displaystyle\lim_{x \to 0^{-}}\frac{\left|x\right|}{x} = \displaystyle\lim_{x \to 0^{-}}\frac{-x}{x} = -1$
+\end{center}
+Como el cociente incremental no tiene límite en 0, $f$ no es derivable en 0. Sin embargo, $\forall{c}\in{\mathbb{R}\setminus{\left\{c\right\}}}: f'(x)=
+      \begin{cases} 
+        \text{1} &\text{si } c>0 \\
+        \text{-1} &\text{si } c<0
+      \end{cases}$
+\seti
+\end{enumerate}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\begin{exampleblock}{Ejemplos}
+\begin{enumerate}
+\conti
+\item La función $f:\mathbb{R}\rightarrow\mathbb{R}$ dada por $f(x) = \sqrt[3]{x}$ no es derivable en 0.
+En efecto,
+\begin{center}
+$\displaystyle\lim_{x \to 0}\frac{f(x)-f(0)}{x-0} = \displaystyle\lim_{x \to 0}\frac{\sqrt[3]{x}}{x} =
+\displaystyle\lim_{x \to 0} x^{\frac{-2}{3}} =
+\displaystyle\lim_{x \to 0}\frac{1}{\sqrt[3]{x^{2}}} = +\infty$
+\end{center}
+\end{enumerate}
+\end{exampleblock}
+
+\begin{block}{Proposición}
+Si $f:I\rightarrow\mathbb{R}$ es derivable en $c\in{I}$, entonces $f$ es continua en $c$.
+\end{block}
+Demostración.\\
+Sea $c$ un punto de acumulación de $I$.\\
+Además, $\forall{x}\in{I\setminus{\left\{c\right\}}}: f(x) - f(c) = \frac{f(x)-f(c)}{x-c}(x-c)$.\\
+$\displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c} = f'(c)$ y $\displaystyle\lim_{x \to c}(x-c) = 0\Rightarrow\displaystyle\lim_{x \to c}f(x)-f(c) = 0\Rightarrow$\\$\Rightarrow\displaystyle\lim_{x \to c}f(x)=f(c)$.\\
+Por tanto, f es continua en c.
+\begin{flushright}
+$\qedsymbol$
+\end{flushright}
+\end{frame}
+
+\begin{frame}
+Observación:
+El recíproco no es cierto. Por ejemplo, $f:\mathbb{R}\rightarrow\mathbb{R}$ dada por $f(x) = \left|x\right|$ es continua en 0, pero no es derivable en 0.
+Existen funciones $f:\mathbb{R}\rightarrow\mathbb{R}$ continuas en $\mathbb{R}$ que no son derivables en ningún punto. El primer ejemplo conocido (Weirstrass, 1872) es la función $f:\mathbb{R}\rightarrow\mathbb{R}$ dada por $\sum_{n=0}^{\infty} \frac{1}{2^{n}}cos(3^{n}x)$.
+\begin{block}{Proposición}
+Sean $f,g:I\rightarrow\mathbb{R}$ funciones derivables en $c\in{I}$. Entonces:
+
+\begin{enumerate}[label=(\alph*)]
+\item Si $b\in{\mathbb{R}}$, la función $bf$ es derivable en $c$ y $(bf)'(c)=bf'(c)$
+\item La función $f+g$ es derivable en $c$ y $(f+g)'(c)=f'(c)+g'(c)$
+\item La función $fg$ es derivable en $c$ y $(fg)'(c)=f'(c)g(c)+f(c)g'(c)$
+\item Si, además, $\forall{x}\in{I}:g(x)\neq0$, la función $f/g$ es derivable en $c$ y $(f/g)=\frac{f'(c)g(c)-f(c)g'(c)}{(g(c))^{2}}$
+\end{enumerate}
+\end{block}
+Demostración.\\
+\begin{enumerate}[label=(\alph*)]
+\item Es consecuencia de (c).
+\item Se deja como ejercicio.
+\seti
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{enumerate}[label=(\alph*)]
+\conti
+\item
+$\forall{x}\in{I\setminus\left\{c\right\}}: \displaystyle\frac{(fg)(x)-(fg)(c)}{x-c}=\frac{f(x)g(x)-f(c)g(c)}{x-c} =$\\$\displaystyle=  \frac{(f(x)-f(c))g(x) + f(c)(g(x)-g(c)}{x-c} =$\\$ \frac{f(x)-f(c)}{x-c}g(x) + f(c)\frac{g(x)-g(c)}{x-c}$.
+\\Tomando el límite en c,\\
+$(fg)'(c)=\left(\displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c}\right)\left(\displaystyle\lim_{x \to c}g(x)\right) + f(c)\displaystyle\lim_{x \to c}\frac{g(x)-g(c)}{x-c}  =$ \\$ =f'(c)g(c)+f(c)g'(c) $\\
+\begin{flushright}
+$\qedsymbol$
+\end{flushright}
+\item $\forall{x}\in{I\setminus\left\{c\right\}}: \displaystyle \frac{(f/g)(x)-(f/g)(c)}{x-c}=\frac{f(x)/g(x)-f(c)/g(c)}{x-c} =$\\$\displaystyle=\frac{f(x)g(c)-f(c)g(x)}{g(x)g(c)(x-c)} =\frac{(f(x)-f(c))g(c) - f(c)(g(x)-g(c)}{g(x)g(c)(x-c)} =$ \\ $\displaystyle= \frac{1}{g(x)g(c)}\left( \frac{f(x)-f(c)}{x-c}g(c) - f(c)\frac{g(x)-g(c)}{x-c}\right)$.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+Tomando el límite en c,\\
+$(f/g)'(c)=\frac{1}{g(x)\displaystyle\lim_{x \to c} g(x)}\left(\displaystyle\lim_{x \to c}\frac{f(x)-f(c)}{x-c}\right)\left(\displaystyle\lim_{x \to c}g(x)\right) + f(c)\displaystyle\lim_{x \to c}\frac{g(x)-g(c)}{x-c}  =$ \\$ =f'(c)g(c)+f(c)g'(c) $
+
+\end{frame}
+
+\end{document}
